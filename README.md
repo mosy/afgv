@@ -1,4 +1,4 @@
-# afgv
+# afgv (Automatiseringssystemer For Gand Videregående)
 Norwegian liii translation project
 
 Dette skal være en pågående oversettelse av det fantastiske prosjektet på https://www.ibiblio.org/kuphaldt/socratic/sinst/ (Copyright © 2006 - 2019, Tony R. Kuphaldt)

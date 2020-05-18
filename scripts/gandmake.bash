@@ -40,8 +40,10 @@ ps2pdf ../output/$1$2.ps ../output/$1$2.pdf
 # (unless this is producing an "instructor" version).
 rm -vf all.*
 rm -vf output.*
-if [ "$2" != "_instructor" ] ; then rm -vf ../output/$1.ps ; fi
+#if [ "$2" != "_instructor" ] ; then rm -vf ../output/$1.ps ; fi
 
+rm -vf ../output/$1.ps
+rm -vf ../output/$1$2.ps
 # Note: this script differs from the one found in the
 # Socratic Electronics project.  Here, only PostScript 
 # files are produced for "instructor" worksheets.  

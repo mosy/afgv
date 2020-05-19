@@ -7,7 +7,7 @@ IPDFFILES=$(patsubst %.seq,../output/%_instructor.pdf,$(SEQS))
 ../output/%.pdf: %.seq
 	../scripts/gandmake.bash $* 
 
-../output/%_instructor.ps: %.seq
+../output/%_instructor.pdf: %.seq
 	../scripts/gandmake.bash $* _instructor
 
 

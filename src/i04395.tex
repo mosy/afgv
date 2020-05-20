@@ -1,0 +1,161 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Digital Representation of Numerical Data'' section of the ``Digital Data Acquisition and Network'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i04395}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+{\it Discrete} quantities are those which may be counted using whole numbers (e.g. units passed by on a conveyor belt).  {\it Analog} quantities are continuously variable (e.g. the rate of fluid flow through a pipe).  Real-world analog quantities need to be ``digitized'' in order to be digitally processed and communicated.  Analog-to-Digital Converters (ADCs) do this, typically interpreting an analog DC voltage signal along some pre-detemined scale such as 0 to 5 volts DC.  Digital-to-Analog Converters (DACs) do the reverse.
+
+\vskip 10pt
+
+{\it Integer} numbers encompass whole numbers and their negative counterparts.  We may easily express integer quantities using binary numeration.  1 and 0 states may be voltage levels, frequencies, light pulses, of any other signal capable of representing the two possible states of 0 and 1.  Each place-weight in a binary field has twice the value of the place preceding it (e.g. 1's place, 2's place, 4's place, 8's place, 16's place, etc.).
+
+\vskip 10pt
+
+Two's complement binary notation is commonly used to represent negative numbers, where the MSB of that binary number has a {\it negative} place-weight value.  ``Signed'' binary numbers are two's complement.  ``Unsigned'' binary numbers have all positive place-weights.  16-bit unsigned = range of 0 to 65535.  16-bit signed = range of -32768 to +32767.
+
+\vskip 10pt
+
+``Byte'' = 8 bits.  ``Word'' = whatever is standard for that computer (32 is common).  A ``double word'' is twice the standard word length.
+
+\vskip 10pt
+
+Hexadecimal is shorthand notation for binary: every 4 bits is one hex character.
+
+\vskip 10pt
+
+Fixed-point notation places a fixed binary point within a span of binary bits, allowing what would otherwise be a binary integer to represent fractional values.
+
+\vskip 10pt
+
+Floating-point notation is a kind of binary scientific notation: some bits specify the mantissa, others the placement of the point.  Floating point notation often referred to as ``real''.  The IEEE standard specifies ``special cases'' of floating point numbers for zero, infinity, NaN, etc.  32-bit ``single precision'' IEEE floating-point number uses 1 bit for sign, 8 bits for exponent, and 23 bits for mantissa.  Floating-point math done by special processing hardware, and so some cheaper PLCs lack floating-point capability.
+
+\vskip 10pt
+
+In industrial control systems, graphical control/display panels called {\it HMI}s may be configured to show numerical values inside of control systems such as PLCs.  The ``tag name database'' within the HMI is where each variable is defined according to numerical type, specific memory location within the PLC, read/write privilege, which PLC is being accessed, etc.  The arbitrary tagname assigned to each variable becomes the means of representation within the HMI programming.
+
+A ``discrete'' variable is one that can only be 0 or 1.  ``Integer'' variables represent whole-number quantities, the ``signed'' variety also being able to represent negative counts.  ``Floating point'' variables are for analog quantities in the real world (e.g. motor speed and temperature).  An ``ASCII'' variable is one where binary data will represent text characters.
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain the difference between ``discrete'' and ``analog'' quantities, giving real-world examples.
+\item{} Explain why a 16-bit signed integer number cannot represent a quantity as large as a 16-bit unsigned integer.
+\item{} Calculate the largest numerical quantity representable by a twelve-bit (unsigned integer) binary number.
+\item{} Calculate the largest numerical quantity representable by a sixteen-bit (unsigned integer) binary number.
+\item{} Calculate the largest numerical quantity representable by a thirty-two-bit (unsigned integer) binary number.
+\item{} Explain how {\it fixed-point} binary notation is used to represent fractional number values.
+\item{} Identify a practical application where a {\it fixed-point} integer might be preferable (or simply possible) over a {\it floating-point} binary number.
+\item{} Explain where the term {\it floating-point} comes from.
+\item{} Explain why a crude floating-point convention such as $\pm 1.m \times 2^{E}$ cannot represent zero.
+\item{} Explain how the IEEE 754-1985 floating-point standard addresses the problem of $\pm 1.m \times 2^{E}$ not being able to represent zero.
+\item{} Explain how the IEEE 754-1985 floating-point standard represents the number {\it one}.
+\item{} If you were programming a PLC that lacked floating-point variables, and you needed to represent quantities such as 31.665, how could you do it?
+\item{} Explain what a {\it tag name database} is in an HMI, and why it is important in HMI programming.
+\item{} Comment on the different data types shown in the HMI example and why each one was chosen for its appointed task.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+Suppose we are configuring a control system to direct the filling of medicine bottles at a pharmaceutical packaging operation.  One of the computers controlling this operation must count the number of bottles filled by the end of each production day.  Identify the most reasonable binary data format to use for this particular purpose (i.e. the format most capable of representing the data while using the least number of bits):
+
+\begin{itemize}
+\item{} Signed integer 
+\vskip 5pt 
+\item{} Floating-point 
+\vskip 5pt 
+\item{} Boolean (discrete)
+\vskip 5pt 
+\item{} Unsigned integer 
+\vskip 5pt 
+\item{} ASCII
+\end{itemize}
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+Suppose we are configuring a control system to direct the filling of medicine bottles at a pharmaceutical packaging operation.  One of the computers controlling this operation must command a conveyor belt motor to start and stop.  Identify the most reasonable binary data format to represent the on-off status of this motor (i.e. the format most capable of representing the data while using the least number of bits):
+
+\begin{itemize}
+\item{} Floating-point 
+\vskip 5pt 
+\item{} Boolean (discrete)
+\vskip 5pt 
+\item{} Unsigned integer 
+\vskip 5pt 
+\item{} ASCII
+\vskip 5pt 
+\item{} Signed integer 
+\end{itemize}
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+Suppose we are configuring a control system to direct the filling of medicine bottles at a pharmaceutical packaging operation.  One of the computers controlling this operation must send text messages to the human operator warning of any abnormal conditions in the system.  Identify the most reasonable binary data format to use for this particular purpose (i.e. the format most capable of representing the data while using the least number of bits):
+
+\begin{itemize}
+\item{} Boolean (discrete)
+\vskip 5pt 
+\item{} Signed integer 
+\vskip 5pt 
+\item{} Floating-point 
+\vskip 5pt 
+\item{} ASCII
+\vskip 5pt 
+\item{} Unsigned integer 
+\end{itemize}
+
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, Digital data and networks (numerical data)
+
+%(END_NOTES)
+

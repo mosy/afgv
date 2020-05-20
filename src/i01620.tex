@@ -1,0 +1,48 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose you are asked to calibrate a FOUNDATION Fieldbus pH transmitter, sensing the pH of water flowing through a pipe.  The water treatment process it is a part of must be kept running and not shut down while you do this task.  
+
+The company's standard maintenance procedure for this loop tells you to place the pH transmitter's Analog Input function block in ``Manual'' mode during the calibration so that pH values it senses while being calibrated do not get sent to the PID function block and mess things up for the operating process.  The Analog Input function block's ``Manual'' mode essentially freezes its signal to the PID function block at the last value it was outputting while it was running normally.
+
+\vskip 10pt
+
+You are familiar with placing PID controllers in manual mode when performing such tasks, but you are unfamiliar with doing the same thing to the Analog Input function block in a Fieldbus system.  Are these two steps equivalent to one another, or is there some advantage to doing it one way versus the other?
+
+\vfil
+
+\underbar{file i01620}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Placing the AI block in Manual mode will {\it not} have the same effect as placing the PID block in Manual mode.  Here is the difference: placing the PID block in Manual fixes the final control element (e.g. valve) in one position as you perform the transmitter calibration.  This is good, as it helps stabilize the process pH during the time the system isn't measuring pH.  However, placing the AI block in Manual merely freezes the signal going to the still-acting PID block.  If the frozen pH value is not precisely equal to setpoint, the active PID block will begin to ``wind up'' or ``wind down'' with integral action (which direction depends on whether the frozen pH signal value is above or below setpoint) in a futile attempt to bring pH back to setpoint.  This can cause a major process upset while you're calibrating the pH probe!
+
+A better procedure would call for placing the pH transmitter's AI function block in {\it Out Of Service} (OOS) mode rather than Manual mode, because the OOS mode has a status of ``Bad'' associated with it which will propagate to all function blocks ``downstream'' of it in the control strategy.  Most function blocks shed to Manual mode themselves whenever they receive a ``Bad'' status from an upstream block, and therefore this will place the pH controller into Manual mode to prevent wind-up.
+
+However, the technician should not deviate from this written procedure just yet.  If something were to go wrong during this calibration and it was found the technician deviated from standard procedure, he or she could get in a lot of trouble even if their intention and logic was right.  
+
+%INDEX% Calibration, practice: taking transmitter out of service
+%INDEX% Fieldbus, function block: ``manual'' mode
+%INDEX% Process: water pH neutralization (generic)
+
+%(END_NOTES)
+
+

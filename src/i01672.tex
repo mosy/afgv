@@ -1,0 +1,44 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+When tuning a PID controller by ``trial-and-error'' in automatic mode, it is advisable to ``bump'' the setpoint either up or down to test the response of the new P, I, and D settings.  Why is periodic ``bumping'' of the setpoint necessary when tuning a controller?  What does it tell us about the tuning?  More importantly, what does it {\it not} tell us about the tuning?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} A point of confusion for many students learning PID control is the practical difference between performing an open-loop ``bump'' test (step-changing the controller's output) versus a closed-loop ``bump'' test (step-changing the controller's setpoint).  Explain the difference between these two tests, and why it is necessary to do {\it both} when optimizing a control loop.
+\end{itemize}
+
+\underbar{file i01672}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+``Bumping'' the setpoint on a controller in automatic mode is necessary to test its response to an ``upset'' condition.  It is possible to over-tune a controller (have the tuning be too aggressive) and not realize the problem because its response to a sudden upset was never checked.
+
+However, do not be fooled into thinking that a setpoint ``bump'' is a comprehensive test of controller response.  Just because a controller responds well to a sudden change in setpoint does not necessarily mean it will respond as well to a change in process load!
+
+Setpoint changes are not equivalent to load changes.  ``Integrating'' processes do not require integral action in the controller to achieve good control at any arbitrary setpoint, {\it so long as the load remains constant}.  Load changes in an integrating process {\it do} require integral action in the controller in order to avoid PV $-$ SP offset.  A level controller with insufficient integral action to handle a large load change might still respond well to even a dramatic setpoint change!  Ergo, setpoint changes are not equivalent to load changes.
+
+Also, some processes have gains that vary with load (heat exchangers being a very common example).  A setpoint change in such a process is not a comprehensive test of controller response because the process gain remains constant over a wide range of setpoint values, but will change substantially over a similar range of load (fluid flow) values.
+
+%INDEX% Control, PID tuning: closed-loop trial-and-error
+
+%(END_NOTES)
+
+

@@ -1,0 +1,68 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose an integral-only (I-only) loop controller receives a process variable signal of 44\%, a setpoint value of 50\%, and is configured for reverse action.  Assuming an integral coefficient of 1.6 repeats per minute and a constant error (i.e. PV and SP both remain constant over time), calculate the amount of time required for the output of this controller to change by 10\%.  Also, calculate how long it will take for the output to change by the same amount as the error (PV $-$ SP).
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} In a real process, will the error hold constant as we are assuming it does in this question?  Why or why not?
+\item{} Express the integration rate of this controller in units of {\it minutes per repeat}.
+\item{} Express the integration rate of this controller in units of {\it seconds per repeat}.
+\item{} Express the integration rate of this controller in units of {\it repeats per second}.
+\end{itemize}
+
+\underbar{file i01583}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Given an error of 6\%, and an integral coefficient of 1.6 repeats per minute, the controller output will change by 9.6\% every minute of time.  Use this ramping rate-of-change as the basis for all your calculations.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+$$\hbox{Output} = K_i \int_0^T (\hbox{SP} - \hbox{PV}) \> dt$$
+
+$$\hbox{Output} = 1.6 \int_0^T (\hbox{50\%} - \hbox{44\%}) \> dt$$
+
+If we imagine letting this controller wind up with a constant error (SP = 50\% and PV = 44\%), we see its rate of ramping equal to the accumulation after one minute of time:
+
+$$\hbox{Output} = 1.6 \int_0^1 (50\% - 44\%) \> dt$$
+
+$$\hbox{Output} = 1.6 \int_0^1 (6\%) \> dt$$
+
+$$\hbox{Output} = (1.6) [(1)(6\%) - (0)(6\%)]$$
+
+$$\hbox{Output} = (1.6) (6\%)$$
+
+$$\hbox{Output} = 9.6\% \hbox{ (per minute)}$$
+
+\vskip 10pt
+
+Time for output to change by 10\% = $10\% \over 9.6\%/\hbox{min}$ = 1.0417 minutes = 1 minute and 2.5 seconds
+
+\vskip 10pt
+
+Time for output to change by 6\% = $6\% \over 9.6\%/\hbox{min}$ = 0.625 minutes = 37.5 seconds
+
+\vskip 10pt
+
+The second answer (0.625 minutes) is also the same as the integral coefficient expressed in minutes per repeat.
+
+%INDEX% Control, integral: meaning of ``repeats per minute'' unit
+
+%(END_NOTES)
+
+

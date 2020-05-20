@@ -1,0 +1,73 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#27 (``Interesting Problems In A Cascade Level Loop'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} Mr. Brown claims that cascade loops have the advantage of ``making the valve intelligent.''  Explain what this means in detail. 
+\vskip 10pt
+\item{} Which loop in a cascaded control system should be optimized {\it first} if your goal is to optimize the entire system?  Why should you choose that particular loop as the first one to tune?
+\vskip 10pt
+\item{} Figure 2 in this report shows a very interesting comparison: the PV as recorded by the Protuner analyzer (connected directly to the DCS input terminals) shows a different trend than the PV graphed by the DCS itself!  How is such a thing possible?
+\vskip 10pt
+\item{} Figure 3 shows an open-loop test of this same flow controller, with the flow signal ``spiking'' at each leading edge.  Mr. Brown attributes this to a problem with the valve's positioner.  Based on what you know about valve positioners (especially {\it digital} ``smart'' positioners), how would you suggest fixing this positioner problem?
+\end{itemize}
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Based on the open-loop test results shown in Figure 3, does the control valve appear to exhibit significant hysteresis?  Why or why not?
+\item{} In the end, do you think it was beneficial to have cascade control on this process, as opposed to direct (single-controller) PID control on the level?
+\item{} Had the filtering been located in the transmitter rather than in the DCS, would the Protuner software have recorded a different PV trend than the DCS?  Why or why not?
+\item{} Explain how we may properly determine that the cycling seen in Figure 4 is indeed due to control valve stiction.
+\item{} For those who have studied flow measurement technologies, explain the principle behind not trusting an orifice-based flowmeter below 25\% (or even 33\%) of its full-scale range.
+\item{} Explain how excessive filtering in a control loop not only makes the trend graph appear ``smoother'' than the actual process variable is, but in fact leads to the real PV being much less stable than it would be without any filtering applied.
+\item{} For those who have studied flow measurement technologies, explain what the British standard means by saying orifice-based flow measurements should be maintained at least 33\% of full scale.
+\end{itemize}
+
+\underbar{file i01665}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Cascading ``makes the valve intelligent'' by giving feedback to how much flow is actually going through it.  Rather than simply send a signal to the valve and hope the flow is right, the slave loop {\it ensures} the flow is at the value we want it to be.  Thus, the slave loop ``shields'' the master controller from having to contend with many types of poor control valve behavior.
+
+\vskip 10pt
+
+Tune the slave loop first, because the master loop's tuning will depend on the slave loop responding robustly.  If the slave is poorly tuned, it will be nearly impossible to properly tune the master loop.
+
+\vskip 10pt
+
+The Protuner was able to record a different trend than the DCS because the DCS had filtering in it!  The Protuner was connected directly to the transmitter signal wiring to monitor the raw signal from the flow transmitter, while the DCS had 15 seconds' worth of filtering (damping) configured into it, causing the operator to see a grossly distorted view of the process variable.
+
+\vskip 10pt
+
+To fix the problem of figure 3, run a diagnostic test on the smart positioner, and have it optimize its own internal P+I tuning.
+
+
+
+
+
+
+%INDEX% Reading assignment: Michael Brown Case History #27, "Interesting problems in a cascade level loop"
+
+%(END_NOTES)
+
+

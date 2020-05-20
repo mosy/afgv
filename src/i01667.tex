@@ -1,0 +1,56 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+If a process exhibits a large dead time ($L_R$), how does this affect your choice of P, I, and D tuning constants?  In other words, as the dead time of a process increases, you would generally do what (make more aggressive or less aggressive) to each tuning constant?
+
+\medskip 
+\item{}Proportional: ({\it more} or {\it less} aggressive?)
+\vskip 5pt
+\item{}Integral: ({\it more} or {\it less} aggressive?)
+\vskip 5pt
+\item{}Derivative: ({\it more} or {\it less} aggressive?)
+\end{itemize} 
+
+\underbar{file i01667}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Starting with proportional, you would tend to make this term less aggressive because the controller needs to make smaller adjustments for larger dead times, since the controller is ``running blind'' during the dead time period, and large upsets in the process variable caused by excessive changes in the manipulated variable (output) will be more difficult to counteract.
+
+\vskip 10pt
+
+That integral action should be less aggressive should be obvious.  Since integral action integrates error accumulated over time, dead time will increase the amount of accumulation for any given amount of error, tending to make integral over-react.  Think of it this way: integral action may be likened to {\it impatience} in the controller, and that last thing you want in a process with large dead time is an impatient controller!
+
+There is a noteworthy exception to this rule, though, and that is for self-regulating processes dominated by dead time.  Moderate integral action is surprisingly capable of controlling such a process, just as it is capable of controlling self-regulating processes with little dead time.
+
+\vskip 10pt
+
+That derivative action should be less aggressive is not necessarily obvious.  Derivative action looks at the rate of error change over time, taking action to limit how fast the PV may rise or fall.  This type of ``cautious'' control action is normally very good in processes with large first-order lag times.  However, when the {\it dead time} is large, excessive derivative action can cause oscillations due to the phase shift caused by the dead time.
+
+In processes with little dead time, it is almost impossible to make the PV oscillate due to excessive derivative action.  At most, excessive derivative action only causes the output (valve) to move around a lot.  Given a large dead time, though, the action of derivative will be delayed in having effect on the PV, and thus will have the opportunity to react to its own changes where it otherwise would not.
+
+\vskip 10pt
+
+As you can see by the necessary reduction for all three control modes, increased dead time means that feedback control (of any kind) becomes less and less useful.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% Control, PID tuning: effect of dead time on tuning constant choices
+
+%(END_NOTES)
+
+

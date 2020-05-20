@@ -1,0 +1,78 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+This metal-melting furnace has a cascade control system, whereby a ``bath'' controller (sensing the temperature of the molten metal) acts as the primary, and a ``crown'' controller (sensing the temperature of the refractory wall and roof) acts as the secondary:
+
+$$\includegraphics[width=15.5cm]{i01530x01.eps}$$
+
+One day the crown thermocouple (the sensor for TT-1) goes bad, causing TT-1 to ``fail high'' with a 20.6 mA signal.  Determine the effect(s) this will have on the control system as a whole, and on the furnace temperature in particular.
+
+\vskip 10pt
+
+Suppose an instrument technician replaces the bad thermocouple, but the trend of crown temperature over time begins to cycle (oscillate) more than it ever did before, refusing to settle down to setpoint.  You are called to troubleshoot this problem, and you find that the replacement thermocouple was not fully inserted into the {\it thermowell} (the protective sheath protruding into the furnace, acting as a sort of ``sock'' into which the thermocouple sensor is inserted to measure temperature without direct exposure to the environment inside the furnace).
+
+Explain how something as simple as improper thermocouple insertion could cause the crown temperature control loop to cycle.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Determine the necessary control actions (direct vs. reverse) for each controller in this system, assuming a signal-to-open valve.
+\item{} Why do you think a cascade control strategy is used to control the burner?
+\item{} For those who have studied thermocouples, what {\it type} (letter code) of thermocouple would you recommend for this application, assuming a crown temperature upwards of 1800 $^{o}$F?
+\end{itemize}
+
+\underbar{file i01530}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Not having the thermocouple fully inserted into the thermowell leads to additional {\it lag time}, as the air gap between the thermocouple tip and the thermowell bottom generates a time lag between the thermowell temperature and the thermocouple tip temperature. 
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+A ``high burnout'' TT-1 would cause the furnace to cool down, as the temperature control system would ``think'' the furnace was too hot and take the necessary action of stopping heat input.
+
+\vskip 10pt
+
+Specifically, lag time in a feedback control system leads to greater phase shift, which may result in oscillation (cycling) given enough controller gain.  This is quite common in temperature control applications such as this, where the process itself may have only one dominant lag, allowing aggressive proportional action from the controller to achieve tight, fast control.  The addition of more lag times in a loop like that will often lead to oscillation, as the high gain of the controller now has enough phase shift to complement it and meet (or exceed) the Barkhausen criterion.
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+An thermocouple improperly inserted into its thermowell can cause control problems by introducing what characteristic to the temperature control loop?
+
+\begin{itemize}
+\item{} Integral action
+\vskip 10pt
+\item{} Stiction
+\vskip 10pt
+\item{} Hysteresis
+\vskip 10pt
+\item{} Positive error
+\vskip 10pt
+\item{} Extra lag time
+\vskip 10pt
+\item{} Reverse action
+\end{itemize}
+
+
+%INDEX% Control, strategies: cascade with limits
+%INDEX% Process: combustion furnace
+
+%(END_NOTES)
+
+

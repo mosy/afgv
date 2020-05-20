@@ -1,0 +1,585 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: i01629x03.eps
+%%Creator: Xcircuit v3.0
+%%CreationDate: Sat Jan 20 15:10:46 2007
+%%Pages: 1
+%%BoundingBox: 68 68 279 193
+%%DocumentNeededResources: font Helvetica-Bold 
+%%EndComments
+%%BeginProlog
+%
+%  PostScript prolog for output from xcircuit
+%  Version: 2.4
+%
+%  Electrical circuit (and otherwise general) drawing program
+%
+%  Written by Tim Edwards 8/5/93--5/16/01  (tim@bach.ece.jhu.edu)
+%  The Johns Hopkins University
+%
+%%BeginResource: procset XCIRCproc 2.4 1
+% supporting definitions --- these are the primary xcircuit types.
+
+/XCIRCsave save def
+/topmat matrix currentmatrix def
+
+/fontslant { /slant exch def [1 0 slant 1 0 0] 
+    exch findfont exch makefont dup length dict /ndict exch def
+    { 1 index /FID ne { ndict 3 1 roll put } { pop pop } ifelse } forall
+    ndict definefont pop} def
+/ul { dup type /stringtype eq showflag 1 eq and { gsave 
+   currentpoint topmat setmatrix 0 0 moveto 2 index stringwidth pop (_)
+   false charpath flattenpath pathbbox grestore exch pop 1 index
+   sub setlinewidth exch pop currentpoint 3 -1 roll add moveto 0
+   rlineto stroke moveto } if } def
+/ol { dup type /stringtype eq showflag 1 eq and { gsave gsave
+   currentpoint topmat setmatrix 2 index stringwidth pop 3 index
+   true charpath flattenpath pathbbox grestore exch pop
+   exch pop topmat setmatrix (_) true charpath pathbbox grestore
+   exch pop 1 index sub setlinewidth exch pop currentpoint
+   exch 4 1 roll exch sub add moveto pop 0 rlineto stroke
+   moveto } if } def
+/stW { gsave currentpoint newpath moveto true charpath flattenpath
+	pathbbox pop exch pop sub grestore } def
+/Ts {mark Tabs aload pop counttomark 1 add array astore /Tabs exch def Tabs
+	0 currentpoint pop put} def
+/Tbn {mark Tabs aload pop counttomark dup 2 add 1 roll cleartomark 1 sub} def
+/Tb { 0 1 Tbn {Tabs exch get dup currentpoint pop lt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/Tf { Tbn -1 0 {Tabs exch get dup currentpoint pop gt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/qS { (aa) stW (a a) stW sub 4 div 0 Kn } def
+/hS { qS qS } def
+/pspc 0 def
+/cf0 { scalefont setfont } bind def
+/Kn { dup kY add /kY exch def rmoveto } bind def
+/ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.33 mul neg Kn} def
+/Ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.67 mul Kn } def
+/ns { 0 kY neg Kn /kY 0 def /fscale 1.0 def xfont0 1.0 cf0 } def
+/CR { ns 0 /Bline Bline fscale0 neg add def Bline moveto } def
+/cf { dup type /realtype ne {1.0} if exch findfont exch kY 0 eq
+	{ 40 mul dup /fscale0 exch def cf0 /xfont0 currentfont def}
+	{fscale0 mul fscale mul cf0} ifelse } def
+/ctmk { counttomark dup 2 add -1 roll pop } bind def
+/label { gsave translate 0 0 moveto dup scale neg /rotval exch def
+	/just exch def just 16 and 0 gt {gsave rotval rotate 0 1 dtransform
+	gsave pagemat setmatrix idtransform exch grestore 1 0 dtransform
+	gsave pagemat setmatrix idtransform exch grestore dup abs 1e-9 lt
+	{pop mul 0 gt} {3 1 roll pop pop 0 lt} ifelse grestore {-1 /rotval
+	rotval neg def /just just dup 3 and 1 ne {3 xor} if def} {1} ifelse
+	exch -1e-9 lt {-1 /rotval rotval neg def /just just dup 12 and
+	4 ne {12 xor} if def} {1} ifelse scale } if /showflag 0 def
+	/fspc pspc def /Bline 0 def /Tabs 0 array def /fscale 1.0 def
+	/kY 0 def gsave dup 1 add copy 0 exch 1 0 dtransform exch atan rotate
+	{exch dup type /stringtype eq {true charpath flattenpath} {exec}
+	ifelse } repeat pop pathbbox grestore 3 -1 roll pop 3 1 roll just
+	1 and 0 gt {just 2 and 0 gt {exch pop neg fspc sub} {exch sub 0.5
+	mul neg} ifelse} {pop neg fspc add} ifelse exch Bline exch just 4
+	and 0 gt {just 8 and 0 gt {exch pop neg fspc sub} {add 0.5 mul neg}
+	ifelse} {pop neg fspc add} ifelse rotval rotate Kn currentpoint
+	translate /showflag 1 def /Bline 0 def /Tabs 0 array def /fscale
+	1.0 def /kY 0 def {dup type /stringtype eq {show}{exec} ifelse}
+	repeat grestore } def
+/pinlabel { 4 index 32 and 0 ne hlevel 0 eq or { /pspc 10 def label
+	/pspc 0 def } { pop pop pop pop pop {pop} repeat } ifelse } def
+/pinglobal { pinlabel } def
+/infolabel { pinlabel } def
+
+/scb { setrgbcolor } bind def  /sce { defColor aload pop scb } bind def
+/cRedef {/defColor currentcolor 3 array astore def} def
+/begingate { /hlevel hlevel 1 add def /defColor currentcolor sce 3 array
+	astore def gsave sce translate 0 0 moveto neg rotate dup abs scale
+	} bind def
+/makeparm  {3 string cvs dup length 1 add string /tstr exch def tstr exch
+	1 exch putinterval tstr 0 (v) putinterval tstr cvn} bind def
+/beginparm { -1 1 {makeparm exch def} for
+	dup type /arraytype eq { aload length -1 1 {makeparm exch def}
+	for } if begingate } bind def
+/endgate { /hlevel hlevel 1 sub def grestore defColor aload pop cRedef
+	scb} bind def
+
+/hlevel 0 def
+/tmpa [1 0 0 1 0 0] def
+/gar {8 8 true tmpa {<c0 c0 00 00 0c 0c 00 00>} imagemask} bind
+{8 8 true tmpa {<30 70 60 02 03 07 06 20>} imagemask} bind
+{8 8 true tmpa {<0c 1e 1e 0c c0 e1 e1 c0>} imagemask} bind
+{8 8 true tmpa {<0f 0f 0f 0f f0 f0 f0 f0>} imagemask} bind
+{8 8 true tmpa {<3f f3 e1 e1 f3 3f 1e 1e>} imagemask} bind
+{8 8 true tmpa {<df cf 8f 9f fd fc f8 f9>} imagemask} bind
+{8 8 true tmpa {<ff 3f 3f ff ff f3 f3 ff>} imagemask} bind 7 array astore def
+/ppaint { gsave clip tmpa dup setmatrix pathbbox neg exch neg 4 2 roll
+  neg 4 -1 roll 2 copy gt {exch} if 8 div ceiling 8 mul 4 2 roll neg 2 copy
+  gt {exch} if 8 div ceiling 8 mul 3 -1 roll -8 5 -1 roll
+  { 3 index exch 5 exch put dup -8 3 index { 3 index
+  exch 4 exch put 3 index exec } for } for pop pop pop pop grestore } bind def
+/setstyles {
+  currentlinewidth mul setlinewidth /style exch def
+  style 1 and 0 gt not {closepath} if
+  style 2 and 0 gt {currentlinewidth 4 mul dup 2 array astore 0 setdash} if 
+  style 4 and 0 gt {0.5 currentlinewidth 4 mul 2 array astore 0 setdash} if 
+  style dup 256 ge exch 480 lt and { gsave 1 setgray eofill grestore } if
+  style 16 and 0 gt { gsave style 224 and -5 bitshift dup 7 lt
+	{gar exch get ppaint} { pop eofill } ifelse grestore } if
+  style 8 and 0 gt style 512 eq or { newpath } { stroke } ifelse grestore } def
+
+/polygon { gsave /num exch def moveto num 1 sub {lineto} repeat setstyles } def
+/xcarc   { gsave newpath arc setstyles } def
+/elb { matrix currentmatrix 7 -1 roll 7 -1 roll translate 5 1 roll 4 -1 roll
+	3 index div 1 scale } def
+/ele { 0 4 1 roll 0 4 1 roll } bind def
+/ellipse { gsave elb newpath ele arc setmatrix setstyles } def
+/pellip  { elb ele arc setmatrix } def
+/nellip  { elb ele arcn setmatrix } def
+/spline  { gsave moveto curveto setstyles } def
+/polyc   { {lineto} repeat } bind def
+/beginpath { gsave moveto } bind def
+/endpath { setstyles } bind def
+/bop	 { 1 setlinecap 0 setlinejoin 6 setmiterlimit 0 0 0 scb cRedef } def
+/psinsertion {/PSobj save def /showpage {} def bop rotate translate dup scale} def
+/end_insert {PSobj restore} def
+/setpagemat {/pagemat matrix currentmatrix def} def
+/inchscale  {setpagemat 0.375 mul dup scale} def
+/cmscale    {setpagemat 0.35433071 mul dup scale} def
+
+%%EndResource
+%%EndProlog
+
+% XCircuit output starts here.
+
+%%Page: i00770x02.eps 1
+%%PageOrientation: Portrait
+/pgsave save def bop
+% 1423 895 offsets
+% 32.00 32.00 gridspace
+0.3000 inchscale
+2.6000 setlinewidth
+
+0.604 0.604 0.604 scb
+240 1.00 639 959 639 1151 703 1151 703 959 4 polygon
+240 1.00 639 639 639 831 703 831 703 639 4 polygon
+240 1.00 1311 959 1311 1151 1375 1151 1375 959 4 polygon
+240 1.00 1311 639 1311 831 1375 831 1375 639 4 polygon
+0.400 0.400 0.400 scb
+241 1.00 927 943 943 863 991 863 927 959 spline
+241 1.00 1055 943 1039 863 991 863 1055 959 spline
+241 1.00 927 959 991 863 1055 959 927 959 4 polygon
+240 1.00 927 991 927 959 1055 959 1055 991 4 polygon
+241 1.00 959 863 927 895 879 895 879 847 959 847 959 863 6 polygon
+241 1.00 1023 863 1055 895 1103 895 1103 847 1023 847 1023 863 6 polygon
+0.604 0.604 0.604 scb
+241 1.00 1087 847 1087 831 1151 831 1151 879 1103 895 1103 847 1087 847 
+7 polygon
+sce
+3 1.00 639 1119 703 1119 2 polygon
+3 1.00 639 1071 703 1071 2 polygon
+3 1.00 639 719 703 719 2 polygon
+3 1.00 639 671 703 671 2 polygon
+3 1.00 1311 719 1375 719 2 polygon
+3 1.00 1311 671 1375 671 2 polygon
+3 1.00 1311 1119 1375 1119 2 polygon
+3 1.00 1311 1071 1375 1071 2 polygon
+0.604 0.604 0.604 scb
+241 1.00 703 831 703 735 719 735 799 639 1151 639 1215 767 1311 767 1311 831 
+1087 831 1087 719 799 719 703 831 12 polygon
+241 1.00 831 831 895 831 895 847 879 847 879 1071 847 1071 847 1103 799 1103 
+799 1023 703 1023 703 959 831 959 831 831 13 polygon
+241 1.00 1103 991 1103 1071 1135 1071 1135 1103 1183 1103 1215 1023 1311 1023 
+1311 959 1103 991 9 polygon
+241 1.00 799 1183 799 1119 855 1119 855 1079 895 1079 895 1055 959 1055 959 
+1071 943 1071 943 1375 895 1375 895 1183 799 1183 13 polygon
+241 1.00 1183 1183 1183 1119 1127 1119 1127 1079 1087 1079 1087 1055 1023 1055 
+1023 1071 1039 1071 1039 1375 1087 1375 1087 1183 1183 1183 13 polygon
+sce
+1 1.00 639 959 639 1151 703 1151 703 1023 799 1023 799 1103 847 1103 847 1071 
+879 1071 879 847 895 847 895 831 831 831 831 959 639 959 15 polygon
+1 1.00 1103 1071 1103 991 1311 959 1375 959 1375 1151 1311 1151 1311 1023 1215 
+1023 1183 1103 1135 1103 1135 1071 1103 1071 12 polygon
+1 1.00 799 1183 799 1119 855 1119 855 1079 895 1079 895 1055 959 1055 959 1071 
+943 1071 943 1375 895 1375 895 1183 799 1183 13 polygon
+1 1.00 1183 1183 1183 1119 1127 1119 1127 1079 1087 1079 1087 1055 1023 1055 
+1023 1071 1039 1071 1039 1375 1087 1375 1087 1183 1183 1183 13 polygon
+1 1.00 879 895 927 895 959 863 959 847 879 847 879 895 6 polygon
+1 1.00 1023 863 1023 847 1103 847 1103 895 1055 895 1023 863 6 polygon
+1 1.00 639 639 639 831 703 831 799 719 1087 719 1087 847 1103 847 1103 895 1151 
+879 1151 831 1375 831 1375 639 1311 639 1311 767 1215 767 1151 639 799 639 719 
+735 703 735 703 639 639 639 21 polygon
+1 1.00 927 943 943 863 991 863 927 959 spline
+1 1.00 1055 943 1039 863 991 863 1055 959 spline
+1 1.00 927 959 927 991 1055 991 1055 959 4 polygon
+0.647 0.165 0.165 scb
+240 1.00 943 1151 943 1071 975 1071 975 1151 4 polygon
+sce
+0 1.00 943 1151 943 1071 975 1071 975 1151 4 polygon
+0.647 0.165 0.165 scb
+240 1.00 1007 1151 1007 1071 1039 1071 1039 1151 4 polygon
+sce
+0 1.00 1007 1151 1007 1071 1039 1071 1039 1151 4 polygon
+0.627 0.125 0.941 scb
+1 3.00 959 1163 959 1163 971 1155 947 1155 spline
+1 3.00 1023 1163 1023 1163 1035 1155 1011 1155 spline
+1 3.00 959 1179 959 1179 971 1171 947 1171 spline
+1 3.00 1023 1179 1023 1179 1035 1171 1011 1171 spline
+1 3.00 959 1195 959 1195 971 1187 947 1187 spline
+1 3.00 1023 1195 1023 1195 1035 1187 1011 1187 spline
+1 3.00 959 1211 959 1211 971 1203 947 1203 spline
+1 3.00 1023 1211 1023 1211 1035 1203 1011 1203 spline
+1 3.00 959 1227 959 1227 971 1219 947 1219 spline
+1 3.00 1023 1227 1023 1227 1035 1219 1011 1219 spline
+1 3.00 959 1243 959 1243 971 1235 947 1235 spline
+1 3.00 1023 1243 1023 1243 1035 1235 1011 1235 spline
+0.647 0.165 0.165 scb
+240 1.00 943 1359 943 1279 975 1279 975 1359 4 polygon
+sce
+0 1.00 943 1359 943 1279 975 1279 975 1359 4 polygon
+0.647 0.165 0.165 scb
+240 1.00 1007 1359 1007 1279 1039 1279 1039 1359 4 polygon
+sce
+0 1.00 1007 1359 1007 1279 1039 1279 1039 1359 4 polygon
+0.627 0.125 0.941 scb
+1 3.00 959 1259 959 1259 971 1251 947 1251 spline
+1 3.00 1023 1259 1023 1259 1035 1251 1011 1251 spline
+1 3.00 959 1275 959 1275 971 1267 947 1267 spline
+1 3.00 1023 1275 1023 1275 1035 1267 1011 1267 spline
+0.604 0.604 0.604 scb
+241 1.00 895 1383 947 1383 947 1359 971 1359 971 1407 895 1407 895 1383 
+7 polygon
+sce
+1 1.00 895 1383 947 1383 947 1359 971 1359 971 1407 895 1407 895 1383 7 polygon
+0.604 0.604 0.604 scb
+241 1.00 1087 1383 1035 1383 1035 1359 1011 1359 1011 1407 1087 1407 1087 1383 
+7 polygon
+sce
+1 1.00 1087 1383 1035 1383 1035 1359 1011 1359 1011 1407 1087 1407 1087 1383 
+7 polygon
+0.400 0.400 0.400 scb
+240 1.00 975 1535 975 991 1007 991 1007 1535 4 polygon
+sce
+0 1.00 975 1535 975 991 1007 991 1007 1535 4 polygon
+0.627 0.125 0.941 scb
+1 2.00 851 1075 879 1075 2 polygon
+1 2.00 1103 1075 1131 1075 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 815 1215 815 1071 831 1071 831 1215 4 polygon
+sce
+0 1.00 815 1215 815 1071 831 1071 831 1215 4 polygon
+1 1.00 815 1071 831 1079 2 polygon
+1 1.00 815 1079 831 1087 2 polygon
+1 1.00 815 1087 831 1095 2 polygon
+1 1.00 815 1095 831 1103 2 polygon
+1 1.00 815 1103 831 1111 2 polygon
+1 1.00 815 1111 831 1119 2 polygon
+1 1.00 815 1119 831 1127 2 polygon
+1 1.00 815 1127 831 1135 2 polygon
+1 1.00 815 1135 831 1143 2 polygon
+1 1.00 815 1151 831 1159 2 polygon
+1 1.00 815 1143 831 1151 2 polygon
+1 1.00 815 1159 831 1167 2 polygon
+1 1.00 815 1167 831 1175 2 polygon
+1 1.00 815 1175 831 1183 2 polygon
+1 1.00 815 1183 831 1191 2 polygon
+1 1.00 815 1191 831 1199 2 polygon
+1 1.00 815 1199 831 1207 2 polygon
+1 1.00 815 1207 831 1215 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 1151 1215 1151 1071 1167 1071 1167 1215 4 polygon
+sce
+0 1.00 1151 1215 1151 1071 1167 1071 1167 1215 4 polygon
+1 1.00 1151 1191 1167 1199 2 polygon
+1 1.00 1151 1199 1167 1207 2 polygon
+1 1.00 1151 1207 1167 1215 2 polygon
+1 1.00 1151 1071 1167 1079 2 polygon
+1 1.00 1151 1079 1167 1087 2 polygon
+1 1.00 1151 1087 1167 1095 2 polygon
+1 1.00 1151 1095 1167 1103 2 polygon
+1 1.00 1151 1103 1167 1111 2 polygon
+1 1.00 1151 1111 1167 1119 2 polygon
+1 1.00 1151 1119 1167 1127 2 polygon
+1 1.00 1151 1127 1167 1135 2 polygon
+1 1.00 1151 1135 1167 1143 2 polygon
+1 1.00 1151 1151 1167 1159 2 polygon
+1 1.00 1151 1143 1167 1151 2 polygon
+1 1.00 1151 1159 1167 1167 2 polygon
+1 1.00 1151 1167 1167 1175 2 polygon
+1 1.00 1151 1175 1167 1183 2 polygon
+1 1.00 1151 1183 1167 1191 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 807 1199 807 1183 839 1183 839 1199 4 polygon
+sce
+0 1.00 807 1199 807 1183 839 1183 839 1199 4 polygon
+1 1.00 815 1199 815 1183 2 polygon
+1 1.00 831 1199 831 1183 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 1143 1199 1143 1183 1175 1183 1175 1199 4 polygon
+sce
+0 1.00 1143 1199 1143 1183 1175 1183 1175 1199 4 polygon
+1 1.00 1167 1199 1167 1183 2 polygon
+1 1.00 1151 1199 1151 1183 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 911 1447 911 1343 927 1343 927 1447 4 polygon
+sce
+0 1.00 911 1447 911 1343 927 1343 927 1447 4 polygon
+1 1.00 911 1343 927 1351 2 polygon
+1 1.00 911 1351 927 1359 2 polygon
+1 1.00 911 1359 927 1367 2 polygon
+1 1.00 911 1367 927 1375 2 polygon
+1 1.00 911 1375 927 1383 2 polygon
+1 1.00 911 1383 927 1391 2 polygon
+1 1.00 911 1391 927 1399 2 polygon
+1 1.00 911 1399 927 1407 2 polygon
+1 1.00 911 1407 927 1415 2 polygon
+1 1.00 911 1415 927 1423 2 polygon
+1 1.00 911 1423 927 1431 2 polygon
+1 1.00 911 1431 927 1439 2 polygon
+1 1.00 911 1439 927 1447 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 1055 1447 1055 1343 1071 1343 1071 1447 4 polygon
+sce
+0 1.00 1055 1447 1055 1343 1071 1343 1071 1447 4 polygon
+1 1.00 1055 1343 1071 1351 2 polygon
+1 1.00 1055 1351 1071 1359 2 polygon
+1 1.00 1055 1359 1071 1367 2 polygon
+1 1.00 1055 1367 1071 1375 2 polygon
+1 1.00 1055 1375 1071 1383 2 polygon
+1 1.00 1055 1383 1071 1391 2 polygon
+1 1.00 1055 1391 1071 1399 2 polygon
+1 1.00 1055 1399 1071 1407 2 polygon
+1 1.00 1055 1407 1071 1415 2 polygon
+1 1.00 1055 1415 1071 1423 2 polygon
+1 1.00 1055 1423 1071 1431 2 polygon
+1 1.00 1055 1431 1071 1439 2 polygon
+1 1.00 1055 1439 1071 1447 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 903 1423 903 1407 935 1407 935 1423 4 polygon
+sce
+0 1.00 903 1423 903 1407 935 1407 935 1423 4 polygon
+0.400 0.400 0.400 scb
+240 1.00 1047 1423 1047 1407 1079 1407 1079 1423 4 polygon
+sce
+0 1.00 1047 1423 1047 1407 1079 1407 1079 1423 4 polygon
+1 1.00 911 1423 911 1407 2 polygon
+1 1.00 927 1423 927 1407 2 polygon
+1 1.00 1055 1423 1055 1407 2 polygon
+1 1.00 1071 1423 1071 1407 2 polygon
+0.604 0.604 0.604 scb
+240 1.00 1711 959 1711 1151 1775 1151 1775 959 4 polygon
+240 1.00 1711 639 1711 831 1775 831 1775 639 4 polygon
+240 1.00 2383 959 2383 1151 2447 1151 2447 959 4 polygon
+240 1.00 2383 639 2383 831 2447 831 2447 639 4 polygon
+0.400 0.400 0.400 scb
+241 1.00 2031 927 1999 895 1951 895 1951 943 2031 943 2031 927 6 polygon
+241 1.00 2095 927 2127 895 2175 895 2175 943 2095 943 2095 927 6 polygon
+sce
+3 1.00 1711 1119 1775 1119 2 polygon
+3 1.00 1711 1071 1775 1071 2 polygon
+3 1.00 1711 719 1775 719 2 polygon
+3 1.00 1711 671 1775 671 2 polygon
+3 1.00 2383 719 2447 719 2 polygon
+3 1.00 2383 671 2447 671 2 polygon
+3 1.00 2383 1119 2447 1119 2 polygon
+3 1.00 2383 1071 2447 1071 2 polygon
+0.604 0.604 0.604 scb
+241 1.00 1775 831 1775 735 1791 735 1871 639 2223 639 2287 767 2383 767 2383 
+831 2159 831 2159 719 1871 719 1775 831 12 polygon
+241 1.00 1871 1183 1871 1119 1927 1119 1927 1079 1967 1079 1967 1055 2031 1055 
+2031 1071 2015 1071 2015 1375 1967 1375 1967 1183 1871 1183 13 polygon
+241 1.00 2255 1183 2255 1119 2199 1119 2199 1079 2159 1079 2159 1055 2095 1055 
+2095 1071 2111 1071 2111 1375 2159 1375 2159 1183 2255 1183 13 polygon
+sce
+1 1.00 1871 1183 1871 1119 1927 1119 1927 1079 1967 1079 1967 1055 2031 1055 
+2031 1071 2015 1071 2015 1375 1967 1375 1967 1183 1871 1183 13 polygon
+1 1.00 2255 1183 2255 1119 2199 1119 2199 1079 2159 1079 2159 1055 2095 1055 
+2095 1071 2111 1071 2111 1375 2159 1375 2159 1183 2255 1183 13 polygon
+1 1.00 1951 895 1999 895 2031 927 2031 943 1951 943 1951 895 6 polygon
+1 1.00 2095 927 2095 943 2175 943 2175 895 2127 895 2095 927 6 polygon
+0.647 0.165 0.165 scb
+240 1.00 2015 1151 2015 1071 2047 1071 2047 1151 4 polygon
+sce
+0 1.00 2015 1151 2015 1071 2047 1071 2047 1151 4 polygon
+0.647 0.165 0.165 scb
+240 1.00 2079 1151 2079 1071 2111 1071 2111 1151 4 polygon
+sce
+0 1.00 2079 1151 2079 1071 2111 1071 2111 1151 4 polygon
+0.627 0.125 0.941 scb
+1 3.00 2031 1163 2031 1163 2043 1155 2019 1155 spline
+1 3.00 2095 1163 2095 1163 2107 1155 2083 1155 spline
+1 3.00 2031 1179 2031 1179 2043 1171 2019 1171 spline
+1 3.00 2095 1179 2095 1179 2107 1171 2083 1171 spline
+1 3.00 2031 1195 2031 1195 2043 1187 2019 1187 spline
+1 3.00 2095 1195 2095 1195 2107 1187 2083 1187 spline
+1 3.00 2031 1211 2031 1211 2043 1203 2019 1203 spline
+1 3.00 2095 1211 2095 1211 2107 1203 2083 1203 spline
+1 3.00 2031 1227 2031 1227 2043 1219 2019 1219 spline
+1 3.00 2095 1227 2095 1227 2107 1219 2083 1219 spline
+1 3.00 2031 1243 2031 1243 2043 1235 2019 1235 spline
+1 3.00 2095 1243 2095 1243 2107 1235 2083 1235 spline
+0.647 0.165 0.165 scb
+240 1.00 2015 1359 2015 1279 2047 1279 2047 1359 4 polygon
+sce
+0 1.00 2015 1359 2015 1279 2047 1279 2047 1359 4 polygon
+0.647 0.165 0.165 scb
+240 1.00 2079 1359 2079 1279 2111 1279 2111 1359 4 polygon
+sce
+0 1.00 2079 1359 2079 1279 2111 1279 2111 1359 4 polygon
+0.627 0.125 0.941 scb
+1 3.00 2031 1259 2031 1259 2043 1251 2019 1251 spline
+1 3.00 2095 1259 2095 1259 2107 1251 2083 1251 spline
+1 3.00 2031 1275 2031 1275 2043 1267 2019 1267 spline
+1 3.00 2095 1275 2095 1275 2107 1267 2083 1267 spline
+0.604 0.604 0.604 scb
+241 1.00 1967 1383 2019 1383 2019 1359 2043 1359 2043 1407 1967 1407 1967 1383 
+7 polygon
+sce
+1 1.00 1967 1383 2019 1383 2019 1359 2043 1359 2043 1407 1967 1407 1967 1383 
+7 polygon
+0.604 0.604 0.604 scb
+241 1.00 2159 1383 2107 1383 2107 1359 2083 1359 2083 1407 2159 1407 2159 1383 
+7 polygon
+sce
+1 1.00 2159 1383 2107 1383 2107 1359 2083 1359 2083 1407 2159 1407 2159 1383 
+7 polygon
+0.627 0.125 0.941 scb
+1 2.00 1923 1075 1951 1075 2 polygon
+1 2.00 2175 1075 2203 1075 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 1983 1447 1983 1343 1999 1343 1999 1447 4 polygon
+sce
+0 1.00 1983 1447 1983 1343 1999 1343 1999 1447 4 polygon
+1 1.00 1983 1343 1999 1351 2 polygon
+1 1.00 1983 1351 1999 1359 2 polygon
+1 1.00 1983 1359 1999 1367 2 polygon
+1 1.00 1983 1367 1999 1375 2 polygon
+1 1.00 1983 1375 1999 1383 2 polygon
+1 1.00 1983 1383 1999 1391 2 polygon
+1 1.00 1983 1391 1999 1399 2 polygon
+1 1.00 1983 1399 1999 1407 2 polygon
+1 1.00 1983 1407 1999 1415 2 polygon
+1 1.00 1983 1415 1999 1423 2 polygon
+1 1.00 1983 1423 1999 1431 2 polygon
+1 1.00 1983 1431 1999 1439 2 polygon
+1 1.00 1983 1439 1999 1447 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 2127 1447 2127 1343 2143 1343 2143 1447 4 polygon
+sce
+0 1.00 2127 1447 2127 1343 2143 1343 2143 1447 4 polygon
+1 1.00 2127 1343 2143 1351 2 polygon
+1 1.00 2127 1351 2143 1359 2 polygon
+1 1.00 2127 1359 2143 1367 2 polygon
+1 1.00 2127 1367 2143 1375 2 polygon
+1 1.00 2127 1375 2143 1383 2 polygon
+1 1.00 2127 1383 2143 1391 2 polygon
+1 1.00 2127 1391 2143 1399 2 polygon
+1 1.00 2127 1399 2143 1407 2 polygon
+1 1.00 2127 1407 2143 1415 2 polygon
+1 1.00 2127 1415 2143 1423 2 polygon
+1 1.00 2127 1423 2143 1431 2 polygon
+1 1.00 2127 1431 2143 1439 2 polygon
+1 1.00 2127 1439 2143 1447 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 1975 1423 1975 1407 2007 1407 2007 1423 4 polygon
+sce
+0 1.00 1975 1423 1975 1407 2007 1407 2007 1423 4 polygon
+0.400 0.400 0.400 scb
+240 1.00 2119 1423 2119 1407 2151 1407 2151 1423 4 polygon
+sce
+0 1.00 2119 1423 2119 1407 2151 1407 2151 1423 4 polygon
+1 1.00 1983 1423 1983 1407 2 polygon
+1 1.00 1999 1423 1999 1407 2 polygon
+1 1.00 2127 1423 2127 1407 2 polygon
+1 1.00 2143 1423 2143 1407 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 2047 1583 2047 895 2079 895 2079 1583 4 polygon
+sce
+0 1.00 2047 1583 2047 895 2079 895 2079 1583 4 polygon
+0.400 0.400 0.400 scb
+241 1.00 1999 831 2015 911 2063 911 1999 815 spline
+241 1.00 2127 831 2111 911 2063 911 2127 815 spline
+241 1.00 1999 815 2063 911 2127 815 1999 815 4 polygon
+240 1.00 1999 783 1999 815 2127 815 2127 783 4 polygon
+sce
+1 1.00 1999 831 2015 911 2063 911 1999 815 spline
+1 1.00 2127 831 2111 911 2063 911 2127 815 spline
+1 1.00 1999 815 1999 783 2127 783 2127 815 4 polygon
+0.604 0.604 0.604 scb
+241 1.00 1775 1023 1871 1023 1871 1103 1919 1103 1919 1071 1951 1071 1951 895 
+1967 895 1967 879 1903 879 1903 959 1775 959 12 polygon
+sce
+1 1.00 1711 1151 1775 1151 1775 1023 1871 1023 1871 1103 1919 1103 1919 1071 
+1951 1071 1951 895 1967 895 1967 879 1903 879 1903 959 1711 959 1711 1151 
+15 polygon
+0.400 0.400 0.400 scb
+240 1.00 1887 1215 1887 1071 1903 1071 1903 1215 4 polygon
+sce
+0 1.00 1887 1215 1887 1071 1903 1071 1903 1215 4 polygon
+1 1.00 1887 1071 1903 1079 2 polygon
+1 1.00 1887 1079 1903 1087 2 polygon
+1 1.00 1887 1087 1903 1095 2 polygon
+1 1.00 1887 1095 1903 1103 2 polygon
+1 1.00 1887 1103 1903 1111 2 polygon
+1 1.00 1887 1111 1903 1119 2 polygon
+1 1.00 1887 1119 1903 1127 2 polygon
+1 1.00 1887 1127 1903 1135 2 polygon
+1 1.00 1887 1135 1903 1143 2 polygon
+1 1.00 1887 1151 1903 1159 2 polygon
+1 1.00 1887 1143 1903 1151 2 polygon
+1 1.00 1887 1159 1903 1167 2 polygon
+1 1.00 1887 1167 1903 1175 2 polygon
+1 1.00 1887 1175 1903 1183 2 polygon
+1 1.00 1887 1183 1903 1191 2 polygon
+1 1.00 1887 1191 1903 1199 2 polygon
+1 1.00 1887 1199 1903 1207 2 polygon
+1 1.00 1887 1207 1903 1215 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 1879 1199 1879 1183 1911 1183 1911 1199 4 polygon
+sce
+0 1.00 1879 1199 1879 1183 1911 1183 1911 1199 4 polygon
+1 1.00 1887 1199 1887 1183 2 polygon
+1 1.00 1903 1199 1903 1183 2 polygon
+0.604 0.604 0.604 scb
+241 1.00 2159 831 2159 895 2175 895 2175 943 2223 927 2223 831 2159 831 
+7 polygon
+sce
+1 1.00 1711 639 1711 831 1775 831 1871 719 2159 719 2159 895 2175 895 2175 943 
+2223 927 2223 831 2447 831 2447 639 2383 639 2383 767 2287 767 2223 639 1871 
+639 1791 735 1775 735 1775 639 1711 639 21 polygon
+0.604 0.604 0.604 scb
+241 1.00 2175 1039 2175 1071 2207 1071 2207 1103 2255 1103 2383 1039 2383 959 
+2175 1039 8 polygon
+sce
+1 1.00 2175 1039 2175 1071 2207 1071 2207 1103 2255 1103 2383 1039 2383 1151 
+2447 1151 2447 959 2383 959 2175 1039 11 polygon
+0.400 0.400 0.400 scb
+240 1.00 2223 1215 2223 1071 2239 1071 2239 1215 4 polygon
+sce
+0 1.00 2223 1215 2223 1071 2239 1071 2239 1215 4 polygon
+1 1.00 2223 1191 2239 1199 2 polygon
+1 1.00 2223 1199 2239 1207 2 polygon
+1 1.00 2223 1207 2239 1215 2 polygon
+1 1.00 2223 1071 2239 1079 2 polygon
+1 1.00 2223 1079 2239 1087 2 polygon
+1 1.00 2223 1087 2239 1095 2 polygon
+1 1.00 2223 1095 2239 1103 2 polygon
+1 1.00 2223 1103 2239 1111 2 polygon
+1 1.00 2223 1111 2239 1119 2 polygon
+1 1.00 2223 1119 2239 1127 2 polygon
+1 1.00 2223 1127 2239 1135 2 polygon
+1 1.00 2223 1135 2239 1143 2 polygon
+1 1.00 2223 1151 2239 1159 2 polygon
+1 1.00 2223 1143 2239 1151 2 polygon
+1 1.00 2223 1159 2239 1167 2 polygon
+1 1.00 2223 1167 2239 1175 2 polygon
+1 1.00 2223 1175 2239 1183 2 polygon
+1 1.00 2223 1183 2239 1191 2 polygon
+0.400 0.400 0.400 scb
+240 1.00 2215 1199 2215 1183 2247 1183 2247 1199 4 polygon
+sce
+0 1.00 2215 1199 2215 1183 2247 1183 2247 1199 4 polygon
+1 1.00 2239 1199 2239 1183 2 polygon
+1 1.00 2223 1199 2223 1183 2 polygon
+(Direct-acting) {/Helvetica-Bold cf} 2 16 0 2.00 783 1567 label
+(Reverse-acting) {/Helvetica-Bold cf} 2 16 0 2.00 1775 1631 label
+pgsave restore showpage
+
+%%Trailer
+XCIRCsave restore
+%%EOF

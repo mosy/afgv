@@ -1,0 +1,125 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+\noindent
+{\bf Demonstration Program -- communication instructions} 
+
+\vskip 10pt
+
+Write a {\it minimal} ``demonstration'' program for your PLC to have it either read information from another PLC or write information to another PLC.  Communication instructions are a lot more complicated and trouble-prone than counters or timers or math instructions, and so you really need to begin with something very simple before you attempt to write a practical PLC program using them.  To emphasize this important habit and skill, your instructor will refrain from providing help on any other communication programs until you have successfully demonstrated this one!
+
+\vskip 10pt
+
+An acceptable demonstration program must meet these three criteria:
+
+\begin{itemize}
+\item{} {\bf Simple} -- nothing ``extra'' included in the program to detract from the fundamental behavior of the instruction(s) being explored
+\vskip 5pt
+\item{} {\bf Complete} -- nothing missing from the program relevant to the fundamental behavior of the instruction(s) being explored.  {\it For a contact and coil demonstration program, this includes normally-open and normally-closed contact instructions, as well as regular and retentive coil instructions.}
+\vskip 5pt
+\item{} {\bf Clearly documented} -- every rung clearly commented in your own words, every variable named
+\end{itemize}
+
+{\it Your instructor will challenge you to use this demonstration program to illustrate what you have learned about PLC counter instructions.}
+
+\vskip 10pt
+
+Your demonstration program can be as simple as a single rung of logic with one communication instruction, where an input bit from one PLC controls an output bit in another PLC.  Just write something minimal to prove the concept and learn the basic steps necessary to set up a communication link before attempting to add complexity!  
+
+\vskip 10pt
+
+\noindent
+Tips to keep in mind:
+
+\begin{itemize}
+\item{} Only one of the two PLCs connected to each other needs to have a communications instruction in it -- the other PLC doesn't even have to be programmed with any ladder logic at all to have data read from and written to it!
+\item{} Most communication instructions only need to be activated for a single scan in order to perform as intended.  In fact, ``energizing'' a communication instruction every program scan is often a recipe for trouble!
+\item{} Make sure any memory locations being written to by a communication instruction are not also being written to by some other element of the PLC (e.g. an input bit being controlled by electrical inputs, a bit being written to by a coil in the program, etc.).
+\end{itemize}
+
+
+\underbar{file i03122}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+For Koyo CLICK PLCs, the ``Receive'' and ``Send'' instructions are fairly self-explanatory.  
+
+\vskip 20pt
+
+For Allen-Bradley MicroLogix PLCs, the ``Message'' (MSG) instruction is the one to use, configured for ``500CPU'' Communication Command type.  Follow these steps to ensure good operation:
+
+\begin{itemize}
+\item{} Configure the two PLCs which will be networked to each other via Ethernet with compatible IP addresses and subnets (e.g. {\tt 192.168.0.5} and {\tt 192.168.0.7}, each with a subnet mask of {\tt 255.255.255.0}).
+\vskip 5pt
+\item{} Either connect the two MicroLogix PLCs with a single Ethernet cable, or plug them into an Ethernet hub, allowing a laptop to still be connected to them for programming and monitoring purposes.
+\vskip 5pt
+\item{} Create a new ``Message'' file (e.g. {\tt MG9}) and a new ``Routing Information'' file (e.g. {\tt RI10}).  These will need to be referenced within the setup screen of the MSG instruction.
+\vskip 5pt
+\item{} Reference this new Message file in the MSG instruction box (e.g. MSG File = {\tt MG9:0}).
+\vskip 5pt
+\item{} Double-click the words ``Setup Screen'' in the MSG instruction box to access the setup screen where you may enter all the other configuration data for this instruction.
+\vskip 5pt
+\item{} Under the ``This Controller'' section, select Channel 1 (if you double-click on the entry field, a pull-down arrow appears, allowing you to select among options).
+\vskip 5pt
+\item{} Under the ``This Controller'' section, set the ``Communication Command'' to either {\tt 500CPU Read} or {\tt 500CPU Write}, depending on whether you wish to have the MSG instruction read (receive) data from another PLC, or write (send) data to another PLC.
+\vskip 5pt
+\item{} Under the ``This Controller'' section, set the ``Data Table Address'' to the memory location within this PLC accessed by the MSG instruction.  If you are writing information to another PLC, this is the register where the transmitted data will come from.  If you are reading information from another PLC, this is the register where the received data will be placed.
+\vskip 5pt
+\item{} Under the ``This Controller'' section, set the ``Size in Elements'' for the number of contiguous registers you wish to write or read.  If you only wish to read or write a single 16-bit register, leave this parameter set for 1.
+\vskip 5pt
+\item{} Under the ``Target Device'' section, set the ``Data Table Address'' to the memory location within the other PLC accessed by the MSG instruction.  If you are writing information to another PLC, this is the register in the other PLC where the transmitted data will be written to.  If you are reading information from another PLC, this is the register in the other PLC where the received data will be read from.
+\vskip 5pt
+\item{} Under the ``Target Device'' section, select {\tt Local}.
+\vskip 5pt
+\item{} Under the ``Target Device'' section, specify the Routing Information file you created earlier (e.g. {\tt RI10:0}).
+\vskip 5pt
+\item{} Select the MultiHop tab on the Setup Screen window, and there specify the IP address of the target device (i.e. the IP address of the other PLC).
+\end{itemize}
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The recommended summary quiz is to have \underbar{each student} demonstrate their PLCs running this demonstration program.  Demonstration programs should not be accepted unless and until they meet all three criteria listed in the question: they need to be {\it simple} (no extraneous features), {\it complete} (demonstrating {\it all} the necessary instructions), and {\it thoroughly documented} in the student's own words (every rung commented intelligently, every variable named).
+
+\vskip 10pt
+
+When checking students' demonstation programs, have them run the programs with their laptop PCs in online mode so they can view status highlighting and numerical values live, and {\it ask them to provide a running commentary of what they see the instructions doing.  If their commentary is lacking, challenge them to explore instruction behaviors that they have not yet done.}  Refer to the ``suggested questions'' for specific ideas on instruction behavior that may be explored in a demonstration program.
+
+
+%\noindent
+%{\bf Summary Quiz:}
+
+%The recommended summary quiz is to have \underbar{each student} demonstrate their PLCs running this demonstration program.  Demonstration programs should not be accepted unless and until they meet all three criteria listed in the question: they need to be {\it simple} (no extraneous features), {\it complete} (demonstrating {\it all} the necessary instructions), and {\it thoroughly documented} in the student's own words (every rung commented intelligently, every variable named).
+
+\vskip 10pt
+
+This is by far the most important PLC program students will write today.  If there are other programs assigned in this day's plan, {\it prioritize this one}.  This point bears mentioning because a common error students make is to disregard the importance of a well-written demo program, instead tending to treat it as ``busywork'' and move on to ``more important'' assignments.  As the instructor your task is to explain why demonstration programs are important and to ensure students take them seriously:
+
+\begin{itemize}
+\item{} Demonstration programs are a powerful tool for self-instruction later when graduates will be challenged to learn some new PLC system.
+\vskip 5pt
+\item{} Demonstration programs may be re-run at a later date, which makes them ideal tools for review near the conclusion of the course.
+\vskip 5pt
+\item{} Demonstration programs require students to scientifically observe the PLC's programmed behavior, learning by {\it experiment} rather than learning by {\it direct instruction}.
+\vskip 5pt
+\item{} Well-written comments demand critical reflection on the part of the student, and also serve as practice for technical expression.
+\end{itemize}
+
+%INDEX% PLC, demonstration program: communication instructions
+
+%(END_NOTES)
+
+

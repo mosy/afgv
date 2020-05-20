@@ -1,0 +1,169 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose the voltmeter in this bridge circuit registers a strong {\it positive} voltage: 
+
+$$\includegraphics[width=15.5cm]{i00121x01.eps}$$
+
+Identify the likelihood of each specified fault for this circuit.  Consider each fault one at a time (i.e. no coincidental faults), determining whether or not each fault could independently account for {\it all} measurements and symptoms in this circuit.
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Fault} & {\bf Possible} & {\bf Impossible} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed open &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed open &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_3$ failed open &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_4$ failed open &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed shorted &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed shorted &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_3$ failed shorted &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_4$ failed shorted &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Voltage source dead &  &  \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+Finally, identify the {\it next} diagnostic test or measurement you would make on this system.  Explain how the result(s) of this next test or measurement help further identify the location and/or nature of the fault.
+
+\vfil 
+
+\underbar{file i00121}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The fact that point A is much too positive and point B is much too negative suggests a fault either on the left-hand side of the bridge bringing point A too close to the positive power supply rail, or a fault on the right-hand side bringing point B too close to the negative power supply rail.  A point may become ``too close'' either by virtue of a short across a resistor (making the two terminals of the resistor common to each other) connecting to that power supply rail or by virtue of an open fault in a resistor formerly connecting to the {\it other} power supply rail.
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Fault} & {\bf Possible} & {\bf Impossible} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed open &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed open & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_3$ failed open & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_4$ failed open &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed shorted & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed shorted &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_3$ failed shorted &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_4$ failed shorted & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Voltage source dead &  & $\surd$ \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+A good ``next test'' to try is measuring voltage across any of the four resistors.  If the voltage reads 10 volts, then both that resistor and the one in series with it is good, which means the problem must be on the other side of the bridge.
+
+However, any voltage measurement on the faulted side will be indeterminate, as one cannot tell the difference between a shorted resistor and an open resistor if the two resistors are connected in series and together receiving the full supply voltage.  For example, if resistor $R_1$ was failed shorted, it would drop 0 volts and $R_3$ would drop 20 volts.  The exact same voltages would be seen, however, if $R_3$ failed open and $R_1$ was healthy!
+
+%INDEX% Troubleshooting review: electric circuits (Wheatstone bridge)
+
+%(END_NOTES)
+

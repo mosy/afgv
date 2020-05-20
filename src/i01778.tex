@@ -1,0 +1,235 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose the voltmeter in this bridge circuit registers a strong {\it positive} voltage.  A test using a digital multimeter (DMM) shows the voltage between test points {\bf D} and {\bf B} to be 0 volts:
+
+$$\includegraphics[width=15.5cm]{i00313x01.eps}$$
+
+Identify the likelihood of each specified fault for this circuit.  Consider each fault one at a time (i.e. no coincidental faults), determining whether or not each fault could independently account for {\it all} measurements and symptoms in this circuit.
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Fault} & {\bf Possible} & {\bf Impossible} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed open &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed open &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_3$ failed open &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_4$ failed open &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed shorted &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed shorted &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_3$ failed shorted &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_4$ failed shorted &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Voltage source dead &  &  \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+Finally, identify the {\it next} diagnostic test or measurement you would make on this system.  Explain how the result(s) of this next test or measurement help further identify the location and/or nature of the fault.
+
+\vfil 
+
+\underbar{file i01778}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The 0 volt measurement between points B and D tells us something is wrong in the series $R_3$ - $R_4$ subnetwork.  A problem with $R_1$ or $R_2$ might account for the bridge circuit voltmeter's reading, but would not explain the lack of voltage across $R_4$.  Looking at $R_3$ and $R_4$, the only two faults that could cause no voltage to appear across $R_4$ is either an open fault in $R_3$ or a short-circuit across $R_4$:
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Fault} & {\bf Possible} & {\bf Impossible} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed open &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed open &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_3$ failed open & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_4$ failed open &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed shorted &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed shorted &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_3$ failed shorted &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_4$ failed shorted & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Voltage source dead &  & $\surd$ \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+A good ``next test'' would be to measure current at the source, to distinguish between an open $R_3$ and a shorted $R_4$.  An open $R_3$ would result in less total current than normal, while a shorted $R_4$ would result in more total current than normal.
+
+A very common ``next test'' suggestion made by students is to measure voltage across the other resistor in series with the 0 volt measurement (in this case, $R3$) as a confirmation of whether $R_3$ is open or $R_4$ is shorted.  Unfortunately this test will tell us nothing.  In either case, the voltage between points A and D will be the full 12 volts!  Since the results of this test will be the same regardless of the fault being an open $R_3$ or a shorted $R_4$, it is not a good test to perform.  What we need instead is a test that will clearly differentiate between the two faults, which the total current test would accomplish.
+
+
+
+
+
+
+
+
+
+\filbreak \vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtual Troubleshooting} \vrule} \hrule}
+
+\noindent
+{\bf Predicting the effect of a given fault:} present each of the following faults to the students, one at a time, having them comment on all the effects each fault would produce.
+
+\begin{itemize}
+\item{} 
+\item{} 
+\item{} 
+\end{itemize}
+
+
+\vskip 10pt
+
+
+\noindent
+{\bf Identifying possible/impossible faults:} present symptoms to the students and then have them determine whether or not a series of suggested faults could account for all the symptoms, explaining {\it why} or {\it why not} for each proposed fault:
+
+\begin{itemize}
+\item{} Symptom: {\it Voltmeter is ``pegged'' in the negative direction, and $V_{R3}$ is 6 volts}
+\item{} $R_1$ failed open? {\bf Yes!}
+\item{} $R_2$ failed open? {\bf No}
+\item{} $R_3$ failed open? {\bf No}
+\item{} $R_4$ failed open? {\bf No}
+\item{} $R_1$ failed shorted? {\bf No}
+\item{} $R_2$ failed shorted? {\bf Yes!}
+\item{} $R_3$ failed shorted? {\bf No}
+\item{} $R_4$ failed shorted? {\bf No}
+\end{itemize}
+
+
+\vskip 10pt
+
+
+\noindent
+{\bf Determining the utility of given diagnostic tests:} present symptoms to the students and then propose the following diagnostic tests one by one.  Students rate the value of each test, determining whether or not it would give useful information (i.e. tell us something we don't already know).  Students determine what different results for each test would indicate about the fault, if anything:
+
+\begin{itemize}
+\item{} Symptom: {\it }
+\item{}  -- {\bf Yes/No}
+\item{}  -- {\bf Yes/No}
+\end{itemize}
+
+
+\vskip 10pt
+
+
+\noindent
+{\bf Diagnosing a fault based on given symptoms:} imagine the ??? fails ??? in this system (don't reveal the fault to students!).  Present the operator's observation(s) to the students, have them consider possible faults and diagnostic strategies, and then tell them the results of tests they propose based on the following symptoms, until they have properly identified the nature and location of the fault:
+
+\begin{itemize}
+\item{} {\it }
+\item{} 
+\item{} 
+\end{itemize}
+
+
+%INDEX% Troubleshooting review: electric circuits (Wheatstone bridge)
+
+%(END_NOTES)
+
+

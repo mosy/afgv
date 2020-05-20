@@ -1,0 +1,113 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#66 (``A Depressing Day In The Plant With No Miracles'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} Examine Figure 1, showing a closed-loop test of the process.  Identify the features of the controller output trend where {\it integral action} is clearly evident, and also features of the same trend where {\it proportional action} is cleary evident.
+\vskip 10pt
+\item{} Examining Figure 1 again, explain why the upward ramp of the controller output in the middle of the display is steeper than the downward ramp toward the end (right-hand side) of the display.  Based on what you know of PID controller behavior, what explains the differences in ramp steepness, as well as their different directions (ramping up versus ramping down)?  Note that Figure 4 shows the same phenomenon!
+\vskip 10pt
+\item{} Explain what we may determine about the control valve from the open-loop test results shown in Figure 2.  In particular, what is this phenomenon referred to by Mr. Brown as ``negative hysteresis?''
+\vskip 10pt
+\item{} One of the problems this control valve has is that it is over-sized.  Explain how we may determine this from an examination of {\it either} the open-loop test or the closed-loop tests (Figures 1 through 3).
+\vskip 10pt
+\item{} At the end of this Case History, Mr. Brown poses an interesting question: ``How does one differentiate between cycles caused by unstable tuning, and those caused by valve problems as illustrated in this article?''  Explain in your own words how you may make this determination by examining a closed-loop trend of the process.  {\it Note: this is a simple yet extremely valuable tip to remember, as it will make your loop problem troubleshooting go a lot quicker!}
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identify where ``porpoising'' behavior appears in the trend of Figure 1, and identify the controller action (P, I, or D) responsible for it.  For more information on ``porpoising,'' refer to the ``Recognizing a `Porpoising' Controller'' subsection of the ``Heuristic PID Tuning Procedures'' section of the ``Process Dynamics and PID Controller Tuning'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.
+\item{} Examine the trend of Figure 3 and identify the controller's dominant action (either P, I, or D), based on the information contained in the ``Recognizing an Over-Tuned Controller by phase shift'' subsection of the ``Heuristic PID Tuning Procedures'' section of the ``Process Dynamics and PID Controller Tuning'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.
+\item{} Mr. Brown claims that open-loop step-changes ``shock'' the control valve and are therefore not good for revealing sticking and slipping behavior.  Does this mean it's impossible to test for valve stiction using open-loop output steps?  Explain why or why not.
+\end{itemize}
+
+\underbar{file i01659}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+In Figure 1, we see integral action clearly when the output ramps due to a persistent error between PV and SP.  We see proportional action clearly in the response to SP change, as well as in the ``porpoising'' action immediately following.  Note the phase shift during the oscillation: the opposing peaks of the PV and Output waves are almost perfectly aligned, which is what we would expect to see in a reverse-acting controller with proportional-dominant action.
+
+\vskip 10pt
+
+The differing steepness in the output trend of Figure 1 is due to different amounts of error between PV and SP: the output ramps steeply over time when there is a large error, and slowly when there is a small error:
+
+$$m = \int e \> dt$$
+
+\vskip 10pt
+
+The open-loop test of Figure 2 definitely shows a sticking valve, and moreover a valve that tends to {\it overshoot} its commanded position.  This overshoot is what Michael Brown refers to as ``negative hysteresis.'' The actuator air pressure builds up to an excessive level, then the valve unsticks and moves, and it ends up overshooting its target position due to all the potential energy accumulated in the actuator.  
+
+\vskip 10pt
+
+The oversized nature of the control valve is revealed by the relative amplitudes of the PV and Output waves: the PV wave's amplitude exceeds the Output wave's amplitude by a factor of about 3:1.  If the valve had been properly sized, the amplitude of the PV cycling would have been 3 times smaller than it was!
+
+\vskip 10pt
+
+Michael Brown's diagnostic tip for determining whether a cycle is caused by the controller or by a faulty valve is based on period: controller cycles oscillate at the ultimate cycle period of the process, which for flow control loops is quick.  Valve stiction typically manifests as a much slower cycle.  Also, the wave-shapes are different: controller cycles are sinusoidal on both PV and Output, while valve stiction cycles are typically square-wave on PV and triangle-wave on Output.  
+
+It should be noted that the square-vs-triangle wave phenomenon is only for self-regulating processes.  Integrating processes tend to exhibit triangle wave-shapes on both PV and Output when the valve has stiction.
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Examining Figure 4 (closed-loop test), interpret the controller's action from the PV, SP, and Output trends.
+\item{} Examining Figure 5 (open-loop test), show where we can see evidence of valve stiction.
+\item{} Examining Figure 6 (closed-loop test), explain how we can tell this is a slip-stick cycle and not a controller tuning problem.
+\item{} Michael Brown says that a valve stiction cycle is usually revealed by a square wave shape on the PV and a triangle wave shape on the Output.  This, however, is only true for self-regulating processes.  What will the wave-shapes be like in integrating processes such as liquid level control?
+\end{itemize}
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+One way to distinguish ``cycling'' caused by an over-tuned (too-aggressive) PID controller and ``cycling'' caused by a sticking control valve is:
+
+\begin{itemize}
+\item{} Over-tuning oscillations cease in manual mode; sticky valve oscillations continue on
+\vskip 5pt 
+\item{} Over-tuning oscillations are slower (longer period) than sticky-valve oscillations
+\vskip 5pt 
+\item{} Sticky-valve oscillations are sinusoidal; over-tuning oscillations are not
+\vskip 5pt 
+\item{} Sticky-valve oscillations consume less air to operate the valve than over-tuning oscillations
+\vskip 5pt 
+\item{} Over-tuning oscillations are sinusoidal; sticky valve oscillations are not
+\vskip 5pt 
+\item{} Sticky-valve oscillations cease in manual mode; over-tuned valve oscillations continue on
+\end{itemize}
+
+
+%INDEX% Reading assignment: Michael Brown Case History #66, "A depressing day in the plant with no miracles"
+
+%(END_NOTES)
+
+

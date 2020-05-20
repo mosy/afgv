@@ -1,0 +1,89 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read selected portions of the Allen-Bradley ``MicroLogix 1000 Programmable Controllers (Bulletin 1761 Controllers)'' user manual (document 1761-6.3, July 1998) and answer the following questions:
+
+\vskip 10pt
+
+Locate the section discussing the PLC's available {\it math instructions} and identify several of them.
+
+\vskip 10pt
+
+Is there a ``generic'' math instruction capable of evaluating a typed expression (i.e. an instruction box where you can enter your own arbitrary formula to obtain an answer, like an Excel spreadsheet)?
+
+\vskip 10pt
+
+What is the difference between a {\it double integer} and a normal integer in this PLC?
+
+\vskip 10pt
+
+Are {\it floating-point} numbers supported in the MicroLogix 1000 series of PLC, or only integer numbers?
+
+\vskip 10pt
+
+A reserved area in the MicroLogix PLC's memory called {\it status} designates several bits with signficance to math operations.  Identify the functions of some of these bits, and describe how their status (either 0 or 1) could be useful in a PLC program using math instructions.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} If you have access to your own PLC for experimentation, I urge you to write a simple {\it demonstration} program in your PLC allowing you to explore the behavior of these PLC instructions.  The program doesn't have to do anything useful, but merely demonstrate what each instruction does.  First, read the appropriate section in your PLC's manual or instruction reference to identify the proper syntax for that instruction (e.g. which types of data it uses, what address ranges are appropriate), then write the simplest program you can think of to demonstrate that function in isolation.  Download this program to your PLC, then run it and observe how it functions ``live'' by noting the color highlighting in your editing program's display and/or the numerical values manipulated by each instruction.  After ``playing'' with your demonstration program and observing its behavior, write comments for each rung of your program explaining in your own words what each instruction does.
+\item{} Note the {\it execution times} listed for each instruction in the MicroLogix 1000 manual.  Why do you suppose this information might be important to you as a programmer or an end-user of a PLC?
+\end{itemize}
+
+\underbar{file i02344}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Chapter 8 describes the math instructions available in the MicroLogix 1000 PLC.
+
+\vskip 10pt
+
+A generic math instruction (where you get to type in an expression) does not seem to exist in the MicroLogix 1000 instruction set.
+
+\vskip 10pt
+
+Regular integer instructions operate on 16-bit integer values.  Double integer instructions use 32-bit integers.
+
+\vskip 10pt
+
+Floating-point numbers are \underbar{not} supported in the MicroLogix 1000 PLC, only integer numbers.
+
+\vskip 10pt
+
+Status bits in the MicroLogix 1000 PLC have the following meanings related to math:
+
+\begin{itemize}
+\item{} {\tt S:0/0} = carry generated
+\item{} {\tt S:0/1} = overflow
+\item{} {\tt S:0/2} = result is equal to zero 
+\item{} {\tt S:0/3} = result is negative
+\item{} {\tt S:5/0} = overflow or attempt to divide by zero
+\item{} {\tt S:13} = least significant word of MUL and DDV instruction result; also remainder for DIV and DDV instruction result
+\item{} {\tt S:14} = most significant word of MUL and DDV instruction result
+\end{itemize}
+
+Interestingly, the {\tt S:5/0} ``overflow'' or ``divide by zero'' bit (which ironically is called the {\it minor error bit} in the MicroLogix 1000 PLC, can cause the processor fault which will halt execution of the user program!  If a fault condition is undesirable, the manual recommends you include a rung in the program continually resetting the {\tt S:5/0} bit with an unlatch coil(!).  The example program shown on page 8-7 includes such an unlatch coil to prevent processor faults.
+
+
+
+%INDEX% Reading assignment: Allen-Bradley MicroLogix 1000 user manual (math instructions)
+
+%(END_NOTES)
+
+

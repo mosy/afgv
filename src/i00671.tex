@@ -1,0 +1,194 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Examine this page of program code from a Siemens APOGEE system (written in Siemens' ``PPCL'' programming language), then answer the following questions:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=6.5in \raggedright
+
+\noindent
+{\tt 02530 C}
+
+\noindent
+{\tt 02540 C IF THE ROOM TEMP IS LESS THAN HEATING SETPOINT THAN TURN ON THE HEATING PUMP}
+
+\noindent
+{\tt 02550 C ELSE SHUT OFF HEATING PUMP}
+
+\noindent
+{\tt 02560 C}
+
+\noindent
+{\tt 02570 IF ("MV.GH.2E:ROOM TEMP" .LT. "MV.GH.2E.HTG.STPT") THEN ON ("MV.GH.2E:DO 2")}
+
+\noindent
+{\tt 02580 IF ("MV.GH.2E:ROOM TEMP" .GT. "MV.GH.2E.HTG.STPT"+1) THEN OFF ("MV.GH.2E:DO 2")}
+ 
+\noindent
+{\tt 02590 C}
+
+\noindent
+{\tt 02600 C *****ROOM 3E CONTROLS*****}
+
+\noindent
+{\tt 02610 C}
+
+\noindent
+{\tt 02620 C IF SOMEONE PUSHES THE OVERIDE BUTTON, THEN TURN ON THE EXHAUST FAN}
+
+\noindent
+{\tt 02630 C OVERRIDE FOR 2 HOURS}
+
+\noindent
+{\tt 02640 C}
+
+\noindent
+{\tt 02650 IF ("MV.GH.3E:DI OVRD SW" .EQ. ON) THEN SET (0,"MV.GH.3E.OT")}
+
+\noindent
+{\tt 02660 IF ("MV.GH.3E.OT" .GT. 1000) THEN SET (1000, "MV.GH.3E.OT")}
+
+\noindent
+{\tt 02670 IF ("MV.GH.3E.OT" .LT. 120) THEN ON ("MV.GH.3E.OVRD") ELSE OFF ("MV.GH.3E.OVRD")}
+
+}
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+
+
+\vskip 10pt
+
+What is the significance of the letter {\tt C} preceding many of the lines of code in this program?
+
+\vskip 10pt
+
+Identify the meanings of the following ``operators'' in Siemens PPCL code: {\tt .LT.}, {\tt .GT.}, {\tt .EQ.}.
+
+\vskip 10pt
+
+Explain how the ``heating pump'' code functions (lines 2570 and 2580) to turn the pump on and off.
+
+\vskip 10pt
+
+Explain how the ``exhaust fan override'' code functions (lines 2650 and 2670) to turn the fan on for two hours.  Specifically, where does the code tell the Siemens controller to invoke a {\it two-hour} time delay?
+
+\vskip 10pt
+
+Line 6000 of this program (not shown on this page) instructs the controller to {\tt GOTO 00190}, with 00190 being a line near the beginning of the program (also not shown on this page).  In fact, this is the only ``GOTO'' instruction in the entire program.  Why do you think this ``GOTO'' instruction exists?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Do you think it would be easier or more difficult to program custom control algorithms in a text-based language like PPCL or in a graphic-based language such as function blocks?
+\item{} Suppose operations personnel asked you to change the override timer from 2 hours to 3 hours.  Explain how you could modify the code to do this.
+\item{} Suppose the pump's function were physically altered from heating to cooling (i.e. turning the pump on caused coolant to enter the heat exchanger, thus lowering the room's temperature).  How would you modify the code to be compatible with this new pump functionality?
+\item{} Identify the benefit(s) of adequately {\it commenting} a program such as this.
+\end{itemize}
+
+\underbar{file i00671}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Each line beginning with a letter ``C'' is a {\it comment}, placed there strictly for the benefit of any human being reading the program.  Comments are ignored by the controller as it executes the code.
+
+\vskip 10pt
+
+The {\tt .LT.} operator stands for ``Less Than'' while the {\tt .GT.} operator stands for ``Greater Than'' and the {\tt .EQ.} operator stands for ``Equal To''.
+
+\vskip 10pt
+
+The singular GOTO instruction causes the program to {\it loop}, endlessly repeating the entire program.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The heating pump turns on if the room temperature is less than setpoint, and it turns off if the room temperature is greater than 1 degree hotter than setpoint.
+
+\vskip 10pt
+
+The exhaust fan override timer {\tt MV.GH.3E.OT} gets reset to zero if the override button is pressed (line 02650).  As it counts up, line 02670 keeps the fan on so long as the timer value is less than 120 (minutes).  This is where the two-hour delay is established.  The timer's value is upper-limited to 1000 minutes in line 02660.
+
+
+
+
+
+
+
+
+
+
+\filbreak \vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtual Troubleshooting} \vrule} \hrule}
+
+\noindent
+{\bf Predicting the effect of a given fault:} present each of the following faults to the students, one at a time, having them comment on all the effects each fault would produce.
+
+\begin{itemize}
+\item{} Greenhouse 2E room temperature sensor fails with a high signal
+\item{} Solid-state relay interposing DDC to exhaust fan motor fails open
+\item{} {\tt .LT} and {\tt .GT} operators swapped between lines 2570 and 2580
+\item{} Override pushbutton switch fails shorted (``on'')
+\end{itemize}
+
+
+\vskip 10pt
+
+
+\noindent
+{\bf Identifying possible/impossible faults:} present symptoms to the students and then have them determine whether or not a series of suggested faults could account for all the symptoms, explaining {\it why} or {\it why not} for each proposed fault:
+
+\begin{itemize}
+\item{} Symptom: {\it }
+\item{}  -- {\bf Yes/No}
+\item{}  -- {\bf Yes/No}
+\item{}  -- {\bf Yes/No}
+\end{itemize}
+
+
+\vskip 10pt
+
+
+\noindent
+{\bf Determining the utility of given diagnostic tests:} present symptoms to the students and then propose the following diagnostic tests one by one.  Students rate the value of each test, determining whether or not it would give useful information (i.e. tell us something we don't already know).  Students determine what different results for each test would indicate about the fault, if anything:
+
+\begin{itemize}
+\item{} Symptom: {\it }
+\item{}  -- {\bf Yes/No}
+\item{}  -- {\bf Yes/No}
+\end{itemize}
+
+
+\vskip 10pt
+
+
+\noindent
+{\bf Diagnosing a fault based on given symptoms:} imagine the ??? fails ??? in this system (don't reveal the fault to students!).  Present the operator's observation(s) to the students, have them consider possible faults and diagnostic strategies, and then tell them the results of tests they propose based on the following symptoms, until they have properly identified the nature and location of the fault:
+
+\begin{itemize}
+\item{} Operator observation: {\it }
+\item{} 
+\item{} 
+\end{itemize}
+
+%INDEX% DDC, Siemens APOGEE system
+%INDEX% DDC, Siemens PPCL code (APOGEE DDC control)
+
+%(END_NOTES)
+
+

@@ -1,0 +1,82 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read selected portions of the ``SEL-551 Relay'' protective relay manual (document PM551-01, April 2011) and answer the following questions:
+
+\vskip 10pt
+
+Identify three different ANSI/IEEE protective relay functions implemented by this one device.  Hint: the {\it Settings Sheet} section of the manual may be helpful in identifying its functions.
+
+%\vskip 10pt
+
+%In order to configure the various settings in this protective relay, the user can either use pushbuttons on the front panel of the relay, or use a serial communications port connected to a personal computer.  Section 5 describes the parameters of this serial data communication technique.  Identify the default parameter values to use if you were to connect a Windows-based PC to the 551 relay and use a program such as {\tt Hyperterminal}.
+
+\vskip 10pt
+
+Figure 1.1 on page 1.2 shows some typical applications for the SEL-551 protective relay.  Identify at least two applications shown.  Also, identify the direction of power flow in this single-line diagram.
+
+\vskip 10pt
+
+A very useful feature of this relay is {\it event reporting}.  This particular model provides a detailed report on a 15-cycle time frame surrounding a trip event.  An example of this is shown on page 7.12.  Based on the current data shown in this example, when did the fault condition occur, and on which phase of the three-phase system did it occur?
+
+\vskip 10pt
+
+The latter portion of the event report shown on page 7.13 shows the CT ratio for each phase being 120 (120:1, or 600:5) and the pickup value for the phase time-overcurrent being 6 amps.  How many amps of line current (RMS) does this translate to, for a pickup value?  How many amps of line current (peak) does this pickup value represent?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} What do you suppose a {\it fast bus trip scheme} is, as suggested in the single-line diagram of Figure 1.1?
+\item{} Figure 7.3 on page 7.15 shows the method by which the SEL-551 relay calculates RMS values for current based on instantaneous samples of each phase current (8 times per cycle), which is one sample every 45 degrees of phasor rotation.  Explain how this method works.
+\item{} In the latter portion of the event report shown on page 7.13, a section called ``SELogic Control Equations'' defines the variables able to initiate a trip.  Figure 3.13 on page 3.17 shows a logic gate diagram of the ``Trip Logic'' for this relay.  Based on the information contained in the trip logic diagram and in the event report's summary of the SELogic equations, explain how trip conditions are defined in this particular protective relay, and how the flexibility of SELogic allows a relay technician to do far more with this than could be done with simple electromechanical relay technology. 
+\end{itemize}
+
+
+\underbar{file i01202}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Three functions: 50 (instantaneous overcurrent), 51 (time overcurrent), and 79 (automatic reclose) as shown on Settings Sheets (PDF pages 107 through 117).
+
+%\vskip 10pt
+
+%Default communication parameter values: {\tt 2400 8N1} (page 5.1)
+
+\vskip 10pt
+
+Applications include breaker failure protection, transformer protection, distribution bus protection, distribution feeder protection (and reclosing), and industrial feeder protection.   Power comes in on the transmission bus, and goes out through distribution feeder lines. (page 1.2)
+
+\vskip 10pt
+
+The fault occurred on phase A, beginning at the point in time where phase A's current reached a value of $-675$ amps.  Here is where the time-overcurrent (51) elements on phase 1 and on ground pickup up (lower-case ``p'').  Relay actually tripped near the end of the third cycle.
+
+\vskip 10pt
+
+The time-overcurrent pickup value in this case is 720 amps RMS (real line current), being the 120:1 ratio $\times$ 6 amps secondary CT pickup value.  This is equivalent to 1018.23 amps peak (720 $\times \sqrt{2}$ = 1018.23).
+
+\vskip 20pt
+
+\noindent
+Answer to Socratic Question: the method for calculating RMS values for current works like this: two instantaneous samples 90 degrees apart (two samples apart) are each divided by $\sqrt{2}$, squared, added, and then the sum square-rooted to obtain the RMS value.  As it turns out, you can do this on {\it any} two such samples taken of a sinusoidal wave and get the wave's RMS value!
+
+%INDEX% Reading assignment: SEL model 551 overcurrent protective relay
+
+%(END_NOTES)
+
+

@@ -1,0 +1,64 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+In FOUNDATION Fieldbus H1, there are three distinct classes of bus communication (Virtual Communication Relationships, or {\it VCR}s):
+
+\begin{itemize}
+\item{} Publisher / Subscriber
+\item{} Client / Server
+\item{} Source / Sink (also called Report Distribution)
+\end{itemize}
+
+Explain how each of these works, and identify the types of data exchanged by each in a Fieldbus network.
+
+\underbar{file i02439}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Partial answer:}
+
+\underbar{Publisher / Subscriber}: scheduled communication whereby the Link Active Scheduler (LAS) calls upon a specific device on the network to transmit specific data for time-critical control purposes.  The message calling for this data is called a Compel Data (CD) request.  Multiple devices on the network ``subscribing'' to this published data receive it simultaneously.
+
+\vskip 10pt
+
+\underbar{Client / Server}: unscheduled communication between individual devices enabled whenever the LAS grants a Pass Token (PT) to a device.  Each device maintains a queue (list) of data requests issued by other devices (clients), and responds to them in order.  By responding to client requests, the device acts as a server.  Likewise, each device can use this time to act as a client, posting their own requests to other devices, which will act as servers when they receive the token from the LAS.
+
+\vskip 10pt
+
+\underbar{Source / Sink}: unscheduled communication from one device to a ``group address'' representing many devices, enabled whenever the LAS grants a Pass Token (PT) to a device. 
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+\underbar{Publisher / Subscriber}: scheduled communication whereby the Link Active Scheduler (LAS) calls upon a specific device on the network to transmit specific data for time-critical control purposes.  The message calling for this data is called a Compel Data (CD) request.  Multiple devices on the network ``subscribing'' to this published data receive it simultaneously.  {\it Used to communicate process-related parameters between function blocks, for control purposes.  The publisher/subscriber VCR is highly deterministic.}
+
+\vskip 10pt
+
+\underbar{Client / Server}: unscheduled communication between individual devices enabled whenever the LAS grants a Pass Token (PT) to a device.  Each device maintains a queue (list) of data requests issued by other devices (clients), and responds to them in order.  By responding to client requests, the device acts as a server.  Likewise, each device can use this time to act as a client, posting their own requests to other devices, which will act as servers when they receive the token from the LAS.  {\it Used to communicate maintenance and device configuration data, operator setpoint changes, diagnostics, adjusting alarm and PID tuning values, etc.  Client/server communications are checked for data corruption, to ensure reliable data flow.}
+
+\vskip 10pt
+
+\underbar{Source / Sink}: unscheduled communication from one device to a ``group address'' representing many devices, enabled whenever the LAS grants a Pass Token (PT) to a device.  {\it Used to communicate trends and alarms (alarm acknowledgments are handled through client/server VCR, however).  Source/sink communications are not checked for data corruption, so it is technically possible for data to go missing here!} 
+
+\vskip 10pt
+
+One of the better resources I've found for information on this is the Fieldbus Foundation's {\it FOUNDATION Specification System Architecture} report, especially page 7 (Section 2.1.1.6).
+
+%INDEX% Fieldbus, FOUNDATION (H1): Virtual Communication Relationships (VCRs)
+
+%(END_NOTES)
+
+

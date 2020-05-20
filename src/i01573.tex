@@ -1,0 +1,112 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#29 (``Scan Rate Problem In a DCS On a Fast Loop'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} The control strategy in this example is similar to a {\it split-ranged} valve loop.  Explain both the similarities and the differences, and also {\it why} this control system is designed like this.
+\vskip 10pt
+\item{} Explain how the poor performance of this gas pressure-control loop actually created monetary loss on the oil rig.
+\vskip 10pt
+\item{} Examine the closed-loop trend of Figure 2, and determine the dominant mode of control (P, I, or D).  Does this mode make sense for the type of process this is (pressure control with large volumes)?
+\vskip 10pt
+\item{} Explain what is meant by the phrase, ``Scan Rate'' in a digital computer system, and why this is significant when using a computer to control a process.
+\vskip 10pt
+\item{} Examine Figures 2 and 3, then explain how we can tell from these trends that the scan rate of the DCS is slow.  Also explain why one of the ratio block outputs had a much slower scan rate than the other.
+\vskip 10pt
+\item{} Explain why Mr. Brown was unable to properly fix the problem during his visit to the oil rig.
+\vskip 10pt
+\item{} Examine the closed-loop trend of Figure 4, and determine the dominant mode of control (P, I, or D) with Mr. Brown's new tuning.  How does it differ from the ``As-Found'' tuning of Figure 2?
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Why do you think computer control systems like this have adjustable scan rates for different function blocks?  What possible benefit might there be to operating a function with a very slow scan rate?
+\item{} How fast is the scan rate on your team's controlled process?  If this parameter is not advertised by the manufacturer, how could you measure the scan rate? 
+\end{itemize}
+
+\underbar{file i01573}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+One controller drives two parallel control valves (similar to split-range) on two inlet pipes carrying high-pressure natural gas to the rig, each valve opening a certain percentage of the controller output signal (different from most split ranges).  It is kind of like a poor ratio control scheme, balancing the load placed on those two gas lines.
+
+\vskip 10pt
+
+Pressure control on this loop was too slow to recover from sudden load changes such as compressor trips.  This shut down the rig, at a high cost each time (about 1 million British pounds!).
+
+\vskip 10pt
+
+Figure 2 shows integral-dominant control, reverse-action (note the large phase shift between PV and Output).  With large downstream volume, process characteristic should be integrating, which means the controller ought to be proportional-dominant not integral-dominant.
+
+\vskip 10pt
+
+``Scan Rate'' refers to how often the control system updates the output signal (i.e. how fast the program instructions implementing PID control are cyclicly executed).  Scan rate is effectively {\it dead time} added to the loop by the controller itself.
+
+\vskip 10pt
+
+One of the ratio function blocks was in a different library section of the DCS, with an ``external scan rate'' slowing down its response.  The library section's scan rate could not be changed on-line, which meant they could not fix the problem without shutting down the rig.
+
+\vskip 10pt
+
+New tuning in Figure 4 shows proportional dominance (reverse action) instead of integral dominance (reverse action) as originally found.  Note the nearly zero phase shift between PV and Output waves.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+The poorly-performing gas pressure control system on the North Sea oil rig described by Michael Brown was causing a lot of money to be lost because:
+
+\begin{itemize}
+\item{} The slow pressure control was causing the generator engines to run rough
+\vskip 5pt 
+\item{} Gas customers were disgruntled with the pressure swings on their gas lines
+\vskip 5pt 
+\item{} It was wearing out the control valves, which were expensive to replace
+\vskip 5pt 
+\item{} It caused the oil rig to completely blow up one time
+\vskip 5pt 
+\item{} The paper trend recorders were using up a lot of ink drawing the irregular graphs
+\vskip 5pt 
+\item{} It was activating the high-pressure shutdown system, stopping production
+\end{itemize}
+
+
+%INDEX% Reading assignment: Michael Brown Case History #29, "Scan rate problem in a DCS on a fast loop"
+
+%(END_NOTES)
+
+

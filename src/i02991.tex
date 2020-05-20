@@ -1,0 +1,125 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read portions of the Rockwell SMC-Flex motor controller Application Guide (publication 150-AT002B-EN-P, June 2004) and answer the following questions:
+
+\vskip 10pt
+
+Devices such as the SMC-Flex motor controller are often referred to in the industry as ``solid state soft-start'' units.  Explain what is meant by the term {\it soft start}, and why this feature might be desirable for large AC induction motors.
+
+\vskip 10pt
+
+Explain how SCRs (Silicon Controlled Rectifiers) are used to provide reduced-voltage starting for any electric motor receiving its three-phase power through an SMC-Flex unit.  How does this technique compare with other methods of reduced-voltage starting?
+
+\vskip 10pt
+
+In addition to using SCRs to control motor voltage, the SMC-Flex unit also contains an {\it SCR bypass} contactor.  Explain what this is, and under what conditions it ``pulls in'' (operates).
+
+\vskip 10pt
+
+One of the additional features provided by this motor controller is something called {\it kickstart}.  Explain what this feature is, how it works, and identify an application where it might be useful.
+
+\vskip 10pt
+
+Find a wiring diagram for the SMC-Flex unit and identify where ``Start'' and ``Stop'' pushbutton switches may be connected to control the motor.  Also identify the ``normal'' status for each of these switches and explain why they are like that.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identify some of the other useful features of this solid-state soft start unit, and explain how these features would be difficult (or impossible) to emulate using mechanical-style contactors.
+\end{itemize}
+
+\underbar{file i02991}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Page 1-3 describes how soft-starting works: the motor is started up with reduced voltage, the voltage gradually ramping up to full voltage over a brief period of time (settable between 0 and 30 seconds).  Soft-starting an electric motor reduces the inrush current, as well as reducing mechanical wear on the machinery the motor is turning.
+
+\vskip 10pt
+
+Chapter 7 provides a brief overview of the SMC-Flex unit's SCR circuitry for reduced-voltage operation.  Page 7-1 shows a simplified schematic diagram where six SCRs are used to control current through the three phase lines to the motor.  The SCRs chop the regular sine-wave power into smaller bits for reduced-voltage starting.  SCRs will be more compact and dissipate less heat than resistors or inductors alternatively used for soft starting.  The ability to smoothly ramp voltage rather than merely two-stepping voltage to a starting motor makes for gentler start-up operation.
+
+\vskip 10pt
+
+The ``bypass contactor'' inside the SMC-Flex unit bypasses (parallels) the SCRs for full-speed operation, so that the SCRs no longer carry any current or drop any voltage.  Page 1-36 briefly describes this.  An option of connecting an external bypass contactor is shown on page 3-9.
+
+\vskip 10pt
+
+``Kickstart'' refers to an initial boost of voltage to the motor to help it ``break away'' from mechanical loading after standing still, then followed by a regular ramping-up of voltage all the way to 100\% over a brief time period.  This is first described on page 1-3.  An application making use of this feature is the wire draw steel mill machine described on page 2-8 (figure 2.8), where a substantial amount of motor torque is required to initiate movement of the steel wire through the die.  According to this document, other models of soft-start did not provide enough starting torque for this machine to work well.
+
+\vskip 10pt
+
+External start and stop pushbuttons may be connected to terminals on the SMC-Flex to control its operation.  NO start switch between terminals 17 and 18, NC stop switch between terminals 11 and 18 (as shown on page 1-5).  If wire breaks open at either one, motor defaults to safest condition (stopping, or at least not being able to start).
+
+
+
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identify both mechanical and electrical advantages to using a soft-start rather than across-the-line starting of an AC electric motor.
+\item{} Identify the adjustable time range over which the SMC-Flex can soft-start a motor.  Why is an adjustable range important?  In what application(s) would you need a longer (gentler) soft-start?
+\item{} Why do you suppose anyone would want to use a soft-start unit such as the SMC-FLex if they could alternatively use a VFD to gently start up an AC motor?
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+What is a {\it soft start}?
+
+\begin{itemize}
+\item{} A special type of PLC used to control the starting of an electric motor
+\vskip 5pt 
+\item{} A computer program used to automatically reverse the direction of an electric motor
+\vskip 5pt 
+\item{} An electronic circuit providing reduced voltage for starting up an electric motor
+\vskip 5pt 
+\item{} An electronic circuit providing variable-frequency AC power to an electric motor
+\vskip 5pt 
+\item{} Computer software used to analyze and model the start-up of a large electric motor
+\vskip 5pt 
+\item{} A collection of SCRs designed to ``latch'' an alarm circuit in the activated state
+\end{itemize}
+
+
+%INDEX% Reading assignment: Rockwell Bulletin 150 SMC-Flex motor controller
+
+%(END_NOTES)
+
+

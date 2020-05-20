@@ -1,0 +1,136 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read selected portions of the Allen-Bradley ``MicroLogix 1000 Programmable Controllers (Bulletin 1761 Controllers)'' user manual (document 1761-6.3, July 1998) and answer the following questions:
+
+\vskip 10pt
+
+Locate the section discussing the PLC's {\it operating cycle} -- otherwise known as a ``scan'' cycle -- and describe the sequence of operations conducted by the PLC on an ongoing basis.
+
+\vskip 10pt
+
+Locate the section discussing the PLC's memory types (EEPROM and RAM), and describe the functions of each.
+
+\vskip 30pt
+
+A very important aspect to learn about any PLC is how to specify various locations within its memory.  Each manufacturer and model of PLC has its own way of ``addressing'' memory locations, analogous to the different ways each postal system within each country of the world specifies its mailing addresses.  Locate the section of the manual discussing addressing conventions (``Addressing Data Files''), and then answer these questions:
+
+\vskip 10pt
+
+Identify the proper address notation for a particular bit in the Allen-Bradley PLC's memory: bit number {\it 4} of element {\it 1} within the {\it input file}.
+
+\vskip 10pt
+
+Identify the proper address notation for a particular bit in the Allen-Bradley PLC's memory: bit number {\it 2} of element {\it 0} within the {\it output file}.
+
+\vskip 10pt
+
+Identify the proper address notation for a ``word'' of data in the Allen-Bradley PLC's memory: the {\it accumulator} word (ACC) of timer number {\it 6} within data file {\it T4}.
+
+\underbar{file i03604}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Input file, element 1, bit 4: {\tt I:1/4}
+
+\vskip 10pt
+
+Output file, element 0, bit 2: {\tt O:0/2}
+
+\vskip 10pt
+
+Timer 6 accumulator word: {\tt T4:6.ACC}
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The scan cycle is discussed on page 4-3 (execution of the control program may be halted by placing the PLC into ``Stop'' mode):
+
+\begin{itemize}
+\item{} Input scan
+\item{} Execute control program
+\item{} Output scan
+\item{} Communication processing
+\item{} Overhead
+\end{itemize}
+
+\vskip 10pt
+
+Page 4-6 discussed EEPROM and RAM memory.  EEPROM is non-volatile, storing data such as retentive data and program files.  RAM is volatile, storing both retentive and program data as well as CPU workspace data, storing data to and reading data from EEPROM memory when necessary.
+
+\vskip 10pt
+
+The section titled ``Addressing Data Files'' begins on page 4-10 and ends on page 4-14.  Memory areas include:
+
+\begin{itemize}
+\item{} {\tt O} = Output
+\item{} {\tt I} = Input
+\item{} {\tt S} = Status
+\item{} {\tt B} = Bit
+\item{} {\tt T} = Timer
+\item{} {\tt C} = Counter
+\item{} {\tt R} = Control
+\item{} {\tt N} = Integer
+\end{itemize}
+
+A colon symbol ({\tt :}) is used to delimit files.  A period ({\tt .}) is used to delimit elements within a memory structure such as a timer file.  A forward slash ({\it /}) is used to delimit bits within a word.
+
+\vskip 10pt
+
+Input file, element 1, bit 4: {\tt I:1/4}
+
+\vskip 10pt
+
+Output file, element 0, bit 2: {\tt O:0/2}
+
+\vskip 10pt
+
+Timer 6 accumulator word: {\tt T4:6.ACC}
+
+
+
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} How does the Allen-Bradley PLC's operating scan differ from the Siemens PLC's scan cycle?
+\item{} Describe the flow of information to/from and within the PLC during such events as powering up, normal operation, powering down, downloading a program, etc.
+\item{} Identify similar memory locations between the Siemens S7-200 PLC and the Allen-Bradley MicroLogix 1000 PLC.
+\itemitem{} Input bits: {\tt I} for both Siemens and Allen-Bradley
+\itemitem{} Output bits: {\tt Q} for Siemens and {\tt O} for Allen-Bradley
+\itemitem{} Internal bits: {\tt M} for Siemens and {\tt B} for Allen-Bradley
+\itemitem{} Timer data: {\tt T} for both Siemens and Allen-Bradley
+\itemitem{} Counter data: {\tt C} for both Siemens and Allen-Bradley
+\itemitem{} Special data: {\tt SM} for Siemens and {\tt S} for Allen-Bradley
+\item{} Identify the proper address notation for a particular bit in the Allen-Bradley PLC's memory: bit number {\it 12} of element {\it 5} within the {\it integer file}.  {\tt N7:5/12}
+\item{} Identify the proper address notation for a particular bit in the Allen-Bradley PLC's memory: the ``Done'' bit within timer instruction number {\it 2}.  {\tt T4:2/DN}
+\item{} Identify the proper address notation for a particular word in the Allen-Bradley PLC's memory: the ``Accumulator'' value within timer instruction number {\it 9}.  {\tt T4:9.ACC}
+\item{} Identify the proper address notation for a particular word in the Allen-Bradley PLC's memory: the ``Accumulator'' value within counter instruction number {\it 15}.  {\tt C5:15.ACC}
+\end{itemize}
+
+
+%INDEX% Reading assignment: Allen-Bradley MicroLogix 1000 user manual (scan cycle, memory types, addressing I/O)
+
+%(END_NOTES)
+
+

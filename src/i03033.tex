@@ -1,0 +1,159 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2014, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Instrument Transformer Burden and Accuracy'' subsection of the ``Electrical Sensors'' section of the ``Electric Power Measurement and Control'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i03033}
+%(END_QUESTION)
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Instrument transformers should not have to drive power to their measuring instruments (loads), but in practice they actually do.  Voltage-sensing instruments have finite input impedance, and current-sensing instruments always have greater than zero input impedance.  This {\it burden} imposed by the measuring instrument may be expressed in units of volt-amps (apparent power, $S$) or in units of ohms.  The greater the burden, the more the transformer's accuracy suffers.
+
+\vskip 10pt
+
+Potential transformers (PTs) are rated in terms of how many volt-amps of burden they can power while maintaining the advertised turns ratio accuracy.  ``W'' is the weakest (12.5 VA) while ``ZZ'' is the strongest (400 VA of burden).
+
+\vskip 10pt
+
+Current transformers (CTs) are rated differently if used for metering purposes versus relaying purposes.  A CT used for protective relaying must operate faithfully during fault conditions (i.e. very high currents!) while a metering CT need not accurately measure power during faults.  Meter-class CTs are usually rated by percentage accuracy followed by ``B'' (Burden) followed by the maximum burden in ohms.  An example would be {\it 0.3B1.8} which means 0.3 \% accuracy while powering a burden of 1.8 ohms.
+
+Relaying CTs are rated in terms of how many volts they may produce at their terminals under fault current conditions (20 times rated output current, typically 100 amps).  A ``C400'' CT, for example, is calculated to be able to produce up to 400 volts at its terminals while delivering 100 amps to a relay.  A ``T600'' CT is one {\it tested} to produce up to 600 volts at its terminals at 100 amps output current.
+
+\vskip 10pt
+
+If a CT is forced to output too much voltage, it will {\it saturate}.  This means its ferrous core will become saturated with magnetic flux, at which point it will no longer faithfully reproduce the primary current waveform.  For multi-ratio CTs, the maximum output voltage rating assumes the use of all secondary turns: if only some of those turns are used, the maximum output voltage must be de-rated.  Saturation is limited by magnetic flux, and Faraday's Law shows a proportionality between induced voltage, flux rate, and turns.
+
+\vskip 10pt
+
+Any DC present in a CT's primary winding will enhance saturation.  Ideally, CT cores are designed to retain as little residual magnetism as possible, to avoid having their saturation performance compromised following a fault event.  Core demagnetization may be performed by driving an AC current through the CT at diminishing levels over time.
+
+\vskip 10pt
+
+CT saturation may be tested by driving AC current through either the primary or secondary windings and plotting voltage over current.  The V/I plot will begin to flatten when saturation occurs.
+
+\vskip 10pt
+
+A CT may be built to produce high voltages by maximizing the amount of iron in its core.  Since magnetic flux is the limiting factor, the more magnetic flux the core can take without saturating, the more voltage the CT will be able to output, all other factors being equal.
+
+\vskip 10pt
+
+Wire resistance is a substantial component of a CT's burden, being in series with the impedance of the measuring instrument and the CT's own internal secondary winding resistance.  Wire resistance per 1000 feet of total circuit length may be estimated using this formula:
+
+$$R_{1000ft} = e^{0.232 G - 2.32}$$
+
+\noindent
+Where,
+
+$R_{1000ft}$ = Approximate wire resistance in ohms per 1000 feet of wire length
+
+$G$ = American Wire Gauge (AWG) number of the wire
+
+\vskip 10pt
+
+10 AWG offers nearly exactly 1 ohm per 1000 feet of conductor length.
+
+\vskip 10pt
+
+Wire sizing for CT circuits requires that one calculate the maximum voltage the CT may develop internally, which is more than its ``C'' or ``T'' rating (which is based on terminal voltage considering the internal voltage drop of the CT's own winding resistance).  A C400 CT with 0.3 ohms of winding resistance, for example, is actually capable of generating 430 volts internally, with the 0.3 ohm winding resistance dropping 30 volts at the fault current value of 100 amps, giving 400 volts at the CT terminals.  Once we know this internal maximum CT voltage, we may calculate maximum circuit resistance by using Ohm's Law (maximum voltage divided by fault current) and subtracting the CT's internal resistance plus the relay's input resistance.  What is left over is the maximum wire resistance for the CT secondary circuit.
+
+In applications where DC transients are possible, we must de-rate the calculated CT maximum internal voltage by the ratio $1 \over {1 + {X \over R}}$, where $X \over R$ is the reactance-to-resistance ratio of the power system itself.  Thus, our hypothetical C400 CT with a maximum (internal) voltage of 430 volts will only be able to generate 28.67 volts with a system $X \over R$ ratio of 14.
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Describe in your own words how you go about calculating wire size or length for any given CT installation, based on the examples given in the book.
+\item{} If two CTs are connected in parallel with each other, will this help their ability to drive a high-burden protective relay?
+\item{} If two CTs are connected in series with each other, will this help their ability to drive a high-burden protective relay?
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+The designation ``C400'' on a protective relay CT means:
+
+\begin{itemize}
+\item{} Its 100\% full-load current rating is 400 amps
+\vskip 5pt 
+\item{} It can output a maximum of 400 volts to a burden
+\vskip 5pt 
+\item{} Its fault current rating is 400 kilo-amps 
+\vskip 5pt 
+\item{} It can tolerate a burden of up to 400 microfarads
+\vskip 5pt 
+\item{} It can power up to 400 protective relays at once
+\vskip 5pt 
+\item{} It costs \$400
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+{\it Saturation} is undesirable in a current transformer because:
+
+\begin{itemize}
+\item{} Saturation makes the CT unusually dangerous to open-circuit
+\vskip 5pt 
+\item{} It prevents the CT from ever being used to measure DC
+\vskip 5pt 
+\item{} Saturation typically voids the manufacturer's warranty
+\vskip 5pt 
+\item{} Saturation can badly overheat the CT's secondary wires
+\vskip 5pt 
+\item{} The CT behaves nonlinearly when it is saturating
+\vskip 5pt 
+\item{} The ground connection cannot work during saturation
+\end{itemize}
+
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, instrument transformer burden and accuracy
+
+%(END_NOTES)
+
+

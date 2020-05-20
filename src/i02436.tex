@@ -1,0 +1,47 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Explain why every H1 FOUNDATION Fieldbus network segment should have at least a primary {\it and} a ``backup'' LAS device.  On a related note, is {\it every} type of FOUNDATION Fieldbus device capable of being configured as an LAS?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} If a device is configured to be a backup LAS, what communication events does it ordinarily participate in that non-backup devices do not participate in?
+\end{itemize}
+
+\underbar{file i02436}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Most Fieldbus segments have two LAS-enabled devices: a primary and a backup.  However, the Fieldbus standard allows for up to 8 LAS-enabled devices (one primary and 7 backups!).  Some host systems, though, do not allow the enabling of all 8 LAS-capable devices.  Emerson's DeltaV DCS, for example, only allows for two: the primary and a single backup LAS.
+
+\vskip 10pt
+
+If there is only one LAS and it fails, the Fieldbus segment will stop working.  This is why it is important to have redundant Link Master devices on each H1 segment.  A ``Link Master'' device is nothing more than a basic Fieldbus device with LAS capability.  FOUNDATION Fieldbus H1 supports multiple Link Masters on a network, the one with the lowest-number address automatically becoming the Link Active Scheduler.
+
+\vskip 10pt
+
+The Fieldbus H1 interface card on the host system (usually a DCS) is usually configured as the LAS device in a Fieldbus system, with one of the field instruments serving as the backup LAS.  Note that some Fieldbus instruments do {\it not} have backup LAS capability, so you must be sure to choose your field devices carefully to ensure at least one of them has this capability!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% Fieldbus, FOUNDATION (H1): Link Active Scheduler (LAS)
+%INDEX% Fieldbus, FOUNDATION (H1): Link Master devices
+
+%(END_NOTES)
+
+

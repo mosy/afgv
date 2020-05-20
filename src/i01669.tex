@@ -1,0 +1,47 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose you are tuning a temperature controller for a heat-treating furnace, the purpose of which is to measure and control the temperature of metal castings, raising their temperature to just under the melting point and then holding it there for a specified ``soak'' time.
+
+Do you recommend that the controller be configured for proportional-only control, proportional + integral (P+I) control, or full PID?  Why?  What would be considered the ``optimum'' process variable response for this controller, once tuned?  Is ``quarter-amplitude damping'' an acceptable response, or not?  Why?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain how you might configure this control system to be ``fool-proof'' so that no one could accidently cause the furnace temperature to rise too high and melt the metal castings.
+\item{} Suppose an instrument technician configured the temperature controller to have a high limit on the PV input, so that the controller could not register any temperature above the melting point of this metal.  Would this prevent the furnace from overheating?  Explain why or why not.
+\end{itemize}
+
+\underbar{file i01669}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Partial answer:}
+
+\vskip 10pt
+
+A full PID controller would be best, because a ``P-only'' controller will inevitably have offset, which may cause the process variable to settle at a point above setpoint, high enough above to melt the parts.  A P+I controller will eliminate the offset, but a positive offset (PV too high) can only be corrected by integral action if the PV is allowed to accumulate positive error (i.e. PV remains mildly excessive for a period of time).  In order to avoid overshoot in a P+I controller, which would melt the parts, it must be tuned for {\it very slow} response.  Faster response may be obtained through the addition of derivative action, in a full PID controller.
+ 
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Quarter-amplitude damping is {\it definitely} not acceptable for this control application, because it implies substantial overshoot.  Positive overshoot of the magnitude seen in quarter-amplitude damped oscillations will almost certainly melt the metal parts, if the setpoint is just below the melting point of the metal.
+
+%INDEX% Control, PID tuning: quarter-wave damping controller response
+
+%(END_NOTES)
+
+

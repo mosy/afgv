@@ -1,0 +1,82 @@
+%(BEGIN_QUESTION)
+% Copyright 2009, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+The reference manual for the Rosemount model 3144 temperature transmitter states that the default (factory) configuration for this transmitter is for the {\it failure mode} to be ``high''.  Explain what this means, and why the ``failure mode'' is an important parameter for a thermocouple instrument.
+
+\vskip 10pt
+
+Also, comment on the ``NAMUR'' signal levels differentiating a saturated condition from a detected failure, and why this standard might be important in a control system.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Are NAMUR signals used only for temperature instruments, or for other types of instruments as well (e.g. pressure, level, flow)?
+\end{itemize}
+
+\underbar{file i04015}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Hint: what Rosemount refers to as a ``failure mode'' encompasses the more specific concept of ``burnout''.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+This switch setting configures the transmitter to default either to a high-current value (over 20 mA) or to a low-current value (below 4 mA) in the event of certain self-diagnosed errors, including a burnt-open thermocouple. 
+
+\vskip 10pt
+
+The NAMUR standard signal levels for representing abnormal status of a 4-20 mA electronic transmitter are as follows (from table 2-1 on page 2-5 of the manual):
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Status} & {\bf Signal value} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Fail high & 21.5 mA $\leq I \leq$ 23.0 mA \cr
+%
+\noalign{\hrule}
+%
+% Another row
+High saturation & $I \geq$ 20.5 mA \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Low saturation & $I \leq$ 3.8 mA \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Fail low & $I \leq$ 3.6 mA \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+%INDEX% Measurement, temperature: thermocouple transmitter (burnout mode)
+
+%(END_NOTES)
+
+

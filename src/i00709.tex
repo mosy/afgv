@@ -1,0 +1,112 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Examine this page of program code from a Siemens APOGEE system (written in Siemens' ``PPCL'' programming language), then answer the following questions:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=6.5in \raggedright
+
+\noindent
+{\tt 04600 C *****SWAMP COOLER CONTROL*****}
+
+\noindent
+{\tt 04610 C}
+
+\noindent
+{\tt 04620 C IF ANY WEST ROOM IS GREATER THAN 2 DEG ABOVE ITS SETPOINT, THEN TURN ON} 
+
+\noindent
+{\tt 04630 C THE SWAMP COOLER, ELSE SHUT OFF SWAMP COOLER}
+
+\noindent
+{\tt 04640 C}
+
+\noindent
+{\tt 04650 IF ("MV.GH.1W:ROOM TEMP" .GT. "MV.GH.1W.CLG.STPT" + 2) THEN ON ("MV.GH.1W.CLG")}
+
+\noindent
+{\tt 04652 IF ("MV.GH.1W:ROOM TEMP" .LE. "MV.GH.1W.CLG.STPT") THEN OFF ("MV.GH.1W.CLG")}
+
+\noindent
+{\tt 04660 IF ("MV.GH.2W:ROOM TEMP" .GT. "MV.GH.2W.CLG.STPT" + 2) THEN ON ("MV.GH.2W.CLG")}
+
+\noindent
+{\tt 04662 IF ("MV.GH.2W:ROOM TEMP" .LE. "MV.GH.2W.CLG.STPT") THEN OFF ("MV.GH.2W.CLG")}
+
+\noindent
+{\tt 04670 IF ("MV.GH.3W:ROOM TEMP" .GT. "MV.GH.3W.CLG.STPT" + 2) THEN ON ("MV.GH.3W.CLG")}
+
+\noindent
+{\tt 04672 IF ("MV.GH.3W:ROOM TEMP" .LE. "MV.GH.3W.CLG.STPT") THEN OFF ("MV.GH.3W.CLG")}
+
+\noindent
+{\tt 04680 C}
+
+\noindent
+{\tt 04690 IF ("MV.GH.1W.CLG".OR."MV.GH.2W.CLG".OR."MV.GH.3W.CLG") THEN ON ("MV.GH.3W:DO 6")}
+
+\noindent
+\hskip 32pt {\tt ELSE OFF ("MV.GH.3W:DO 6")}
+
+}
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+
+\vskip 10pt
+
+What is the significance of the letter {\tt C} preceding many of the lines of code in this program, particularly the signficance of lines 04610, 04640, and 04680?
+
+\vskip 10pt
+
+Identify the meanings of the following ``operators'' in Siemens PPCL code: {\tt .LE.} and {\tt .GT.}
+
+\vskip 10pt
+
+Explain how lines 04650 through 04690 control the ``swamp cooler''.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Do you think it would be easier or more difficult to program custom control algorithms in a text-based language like PPCL or in a graphic-based language such as function blocks?
+\item{} Is this program an example of {\it differential gap} (``on/off'') control or {\it proportional} control?
+\item{} Identify any ``adjustments'' that may be made in the program to alter its quality of control (i.e. how tightly it regulates room temperature to setpoint).
+\end{itemize}
+
+\underbar{file i00709}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Each line beginning with a letter ``C'' is a {\it comment}, placed there strictly for the benefit of any human being reading the program.  Comments are ignored by the controller as it executes the code.
+
+\vskip 10pt
+
+The {\tt .LE.} operator stands for ``Less Than Or Equal To'' while the {\tt .GT.} operator stands for ``Greater Than''.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+If any of three different room temperature sensors exceed the setpoint value by 2 degrees, discrete output {\tt DO 6} will activate.  That discrete output returns to an inactive state when all three room temperature sensors are at or below the setpoint value.
+
+%INDEX% DDC, Siemens APOGEE system
+%INDEX% DDC, Siemens PPCL code (APOGEE DDC control)
+
+%(END_NOTES)
+
+

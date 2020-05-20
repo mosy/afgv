@@ -1,0 +1,63 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+A proportional-only controller in automatic mode has the following input and output values:
+
+\begin{itemize}
+\item{} PV = 65\%
+\item{} SP = 62\%
+\item{} Output = 48\%
+\end{itemize}
+
+Suddenly, the operator changes the setpoint from a value of 62\% to a value of 55\%.  The controller output immediately goes from 48\% to 31\%.  Calculate the proportional band and the gain for this controller, and show all your work.  Also, determine if this controller is {\it direct} or {\it reverse} acting.
+
+\vfil
+
+\underbar{file i01493}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Just like an electronic amplifier, the {\it gain} of a loop controller is mathematically defined as the ratio of output change ($\Delta m$) to input change ($\Delta e$).  In other words:
+
+$$\hbox{Gain} = {\Delta \hbox{ Output} \over \Delta \hbox{ Input}}$$
+
+$$K_p = {\Delta m \over \Delta e}$$
+
+For this reason, we must approach this problem by examining how far the error {\it changes} from its previous value, and compare that to how far the output signal {\it changes} from its previous value.  In this example, the setpoint changed from 62\% to 55\%, which is a jump of -7\%.  As a consequence of that setpoint change, the output jumped from 48\% to 31\%, which is a jump of -17\%.  Therefore:
+
+$$K_p = {\Delta m \over \Delta e} = {31\% - 48\% \over 55\% - 62\%} = {-17\% \over -7\%} = 2.429$$
+
+Proportional band is defined as the mathematical reciprocal of controller gain, expressed as a percentage.  Therefore:
+
+$$\hbox{PB} = {1 \over K_p} = {1 \over 2.429} = 0.4118 = 41.18\%$$
+
+\vskip 10pt
+
+The fact that the output value decreased when the setpoint value decreased tells us this controller is {\it reverse-acting}.  At first, this may seem backward to us, because didn't the output go in the {\it same} direction as the input?  While this is true, it is imperative to remember that ``direct'' and ``reverse'' for a loop controller is defined as the effect that the {\it process variable} (not the {\it setpoint}) has on the output.  Since we know PV and SP always have opposing effects on the output, a decreasing output for a decreasing SP means the output would increase for a decreasing PV, making it reverse-acting.  The equation for such a controller is shown here:
+
+$$m = K_p (\hbox{SP} - \hbox{PV}) + b$$
+
+%INDEX% Control, proportional: gain versus proportional band
+%INDEX& Control, proportional: proportional band versus gain
+
+%(END_NOTES)
+
+

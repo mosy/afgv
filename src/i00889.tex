@@ -1,0 +1,59 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+A data acquisition unit is needed to sample vibration data on a large steam turbine.  The turbine's shaft speed is 1800 RPM, and the intent is to measure vibrations as high as the 11th harmonic frequency of the shaft speed.
+
+\vskip 10pt
+
+Determine the minimum sampling rate for the DAQ module to avoid {\it aliasing}.  Also, determine a practical sampling rate so that even the highest-frequency component of interest will be well-digitized.
+
+\vfil 
+
+\underbar{file i00889}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+``Aliasing'' is an effect that happens when a digital data acquisition system samples a changing signal too slowly, the result being that a false waveform of much-too-low frequency is interpreted by the DAQ when in fact no such signal actually exists.  The absolute minimum sample rate needed to avoid aliasing is {\it twice} the frequency of interest (according to Nyquist's Sampling Theorem), but a more practical standard is to sample {\it ten times} faster than the highest frequency of interest.
+
+Therefore, our first task is to convert the highest harmonic vibration frequency into the unit of Hertz (cycles per second), so that we may multiply by ten to get the requisite samples-per-second DAQ rate.
+
+\vskip 30pt
+
+We are told the shaft rotates at 1800 RPM, and that we are interested in all frequencies up to the 11th harmonic (11 times faster than the shaft's rotation).  1800 RPM can be thought of as 1800 cycles (revolutions) per minute.  Converting this into a frequency value in units of Hertz requires that we cancel out the ``minutes'' in RPM and replace it with ``seconds''.  We may do this using the {\it unity fraction} method where we arrange the appropriate unit conversions in fractional format so as to cancel out the unit(s) we don't want and replace them with the unit(s) we do:
+
+$$\left(1800 \hbox{ rev} \over 1 \hbox{ min} \right) \left(1 \hbox{ min} \over 60 \hbox{ sec} \right) = 30 \hbox{ rev/sec} = 30 \hbox{ Hz}$$
+
+This means the vibration signal's fundamental frequency will be 30 Hz.  The frequency of the highest interest is 330 Hz (the 11th harmonic of 30 Hz).
+
+\vskip 30pt
+
+Based on this signal frequency, we must sample from 2 to 10 times faster than it, in order to avoid aliasing:
+
+\vskip 10pt
+
+Absolute minimum sampling rate = 660 samples per second ($2 \times$ highest $f$ of interest) ; Practical sampling rate = 3300 samples per second ($10 \times$ highest $f$ of interest)
+
+%INDEX% Electronics review: ADC aliasing
+%INDEX% Electronics review: ADC resolution
+
+%(END_NOTES)
+
+

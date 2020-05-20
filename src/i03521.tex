@@ -1,0 +1,133 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Calculate the minimum required transmitter power for a FreeWave I2-IOS industrial data radio (2.4 GHz) assuming the following parameters:
+
+\begin{itemize}
+\item{} BER (bit error rate) = $10^{-6}$
+\item{} Distance = 3 miles 
+\item{} EAN2400NR 1/2 wave whip transmitting antenna
+\item{} ASC0032SF transmitting cable (3 feet long)
+\item{} EAN2414CR Corner Reflector receiving antenna
+\item{} ASC0102SN receiving cable (10 feet long)
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain why the {\it bit error rate} is an important factor in this calculation.  If we desire a lower (smaller) bit error rate, what must change?
+\item{} Define ``sensitivity'' for a radio receiver unit.
+\item{} Explain why one should always incorporate some {\it fade loss} into the minimum transmitter power calculation for any realistic radio application.
+\item{} After calculating the minimum transmitter power for this application, calculate the amount of margin (for fade and other losses) based on this particular transmitter's rated power output.
+\end{itemize}
+
+\underbar{file i03521}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+$P_{tx}$ (minimum) = $-4.173$ dBm = 0.383 mW
+ 
+\vskip 10pt
+
+The FreeWave I2-IOS transceiver has a minimum output power of 5 milliwatts, giving this system a healthy margin (``budget'') on which to operate.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Consulting the datasheet for this radio unit, we see that its sensitivity (the minimum amount of RF signal power needed at its input connector in order to reliably interpret that signal) is $-105$ dBm at the specified bit error rate of $10^{-6}$.  This means that the transmitter must output enough power to deliver $-105$ dBm of power to the receiver, accounting for all losses in the path (path loss, antenna losses/gains, cable losses, etc.).
+
+\vskip 10pt
+
+First, we will calculate the path loss for a 2.4 GHz signal over 3 miles of empty space, starting with a calculation of wavelength ($\lambda$) and distance ($D$) in meters:
+
+$$\lambda = {v \over f} = {2.9979 \times 10^8 \over 2.4 \times 10^9} = 0.1249 \hbox{ m}$$
+
+$$\left(3 \hbox{ mi} \over 1 \right) \left(5280 \hbox{ ft} \over 1 \hbox{ mi} \right) \left(12 \hbox{ in} \over 1 \hbox{ ft} \right) \left(2.54 \hbox{ cm} \over 1 \hbox{ in} \right) \left(1 \hbox{ m} \over 100 \hbox{ cm} \right) = 4828.032 \hbox{ m}$$
+
+$$L_{path} = -20 \log \left(4 \pi D \over \lambda \right)$$
+
+$$L_{path} = -20 \log \left(4 \pi (4828.032) \over 0.1249 \right) = -113.727 \hbox{ dB}$$
+
+\vskip 10pt
+
+Path loss is not the only loss in this system, however.  We must also contend with power losses through each of the specified cables (one at the transmitter and one at the receiver).  From the FreeWave cable datasheet, we see that a model ASC0032SF transmitting cable (3 feet long) suffers a loss of $-0.6$ dB at 2.4 GHz, while a model ASC0102SN receiving cable (10 feet long) suffers a loss of $-1.5$ dB at 2.4 GHz.
+
+\vskip 10pt
+
+Also from FreeWave datasheets, we see that a model EAN2400NR 1/2 wave whip transmitting antenna exhibits a gain of +1 dBi, while a model EAN2414CR Corner Reflector receiving antenna exhibits a gain of +14 dBi.
+
+\vskip 10pt
+
+Tallying all these gains and losses:
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Gain or Loss} & {\bf Decibel value} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+ASC0032SF transmitter cable loss & $-0.6$ dB \cr
+%
+\noalign{\hrule}
+%
+% Another row
+EAN2400NR transmitter antenna gain & +1 dBi \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Path loss & $-113.727$ dB \cr
+%
+\noalign{\hrule}
+%
+% Another row
+EAN2414CR receiver antenna gain & +14 dBi \cr
+%
+\noalign{\hrule}
+%
+% Another row
+ASC0102SN receiver cable loss & $-1.5$ dB \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$G_{total} + L_{total}$ & {\bf $-$100.827 dB} \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+The link budget formula solves for minimum transmitter power given minimum receiver power and all gains/losses in the path:
+
+$$P_{tx(min)} = P_{rx(min)} - (G_{total} + L_{total})$$
+
+$$P_{tx(min)} = -105 \hbox{ dBm} - (-100.827 \hbox{ dB}) = -4.173 \hbox{ dBm}$$
+
+This equates to a minimum transmitter power output of 0.383 milliwatts, which is quite a bit less than the transmitter's minimum power output of 5 milliwatts, giving a margin of 11.16 dB for fade and other losses at minimum power.  At the transmitter's maximum power output of 500 milliwatts, the margin increases to 31.16 dB.
+
+%INDEX% Electronics review, RF link budget calculation
+
+%(END_NOTES)
+
+

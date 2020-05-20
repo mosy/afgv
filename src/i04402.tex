@@ -1,0 +1,122 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Data Frames'' subsection of the ``Digital Data Communication Theory'' section of the ``Digital Data Acquisition and Networks'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i04402}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Synchronous serial data communication happens when transmitter and receiver are locked in step.  Most serial data is communicated asynchronously, however, which means data must be sent in frames preceded by ``start'' bits and terminated by ``stop'' bits.  Asynchronous devices cannot be expected to maintain perfect synchronization for extended lengths of time, hence the need to break data into frames.  The format of a data frame is part of the serial communication standard.
+
+\vskip 10pt
+
+EIA/TIA-232 allows the user to choose how many data bits, how many stop bits, etc.  Ethernet does not.  
+
+\vskip 10pt
+
+Bits in EIA/TIA-232 are sent in reverse order: LSB first and MSB last.  Idle state is ``mark.''  Start bit is ``space.''  Stop bit(s) is/are ``mark.''  
+
+\vskip 10pt
+
+Parity bit is a 0 or a 1 added to a data frame to bring the total count of 1's either to an even number or to an odd number.  The receiving computer expects this even- or odd-count, and checks to see that it is so.  If the parity of the received message doesn't match what is expected, the receiver knows corruption has occurred.  Does not work for even-numbered bit corruptions, and does not indicate which bit has been corrupted!
+
+Other error-detecting methods exist, including Cyclic Redundancy Check (CRC) used in Ethernet.
+
+\vskip 10pt
+
+``Flow control'' gives the receiving device the power to halt communication until its buffer can process all the data received thusfar, and then call to resume communication when it is ready for more data.  Used on printers, which have limited memory capacity and which cannot print images on paper as fast as a computer can send the data.  This flow control may be managed using hard-wired signals (``hardware'') or by sending special control sequences along the serial network (``software'' -- XON/XOFF).
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain what is meant by the term ``asynchronous'' as it applies to serial data communication.
+\item{} Describe the serial data frame options seen in the Minicom screenshot.
+\item{} Explain why data frame details such as data frame length, stop bit number, etc. must be compatible between sending and receiving computers.
+\item{} Explain how {\it parity-checking} works and what useful purpose it fulfills.  Feel free to use an analogy if it helps!
+\item{} Describe a data error that parity-checking would {\it not} detect.
+\item{} Explain why anyone would select ``no'' parity checking in a serial data network.
+\item{} Explain how {\it flow control} works and what useful purpose it fulfills.
+\item{} Distinguish between the ``hardware'' and ``software'' versins of serial data flow control.
+\end{itemize}
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+{\it Parity} works to detect errors in serial data transmission by:
+
+\begin{itemize}
+\item{} Detecting if the clock speeds of sender and receiver don't match
+\vskip 5pt 
+\item{} Digitally encoding the time at which a data frame begins
+\vskip 5pt 
+\item{} Signaling when an error occurs by setting the parity bit to a ``1''
+\vskip 5pt 
+\item{} Digitally encoding the time at which a data frame ends 
+\vskip 5pt 
+\item{} Counting the total number of ``1'' bits in a data frame
+\vskip 5pt 
+\item{} Signaling when an error occurs by setting the parity bit to a ``0''
+\end{itemize}
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+An {\it asynchronous} serial data network using NRZ encoding requires a ``start'' bit in order to:
+
+\begin{itemize}
+\item{} Synchronize transmitter and receiver at the beginning of a data frame
+\vskip 5pt 
+\item{} Indicate when the transmitting device ``powers up'' for the first time
+\vskip 5pt 
+\item{} Indicate when a data frame has concluded and transmission will cease
+\vskip 5pt 
+\item{} Reboot the Microsoft Windows operating system of the computer
+\vskip 5pt 
+\item{} Detect when a corruption has occurred in the data stream from noise
+\vskip 5pt 
+\item{} Establish the standard clock speed of the data transfer
+\end{itemize}
+
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, Digital data and networks (data frames)
+
+%(END_NOTES)
+

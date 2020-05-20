@@ -1,0 +1,140 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read selected portions of the Siemens ``SIMATIC S7-200 Programmable Controller System Manual'' (document A5E00307987-04, August 2008) and answer the following questions:
+
+\vskip 10pt
+
+Locate the section discussing the PLC's {\it scan cycle} and describe the sequence of operations conducted by the PLC on an ongoing basis.
+
+\vskip 10pt
+
+Locate the section discussing the PLC's memory types (``Permanent Memory'' versus ``Retentive Data Memory'' and such), and describe the functions of each. 
+
+\vskip 30pt
+
+A very important aspect to learn about any PLC is how to specify various locations within its memory.  Each manufacturer and model of PLC has its own way of ``addressing'' memory locations, analogous to the different ways each postal system within each country of the world specifies its mailing addresses.  Locate the section of the manual discussing addressing conventions (``Accessing the Data of the S7-200''), and then answer these questions:
+
+\vskip 10pt
+
+Identify the proper address notation for a particular bit in the Siemens PLC's memory: bit number {\it 4} of byte {\it 1} within the {\it process-image input register}.
+
+\vskip 10pt
+
+Identify the proper address notation for a particular bit in the Siemens PLC's memory: bit number {\it 2} of byte {\it 0} within the {\it process-image output register}.
+
+\vskip 10pt
+
+Identify the proper address notation for a ``double word'' of data in the Siemens PLC's memory beginning at byte {\it 105} within the {\it variable memory area}.  How many bits are contained in a double word?
+
+\underbar{file i03605}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Input register, byte 1, bit 4: {\tt I1.4}
+
+\vskip 10pt
+
+Output register, byte 0, bit 2: {\tt Q0.2}
+
+\vskip 10pt
+
+Variable memory double word, starting at byte 105: {\tt VD105} (a double-word consisting of 4 bytes, or 32 bits)
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The scan cycle is discussed on page 24 (execution of the control program may be halted by placing the PLC into ``Stop'' mode):
+
+\begin{itemize}
+\item{} Read discrete inputs (analog inputs will be read on scan cycle if filtering enabled, otherwise will be read immediately within program execution)
+\item{} Execute control program
+\item{} Communication processing
+\item{} Self-diagnostic checks
+\item{} Write discrete outputs (analog outputs written immediately within program execution)
+\end{itemize}
+
+A generic scan is shown in graphical form on page 24.  A much more detailed diagram of a PLC's scan is shown on page 26.  Detailed explanations of these steps are found on pages 25 through 27.
+
+\vskip 10pt
+
+Retentive Data Memory used to retain program parameters through a power cycle.  Parameters such as Timer and Counter values may be made retentive.  Permanent Memory is also retained through a power cycle, and stores such data as the user's program, system values, etc.  Interestingly, a memory cartridge may be installed in the S7-200 PLC to store such things as documentation files (e.g. Adobe .pdf documents!).
+
+\vskip 10pt
+
+The section titled ``Accessing the Data of the S7-200'' begins on page 27 and ends on page 36.  Memory areas include:
+
+\begin{itemize}
+\item{} {\tt I} = input register
+\item{} {\tt Q} = output register
+\item{} {\tt V} = variable memory
+\item{} {\tt M} = bit memory
+\item{} {\tt T} = timer memory
+\item{} {\tt C} = counter memory
+\item{} {\tt HC} = high-speed counter memory
+\item{} {\tt AC} = accumulator memory
+\item{} {\tt SM} = special memory
+\item{} {\tt L} = local memory (similar to {\tt V} memory, but with local rather than global scope)
+\item{} {\tt AI} = analog input register
+\item{} {\tt AQ} = analog output register
+\item{} {\tt S} = sequence control memory
+\end{itemize}
+
+\vskip 10pt
+
+A special pair of registers inside the S7-200 PLC (SMB31 and SMW32) can instruct the PLC to save one value stored in V memory to Permanent memory (the same place where the program is stored).
+
+\vskip 10pt
+
+Input register, byte 1, bit 4: {\tt I1.4}
+
+\vskip 10pt
+
+Output register, byte 0, bit 2: {\tt Q0.2}
+
+\vskip 10pt
+
+Variable memory double word, starting at byte 105: {\tt VD105} (a double-word consisting of 4 bytes, or 32 bits)
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Page 26 of this manual shows a timing diagram for a typical scan cycle.  Examine this diagram and identify some of the events taking place in this particular scan.  
+\item{} Explain what an {\it interrupt} event is according to the timing diagram shown on page 26.
+\item{} How many bits comprise a {\it byte} in the S7-200 PLC's memory?
+\item{} How many bits comprise a {\it word} in the S7-200 PLC's memory?
+\item{} How many bits comprise a {\it double word} in the S7-200 PLC's memory?
+\item{} Identify the proper address notation for a ``word'' of data in the Siemens PLC's memory beginning at byte {\it 81} within the {\it variable memory area}.  {\tt VW81}
+\item{} Identify the proper address notation for a particular bit in the Siemens PLC's memory: bit number {\it 5} of byte {\it 17} within the {\it variable memory area}.  {\tt V17.5}
+\item{} Identify the proper address notation for a particular bit in the Siemens PLC's memory: the output bit of timer instruction number {\it 2}.  {\tt T2}
+\item{} Identify the proper address notation for a ``word'' of data in the Siemens PLC's memory: the current value of timer instruction number {\it 44}.  {\tt T44}
+\item{} Identify the proper address notation for a particular bit in the Siemens PLC's memory: the output bit of counter instruction number {\it 8}.  {\tt C8}
+\item{} Identify the proper address notation for a ``word'' of data in the Siemens PLC's memory: the current value of counter instruction number {\it 12}.  {\tt C12}
+\item{} Identify the proper address notation for a ``word'' of data in the Siemens PLC's memory beginning at byte {\it 2} within the {\it special memory area}.  {\tt SMB2}
+\item{} Identify the proper address notation for a particular bit in the Siemens PLC's memory: bit number {\it 6} of byte {\it 65} within the {\it special memory area}.  {\tt SM65.6}
+\end{itemize}
+
+%INDEX% Reading assignment: Siemens S7-200 system manual (scan cycle, addressing I/O)
+
+%(END_NOTES)
+
+

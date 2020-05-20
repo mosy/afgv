@@ -1,0 +1,76 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#68 (``Control Mayhem On A Mine'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} Examine the PV and Output (PD) trends shown in Figure 1, and explain where you think the ``steps'' originate from in both waveforms. 
+\vskip 10pt
+\item{} Examine the ore crusher control strategy shown in Figure 2, and explain the metallurgists' rationale for the ``selector'' strategy between the level and power controllers.
+\vskip 10pt
+\item{} Describe the strange ``interlock'' control strategy for level programmed into this PLC that resulted in the feed belt being automatically shut off, and what effect(s) this had on the PID controller block while it was being overridden by the interlock logic.
+\vskip 10pt
+\item{} Another problem discovered while investigating the crusher level control loop was that the feeder belt speed did not precisely follow the controller's output.  Explain how this may be discerned from the trend of Figure 5, and also how this is analogous to an incorrectly-sized control valve.
+\vskip 10pt
+\item{} In the ``Addendum'' section of this case history, Mr. Brown relates another PLC programming problem where a certain necessary feature in the PID function blocks could not be accessed.  Identify this blocked feature, its significance, and why any PLC programmer in their right mind could think it would be okay to do this sort of thing.
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} How may we tell that the control valve in the slurry flow loop (Figure 1 closed-loop test) is oversized?
+\item{} Identify which points in time on the trend of Figure 3 the control system is operating in ``level'' mode and which points in time it is operating in ``power'' mode.
+\item{} Comment on the {\it installed characteristic} of the final control element (e.g. quick-opening, linear, or equal-percentage) in the control loop whose trend is shown in Figure 5.  Is there any ``stiction'' in this FCE?
+\end{itemize}
+
+
+\underbar{file i01597}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The ``steps'' in the waveforms most likely originate from a slow scan time, either in the PLC or perhaps in the transmitter.
+
+\vskip 10pt
+
+Crusher control strategy: control switched from level to motor power whenever power exceeded a threshold (motors were undersized).  The result was that control kep switching from level to power, cycling continuously.  Mine personnel had been trying to ``tune'' this loop without success for years!
+
+\vskip 10pt
+
+An interlock routine forced the belt feeder to stop if the crusher's level ever got too high, but the level controller was left in automatic mode and so it continued to integrate!
+
+\vskip 10pt
+
+Figure 5 shows an ``oversized'' belt feeder: its belt speed varied between 1\% and 100\% as controller output varied between 18\% and 38\%.  This is a process gain of 5, which is quite large!  The source of this problem was the decision (made by one of the metallurgists at the mine) to over-size the hydraulic control valve throttling hydraulic fluid to the belt conveyor hydraulic motor.
+
+\vskip 10pt
+
+In a South African paint plant run by German (Siemens?) PLCs, the PID blocks could not be put into manual mode to do tuning!  This control was critical, too: deviance of 1 degree Celsius would mean scrapping the batch!
+
+
+
+
+
+
+
+
+%INDEX% Reading assignment: Michael Brown Case History #68, "Control mayhem on a mine"
+
+%(END_NOTES)
+
+

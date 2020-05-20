@@ -1,0 +1,53 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Allen-Bradley SLC 500 PLCs use {\it 16-bit signed integers} to represent ``Accumulator'' values inside counter instructions.  Given the limitation of these instructions only being able to count between -32768 and +32767, determine the accumulator value of counter number 7 ({\tt C5:7.ACC}) immediately following each event listed sequentially.  Express all your answers in decimal form:
+
+\vskip 10pt
+
+\begin{itemize}
+\item{} {\bf Step 1:} ``Reset'' coil for counter {\tt C5:7} activated momentarily.  {\tt C5:7.ACC} = \underbar{\hskip 50pt}
+\vskip 10pt
+\item{} {\bf Step 2:} Input to {\tt CTU} instruction pulsed 20000 times.  {\tt C5:7.ACC} = \underbar{\hskip 50pt} 
+\vskip 10pt
+\item{} {\bf Step 3:} Input to {\tt CTD} instruction pulsed 10500 times.  {\tt C5:7.ACC} = \underbar{\hskip 50pt} 
+\vskip 10pt
+\item{} {\bf Step 4:} Input to {\tt CTU} instruction pulsed 30000 times.  {\tt C5:7.ACC} = \underbar{\hskip 50pt} 
+\end{itemize}
+
+\underbar{file i03583}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+{\it 2 points for each of the first three answers, 4 points for the last answer:}
+
+\begin{itemize}
+\item{} {\bf Step 1:} ``Reset'' coil for counter {\tt C5:7} activated momentarily.  {\tt C5:7.ACC} = \underbar{\bf 0}
+\item{} {\bf Step 2:} Input to {\tt CTU} instruction pulsed 20000 times.  {\tt C5:7.ACC} = \underbar{\bf 20,000} 
+\item{} {\bf Step 3:} Input to {\tt CTD} instruction pulsed 10500 times.  {\tt C5:7.ACC} = \underbar{\bf 9,500} 
+\item{} {\bf Step 4:} Input to {\tt CTU} instruction pulsed 30000 times.  {\tt C5:7.ACC} = \underbar{\bf -26036} 
+\end{itemize}
+
+It is easy to mistakenly think the answer to the last one is $-26035$.  To prove that it is in fact $-26036$, simplify the problem to a four-bit counter (range $-8$ to +7) and see what happens when the count overflows past +7.  For any positive value $N$ greater than the upper range value (URV), the counter's result will be $N$ $-$ LRV $-$ (URV + 1).  For an intended count of 39,500 in an Allen-Bradley SLC 500 PLC, the actual count will be $-26036$.  
+
+Any answers that come close to $-26036$ (e.g. $-26034$ or $-26035$) should receive a $-2$ point reduction rather than a full $-4$ points.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+{\bf This question is intended for exams only and not worksheets!}.
+
+%(END_NOTES)
+

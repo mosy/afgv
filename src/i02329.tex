@@ -1,0 +1,62 @@
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#52 (``Dynamics Can Suddenly Change In A Control Loop'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} Examining the trend in Figure 1, how may we determine just by inspection of the PV graph that this controller has {\it too little integral} action and {\it too much proportional} action?  Note there is no setpoint graph and no output graph displayed on this trend screen.  Can we even tell for sure what mode the controller is in, without having Michael Brown tell us?
+\vskip 10pt
+\item{} Figure 2 shows the control valve responding very well to manual-mode (open-loop) step-changes in the controller's output.  Comment on the features of this graph, identifying exactly how it reveals good valve performance and trim characteristics.
+\vskip 10pt
+\item{} Explain what happened in this control loop when they placed it in auto-cascade mode (with the flow controller now ``slaved'' to the level controller's output), and how Mr. Brown was able to properly identify the problem.
+\vskip 10pt
+\item{} Figure 6 shows another interesting problem discovered in the loop when operating in cascade mode.  This trend shows the PV signal reaching 100\% with the control valve at (only) about 81\% open.  Do you think this is a control valve problem or a transmitter problem?  Explain your answer.
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain what ``gain scheduling'' is, and identify a synonym for it.
+\item{} Mr. Brown mentions ``it is a good thing to put an output limit on a controller when there is an oversized valve in the loop''.  Explain what he means by an {\it output limit} on a controller, and why this would be a good idea to implement for an oversized control valve.
+\item{} Identify where ``porpoising'' behavior is revealed in one of this article's trend graphs.  Explain why porpoising is always a bad thing for a control loop, and what causes it to happen.
+\end{itemize}
+
+\underbar{file i02329}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The ``porpoising'' action seen in the Figure 1 PV trend indicates too much proportional action.  Slow creep to setpoint indicates too little integral.  Integral can never produce porpoising because porpoising is caused by the controller reversing the direction of its output prior to reaching setpoint, and integral will never reverse direction unless the PV crosses setpoint (changing the sign of the error).
+
+\vskip 10pt
+
+Figure 2 shows crisp and repeatable valve response -- very good!  There is negligible dead time, and a very short lag time.  The self-regulation of the process is clearly evident in this open-loop test.
+
+\vskip 10pt
+
+After placing in cascade mode, the loop went unstable (Figure 4).  An open-loop test (Figure 5) revealed the valve was now overshooting (caused by a positioner feedback cam problem).
+
+\vskip 10pt
+
+Figure 6 seems to show a condition where the transmitter saturates when the valve reaches about 80\% open.  Further opening of the valve, of course, does not change the flow transmitter's reading, but it does seem to make the level integrate downward at a faster rate (as evidenced by the downward {\it curve} of the level trend over time as the valve opens further), so it seems the valve still has useful range above 80\% open.  Conclusion: we need to increase span of transmitter in order for it to see flow rates beyond what it can see now!
+
+
+%INDEX% Reading assignment: Michael Brown Case History #52, "Dynamics can suddenly change in a control loop"
+
+%(END_NOTES)
+
+

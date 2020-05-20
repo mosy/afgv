@@ -1,0 +1,211 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2009, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+An analog-to-digital converter (ADC) has a calibrated input range of 0 to 5 volts, and a 12-bit output.  Complete the following table of values for this converter, assuming perfect calibration (no error):
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Input voltage & Percent of span & Counts & Counts \cr
+%
+% Another row
+(volts) & (\%) & (decimal) & (hexadecimal) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+1.6 &  &  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+ &  & 3022 & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+ & 40 &  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+ &  &  & A2F \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Calculate the resolution of this ADC in {\it percent} of full-scale range.  In other words, what is the smallest percentage of input signal change it is able to resolve?
+\end{itemize}
+
+\underbar{file i03822}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Partial answer:}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Input voltage & Percent of span & Counts & Counts \cr
+%
+% Another row
+(volts) & (\%) & (decimal) & (hexadecimal) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+1.6 & 32 & 1310 or 1311 &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+ & 73.8 & 3022 &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+ & 40 &  & 666 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+3.18 &  &  & A2F \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+That fact that this is a 12-bit ADC tells us all we need to know to calculate its maximum count value:
+
+$$\hbox{Count}_{max} = 2^{12} - 1 = 4096 - 1 = 4095$$
+
+Therefore, the count range is 0 to 4095 counts, matching the input voltage range of 0 to 5 volts, proportional.  Relating input voltage to count value is as simple as solving for this proportionality.  Each count is worth ${1 \over 4095}$ of 5 volts, or 1.221 mV.
+
+\vskip 10pt
+
+Performing calculations for the first table row, we take the given input voltage of 1.6 volts and solve for the percentage of range as well as the proportional count value:
+
+$${1.6 \hbox{ V} \over 5 \hbox{ V}} = 32\% = {N \hbox{ counts} \over 4095 \hbox{ counts}}$$
+
+$$N = 1310.4 \hbox{ counts}$$
+
+Since there is no such thing as a non-integer count value, we may either round up (to 1311 counts) or round down (to 1310 counts).  The last step is simply converting the decimal values of 1310 and 1311 into hexadecimal.
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Input voltage & Percent of span & Counts & Counts \cr
+%
+% Another row
+(volts) & (\%) & (decimal) & (hexadecimal) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+1.6 & 32 & 1310 or 1311 & 51E or 51F \cr
+%
+\noalign{\hrule}
+%
+% Another row
+3.69 & 73.8 & 3022 & BCE \cr
+%
+\noalign{\hrule}
+%
+% Another row
+2.0 & 40 & 1638 & 666 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+3.18 & 63.7 & 2607 & A2F \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+Suppose a data acquisition unit has an analog-to-digital converter with an input range of 0 to 10 volts and a 16-bit output.  Calculate the ``count'' value output by this converter circuit when it inputs an analog voltage signal of 7.15 volts, rounding up to the nearest integer value. 
+
+\begin{itemize}
+\item{} B710
+\vskip 5pt 
+\item{} 0ADA
+\vskip 5pt 
+\item{} 0000
+\vskip 5pt 
+\item{} 7266
+\vskip 5pt 
+\item{} B70A
+\vskip 5pt 
+\item{} FFFF
+\end{itemize}
+
+
+%INDEX% Calibration: table, analog-digital conversion
+
+%(END_NOTES)
+
+

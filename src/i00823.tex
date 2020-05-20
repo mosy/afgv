@@ -1,0 +1,76 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read selected portions of the ``SEL-387L Line Current Differential Relay'' protective relay data sheet (document SEL-387L Data Sheet, October 2009) and answer the following questions:
+
+\vskip 10pt
+
+The model 387L is billed as a ``No Settings'' relay.  Explain what this means, and why it is possible for this application when modern digital protective relays typically have {\it lots} of important parameters which must be set.
+
+\vskip 10pt
+
+Explain why differential current protection for a power line requires the use of {\it two} model 387L relays, and also how the relay pair communicates with each other.
+
+\vskip 10pt
+
+Reference is made within this data sheet to ``local'' and ``remote'' current measurements.  Describe what is meant by these two terms.
+
+\vskip 10pt
+
+A useful feature provided by this relay is a pair of {\it transfer contacts}.  Explain what these do, and how they are similar to discrete I/O in PLCs.
+
+\vskip 10pt
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Can a pair of 387L relays be used to provide differential current protection on a {\it transformer}?  Explain why or why not.
+\item{} Sketch a simple circuit showing how the {\tt T1} input on one relay could be used to trigger the {\tt R1} output on a second relay to perform some useful function.
+\end{itemize}
+
+\underbar{file i00823}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Partial answer:}
+
+\vskip 10pt
+
+Since it is impractical to run CT secondary wires along the entire length of the power line in order to perform differential current measurement with one relay, a {\it pair} of 387L relays (one at each end of the line) monitors current with their own set of CTs and compares those current measurements via a fiber-optic communications link between the two relays.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+This relay has no necessary settings because it simply compares line current at the beginning and end of a power line.  So long as the CTs at each end of the line match each other well enough, it will function for all applications.
+
+\vskip 10pt
+
+Since it is impractical to run CT secondary wires along the entire length of the power line in order to perform differential current measurement with one relay, a {\it pair} of 387L relays (one at each end of the line) monitors current with their own set of CTs and compares those current measurements via a fiber-optic communications link between the two relays.
+
+\vskip 10pt
+
+A ``local'' current measurement is that provided by CTs hard-wired to one 387L relay.  A ``remote'' current measurement is one obtained via the fiber-optic relay-to-relay communications channel from CTs hard-wired to the {\it other} 387L relay.
+
+\vskip 10pt
+
+Each 387L relay provides two ``transfer'' contact inputs (T1 and T2) and two transfer contact outputs (R1 and R2).  For example, energizing input T1 on one relay immediately closes the contact R1 on the other relay.  No programmable logic exists between these two I/O points, this being a ``no settings'' relay.
+
+%INDEX% Reading assignment: SEL model 387L line current differential protective relay
+
+%(END_NOTES)
+
+

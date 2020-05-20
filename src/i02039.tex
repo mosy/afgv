@@ -1,0 +1,38 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+The Allen-Bradley Logix5000 family of PLCs has the option of a model 1756-IB16D DC ``diagnostic'' input card, where each discrete input device (switch) is supposed to be wired such that it has a 14.3 k$\Omega$ resistor connected in parallel with it.
+
+\vskip 10pt
+
+Examine the internal schematic for a typical channel on this input card, as well as the sample wiring diagram showing how switches are supposed to be connected to the inputs of this card, and identify how this card provides ``diagnostic'' information above and beyond the basic recognition of switch status.  Note: you may find Allen-Bradley's document called {\it ``1756 ControlLogix I/O Modules''} (publication 1756-TD002A-EN-E, May 2009) helpful in answering this question.
+
+\underbar{file i02039}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+The purpose of the parallel-connected 14.3 k$\Omega$ resistor is to provide a path for current to each connected channel of the input card even when the discrete switch is in the open state.  The card has {\it two} optocoupling devices per channel: one for detecting this ``leakage'' current and another for detecting the full-on current when the switch closes.  Thus, the card has the ability to monitor wiring continuity even when the field switch device is in the ``off'' state.
+
+The leakage current range necessary for diagnostic monitoring of input wiring is between 1.2 mA and 1.5 mA inclusive.  In order for the card to detect a full-on condition, the current must lie within the range of 2 mA (10 VDC) to 13 mA (30 VDC).
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% PLC, I/O: discrete I/O device wiring
+
+%(END_NOTES)
+
+

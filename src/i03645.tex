@@ -1,0 +1,89 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose a Rosemount model 3095MV FOUNDATION Fieldbus transmitter is executing an analog input (AI) function block with the following parameters:
+
+\begin{itemize}
+\item{} {\tt Channel} = 1
+\item{} {\tt L\_type} = Indirect
+\item{} {\tt XD\_Scale} = 20 to 150 inches H$_{2}$O
+\item{} {\tt OUT\_Scale} = 0 to 375 gallons
+\end{itemize}
+
+Calculate the following AI function block values when this transmitter senses a differential pressure of 109.2 inches H$_{2}$O:
+
+\begin{itemize}
+\item{} {\tt FIELD\_VAL} = \underbar{\hskip 50pt}
+\vskip 10pt
+\item{} {\tt PV} signal output by AI block = \underbar{\hskip 50pt} 
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} What would the new values be if the {\tt L\_Type} parameter were set to {\it direct} instead of {\it indirect}?
+\item{} What would the new values be if the {\tt L\_Type} parameter were set to {\it indirect square root} instead of {\it indirect}?
+\item{} What would this transmitter be sensing if the {\tt Channel} parameter had a value of 2 instead of 1?
+\end{itemize}
+
+\underbar{file i03645}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\begin{itemize}
+\item{} {\tt FIELD\_VAL} = \underbar{\bf 68.615 \%}
+\vskip 10pt
+\item{} {\tt PV} signal output by AI block = \underbar{\bf 257.3 gallons} 
+\end{itemize}
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+It should be noted that the 3095MV transmitter has five channels available to AI blocks:
+
+\begin{itemize}
+\item{} Channel \#1 = Differential pressure
+\item{} Channel \#2 = Static pressure
+\item{} Channel \#3 = Process temperature
+\item{} Channel \#4 = Sensor temperature
+\item{} Channel \#5 = Mass flow
+\end{itemize}
+
+\vskip 10pt
+
+Calculation of the {\tt FIELD\_VAL} parameter is described in Rosemount's {\it Foundation Fieldbus Blocks} product manual, derived from the sensor's raw value on a range defined by the {\tt XD\_Scale} range points.  Thus:
+
+$${{109.2 - 20} \over {150 - 20}} = 0.68615 = 68.615 \%$$
+
+\vskip 10pt
+
+The PV signal output by the AI block, of course, will be scaled because we have specified the {\tt L\_Type} to be ``indirect'':
+
+$$(0.68615)(375) = 257.31 \hbox{ gallons}$$
+
+\vskip 10pt
+
+If the {\tt L\_Type} was set for ``direct'', the PV signal output by the block would be identical to the {\tt FIELD\_VAL} in percent.
+
+\vskip 10pt
+
+If the {\tt L\_Type} was set for ``indirect square root'', the PV signal output by the block would be:
+
+$$\left(\sqrt{0.68615} \right) (375) = (0.82834)(375) = 310.63 \hbox{ gallons}$$
+
+%INDEX% Fieldbus, instrument ranging: setting XD_Scale and OUT_Scale parameters for an application
+
+%(END_NOTES)
+

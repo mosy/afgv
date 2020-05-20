@@ -1,0 +1,118 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``H1 FF Physical Layer'' section of the ``FOUNDATION Fieldbus Instrumentation'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i04557}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+FOUNDATION Fieldbus H1 networks use two-wire (ungrounded) cabling where DC power is conveyed along the same two wires as the Manchester-encoded signal (0.75 V P-P transmit minimum, 0.15 V P-P receive minimum).  Characteristic impedance of the cable is 100 ohms nominal, and the data rate is 31.25 kbps (26 times faster than HART).  These layer 1 characteristics are shared by Profibus PA as well as FOUNDATION Fieldbus.
+
+\vskip 10pt
+
+A FF H1 network must contain at minimum: a DC power supply, a conditioner circuit (to block FF signals from reaching the DC power supply), two terminating resistors, and of course at least two FF instruments.  The terminating resistors are coupled through capacitors so as to not load the DC power supply voltage.
+
+\vskip 10pt
+
+``Daisy Chain'' topolgy simple, but does not allow removal of instruments without severing the network.  ``Bus/Spur'' topology uses coupling devices to link short spur cables to the main bus cable.  Spur cables should be kept as short as possible to minimize the effects of signal reflections off each (unterminated) spur.  ``Chicken-foot'' topology is similar to Bus/Spur, with one coupling device connecting multiple spurs to the end of a bus.  Most FF H1 systems a combination of the latter two topologies.
+
+\vskip 10pt
+
+``Brick'' coupling devices available with quick-disconnect cable plugs to make FF H1 networks easy to build.  These usually require the use of ITC rather than conduit, since the plug ends won't fit through conduit.  Article 727 of the NEC specifies how to install ITC (no more than 50 feet per run, tied down at least every 6 feet).  Avoid keying a radio transmitter too close to a FF coupling device, especially one made of plastic.  Some coupling devices designed to mount inside electrical enclosures, allowing the use of standard conduit for the H1 cabling.  Many coupling devices (outdoor as well as inside enclosures) provide short-circuit spur protection.
+
+\vskip 10pt
+
+Manchester encoding used in H1 is indexed by the polarity of DC supply voltage (i.e. the receiving device ``knows'' which way is up based on the polarity of the DC supply).  Many FF devices are polarity-insensitive, but not all!  All FF H1 devices draw at least 10 mA from the bus, with a typical range being between 10 mA and 30 mA.  Minimum transmission signal strength = 750 mV P-P, while the minimum received signal strength is 150 mV P-P.
+
+\vskip 10pt
+
+Type ``A'' cable is best, type ``D'' cable is worst, based on how closely they adhere to the ideal FF H1 standard (100 ohms impedance, twisted-pair, individually shielded, at least 18 AWG).  Maximum cable length is sum total of bus plus all spurs!  Best practice minimizes spur length at the expense of more bus length.  If more length is needed, up to four signal {\it repeaters} may be installed along the bus to boost the signal.
+
+\vskip 10pt
+
+Segment design tool software useful for designing H1 networks.  This software checks for improper cable lengths, termination resistor count, power supply loading, etc.  This takes the place of the loop diagram in analog-based control systems. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Why must there be exactly {\it two} terminating resistors in an H1 segment?
+\item{} Identify the proper value of FF termination resistors for an H1 segment.  What, exactly, dictates this resistance value for any transmission line?
+\item{} Suppose the H1 interface card on a DCS has its own terminating resistor built in, and someone mistakenly installs an external terminating resistor at that card's terminals.  Will this cause signal integrity problems?  If so, what type(s) of problem(s) do you think might arise from having this unnecessary terminating resistor connected?
+\item{} Explain why ``daisy-chain'' H1 networks are impractical.
+\item{} Why should the spur cable lengths in a bus/spur H1 network be kept relatively short?
+\item{} Describe ITC (Instrument Tray Cable) installations, as opposed to conduit installations.
+\item{} Explain how radio transmitters may interfere with an H1 segment, and where that segment might be the most vulnerable.
+\item{} Suppose a technician attempts to measure the process variable signal output by a FF transmitter by connecting his ammeter in series with the transmitter.  Explain why this is folly, and describe what the ammeter will likely show for current.
+\item{} Explain how a {\it segment protector} differs from a regular ``brick'' coupling device.
+\item{} Explain how some H1 devices are able to properly interpret the Manchester signals even if its wires are connected backwards.
+\item{} Explain why the ``better'' layout is indeed superior to the ``adequate'' layout in the ``Cable Types'' section of the textbook.
+\item{} Explain why the individually shielded pairs of Type A FF cable is better than the whole-cable shield of Type B FF cable.  Why would individual H1 wire pairs require their own shielding?
+\item{} Describe the function of a {\it repeater} in an H1 network.  Is this device similar to anything else you have encountered in your study of digital networks?
+\item{} Describe some of the functionality of H1 segment design software.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+FOUNDATION Fieldbus H1 networks use which encoding standard to electrically represent data bits?
+
+\begin{itemize}
+\item{} Non-Return-to-Zero (NRZ)
+\vskip 5pt 
+\item{} Phase Shift Keying (PSK)
+\vskip 5pt 
+\item{} Manchester
+\vskip 5pt 
+\item{} Morse code
+\vskip 5pt 
+\item{} Frequency Shift Keying (FSK)
+\vskip 5pt 
+\item{} ISDN
+\end{itemize}
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, FOUNDATION Fieldbus (H1 FF physical layer)
+
+%(END_NOTES)
+

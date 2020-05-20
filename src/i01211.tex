@@ -1,0 +1,103 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+The following segment of program code from a Siemens APOGEE system (written in Siemens' ``PPCL'' programming language) overrides the position of an outside air damper based on measured concentration levels of carbon dioxide gas (CO$_{2}$) exhaled by people in that room.  Examine this code, and then answer the following questions:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=6.5in \raggedright
+
+\noindent
+{\tt 08230 C HVU-2 OUTSIDE AIR DAMPER POSITION OVERRIDDEN} 
+
+\noindent
+{\tt 08240 C IF SPACE CO2 LEVELS RISE MORE THAN 300 PPM ABOVE SETPOINT}
+
+\noindent
+{\tt 08250 C}
+
+\noindent
+{\tt 08260 SAMPLE(300) IF("MV.HVU2.STATUS" .EQ. ON .AND. "MV.HVU2.CO2" .GT. "MV.OACO2" + 300)}
+
+\noindent
+{\tt \hskip 30pt THEN ON("MV.HVU2.CO2.OVRD") ELSE OFF("MV.HVU2.CO2.OVRD")}
+
+\noindent
+{\tt 08270 SAMPLE(30) IF("MV.HVU2.CO2.OVRD" .EQ. ON .AND. "MV.HVU.2:AIRTEMP" .GE. 52)}
+
+\noindent
+{\tt \hskip 30pt THEN "MV.HVU2.MOA" = "MV.HVU2.MOA" + 0.2}
+
+\noindent
+{\tt 08280 SAMPLE(5) IF("MV.HVU2.CO2.OVRD" .EQ. OFF .OR. "MV.HVU.2:AIRTEMP" .LE. 48)}
+
+\noindent
+{\tt \hskip 30pt THEN "MV.HVU2.MOA" = "MV.HVU2.MOA" - 0.2}
+}
+
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+
+\vskip 10pt
+
+Identify the variable in this code referring to the measured CO$_{2}$ concentration in the room (i.e. the {\it process variable}).
+
+\vskip 10pt
+
+Identify the variable in this code referring to the desired CO$_{2}$ concentration in the room (i.e. the {\it setpoint}).
+
+\vskip 10pt
+
+Identify the variable in this code referring to the position of the outside air damper for the room (i.e. the {\it output}).
+
+\vskip 10pt
+
+What condition must be met in order to allow the outside air damper to open up, in addition to the CO$_{2}$ concentration being excessive?
+
+\vskip 10pt
+
+What condition will cause the outside air damper to close down, even if the CO$_{2}$ concentration is too high?
+
+\underbar{file i01211}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+2 points for each of the answers:
+
+\begin{itemize}
+\item{} Identify the variable in this code referring to the measured CO$_{2}$ concentration in the room (i.e. the {\it process variable}) = {\tt MV.HVU2.CO2}
+\vskip 10pt
+\item{} Identify the variable in this code referring to the desired CO$_{2}$ concentration in the room (i.e. the {\it setpoint}) = {\tt MV.OACO2}
+\vskip 10pt
+\item{} Identify the variable in this code referring to the position of the outside air damper for the room (i.e. the {\it output}) = {\tt MV.HVU2.MOA}
+\vskip 10pt
+\item{} What condition must be met in order to allow the outside air damper to open up, in addition to the CO$_{2}$ concentration being excessive? {\bf The room air temperature must be at least 52 degrees.}
+\vskip 10pt
+\item{} What condition will cause the outside air damper to close down, even if the CO$_{2}$ concentration is too high?  {\bf If the room air temperature is 48 degrees or less.}
+\end{itemize}
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+{\bf This question is intended for exams only and not worksheets!}
+
+%(END_NOTES)
+
+

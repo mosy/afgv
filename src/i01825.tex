@@ -1,0 +1,86 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Loop Problem Signatures \#16 (``The Full PID Controller and Response to Setpoint or Load Changes'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} According to Mr. Brown, most industrial control loops require different speeds of controller response to setpoint changes versus load changes.  Which of these should a loop controller typically respond faster to, and what is the rationale for having the controller respond differently to the two types of changes?
+\vskip 10pt
+\item{} Identify a process type that definitely needs its controller to respond quickly to setpoint changes as well as load changes (i.e. an exception to the above rule).
+\vskip 10pt
+\item{} Some different PID algorithms have been designed to provide a difference in response between setpoint changes and load changes.  Explain how they achieve this goal, and also what some of the disadvantages of these ``different'' PID algorithms are.
+\vskip 10pt
+\item{} Mr. Brown cites a specific case where the wrong selection of PID control algorithm led to annual losses for a manufacturing company estimated to be {\it 14 million pounds!} (British).  Explain why the ``other'' PID algorithm would have responded better, and why this particular company did not make the change throughout its facility.
+\end{itemize}
+
+\underbar{file i01825}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+In general , we wish to have fast controller response to load changes, but slow(er) controller response to setpoint changes (except in the case of cascaded slave controllers and batch temperature control systems).  What we generally would like to avoid is a big ``kick'' in the output whenever a setpoint change is made.  Full PID equations typically do this:
+
+$$m = K_p \left(e + {1 \over \tau_i} \int e \> dt + \tau_d {de \over dt} \right)$$
+
+\vskip 10pt
+
+One modification to the full PID equation is to have derivative act on PV alone rather than on error (PV $-$ SP or SP $-$ PV).  Michael Brown refers to this as the PI-D equation:
+
+$$m = K_p \left(e + {1 \over \tau_i} \int e \> dt + \tau_d {d \hbox{PV} \over dt} \right)$$
+
+One problem with this form of PID is that you cannot test the response of derivative by making setpoint changes, which in turn makes it very challenging to tune.  The only way to test for proper derivative response with this type of PID controller is to make precise changes to load, which in practice is very difficult if not impossible to do.
+
+\vskip 10pt
+
+Some controller manufacturers recognise that aggressive proportional action can also cause the FCE to ``kick'' upon setpoint changes, and so they have come up with algorithms where even proportional action ignores setpoint changes (integral being the only action of the controller that recognizes and acts upon PV changes!).  This Michael Brown calls a I-PD controller.  He does not show the equation necessary to implement this strategy, but instead shows a block diagram.  These controllers are even more difficult to tune than PI-D controllers!
+
+\vskip 10pt
+
+Having derivative respond to setpoint changes is important on batch control processes (where sudden setpoint changes need to be matched quickly).  One biopharmaceutical manufacturer was losing money at a fast rate due to the slow response (no D on SP changes) of their controllers!  Change not made to PID tuning because these controllers were part of a ``sealed'' process design that could not be modified.
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Describe in detail how you would bench-test a PID controller to identify its control equation (P+I+D versus PI-D versus I-PD).
+\item{} If you were stuck with one of these controllers, how would you go about tuning it?
+\end{itemize}
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+In Michael Brown's Loop Problem Signatures \#16 (``Digital Controllers Part 8 -- The Full PID Controller''), he explains how the vast majority of control loops require fast controller response to one type of disturbance, and slow controller response to another type of disturbance.  Identify these two types of disturbances and their respective controller speeds.
+
+%INDEX% Reading assignment: Michael Brown Loop Problem Signature #16, "The full PID controller and response to setpoint or load changes"
+
+%(END_NOTES)
+
+

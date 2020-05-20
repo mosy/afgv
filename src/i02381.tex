@@ -1,0 +1,50 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose a technician needs to program a PLC to take the raw analog-to-digital ``count'' value from an analog input card and scale it to a value ranging 0 to 100 (\%).  The input card's ADC count range is 0 to 65535.  The standard formula for doing this conversion is as follows:
+
+$$\hbox{Scaled output} = {\hbox{Raw input} \over 65535} \times 100$$
+
+Ideally, this formula entered into a ``Math'' instruction in the PLC will convert any raw count value from the analog input channel into a 0 to 100\% value.  However, when the technician tries programming this formula into the PLC's math instruction, the result is always either 0 or 100 and never any other values.  After fruitlessly trying to figure out what is going wrong, a more experienced programmer walks by to observe and comments, ``That's because this PLC's math instruction only does {\it integer} calculations.''  The first technician is still perplexed, and comes to you for help.  
+
+\vskip 10pt
+
+First, explain why the formula does not compute as the technician expects it to.  Second, recommend a fix so that the PLC will do a better job of scaling this ADC count value into percent.
+
+\vfil
+
+\underbar{file i02381}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Following order of operations, the first arithmetic function performed is the division by 65535.  Since the analog raw signal value will usually be less than 65535, the resulting quotient will be less than one.  If all arithmetic in the math instruction is integer, values (ideally) less than one will likely be rounded off to 0.  Only if the ADC raw count is exactly 65535 will the integer quotient be 1.
+
+\vskip 10pt
+
+The way to fix this problem in the PLC program is to change the order of operations.  First we need to multiply the raw input value by 100, {\it then} divide by 65535.  If we do this, the PC will be able to calculate a percentage value even with its integer (whole-number) limitation. 
+
+Normally, the order of operations is irrelevant when all we're doing is multiplying and dividing numbers (i.e. the {\it commutative property} of multiplication).  However, when the intermediate results are represented only in integer form, the ``rounding'' caused by truncation to the lowest-value integer may be quite severe as it is in this case.
+
+%INDEX% PLC, ladder logic programming: on-delay versus off-delay timers
+
+%(END_NOTES)
+
+

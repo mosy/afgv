@@ -1,0 +1,145 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#92 (``The Controller Has Gone Out Of Tune!'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} As Mr. Brown points out, the title of this case history is rather ridiculous given the use of digital PID controllers.  Yet, this attitude persists in industry.  Why do you suppose this is?
+\vskip 10pt
+\item{} According to Mr. Brown, what single type of instrument problem accounts for the vast majority of loop control problems?
+\vskip 10pt
+\item{} Identify the dominant controller mode (P, I, or D) in the trend of Figure 4, as well as the controller's direction of action (i.e. direct vs. reverse).
+\vskip 10pt
+\item{} A fair portion of this case history is devoted to an explanation of {\it aliasing} and how this phenomenon may cause instability in a control system.  Explain the concept of ``aliasing'' in your own words.
+\vskip 10pt
+\item{} Is aliasing a problem when the control system has a {\it fast} scan rate or a {\it slow} scan rate?  Explain your answer.
+\vskip 10pt
+\item{} Explain what parameter(s) in this particular DCS affected its scan rate, and why that was significant to the problem experienced in the level control loop whose performance is documented in Figures 4 and 5.
+\vskip 10pt
+\item{} Figure 5 shows an example of how a high-frequency oscillation in the PV results in a low frequency on the controller output signal due to aliasing.  Suppose a technician suggested this oscillation could be caused by machinery vibration near the transmitter.  Would you agree with this possibility, or not?  Why?
+\end{itemize}
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Examine and then explain Mr. Brown's recommended test for valve hysteresis, shown in Figure 1.
+\item{} The controller cycling shown in Figure 5 did not create a level-control problem, according to Mr. Brown, however it did cause problems for another section of the process.  Identify what this other section was.
+\item{} Mr. Brown says he corrected the aliasing problem seen in Figure 5 by using {\it filtering}.  If you were the one applying this ``fix'' to the problem, would you place the filtering in the smart transmitter or in the controller?
+\item{} A stroboscope is a tool used to ``freeze'' the motion of a rotating machine, by flashing a bright strobe light in the direction of the machine once per revolution to make it look as though the spinning component is standing still.  If the stroboscope is not precisely set to the right frequency, the component looks as though it is spinning, but much slower than it actually is.  Explain how this is an example of {\it aliasing}.
+\end{itemize}
+
+\underbar{file i01541}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+A plausible reason why people tend to focus on controller tuning first is because it's easy to change.  
+
+\vskip 10pt
+
+According to Michael Brown, over 80\% of loop problems are related to the control valve, followed by measurement problems and finally by process changes.
+
+\vskip 10pt
+
+Figure 4 trend shows P-dominant action with a direct-acting controller.  We know this because the PV and Output waveforms are almost exactly in-phase with each other.
+
+\vskip 10pt
+
+{\it Aliasing}: when a digital sampling device doesn't sample fast enough.  It captures only bits and pieces of the wave, resulting in a slower-frequency signal than what is actually there.  Figure 5 shows this dramatically: high-frequency noise on the PV turning into lower-frequency wave on the output.
+
+\vskip 10pt
+
+In the Japanese DCS used in this process, the controller's scan rate was based on the integral time constant.  The relatively slow integral time used in this level control process forced the controller to sample only once every 16 seconds, which aliased the noise on the PV signal to become a slower oscillation at the control valve.
+
+\vskip 10pt
+
+Figure 5's high-frequency cycle on the PV has a period of about 21 seconds, making it very unlikely to originate from vibration (unless it's {\it aliased} vibration from the scan rate of the transmitter!).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+According to Michael Brown in his Case History \#92 (``The Controller Has Gone Out Of Tune!'') report, which instrument type accounts for approximately 80\% of loop problems?
+
+\begin{itemize}
+\item{} Transmitters
+\vskip 10pt
+\item{} I/P converters
+\vskip 10pt
+\item{} Control valves
+\vskip 10pt
+\item{} P/I converters
+\vskip 10pt
+\item{} Analog controllers
+\vskip 10pt
+\item{} Digital controllers
+\end{itemize}
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+{\it Aliasing} is a phenomenon where:
+
+\begin{itemize}
+\item{} Operators carry tools to disguise themselves as instrument technicians
+\vskip 5pt 
+\item{} Noise superimposed on a signal causes control loop instability
+\vskip 5pt 
+\item{} The scan time of a digital system is too rapid for the signal
+\vskip 5pt 
+\item{} Stiction in a control valve causes a loop to cycle periodically
+\vskip 5pt 
+\item{} A signal is misinterpreted as being much lower frequency than it is
+\vskip 5pt 
+\item{} Interlock logic in a control strategy causes periodic cycling
+\end{itemize}
+
+
+%INDEX% Reading assignment: Michael Brown Case History #92, "The controller has gone out of tune!"
+
+%(END_NOTES)
+
+

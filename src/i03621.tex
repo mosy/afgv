@@ -1,0 +1,86 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Calculate the minimum required transmitter power for an FM radio broadcast station, assuming we wish an FM radio receiver with a sensitivity of $-90$ dBm be able to receive the signal.  Assume the following gains, losses and other parameters in the system:
+
+\vskip 10pt
+
+\begin{itemize}
+\item{} Frequency = 104.5 MHz
+\vskip 10pt
+\item{} Distance = 120 km
+\vskip 10pt
+\item{} Transmitter antenna gain = 6 dBi
+\vskip 10pt
+\item{} Receiver antenna gain = 0 dBi
+\vskip 10pt
+\item{} Transmitter cable loss = 0.09 dB per foot ; 300 feet long
+\vskip 10pt
+\item{} Receiver cable loss = 0.12 dB per foot ; 3 feet long
+\end{itemize}
+
+\vskip 10pt
+
+After calculating the required (minimum) transmitter power, re-calculate to include a {\it fade margin} of 20 dB for good measure.  Explain what ``fade margin'' is, and why it might be a good idea to include it in an RF link budget calculation.
+
+\vfil 
+
+\underbar{file i03621}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+In order to determine the required transmitter power, we must add all the expected power gains and losses along the signal path to the receiver's sensitivity using this formula:
+
+$$P_{tx} = P_{rx} - (G_{total} + L_{total})$$
+
+We are given all the data we need to calculate power gains (antenna gains) as well as power losses (cable losses, path loss, and fade margin).  Calculating cable power loss is simple: just multiply the decibels per foot figure by the cable length in feet.  Calculating path loss is a little more complicated, since it is based on wavelength, which we must also calculate:
+
+\vskip 10pt
+
+$$\lambda = {c \over f} = {2.9979 \times 10^8 \hbox{ m/s} \over 104.5 \times 10^6 \hbox{ s}^{-1}} = 2.869 \hbox{ m}$$
+
+$$L_p = -20 \log \left(4 \pi D \over \lambda\right) = -20 \log \left(4 \pi 120000 \hbox{ m} \over 2.869 \hbox{ m} \right) = -114.41 \hbox{ dB}$$
+
+\vskip 10pt
+
+Summarizing, we have $-114.41$ dB of path loss at 104.5 MHz, an antenna gain of +6 dBi, another antenna gain of 0 dBi, a fade margin (an allowable power loss due to fade) of $-20$ dB, and two cables (one 300 feet long at $-0.09$ dB per foot and another 3 feet long at $-0.12$ dB per foot):
+
+$$P_{tx} = -90 \hbox{ dBm} - (6 \hbox{ dBi} + 0 \hbox{ dBi} -114.41 \hbox{ dB} - 20 \hbox{ dB} -(0.09 \hbox{ dB/ft})(300 \hbox{ ft}) -(0.12 \hbox{ dB/ft})(3 \hbox{ ft}))$$
+
+$$P_{tx} = -90 \hbox{ dBm} - ( -21.36 \hbox{ dB} -114.41 \hbox{ dB} - 20 \hbox{ dB} )$$
+
+$$P_{tx} = -90 \hbox{ dBm} - (-155.77 \hbox{ dB})$$
+
+$$P_{tx} = 65.77 \hbox{ dBm} = 3779.03 \hbox{ watts \hskip 20pt (with 20 dB fade margin)}$$
+
+Thus, our transmitter must output at least 65.77 dBm in order to overcome all these losses and still be able to meet the receiver's minimum signal strength requirements.  If we omit the 20 dB fade margin, the required power from the transmitter will be 20 dB (100 times) less:
+
+$$P_{tx} = 45.77 \hbox{ dBm} = 37.7903 \hbox{ watts \hskip 20pt (no fade margin)}$$
+
+\vskip 10pt
+
+{\it Fade loss} is the signal loss resulting from deconstructive interference of the incident wave by reflections of that incident wave off nearby surfaces.  Fade loss is quite difficult to predict for any real application, and so it is often best to simply include a margin (20 dB or so) to account for it if it happens.
+
+%INDEX% Electronics review, RF link budget calculation
+
+%(END_NOTES)
+
+

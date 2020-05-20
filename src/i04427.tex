@@ -1,0 +1,69 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+\noindent
+{\bf Programming Challenge and Comparison -- Modbus communcation with a non-PLC device} 
+
+\vskip 10pt
+
+Write a PLC program that digitally communicates with a non-PLC device (e.g. a VFD).  You will find that Koyo CLICK PLCs with built-in RS-485 communication ports and easy-to-configure Modbus send/receive instructions work exceptionally well for this task, especially when the Modbus register addresses are specified in hexadecimal (rather than decimal).  If the device you choose is a variable-frequency motor drive (VFD), recommended functions to perform via the network include starting the motor, stopping the motor, and changing its speed.  Your system must incorporate an HMI for user interface (e.g. entering the desired motor speed via the HMI panel).
+
+\vskip 10pt
+
+Note: an essential step of this exercise is properly identifying all electrical connections for the network communication between the PLC and the non-PLC device.  Improper network connections will not only fail to work, but they might even damage one or both of the devices!  {\bf For this reason, your instructor will inspect all proposed wiring before you make any connections!}
+
+\vskip 10pt
+
+When your system is complete and tested, capture a screen-shot of the PLC program as it appears on your computer, and prepare to present your program solution to the class in a review session for everyone to see and critique.  The purpose of this review session is to see multiple solutions to one problem, explore different programming techniques, and gain experience interpreting PLC programs others have written.  When presenting your program (either individually or as a team), prepare to discuss the following points:
+
+\begin{itemize}
+\item{} Show how the communication command(s) is set up, including all the relevant parameters such as baud rate, parity bits, stop bits (which must be set identically in the PLC and the other device).
+\item{} Identify which Modbus codes were used to read and/or write information with the other device.
+\item{} If multiple communication instructions were used in the PLC program, show how you programmed the PLC so these instructions would not interfere with each other (because they are each using the same communications port on the PLC).
+\item{} How you designed the program (i.e. what steps you took to go from a concept to a working program)
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} A powerful problem-solving technique is to simplify the problem so that it is easier to solve, then use that solution as a starting point for the final solution of the given (complex) problem.  Show how you would first simplify the given problem here, and what that simple(r) solution would look like.
+\item{} Identify the advantages of using digital communications to allow a PLC to read and/or write data with other devices, as opposed to discrete I/O wire connections.
+\end{itemize}
+
+\vfil 
+
+\underbar{file i04427}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+If you happen to be using the Automation Direct model GS-1 variable frequency motor drive (an inexpensive option), be prepared to use a rather strange convention for network control bits.  Rather than have certain commands such as ``Run'' and ``Stop'' be distinct bits in a longer digital word as is the case with other motor drives, the GS-1 drive reserves entire 16-bit registers for each bit function.  For example, register {\tt 091B} (hex) in the GS-1 drive is the Run/Stop command: setting that entire 16-bit word to 1 (i.e. 0000000000000001) makes the drive run; setting that entire word to 0 (0000000000000000) makes the drive stop.  The direction control register {\tt 091C} is the same way: setting that entire 16-bit word to 1 (i.e. 0000000000000001) makes the drive go reverse while setting the whole word to 0 (0000000000000000) makes it go forward.
+
+Most other industrial motor drives have a single 16-bit word where individual bits of that word do different functions (e.g. bit 0 is Run/Stop, bit 1 is Fwd/Rvs, bit 2 is Jog, bit 3 is . . .), and the PLC must write individual bit values to the respective places within that 16-bit word in order to command the drive.  While this approach is more efficient in terms of memory usage within the drive, it is less convenient when used with Automation Direct's Koyo ``DirectLogic'' and ``CLICK'' series of PLCs because these PLCs do not provide convenient ways to specify bit-wise addresses.  By contrast, Allen-Bradley and Siemens PLCs make it very easy to address individual bits within a multi-bit register.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+(The recommended summary quiz is to have \underbar{each student} demonstrate their team's PLC running this particular program)
+
+%INDEX% PLC, ladder logic programming: Modbus
+
+%(END_NOTES)
+

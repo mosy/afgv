@@ -1,0 +1,51 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+A P+I controller is used to control the flow of a liquid through a pipe.  The flow control valve, however, is undersized, and will not allow the flow to achieve a value greater than 70\% of measurement range.  What will the controller do if given a setpoint of 80\%?  Be as specific as you can in your answer.
+
+\vskip 10pt
+
+What will happen if the setpoint is returned to some achievable value like 50\% after it has been left at 80\% for a long time?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} How do you suppose a problem such as this manifest on a process trend (recording)?  Are there any revealing clues on a trend to indicate such a problem exists?
+\end{itemize}
+
+\underbar{file i01609}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Since the flow cannot exceed 70\% due to the undersized valve, the controller will continue to ``see'' an error of 10\% and the controller output will eventually saturate at 100\% (wide-open valve).  The integral term of the algorithm will continue to increase (unless limited by a special feature of the controller designed to stop the integration process if and when the output signal reaches certain limits), even though it won't do any good because the valve is saturated wide open.  This phenomenon is called {\it integral windup} or {\it reset windup}.
+
+When the setpoint is reduced to 50\%, the controller output may remain saturated at 100\% (valve fully open) rather than immediately decrease to reduce flow through the pipe like it's supposed to, because of the accumulated value (``windup'') of the integral term. 
+
+\vskip 10pt
+
+It should be noted that most modern (digital) loop controllers have anti-reset windup limits set by default at 100\% and 0\%, so that the integral accumulator will not wind past these limits.  I have encountered controllers without this feature, though, where the controller's internal accumulator is able to go way past 100\% even though the control valve of course cannot open any more than 100\%.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Other conditions may cause windup as well.  A failed transmitter, a batch process that shuts down, or other discontinuities in the process will cause a controller with integral action to ``wind up'' or ``wind down'' in a fruitless effort to minimize error.
+
+When the setpoint is reduced to 50\%, the controller output may remain saturated at 100\% (valve fully open) rather than immediately decrease to reduce flow through the pipe like it's supposed to, because of the accumulated value (``windup'') of the integral term.  In other words, the accumulated value of the integral term during ``windup'' when it fruitlessly tried to increase the flow rate to 80\% is still present when the setpoint decreases to 50\%, and it may be sufficient to hold the controller output at 100\% for a long time (until the integral term ``winds back down'' far enough).  This, of course, results in a delayed controller response to the new setpoint.
+
+%INDEX% Control, integral: windup
+
+%(END_NOTES)
+
+

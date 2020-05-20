@@ -1,0 +1,83 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read portions of the Burr-Brown (Texas Instruments) datasheet for the INA111 high-speed instrumentation amplifier and answer the following questions:
+
+\vskip 10pt
+
+Calculate the necessary gain resistor value ($R_G$) to give the amplifier a gain of 30.  Also, express this gain value in decibels.
+
+\vskip 10pt
+
+Manipulate the given gain formula to solve for $R_G$ provided any arbitrary gain value desired.
+
+\vskip 10pt
+
+Identify the typical input resistance of this instrumentation amplifier, as well as the typical bias current value.  Describe what will happen if there are no ``return paths'' provided for the amplifier's input bias currents.
+
+\vskip 10pt
+
+This datasheet recommends the use of {\it clamping diodes} to protect the amplifier's inputs from gross over-voltages.  Examine the schematic diagram shown in figure 5 and explain how these clamping diodes work to protect the amplifier.  Note that there is actually a mistake in this schematic -- can you find it?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identify which fundamental principles of electric circuits apply to each step of your analysis of this circuit.  In other words, be prepared to explain the reason(s) ``why'' for every step of your analysis, rather than merely describing those steps.
+\item{} The datasheet recommends that only one bias current return resistor need be used if the differential source resistance is low.  Explain why the resistance of the voltage signal source matters at all to the bias currents.
+\item{} Referring to the internal schematic diagram of the INA111 shown on the first page of the datasheet, calculate $V_O$ given $V_{in(+)}$ = +3.5 volts, $V_{in(-)}$ = +1.5 volts, and $R_G$ = 50 k$\Omega$ by applying Ohm's Law and Kirchhoff's Voltage and Current Laws to the three-opamp circuit.
+\end{itemize}
+
+\underbar{file i00887}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+$R_G$ = 1.724 k$\Omega$ for a gain of 30 = 29.54 dB
+
+\vskip 10pt
+
+$$R_G = {50000 \over {A_v - 1}}$$
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+(Gain formula shown on page 1 schematic)
+
+$$A_V = 1 + {50000 \over R_G}$$
+
+$$A_V - 1 = {50000 \over R_G}$$
+
+$${1 \over A_V - 1} = {R_G \over 50000}$$
+
+$$R_G = {50000 \over A_V - 1}$$
+
+$$R_G = {50000 \over 30 - 1} = 1.7241 \hbox{ k}\Omega$$
+
+\vskip 10pt
+
+$$\hbox{dB} = 20 \log A_V$$
+
+$$\hbox{dB} = 20 \log 30 = 29.54 \hbox{ dB}$$
+
+According to page 2, the input resistance of the INA111 amplifier is typically on the order of $10^{12}$ ohms, yielding bias currents on the order of 2 pA (pico-amps).  Page 8 discusses the necessity of having a path for bias currents to reach the negative rail of the DC power supply.  If no path for bias currents are provided, the amplifier input terminals will each float to potentials exceeding the common-mode range of the amplifier, resulting in output saturation.
+
+\vskip 10pt
+
+Clamping diodes are oriented such that no input signal exceeding either power supply rail voltage will make it in full form to the amplifier's inputs.  Excessive input voltages are thus ``clamped'' to slightly beyond the rail limits.  The mistake in this diagram is that the lower supply voltage rail should be labeled ``V$-$'' when instead it is labeled ``V+'' just like the upper rail.
+
+%INDEX% Reading assignment: Burr-Brown INA111 instrumentation amplifier datasheet
+
+%(END_NOTES)
+
+

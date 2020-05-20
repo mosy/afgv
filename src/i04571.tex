@@ -1,0 +1,54 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose we have an H1 Fieldbus segment with 6 devices connected.  The LAS, of course, maintains these addresses in its ``Live List'' so it knows who to send tokens to:
+
+\begin{itemize}
+\item{} Address 24: Multi-channel temperature transmitter
+\item{} Address 33: Control valve positioner
+\item{} Address 35: Control valve positioner
+\item{} Address 40: Pressure transmitter
+\item{} Address 88: Level transmitter
+\item{} Address 107: Local indicator
+\end{itemize}
+
+If someone were to connect a new device with an address of 249, how would the LAS ever know it was there, and how would it get added to the Live List?  Conversely, how does a device fall off the Live List?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Suppose someone were to plug a new device into one of the coupler ports on this H1 segment, and this new device happened to have a pre-assigned address of 40.  What would happen as a result?
+\item{} Suppose someone were to plug a new device into one of the coupler ports on this H1 segment, and this new device happened to have a pre-assigned address falling within the FUN/NUN address range.  What would happen as a result?
+\end{itemize}
+
+\underbar{file i04571}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Hint: the PN (Probe Node) token!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The LAS periodically issues ``Probe Node'' tokens during unscheduled communication times to probe for new nodes.  A new device connected to the segment -- when it receives a PN with its address attached -- will respond to the LAS and be added to the Live List.  If a device ever repeatedly fails to respond to specific tokens issued by the LAS, it will be removed from the Live List.
+
+The LAS also periodically transmits the latest Live List to any backup Link Master devices in case they must take over as the primary LAS.
+
+%INDEX% Fieldbus, FOUNDATION (H1): Device addresses
+%INDEX% Fieldbus, FOUNDATION (H1): Probe Node (PN) token
+
+%(END_NOTES)
+
+

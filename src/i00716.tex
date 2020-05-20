@@ -1,0 +1,65 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read the Siemens model 353 controller application note on ``Ethernet Peer-to-Peer Communication With Model 353 and Procidia i/pac Controllers'' (document AD353-113, Revision 1, July 2002), then answer the following questions:
+
+\vskip 10pt
+
+The communication protocol used by model 353 controllers is {\it Modbus TCP/IP}.  Explain how this differs from implementations of Modbus you have seen in RS-485 networks.
+
+\vskip 10pt
+
+Explain how the AIE and AOE function blocks are used in a pair of model 353 controllers to exchange analog signal data between the two.  Does one controller {\it read} data from another controller, or does it {\it write} data to another controller, or can both events take place?
+
+\vskip 10pt
+
+The ``Ethernet Function Block'' section does presents a good example of how the subnet mask is used to identify a range of IP addresses that controllers may communicate between.  Read the example given and explain in your own words how the subnet mask works.
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain why communicating variables via Ethernet would be considered an advantage to a single-loop controller such as the Siemens model 353.  Why not just communicate all process-related variables via 4-20 mA analog signals over twisted-pair instrument cables?
+\item{} Identify any disadvantages to communicating process data between controllers using Ethernet.  Can you think of any faults that could really cause control problems in a system using Ethernet to exchange process data between controllers?
+\item{} If you had the choice of connecting multiple Ethernet-capable controllers together, would you opt for an Ethernet {\it switch} or an Ethernet {\it hub} as the connecting node between controllers?  Explain your reasoning.
+\item{} Modbus is designed to employ master-slave arbitration.  Ethernet is uses CSMA/CD arbitration.  How is it possible for Modbus to work over an Ethernet connection if the two arbitration protocols are different?
+\end{itemize}
+
+
+\underbar{file i00716}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Modbus TCP/IP encapsulates Modbus codes and commands within TCP ``segment'' frames and IP ``packets'', which are then split, routed, and reassembled at the destination just like data on the internet.
+
+\vskip 10pt
+
+An AIE function block {\it reads} data from another controller connected on the Ethernet network via Modbus TCP/IP.  An AOE function block does not initiate a communications event, but rather ``maps'' specified data points within a controller to specific Modbus address registers where that data may be read by another controller's AIE block.
+
+There is no provision for a Modbus {\it write} command in the Siemens 353 or i$|$Pac controllers.  They may act as Modbus master devices through the use of the AIE, DIE, and/or CIE function blocks, but only to {\it read} data from another Modbus (slave) device.
+
+\vskip 10pt
+
+The subnet mask given in the example (255.255.255.0) ``masks out'' the last octet of the IP address (192.169.175.2) to define the subnet as being only the first three octets (192.168.175.0).
+
+%INDEX% Reading assignment: Siemens model 353 controller application note (Ethernet peer-to-peer communication)
+
+%(END_NOTES)
+
+

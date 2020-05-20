@@ -1,0 +1,111 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#63 (``Problems On A Plant With No Positioners On Valves'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} According to Mr. Brown, what is the purpose for installing a positioner on a control valve?
+\vskip 10pt
+\item{} Examine the closed-loop test shown in Figure 1.  What can you determine about the condition of the loop from this test?
+\vskip 10pt
+\item{} Mr. Brown claims you can tell the integral action of the controller is too slow based on the closed-loop test results shown in Figure 1.  Explain how his conclusion is justified by the data.
+\vskip 10pt
+\item{} Figure 2 shows the response of the system during an open-loop test.  What can you determine about the condition of the valve from this test?
+\vskip 10pt
+\item{} In this Case History, Mr. Brown expresses his low opinion of ``quarter-amplitude damping'' as a standard for good control behavior.  Explain his objection to quarter-wave damping, in your own words.
+\vskip 10pt
+\item{} Compare the ``As-Found'' controller tuning with the ``As-left'' tuning, and identify how the tuning parameters were changed for better performance.  How do you suppose the tuning could be ``tightened'' even further had the valve been repaired or at least equipped with a positioner?
+\end{itemize}
+
+\underbar{file i01697}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The purpose of a valve positioner, according to Michael Brown, is to minimize hysteresis and ensure optimum positioning accuracy.
+
+\vskip 10pt
+
+Figure 1's closed-loop test reveals a sticky valve (at least 5\% hysteresis).  We can also tell that the controller is operating mostly on proportional action (big step-change in Output following SP change) with slow integral (slow ramping to eliminate error).
+
+\vskip 10pt
+
+We can tell the integral action is too slow by how casually the Output ramps in response to persistent PV $-$ SP error.  It takes around 3 minutes for the valve to move far enough to bring PV back to SP, on a liquid flow control loop!
+
+\vskip 10pt
+
+The open-loop test of Figure 2 shows a large amount of valve hysteresis (just over 10\%).  Michael Brown stresses the importance of choosing an appropriate step-size for the Output to gather data for loop tuning.  Some loop-tuning software packages and self-tuning PID controllers use a single step in output to gather their open-loop data, which does not factor in control valve stiction!
+
+\vskip 10pt
+
+Michael Brown argues against quarter-wave response because in his opinion it is too close to instability for good control, cycling the valve too often, and prolonging the time required to stabilize at SP.  All that valve motion will contribute to premature packing wear.
+
+Another argument against quarter-wave damped response and its attendant valve motion is the extra energy required to move that control valve.  In the case of pneumatically-actuated valves especially, the cost of compressed air is not insignificant!
+
+\vskip 10pt
+
+The original flow loop tuning had a controller gain of 0.8 and a reset time of 20 seconds per repeat.  The new tuning used a lot less P action and a lot more I action: a gain of 0.2 and a reset time of 1.5 seconds per repeat.  The valve is still bad (as revealed by how far the Output must move to keep PV equal to SP in Figure 3), but the control quality is much better.
+
+Had the control valve been repaired or equipped with a positioner, it might be possible to make the controller tuning even more aggressive than it is right now.
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Examining Figure 2 (open-loop test), show where we can see evidence of valve stiction.
+\item{} Michael Brown mentions how some loop-tuning software packages and self-tuning PID controllers err by making single-sized step-changes in the controller output during the exploratory phase.  Explain why this can be problematic.
+\item{} Explain how we can tell from the trend shown in Figure 3 that the control valve still has problems.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+Michael Brown considers quarter-wave damped PID tuning (sometimes called quarter-{\it amplitude} tuning) to be impractical for real applications, despite the fact that many references and guides suggest this kind of response as ideal (or at least satisfactory).  Identify a reason given my Mr. Brown as to why quarter-wave damped response is less than ideal.
+
+\begin{itemize}
+\item{} Quarter-damped response causes the control valve to exhibit hysteresis
+\vskip 5pt 
+\item{} Quarter-damped response only works on integrating processes, which are rare
+\vskip 5pt 
+\item{} Quarter-damped response leads to persistent offset (PV $-$ SP error) over time
+\vskip 5pt 
+\item{} Quarter-damped response is not achievable without derivative action, which some controllers lack
+\vskip 5pt 
+\item{} Quarter-damped response achieves setpoint too quickly
+\vskip 5pt 
+\item{} Quarter-wave damped response will wear out the control valve prematurely
+\end{itemize}
+
+%INDEX% Reading assignment: Michael Brown Case History #63, "Problems on a plant with no positioners on valves"
+
+%(END_NOTES)
+
+

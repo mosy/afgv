@@ -1,0 +1,70 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Two important measurements in reliability analysis are {\it Mean Time Between Failures} (MTBF) and {\it Mean Time To Failure} (MTTF).  The only difference between MTBF and MTTF is that the former applies to repairable devices while the latter applies to non-repairable devices.  You will sometimes see these two names used interchangeably, though.
+
+Suppose an instrument company decides to do a MTBF test on its new line of DCS analog input modules.  An array of 2000 modules is constructed, powered up, and subjected to simulations of normal signal activity and normal environmental conditions.  The test proceeds for 470 days (24 hours per day, 7 days per week), in which time 30 of the modules failed.  Use this information to calculate the MTBF for these input modules.
+
+\underbar{file i02505}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+MTBF = 752,000 hours
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Yes, this equates to an MTBF of {\it 85.84 years}!
+
+\vskip 10pt
+
+I obtained the following formula from the Third Edition of the {\it Instrument Engineer's Handbook, Process Software and Digital Networks}, edited by B\'ela Lipt\'ak:
+
+$$\hbox{MTBF} = {nt \over f}$$
+
+\noindent
+Where,
+
+MTBF = Mean Time Between Failures, typically in units of hours
+
+$n$ = Number of devices initially put under test
+
+$t$ = Time duration of test, same unit as MTBF
+
+$f$ = Number of failed devices during the testing period
+
+\vskip 10pt
+
+One complicating detail is that many writers refer to the term $nt$ simply as ``total test time,'' assuming the reader knows ``total'' refers to the sum of each instrument's test time, as though each instrument were tested serially instead of in parallel.  This is akin to expressing labor in units of ``man-hours.''
+
+\vskip 10pt
+
+Here are some examples of MTBF values for real instruments (taken from Emerson's website in reference to Rosemount products):
+
+\begin{itemize}
+\item{} Rosemount 1151 (analog DP transmitter) = 226 years
+\item{} Rosemount 3051C (digital DP transmitter) = 136 years
+\item{} Rosemount 3095C (digital multivariable DP transmitter) = 192 years
+\item{} Rosemount 3144P (digital temp transmitter) = 45 years
+\item{} Rosemount 3244MVF (digital temp transmitter) = 91 years
+\end{itemize}
+
+
+%INDEX% Safety, system reliability: Mean Time Between Failures (MTBF)
+%INDEX% Safety, system reliability: Mean Time To Failure (MTTF)
+
+%(END_NOTES)
+
+

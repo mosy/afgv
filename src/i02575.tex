@@ -1,0 +1,76 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+\noindent
+{\bf Programming Challenge and Comparison -- analog input scaling} 
+
+\vskip 10pt
+
+Work individually or in teams to wire and configure a PLC's analog input to receive a variable voltage signal from a potentiometer, and then display that signal in three different forms on an HMI screen:
+
+\begin{itemize}
+\item{} Raw ``count'' value (directly read from the PLC's input register)
+\item{} Scaled 0.0\% to 100.0\% (as a fixed-point integer value)
+\item{} Scaled 0.000\% to 100.000\% (as a floating-point value)
+\end{itemize}
+
+\vskip 10pt
+
+One important point of caution is to ensure you do not ``over-voltage'' the input of your PLC.  Some PLCs have rather limited voltage measurement ranges on their analog input terminals, and may actually suffer {\it irreparable damage} if you exceed the voltage limit.  If this is the case (e.g. the PLC can tolerate a maximum of 10 volts to the analog input, but the only DC power supply you have for powering the potentiometer is 24 volts), you must include a fixed-value resistor in the potentiometer circuit in order to limit its full output voltage to an acceptable level.
+
+Another note of caution is to ensure the potentiometer has a sufficient power rating to withstand the supply voltage.  For example, connecting a 1 k$\Omega$, ${1 \over 2}$ watt potentiometer directly across a 24 VDC power supply is a recipe for smoke!
+
+\vskip 10pt
+
+You are encouraged to consult with your instructor before powering the circuit up, to make sure the PLC's analog input will not be damaged by excessive voltage from the potentiometer.  Show the sketch of your circuit as well as all relevant calculations, to prove that no ratings will be exceeded when powered.
+
+\vskip 10pt
+
+After you've got the voltage limit and wiring figured out for the analog input, you should be able to turn the potentiometer throughout its full range and note the changing number in the PLC's input register for that analog input.  Often, this is a ``raw count'' value based on the number of bits in the input register, proportional to the input voltage but not actually scaled in volts.  Your next step will be to use math instructions in the PLC program to ``scale'' this raw analog input value into 0-100\% to be displayed on the HMI screen.
+
+\vfil 
+
+\noindent
+PLC comparison:
+
+\begin{itemize}
+\item{} \underbar{Allen-Bradley Logix 5000}: the I/O configuration menu (specifically, the {\it Module Properties} window) allows you to directly and easily scale analog input signal ranges into any arbitrary numerical range desired.  Floating-point (``REAL'') format is standard, but integer format may be chosen for faster processing of the analog signal.
+\vskip 5pt
+\item{} \underbar{Allen-Bradley PLC-5, SLC 500, and MicroLogix}: raw analog input values are 16-bit signed integers.  The {\tt SCL} and {\tt SCP} instructions are custom-made for scaling these raw integer ADC count values into ranges of your choosing.
+\vskip 5pt
+\item{} \underbar{Siemens S7-200}: raw analog input values are 16-bit signed integers.  Interestingly, the S7-200 PLC provides built-in potentiometers assigned to special word registers ({\tt SMB28} and {\tt SMB29}) with an 8-bit (0-255 count) range.  These values may be used for any suitable purpose, including combination with the raw analog input register values in order to provide mechanical calibration adjustments for the analog input(s).
+\vskip 5pt
+\item{} \underbar{Koyo (Automation Direct) DirectLogic}: you must use standard math instructions (e.g. {\tt ADD}, {\tt MUL}) to implement a $y = mx + b$ linear equation for scaling purposes.
+\vskip 5pt
+\item{} \underbar{Koyo (Automation Direct) CLICK}: the I/O configuration menu allows you to directly and easily scale analog input signal ranges into any arbitrary numerical range desired.
+\end{itemize}
+
+\underbar{file i02575}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+A helpful reference for you, especially if programming an Allen-Bradley SLC 500 or MicroLogix PLC, is the subsection entitled ``Example Calculation: PLC analog input scaling'' in the ``Relating 4 to 20 mA Signals to Instrument Variables'' section of the ``Analog Electronic Instrumentation'' chapter of the {\it Lessons In Industrial Instrumentation} textbook.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% PLC, I/O: analog resolution and scaling
+%INDEX% PLC, ladder logic programming: analog input scaling
+
+%(END_NOTES)
+
+

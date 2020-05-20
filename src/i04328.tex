@@ -1,0 +1,140 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2009, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Ziegler-Nichols Closed-Loop (`Ultimate Gain')'' subsection of the ``Quantitative PID Tuning Procedures'' section of the ``Process Dynamics and PID Controller Tuning'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\vskip 10pt
+
+In particular, you should write your own step-by-step instructions for implementing the Ziegler-Nichols ``closed-loop'' tuning method, so you will have a concise reference to apply to later loop tuning challenges:
+
+\begin{itemize}
+\item{} 
+\vskip 10pt
+\item{} 
+\vskip 10pt
+\item{} 
+\vskip 10pt
+\item{} 
+\end{itemize}
+
+\underbar{file i04328}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+``Closed-loop'' refers to when a loop controller is in {\it automatic} mode, and so a ``closed-loop'' PID tuning procedure is one where the loop is in automatic mode and the controller adjusted until self-sustaining oscillations are achieved (with no saturation of signals; the oscillation must be a ``clean'' sinusoidal wave).  In the Z-N closed-loop method, the integral and derivative actions are first disabled, then the gain raised until self-sustaining oscillations ensue.  The amount of controller gain necessary to achieve this state is called the {\it ultimate sensitivity} ($S_u$) or {\it ultimate gain} ($K_u$) of the system.
+
+\vskip 10pt
+
+\noindent
+Ziegler-Nichols tuning recommendation for a P-only controller:
+
+$$K_p = 0.5 K_u$$
+
+At this controller gain setting, oscillations should decay in amplitude by $1 \over 4$ with each cycle, leading to the phrase {\it quarter-wave damping}.  Whether or not this is considered acceptable depends on the needs of the process.  If the oscillations are short in period and thus die down quickly, quarter-wave or higher might be fine.  If the downstream process cannot tolerate large swings in valve position (or if large amounts of valve motion are detrimental to valve life), even quarter-wave might be unacceptable.
+
+\vskip 10pt
+
+\noindent
+Ziegler-Nichols tuning recommendation for a P+I controller:
+
+$$K_p = 0.45 K_u \hskip 50pt \tau_i = {P_u \over 1.2}$$
+
+Here, $P_u$ refers to the period (time) of the ultimate oscillation wave.
+
+\vskip 10pt
+
+\noindent
+Ziegler-Nichols tuning recommendation for a P+I+D controller:
+
+$$K_p = 0.6 K_u \hskip 50pt \tau_i = {P_u \over 2} \hskip 50pt \tau_d = {P_u \over 8}$$
+
+
+\vskip 10pt
+
+Closed-loop tuning methods are problematic in that the process must be brought to a state of instability in order to make the necessary determinations of $K_u$ and $P_u$.
+
+\vskip 10pt
+
+\noindent
+Lessons learned from Z-N closed-loop recommendations:
+
+\item{} Controller gain must be less than the ultimate gain of the system
+\item{} Integral time must be proportional to the system's lag time
+\item{} Derivative time must be proportional to the system's lag time
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} {\bf Explain the purpose of each and every step in your bulleted tuning instructions.}
+\item{} What is a {\it limit cycle}, and why should we avoid this condition when performing the ``ultimate'' (closed-loop) tuning strategy?
+\item{} Explain what {\it quarter-wave damping} looks like when viewed on a trend graph.
+\item{} How can we tell from the tuning recommendations that $K_u$ is expressed as a {\it gain} rather than as a {\it proportional band} value?
+\item{} According to Ziegler and Nichols, in what process application might quarter-wave damped response be considered too aggressive?
+\item{} According to Ziegler and Nichols, in what process application might oscillations decaying less than quarter-wave be considered acceptable?
+\item{} Note the amount of controller gain recommended by Ziegler and Nichols for P-only, P+I, and full PID controllers.  What do you notice about the relative amounts of gain you can use in each case?  Explain why, for example, you can get away with more gain in a full PID controller than you can in either P-only or P+I.
+\item{} As the period of a process increases (i.e. time lags increase), should integral controller action be made more or less aggressive?  How can we tell, from the Ziegler-Nichols tuning recommendations?
+\item{} As the period of a process increases (i.e. time lags increase), should derivative controller action be made more or less aggressive?  How can we tell, from the Ziegler-Nichols tuning recommendations?
+\item{} Identify why the closed-loop Ziegler-Nichols tuning method may be impractical for tuning real processes.
+\end{itemize}
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+The ``Ultimate gain'' tuning method proposed by Ziegler and Nichols in their 1942 paper involves what first step taken by the technician or engineer?
+
+\begin{itemize}
+\item{} Manually ``bumping'' the valve and charting PV response to calculate process gain
+\vskip 5pt 
+\item{} Trial-and-error adjustments of P, I, and D until the ``ultimate'' control quality is achieved
+\vskip 5pt 
+\item{} Increasing controller gain until self-sustaining oscillations are achieved
+\vskip 5pt 
+\item{} Manually ``bumping'' the valve and charting PV response to calculate process lag 
+\vskip 5pt 
+\item{} Reversing the action (direct/reverse) of the controller to gauge process response time
+\vskip 5pt 
+\item{} Manually ``bumping'' the valve and charting PV response to calculate process dead time 
+\end{itemize}
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, PID tuning (Z-N closed-loop)
+
+%(END_NOTES)
+
+

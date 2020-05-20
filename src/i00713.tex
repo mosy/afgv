@@ -1,0 +1,266 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+In this SCADA system, a ``master'' PLC (MTU) communicates with multiple ``slave'' PLCs (RTUs) via radio using Modbus protocol.  Each PLC communicates with its radio transceiver via a short RS-232 serial cable.  This illustration is approximately drawn to scale with regard to distances between the units:
+
+$$\includegraphics[width=15.5cm]{i00713x01.eps}$$
+
+Unfortunately, there is a problem with this system.  RTU number 4 does not communicate with the MTU.  Upon inspection, you see that the ``Tx'' and ``Rx'' LED indicators are blinking on all the RTU radio transceivers except for RTU \#4: there, only the ``Rx'' LED blinks.
+
+Identify the likelihood of each specified fault for this system.  Consider each fault one at a time (i.e. no coincidental faults), determining whether or not each fault could independently account for {\it all} measurements and symptoms in this SCADA network.
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Fault} & {\bf Possible} & {\bf Impossible} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Damaged antenna on MTU &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Damaged antenna on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC halted (not running) RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Radio transceiver powered down on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+``TD'' conductor broken inside RS-232 cable on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+``RD'' conductor broken inside RS-232 cable on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud rate set incorrectly on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud rate set incorrectly on MTU &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus mode (RTU/ASCII) set incorrectly on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus mode (RTU/ASCII) set incorrectly on MTU &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Fresnel zone interference between MTU and RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+Finally, identify the {\it next} diagnostic test or measurement you would make on this system.  Explain how the result(s) of this next test or measurement help further identify the location and/or nature of the fault.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} A powerful troubleshooting technique is to {\it swap identical components} between elements of a system to see if and where the problem moves.  Explain how this simple test could be applied to this SCADA system in order to diagnose the fault.
+\item{} An important question to answer is whether the ``Tx'' and ``Rx'' LED indicators on the radio transceivers refer to transmission and reception over the wireless network or over the RS-232 serial network.  Explain how we may conclusively answer this question based on the information given and our knowledge of serial Modbus networks.
+\end{itemize}
+
+\underbar{file i00713}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Partial answer:}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Fault} & {\bf Possible} & {\bf Impossible} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Damaged antenna on MTU &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Damaged antenna on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC halted (not running) RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Radio transceiver powered down on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+``TD'' conductor broken inside RS-232 cable on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+``RD'' conductor broken inside RS-232 cable on RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud rate set incorrectly on RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud rate set incorrectly on MTU &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus mode (RTU/ASCII) set incorrectly on RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus mode (RTU/ASCII) set incorrectly on MTU &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Fresnel zone interference between MTU and RTU \#4 &  & $\surd$ \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Fault} & {\bf Possible} & {\bf Impossible} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Damaged antenna on MTU &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Damaged antenna on RTU \#4 &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC halted (not running) RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Radio transceiver powered down on RTU \#4 &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+``TD'' conductor broken inside RS-232 cable on RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+``RD'' conductor broken inside RS-232 cable on RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud rate set incorrectly on RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud rate set incorrectly on MTU &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus mode (RTU/ASCII) set incorrectly on RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus mode (RTU/ASCII) set incorrectly on MTU &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Fresnel zone interference between MTU and RTU \#4 &  & $\surd$ \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+
+The fact that RTU \#4 is receiving signals from the MTU tells us their respective antennas are both working, and so is the radio receiver unit at RTU \#4.  Thus, we are looking for any fault capable of accounting for a lack of response from RTU \#4.
+
+%INDEX% Wireless, SCADA network troubleshooting
+
+%(END_NOTES)
+

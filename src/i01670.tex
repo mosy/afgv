@@ -1,0 +1,125 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Loop Problem Signatures \#17 (``Cascade Control'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} This tutorial opens with an example of a temperature control loop that oscillated badly following setpoint changes.  What was the cause of this problem, exactly?
+\vskip 10pt
+\item{} What general rule does Mr. Brown give for the tuning of integral action on a self-regulating process?  How much integral action should one expect to use on any well-tuned self-regulating process?
+\vskip 10pt
+\item{} Explain how the inclusion of cascade control in the hypothetical heat exchanger system helps make an imperfect control valve more perfect.
+\vskip 10pt
+\item{} What type of process (in general) does Mr. Brown recommend using cascaded controllers on?
+\vskip 10pt
+\item{} Identify some of the common misconceptions of cascade control listed by Mr. Brown in his tutorial.
+\end{itemize}
+
+\underbar{file i01670}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Figures 1 and 2 contrast a temperature control loop before and after replacement of a sticking control valve (hysteresis of nearly 7\%).  The tuning was not altered between these two tests -- only the control valve was changed.
+
+\vskip 10pt
+
+When tuning controllers for self-regulating processes, Michael Brown recommends an integral time constant that is close in value to the dominant lag time of the process being controlled.
+
+\vskip 10pt
+
+By adding a cascade (slave) flow controller on the steam line of the heat exchanger, the flow controller takes care of any steam header load changes and/or valve problems, so the slower temperature controller does not have to.  
+
+\vskip 10pt
+
+Michael Brown recommends using cascade control on ``critical slow control processes'' in a plant.  Common combinations of master/slave control include:
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Master} & {\bf Slave} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Temperature & Flow \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Temperature & Pressure \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Level & Flow \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Controller & Valve positioner \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Temperature & Temperature \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+\vskip 10pt
+
+Common misconceptions of cascade control include:
+
+\begin{itemize}
+\item{} It's nonsense to use two controllers to control one valve
+\item{} Each controller maintains its PV independent of the other
+\end{itemize}
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Would the unstable system shown in Figure 1 have been as unstable with different controller tuning?  Recommend how the controller could have been tuned differently to result in less oscillation.
+\item{} Identify any features of the trend in Figure 1 that point to valve stiction, without the benefit of an output trend to compare against PV and SP.
+\item{} Explain why the period of the oscillation shown in Figure 1 slows down over time.  How does this relate to valve stiction?
+\item{} Perform fault analysis on the heat exchanger temperature control loop shown in the tutorial: propose a fault, and have students predict the effects.
+\itemitem{} Temperature transmitter fails high
+\itemitem{} Flow transmitter fails low
+\itemitem{} Valve air supply fails
+\itemitem{} Valve jams too far open
+\end{itemize}
+
+
+%INDEX% Reading assignment: Michael Brown Loop Problem Signature #17, "Cascade control"
+
+%(END_NOTES)
+
+

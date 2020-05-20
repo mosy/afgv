@@ -1,0 +1,112 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#60 (``Do Mines Have Particularly Bad Control Problems?'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} Mr. Brown has some unkind words to say about PLCs used as loop controllers, especially when compared to DCSs.  What, specifically, is his criticism, and do you think this is valid given your exposure to PID control algorithms in PLC systems you've seen (e.g. Allen-Bradley Logix5000)?
+\vskip 10pt
+\item{} One of the anecdotes related in this Case History was a PLC used as a loop controller for a furnace pressure control system, where the programmer decided to make the control valve shut every time the controller was switched from manual mode to automatic mode.  What happened as a result of this?
+\vskip 10pt
+\item{} Figure 1 shows the closed-loop response of a system where the integral action was far too slow.  Explain how we may make this determination on our own just from examining the trend of SP and PV, even without a trend of the controller Output to compare.
+\vskip 10pt
+\item{} Figure 2 shows a loop in ``continuous cycle'' (oscillation).  Examine the {\it phase shift} between the PV and Output and use this information to determine whether the controller's action is dominated by P, I, or D.  Hint: this is a {\it direct-acting} controller.
+\vskip 10pt
+\item{} Figure 4 shows a textbook example of a ``stick-slip'' cycle.  Explain what causes this, and why this problem cannot be eliminated simply by adjusting the tuning parameters on the controller.
+\vskip 10pt
+\item{} Explain how we are able to tell the valve has stiction problems by examining the trend graph shown in Figure 5.
+\end{itemize}
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} In this article the author refers to a cyanide concentration analyzer with a scan rate of once per 17 minutes.  Explain why this scan rate may be problematic if this type of analyzer happens to be the transmitter in a feedback control loop.
+\item{} Describe what a ``safety bursting plate'' is, and what other term(s) this kind of a device may be known by?
+\item{} The controller seen cycling in Figure 2 is direct-acting, yet Mr. Brown does not specify this fact anywhere in the text.  How is it possible for us to know this?  Hint: examine Figure 3, which is an {\it open-loop} test of that same process.  Figure 2 (closed-loop) also contains enough information for us to tell this is a direct-acting controller.
+\item{} If you experience difficulty answering the question on PV/Output phase shift as a way of identifying dominant control action, read the ``Recognizing an Over-Tuned Controller by phase shift'' subsection of the ``Heuristic PID Tuning Procedures'' section of the ``Process Dynamics and PID Controller Tuning'' chapter in your {\it Lessons In Industrial Instrumentation} textbook and discuss this with your classmates.
+\item{} One way that a ``stick-slip'' cycle may be ceased is to eliminate integral action from the controller (i.e. set $\tau_i$ to a very large number).  Explain why this will stop the cycling, but unfortunately introduce another control problem in its place.
+\item{} Identify where ``porpoising'' behavior is revealed in one of this article's trend graphs.  Explain why porpoising is always a bad thing for a control loop, and what causes it to happen.
+\end{itemize}
+
+\underbar{file i01426}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+PID control implemented in PLCs tends to be weird, because it's easy to subvert the algorithm with the user's own programming (e.g. the filter algorithm Michael Brown found ``buried'' in a user program's subroutine).  Also, the stock PID instructions often exhibit ``unprofessional'' behavior.  One case in point is the PID instruction in Allen-Bradley MicroLogix PLCs, which refuses to exhibit the nearly-essential feature of output tracking if the integral time constant is set to zero (output tracking works just fine with any non-zero $\tau_i$ value, though!).
+
+\vskip 10pt
+
+On the PLC where the valve slammed shut transitioning from manual to auto modes, the pressure spike actually caused a small explosion in the process!
+
+\vskip 10pt
+
+Figure 1: we can tell integral is far too slow because the PV does not seem to be advancing toward the new SP value (even after more than 1 minute!).  Whatever the controller output is doing, it isn't doing it fast enough!  Also, the cycling prior to setpoint is something we call {\it porpoising}, and it is always caused by either excessive proportional action or excessive derivative action (but never integral action).
+
+\vskip 10pt
+
+Figure 2: the -90 degree phase shift of the output (PD) waveform in relation to the PV waveform suggests integral is the dominant action here, which makes sense for a flow control loop!
+
+\vskip 10pt
+
+Figure 4: stick-slip cycle in a self-regulating process: {\it square wave} on PV, {\it triangle wave} on output.
+
+\vskip 10pt
+
+Figure 5: stiction in this valve is evidenced by the unresponsiveness of the PV during the time the Output ramps from integral control action.
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+In Michael Brown's Case History \#60 (``Do Mines Have Particularly Bad Control Problems?''), he recalls a time when a poorly-programmed PLC actually caused damage to the process as he tried to optimize a pressure control loop on a smelting furnace controlled by that PLC.  Describe what was wrong with the PLC program, and what exactly happened to the furnace when Mr. Brown switched from Manual to Auto mode on that loop.
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+In Michael Brown's Case History \#60 (``Do Mines Have Particularly Bad Control Problems?''), he lists some reasons why PID loop control is best implemented in a DCS (Distributed Control System) rather than in a PLC (Programmable Logic Controller).  Identify one of the reasons cited by Mr. Brown for preferring a DCS over a PLC to do loop control.
+
+
+%INDEX% Reading assignment: Michael Brown Case History #60, "Do mines have particularly bad control problems?"
+
+%(END_NOTES)
+
+

@@ -1,0 +1,132 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``FF Function Blocks'' section of the ``FOUNDATION Fieldbus Instrumentation'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i04560}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Function blocks are software entities, represented in graphical form as rectangles to which you may attach connecting lines showing where data flows between the blocks.  Inputs are always on the left side and outputs always on the right.  Function blocks are analogous to legacy opamp circuits where each circuit performed a particular task, and functions could be linked together with connecting wires.  In a FF H1 system, line connections between blocks residing in different instruments represent cyclic messages sent over the segment.  Function blocks may often be located arbitrarily in Fieldbus instruments.
+
+AI blocks must always be located in transmitters; AO blocks must always be located in final control element instruments.  PID and other control blocks may be arbitrarily located in which ever field instruments one desires, provided that field instrument is capable of executing the desired function block.  Connecting lines between function blocks residing in different instruments represents cyclic messages (publisher/subscriber VCR) taking up scheduled time in an H1 segment macrocycle.  Locating the PID function inside the transmitter requires two cyclic communcations (OUT and BKCAL\_OUT signals) between the PID and AO blocks.  Locating the PID function inside the valve requires only one cyclic communication (PV) between AI and PID blocks.
+
+\vskip 10pt
+
+Ten ''basic'' FF function block types recognized: AI, AO, Bias (B), Control Selector (CS), DI, DO, Manual Loader (ML), PD, PID, Ratio (RA).  The FF standard recognizes 19 other ``advanced'' function block types.  If an instrument manufacturer adheres to the FF standard, their basic and advanced function blocks will behave exactly the same as everyone else's basic and advanced function blocks, ensuring interoperability.  It should be noted that some manufacturers equip their blocks with proprietary ``extended'' features.
+
+All FF instruments also contain one ``Resource'' block as well as one or more ``Transducer'' blocks.  The Resource block contains device information such as the identifier, device type, revision level, memory, available features, etc.  Transducer blocks organize information specific to real-world I/O as well as calculated quantities (e.g. mass flow calculations).
+
+\vskip 10pt
+
+Each connecting line between FF function blocks carries not only process control data, but also the status of that signal (Good, Bad, Uncertain).  Sub-status labels such as ``sensor failure'' serve to specify the cause of non-Good statuses.  Function blocks receiving a ``Bad'' signal status may shed to a different operating mode, or go into a pre-programmed failure state.  Signal statuses are propagated to all downstream blocks: e.g. an AI block outputting a Bad status will cause the PID block downstream to also output a Bad status.
+
+\vskip 10pt
+
+In Fieldbus, each individual function block had its own mode (OOS, Auto, Manual, Cascade, Iman, Local Override, Remote Cascade, Remote Output).  A technician will place a block in its Out Of Service (OOS) mode when performing any configuration on it (e.g. PV ranging).  The ``Target'' mode is the mode the block tries to be in, but the ``Actual'' mode is the mode it's really in (perhaps due to a Bad signal status telling it to shed to a different mode).
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identify the function of each scheduled communication event shown on the macrocycle schedule diagram in the book.
+\item{} Explain what the grey areas on the macrocycle schedule diagrams refer to (``Block Execution'').
+\item{} How can we tell from the function block diagram where each block is physically being executed (i.e. which device it's located in)?
+\item{} Suppose the PID function block were executed in a {\it third} Fieldbus device located on the same H1 segment as the transmitter and the valve positioner.  How would the macrocycle schedule look in that case?
+\item{} Identify some of the functions of the {\it Resource} block in a FF device.
+\item{} Explain why the {\it computation time} of a FF device is a useful parameter to access in the Resource block.  {\it Hint: this has something to do with macrocycle scheduling!}
+\item{} Identify some of the functions of the {\it Transducer} block(s) in a FF device.
+\item{} What are the three major signal status labels in a FF system (Good, Bad, Uncertain), and how do these labels reflect ``confidence'' in the scientific sense of the word?
+\item{} Identify an application where you would want to place a Fieldbus function block in Manual mode.
+\item{} Identify an application where you would want to place a Fieldbus function block in Out Of Service (OOS) mode.
+\item{} Explain the differences between ``Target,'' ``Actual,'' ``Permitted,'' and ``Normal'' modes for a Fieldbus function block.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+{\it Status propagation} refers to what feature of FF function blocks?
+
+\begin{itemize}
+\item{} Input signals to function blocks automatically scale to the appropriate limits
+\vskip 5pt 
+\item{} The LAS will automatically detect and commission new devices added to the network
+\vskip 5pt 
+\item{} Each function block has the ability to self-diagnose and report a status code
+\vskip 5pt 
+\item{} Alarms will be generated if the signal values exceed certain pre-set limits
+\vskip 5pt 
+\item{} Whatever status a block's input signal carries is given to the output signal as well
+\vskip 5pt 
+\item{} ``Bad'' status codes are repaired so they won't adversely affect process control
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+The {\it Resource} function block of any Fieldbus instrument contains what type of information (among other things)?
+
+\begin{itemize}
+\item{} Measured analog input values
+\vskip 5pt 
+\item{} Routing tables for all nodes
+\vskip 5pt 
+\item{} The device's identifier code
+\vskip 5pt 
+\item{} All ``Bkcal'' signal values
+\vskip 5pt 
+\item{} The segment scheduler's ``Live List''
+\vskip 5pt 
+\item{} Calculated analog output values
+\end{itemize}
+
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, FOUNDATION Fieldbus (FF function blocks)
+
+%(END_NOTES)
+

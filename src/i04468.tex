@@ -1,0 +1,148 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read the ``Modbus Function Codes and Addresses'' subsection of the ``Modbus'' section of the ``Digital Data Acquisition and Networks'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i04468}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Modbus uses distinct numerical codes to designate read and write operations for bits (``contacts'' and ``coils'') and words (``registers'').  Modbus also assigns its own numerical ranges for bit and register addresses, which don't necessarily match the addressing scheme inside the actual device you're trying to communicate with via Modbus (!).
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Modbus code} & {\bf Function} \cr
+(decimal) &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+01 & Read one or more PLC output ``coils'' (1 bit each) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+02 & Read one or more PLC input ``contacts'' (1 bit each) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+03 & Read one or more PLC ``holding'' registers (16 bits each) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+04 & Read one or more PLC analog input registers (16 bits each) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+05 & Write (force) a single PLC output ``coil'' (1 bit) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+06 & Write (preset) a single PLC ``holding'' register (16 bits) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+15 & Write (force) multiple PLC output ``coils'' (1 bit each) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+16 & Write (preset) multiple PLC ``holding'' registers (16 bits each) \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+\vskip 10pt
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Modbus codes} & {\bf Address range} & {\bf Purpose} \cr
+(decimal) & (decimal) & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+01, 05, 15 & 00001 to 09999 & Discrete outputs (``coils''), {\it read/write} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+02 & 10001 to 19999 & Discrete inputs (``contacts''), {\it read-only} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+04 & 30001 to 39999 & Analog input registers, {\it read-only} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+03, 06, 16 & 40001 to 49999 & ``Holding'' registers, {\it read/write} \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+All Modbus address ranges start at 1, not 0.  Oddly, the hexadecimal code specifying the address in a Modbus command is relative to the starting address of the range, rather than being absolute.  For example, when reading analog register 30005 using the 03 Modbus code, the address value specified in the Modbus frame would actually be ``4'' because ``0'' would refer to register 30001, ``1'' would refer to register 30002, etc.  By doing this the Modbus frames can be shorter, since they don't have to contain all the digits of the full address. 
+
+Modbus-compliant devices associate important variables within the device to specific Modbus registers, so end-users will be able to access those data points.  These associations are found in the manufacturer documentation.
+
+Some industrial devices contain Modbus ``mapping tables'' where the user gets to link variables within that instrument to Modbus registers of their own choosing where any other Modbus-compliant device will be able to read and/or write values.
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain what a Modbus ``map'' is within an industrial device.
+\item{} Examine the screenshot of the Modbus Register Map for the Emerson Smart Wireless Gateway shown in the textbook.  Do you think you could assign {\it any} Modbus register address at will to those same instrument variables, or are there limits?
+\end{itemize}
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, Digital data and networks (Modbus function codes)
+
+%(END_NOTES)
+

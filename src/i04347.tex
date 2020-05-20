@@ -1,0 +1,72 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+A {\it V-notch weir} is a type of flow-sensing element for measuring liquid flow through open channels.  Its construction is similar to a dam, and the height of liquid (``head'') on its upstream side is related to flow rate over the weir by a nonlinear equation.
+
+Suppose the height signal from a level transmitter upstream of a 60$^{o}$ V-notch weir gets sent to the analog input of a process recorder.  Displaying the height measurement directly on the recorder would not be very useful, because height ($H$) is not linearly proportional to flow rate ($Q$).  A human operator looking at a trend of head could not tell what this trend means in terms of {\it flow}, or worse yet might mistakenly interpret the head trend as a flow trend.  However, this recorder does have the feature of {\it characterization}, where you may enter an equation to ``linearize'' an otherwise non-linear signal.
+
+\vskip 10pt
+
+Write a ``linearization'' formula so that the trend recorder will be able to input the measured height ($H$, in inches) upstream of a 60$^{o}$ V-notch weir and display as a flow rate ($Q$) in units of cubic feet per second.
+
+\vfil 
+
+\underbar{file i04347}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Note that I did not specify the nonlinear equation for a V-notch weir in the question.  This I left for you to research.  The characteristic formula for this type of weir (from the {\it Lessons In Industrial Instrumentation} textbook) is as follows:
+
+$$Q = 2.48 \left( \tan {\theta \over 2} \right) H^{2.5} \hbox{\hskip 20pt V-notch weir}$$
+
+\noindent
+Where,
+
+$Q$ = Volumetric flow rate (cubic feet per second -- CFS)
+
+$L$ = Width of crest (feet)
+
+$\theta$ = V-notch angle (degrees)
+
+$H$ = Head (feet)
+
+\vskip 10pt
+
+Our task here is to modify this formula for use in this application, where the recorder receives a value for $H$ in units of inches, and must register cubic feet per second.  Since the formula as specified in the textbook assumes $H$ in feet of head rather than inches, we need to embed the inches-to-feet conversion in our modified formula, as well as the known angle of 60$^{o}$.  The result is shown in these three forms, each one in different stages of reduction:
+
+$$Q = 2.48 \left[\tan \left(60 \over 2\right)\right] \left({H \over 12} \right)^{2.5}$$
+
+$$Q = 2.48 (\tan 30) \left({H \over 12} \right)^{2.5}$$
+
+$$Q = {2.48 \over \sqrt{3}} \left({H \over 12} \right)^{2.5}$$
+
+$$Q = 1.43 \left({H \over 12} \right)^{2.5}$$
+
+$$Q = 1.43 \left({H^{2.5} \over 498.83} \right)$$
+
+$$Q = {1.43 \over 498.83} H^{2.5}$$
+
+$$Q = 0.00287 H^{2.5}$$
+
+%INDEX% Measurement, flow: characterization for a V-notch weir
+
+%(END_NOTES)
+

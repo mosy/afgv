@@ -1,0 +1,68 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2014, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose a 51 (time-overcurrent) protective relay is used to provide protection for a large (3000 horsepower) electric motor.  The motor runs on a line voltage of 4160 volts, and has a full-load efficiency of 88\%.  The relay obtains its line current data from a set of three 400:5 current transformers on the motor's T1, T2, and T3 leads.
+
+\vskip 10pt
+
+Based on this information, identify the {\it pick-up} current value for this protective relay, in secondary CT amps:
+
+\vskip 10pt
+
+$I_{pickup}$ = \underbar{\hskip 50pt}
+
+\vskip 10pt
+
+Also, explain what other factor(s) will dictate the time dial setting and time-current curve type for this 51 relay to provide sufficient protection for the motor.
+
+\underbar{file i00851}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+The motor's 3000 horsepower rating refers to its mechanical output, not its electrical input.  The electrical input power necessary at full load may be determined thusly:
+
+$$P_{in} = {P_{out} \over \hbox{Efficiency}}$$
+
+$$P_{in} = {3000 \hbox{ HP} \over 0.88} = 3409.1 \hbox{ HP}$$
+
+This amount of electrical horsepower equates to 2.5432 megawatts (MW), given the conversion factor of 746 watts per horsepower.  Calculating line current for this three-phase motor:
+
+$$P = I_{line} V_{line} \sqrt{3}$$
+
+$$I_{line} = {P \over V_{line} \sqrt{3}}$$
+
+$$I_{line} = {2.5432 \hbox{ MW} \over (4160 \hbox{ V}) \sqrt{3}} = 352.96 \hbox{ A}$$
+
+The CT will output a proportionately lesser amount of current, $5 \over 400$ times less to be exact:
+
+$$I_{sec} = (I_{pri}) \left({5 \over 400}\right)$$
+
+$$I_{sec} = (352.96 \hbox{ A}) \left({5 \over 400}\right) = 4.412 \hbox{ A}$$
+
+Thus, the 51 relay will see 4.412 amps at each of its CT inputs when the motor is at full load.  This value of 4.412 amps must therefore be the pickup value for the relay's time-overcurrent function, because any current value larger than this is an overload and should result in the relay tripping the circuit breaker at some point in time.
+
+\vskip 10pt
+
+In order to determine the relay's proper time dial setting and time-current curve, we must know the {\it damage curve} for the motor: a time-current curve describing the limits of overload tolerable by the motor before it sustains damage.  The relay's time-current curve must be chosen so as to trip the breaker {\it before} the motor's time-current limits are exceeded.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% Electronics review: current transformer (CT)
+%INDEX% Protective relay: time-overcurrent (51)
+
+%(END_NOTES)
+

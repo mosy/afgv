@@ -1,0 +1,74 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read selected portions of the {\it Foundation Fieldbus Blocks} document published by Rosemount (document 00809-0100-4783, revision BA) and answer the following questions:
+
+\vskip 10pt
+
+The Analog Input (AI) function block has two outputs.  Identify what each one does, and what internal functions of the AI block drive each one.
+
+\vskip 10pt
+
+Identify the purposes of the following parameters which must be configured for each Fieldbus Analog Input (AI) function block: {\tt Channel}, {\tt L\_Type}, {\tt XD\_Scale}, and {\tt OUT\_Scale}.
+
+\vskip 10pt
+
+Nearly every FF function block supports a {\it Manual} mode (not just the PID control block!).  Explain what this mode does, and why someone might wish to make use of it.
+
+\vskip 10pt
+
+Both the AI and the PID blocks provide a feature called {\it filtering}.  Explain what this feature is and why it might be useful in a real process control application.
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain how the ability to put {\it any} and {\it every} Fieldbus function block into ``manual'' mode might not only be confusing to someone on the job, but potentially dangerous as well.
+\item{} Suppose you were commissioning a multivariable Fieldbus instrument on a system, where more than one of those variables would be used in the control scheme (i.e. FF function blocks would depend on inputs from more than one variable coming from this particular transmitter).  How could you set up this control strategy, given that the AI function block seems to handle only one channel of data?
+\item{} A common source of confusion regarding the {\tt L\_Type} AI block parameter are the settings {\it Direct} versus {\it Indirect}.  These are often wrongly interpreted as synonymous with ``direct'' and ``reverse'' action.  Identify the true meanings of the ``Direct'' and ``Indirect'' settings for the {\tt L\_Type} parameter, and explain how these meanings are completely different than direct/reverse action.
+\end{itemize}
+
+\underbar{file i04577}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Partial answer:}
+
+\vskip 10pt
+
+The {\tt XD\_Scale} high and low values are necessary to convert the channel value (from the instrument's transducer block) into a percentage (the FIELD\_VAL).  The {\tt OUT\_Scale} high and low values are necessary to convert this percentage-based FIELD\_VAL into a scaled PV value, when the linearization type is set to ``Indirect'' or ``Indirect Square Root.''  Otherwise, if the linearization type is set to ``Direct,'' the PV output by the AI block will simply be equal to the channel value.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The AI block has two outputs: OUT and OUT\_D.  OUT is the ``analog'' signal representing PV, while OUT\_D is a discrete signal representing a PV alarm state.  (Page 2-1)
+
+\vskip 10pt
+
+The {\tt Channel} parameter instructs the AI block to process data from a specific channel of the field instrument (useful in multivariable instruments where there is more than one channel to choose from).  The {\tt XD\_Scale} high and low values are necessary to convert the channel value (from the instrument's transducer block) into a percentage (the FIELD\_VAL).  The {\tt OUT\_Scale} high and low values are necessary to convert this percentage-based FIELD\_VAL into a scaled PV value, when the linearization type ({\tt L\_Type}) is set to ``Indirect'' or ``Indirect Square Root.''  Otherwise, if the linearization type is set to ``Direct,'' the PV output by the AI block will simply be equal to the channel value.  (Pages 2-2 through 2-4)
+
+\vskip 10pt
+
+In ``Manual'' mode, you may force the output of any function block to a desired value, just like placing a loop controller in manual mode and forcing its MV output to some desired value.  (Page 2-1)
+
+\vskip 10pt
+
+Filtering is used to dampen high-frequency fluctuations in a signal (e.g. process noise).  The {\tt PV\_FTIME} parameter is equivalent to the filter function's time constant ($\tau$).  (Page 2-5)
+
+%INDEX% Reading assignment: Rosemount FF Function Blocks guide
+
+%(END_NOTES)
+

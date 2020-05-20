@@ -1,0 +1,169 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+A company named GlassPoint designed and built a rather ingenious solar-powered steam generating system for enhanced oilfield recovery cost-competitive to natural gas in regions with plentiful direct sunshine.  Their website in 2011 claimed these performance figures:
+
+\begin{itemize}
+\item{} Steam pressure = 2500 PSIG
+\item{} Steam temperature = 750 degrees Fahrenheit
+\item{} Steam volume = 90 barrels of boiler feedwater consumption per day, per acre of collection area
+\end{itemize}
+
+Based on these performance metrics, answer the following questions:
+
+\vskip 10pt
+
+\noindent
+Is this saturated steam or superheated steam?  How can you tell?
+
+\vskip 10pt
+
+\noindent
+Calculate the water flow rate in units of gallons per minute (per acre of collection).  Hint: one ``barrel'' is equal to 42 gallons.  Assume the unit operates for 12 hours each day, not 24 hours since the sun does not shine at night.
+
+\vskip 10pt
+
+\noindent
+Calculate the heat output rate in units of BTU per minute per acre of collection, assuming the boiler feedwater starts at an ambient temperature of 70 degrees Fahrenheit. 
+
+\vskip 10pt
+
+\noindent
+Calculate the heat output rate in units of horsepower per acre of collection. 
+
+\vskip 10pt
+
+Hint: the {\it Fisher Control Valve Handbook} has a set of steam tables in the Appendix section covering the pressures and temperatures experienced in the GlassPoint process.
+
+\vskip 10pt
+
+\underbar{file i02899}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Partial answer:}
+
+\vskip 10pt
+
+This is definitely superheated steam, because its temperature is well above the boiling point for water at 2500 PSIG (approximately 670 $^{o}$F, as my steam table shows water at 2526 PSIA to boil at 670 $^{o}$F).
+
+\vskip 10pt
+
+Your calculated value for water flow rate should be 5.25 gallons per minute, or 43.79 pounds per minute.
+
+\vskip 10pt
+
+Heat output = approximately 1249.9 horsepower per acre of collection area.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Even my old steam table (dated from 1920) shows saturated steam at 706.1 $^{o}$F (cooler than the GlassPoint steam) at a saturated pressure of 3200 PSIA (greater than the GlassPoint steam), which tells us the GlassPoint steam must be superheated.
+
+\vskip 10pt
+
+We may calculate heat output per acre of collection by converting the flow rate of feedwater per acre (90 barrels per day) into BTU per minute.  90 barrels per 12-hour day is 315 GPH, which is 5.25 GPM.  At 62.4 lbs per cubic foot, this equates to a mass flow rate of 43.79 pounds per minute of water being boiled into steam:
+
+$$\left( {5.25 \hbox{ gal} \over \hbox{min}} \right) \left( {231 \hbox{ in}^3 \over 1 \hbox{ gal}} \right) \left( {1 \hbox{ ft}^3 \over 1728 \hbox{ in}^3} \right) \left( {62.4 \hbox{ lb} \over 1 \hbox{ ft}^3} \right) = 43.79 \hbox{ lb/min}$$
+
+Interpolating from the Fisher Control Valve Handbook's superheated steam table, steam at 2500 PSIG and 750 degrees F has an enthalpy of 1248.3 BTU per pound.  Subtracting the enthalpy of 70 $^{o}$F water, this gives us a heat of 1210.3 BTU per pound of boiler feedwater turned into steam.  Given a mass flow rate of 43.79 pounds per minute, our heat output from one acre of GlassPoint collection is 53,003.1 BTU per minute (with no rounding).
+
+Converting 53003.1 BTU/minute into horsepower:
+
+$$\left( {53003.1 \hbox{ BTU/min} \over 1} \right) \left( {1 \hbox{ HP} \over 2544.43 \hbox{ BTU/hr}} \right) \left( {60 \hbox{ min} \over 1 \hbox{ hr}} \right) = 1249.9 \hbox{ HP}$$
+
+Thus, one acre of GlassPoint solar collection is equivalent to {\bf 1249.9 horsepower}.
+
+\vskip 20pt
+
+\noindent
+{\bf Interpolation work:}
+
+\vskip 10pt
+
+Fisher Control Valve Handbook shows the following enthalpies (table values in {\bf bold}, interpolated values in {\it italics}):
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Pressure & Temperature & {\it Temperature} & Temperature \cr
+%
+\noalign{\hrule}
+%
+% Another row
+ & {\bf 740 $^{o}$F} &  {\it 750 $^{o}$F} & {\bf 760 $^{o}$F} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+{\bf 2500 PSIA} & 1237.6 BTU/lb & {\it 1249.7 BTU/lb} & 1261.8 BTU/lb \cr
+%
+\noalign{\hrule}
+%
+% Another row
+{\bf 2600 PSIA} & 1227.3 BTU/lb & {\it 1240.1 BTU/lb} & 1252.9 BTU/lb \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+Now, all we need to do is take the interpolated enthalpies at 750 $^{o}$F and interpolate {\it them} to a pressure that is 2514.7 PSIA.  Mathematically, this is nothing more than a scaling problem:
+
+$${{2514.7 - 2500} \over {2600 - 2500}} = {14.7 \over 100} = 0.147$$
+
+$$0.147 (1240.1 - 1249.7) = -1.4112$$
+
+$$-1.4112 + 1249.7 = 1248.3 \hbox{ BTU/lb}$$
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+Referencing a steam table, determine the rate of heat released by steam flowing through a heat exchanger at a flow rate of 10 pounds per hour, assuming a entry temperature of 400 $^{o}$F and pressure of 230 PSIG, exiting as hot water (condensate) at 140 $^{o}$F and atmospheric pressure.
+
+\begin{itemize}
+\item{} 11690 BTU/hr
+\vskip 5pt 
+\item{} 10930 BTU/hr
+\vskip 5pt 
+\item{} 12010 BTU/hr
+\vskip 5pt 
+\item{} 10610 BTU/hr
+\vskip 5pt 
+\item{} 13020 BTU/hr
+\end{itemize}
+
+%INDEX% Physics, heat and temperature: steam table
+%INDEX% Process: solar steam generation (GlassPoint)
+
+%(END_NOTES)
+
+

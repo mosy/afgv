@@ -1,0 +1,98 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Override Controls'' subsection of the ``Limit, Selector, and Override Controls'' section of the ``Basic Process Control Strategies'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i02473}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+An ``override'' control system is where multiple controllers feed into a selector function, whereby only one of those controllers effects the final control element and the other(s) are de-selected (``over-ridden'') according to signal values.
+
+\vskip 10pt
+
+Truck driver override control strategy: throttle engine according to speed setpoint, unless engine becomes too hot at which point the control decisions are made on the basis of limiting exhaust temperature.  An important consideration is ensuring that the de-selected controller will not ``wind up'' with integral action when it is being over-ridden by another controller.
+
+\vskip 10pt
+
+Water well pump control system: low-level switch (LSL) overrides pump motor to completely shut it off if the well's water level gets too low.  This is called a {\it hard override} system, because the final control element completely shuts down if a limit is exceeded.
+
+A {\it soft override} system uses a separate level controller to monitor well level and override the pressure controller if water gets too low, slowing down the motor (but not necessarily shutting it off like the switch would).
+
+It is possible (and sometimes even preferable) to include both hard and soft override controls in a system, as backups to each other!
+
+\vskip 10pt
+
+Limiting integral wind-up in the de-selected controller(s) may take the form of an integral control bit written to the PID controller by the selector function, or a BKCAL signal used as external reset for the PID controller (e.g. the standard implementation of FOUNDATION Fieldbus control systems).
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain how a freight truck driver must play the role of an override control system when hauling a heavy load up a steep incline.
+\item{} A problem-solving technique useful for analyzing control systems is to mark the PV and SP inputs of all controllers with ``+'' and ``$-$'' symbols, rather than merely label each controller as ``direct'' or ``reverse'' action.  Apply this technique to all controllers show in the example diagrams of this section, identifying which controller input(s) should be labeled ``+'' and which controller input(s) should be labeled ``$-$''.
+\item{} Explain the distinction between a ``hard'' versus a ``soft'' override control system.
+\item{} Explain what ``integral wind-up'' is, and why it can be a problem.
+\item{} Describe different ways of mitigating ``integral wind-up'' when a limit function overrides the output of a PID controller.
+\item{} Explain what will happen in the water well system having both ``soft'' and ``hard'' overrides, if the level transmitter fails with a low signal.
+\item{} Explain what will happen in the water well system having both ``soft'' and ``hard'' overrides, if the level transmitter fails with a high signal.
+\item{} Explain what will happen in the water well system having both ``soft'' and ``hard'' overrides, if the pressure transmitter fails with a low signal.
+\item{} Explain what will happen in the water well system having both ``soft'' and ``hard'' overrides, if the pressure transmitter fails with a high signal.
+\item{} Explain what will happen in the water well system having both ``soft'' and ``hard'' overrides, if the LAL function fails with a signal representative of a low well water level condition (i.e. in the alarm state).
+\item{} Explain what will happen in the water well system having both ``soft'' and ``hard'' overrides, if the LAL function fails with a signal representative of a high well water level condition (i.e. in the non-alarm state).
+\end{itemize}
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+An {\it override} control strategy is where:
+
+\begin{itemize}
+\item{} One measurement signal is selected from two or more transmitter signals
+\vskip 5pt 
+\item{} The average of three or more measurement signals is used as the PV
+\vskip 5pt 
+\item{} The integral action of a PID controller is limited to prevent windup
+\vskip 5pt 
+\item{} Multiple sensors are used in order to achieve redundancy (for safety)
+\vskip 5pt 
+\item{} One control signal is selected from two or more controller output signals
+\vskip 5pt 
+\item{} Water level and water flow rate are the two major process variables 
+\end{itemize}
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, basic control strategies (override controls)
+
+%(END_NOTES)
+
+

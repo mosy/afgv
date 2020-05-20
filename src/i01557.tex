@@ -1,0 +1,84 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Digital controllers calculate the time-derivative of an input signal by sampling that signal (analog-to-digital conversion) repeatedly and performing mathematical analysis on it between samples.  Here is a ``pseudocode'' algorithm that a digital computer might use in computing an input signal's rate-of-change over time:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=6in \raggedright
+
+\noindent
+\underbar{\bf Pseudocode listing}
+
+\vskip 10pt
+
+{\tt LOOP}
+
+\hskip 10pt {\tt SET x = input} \hskip 10pt {\it // (Sample input signal and set 'x' equal to that value)}
+
+\hskip 10pt {\tt SET t = system\_time} \hskip 10pt {\it // (Sample system clock and set 't' equal to that value)}
+
+\vskip 10pt
+
+\hskip 10pt {\tt SET delta\_x = x - last\_x}
+
+\hskip 10pt {\tt SET delta\_t = t - last\_t}
+
+\vskip 10pt
+
+\hskip 10pt {\tt SET rate = delta\_x $\div$ delta\_t} \hskip 10pt {\it // (Calculate the rate of change $\Delta x \over \Delta t$)}
+
+\vskip 10pt
+
+\hskip 10pt {\tt SET last\_x = x} \hskip 10pt {\it // (Set 'last\_x' equal to the current value of 'x')}
+
+\hskip 10pt {\tt SET last\_t = t} \hskip 10pt {\it // (Set 'last\_t' equal to the current value of 't')}
+
+{\tt ENDLOOP}
+}
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+
+
+\vskip 10pt
+
+Explain how this algorithm works, calculating rate of change based on successive samples of the input variable and of the system clock (time).
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Suppose the order of the last two SET instructions were reversed.  How will this change affect the operation of the program, if at all?
+\item{} Suppose the ``t = system\_time'' SET instruction is deleted from the program.  How will this change affect the operation of the program, if at all?
+\item{} Suppose the microprocessor were upgraded such that this program executed at twice its normal speed (i.e. it would ``loop'' through the algorithm twice as frequently as before).  How will this change affect the calculation of rates of change, if at all?
+\end{itemize}
+
+\underbar{file i01557}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+The trickiest part to understand is the relationship between {\tt x} and {\tt last\_x}, and between {\tt t} and {\tt last\_t}.  This technique of declaring a variable pair and sequentially cascading a value from one variable to the next variable in each loop of execution, is commonly used in a lot of different algorithms.  The point of this technique is to provide a means of measuring change in a variable (such as {\tt x} and {\tt t}) with every scan of the program.  Once change in $x$ and $t$ are both known, the quotient (derivative) may be calculated by dividing one change by the other.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+%INDEX% Control, derivative: digital algorithm
+
+%(END_NOTES)
+
+

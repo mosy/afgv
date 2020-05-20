@@ -1,0 +1,82 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read pages 4-46 through 5-8 of the Automation Direct ``GS1 Series Drives user manual'' (document GS1-M), and answer the following questions:
+
+\vskip 10pt
+
+Describe what a VFD (Variable Frequency Drive) is useful for.  What, exactly, does it do in a control system?
+
+\vskip 10pt
+
+Identify the purpose of the ``FA-ISONET'' device referenced on pages 5-6 and 5-7.
+
+\vskip 10pt
+
+Identify some of the status bits readable in register 48450 (2001 hex).
+
+\vskip 10pt
+
+Identify the register within the AC motor drive holding the speed ``reference'' (command) value.  This is the numerical value commanding the motor how fast to spin.  Is this numerical value specified in integer, fixed-point, or floating-point format?
+
+\vskip 10pt
+
+Does this AC drive accept Modbus commands in RTU format, ASCII format, or either?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identify which layer of the OSI model the FA-ISONET device operates on.
+\item{} Can the Modbus bit rate of this VFD be arbitrarily set, or is it fixed at one communication speed?
+\item{} Which variant of Modbus is more efficient from the standpoint of maximum data transfer in minimum time: ASCII or RTU?
+\item{} Identify which register(s) within the VFD you would have to write data into via Modbus in order to command the drive to ``Run'' and to ``Stop''.
+\item{} Explain the significance of the speed reference value residing in a register address beginning with ``4'' within the Modbus addressing scheme.
+\end{itemize}
+
+\underbar{file i04470}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The purpose of any VFD is to supply power to an induction motor in such a way as to control the speed of that motor.
+
+\vskip 10pt
+
+Page 5-6: the FA-ISONET device converts between RS-232 (ground-referenced) signals and RS-485 (differential) signals.  The FS-ISONET happens to use 4-wire RS-485 signaling, where the transmit ad receive pairs are independent of each other.  In order to communicate with the VFD which uses a 2-wire RS-485 connection, some jumper wires must be added to parallel the ``+'' and ``$-$'' terminals of the transmit and receive pairs.
+
+\vskip 10pt
+
+Page 5-4: table describing each bit in this 16-bit read-only word.  Bits include stop, standby, running, jog, direction, source of motor frequency, etc.
+
+\vskip 10pt
+
+Page 4-49: register 42331 holds the frequency reference value in fixed-point format (XXX.X), and register 48451 holds the same value in read-only fashion (page 5-5).  The manual is not as explicit in declaring this as a fixed-point value as the Allen-Bradley PowerFlex 4 manual is, but the position of the decimal point reveals that it is.  {\it Note: page 4-49 also shows registers you must write to in order to start, stop, reverse, etc.}
+
+\vskip 10pt
+
+Page 5-16: communicates in either Modbus ASCII or Modbus RTU format (user-selectable)!  Pages 5-17 through 5-21 show the structure of the serial data frames and Modbus messages.
+
+\vskip 10pt
+
+A well-organized table of communication parameters appears on pages 5-2 through 5-3.
+
+
+%INDEX% Reading assignment: Automation Direct GS1 series VFD user manual
+
+%(END_NOTES)
+

@@ -1,0 +1,95 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2009, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Dead Time'' subsection of the ``Process Characteristics'' section of the ``Process Dynamics and PID Controller Tuning'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i04324}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+{\it Dead time} is when a system exhibits no output response at all from a change in its input.  Unlike lag time where at least some effect is immediately present, dead time represents a time period where the process is completely ``dead'' to its input.  Dead time is also referred to as {\it transport delay}, because it usually originates in the travel of some substance between different locations in a process, such as the cookie-baking process where the cookies must travel down the conveyor belt before their temperature is measured.
+
+\vskip 10pt
+
+Dead time is far more detrimental to loop stability than lag time because the amount of phase shift possible from dead time is limited only by frequency, whereas the amount of phase shift possible from lags is inherently limited (first-order = -90$^{o}$ maximum; second-order = -180$^{o}$ maximum).  Being that any feedback system will oscillate if the total phase shift is 360$^{o}$ and the total gain is at least 1, a purely dead-time process {\it will} oscillate if the gain is sufficient.  
+
+Interestingly, the presence of lag in a dead-time process can actually help avoid oscillation, by working to diminish process gain as frequency increases.  Enough lag in a dead-time process ensures that there will never be enough gain to oscillate, even if there might be enough phase shift.
+
+\vskip 10pt
+
+Multiple orders of lag may approach dead-time response if there are enough orders.  Digital instruments introduce dead time into process control loops because they do not sample continuously.  Wireless transmitters are possibly the worst offenders here, with sample times measured in seconds or even minutes.
+
+\vskip 10pt
+
+Sample-and-hold PID algorithms may be used to control dead-time dominant processes, with the controller ``freezing'' its output periodically to give the dead time enough delay to pass.
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Examine the cookie-baking process shown in the textbook and explain where its dead time comes from.
+\item{} Identify some practical sources of dead time in a process.
+\item{} Describe a procedure for measuring the amount of dead time in a control loop.
+\item{} Compare the phase-shift diagrams of a {\it lag time} function versus a {\it dead time} function, and comment on the differences between these two process characteristics.
+\item{} Explain why the addition of some lag time in a dead-time process may actually help avoid oscillations.
+\item{} Which is better, a process with a lot of dead time and a little lag time, or a process with a lot of lag time and a little dead time?  Explain why.
+\item{} Explain how a {\it sample-and-hold} PID algorithm works.
+\end{itemize}
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+From the perspective of closed-loop (feedback) control {\it dead time} is more detrimental than {\it lag time} because:
+
+\begin{itemize}
+\item{} Dead time more readily generates the phase shift necessary for oscillation
+\vskip 5pt 
+\item{} Dead time can never be eliminated while lag time can through process re-design
+\vskip 5pt 
+\item{} ``Dead'' is a scarier word than ``lag,'' and Mommy isn't holding my hand
+\vskip 5pt 
+\item{} Lag time poses no problems whatsoever for closed-loop control
+\vskip 5pt 
+\item{} Dead time is more difficult for a technician to detect and diagnose
+\vskip 5pt 
+\item{} Lag time may be offset by transmitter damping, whereas dead time cannot
+\end{itemize}
+
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, process characteristics (dead time)
+
+%(END_NOTES)
+
+

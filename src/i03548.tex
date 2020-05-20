@@ -1,0 +1,51 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2013, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+With two computers configured to communicate with one another serially via terminal emulator software (e.g. {\tt Hyperterminal}), the receiving computer should be able to request that the transmitting computer ``halt'' its transmission of data by means of a feature called {\it data flow control}.  Typically, the serial setup parameters available for flow control include the following:
+
+\begin{itemize}
+\item{} Hardware flow control (RTS/CTS)
+\item{} Software flow control (XON/XOFF)
+\item{} No flow control
+\end{itemize}
+
+Hardware flow control uses the RTS and CTS lines of an EIA/TIA-232 port (RTS = ``Request To Send'' ; CTS = ``Clear To Send'') to request data and to be cleared to transmit data, respectively.  In order for you to use hardware flow control, therefore, you must have a pair of conductors in your data cable connecting the RTS line of one device to the CTS line of the other device and vice-versa.  When a device receiving data wants to stop the flow of data coming in, it ``de-asserts'' its RTS line, which causes the transmitting device to stop sending data when it sees its CTS line de-activate.  When the receiving device is once again ready to receive data, it ``re-asserts'' its RTS line and the communication continues.
+
+Software flow control does not use the RTS or CTS lines, but rather uses special control codes communicated serially over the TD and RD lines to control the flow of data.  When a device receiving data wants to stop the flow of data coming in it transmits an ``XOFF'' code, which commands the other device to stop transmitting.  When the first device is once again ready to receive data, it transmits an ``XON'' code and the communication continues.
+
+\vskip 10pt
+
+With your terminal emulator software and cable properly configured for software flow control, you can experiment with this feature by making one device transmit a continuous stream of data (e.g. continuously pressing one of the lettered or numbered keys on the keyboard of a computer) while pressing the {\tt <CTRL><S>} key combination on the receiving computer to issue an XOFF command.  You can resume data transfer by pressing the {\tt <CTRL><Q>} key combination to issue an XON command.
+
+\vskip 10pt
+
+Note the effects seen at {\it both} computers!
+
+
+\underbar{file i03548}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+No answers provided here.  You'll have to try it yourself on a real computer!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% Networking, practical exercise: serial data flow control
+
+%(END_NOTES)
+
+

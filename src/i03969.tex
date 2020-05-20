@@ -1,0 +1,79 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Material Volume Measurement'' section of the ``Signal Characterization'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\vskip 10pt
+
+If you would like to learn more about 3D-mapping of solid materials in storage vessels, consult the datasheet or manual for Rosemount's model 5708 3D Solids Scanner instrument.  This instrument uses a cluster of ultrasonic transducers to create a three-dimensional map of the material's surface shape, allowing precise calculations of stored volume despite angles of repose, material clumping, and other phenomena rendering single-point level measurement impractical.
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} For those who have studied PLC programming, explain how you could implement a multi-point characterization function in Ladder Diagram programming.
+\end{itemize}
+
+\underbar{file i03969}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+For a vertical cylinder, height is proportional to volume.  Level-sensing instruments are really just measuring height.  If what we really want to know is the {\it volume} of material stored in the vessel, we need to ensure that the proportionality between height and volume is well known.
+
+\vskip 10pt
+
+Horizontal cylinders and spheres are two examples of vessel shapes where the relationship between height and volume is definitely non-linear:
+
+$$V = L \left[ (h-r) \sqrt{2hr - h^2} + r^2 \sin^{-1}{(h-r) \over r} + {\pi r^2 \over 2} \right] \hbox{\hskip 10pt  (horizontal cylinder)}$$
+
+$$V = \pi h^2 \left(r - {h \over 3}\right) \hbox{\hskip 20pt  (sphere)}$$
+
+Non-linear functions such as these may be approximated using a {\it multi-segment characterizer} function in a computer, using multiple straight-line functions pieced together to form a fascimile of the real function's curve.  For many real-life vessel shapes (with stepped profiles, interior objects, etc.), a piecewise function is truly the best fit to reality.
+
+\vskip 10pt
+
+A {\it strapping table} is a table of liquid volume versus liquid height values measured for any particular storage vessel.  Strapping tables may be used to program multi-segment characterizing functions for volume linearization in any particular application.
+
+\vskip 10pt
+
+Some ``smart'' level transmitters have strapping table capability built right in, so that the transmitter may output a signal proportional to liquid volume and not just liquid height.
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Suppose a spherical vessel is used to store liquid butane under pressure.  Where along the vessel's height will one inch of liquid height increase represent the greatest amount of volume increase?
+\item{} Examining the illustration in the textbook of a spherical vessel with ``odd-shaped objects'' inside of it, where along the vessel's height will one inch of liquid height increase represent the greatest amount of volume increase?
+\item{} Suppose a tape-and-float level transmitter is used to sense the level of liquid inside of a horizontal cylinder.  If this level transmitter experiences some hysteresis (due to pulley friction on the tape), where will the corresponding liquid {\it volume} measurement error be greatest: at the bottom of the vessel, the middle of the vessel, or the top of the vessel?
+\item{} Suppose operations personnel are taking measurements to generate a {\it strapping table} for a liquid storage vessel, but the person recording this data makes a typographical error on one of the numerical entries.  What kind of calibration error will this mistake introduce into the level-sensing system: a {\it zero} shift, a {\it span} shift, a {\it hysteresis} error, or a {\it linearity} error?
+\item{} Suppose your supervisor charges you with the responsibility of building a volume measurement system for an oddly-shaped vessel that will store diesel fuel.  Outline all the steps you would take in developing and implementing a solution.
+\end{itemize}
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, Signal Characterization (liquid volume measurement)
+
+%(END_NOTES)
+
+

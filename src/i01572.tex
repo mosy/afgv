@@ -1,0 +1,96 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#67 (``Problems Encountered In Level Controls'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} Explain what Mr. Brown means when he says, ``Integrating processes are always `balancing' processes . . .''
+\vskip 10pt
+\item{} Examine the trend of a tank level control in Figure 1 and determine if the controller is {\it direct} or {\it reverse} acting.
+\vskip 10pt
+\item{} Examine the ``As-Found'' response of a tank level control shown in Figure 1 and determine the dominant control action (P, I, or D) as revealed by the PV and Output waveforms.  Is this action reasonable for an integrating process such as level control?  Why or why not?
+\vskip 10pt
+\item{} Examine the ``As-Left'' response of a tank level control shown in Figure 2 and determine how this tuning differs from the ``As-Found'' tuning shown in Figure 1.
+\vskip 10pt
+\item{} Explain how we can definitely determine the control system graphed in Figure 4 has a bad valve.
+\vskip 10pt
+\item{} Explain the rationale behind the instrument technician's creative ``fix'' for that bad control valve, shown in Figure 5.
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Discuss how we may use PV/Output phase shift to identify a controller's dominant action, based on the information contained in the ``Recognizing an Over-Tuned Controller by phase shift'' subsection of the ``Heuristic PID Tuning Procedures'' section of the ``Process Dynamics and PID Controller Tuning'' chapter in your {\it Lessons In Industrial Instrumentation} textbook and discuss this with your classmates.
+\item{} Explain why a process with ``positive lead integrator'' behavior (e.g. Figure 6) will be very challenging to control using PID.
+\end{itemize}
+
+\underbar{file i01572}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Level controls are integrating because they depend on a balancing of in-flow with out-flow, either of mass or of energy (mass-balance or energy-balance).  If the in-flow of matter or energy does not equal the out-flow of matter or energy, the process either accumulates or loses its store of that quantity, resulting in a ``ramping'' of the PV over time.
+
+\vskip 10pt
+
+Figure 1: we can tell the controller is direct-acting because the Output jumps down when SP jumps up.  This tells us error is calculated as follows: $e = (\hbox{PV} - \hbox{ SP})$
+
+\vskip 10pt
+
+The ``As-Found'' tuning for this level loop is heavy on integral (PD lags PV by almost 90 degrees).  This is the wrong kind of tuning for an integrating process, which thrives on strong proportional action.
+
+\vskip 10pt
+
+The ``As-Left'' tuning revealed in Figure 2 is heavy on proportional, as revealed by the large output step-change prompted by the setpoint step-change.  There is still some phase shift between PV and Output which tells us there is still significant integral action at work, most likely necessary to handle load changes in the process.
+
+\vskip 10pt
+
+Figure 4: the valve is seen to have a large amount of hysteresis because it requires an enormous reversal of the controller's manual output to stop the PV from ramping down, after it a comparatively modest change in output drove the PV down.
+
+\vskip 10pt
+
+The instrument technician's idea for ``fixing'' the sticky valve by introducing derivative into the controller worked quite well.  The D action amplified the process noise, causing the Output to rapidly change with the effect of continuously dislodging the sticky valve and not allowing static friction to freeze its position for long.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+In Michael Brown's Case History \#67 (``Problems Encountered in Level Controls''), he recounts an instrument technician's creative solution to a valve with terrible stiction.  Identify what this solution consisted of and then explain why it worked.
+
+
+
+%INDEX% Reading assignment: Michael Brown Case History #67, "Problems encountered in level controls"
+
+%(END_NOTES)
+
+

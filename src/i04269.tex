@@ -1,0 +1,56 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2009, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+An instrument technician is troubleshooting a faulty control loop, in which the control valve does not seem to respond at all to changes in the controller's output (with the controller in manual mode).  The controller is part of a distributed control system (DCS), and the control valve is a pneumatically-actuated ball valve with an electro-pneumatic positioner (Fisher model 3582i).
+
+\vskip 10pt
+
+The technician decides to go to the control valve and test the pneumatic valve positioner by pressing the baffle (flapper) toward the nozzle with his finger.  The valve does nothing, remaining in its ``fail'' position.
+
+A second technician assisting the first suggests taking a measurement of loop current, to see if the controller's output signal is arriving at the electro-pneumatic positioner.
+
+\vskip 10pt
+
+Do you agree with the second technician's suggestion?  Explain your reasoning, whether for or against this next step in diagnosing the problem.
+
+\vfil 
+
+\underbar{file i04269}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The second technician's suggestion is likely a wasted step, as the valve clearly has a pneumatic problem.  If the baffle-to-nozzle test yields no response, there is definitely a problem with the pneumatics (or the air supply) of the valve.  
+
+\vskip 10pt
+
+One key to identifying the second test as useless is to first identify the pathway of information or power through the system.  Here, the DCS sends a 4-20 mA signal carrying information to the I/P unit inside the model 3852i positioner.  That I/P then converts the electrical signal into a pneumatic signal to carry that same information on to the positioner mechanism where the baffle/nozzle resides.  In that mechanism, the pressure signal causes a motion on the D-ring, causing baffle motion, causing changes in nozzle backpressure, causing the relay to amplify that backpressure signal, causing the valve's actuator to fill with more or less compressed air, causing the valve stem to move, causing the feedback arm to rotate and thereby re-balance the positioner's D-ring.
+
+Recognizing that information is flowing from the DCS to the I/P to the positioner mechanism and finally to the valve lets us visualize the chain of components that must work together to make the valve function.  Manually pressing the baffle toward the nozzle bypasses the DCS and the I/P, and should cause air pressure to be sent to the valve actuator.  The fact that this test results in no motion at the valve tells us the problem is {\it not} related to the 4-20 mA electrical signal, the DCS, or the I/P.
+
+\vskip 10pt
+
+For the sake of argument, there may {\it also} happen to be a problem with the 4-20 mA controller signal, but we know for a fact that a pneumatic problem exists sufficient in itself to account for the valve's inaction.  Prudent troubleshooting would demand that we fix what we know is a definite problem before spending any time looking for another problem that may or may not exist.
+
+%INDEX% Final Control Elements: troubleshooting
+
+%(END_NOTES)
+
+

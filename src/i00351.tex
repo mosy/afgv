@@ -1,0 +1,87 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#82 (``Problems In A Canadian Plant'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} Comment on Mr. Brown's observations regarding the competence of Canadian instrument technicians in general, and also about specific deficiencies in control curricula worldwide.
+\vskip 10pt
+\item{} Explain what ``anti-reset windup'' (ARW) is in a digital PID controller, and what purpose it serves.
+\vskip 10pt
+\item{} The control loop behavior shown in Figures 1 and 2 is very strange.  What looked at first like a control valve problem was in fact a weird problem in the DCS.  Explain how this control system's anti-reset winding (ARW) feature worked, and why it accounted for the strange closed-loop behavior seen in the trend of Figure 1.
+\vskip 10pt
+\item{} Examine the open-loop test shown in Figure 4, and identify what feature(s) of this trend clearly indicate a control valve problem.
+\vskip 10pt
+\item{} Examine the closed-loop trend shown in Figure 5, and determine from the graphs what the dominant control mode (P, I, or D) is in the loop controller.  Also, determine if this controller is direct-acting or reverse-acting.
+\vskip 10pt
+\item{} Examine the closed-loop trend shown in Figure 6, and identify those features of the output (PD) graph clearly showing {\it proportional} action, and those features clearly showing {\it integral} action.
+\end{itemize}
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Variable-speed pumps are often considered nearly ideal from the perspective of control characteristics.  Explain why a variable-speed pump might be preferable to a throttling valve in a control loop.
+\item{} Examine the trend graph shown in Figure 1 and calculate the controller's {\it proportional band}.
+\end{itemize}
+
+\underbar{file i00351}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Mr. Brown thinks highly of Canadian instrument technicians.  However, in his words, ``Most basic control theory taught in control training institutions is almost unusable in real life'' and this included the Canadian technicians.
+
+\vskip 10pt
+
+Anti-reset windup (ARW) is a feature of PID controllers whereby the integral action gets disabled if certain PV and/or output values are exceeded.  The purpose of this feature is to prevent integral action from ``winding'' the controller's output uselessly.
+
+\vskip 10pt
+
+Figure 1: overshoot on down SP change, undershoot in up SP change.  Figure 2 (open-loop) shows pretty good valve behavior.  Control system anti-restet windup low limit was set to 45\% on PV scale, and very oddly the controller made the reset go {\it 16 times faster} when the PV went outside this limit!!!  Not only was the ARW set to engage at a strangely low PV value, but it also did entirely the wrong thing by speeding up integral action when it should have slowed it down or stopped it entirely!
+
+\vskip 10pt
+
+Figure 4 shows a huge stiction problem, as the controller output must at times be moved quite a bit before the flow signal responds at all.
+
+\vskip 10pt
+
+Figure 5 clearly shows a proportional-dominant direct-acting controller.  The PV and Output waveforms almost perfectly mimic each other, revealing a controller gain of approximately 1.
+
+\vskip 10pt
+
+In Figure 6 we see proportional action clearly in the response to setpoint step-changes.  The output steps approximately one-third as much as the SP steps, which is equivalent to a gain of $1 \over 3$.  Integral action is clearly evident in the sloped centerline of the cycle seen while the setpoint is stable at about 60\% -- here, the output (PD) ramps upward while the PV cycles asymmetrically around SP.
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} What do you think the PV and PD waveforms of Figure 5 would have looked like if the loop were oscillating with excessive {\it integral} action instead of excessive proportional action?
+\item{} Identify the controller's dominant action in the closed-loop trend of Figure 6 (P, I, or D).
+\end{itemize}
+
+
+
+%INDEX% Reading assignment: Michael Brown Case History #82, "Problems in a Canadian plant"
+
+%(END_NOTES)
+
+

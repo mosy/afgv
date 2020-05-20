@@ -1,0 +1,157 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+\noindent
+{\bf Lab Exercise}
+
+\vskip 5pt
+
+Your team's task is to equip working process control system with an additional layer of controls to bring it to a safe ``shutdown'' condition in the event of one or more detected conditions sensed by separate instrumentation.
+
+The shutdown function must bring the process to a ``safe'' condition (power off, vessels drained/vented, etc.) independent of any action on the part of the loop PID controller.  In other words, the shutdown should work {\it no matter what the loop controller is trying to do}.  This shutdown condition must ``latch'' and be re-settable only from a manual pushbutton, also independent of the loop PID controller.  You may use either a hard-wired relay, a PLC, or a dedicated safety controller to implement the latching safety shutdown function.
+
+Each student must independently demonstrate the shutdown functionality of a different team's system by simulating a ``dangerous'' condition to the input of the shutdown system.  This will be done given a 5-minute time limit.  In other words, each student needs to figure out how to make another team's (chosen by the instructor) shutdown system ``think'' a dangerous condition exists without actually bringing the system to that actual point (e.g. over-temperature, over-pressure, overflow level, etc.) and then correctly implement that test.  Failure to correctly devise a valid shutdown test given the criteria posed by the instructor will disqualify the effort, in which case the student must re-try with a different system and/or scenario.  Multiple re-tries are permitted with no reduction in grade.
+
+\vskip 10pt
+
+\underbar{Objective completion table:}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Performance objective} & {\bf Grading} & {\bf 1} & {\bf 2} & {\bf 3} & {\bf 4} & {\bf Team} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Choose safety shutdowns to add & mastery & -- & -- & -- & -- & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Updated loop diagram and process inspection & mastery & & & & & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Test shutdown systems (5 minute time limit) & mastery & & & & & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Lab question: Selection/testing & proportional &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Lab question: Commissioning & proportional &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Lab question: Mental math & proportional &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Lab question: Diagnostics & proportional &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+Each student will be asked to correctly answer a ``lab question'' from each of the four categories (examples shown on the next page).  These lab questions serve as a guide to knowledge and skills all team members should be learning as they progress through the lab exercise.  The instructor may quiz students on these questions at any appropriate time before the lab exercise is complete.
+
+\vfil \eject
+
+\noindent
+\underbar{Lab Questions} 
+
+\begin{itemize}
+\item{} {\bf Selection and Initial Testing}
+\itemitem{} Identify all inputs and outputs on the field instruments (transmitter and FCE)
+\itemitem{} Explain the meanings of the various ratings specified on the instrument nameplate
+\itemitem{} Identify in the manufacturer documentation where to connect signal wires to the field instrument (transmitter or FCE)
+\itemitem{} Explain what types of test equipment were used to validate the operation of the field instrument (transmitter or FCE)
+\itemitem{} Explain how you could perform rudimentary tests of instrument function using simple test equipment (multimeter, air pumps, pressure gauges, resistors, batteries, etc.)
+\end{itemize}
+
+\filbreak
+
+\begin{itemize}
+\item{} {\bf Commissioning and Documentation}
+\itemitem{} Demonstrate how to use a loop calibrator to measure signal current
+\itemitem{} Demonstrate how to use a loop calibrator to source signal current
+\itemitem{} Demonstrate how to use a loop calibrator to simulate signal current
+\itemitem{} Identify multiple locations (referencing a loop diagram) you may measure various 4-20 mA instrument signals in the system
+\itemitem{} Identify multiple locations (referencing a loop diagram) you may connect HART communicator in the system
+\end{itemize}
+
+\filbreak
+
+\begin{itemize}
+\item{} {\bf Mental math} (no calculator allowed!)
+\itemitem{} Determine allowable calibration error of instrument (e.g. +/- 0.5\% for an instrument ranged 200 to 500 degrees)
+\itemitem{} Convert 4-20 mA signal into a percentage of span (e.g. 13 mA = \underbar{\hskip 20pt}\%)
+\itemitem{} Convert percentage of span into a 4-20 mA signal value (e.g. 70\% = \underbar{\hskip 20pt} mA)
+\itemitem{} Convert 3-15 PSI signal into a percentage of span (e.g. 11 PSI = \underbar{\hskip 20pt}\%)
+\itemitem{} Convert percentage of span into a 3-15 PSI signal value (e.g. 40\% = \underbar{\hskip 20pt} PSI)
+\end{itemize}
+
+\filbreak
+
+\begin{itemize}
+\item{} {\bf Diagnostics}
+\item{} ``Virtual Troubleshooting'' -- referencing their system's diagram(s), students propose diagnostic tests (e.g. ask the instructor what a meter would measure when connected between specified points; ask the instructor how the system responds if test points are jumpered) while the instructor replies according to how the system would behave if it were faulted.  Students try to determine the nature and location of the fault based on the results of their own diagnostic tests.
+\itemitem{} Given a particular component or wiring fault ({\it instructor specifies type and location}), what symptoms would the loop exhibit and why?
+\itemitem{} Identify how to electrically simulate a specified shutdown trip condition.
+\itemitem{} Explain why breaking a 4-20 mA loop could cause serious problems in an actual instrument loop!
+\itemitem{} Explain what will happen (and why) in your control loop if the transmitter suddenly fails with a low (4 mA) signal.  Assume the controller is in automatic mode when this happens.
+\itemitem{} Explain what will happen (and why) in your control loop if the transmitter suddenly fails with a high (20 mA) signal.  Assume the controller is in automatic mode when this happens.
+\itemitem{} Explain what will happen (and why) in your control loop if the FCE suddenly fails with the equivalent of a low (4 mA) MV signal.
+\itemitem{} Explain what will happen (and why) in your control loop if the FCE suddenly fails with the equivalent of a high (20 mA) MV signal.
+\end{itemize}
+
+
+\underbar{file i00005}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+\noindent
+{\bf Loop diagrams / inspections:}
+
+I strongly recommend checking off students' loop diagrams while you inspect their loop (checking for secure wiring, proper tubing, good conduit installation, etc.) with them.  Have all team members take you on a ``tour'' of their completed loop, with each team member explaining a different portion of the loop you select while using their own loop diagram as a guide.  While a student is explaining their section of the loop, you can check the other students' loop diagrams for accuracy.  This not only saves time by consolidating the tasks of loop inspection and loop diagram verification, but it also ensures students can actually relate their loop diagrams to the loop they have built and articulate that understanding to you.
+
+%INDEX% Lab exercise, adding safety shutdowns to a complete process control loop
+
+%(END_NOTES)
+
+

@@ -1,0 +1,82 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read selected portions of the ``SEL-387A Current Differential Relay'' protective relay instruction manual (document SEL-387A Instruction Manual, January 2014) and answer the following questions:
+
+\vskip 10pt
+
+Identify common applications for this model of protective relay.
+
+\vskip 10pt
+
+Like many other modern digital protective relays, the model 387A is capable of providing more than one ANSI/IEEE protection function.  Identify some of the functions offered by this particular relay other than 87 (differential).
+
+\vskip 10pt
+
+Figure 2.7 on page 2-10 shows a sample application where they 387A relay protects a transformer.  Identify the winding configuration of the power transformer (e.g. Delta/Wye) as well as the configuration of the primary and secondary circuit current transformers as they connect to the relay.  How does this CT connection scheme differ from traditional (electromechanical) differential current relays?
+
+\vskip 10pt
+
+Based on the power transformer configuration shown in Figure 2.7, how much phase shift is there between the primary and secondary phases?
+
+\vskip 10pt
+
+One of the major considerations when implementing differential current protection on power transformers is {\it phase shift compensation} from primary to secondary, if the power transformer being protected has Wye-Delta or Delta-Wye windings.  With electromechanical relays this compensation takes the form of different CT wiring configurations on the primary and secondary sides (i.e. Delta-connected CTs on the power transformer's Wye side, and Wye-connected CTs on the power transformer's Delta side).  However, digital 87 relays such as the model 387A offer ``connection compensation'' which is based on digital math calculations rather than electrical wiring.  Pages 3-17 through 3-21 discuss the application of this feature in the model 387A relay.  Read this section and explain in your own words how connection compensation works for the two examples shown in figures 3.9 and 3.10.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} The winding compensation parameter must be set to a particular value on the Wye-connected side of the power transformer, if the CTs for that side are also Wye-connected.  Explain why this is, and what the particular {\tt WnCTC} value must be set to.
+\item{} Examine each of the phasor diagrams shown for each of the {\tt WnCTC} selection examples on pages 3-19 (figure 3.9) and 3-20 (figure 3-10).  Which phasor diagrams show the phase shift of the power transformer?  How are the CT phase shifts represented?  What does the dashed line in each phasor diagram represent?  How do the {\tt WnCTC} values fit into the phasor diagrams?
+\end{itemize}
+
+\underbar{file i00824}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Partial answer:}
+
+\vskip 10pt
+
+In Figure 2.7 (page 2-10) we see the 387A relay protecting a Wye-wound step-down {\it autotransformer}.  Both primary and secondary CTs are connected in Wye configurations, as is common for digital 87 relays.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The model 387A may be used to protect transformers, rotating machines, reactors, and other multi-terminal power system components (Page 1-1).  Some applications are illustrated on page 1-4.
+
+\vskip 10pt
+
+This relay also provides instantaneous and time-overcurrent (50/51) protection and directional overcurrent (67) protection in addition to differential current (87) protection.  Figure 1.1 on page 1-2 makes this clear to see.
+
+\vskip 10pt
+
+In Figure 2.7 (page 2-10) we see the 387A relay protecting a Wye-wound step-down {\it autotransformer}.  Both primary and secondary CTs are connected in Wye configurations, as is common for digital 87 relays.  Even if the power transformer had a Wye-Delta or Delta-Wye winding configuration, the current transformers n both side could still be connected in Wye fashion, the phase shift compensation being done digitally by the relay.  Electromechanical 87 relays, lacking mathematical compensation for transformer phase shift, required CTs that were complementarily connected (i.e. Delta CTs on the Wye side of the power transformer, and vice-versa).
+
+\vskip 10pt
+
+The autotransformer, being a Wye-Wye primary/secondary configuration, imparts no phase shift from input to output.
+
+\vskip 10pt
+
+Winding connection compensation is a feature that may be enabled or disabled by the {\tt ICOM} setting (page 3-9).  When enabled, a set of parameters called {\tt W1CTC} and {\tt W2CTC} (winding 1 and winding 2 CT compensation) take in an integer number between 1 and 12 inclusive describing the amount of additional phase shift to add to the CT signals for that transformer winding, as per hours on a clock face, with each hour being worth 30 degrees of phase shift.  Thus, ``3'' represents a +90 degree phase shift, ``6'' represents a +180 degree phase shift, and ``10'' represents a +300 degree phase shift.  If the number ``12'' is entered, the relay eliminates any zero-sequence currents from being read from that CT set, which is necessary if the CTs are Wye-connected on the Wye-connected side of the power transformer.
+
+%INDEX% Electric power systems: protective relays (differential)
+%INDEX% Reading assignment: SEL model 387A current differential protective relay
+
+%(END_NOTES)
+
+

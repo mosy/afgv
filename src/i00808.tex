@@ -1,0 +1,168 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read Section 10.0 of the Siemens model 353 Process Automation Controller user's manual (document UM353-1, Revision 11, March 2003).  This section, entitled ``Controller and System Test'', describes how to test a model 353 controller by stepping through a set of exercises designed to explore its major features.  It also doubles as an excellent exercise for students to use in understanding this controller's features and capabilities.
+
+To do this exercise, you will need access to a Siemens model 353 controller.  Feel free to use one of the panel-mounted 353 controllers in the lab, or one of the Desktop Process units, or even a 353 controller taken from storage.  It is definitely a hands-on activity!
+
+\vskip 10pt
+
+\noindent
+{\bf 10.1.1 Connections and Power}
+
+This subsection describes how to connect AC power to the controller, and also how to connect the output to the PV input for the purposes of the subsequent tests.  Feel free to skip this second part, especially if your controller is already connected to a real process.  Proceed through each of the subsections, following the step-by-step instructions.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.2 Configuration}
+
+This subsection refers you to another section of the manual, instructing you to load Factory Configured Option number 101 (FCO 101).
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.3 Input/Output}
+
+This subsection shows you how to verify the Setpoint, Output, and Process Variable I/O as configured in FCO 101, and points you to the diagram of FCO 101 to verify the ``connections'' of P, S, and V in the ODC function block.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.4 Auto/Manual}
+
+This subsection shows you how to test the Automatic and Manual modes.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.5 Modifying an FCO}
+
+This subsection shows you how to make changes to the function blocks within FCO 101.  The changes include:
+
+\begin{itemize}
+\item{} Adding a new function block to FCO 101
+\item{} Perusing parameters inside a function block
+\item{} Changing MINSCALE and MAXSCALE parameters of the AIN1 function block
+\end{itemize}
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.6 Alarms}
+
+This subsection shows you how to change the alarm values and priorities.  The instructions imply a connection between output and PV input, such that you can simulate any PV signal desired simply by switching to manual mode and adjusting the output.  If your controller is connected to a working process, I recommend running the controller in automatic mode and adjusting the setpoint to make the PV go to the desired value(s).
+
+\filbreak
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.7 Tag}
+
+This subsection shows you how to change the ``tag'' name of the loop.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.8 Quick}
+
+This subsection explores the ``Quick'' set feature to change certain parameters in any function block.  In this particular case, the instructions guide you to configuring a ramping setpoint value.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.9 Tune}
+
+This subsection explores the ``Tune'' feature to change P, I, and D tuning parameters, and also to activate autotune.  If your controller is connected to a working process, feel free to engage the ``autotune'' feature and see how well it does.  In my general experience a competent technician can always achieve more robust control through careful hand-selection of tuning parameter than by relying on an autotune feature, but go ahead and try it just for fun.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.10 View}
+
+This subsection explores the ``View'' feature to monitor variables inside the controller.  This can be a very useful diagnostic tool, especially when developing and ``debugging'' new function-block programs.
+
+\vskip 30pt
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Suppose you wished to change the ``connection'' path between two function blocks in a program.  Demonstrate how to do this.
+\item{} Suppose you wished to take the factory configured option program \#101 and add a discrete output block, then connect that block to the alarm block so that an external alarm light could be controlled by the alarm settings in the controller.  Demonstrate how to do this.
+\item{} Identify some of the different Factory Configured Options (FCOs) available to you.
+\item{} In section 10.1.5 a clever way is shown to change the upper range value of the AIN function block from 100 to 500.  Instead of simply turning the pulser knob to increment 100 to 500, some decimal-point shifting is used.  Explain how this works.
+\item{} Section 3.2.12 describes the meaning of five different priority levels for alarms in the ALARM function block.  Explain these priority levels in your own words.
+\item{} In section 10.1.8 describes one of the quick-set parameters as ``POWER UP SETPOINT''.  Explain what this parameter is useful for, citing a practical application if possible.
+\end{itemize}
+
+\underbar{file i00808}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+{\bf Lesson:} Learning how to navigate through the menu structure of this controller is key.  Other key points learned in this exercise include: resetting the controller back to factory default (FCO 101), using the ``D'' button and ``A/M'' button to switch display and control modes, seeing how function blocks are linked together in a program, how to add a function block, how to change the PV range and engineering units, how to set alarm points, how to change the tag name, using the ``Quick'' button to edit certain parameters, using the ``Tune'' button to edit PID tuning parameters, and using the ``View'' menu to monitor program variables.
+
+\vskip 10pt
+
+Page 2-4 (section 2.7 ``Configuration Procedure'') gives step-by-step instructions for resetting the controller to a Factory Configured Option (FCO) such as 101.  The text in section 10.1.2 simply refers you to section 2.7 where explicit instructions are given.
+
+\vskip 10pt
+
+Page 3-22 describes the different alarm priority levels assignable within the ALARM function block:
+
+\begin{itemize}
+\item{} Priority 1 = Causes bargraphs and condition displays to flash until acknowledged
+\item{} Priority 2 = Same as Priority 1, but self-clearing (i.e. no acknowledgement required)
+\item{} Priority 3 = Causes event LEDs (L and S) to flash until acknowledged
+\item{} Priority 4 = Same as Priority 3, but self-clearing (i.e. no acknowledgement required)
+\item{} Priority 5 = Alarm displayed, but self-clearing
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+(This makes a good summary quiz in itself -- students showing they have performed these configuration exercises)
+
+%INDEX% Reading assignment: Siemens model 353 controller manual
+
+%(END_NOTES)
+
+

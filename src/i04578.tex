@@ -1,0 +1,84 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Search through the reference manual for the Rosemount model 848T Fieldbus temperature transmitter (document 00809-0100-4697, revision CB) and answer the following questions:
+
+\vskip 10pt
+
+Describe the two different types of analog input function blocks offered in this transmitter, and their respective purposes.
+
+\vskip 10pt
+
+Describe the purpose of the other function block offered in this Fieldbus transmitter, identifying some practical applications for it in real control systems.
+
+\vskip 10pt
+
+Is this transmitter model a Link Master device (i.e. does it have the capability of being the LAS for a network segment)?  Note that you will have to look outside Appendix D to answer this question!
+
+\vskip 10pt
+
+Locate the section of the manual describing how to configure individual Analog Input function blocks (entitled ``Monitoring Temperature Points Individually''), and identify the specific parameters it recommends you to configure in each of those Analog Input blocks.  Also, explain why the procedure directs you to set the {\tt MODE\_BLK.TARGET} parameter both before and after making changes to the other parameters in the AI block.
+
+\underbar{file i04578}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+Parameters to set in each AI block (from page 3-5):
+
+\begin{itemize}
+\item{} {\tt Channel} (options = 1 through 8)
+\item{} {\tt L\_Type} (options = direct, indirect, indirect square root)
+\item{} {\tt XD\_Scale} (options = upper range value, lower range value, unit, etc.)
+\item{} {\tt OUT\_Scale} (options = upper range value, lower range value, unit, etc.) 
+\item{} Alarm limits and priorities
+\end{itemize}
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Two different analog input function blocks: AI and MAI (Analog Input and Multiple Analog Input).  Since the 848T is a multi-channel temperature transmitter, the MAI block is useful for communicating multiple channels of temperature data using only one function block, resulting in less communication (fewer CD tokens issued) on the H1 network.
+
+\vskip 10pt
+
+The other function block is ISEL (Input Selector), which is used to select one signal from a multitude of input signals (e.g. minimum, maximum, midpoint (median), first good, hot backup, or average).  The averaging selection mode may be set do average only the middle few values out of all (e.g. average only the middle 6 values out of 8 input signals).  An example showing how the block may average the middle 6 out of 8 values is shown on page D-20.
+
+\vskip 10pt
+
+The Rosemount 848T is a Link Master device, meaning it can function as an LAS.  (Page A-2)
+
+\vskip 10pt
+
+\noindent
+Parameters to set in each AI block (from page 3-5):
+
+\begin{itemize}
+\item{} {\tt Channel} (options = 1 through 8)
+\item{} {\tt L\_Type} (options = direct, indirect, indirect square root)
+\item{} {\tt XD\_Scale} (options = upper range value, lower range value, unit, etc.)
+\item{} {\tt OUT\_Scale} (options = upper range value, lower range value, unit, etc.) 
+\item{} Alarm limits and priorities
+\end{itemize}
+
+Channel options are listed on page 3-16.  Channel numbers 1 through 8 represent eight individual temperature inputs (from RTDs or thermocouples), while channels 9 through 12 represent differential temperature inputs, and channel 13 represents the transmitter's ``body'' temperature.
+
+The block's target mode must be switched to OOS (Out Of Service) in order to edit the above parameters, and then after this is done one must switch the target mode back to Auto.
+
+
+%INDEX% Reading assignment: Rosemount 848T FF temperature transmitter reference manual
+
+%(END_NOTES)
+

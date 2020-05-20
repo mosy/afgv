@@ -1,0 +1,85 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Transmission Control Protocol (TCP) and User Datagram Protocol (UDP)'' section of the ``Digital Data Acquisition and Networks'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i04448}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+TCP and UDP both layer-4 protocols, specifying virtual ``ports'' on a computer to receive IP packets.  Analogous to ``mail stops'' at a single mailing address.  TCP and UDP both need IP in order to function, which is why you often see them specified as TCP/IP and UDP/IP.
+
+\vskip 10pt
+
+TCP is tasked with breaking up large chunks of digital data into ``segments'' to be send to its destination and reassembled by the TCP protocol on the receiving end.  TCP also manages the data-exchange session, ensuring the receiving device is ready to receive the data, and closing the connection when the data transaction has completed.  Inside of each segmemt is an IP packet, appended with additional information (data integrity checks, urgency, etc.).  If a TCP segment is received properly, the receiving device acknowledges this receipt to the transmitting device.  If a TCP segment is not received properly, TCP necessitates a re-send to ensure end-to-end data integrity.  TCP also controls flow of data, much like XON/XOFF for serial RS-232, except that in TCP's case the data flow control extends over world-wide networks.
+
+\vskip 10pt
+
+UDP is a much simpler algorithm that lacks the thorough data integrity assurance of TCP.  Simpler means faster here, which is why UDP/IP is often used in industrial data networks.  UDP also does not break large chunks of data into smaller segments as TCP does, instead relegating this task to software residing at higher OSI levels.  This lack of segmentation is often fine for industrial applications, because the data chunks tend to be small enough to fit into single IP packets without any need for segmentation.
+
+\vskip 10pt
+
+The {\tt netstat} command shows the status of all TCP and UDP ``ports'' on a computer.  The state-less nature of UDP is evident in the output from a {\tt netstat} query, as TCP ports all have states associated with them (``LISTENING'' or ``ESTABLISHED'') while UDP ports do not.  
+
+\vskip 10pt
+
+Certain ports are standardized for particular uses in computer applications.  Port 80, for example, is used for HTTP (web page) connections.  Port 502 is used for Modbus messages sent over TCP/IP.
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain what Transmissin Control Protocol (TCP) does, in your own words.
+\item{} Identify some things that TCP does that IP does not, and why these features are important for the internet.  Note: running {\tt netstat} is a good way to visually contrast one of these differences!
+\item{} Explain how UDP differs from TCP, and where we might favor each.
+\item{} Describe some of the features of TCP that ensure integrity of data transfer.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+Identify one difference between TCP and UDP, and give a practical example of why this might be important in a real network system (i.e. explain why you might opt for one of these protocols over the other, given the choice).
+
+
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, Digital data and networks (TCP/UDP)
+
+%(END_NOTES)
+

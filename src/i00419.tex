@@ -1,0 +1,60 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#116 (``Poor Control Strategy: Minimum Flow Control'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} Examine the P\&ID shown in Figure 1, and explain how it is supposed to perform its dual tasks of regulating liquid level inside the vessel and maintaining a minimum amount of flow through the pump.
+\vskip 10pt
+\item{} What does it mean to ``split-range'' a pair of control valves?
+\vskip 10pt
+\item{} Examine the P\&ID shown in Figure 3, and explain how Mr. Brown's revised control strategy performs its dual tasks of regulating liquid level and maintaining minimum pump flow.
+\vskip 10pt
+\item{} One of the comments Mr. Brown makes in this case history is that ``The [addition of another] controller would cost nothing,'' referring to the flow controller added to the process strategy to realize minimum flow through the pump.  Explain how this ``no cost'' assertion can be true, knowing that loop controller hardware (and software!) can be very expensive indeed.
+\vskip 10pt
+\item{} As shown in the trend of Figure 2, the response of flow transmitter FT-1 was ``heavily damped.''  What does the word ``damped'' mean with regard to a flow transmitter, and why might this be a problem for any control loop incorporating a damped flow transmitter?
+\end{itemize}
+
+\underbar{file i00419}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The control strategy as found attempts to regulate level and maintain minimum flow using a weird split-range sequence between two control valves.  The valve letting liquid away from the vessel works over a 32\% to 100\% signal range, while the recirculating valve works over a 0\% to 75\% signal range.
+
+\vskip 10pt
+
+This is what split-ranging means: to have more than one valve operate off of one controller signal, usually each valve operating on a different portion of that signal's range.
+
+\vskip 10pt
+
+Mr. Brown's revised control strategy makes far more sense: the level controller operates one valve over its full range, while a separate flow controller monitors pump flow and ensures minimum flow by opening the recirculating valve when needed to supplement the out-going flow rate.
+
+\vskip 10pt
+
+If the control system used to implement the original strategy is a PLC or DCS, there probably exist some unused analog I/O points which may be pressed into service for a control loop.  The actual control algorithm is merely software running in the PLC or DCS, and so costs nothing to add.
+
+\vskip 10pt
+
+A ``heavily damped'' transmitter is one with a large filter time entered into it.  This is a problem in any feedback control loop because the damping adds phase shift, which makes oscillation more likely.
+
+%INDEX% Reading assignment: Michael Brown Case History #116, "Poor Control Strategy: Minimum Flow Control"
+
+%(END_NOTES)
+
+

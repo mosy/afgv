@@ -1,0 +1,235 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``H1 FF Data Link Layer'' section of the ``FOUNDATION Fieldbus Instrumentation'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i04559}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+FOUNDATION Fieldbus is a broadcast-type of network, and so devices must arbitrate for bus access.  Layer 2 OSI characteristics for FF H1:
+
+\begin{itemize}
+\item{} Link Active Scheduler (LAS) devices serves as master, with backup LAS device(s) allowed
+\item{} Master-Slave arbitration for cyclic (critial control) messages.  LAS broadcasts CD (Compel Data) token to force slave device to transmit specific data.
+\item{} Token-based arbitration for acyclic (less important) messages.  LAS broadcasts PT (Pass Token) to permit other devices to transmit for an allotted time.
+\item{} 8-bit address field (0 through 255)
+\item{} Maximum of 32 live devices on a segment
+\end{itemize}
+
+Host system typically assigns device address number upon commissioning:
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Address range} & {\bf Address range} & {\bf Allocation} \cr
+(decimal) & (hexadecimal) &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+0 through 15 & 00 through 0F & Reserved \cr
+%
+\noalign{\hrule}
+%
+% Another row
+16 through 247 & 10 through F7 & Permanent devices \cr
+%
+\noalign{\hrule}
+%
+% Another row
+248 through 251 & F8 through FB & New or decommissioned devices \cr
+%
+\noalign{\hrule}
+%
+% Another row
+252 through 255 & FC through FF & Temporary (``visitor'') devices \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+LAS spends some acyclic time polling for new devices.  In order to shorten this task, we may specify address range to skip: FUN = First Unused Node ; NUN = Number of Unused Nodes.  If FUN = 40 and NUN = 172, the addresses skipped will be 40 through 211 inclusive.
+
+More devices on a segment means longer macrocycle time (slower updates), as well as more total current drawn on the segment.  12 devices = 1 second macrocycle.  6 devices = 0.5 second macrocycle.  3 devices = 0.25 second macrocycle.
+
+FF identifier is analogous to Ethernet MAC address: an identifying set of 32 bytes unique to each and every FF device ever manufactured.  First 6 bytes (characters) = manufacturer code; next 4 bytes = device type code; rest of bytes = serial number.
+
+\vskip 10pt
+
+In addition to CD (cyclic) and PT (acyclic) messages broadcast by the LAS, the LAS also broadcasts TD (Time Distribution) messages for synchronization, and PN (Probe Node) messages to detect new devices.  Furthermore, the LAS maintains a list of active devices on the segment called the ``Live List''.  Devices responding to a PN message get added to the list, while devices repeatedly failing to respond to PT tokens get removed from the list.
+
+A general guideline is that a macrocycle needs to have at least 70\% unscheduled time to allow enough time for acyclic communications to occur without undue delay.
+
+\vskip 10pt
+
+Virtual Communication Relationships (VCRs): Publisher/Subscriber, Client/Server, and Source/Sink:
+
+\begin{itemize}
+\item{} Publisher/Subscriber: this is how cyclic (CD) tokens work: one device publishes the data upon request by the LAS, while other(s) listen (subscribe) to the broadcast data.  Happens on a precisely defined schedule.
+\item{} Client/Server: this is how acyclic (PT) tokens work: when each device gets time-limited permission to communicate, it broadcasts data requested by clients (acting as a server), and also post requests of other devices' data (acting as a client).  This type of communication is error-checked.
+\item{} Source/Sink: also an example of acyclic (PT) communication: when each device gets time-limited permission to communicate, it broadcasts to a ``group address'' of many devices but makes no requests.  Not error-checked like Client/Server.
+\end{itemize}
+
+Example of Publisher/Subscriber in P\&ID: FT-231, PC-231, and LT-211 all compelled to broadcast process data to other field instruments for control purposes.
+
+Example of Client/Server in P\&ID: manual setpoint changes (PC-231), tuning adjustments (LC-211), re-ranging of transmitter (FT-187).
+
+Example of Source/Sink in P\&ID: FT-231 alarm, FT-187 and TT-187 trend data.
+
+\vskip 10pt
+
+``Link Master'' FF devices capable of performing role of LAS, while ``Basic'' FF devices are not.  ``Bridge'' FF devices are specially built to link multiple H1 segments together.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Describe the difference between {\it scheduled} (``cyclic'') and {\it unscheduled} (``acyclic'') communication on an H1 network.
+\item{} Suppose the LAS device in an H1 segment were to fail.  What are the consequences of this?
+\item{} What is the purpose of having FUN and NUN parameters in an H1 segment?
+\item{} Are there any negative consequences possible with incorrect FUN and NUN parameters?
+\item{} Identify some of the information contained in the 32-byte Fieldbus {\it identifier}.
+\item{} Identify some of the different {\it tokens} transmitted by the LAS device.
+\item{} What purpose does the {\it Live List} serve, and how is this list managed?
+\item{} Describe what a ``macrocycle'' is, and what factors influence its period.
+\item{} How many devices can we realistically have operating on a single H1 segment?  What factor(s) define the upper limit on device count?
+\item{} When examining a P\&ID, how can we tell when multiple instrument functions are contained within one FOUNDATION Fieldbus device?
+\item{} When examining a P\&ID, how can we tell when field instruments are connected together on a FOUNDATION Fieldbus segment?
+\item{} Describe the difference between Publisher/Subscriber, Client/Server, and Source/Sink VCRs in a FOUNDATION Fieldbus network.
+\item{} Explain why only the most critical messages are passed using the Publisher/Subscriber VCR in a FOUNDATION Fieldbus network.
+\item{} Explain why messages such as setpoint changes are passed using the Client/Server VCR in a FOUNDATION Fieldbus network.
+\item{} Explain why there is no Publisher/Subscriber message shown between FIC-231 and FV-231 in the textbook P\&ID.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+The purpose of the {\it LAS} device in a FOUNDATION Fieldbus H1 network segment includes:
+
+\begin{itemize}
+\item{} Conditioning DC power on the H1 segment to avoid data errors
+\vskip 5pt 
+\item{} Verifying the stem position of the control valve in a loop
+\vskip 5pt 
+\item{} Absorbing data pulse energy to avoid reflections on the network
+\vskip 5pt 
+\item{} Coordinating all communication on the H1 network segment
+\vskip 5pt 
+\item{} Providing operators with a graphical interface to view the process
+\vskip 5pt 
+\item{} Measuring the primary process variable in a control loop
+\end{itemize}
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+One task {\it not} performed by the LAS in a FOUNDATION Fieldbus H1 network segment is:
+
+\begin{itemize}
+\item{} Querying the network for any new (recently added) devices
+\vskip 5pt 
+\item{} Broadcasts ``PT'' tokens to devices for unscheduled communication
+\vskip 5pt 
+\item{} Distributing time messages to keep all devices synchronized
+\vskip 5pt 
+\item{} Broadcasts ``CD'' tokens to compel devices to transmit data
+\vskip 5pt 
+\item{} Verifies the stem positions of all control valves in a loop 
+\vskip 5pt 
+\item{} Maintaining a list of all ``live'' devices on the segment
+\end{itemize}
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+A FOUNDATION Fieldbus H1 network behaves like a {\it master/slave} network in what major way?
+
+\begin{itemize}
+\item{} All devices use hexadecimal addressing to distinguish one from another
+\vskip 5pt 
+\item{} If there is no functioning LAS, the entire network stops working
+\vskip 5pt 
+\item{} Each device is given an equal amount of time to transmit data to the network
+\vskip 5pt 
+\item{} The data bits are communicated in serial fashion (one at a time)
+\vskip 5pt 
+\item{} Collisions are negotiated by retries following random back-off times
+\vskip 5pt 
+\item{} Slave devices on an H1 segment can only receive, not transmit, information
+\end{itemize}
+
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, FOUNDATION Fieldbus (H1 FF data link layer)
+
+%(END_NOTES)
+

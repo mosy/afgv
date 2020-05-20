@@ -1,0 +1,43 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+In addition to supporting a wide array of general-purpose function blocks for control programming, each FOUNDATION Fieldbus device also contains other blocks specific to that device: one {\it Resource Block} and one {\it Transducer Block}.  What purposes do these other blocks serve, and how do they differ from general function blocks such as AO, AI, PID, etc.?
+
+\underbar{file i02444}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+The Resource Block contains all the specific parameters and characteristics for a field device.  The algorithm implemented by the Resource Block is unique to the device and may vary from manufacturer to manufacturer.
+
+\vskip 10pt
+
+The Transducer Block handles direct I/O interfacing with sensors or output mechanisms on the device.  Examples would include the differential capacitance cell on a Rosemount 3051 differential pressure transmitter; or the I/P, feedback potentiometer, and pressure sensors on a Fisher DVC6000 valve positioner.
+
+\vskip 10pt
+
+At first it may seem as though the Transducer block would be redundant to the AI or AO blocks.  However, it is not.  The AI and AO blocks are {\it generic} function blocks designed to homogeneously connect with other general-purpose function blocks.  The Transducer Block is specific to the particular device.  AI and AO function blocks interface with Transducer blocks to provide a generic connection point to other function blocks.
+
+Transducer blocks are not just essential for basic device operation, but they are also necessary for AO function blocks to generate ``back calculation'' output signals.  For instance, the pressure sensor and stem position feedback potentiometer inputs on a Fisher DVC6000 valve positioner are used to generate the back-calculation signal value coming from any AO function block configured to it.  These inputs are how the positioner ``knows'' the valve is responding.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% Fieldbus, function block: Resource block (in each device)
+%INDEX% Fieldbus, function block: Transducer block (in each device)
+
+%(END_NOTES)
+
+

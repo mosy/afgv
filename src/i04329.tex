@@ -1,0 +1,161 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2016, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Ziegler-Nichols Open-Loop'' subsection of the ``Quantitative PID Tuning Procedures'' section of the ``Process Dynamics and PID Controller Tuning'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\vskip 10pt
+
+In particular, you should write your own step-by-step instructions for implementing the Ziegler-Nichols ``open-loop'' tuning method, so you will have a concise reference to apply to later loop tuning challenges:
+
+\begin{itemize}
+\item{} 
+\vskip 10pt
+\item{} 
+\vskip 10pt
+\item{} 
+\vskip 10pt
+\item{} 
+\end{itemize}
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Further exploration . . . (optional)} \vrule} \hrule}
+
+A paper written by G.H. Cohen and G.A. Coon in 1953 entitled ``Theoretical Consideration of Retarded Control'' sought to improve on the techniques advanced by Ziegler and Nichols in 1942.  An interesting passage is shown here, from the beginning of the Cohen-Coon paper:
+
+\vskip 10pt {\narrower \noindent \baselineskip5pt
+
+The process can be characterized by its reaction curve which is the chart record obtained when the valve is given a sudden sustained disturbance with the controller disconnected.  Such a record is shown in figure 1(a) for a unit change in pressure.  There appears to be a period of time during which the pen moves but little and this dead time or lag $L$ may be of some magnitude in comparison with the transfer lag (the lag due to the lumped capacity of the process).  The dead time is due to the fact that the process is really a continuum where the parameters which describe the process are distributed.  The lag due to the finite time of transport of the signal (for example, a long tube which carries a compressible fluid) is called a distance-velocity lag.  If the continuum contains no inertia, it may be represented by a number of cascaded lumped resistance-capacity networks.  Increasing the number of cascaded elements gives a better approximation to the continuum since the order of contact with the time axis increases with the number of elements in the lumped circuit approximation.  However, the complexity of the problem increases with the number of elements.
+
+\par} \vskip 10pt
+
+Describe what this passage is saying, in your own words.  Are Cohen and Coon describing a closed-loop tuning method or an open-loop tuning method?  Are they regarding lag time and dead time as identical parameters, or as different qualities of the process?  What do they mean by the term ``capacity'' and how does this relate to your existing knowledge of process dynamics?
+
+\vskip 10pt
+	
+\underbar{file i04329}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+``Open-loop'' refers to when a loop controller is in {\it manual} mode, and so an ``open-loop'' PID tuning procedure is one where the loop is in manual mode, step-changes are made to the output, and the response of the PV is noted over time.  The Z-N open-loop method looks at the dead time inherent to the process ($L$) as well as the {\it reaction rate} ($R$; i.e. how fast the PV rises or falls following the output step-change).
+
+$$R = {\Delta \hbox{PV} \over \Delta t}$$
+
+\vskip 10pt
+
+\noindent
+Ziegler-Nichols tuning recommendation for a P-only controller:
+
+$$K_p = {\Delta m \over {R L}}$$
+
+\vskip 10pt
+
+\noindent
+Ziegler-Nichols tuning recommendation for a P+I controller:
+
+$$K_p = 0.9 {\Delta m \over {R L}} \hskip 50pt \tau_i = 3.33 L$$
+
+\vskip 10pt
+
+\noindent
+Ziegler-Nichols tuning recommendation for a P+I+D controller:
+
+$$K_p = 1.2 {\Delta m \over {R L}} \hskip 50pt \tau_i = 2 L \hskip 50pt \tau_d = 0.5 L$$
+
+
+
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} {\bf Explain the purpose of each and every step in your bulleted tuning instructions.}
+\item{} Consider some change made to a process design that increases its reaction rate ($R$).  What effect would an increased process reaction rate have on the Z-N recommended values for P, I, and D?
+\item{} Consider some change made to a process design that increases its dead time ($L$).  What effect would an increased process dead time have on the Z-N recommended values for P, I, and D?  How do you think this change would affect the loop's ability to achieve setpoint in a timely manner?
+\item{} Which do you think is the more practical tuning technique: the Z-N closed-loop method or the Z-N open-loop method?  Explain your answer.
+\item{} Note the amount of controller gain recommended by Ziegler and Nichols for P-only, P+I, and full PID controllers.  What do you notice about the relative amounts of gain you can use in each case?  Explain why, for example, you can get away with more gain in a full PID controller than you can in either P-only or P+I.
+\item{} As the dead time of a process increases, should integral controller action be made more or less aggressive?  How can we tell, from the Ziegler-Nichols tuning recommendations?
+\item{} As the dead time of a process increases, should derivative controller action be made more or less aggressive?  How can we tell, from the Ziegler-Nichols tuning recommendations?
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+The ``open loop'' tuning method proposed by Ziegler and Nichols in their 1942 paper involves what first step taken by the technician or engineer?
+
+\begin{itemize}
+\item{} Manually ``bumping'' the valve and charting PV response to calculate dead time and reaction rate
+\vskip 5pt 
+\item{} Trial-and-error adjustments of P, I, and D until optimum control quality is achieved
+\vskip 5pt 
+\item{} Increasing controller gain until self-sustaining oscillations are achieved
+\vskip 5pt 
+\item{} Manually ``bumping'' the setpoint and charting PV response to calculate overshoot and settling time
+\vskip 5pt 
+\item{} Reversing the action (direct/reverse) of the controller to gauge process response time
+\vskip 5pt 
+\item{} Rebuilding the control valve to ensure there is minimal stiction and tight shut-off
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+Suppose something is altered in the piping of a process that increases the amount of transport delay, giving the control loop greater dead time.  According to the recommendations given by Ziegler and Nichols, should you re-tune the controller to have {\it more} derivative action, {\it less} derivative action, or {\it leave the tuning as it was} in order to optimize the control quality of that loop?
+
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, PID tuning (Z-N open-loop)
+%INDEX% Reading assignment: "Further Exploration" (vertical text), lag versus dead time from the Cohen-Coon paper
+
+%(END_NOTES)
+
+

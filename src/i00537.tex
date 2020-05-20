@@ -1,0 +1,187 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``{\sl Wireless}HART'' section of the ``Wireless Instrumentation'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i00537}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+{\sl Wireless}HART is a subset of the HART communication standard (version 7).  Instruments communicate with a central Gateway device as well as link to each other, forming a ``mesh'' network.  In this mesh network, instruments serve as repeaters for other instruments, relaying signals to and from the Gateway device as needed to ensure data integrity.  Reliability is advertised as 99.73\% minimum.
+
+\vskip 10pt
+
+{\sl Wireless}HART instruments are currently battery-powered (several years life for a lithium battery, maximum).  Repeater functionality typically draws less power than basic measurement functionality.
+
+\vskip 10pt
+
+Metal objects and conductive surfaces pose barriers to radio communication.  So do moving vehicles, scaffolding, and other large metal objects.
+
+\vskip 10pt
+
+The Network Manager (usually a function of the Gateway device) is an essential component of any {\sl Wireless}HART network.  It assigns timeslots for all field instruments, assigns the frequency-hopping schedule, automatically adjusts transmit power for each instrument, manages list of live instruments on the network, provides statistical information on network performance, and automatically plans alternate data paths between instruments in the mesh.
+
+\vskip 30pt
+
+{\sl Wireless}HART physical layer: 2.4 to 2.5 GHz, O-QPSK modulation, 250 kbps date rate, DSSS spread-spectrum frequency-hopping between 15 channels, TDMA bus arbitration, with 10 ms timeslots for device communication, variable transmit power (10 mW default).  The Network Manager functions as a master device (with all field instruments as slaves) in that it assigns timeslots for each field device to communicate.  
+
+\vskip 10pt
+
+{\sl Wireless}HART data link layer: each network defined by a {\it network key} code, allowing multiple mesh networks to physically overlap without interference, noisy channels blacklisted on the fly.
+
+\vskip 10pt
+
+{\sl Wireless}HART network layer: mesh networking (all devices able to establish links with each other and act as repeaters for each other, Network Manager establishes all broadcast timeslots and plans data routes between repeating devices, 4 levels of message priority (Command, Process data, Normal, and Alarm).  The Network Manager fulfills a role similar to the LAS in a FOUNDATION Fieldbus system, and like LAS devices we may also have redundant Network Managers in a {\sl Wireless}HART network.
+
+\vskip 10pt
+
+{\sl Wireless}HART application layer: all data is 128 bit encrypted, with backward compatibility to HART command structure and DDL specifications.  This means all {\sl Wireless}HART data is compatible with legacy HART data messages, allowing {\sl Wireless}HART to seamlessly integrate with any and all HART-compatible control platforms.  Even legacy (wired) HART instruments may be made {\sl Wireless}HART compatible by adding a special radio adapter called a {\it THUM}.
+
+\vskip 10pt
+
+Bluetooth uses similar physical layer as {\sl Wireless}HART, but does not support mesh networking (up to only 7 Bluetooth devices per master).
+
+\vskip 10pt
+
+ZigBee (used in building automation) does mesh networking, but does not use channel blacklisting.
+
+\vskip 10pt
+
+Wi-Fi does not support channel blacklisting like {\sl Wireless}HART.
+
+\vskip 30pt
+
+The Network Gateway in a {\sl Wireless}HART system is the interface device between the mesh radio network and the control system.  All data to and from the Gateway is digital rather than analog.  Emerson Smart Wireless Gateway devices support Modbus (RS-485 as well as TCP) protocol, and have their own web browser for easy maintenance and configuration.  Specific instrument data points may be ``mapped'' to Modbus registers inside the Gateway for data transfer.  Multi-variable communication is supported for all {\sl Wireless}HART field instruments.
+
+\vskip 10pt
+
+Using Modbus, virtually any PLC or other control system may read data from the Gateway and take control action on {\sl Wireless}HART parameters.
+
+\vskip 30pt
+
+{\sl Wireless}HART devices all have metal terminals serving as connection points to a field communicator such as the Emerson 375 or 475.  Communication via these terminals is standard wired HART protocol.
+
+\vskip 10pt
+
+The Network ID code (range is 0 to 36863) specifies the particular mesh network to which the instrument belongs.  This number will be specific to a Gateway device.
+
+\vskip 10pt
+
+The device Join Key (128 bits) is like a password allowing it secure access to the mesh network.  Join Keys may be specific to individual devices, or shared between multiple devices.  Join Keys may also be ``rotated'' on a regular basis to help ensure network security.
+
+\vskip 10pt
+
+One of the statistical parameters maintained by the Network Manager is the RSSI (Received Signal Strength Indication), in units of dBm.  This tells you how strong each field device's signal is.  Another parameter is the number of ``neighbors'' each {\sl Wireless}HART field device has, to give an indication of how strong the mesh is.
+
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain the concept of ``mesh networks'' and ``self-healing'' in {\sl Wireless}HART systems.
+\item{} Identify some of the role of the Network Manager.  {\it Assigns TDMA time slots to devices, authenticates new device membership on the network, dynamically adjust devices transmit power, determines frequency-hopping schedule, selects relayed transmission routes between devices, calculates diagnostic parameters such as RSSI, etc.}
+\item{} Where is the Network Manager located in a {\sl Wireless}HART system?
+\item{} How are {\sl Wireless}HART devices typically powered?
+\item{} What would happen in a {\sl Wireless}HART network if the Gateway device failed?
+\item{} Do collisions occur in a {\sl Wireless}HART network?
+\item{} Explain how frequency-hopping spread-spectrum communication enhances security in a {\sl Wireless}HART network.
+\item{} The default RF power output for a {\sl Wireless}HART field device is {\bf 10 dBm}.  Convert this into milliwatts, without using a calculator!
+\item{} What advantage is there in varying the transmit power of each device in a {\sl Wireless}HART network?
+\item{} How may we strengthen the reliability of a {\sl Wireless}HART network with regard to the utter dependence of the network upon the Gateway device?
+\item{} Can multiple {\sl Wireless}HART networks overlap within the same physical area?
+\item{} Why do you suppose Alarm messages have the lowest priority in a {\sl Wireless}HART network?  Aren't alarms important???  Explain how this is similar to alarm communication in a FOUNDATION Fieldbus network (happening during unscheduled or asynchronous times as a source/sink VCR).
+\item{} Explain how one can convert a legacy HART instrument into a {\sl Wireless}HART instrument, and how the Application layer specification of {\sl Wireless}HART makes this backward compatibility possible.
+\item{} Explain how the ``star'' topology of a Bluetooth network differs from the ``mesh'' topology of a {\sl Wireless}HART network.
+\item{} Explain how the CSMA/CA protocol of a ZigBee or Wi-Fi network differs from the TDMA protocol of a {\sl Wireless}HART network.
+\item{} Explain what {\it determinism} is in a digital network, why this is important for industrial measurement and control, and why {\sl Wireless}HART networks exhibit greater deteminism than either ZigBee or Wi-Fi.
+\item{} Explain how process measurement data from a {\sl Wireless}HART field device may be extracted from the gateway over RS-485 or Ethernet cabling.  How, exactly, does another device (such as a PLC) poll process measurement data from the gateway?
+\item{} Explain why multi-variable process data communication is much more practical for {\sl Wireless}HART devices than for wired-HART devices.
+\item{} Describe some of the data security features of the {\sl Wireless}HART standard. {\it 128 bit encryption of data, rotatable Join Keys, channel-hopping spread spectrum frequencies.}
+\item{} Identify some practical measures you might take to achieve a greater (higher) RSSI value from a particular {\sl Wireless}HART field instrument.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+A feature unique to wireless {\it mesh} networks (not shared by any other type of radio network) is:
+
+\begin{itemize}
+\item{} Each device has a multitude of network gateways it may communicate with
+\vskip 5pt 
+\item{} All antennas types are necessarily identical (e.g. all ``whip'' antennas)
+\vskip 5pt 
+\item{} The data communicated is entirely digital -- no analog signals at all
+\vskip 5pt 
+\item{} Multiple communication paths exist between field devices and the gateway
+\vskip 5pt 
+\item{} All communication is duplex (two-way) between gateway and field devices 
+\vskip 5pt 
+\item{} All communication is simplex (one-way) between gateway and field devices
+\end{itemize}
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+Two parameters which must be programmed into a {\sl Wireless}HART device in order to make it ready to be part of a mesh network are:
+
+\begin{itemize}
+\item{} Baud Rate and IP address
+\vskip 5pt 
+\item{} Network ID and Join Key
+\vskip 5pt 
+\item{} Join Key and Baud Rate
+\vskip 5pt 
+\item{} Network ID and Channel Number
+\vskip 5pt 
+\item{} Username and Password
+\vskip 5pt 
+\item{} IP address and Private Key
+\end{itemize}
+
+
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, WirelessHART (introduction)
+
+%(END_NOTES)
+
+

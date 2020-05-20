@@ -1,0 +1,113 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+\noindent
+{\bf Programming Challenge -- Engine auto-start sequence}
+
+\vskip 10pt
+
+Suppose we wish to have a PLC start up an engine automatically on demand.  We need the PLC to follow this sequence in starting the engine:
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Step \# & Throttle (idle/run) & Choke & Ignition & Starter \cr
+%
+\noalign{\hrule}
+%
+% Another row
+1 & 0 & 0 & 0 & 0 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+2 & 0 & 1 & 0 & 0 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+3 & 0 & 1 & 1 & 1 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+4 & 1 & 0 & 1 & 0 \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+The program needs to have two discrete inputs and four discrete outputs:
+
+\begin{itemize}
+\item{} Input\_start: Start-up command signal (0 = shut down ; 1 = begin start-up sequence)
+\item{} Input\_run\_detector: Running sensor (0 = not firing ; 1 = engine running)
+\vskip 5pt
+\item{} Output\_throttle: (0 = idle position; 1 = run position)
+\item{} Output\_choke: (0 = off (run position) ; 1 = choked position)
+\item{} Output\_ignition: (0 = off ; 1 = on)
+\item{} Output\_starter: (0 = off ; 1 = cranking)
+\end{itemize}
+
+Steps 1 through 3 should happen according to a timed schedule, but the transition from step 3 (cranking the engine) to step 4 (engine running) should occur {\it only} if Input\_run\_detector shows the engine has fired.  The sequence should immediately revert to step 1 if the ``Input\_start'' command signal ever turns off.
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} How will your sequencer ``know'' when to advance from one step to the next, especially given the change of criteria from steps 1 through 3, to step 4?
+\end{itemize}
+
+
+\vfil
+
+\noindent
+PLC comparison:
+
+\begin{itemize}
+\item{} \underbar{Allen-Bradley Logix 5000}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, and {\tt SQL}.
+\vskip 5pt
+\item{} \underbar{Allen-Bradley SLC 500}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, {\tt SQC}, and {\tt SQL}. 
+\vskip 5pt
+\item{} \underbar{Siemens S7-200}: relevant ladder-logic commands include {\tt SCR}, {\tt SCRE}, and {\tt SCRT}.
+\vskip 5pt
+\item{} \underbar{Koyo (Automation Direct) DirectLogic}: relevant ladder-logic commands include {\tt DRUM} and {\tt EDRUM}.
+\end{itemize}
+
+\underbar{file i03715}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% PLC, programming challenge: Engine auto-start sequence
+
+%(END_NOTES)
+
+

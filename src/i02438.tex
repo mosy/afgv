@@ -1,0 +1,73 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+In digital communication networks using a {\it token passing} arbitration model, each device on the network is given its own time to transmit by means of a special message called a ``token.''  After each device is finished transmitting, it gives up its token to the next device on the token list.  This way, different nodes on the network never ``collide'' as they do in Ethernet because only one has permission to transmit at any given time.
+
+The FOUNDATION Fieldbus H1 standard also uses the concept of tokens for managing communication between devices.  However, the tokens in Fieldbus are never passed along from device to device as is standard in token-passing networks.  Describe how tokens {\it are} used in the H1 protocol.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain why the absence of ``collisions'' is an important feature of FOUNDATION Fieldbus H1 networks, especially as they relate to mission-critical process control systems.
+\item{} Explain how collisions are avoided in a master-slave network such as Modbus over RS-485.
+\item{} Explain how collisions are avoided in a TDMA network such as GSM (used for cell phones) and {\sl Wireless}HART.
+\item{} Explain how collisions are managed in a CSMA/CD network such as Ethernet.
+\item{} Explain how collisions are managed in a CSMA/BA network such as DeviceNet.
+\item{} Explain how collisions are managed in a CSMA/CA network such as Wi-Fi.
+\item{} Explain why the CSMA/CA arbitration protocol used in Wi-Fi networks would be totally inappropriate for Fieldbus.
+\end{itemize}
+
+\underbar{file i02438}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+The Link Active Scheduler (LAS) grants {\it delegated tokens} to individual devices connected to the Fieldbus network.  There are two basic token types issued by the LAS: 
+
+\vskip 10pt
+
+\vskip 10pt {\narrower \noindent \baselineskip5pt
+
+\noindent
+(1) A {\it Compel Data} (CD) token which requests an immediate broadcast of specific data from a specific device.
+
+\par} \vskip 10pt
+
+\vskip 10pt {\narrower \noindent \baselineskip5pt
+
+\noindent
+(2) A {\it Pass Token} (PT) which grants a specific device permission to transmit for a limited amount of time called the {\it maximum hold time}.  When the chosen device is finished, or when the token time runs out (whichever comes first), the device returns the token to the LAS.  If unscheduled time still remains, the LAS will issue another time-limited token to the next device.
+
+\par} \vskip 10pt
+
+\vskip 10pt
+
+In both cases, the token gets sent from the LAS to another device, then exclusive permission to transmit returns to the LAS.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+In a general sense, a {\it token} is a message given to a specific device granting it permission to broadcast to a network.  By this definition, the Probe Node (PN) message sent by the LAS may be considered a token in addition to the CD and PT tokens.  The primary difference between these tokens is the delegated restriction carried by each one: with CD and PN tokens, the restriction is on the type of data to be returned.  With the PT token, the restriction is on the maximum time period allowed to transmit.
+
+By contrast, the Time Distribution (TD) message transmitted by the LAS is not considered a token, because this message does not grant any device the right to respond.  The TD message neither requires nor permits replies, and therefore is not a token.
+
+\vskip 10pt
+
+For a detailed explanation of the CD and PT token processes, see page 50 of the Fieldbus Foundation's {\it FOUNDATION Specification System Architecture} report, Section 8.4.2.1.1 (``Basic Devices'').
+
+%INDEX% Fieldbus, FOUNDATION (H1): token passing
+
+%(END_NOTES)
+
+

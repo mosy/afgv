@@ -1,0 +1,143 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read selected portions of the Siemens ``SIMATIC S7-200 Programmable Controller System Manual'' (document A5E00307987-04, August 2008) and answer the following questions:
+
+\vskip 10pt
+
+Locate the section discussing the PLC's available {\it math instructions} and identify several of them.
+
+\vskip 10pt
+
+Is there a ``generic'' math instruction capable of evaluating a typed expression (i.e. an instruction box where you can enter your own arbitrary formula to obtain an answer, like an Excel spreadsheet)?
+
+\vskip 10pt
+
+What is the difference between a {\it double integer} and a normal integer in this PLC?
+
+\vskip 10pt
+
+How is it possible to calculate roots other than square roots, when the only ``root'' instruction available in the set is ``square root''?
+
+\vskip 10pt
+
+Are {\it floating-point} numbers supported in the Siemens S7-200 series of PLC, or only integer numbers?
+
+\vskip 10pt
+
+A reserved area in the S7-200 PLC's memory called {\tt SMB1} (Special Memory Byte \#1) holds eight bits with signficance to math operations.  Identify the functions of some of these bits, and describe how their status (either 0 or 1) could be useful in a PLC program using math instructions.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} If you have access to your own PLC for experimentation, I urge you to write a simple {\it demonstration} program in your PLC allowing you to explore the behavior of these PLC instructions.  The program doesn't have to do anything useful, but merely demonstrate what each instruction does.  First, read the appropriate section in your PLC's manual or instruction reference to identify the proper syntax for that instruction (e.g. which types of data it uses, what address ranges are appropriate), then write the simplest program you can think of to demonstrate that function in isolation.  Download this program to your PLC, then run it and observe how it functions ``live'' by noting the color highlighting in your editing program's display and/or the numerical values manipulated by each instruction.  After ``playing'' with your demonstration program and observing its behavior, write comments for each rung of your program explaining in your own words what each instruction does.
+\item{} The mathematical technique suggested by the manual for calculating roots other than two can utterly fail in certain cases.  Identify at least one of those cases!
+\item{} The Siemens S7-200 PLC has the ability to divide two integer numbers and express both the quotient and a {\it remainder}.  Explain how these two portions of the result are stored in the PLC's memory.
+\item{} Apply the mathematical technique suggested for the S7-200 PLC to demonstrate how to take the cube root of some number you already know the answer to (e.g. $\root 3 \of {64}$).
+\end{itemize}
+
+\underbar{file i02343}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+The suggestion for calculating roots other than two uses logarithms and exponentials (anti-logarithms).  It is based on mathematical laws of logarithms and exponents such as these, which have been used in antiquity to multiply, divide, and raise to powers long before the advent of electronic calculators or computers:
+
+$$\log (AB) = \log A + \log B \hskip 50pt AB = e^{(\log AB)} = e^{(\log A + \log B)}$$
+
+$$\log \left(A \over B \right) = \log A - \log B \hskip 50pt {A \over B} = e^{\log \left(A \over B \right)} = e^{(\log A - \log B)} $$
+
+$$\log (A^B)= B \log A \hskip 50pt A^B = e^{\log A^B} = e^{B \log A}$$
+
+$$\root B \of {A} = A^{1 \over B} \hskip 50pt A^{1 \over B} = e^{\log A^{1 \over B}} = e^{{1 \over B} \log A} = e^{{\log A} \over B}$$
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The section on math instructions begins on page 140.  Some of the available math instructions include Add, Subtract, Multiply, and Divide.  These are available in integer, double integer, and ``real'' (floating point) varieties.  Trigonometric, exponential, log, and square root instructions are also provided by the S7-200 PLC.
+
+\vskip 10pt
+
+A generic math instruction (where you get to type in an expression) does not seem to exist in the S7-200 instruction set.
+
+\vskip 10pt
+
+Regular integer instructions operate on 16-bit integer values.  Double integer instructions use 32-bit integers.
+
+\vskip 10pt
+
+The suggestion for calculating roots other than two uses logarithms and exponentials (anti-logarithms).  It is based on mathematical laws of logarithms and exponents such as these, which have been used in antiquity to multiply, divide, and raise to powers long before the advent of electronic calculators or computers:
+
+$$\log (AB) = \log A + \log B \hskip 50pt AB = e^{(\log AB)} = e^{(\log A + \log B)}$$
+
+$$\log \left(A \over B \right) = \log A - \log B \hskip 50pt {A \over B} = e^{\log \left(A \over B \right)} = e^{(\log A - \log B)} $$
+
+$$\log (A^B)= B \log A \hskip 50pt A^B = e^{\log A^B} = e^{B \log A}$$
+
+$$\root B \of {A} = A^{1 \over B} \hskip 50pt A^{1 \over B} = e^{\log A^{1 \over B}} = e^{{1 \over B} \log A} = e^{{\log A} \over B}$$
+
+\vskip 10pt
+
+Floating-point math operations are supported, under the title of ``real'' numbers.
+
+\vskip 10pt
+
+Memory register {\tt SMB1} has the following meanings for each of its bits:
+
+\begin{itemize}
+\item{} {\tt SMB1.0} = calculation result equal to zero
+\item{} {\tt SMB1.1} = overflow or illegal result detected
+\item{} {\tt SMB1.2} = calculation result is negative
+\item{} {\tt SMB1.3} = division by zero detected
+\item{} {\tt SMB1.4} = overfilled table detected
+\item{} {\tt SMB1.5} = LIFO or FIFO instructions reading from empty table
+\item{} {\tt SMB1.6} = non-BCD to binary conversion attempted
+\item{} {\tt SMB1.7} = ASCII to hexadecimal conversion invalid
+\end{itemize}
+
+\vskip 10pt
+
+Using logarithms to perform multiplication, division, powers, and roots works fine {\it unless} any operand happens to be negative.  Since there is no logarithm of a negative number, this technique will fail.  We know the cube-root of $-27$ is $-3$, but you cannot determine this using logarithms!
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+Identify the meaning of a {\it double integer} in a Siemens or Allen-Bradley PLC.
+
+\begin{itemize}
+\item{} This is an integer number capable of representing negative values
+\vskip 5pt 
+\item{} This is an integer number using 32 bits instead of the regular 16 bits
+\vskip 5pt 
+\item{} This is a number that can express scientific notation (powers of 10)
+\vskip 5pt 
+\item{} This is a number that can express fractional quantities (e.g. 3.14)
+\vskip 5pt 
+\item{} This is a number useful for expressing alphabetical characters
+\vskip 5pt 
+\item{} This is an integer number using 8 bits instead of the regular 16 bits
+\end{itemize}
+
+%INDEX% Reading assignment: Siemens S7-200 system manual (math instructions)
+
+%(END_NOTES)
+
+

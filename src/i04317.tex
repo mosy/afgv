@@ -1,0 +1,150 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2009, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline the ``Integrating Processes'' subsection of the ``Process Characteristics'' section of the ``Process Dynamics and PID Controller Tuning'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
+
+\underbar{file i04317}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+If a level-control valve is suddenly moved (with the other flow constant), level will ramp.
+
+\vskip 10pt
+
+Definition of an integrating process: PV will {\it ramp} linearly when FCE or load changes.  Classic example is the amount of material volume stored in a vessel given in-flow and out-flow rates:
+
+$${dV \over dt} = Q_{in} - Q_{out}$$
+
+$$\Delta V = \int_0^T (Q_{in} - Q_{out}) \> dt$$
+
+Flow in vs. flow out: one controlled, the other constant.  Imbalance causes quantity to accumulate.  Rate of accumulation proportional to the amount of mismatch.  PV stabilizes only when flow in = flow out.
+
+\vskip 10pt
+
+A proportional-only controller is able to attain new SP values with no offset (if ``bias'' value set such that controlled flow = fixed flow)!  Since output of P-only controller always returns to bias value when PV=SP, the bias value need only be set to match the other flow and the controller will achieve any new SP without offset.
+
+\vskip 10pt
+
+Amount of controller gain limited by system time lags (oscillation) and noise (amplifying PV noise on the MV).
+
+\vskip 10pt
+
+Integral controller action guarantees overshoot on an integrating process following setpoint changes, because integral action during period of before PV reaches new SP causes FCE bias to go to new position once PV=SP.  This guarantees overshoot, as the controller must do so in order to ``unwind'' the previous integral action.  Integral action, however, is still needed to compensate for {\it load} changes in an integrating process.
+
+\vskip 10pt
+
+Mass-balance: if mass in $\neq$ mass out, the process will either accumulate or release mass.
+
+Energy-balance: if energy in $\neq$ energy out, the process will either accumulate or release energy.
+
+\vskip 10pt
+
+Self-regulating processes: FCE exerts influence over both in-flow and out-flow!
+
+Integrating processes: FCE exerts influence over either in-flow or out-flow but never both!
+
+\vskip 10pt
+
+Integrating process becomes self-regulating if some form of natural negative feedback is added to it (e.g. gravity-drained tank).  This intrinsic negative feedback degeneratively alters one of the flows according to the value of the process variable.
+
+\vskip 10pt
+
+\noindent
+{\bf Summary:}
+
+\item{} Integraring processes naturally {\it ramp} over time following change in MV or load.
+\item{} Ramping caused by imbalance of mass flow or energy flow in/out of the system.
+\item{} Proportional-only controller action works well to control this type of process.
+\item{} Integral action guarantees overshoot of new setpoint values in an integrating process.
+\item{} Some integral controller action is necessary to compensate for load changes in integrating processes.
+\item{} Amount of controller gain (proportional action) tolerable depends on the amount of time lag and noise in the integrating process.
+\item{} An integrating process may become self-regulating if some form of natural negative feedback is present in the process (e.g. forced-drain tank converted to gravity-drain tank).
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\filbreak
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Explain how we can tell the controller is in manual mode solely based on an examination of the trend graph.
+\item{} Explain how an integrating process differs from a self-regulating process.
+\item{} Explain why proportional-only controller action does not experience offset following SP changes when controlling an integrating process.
+\item{} Explain why integral controller action guarantees overshoot SP changes when controlling an integrating process.
+\item{} Explain why proportional-only controller action will experience offset following {\it load} changes when controlling an integrating process.
+\item{} Explain why integral controller action is required to avoid offset following load changes when controlling an integrating process.
+\item{} Explain what a {\it mass-balance} process is, and how this relates to either self-regulation or integration.
+\item{} Explain what a {\it energy-balance} process is, and how this relates to either self-regulation or integration.
+\item{} Given some examples of {\it mass-balance} in real-life processes.
+\item{} Given some examples of {\it energy-balance} in real-life processes.
+\item{} Explain how an integrating process can be made into a self-regulating process.
+\item{} Comparing the water-vessel example where it was integrating and then was made self-regulating by gravity-drain instead of constant-drain, how would the tuning requirements of the loop controller change?
+\item{} A common misconception for students first learning about integrating processes is that they confuse the presence of ``integral action'' intrinsic to the process with integral action within a loop controller.  Present this misconception to students, and ask them how they would be able to conclusively demonstrate that the process itself ``integrates'' even without an integral-action controller driving it.
+\item{} Examine the open-loop trends shown for both level control systems, and determine whether we will need to configure the controller for direct or reverse action.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Summary Quiz:}
+
+Liquid level control is a ``textbook'' example of an {\it integrating} process.  However, even liquid level control applications may be {\it self-regulating} if what condition is true?
+
+\begin{itemize}
+\item{} If the control valve throttles liquid going into the vessel
+\vskip 5pt 
+\item{} If the liquid is considerably denser than water
+\vskip 5pt 
+\item{} If the uncontrolled flow rate always remains constant
+\vskip 5pt 
+\item{} If the control valve throttles liquid coming out of the vessel 
+\vskip 5pt 
+\item{} If the uncontrolled flow rate varies with liquid level
+\vskip 5pt 
+\item{} If the liquid is considerably lighter than water 
+\end{itemize}
+
+%INDEX% Reading assignment: Lessons In Industrial Instrumentation, process characteristics (integrating)
+
+%(END_NOTES)
+
+

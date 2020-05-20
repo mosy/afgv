@@ -1,0 +1,84 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read and outline Case History \#46 (``Analysis Uncovers Control Problems In A Process Plant'') from Michael Brown's collection of control loop optimization tutorials.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading, and answer the following questions:
+
+\begin{itemize}
+\item{} Explain why, according to Mr. Brown, that most people working at highly automated facilities do not realize so many of their PID-controlled systems are performing poorly.
+\vskip 10pt
+\item{} The fact that poor PID tuning is so commonplace in industry, yet these industries continue to operate, reveals which kind of process type is most common: {\it self-regulating}, {\it integrating}, or {\it runaway}?
+\vskip 10pt
+\item{} When Mr. Brown works to optimize a control loop, he does so mainly using three specific tests.  Identify what these tests are, and why they are performed in that order.  Comment also on his technique, and how it contrasts with some conventional PID tuning approaches.
+\vskip 10pt
+\item{} One of the reasons the flow-control loop F0102 was never noticed as problematic is because the controller had excessive {\it filtering} programmed into it.  Explain why this was a problem for control, and how the operations staff reacted when Mr. Brown removed the filtering.  Is there any other place in this system filtering could have been active besides the DCS controller?
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Examining the trend graph shown in Figure 1, explain how we are able to tell that the controller was switched from automatic to manual mode (other than the text box Mr. Brown has added to the trend).
+\item{} Explain how we can tell that the control valve of loop F0102 is grossly oversized, both from an examination of the open-loop trend as well as from the closed-loop trend.
+\end{itemize}
+
+\underbar{file i01549}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Michael Brown claims that a lack of education is the reason for widespread poor PID control.  The fact that so many industries are able to function anyway is because the majority of processes tend to be self-regulating.  If the controller is in automatic mode and the PV is near SP, many people assume that all is well.  In truth, operators often switch to manual mode to make changes, then switch back to automatic mode only after manually stabilizing the PV.
+
+\vskip 10pt
+
+The ability to run loops in manual mode reveals their {\it self-regulating} nature.
+
+\vskip 10pt
+
+\noindent
+Michael Brown's three tests:
+
+\item{} As-Found automatic (closed-loop) test
+\item{} Manual (open-loop) test to probe process characteristics and instrument health
+\item{} As-Left automatic (closed-loop) test
+\end{itemize}
+
+\vskip 10pt
+
+Filtering on flow loop F0102 was masking an oscillation problem, making the PV look far more stable than it actually was.  After removing the filtering, the operators thought the loop was now unstable, and placed it into manual mode to ``fix'' the problem!
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} According to Michael Brown, why did nearly all the loops have P, I, and D terms set?  {\it The DCS had a self-tuning function, which applied all three actions to every loop it tried to self-tune.}
+\item{} Explain why there was oscillation in the flow of loop F0102 even when the controller was placed in manual mode.  {\it The valve positioner itself was unstable.}
+\item{} Describe how Michael Brown was able to pinpoint the source of the manual-mode instability.  {\it He identified upstream loops that could account for the problem, and placed their controllers into manual mode one at a time to see if that made the oscillations in loop F0102 disappear.  As it turned out, none of the suspected loops were at fault.}
+\item{} Explain why oscillations of loop F0102 dramatically increased when the controller was placed in automatic mode.  {\it The valve positioner's oscillation period was close to the ultimate frequency of the loop, making the loop sympathetically resonate with the bad positioner.}
+\item{} Explain how we can tell that the control valve of loop F0102 may have incorrect characterization, from an examination of the open-loop trend.  {\it The process gain is much larger at lower valve positions than at higher valve positions.  It looks like we have a linear (or even quick-opening) inherent characteristic, which is being distorted by changes in differential pressure across the valve.  An equal-percentage characteristic would fare much better here.  Now, it is possible that something else is going on here, perhaps a positioner with problems.}
+\end{itemize}
+
+
+
+%INDEX% Reading assignment: Michael Brown Case History #46, "Analysis uncovers control problems in a process plant"
+
+%(END_NOTES)
+
+

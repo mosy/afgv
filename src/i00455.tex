@@ -1,0 +1,56 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Suppose you are tasked with building a control system using {\sl Wireless}HART transmitters to sense a variety of process variables.  The central component of the wireless network, of course, is the {\it gateway} device.  Your particular network gateway provided Modbus access to the data received from all those transmitters via RS-485 (serial) network.
+
+The challenge is this: five programmable logic controllers (PLCs) require access to the measurement variables of five different {\sl Wireless}HART transmitters.  Each PLC has an RS-485 serial port, meaning they may be all ``daisy-chained'' on one RS-485 wired network connecting also to the wireless network gateway device.  What is not so easy is figuring out how all five of the PLCs will be able to read data from the gateway, since Modbus is fundamentally a {\it master/slave} protocol (one ``master'' device sending data to and receiving data from multiple ``slave'' devices).  In our system, we need five different PLCs to get data from the one gateway, which itself is a ``slave'' device.
+
+\vskip 30pt
+
+Explain how it is possible to configure a single PLC as the Modbus ``master'' device, and still have the other four PLCs receive data from the wireless network gateway (``slave'') device.
+
+\vskip 100pt
+
+Determine whether or not it is possible to configure {\it all} five of the PLCs as Modbus ``master'' devices, yet avoid ``bus contention'' issues as they all attempt to query the wireless gateway (``slave'') device.  Explain why this proposed solution is (or is not!) possible!
+
+\vfil 
+
+\underbar{file i00455}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+ 
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+In a master/slave network such as Modbus, only one device (the master) is allowed to initiate communication on the bus.  All other devices are merely allowed to respond to the query of the master.  This is the fundamental principle we must work with when creating a solution for this application.
+
+\vskip 10pt
+
+First solution: have one PLC be the master, which reads all data points from the gateway, then sends data as needed to each of the other four PLCs in turn.  This would definitely be the most conventional way to manage data in this kind of system.
+
+\vskip 10pt
+
+Second solution: yes, you can have five master PLCs, but you must somehow synchronize them so they never contend for the bus at the same time.  This may require some creative wiring between PLCs (e.g. discrete signals enabling only one PLC at a time to be the master) or some creative programming (e.g. each PLC has a synchronized clock, and is programmed to communicate during designated time slots as in TDMA).
+
+%INDEX% Networking, protocols: master-slave
+%INDEX% Networking, serial: EIA/TIA-485 (formerly RS-485)
+%INDEX% Networking, WirelessHART
+
+%(END_NOTES)
+
+

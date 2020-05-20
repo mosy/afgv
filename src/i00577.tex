@@ -1,0 +1,90 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read portions of the reference manual for the Rosemount Smart Wireless THUM Adapter (document 00809-0100-4075, revision AA) and answer the following questions:
+
+\vskip 10pt
+
+Explain what the purpose of the THUM device is.  How would it typically be used in a {\sl Wireless}HART network?
+
+\vskip 10pt
+
+Does the THUM need to be programmed with a ``network ID'' and a ``join key'' just like a regular {\sl Wireless}HART field device, or is it exempt from this because it is merely an {\it adapter}?  Explain the rationale for your answer.
+
+\vskip 10pt
+
+How much of a DC voltage drop does the THUM impart to the 4-20 mA loop circuit?  More importantly, how could this voltage drop (potentially) affect the loop circuit?  Also, {\it why} is a voltage drop across the THUM necessary for its operation?
+
+\vskip 10pt
+
+Explain the purpose of the THUM having both a variable (default) and fixed voltage drop mode.
+
+\vskip 10pt
+
+This manual recommends a certain power-up sequence when commissioning new devices in a {\sl Wireless}HART mesh network.  Explain how this sequence is supposed to go, and why it has any bearing on the operation of the mesh network.
+
+\vskip 10pt
+
+The THUM may be connected to loop-powered (2-wire) instruments as well as self-powered (4-wire) instruments.  Examine the connection diagrams for both types of configurations, and identify the pattern of wire connections to the THUM: which direction does current always flow through the THUM's wires?
+
+\vskip 10pt
+
+Does the mounting orientation for a THUM device matter, since there is no external antenna as there is on other {\sl Wireless}HART devices?  If so, which way should the THUM be mounted?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} In this manual, a distinction is made between 2-wire HART instruments, 4-wire ``passive'' HART instruments, and 4-wire ``active'' HART instruments.  Explain this distinction.
+\end{itemize}
+
+\underbar{file i00577}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+The Rosemount THUM connects to any wired HART device to give it {\sl Wireless}HART capability (page 1-3).
+
+\vskip 10pt
+
+The THUM definitely needs to be programmed with its own network ID and join key, because a wired-HART device has neither of these parameters in it.  {\sl Wireless}HART is essentially a ``superset'' of the wired HART standard, and so any extra parameters necessary for wireless network communication must reside in the THUM rather than in the ``sub-device''.  (page 2-3)
+
+\vskip 10pt
+
+A THUM will drop approximately 2.25 volts at 3.5 mA and approximately 1.2 volts at 25 mA (page 1-3), and 2.5 volts in faulted mode.  Normally, this small amount of voltage drop will be of no consequence, but in poorly-designed loop circuits it could conceivably starve the loop-powered transmitter of voltage necessary to operate.  This voltage drop is necessary in order for the THUM to dissipate power in the form of radio transmissions, as well as for the operation of its internal microprocessor.
+
+\vskip 10pt
+
+In the fixed voltage drop mode, the THUM always drops 2.25 volts (page 5-2).  This poses a ``worst-case'' voltage drop scenario for the 4-20 mA loop, allowing the technician to see whether the loop has adequate power supply voltage to function under all conditions.  Think of this as a kind of ``stress test'' for the circuit (page 3-7).
+
+\vskip 10pt
+
+{\it Wireless}HART field devices should be powered up in order of proximity to the network gateway device, allowing for faster commissioning.  Those devices closest to the Gateway should be powered first, so they may serve as repeaters for other (farther) devices (page 1-3).
+
+\vskip 10pt
+
+The THUM scavenges power from current passing from the red wire to the yellow wire.  Typically this takes the form of the power source connecting to the Red (+) and Black ($-$) wires while the Yellow (+) and White ($-$) wires always connect to the HART device's power/comm terminals (pages 3-4 and 3-5).  Examples of installations with no wired HART device are shown on pages 2-2 (current source) and 2-3 (voltage source).
+
+\vskip 10pt
+
+The THUM should be mounted vertically, so that its integral antenna may be vertically oriented (page 1-3).
+
+%INDEX% Networking, WirelessHART
+%INDEX% Reading assignment: Rosemount THUM wireless adapter
+
+%(END_NOTES)
+

@@ -1,0 +1,1112 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: i01142x01.eps
+%%Creator: XCircuit v3.7 rev26
+%%CreationDate: Sat Jun  2 12:35:45 2012
+%%Pages: 1
+%%BoundingBox: 68 68 293 524
+%%DocumentNeededResources: font Helvetica Helvetica-Bold 
+%%EndComments
+%%BeginProlog
+%
+%  PostScript prolog for output from xcircuit
+%  Version: 3.7
+%
+%  Electrical circuit (and otherwise general) drawing program
+%
+%  Written by Tim Edwards 8/5/93--11/1/10  (tim.edwards@multigig.com)
+%  The Johns Hopkins University (1993-2004)
+%  MultiGiG, Inc. (2004-present)
+%
+%%BeginResource: procset XCIRCproc 3.7 2
+%
+% supporting definitions --- these are the primary xcircuit types.
+
+/XCIRCsave save def
+/topmat matrix currentmatrix def
+
+/fontslant { /slant exch def [1 0 slant 1 0 0] 
+    exch findfont exch makefont dup length dict /ndict exch def
+    { 1 index /FID ne { ndict 3 1 roll put } { pop pop } ifelse } forall
+    ndict definefont pop} def
+/ul { dup type /stringtype eq showflag 1 eq and { gsave 
+   currentpoint topmat setmatrix 0 0 moveto 2 index stringwidth pop (_)
+   false charpath flattenpath pathbbox grestore exch pop 1 index
+   sub setlinewidth exch pop currentpoint 3 -1 roll add moveto 0
+   rlineto stroke moveto } if } def
+/ol { dup type /stringtype eq showflag 1 eq and { gsave gsave
+   currentpoint topmat setmatrix 2 index stringwidth pop 3 index
+   true charpath flattenpath pathbbox grestore exch pop
+   exch pop topmat setmatrix (_) true charpath pathbbox grestore
+   exch pop 1 index sub setlinewidth exch pop currentpoint
+   exch 4 1 roll exch sub add moveto pop 0 rlineto stroke
+   moveto } if } def
+/stW { gsave currentpoint newpath moveto true charpath flattenpath
+	pathbbox pop exch pop sub grestore } def
+/Ts {mark Tabs aload pop counttomark 1 add array astore /Tabs exch def Tabs
+	0 currentpoint pop put} def
+/Tbn {mark Tabs aload pop counttomark dup 2 add 1 roll cleartomark 1 sub} def
+/Tb { 0 1 Tbn {Tabs exch get dup currentpoint pop lt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/Tf { Tbn -1 0 {Tabs exch get dup currentpoint pop gt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/qS { (aa) stW (a a) stW sub 4 div 0 Kn } def
+/hS { qS qS } def
+/pspc 0 def
+/cf0 { scalefont setfont } bind def
+/Kn { dup kY add /kY exch def rmoveto } bind def
+/ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.33 mul neg Kn} def
+/Ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.67 mul Kn } def
+/ns { 0 kY neg Kn /kY 0 def /fscale 1.0 def xfont0 1.0 cf0 } def
+/CR { ns 0 /Bline Bline fscale0 neg add def Bline moveto } def
+/cf { dup type /realtype ne {1.0} if exch findfont exch kY 0 eq
+	{ 40 mul dup /fscale0 exch def cf0 /xfont0 currentfont def}
+	{fscale0 mul fscale mul cf0} ifelse } def
+/ctmk { counttomark dup 2 add -1 roll pop } bind def
+/label { gsave translate 0 0 moveto dup scale neg /rotval exch def
+	/just exch def just 384 and 0 gt {/mshow {pop} def} {/mshow {show}
+	def} ifelse just 16 and 0 gt {gsave rotval rotate 0 1 dtransform
+	gsave pagemat setmatrix idtransform exch grestore 1 0 dtransform
+	gsave pagemat setmatrix idtransform exch grestore dup abs 1e-9 lt
+	{pop mul 0 gt} {3 1 roll pop pop 0 lt} ifelse grestore {-1 /rotval
+	rotval neg def /just just dup 3 and 1 ne {3 xor} if def} {1} ifelse
+	exch -1e-9 lt {-1 /rotval rotval neg def /just just dup 12 and
+	4 ne {12 xor} if def} {1} ifelse scale } if /showflag 0 def
+	/fspc pspc def /Bline 0 def /Tabs 0 array def /fscale 1.0 def
+	/kY 0 def gsave dup 1 add copy 0 exch 1 0 dtransform exch atan rotate
+	{exch dup type /stringtype eq {true charpath flattenpath} {dup type
+	/arraytype eq {exec} {12 string cvs true charpath flattenpath} ifelse}
+	ifelse} repeat pop pathbbox grestore 3 -1 roll pop 3 1 roll just
+	1 and 0 gt {just 2 and 0 gt {exch pop neg fspc sub} {exch sub 0.5
+	mul neg} ifelse} {pop neg fspc add} ifelse exch Bline exch just 4
+	and 0 gt {just 8 and 0 gt {exch pop neg fspc sub} {add 0.5 mul neg}
+	ifelse} {pop neg fspc add} ifelse rotval rotate Kn currentpoint
+	translate /showflag 1 def /Bline 0 def /Tabs 0 array def /fscale
+	1.0 def /kY 0 def {dup type /stringtype eq {mshow} {dup type
+	/arraytype eq {exec} {12 string cvs mshow} ifelse} ifelse} repeat
+	grestore endclip} def
+/pinlabel { 4 index 32 and 0 ne hlevel 0 eq or { /pspc 10 def label
+	/pspc 0 def } { pop pop pop pop pop {pop} repeat } ifelse } def
+/pinglobal { pinlabel } def
+/infolabel { pinlabel } def
+/graphic { gsave 4 index cvx exec /DataSource get resetfile translate 0 0
+	moveto neg rotate dup scale cvx exec image grestore endclip} def
+
+/scb { setrgbcolor } bind def  /sce { defColor aload pop scb } bind def
+/cRedef {/defColor currentcolor 3 array astore def} def
+/begingate {dup type /dicttype ne {1 dict} if begin	% default params
+	dup type /dicttype ne {1 dict} if begin		% instanced params
+	/hlevel hlevel 1 add def /defColor currentcolor sce 3 array astore
+	def gsave sce translate 0 0 moveto neg rotate dup type /nametype
+	eq not { dup abs currentlinewidth exch div setlinewidth } { pop }
+	ifelse dup abs scale clipped 1 and 1 eq {/clipped clipped 1 add def}
+	if} bind def
+/endgate { /hlevel hlevel 1 sub def grestore defColor aload pop cRedef
+	scb end end endclip} bind def
+
+/hlevel 0 def
+/endclip {clipped 1 and 1 eq {grestore /clipped clipped 1 sub def} if} def
+/tmpa [1 0 0 1 0 0] def
+/gar {8 8 true tmpa {<c0 c0 00 00 0c 0c 00 00>} imagemask} bind
+{8 8 true tmpa {<30 70 60 02 03 07 06 20>} imagemask} bind
+{8 8 true tmpa {<0c 1e 1e 0c c0 e1 e1 c0>} imagemask} bind
+{8 8 true tmpa {<0f 0f 0f 0f f0 f0 f0 f0>} imagemask} bind
+{8 8 true tmpa {<3f f3 e1 e1 f3 3f 1e 1e>} imagemask} bind
+{8 8 true tmpa {<df cf 8f 9f fd fc f8 f9>} imagemask} bind
+{8 8 true tmpa {<ff 3f 3f ff ff f3 f3 ff>} imagemask} bind 7 array astore def
+/ppaint { gsave clip tmpa dup setmatrix pathbbox neg exch neg 4 2 roll
+  neg 4 -1 roll 2 copy gt {exch} if 8 div ceiling 8 mul 4 2 roll neg 2 copy
+  gt {exch} if 8 div ceiling 8 mul 3 -1 roll -8 5 -1 roll
+  { 3 index exch 5 exch put dup -8 3 index { 3 index
+  exch 4 exch put 3 index exec } for } for pop pop pop pop grestore } bind def
+/setstyles {
+  currentlinewidth mul setlinewidth /style exch def style 2048 and 0 gt
+  clipped 1 and 0 eq and {clip newpath /clipped clipped 1 add def} {
+  style 1 and 0 gt not {closepath} if
+  style 1024 and 0 gt {2 setlinecap} if
+  style 2 and 0 gt {currentlinewidth 4 mul dup 2 array astore 0 setdash} if
+  style 4 and 0 gt {0.5 currentlinewidth 4 mul 2 array astore 0 setdash} if
+  gsave style 16 and 0 gt { style 224 and -5 bitshift style 256 and 0 gt {
+  7 exch sub 8 div dup 1 exch sub currentrgbcolor 3 array astore
+  {3 copy mul add 4 1 roll pop} forall pop pop setrgbcolor eofill}
+  {dup 7 lt {gar exch get ppaint} {pop eofill} ifelse} ifelse}
+  {style 256 and 0 gt {1 setgray eofill} if} ifelse grestore style 8 and 0 gt 
+  style 512 eq or {newpath} {stroke} ifelse grestore endclip} ifelse} def     
+
+/addtoy {exch dup dup 2 mul 3 add 1 roll -1 1 { 4 1 roll dup 4 1 roll add
+	4 -1 roll 2 mul 1 add index 2 mul 2 add 2 roll} for pop} def
+/addtoy1 {1 exch addtoy pop} def
+/addtoy3 {3 exch addtoy pop} def
+/addtoy4 {4 exch addtoy pop} def
+/addtox {exch dup dup 2 mul 3 add 1 roll -1 1 { 4 1 roll dup 4 1 roll 3 -1 roll
+	add exch 4 -1 roll 2 mul 1 add index 2 mul 2 add 2 roll} for pop} def
+/addtox1 {1 exch addtox pop} def
+/addtox3 {3 exch addtox pop} def
+/addtox4 {4 exch addtox pop} def
+/polygon { gsave /num exch def moveto num 1 sub {lineto} repeat setstyles } def
+/xcarc   { gsave newpath arc setstyles } def
+/elb { matrix currentmatrix 7 -1 roll 7 -1 roll translate 5 1 roll 4 -1 roll
+	3 index div 1 scale } def
+/ele { 0 4 1 roll 0 4 1 roll } bind def
+/ellipse { gsave elb newpath ele arc setmatrix setstyles } def
+/pellip  { elb ele arc setmatrix } def
+/nellip  { elb ele arcn setmatrix } def
+/spline  { gsave moveto curveto setstyles } def
+/polyc   { {lineto} repeat } bind def
+/beginpath { gsave moveto } bind def
+/endpath { setstyles } bind def
+/bop	 { 1 setlinecap 0 setlinejoin 6 setmiterlimit 0 0 0 scb cRedef
+	/clipped 0 def} def
+/psinsertion {/PSobj save def /showpage {} def /setpagedevice {pop} def bop
+	rotate translate dup scale} def
+/end_insert {PSobj restore} def
+/setpagemat {/pagemat matrix currentmatrix def} def
+/inchscale  {setpagemat 0.375 mul dup scale} def
+/cmscale    {setpagemat 0.35433071 mul dup scale} def
+
+%%EndResource
+%%EndProlog
+
+% XCircuit output starts here.
+
+%%BeginSetup
+
+/::pump2 {
+begingate
+1 1.000 -112 76 -48 76 -48 32 -112 32 spline
+1 1.000 -112 -140 -48 -140 -48 -96 -112 -96 spline
+1 1.000 -48 -96 -48 32 2 polygon
+1 1.000 -112 -96 -112 32 2 polygon
+0 1.000 -48 -24 -48 -40 16 -40 16 -24 4 polygon
+0 1.000 16 16 16 -80 176 -80 176 16 4 polygon
+0 1.000 32 -80 32 -144 160 -144 160 -80 4 polygon
+1 1.000 -112 -96 -112 -144 -48 -144 -48 -96 4 polygon
+0 1.000 -192 -144 -192 -168 224 -168 224 -144 4 polygon
+1 1.000 -144 0 -144 -64 2 polygon
+1 1.000 -160 0 -160 -64 2 polygon
+1 1.000 -112 96 -48 96 2 polygon
+1 1.000 -112 112 -48 112 2 polygon
+1 2.000 -80 96 -80 64 2 polygon
+1 2.000 -112 -32 -144 -32 2 polygon
+1 2.000 -160 -32 -208 -32 2 polygon
+1 2.000 -80 112 -80 160 2 polygon
+endgate
+} def
+
+/generic::arrowhead {
+% nonetwork
+begingate
+8 -28 beginpath
+3 -18 3 -15 0 0 curveto
+-3 -15 -3 -18 -8 -28 curveto
+-2 -26 2 -26 8 -28 curveto
+249 
+1.000 endpath
+endgate
+} def
+
+/pid::cont_arrow {
+begingate
+1 1.000 -192 64 128 64 192 0 128 -64 -192 -64 -192 64 6 polygon
+endgate
+} def
+
+/pid::flange {
+begingate
+1 1.000 0 32 0 -32 2 polygon
+1 1.000 16 32 16 -32 2 polygon
+endgate
+} def
+
+/::valve_check {
+begingate
+1 1.000 -48 48 -48 -16 2 polygon
+1 1.000 48 48 48 -16 2 polygon
+1 1.000 -48 48 48 -16 2 polygon
+1.000 90 48 -32 generic::arrowhead
+1 1.000 32 -32 -32 -32 2 polygon
+endgate
+} def
+
+/pid::valve {
+begingate
+1 1.000 -48 32 -48 -32 48 32 48 -32 -48 32 5 polygon
+endgate
+} def
+
+/pid::magnetic_flow {
+begingate
+1 2.000 -112 -96 -48 -96 2 polygon
+1 2.000 48 -96 112 -96 2 polygon
+0 1.000 -48 -48 -48 -144 48 -144 48 -48 4 polygon
+(M) {/Helvetica cf} 2 16 0 1.000 -16 -112 label
+1 1.000 0 64 64 0.000 360.000 xcarc
+1 1.000 0 0 0 -48 2 polygon
+endgate
+} def
+
+/pid::valve_positioner {
+begingate
+1 1.000 16 -96 16 32 2 polygon
+1 1.000 -32 32 64 32 2 polygon
+1 1.000 -32 96 64 96 64 32 -32 32 spline
+0 1.000 16 0 16 -48 64 -48 64 0 4 polygon
+1 1.000 16 80 16 112 -64 112 -64 0 -64 -16 16 -16 6 polygon
+1 1.000 -80 64 -48 48 2 polygon
+1 1.000 -80 48 -48 32 2 polygon
+1 1.000 -32 -128 -32 -64 64 -128 64 -64 -32 -128 5 polygon
+(P) {/Helvetica cf} 2 16 0 1.000 28 -40 label
+endgate
+} def
+
+/pid::venturi_flow {
+begingate
+1 2.000 -112 0 -48 0 2 polygon
+1 1.000 -48 48 -48 -48 2 polygon
+1 1.000 48 48 48 -48 2 polygon
+1 1.000 -16 32 16 32 48 48 -48 48 spline
+1 1.000 -16 -32 16 -32 48 -48 -48 -48 spline
+1 2.000 48 0 112 0 2 polygon
+endgate
+} def
+
+/pid::field {
+begingate
+1 1.000 0 0 64 0.000 360.000 xcarc
+endgate
+} def
+
+/pid::seal2 {
+begingate
+1 1.000 24 16 -8 16 8 0 8 32 spline
+0 1.000 0 32 0 -32 16 -32 16 32 4 polygon
+1 1.000 24 -16 -8 -16 8 -32 8 0 spline
+endgate
+} def
+
+/pid::line_capillary {
+begingate
+1 1.000 -64 0 64 0 2 polygon
+1 1.000 -16 16 16 -16 2 polygon
+1 1.000 16 16 -16 -16 2 polygon
+endgate
+} def
+
+/pid::valve_globe_air {
+begingate
+1 1.000 -48 32 48 32 2 polygon
+1 1.000 -48 -80 -48 -16 48 -80 48 -16 -48 -80 5 polygon
+1 1.000 0 -48 0 32 2 polygon
+1 1.000 -48 96 48 96 48 32 -48 32 spline
+endgate
+} def
+
+/pid::insulation {
+begingate
+1 1.000 -48 16 48 16 2 polygon
+1 1.000 -48 -16 48 -16 2 polygon
+1 1.000 -52 12 -52 4 -48 0 -48 16 spline
+1 1.000 -52 -4 -52 -12 -48 -16 -48 0 spline
+1 1.000 -44 -4 -44 -12 -48 -16 -48 0 spline
+1 1.000 52 12 52 4 48 0 48 16 spline
+1 1.000 52 -4 52 -12 48 -16 48 0 spline
+1 1.000 44 -4 44 -12 48 -16 48 0 spline
+endgate
+} def
+
+/pid::insul_steam {
+begingate
+1.000 0 0 8 pid::insulation
+3 1.000 -56 0 56 0 2 polygon
+(ST) {/Helvetica cf} 2 16 0 0.500 -16 -28 label
+endgate
+} def
+
+/pid::signal_air {
+begingate
+1 1.000 0 16 -16 -16 2 polygon
+1 1.000 16 16 0 -16 2 polygon
+1 1.000 -64 0 64 0 2 polygon
+endgate
+} def
+
+/pid::current_pressure {
+begingate
+0 1.000 -16 16 -16 -32 32 -32 32 16 4 polygon
+(P) {ss} (/) {ns} (I) {Ss} {/Helvetica cf} 7 16 0 0.700 -4 -16 label
+endgate
+} def
+
+/pid::main_shared_front {
+begingate
+1 1.000 0 0 64 0.000 360.000 xcarc
+0 1.000 -64 64 -64 -64 64 -64 64 64 4 polygon
+1 1.000 -64 0 64 0 2 polygon
+endgate
+} def
+
+/pid::link_dcs {
+begingate
+1 1.000 0 0 8 0.000 360.000 xcarc
+1 1.000 -16 0 -64 0 2 polygon
+1 1.000 64 0 16 0 2 polygon
+endgate
+} def
+
+/pid::valve_globe_hand {
+begingate
+1 1.000 48 -64 48 0 -48 -64 -48 0 48 -64 5 polygon
+1 1.000 0 -32 0 48 2 polygon
+1 1.000 -32 48 32 48 2 polygon
+endgate
+} def
+
+/pid::field_shared {
+begingate
+1 1.000 0 0 64 0.000 360.000 xcarc
+0 1.000 -64 64 -64 -64 64 -64 64 64 4 polygon
+endgate
+} def
+
+/pid::link_field_bus {
+begingate
+1 1.000 -64 0 -16 0 2 polygon
+1 1.000 16 0 64 0 2 polygon
+1 1.000 0 8 -8 0 0 -8 8 0 0 8 5 polygon
+endgate
+} def
+
+/pid::valve_check {
+begingate
+1 1.000 -48 48 -48 -16 2 polygon
+1 1.000 48 48 48 -16 2 polygon
+1 1.000 -48 48 48 -16 2 polygon
+1.000 90 48 -32 generic::arrowhead
+1 1.000 32 -32 -32 -32 2 polygon
+endgate
+} def
+
+/pid::orificeplate {
+begingate
+1 2.000 -16 -64 -16 -128 2 polygon
+1 2.000 16 -64 16 -128 2 polygon
+1 1.000 0 -80 0 -112 2 polygon
+1 1.000 0 -80 0 0 2 polygon
+1 1.000 0 64 64 0.000 360.000 xcarc
+endgate
+} def
+
+/pid::valve_relief {
+begingate
+1 1.000 -16 -64 16 -16 48 -64 -16 -64 4 polygon
+1 1.000 16 -16 -32 16 -32 -48 16 -16 4 polygon
+1 1.000 0 16 32 0 2 polygon
+1 1.000 0 32 32 16 2 polygon
+1 1.000 0 48 32 32 2 polygon
+1 1.000 16 -16 16 64 2 polygon
+endgate
+} def
+
+/::diagram8 {
+begingate
+1.000 0 1152 -1616 ::pump2
+1.000 90 992 -1648 generic::arrowhead
+1.000 180 -3776 -608 pid::cont_arrow
+1.000 0 -3776 288 pid::cont_arrow
+1.000 0 -3776 -128 pid::cont_arrow
+1.000 0 -3776 -800 pid::cont_arrow
+(DP Atmosphere) {/Helvetica cf} 2 16 0 1.000 -2160 1760 label
+(P-102) {/Helvetica-Bold cf} 2 16 0 1.000 256 1904 label
+(F) {ns} (o) {Ss} (5 GPM @ 80 ) {/Helvetica cf} 6 16 0 1.000 192 1808 label
+(Rated head: 75 PSI) {/Helvetica cf} 2 16 0 1.000 144 1760 label
+(P-101) {/Helvetica-Bold cf} 2 16 0 1.000 -512 1904 label
+(F) {ns} (o) {Ss} (20 GPM @ 80 ) {/Helvetica cf} 6 16 0 1.000 -592 1808 label
+(Rated head: 80 PSI) {/Helvetica cf} 2 16 0 1.000 -624 1760 label
+(P-103) {/Helvetica-Bold cf} 2 16 0 1.000 1040 1904 label
+1.000 0 3808 864 pid::cont_arrow
+1 1.000 -1600 224 -1696 384 -1184 384 -1280 224 -1600 224 5 polygon
+0 1.000 -1696 384 -1696 896 -1184 896 -1184 384 4 polygon
+1 1.000 -1696 1024 -1184 1024 -1184 896 -1696 896 spline
+0 1.000 -1600 224 -1600 64 -1280 64 -1280 224 4 polygon
+(V-6) {/Helvetica-Bold cf} 2 16 0 1.000 -1488 832 label
+3 1.000 -1552 336 -1520 368 -1520 432 -1360 432 -1360 368 -1328 336 -1552 336 7 
+polygon
+2 1.000 -1536 400 -1536 704 -1344 704 -1344 400 4 polygon
+3 1.000 -1568 720 -1312 720 2 polygon
+3 1.000 -1568 816 -1312 816 -1312 720 -1568 720 spline
+-1.000 270 -1440 1024 pid::flange
+1.000 180 -1696 288 pid::flange
+1 2.000 -1696 288 -1640 288 2 polygon
+-1.000 180 -1184 288 pid::flange
+1 2.000 -1184 288 -1240 288 2 polygon
+1.000 90 -1712 288 generic::arrowhead
+1 2.000 -1728 288 -1792 288 2 polygon
+1.000 270 -1168 288 generic::arrowhead
+1 2.000 -1088 288 -1152 288 2 polygon
+1.000 360 -1440 16 generic::arrowhead
+1 2.000 -1440 0 -1440 -64 2 polygon
+1.000 360 -1440 1296 generic::arrowhead
+1 2.000 -1216 976 -1216 944 2 polygon
+-1.000 270 -1216 992 pid::flange
+1 2.000 -1216 1008 -1216 1072 2 polygon
+-1.000 180 -1216 992 generic::arrowhead
+-1.000 180 -1152 768 pid::flange
+1 2.000 -1152 768 -1184 768 2 polygon
+3 2.000 -1184 768 -1232 768 -1232 720 3 polygon
+1 1.000 -1696 752 -1712 752 2 polygon
+1 1.000 -1696 640 -1712 640 2 polygon
+1 1.000 -1712 768 -1712 624 2 polygon
+1 1.000 -1728 768 -1728 624 2 polygon
+(MW) {/Helvetica cf} 2 16 0 1.000 -1824 704 label
+(24") {/Helvetica cf} 2 16 0 1.000 -1824 656 label
+1.000 90 -464 768 generic::arrowhead
+-1.000 180 -1248 96 pid::flange
+1 2.000 -1248 96 -1280 96 2 polygon
+1.000 90 -1152 96 generic::arrowhead
+-1.000 180 -1152 864 pid::flange
+1 2.000 -1152 864 -1184 864 2 polygon
+-1.000 270 -1136 864 generic::arrowhead
+0 1.000 -560 -320 -560 -864 -80 -864 -80 -320 4 polygon
+(V-7) {/Helvetica-Bold cf} 2 16 0 1.000 -368 -416 label
+1.000 0 368 -1616 ::pump2
+1.000 90 208 -1648 generic::arrowhead
+1.000 270 304 -1408 ::valve_check
+1.000 270 1088 -1408 ::valve_check
+-1.000 270 -1440 32 pid::flange
+1 2.000 -1440 32 -1440 64 2 polygon
+-1.000 270 -128 -896 pid::flange
+1 2.000 -128 -896 -128 -864 2 polygon
+-1.000 /sv 90 -128 -1040 pid::valve
+-1.000 180 -128 -992 generic::arrowhead
+1 2.000 -128 -976 -128 -912 2 polygon
+-1.000 /sv 180 32 -1648 pid::valve
+1 2.000 160 -1648 80 -1648 2 polygon
+-1.000 /sv 180 816 -1648 pid::valve
+1 2.000 944 -1648 864 -1648 2 polygon
+1 2.000 768 -1648 656 -1648 656 -1168 -128 -1168 4 polygon
+-1.000 /sv 270 288 -1264 pid::valve
+1 2.000 288 -1360 288 -1312 2 polygon
+1 2.000 288 -1216 288 -1184 2 polygon
+1 2.000 288 -1152 288 -1104 2 polygon
+-1.000 /sv 270 1072 -1264 pid::valve
+1 2.000 1072 -1360 1072 -1312 2 polygon
+1 2.000 288 -1104 1072 -1104 1072 -1216 3 polygon
+(P-101) {/Helvetica-Bold cf} 2 16 0 1.000 320 -1840 label
+-1.000 90 656 -1168 generic::arrowhead
+-1.000 360 288 -1104 generic::arrowhead
+-1.000 360 1072 -1104 generic::arrowhead
+1 1.000 1280 -864 1280 -16 1472 128 1472 304 4 polygon
+1 1.000 1760 -864 1760 -16 1568 128 1568 304 4 polygon
+1 1.000 1280 -864 1760 -864 2 polygon
+1 1.000 1280 -16 1760 -16 2 polygon
+1 1.000 1472 128 1568 128 2 polygon
+1 1.000 1520 368 1520 240 1568 304 1472 304 spline
+(V-5) {/Helvetica-Bold cf} ( ) {/Helvetica cf} 4 16 0 1.000 1472 -192 label
+1.000 180 1248 -304 pid::flange
+1 2.000 1248 -304 1280 -304 2 polygon
+-1.000 180 1792 -832 pid::flange
+1 2.000 1792 -832 1760 -832 2 polygon
+1.000 0 3168 -1616 ::pump2
+1.000 90 3008 -1648 generic::arrowhead
+(P-103) {/Helvetica-Bold cf} 2 16 0 1.000 2336 -1840 label
+1.000 0 2384 -1616 ::pump2
+1.000 90 2224 -1648 generic::arrowhead
+1.000 270 2320 -1408 ::valve_check
+1.000 270 3104 -1408 ::valve_check
+-1.000 /sv 180 2048 -1648 pid::valve
+1 2.000 2176 -1648 2096 -1648 2 polygon
+1 2.000 2000 -1648 1888 -1648 1888 -1088 3 polygon
+-1.000 /sv 180 2832 -1648 pid::valve
+1 2.000 2960 -1648 2880 -1648 2 polygon
+1 2.000 2784 -1648 2672 -1648 2672 -1168 1888 -1168 4 polygon
+-1.000 /sv 270 2304 -1264 pid::valve
+1 2.000 2304 -1360 2304 -1312 2 polygon
+1 2.000 2304 -1216 2304 -1184 2 polygon
+1 2.000 2304 -1152 2304 -1104 2 polygon
+-1.000 /sv 270 3088 -1264 pid::valve
+1 2.000 3088 -1360 3088 -1312 2 polygon
+1 2.000 2304 -1104 3088 -1104 3088 -1216 3 polygon
+-1.000 90 2672 -1168 generic::arrowhead
+-1.000 360 2304 -1104 generic::arrowhead
+-1.000 360 3088 -1104 generic::arrowhead
+1 2.000 1808 -832 1888 -832 1888 -1104 3 polygon
+(P-102) {/Helvetica-Bold cf} 2 16 0 1.000 1104 -1840 label
+(P-104) {/Helvetica-Bold cf} 2 16 0 1.000 3120 -1840 label
+-1.000 180 1792 -96 pid::flange
+1 2.000 1792 -96 1760 -96 2 polygon
+3 2.000 1760 -96 1312 -96 2 polygon
+1 1.000 1536 328 1552 328 1568 304 1520 304 spline
+1 1.000 -560 -192 -80 -192 -80 -320 -560 -320 spline
+-1.000 270 -176 -192 pid::flange
+1 2.000 -176 -208 -176 -240 2 polygon
+3 2.000 -176 -240 -176 -800 2 polygon
+1 2.000 1232 -304 960 -304 960 1136 3 polygon
+1 2.000 960 1296 960 1168 2 polygon
+-1.000 270 -512 -896 pid::flange
+1 2.000 -512 -896 -512 -864 2 polygon
+1.000 0 -512 -912 generic::arrowhead
+1 1.000 -1152 496 -1184 464 -1168 464 -1168 496 spline
+1 1.000 -1696 496 -1728 464 -1712 464 -1712 496 spline
+(Dwg. 12051) {/Helvetica cf} 2 16 0 1.000 -3952 248 label
+(Nitric acid supply) {/Helvetica cf} 2 16 0 1.000 -3952 304 label
+(Ammonia /) {/Helvetica cf} 2 16 0 1.000 -3952 -96 label
+(off-gas) {/Helvetica cf} 2 16 0 1.000 -3952 -136 label
+(Dwg. 10927) {/Helvetica cf} 2 16 0 1.000 -3952 -176 label
+1 1.000 -560 -720 -576 -720 2 polygon
+1 1.000 -560 -816 -576 -816 2 polygon
+1 1.000 -576 -704 -576 -832 2 polygon
+1 1.000 -592 -704 -592 -832 2 polygon
+1 2.000 -592 -736 -656 -736 2 polygon
+-1.000 90 -592 -800 generic::arrowhead
+1 2.000 -592 -800 -656 -800 2 polygon
+3 2.000 -560 -736 -288 -736 2 polygon
+3 2.000 -560 -800 -288 -800 2 polygon
+3 2.000 -256 -736 -256 -800 -288 -800 -288 -736 spline
+(Dwg. 19320) {/Helvetica cf} 2 16 0 1.000 -3952 -840 label
+(Condensate) {/Helvetica cf} 2 19 0 1.000 -3648 -592 label
+(30 PSI steam) {/Helvetica cf} 2 16 0 1.000 -3952 -784 label
+(Dwg. 19320) {/Helvetica cf} 2 19 0 1.000 -3648 -648 label
+(Ammonium nitrate) {/Helvetica cf} 2 16 0 1.000 3632 880 label
+(Dwg. 18546) {/Helvetica cf} 2 16 0 1.000 3632 832 label
+1 2.000 2320 864 2992 864 2 polygon
+1.000 180 1248 -832 pid::flange
+1 2.000 1248 -832 1280 -832 2 polygon
+1 2.000 -464 -208 -464 -240 2 polygon
+-1.000 270 -464 -192 pid::flange
+1 2.000 -176 880 -176 1136 2 polygon
+1 2.000 -176 1168 -176 1296 2 polygon
+1.000 0 -2672 288 pid::valve
+1.000 0 -2992 288 pid::valve
+1 2.000 -3168 288 -3040 288 2 polygon
+1 2.000 -2944 288 -2880 288 2 polygon
+1 2.000 -2784 288 -2720 288 2 polygon
+1 2.000 960 1296 -1072 1296 2 polygon
+1 2.000 -1216 1072 -1216 1152 -1040 1152 3 polygon
+1.000 0 -2224 384 pid::magnetic_flow
+1 2.000 -2624 288 -2336 288 2 polygon
+1 2.000 -2880 160 -3104 160 -3104 288 3 polygon
+1 2.000 -2784 160 -2560 160 -2560 288 3 polygon
+1.000 0 -2848 384 pid::valve_positioner
+1.000 0 -1840 288 pid::valve
+1.000 0 -1040 288 pid::valve
+1 2.000 -1168 480 -928 480 -928 288 -992 288 4 polygon
+1 2.000 -1888 288 -1952 288 -1952 480 -1712 480 4 polygon
+1 2.000 -2112 288 -1952 288 2 polygon
+1.000 270 -1024 -400 pid::magnetic_flow
+1.000 0 -2496 -128 pid::venturi_flow
+1.000 0 -2496 -288 pid::field
+(FT) {/Helvetica cf} 2 16 0 1.000 -2248 456 label
+(23) {/Helvetica cf} 2 16 0 1.000 -2248 408 label
+(FV) {/Helvetica cf} 2 16 0 1.000 -3040 424 label
+(23) {/Helvetica cf} 2 16 0 1.000 -3040 376 label
+1 1.000 -3016 416 56 0.000 360.000 xcarc
+1 1.000 -2976 376 -2856 336 2 polygon
+(FT) {/Helvetica cf} 2 16 0 1.000 -2520 -280 label
+(24) {/Helvetica cf} 2 16 0 1.000 -2520 -328 label
+1 1.000 -2560 -288 -2640 -288 -2640 -128 3 polygon
+1 1.000 -2432 -288 -2352 -288 -2352 -128 3 polygon
+1 1.000 -2632 -32 56 0.000 360.000 xcarc
+(FE) {/Helvetica cf} 2 16 0 1.000 -2656 -24 label
+(24) {/Helvetica cf} 2 16 0 1.000 -2656 -72 label
+1 1.000 -2600 -80 -2560 -104 2 polygon
+(FT) {/Helvetica cf} 2 16 0 1.000 -1112 -384 label
+(22) {/Helvetica cf} 2 16 0 1.000 -1112 -432 label
+-1.000 180 720 864 pid::valve
+-1.000 180 400 864 pid::valve
+1 2.000 448 864 512 864 2 polygon
+1 2.000 608 864 672 864 2 polygon
+1 2.000 512 992 288 992 288 864 3 polygon
+1 2.000 608 992 832 992 832 864 3 polygon
+-1.000 180 544 768 pid::valve_positioner
+(FV) {/Helvetica cf} 2 28 0 1.000 352 768 label
+1 1.000 376 736 56 0.000 360.000 xcarc
+1 1.000 416 776 536 816 2 polygon
+(25) {/Helvetica cf} 2 16 0 1.000 352 700 label
+1.000 180 1264 768 pid::magnetic_flow
+1 2.000 1376 864 2288 864 2 polygon
+1 2.000 976 864 1152 864 2 polygon
+(FT) {/Helvetica cf} 2 16 0 1.000 1240 712 label
+(25) {/Helvetica cf} 2 16 0 1.000 1240 668 label
+1.000 0 -656 -512 pid::field
+1 1.000 -608 -384 -608 -320 -656 -352 -608 -384 4 polygon
+1 1.000 -656 -352 -624 -400 -688 -400 -656 -352 4 polygon
+1 1.000 -656 -400 -656 -448 2 polygon
+1 1.000 -608 -352 -560 -352 2 polygon
+1 1.000 -608 -640 -608 -704 -656 -672 -608 -640 4 polygon
+1 1.000 -656 -672 -624 -624 -688 -624 -656 -672 4 polygon
+1 1.000 -656 -624 -656 -576 2 polygon
+1 1.000 -608 -672 -560 -672 2 polygon
+(LG) {/Helvetica cf} 2 16 0 1.000 -688 -504 label
+(21) {/Helvetica cf} 2 16 0 1.000 -680 -552 label
+-1.000 180 96 -640 pid::field
+1.000 0 -48 -832 pid::seal2
+-1.000 270 96 -768 pid::line_capillary
+(LT) {/Helvetica cf} 2 16 0 1.000 72 -632 label
+(26) {/Helvetica cf} 2 16 0 1.000 72 -680 label
+1 2.000 -1232 96 -928 96 -928 -288 3 polygon
+1 2.000 -512 -928 -512 -1168 -928 -1168 -928 -496 4 polygon
+1 2.000 -16 -1648 -128 -1648 -128 -1168 3 polygon
+1 2.000 -128 -1088 -128 -1168 2 polygon
+-1.000 180 -128 -1168 generic::arrowhead
+-1.000 180 -384 -976 pid::field
+1 1.000 -384 -872 8 0.000 360.000 xcarc
+1 1.000 -384 -880 -384 -912 2 polygon
+(TT) {/Helvetica cf} 2 16 0 1.000 -408 -968 label
+(27) {/Helvetica cf} 2 16 0 1.000 -408 -1016 label
+-1.000 180 -1104 -848 pid::valve_globe_air
+1 2.000 -1056 -800 -944 -800 2 polygon
+1 2.000 -912 -800 -656 -800 2 polygon
+1 2.000 -1152 -800 -3168 -800 2 polygon
+1 2.000 -656 -736 -912 -736 2 polygon
+1 2.000 -944 -736 -2752 -736 -2752 -608 -3168 -608 4 polygon
+1.000 0 -2096 -744 pid::insul_steam
+1.000 0 -1744 -800 pid::insulation
+1 1.000 -1288 -928 56 0.000 360.000 xcarc
+1 1.000 -1248 -888 -1128 -848 2 polygon
+(TV) {/Helvetica cf} 2 16 0 1.000 -1320 -920 label
+(27) {/Helvetica cf} 2 16 0 1.000 -1312 -968 label
+-1.000 180 -1104 -1120 pid::field
+1.000 90 -1104 -992 pid::signal_air
+1.000 0 -1040 -1040 pid::current_pressure
+(TY) {/Helvetica cf} 2 16 0 1.000 -1128 -1112 label
+(27) {/Helvetica cf} 2 16 0 1.000 -1128 -1160 label
+1.000 0 -704 -1312 pid::main_shared_front
+3 1.000 -1104 -1184 -1104 -1312 -768 -1312 3 polygon
+3 1.000 -640 -1312 -384 -1312 -384 -1040 3 polygon
+(TIC) {/Helvetica cf} 2 16 0 1.000 -736 -1296 label
+(27) {/Helvetica cf} 2 16 0 1.000 -728 -1360 label
+(V-6) {/Helvetica-Bold cf} 2 16 0 1.000 -2016 1904 label
+(NEUTRALIZER) {/Helvetica-Bold cf} 2 16 0 1.000 -2112 1856 label
+(10'-4" Dia  9'-8" Sidewall) {/Helvetica cf} 2 16 0 1.000 -2160 1808 label
+(F) {ns} (o) {Ss} (DT 270 ) {/Helvetica cf} 6 16 0 1.000 -2160 1712 label
+(V-7) {/Helvetica-Bold cf} 2 16 0 1.000 -1264 1904 label
+(RUNDOWN TANK) {/Helvetica-Bold cf} 2 16 0 1.000 -1376 1856 label
+(DP Atmosphere) {/Helvetica cf} 2 16 0 1.000 -1424 1760 label
+1 1.000 -80 -352 -48 -368 2 polygon
+1 1.000 -80 -368 -48 -384 2 polygon
+1 1.000 -80 -384 -48 -400 2 polygon
+1 1.000 -48 -352 -48 -416 2 polygon
+(2") {/Helvetica cf} 2 16 0 1.000 -16 -384 label
+(insul) {/Helvetica cf} 2 16 0 0.750 -32 -416 label
+(V-5) {/Helvetica-Bold cf} 2 16 0 1.000 -2688 1904 label
+(SCRUBBER) {/Helvetica-Bold cf} 2 16 0 1.000 -2752 1856 label
+(7'-6" Dia  20'-8" Sidewall) {/Helvetica cf} 2 16 0 1.000 -2848 1808 label
+(Stack height 14'-6") {/Helvetica cf} 2 16 0 1.000 -2848 1760 label
+(DP Atmosphere) {/Helvetica cf} 2 16 0 1.000 -2848 1712 label
+-1.000 180 -576 624 pid::field
+(AIT) {/Helvetica cf} 2 16 0 1.000 -608 632 label
+1.000 0 -2496 608 pid::main_shared_front
+3 1.000 -2784 360 -2688 360 -2688 608 -2560 608 4 polygon
+(23) {/Helvetica cf} 2 16 0 1.000 -2520 560 label
+1.000 0 -2048 1056 pid::main_shared_front
+1.000 90 -2496 736 pid::link_dcs
+(AIC) {/Helvetica cf} 2 16 0 1.000 -2080 1072 label
+(28) {/Helvetica cf} 2 16 0 1.000 -2072 1008 label
+1.000 0 -1360 -400 pid::main_shared_front
+(FIR) {/Helvetica cf} 2 16 0 1.000 -1392 -384 label
+3 1.000 -1296 -400 -1152 -400 2 polygon
+(22) {/Helvetica cf} 2 16 0 1.000 -1384 -440 label
+(L) {/Helvetica cf} 2 16 0 0.750 -1280 -448 label
+(H) {/Helvetica cf} 2 16 0 0.750 -1280 -368 label
+1.000 0 -2256 -416 pid::main_shared_front
+(FIR) {/Helvetica cf} 2 16 0 1.000 -2288 -400 label
+(H) {/Helvetica cf} 2 16 0 0.750 -2184 -384 label
+(L) {/Helvetica cf} 2 16 0 0.750 -2184 -464 label
+(24) {/Helvetica cf} 2 16 0 1.000 -2280 -456 label
+(14'-0" Dia  7'-3" Sidewall) {/Helvetica cf} 2 16 0 1.000 -1432 1808 label
+(F) {ns} (o) {Ss} (DT 250 ) {/Helvetica cf} 6 16 0 1.000 -1424 1712 label
+(83% AMMONIUM NITRATE PUMP) {/Helvetica-Bold cf} 2 16 0 1.000 -752 1856 label
+(83% AMMONIUM NITRATE PUMP) {/Helvetica-Bold cf} 2 16 0 1.000 16 1856 label
+(SCRUBBER RECIRCULATION PUMP) {/Helvetica-Bold cf} 2 16 0 1.000 768 1856 label
+(P-104) {/Helvetica-Bold cf} 2 16 0 1.000 1920 1904 label
+(SCRUBBER RECIRCULATION PUMP) {/Helvetica-Bold cf} 2 16 0 1.000 1648 1856 label
+(F) {ns} (o) {Ss} (1500 GPM @ 225 ) {/Helvetica cf} 6 16 0 1.000 896 1808 label
+(F) {ns} (o) {Ss} (1500 GPM @ 225 ) {/Helvetica cf} 6 16 0 1.000 1792 1808 
+label
+(Rated head: 10 PSI) {/Helvetica cf} 2 16 0 1.000 912 1760 label
+(Rated head: 10 PSI) {/Helvetica cf} 2 16 0 1.000 1808 1760 label
+1.000 0 -2048 80 pid::main_shared_front
+(FY) {/Helvetica cf} 2 16 0 1.000 -2072 96 label
+(23) {/Helvetica cf} 2 16 0 1.000 -2072 32 label
+1 2.000 -3168 -128 -2608 -128 2 polygon
+1 2.000 -2384 -128 -1440 -128 -1440 -48 3 polygon
+(Lead/Lag) {/Helvetica cf} 2 16 0 0.500 -1968 160 label
+0 1.000 -1984 192 -1984 144 -1872 144 -1872 192 4 polygon
+1.000 180 -2432 1056 pid::link_dcs
+1.000 180 -2304 1056 pid::link_dcs
+1.000 180 -2176 1056 pid::link_dcs
+1.000 180 -2128 -416 pid::link_dcs
+3 1.000 -2320 -416 -2496 -416 -2496 -352 3 polygon
+1.000 270 -2048 -352 pid::link_dcs
+1.000 270 -2048 -224 pid::link_dcs
+1 1.000 -2048 -160 -2048 -144 2 polygon
+1.000 270 -2048 368 pid::link_dcs
+1.000 360 -2368 608 pid::link_dcs
+1 1.000 -2064 -416 -2048 -416 2 polygon
+1 1.000 -2048 448 -2048 432 2 polygon
+1 2.000 768 864 944 864 2 polygon
+1 2.000 288 864 352 864 2 polygon
+-1.000 180 -128 -1648 generic::arrowhead
+-1.000 180 1888 -1168 generic::arrowhead
+-1.000 180 1888 -1648 generic::arrowhead
+-1.000 270 1808 -96 generic::arrowhead
+-1.000 360 2304 -96 generic::arrowhead
+-1.000 360 2304 1152 generic::arrowhead
+-1.000 360 32 -832 pid::line_capillary
+1.000 0 96 0 pid::main_shared_front
+3 1.000 96 -576 96 -64 2 polygon
+(LIC) {/Helvetica cf} 2 16 0 1.000 64 16 label
+(26) {/Helvetica cf} 2 16 0 1.000 72 -40 label
+1.000 0 768 544 pid::main_shared_front
+3 1.000 832 544 944 544 2 polygon
+3 1.000 976 544 1264 544 1264 640 3 polygon
+3 1.000 608 784 656 784 768 784 768 608 4 polygon
+(FIC) {/Helvetica cf} 2 16 0 1.000 736 560 label
+(25) {/Helvetica cf} 2 16 0 1.000 744 500 label
+1.000 270 96 128 pid::link_dcs
+1.000 270 96 256 pid::link_dcs
+1.000 270 96 384 pid::link_dcs
+1.000 360 640 544 pid::link_dcs
+1.000 360 512 544 pid::link_dcs
+1.000 360 384 544 pid::link_dcs
+1 1.000 320 544 304 544 2 polygon
+1.000 360 208 544 pid::link_dcs
+1 1.000 96 512 8 0.000 360.000 xcarc
+1 1.000 96 496 96 448 2 polygon
+-1.000 180 -464 -192 generic::arrowhead
+-1.000 180 -176 -192 generic::arrowhead
+-1.000 90 960 1296 generic::arrowhead
+-1.000 180 960 -304 generic::arrowhead
+-1.000 90 1232 -304 generic::arrowhead
+-1.000 360 288 864 generic::arrowhead
+-1.000 90 352 864 generic::arrowhead
+-1.000 360 288 992 generic::arrowhead
+3 1.000 -2288 448 -2496 448 -2496 544 3 polygon
+(FFC) {/Helvetica cf} 2 16 0 1.000 -2528 624 label
+1.000 360 -2240 608 pid::link_dcs
+1.000 360 -2112 608 pid::link_dcs
+1.000 90 -2048 544 pid::link_dcs
+1 1.000 -2048 496 -2048 448 2 polygon
+1.000 270 -2048 -48 pid::link_dcs
+1.000 270 -2048 208 pid::link_dcs
+1.000 90 -2496 864 pid::link_dcs
+1.000 90 -2496 992 pid::link_dcs
+1.000 180 -3104 160 generic::arrowhead
+-1.000 90 -3040 288 generic::arrowhead
+-1.000 0 -2560 288 generic::arrowhead
+1.000 180 832 864 generic::arrowhead
+1.000 360 1968 1248 pid::magnetic_flow
+1 2.000 2304 -96 2304 1152 2 polygon
+1 2.000 2304 1152 2080 1152 2 polygon
+1.000 0 1360 1184 pid::valve_globe_hand
+1 2.000 1408 1152 1872 1152 2 polygon
+1 2.000 1312 1152 -1040 1152 2 polygon
+-1.000 270 1408 1152 generic::arrowhead
+(FT) {/Helvetica cf} 2 16 0 1.000 1944 1320 label
+(29) {/Helvetica cf} 2 16 0 1.000 1944 1272 label
+1.000 0 1696 1312 pid::main_shared_front
+3 1.000 1760 1312 1904 1312 2 polygon
+(FIR) {/Helvetica cf} 2 16 0 1.000 1664 1328 label
+(29) {/Helvetica cf} 2 16 0 1.000 1672 1272 label
+-1.000 360 -48 -832 pid::flange
+1 2.000 -64 -832 -80 -832 2 polygon
+1 1.000 96 528 96 544 144 544 3 polygon
+1.000 0 1216 -832 pid::seal2
+-1.000 180 1120 -832 pid::field
+(LT) {/Helvetica cf} 2 16 0 1.000 1096 -824 label
+1 1.000 1184 -832 1216 -832 2 polygon
+(30) {/Helvetica cf} 2 16 0 1.000 1096 -872 label
+1.000 0 864 -832 pid::main_shared_front
+3 1.000 928 -832 1056 -832 2 polygon
+(LIR) {/Helvetica cf} 2 16 0 1.000 832 -816 label
+(30) {/Helvetica cf} 2 16 0 1.000 840 -872 label
+-1.000 0 1856 -576 pid::field
+1 1.000 1808 -448 1808 -384 1856 -416 1808 -448 4 polygon
+1 1.000 1856 -416 1824 -464 1888 -464 1856 -416 4 polygon
+1 1.000 1856 -464 1856 -512 2 polygon
+1 1.000 1808 -416 1760 -416 2 polygon
+1 1.000 1808 -704 1808 -768 1856 -736 1808 -704 4 polygon
+1 1.000 1856 -736 1824 -688 1888 -688 1856 -736 4 polygon
+1 1.000 1856 -688 1856 -640 2 polygon
+1 1.000 1808 -736 1760 -736 2 polygon
+(LG) {/Helvetica cf} 2 19 0 1.000 1888 -568 label
+(31) {/Helvetica cf} 2 16 0 1.000 1840 -616 label
+-1.000 180 1984 -896 pid::field
+1 1.000 1920 -896 1888 -896 2 polygon
+(AIT) {/Helvetica cf} 2 16 0 1.000 1952 -888 label
+(32) {/Helvetica cf} 2 16 0 1.000 1960 -936 label
+-1.000 180 2400 -256 pid::field
+1 1.000 2336 -256 2304 -256 2 polygon
+(AIT) {/Helvetica cf} 2 16 0 1.000 2368 -248 label
+(33) {/Helvetica cf} 2 16 0 1.000 2376 -296 label
+1.000 0 2176 -672 pid::main_shared_front
+1.000 0 2400 -512 pid::main_shared_front
+3 1.000 2400 -448 2400 -320 2 polygon
+(AIR) {/Helvetica cf} 2 16 0 1.000 2368 -496 label
+(AIR) {/Helvetica cf} 2 16 0 1.000 2144 -656 label
+(33) {/Helvetica cf} 2 16 0 1.000 2376 -552 label
+(32) {/Helvetica cf} 2 16 0 1.000 2152 -712 label
+(pH) {/Helvetica cf} 2 16 0 0.750 -528 688 label
+(pH) {/Helvetica cf} 2 16 0 0.750 2032 -832 label
+(pH) {/Helvetica cf} 2 16 0 0.750 2448 -192 label
+1.000 90 -176 1296 generic::arrowhead
+1 2.000 -176 848 -176 -192 2 polygon
+1 2.000 -1136 768 -464 768 -464 -192 3 polygon
+1 1.000 -512 624 -464 624 2 polygon
+(28a) {/Helvetica cf} 2 16 0 1.000 -608 584 label
+-1.000 180 -576 448 pid::field
+(AIT) {/Helvetica cf} 2 16 0 1.000 -608 456 label
+(pH) {/Helvetica cf} 2 16 0 0.750 -528 512 label
+1 1.000 -512 448 -464 448 2 polygon
+-1.000 180 -576 272 pid::field
+(AIT) {/Helvetica cf} 2 16 0 1.000 -608 280 label
+(pH) {/Helvetica cf} 2 16 0 0.750 -528 336 label
+1 1.000 -512 272 -464 272 2 polygon
+1.000 0 -832 624 pid::field_shared
+1.000 0 -704 624 pid::link_field_bus
+1.000 90 -864 496 pid::link_field_bus
+1.000 90 -864 368 pid::link_field_bus
+1.000 180 -704 272 pid::link_field_bus
+1.000 180 -800 272 pid::link_field_bus
+1 1.000 -864 272 -864 304 2 polygon
+1.000 180 -704 448 pid::link_field_bus
+1 1.000 -800 560 -800 512 2 polygon
+1 1.000 -800 504 -808 496 -800 488 -792 496 -800 504 5 polygon
+1 1.000 -800 480 -800 448 -768 448 3 polygon
+(AY) {/Helvetica cf} 2 16 0 1.000 -856 632 label
+(28) {/Helvetica cf} 2 16 0 1.000 -856 584 label
+(FOUNDATION Fieldbus) {/Helvetica cf} 2 16 0 0.500 -856 288 label
+1.000 180 -1920 1056 pid::link_dcs
+1.000 180 -1792 1056 pid::link_dcs
+1.000 180 -1664 1056 pid::link_dcs
+1.000 180 -1536 1056 pid::link_dcs
+1 2.000 -1440 992 -1440 1008 2 polygon
+1 2.000 -1440 1024 -1440 1296 -1072 1296 3 polygon
+1 1.000 -1472 1056 -1456 1056 2 polygon
+1.000 180 -1328 1056 pid::link_dcs
+1 1.000 -1392 1056 -1424 1056 2 polygon
+1 1.000 -1264 1056 -1232 1056 2 polygon
+1.000 180 -1136 1056 pid::link_dcs
+1.000 180 -1008 1056 pid::link_dcs
+1.000 180 -896 1056 pid::link_dcs
+1.000 270 -832 992 pid::link_dcs
+1 1.000 -832 816 8 0.000 360.000 xcarc
+1 1.000 -832 720 8 0.000 360.000 xcarc
+1 1.000 -832 832 -832 848 2 polygon
+1 1.000 -832 800 -832 784 2 polygon
+1 1.000 -832 704 -832 688 2 polygon
+1 1.000 -832 736 -832 752 2 polygon
+1 1.000 -832 880 -832 928 2 polygon
+1.000 360 -1952 480 generic::arrowhead
+-1.000 90 -928 480 generic::arrowhead
+(Median) {/Helvetica cf} 2 16 0 0.500 -752 704 label
+0 1.000 -768 736 -768 688 -672 688 -672 736 4 polygon
+1.000 0 1936 -64 pid::valve_globe_hand
+1 2.000 2304 -96 2304 -1104 2 polygon
+1.000 0 -512 896 pid::valve_globe_hand
+1 2.000 -1120 864 -560 864 2 polygon
+1 2.000 -464 864 288 864 2 polygon
+1 2.000 288 864 288 -1104 2 polygon
+1.000 0 -3776 1408 pid::cont_arrow
+(Make-up water) {/Helvetica cf} 2 16 0 1.000 -3952 1424 label
+(Dwg. 10537) {/Helvetica cf} 2 16 0 1.000 -3952 1368 label
+1 2.000 1152 1136 1152 880 2 polygon
+1 2.000 1152 848 1152 560 2 polygon
+-1.000 90 1152 1408 generic::arrowhead
+1 2.000 1248 -64 1280 -64 2 polygon
+1.000 180 1248 -64 pid::flange
+-1.000 90 1232 -64 generic::arrowhead
+-1.000 180 1152 416 generic::arrowhead
+-1.000 90 1152 368 pid::valve
+-1.000 90 1152 48 pid::valve
+-1.000 90 1247 192 pid::valve_positioner
+1 2.000 1152 528 1152 416 2 polygon
+1 2.000 1152 480 1024 480 1024 256 3 polygon
+1 2.000 1024 160 1024 -64 1152 -64 3 polygon
+1 2.000 1152 160 1152 96 2 polygon
+1 2.000 1152 320 1152 256 2 polygon
+1 2.000 1152 1168 1152 1408 -3168 1408 3 polygon
+1 2.000 1152 0 1152 -64 1216 -64 3 polygon
+-1.000 270 1024 480 generic::arrowhead
+1.000 90 1152 -64 generic::arrowhead
+1.000 270 1696 80 pid::flange
+1 1.000 1696 80 1696 32 2 polygon
+-1.000 180 1696 288 pid::field
+(LT) {/Helvetica cf} 2 16 0 1.000 1672 296 label
+(35) {/Helvetica cf} 2 16 0 1.000 1672 248 label
+1 1.000 1696 224 1696 96 2 polygon
+1 1.000 1696 160 1760 160 2 polygon
+1 1.000 1792 160 32 0.000 360.000 xcarc
+(FI) {/Helvetica cf} 2 16 0 1.000 1776 144 label
+1 1.000 1824 160 1888 160 2 polygon
+1 1.000 1904 176 1872 144 1888 144 1888 176 spline
+(IAS) {/Helvetica cf} 2 16 0 1.000 1904 144 label
+1.000 0 1696 480 pid::main_shared_front
+3 1.000 1696 416 1696 352 2 polygon
+3 1.000 1224 256 1224 480 1632 480 3 polygon
+(LIC) {/Helvetica cf} 2 16 0 1.000 1664 496 label
+(35) {/Helvetica cf} 2 16 0 1.000 1672 432 label
+1 1.000 1336 352 56 180.000 540.000 xcarc
+1 1.000 1296 312 1176 272 2 polygon
+(LV) {/Helvetica cf} 2 16 0 1.000 1312 360 label
+(35) {/Helvetica cf} 2 16 0 1.000 1312 312 label
+1 2.000 -1552 32 -1552 64 2 polygon
+-1.000 270 -1552 32 pid::flange
+-1.000 90 -1568 -240 pid::valve_check
+1 2.000 -1552 -192 -1552 -144 2 polygon
+1 2.000 -1552 -112 -1552 16 2 polygon
+1.000 0 -1680 -384 pid::valve
+1 2.000 -1552 -288 -1552 -384 -1632 -384 3 polygon
+1 2.000 -1552 -480 -1552 -384 2 polygon
+1 2.000 -1552 -576 -1552 -720 2 polygon
+225 1.000 -1728 -368 -1744 -368 -1744 -400 -1728 -400 4 polygon
+1.000 360 -1552 16 generic::arrowhead
+1.000 360 -1552 -576 generic::arrowhead
+1 2.000 -1552 -752 -1552 -784 2 polygon
+1 2.000 -1552 -816 -1552 -896 2 polygon
+1.000 0 -1664 -1248 pid::valve
+1.000 0 -1984 -1248 pid::valve
+1 2.000 -1936 -1248 -1872 -1248 2 polygon
+1 2.000 -1776 -1248 -1712 -1248 2 polygon
+1 2.000 -1872 -1376 -2096 -1376 -2096 -1248 3 polygon
+1 2.000 -1776 -1376 -1552 -1376 -1552 -1248 3 polygon
+1.000 0 -1840 -1152 pid::valve_positioner
+(FV) {/Helvetica cf} 2 16 0 1.000 -2032 -1112 label
+1 1.000 -2008 -1120 56 0.000 360.000 xcarc
+1 1.000 -1968 -1160 -1848 -1200 2 polygon
+1.000 0 -3776 -1248 pid::cont_arrow
+(Ammonia vapor) {/Helvetica cf} 2 16 0 1.000 -3952 -1232 label
+(Dwg. 10385) {/Helvetica cf} 2 16 0 1.000 -3952 -1288 label
+1.000 0 -2576 -1152 pid::orificeplate
+1.000 0 -2928 -1152 pid::orificeplate
+1 2.000 -3168 -1248 -2944 -1248 2 polygon
+1 2.000 -2912 -1248 -2592 -1248 2 polygon
+1 2.000 -2560 -1248 -2032 -1248 2 polygon
+225 2.000 -1616 -1248 -1552 -1248 -1552 -896 3 polygon
+(36) {/Helvetica cf} 2 16 0 1.000 -2032 -1160 label
+(36) {/Helvetica cf} 2 16 0 1.000 -2600 -1128 label
+(FT) {/Helvetica cf} 2 16 0 1.000 -2600 -1080 label
+(FT) {/Helvetica cf} 2 16 0 1.000 -2952 -1080 label
+(37) {/Helvetica cf} 2 16 0 1.000 -2952 -1128 label
+1.000 0 -2272 -960 pid::main_shared_front
+227 1.000 -2576 -1024 -2576 -960 -2336 -960 3 polygon
+227 1.000 -2208 -960 -1728 -960 -1728 -1168 -1776 -1168 4 polygon
+(FIC) {/Helvetica cf} 2 16 0 1.000 -2304 -944 label
+(36) {/Helvetica cf} 2 16 0 1.000 -2296 -1008 label
+1.000 90 -2032 -1248 generic::arrowhead
+1.000 360 -1552 -1248 generic::arrowhead
+-1.000 180 -2096 -1376 generic::arrowhead
+(FIR) {/Helvetica cf} 2 16 0 1.000 -3168 -944 label
+1.000 0 -3136 -960 pid::main_shared_front
+227 1.000 -3072 -960 -2928 -960 -2928 -1024 3 polygon
+(37) {/Helvetica cf} 2 16 0 1.000 -3160 -1008 label
+(H) {/Helvetica cf} 2 16 0 0.750 -3232 -928 label
+(L) {/Helvetica cf} 2 16 0 0.750 -3232 -1008 label
+(28b) {/Helvetica cf} 2 16 0 1.000 -608 408 label
+(28c) {/Helvetica cf} 2 16 0 1.000 -608 232 label
+3 1.000 2176 -736 2176 -896 2048 -896 3 polygon
+1 2.000 1984 -96 2048 -96 2 polygon
+0 1.000 2160 -80 2160 -112 2048 -112 2048 -80 4 polygon
+1 2.000 2160 -96 2304 -96 2 polygon
+1 2.000 1888 -96 1824 -96 2 polygon
+(Mixer) {/Helvetica cf} 2 16 0 1.000 2056 -64 label
+1 1.000 2064 -88 2064 -104 2072 -104 2056 -88 spline
+1 1.000 2080 -88 2080 -104 2072 -104 2088 -88 spline
+1 1.000 2096 -88 2096 -104 2104 -104 2088 -88 spline
+1 1.000 2112 -88 2112 -104 2104 -104 2120 -88 spline
+1 1.000 2128 -88 2128 -104 2136 -104 2120 -88 spline
+1 1.000 2144 -88 2144 -104 2136 -104 2152 -88 spline
+1 1.000 2064 -104 2064 -88 2072 -88 2056 -104 spline
+1 1.000 2080 -104 2080 -88 2072 -88 2088 -104 spline
+1 1.000 2096 -104 2096 -88 2104 -88 2088 -104 spline
+1 1.000 2112 -104 2112 -88 2104 -88 2120 -104 spline
+1 1.000 2128 -104 2128 -88 2136 -88 2120 -104 spline
+1 1.000 2144 -104 2144 -88 2136 -88 2152 -104 spline
+1.000 180 2224 -96 generic::arrowhead
+1 2.000 2224 -80 2224 32 2288 32 3 polygon
+1 2.000 2320 32 2368 32 2 polygon
+1.000 0 2624 -384 pid::main_shared_front
+3 1.000 2560 -384 2400 -384 2 polygon
+(AIC) {/Helvetica cf} 2 16 0 1.000 2592 -368 label
+(33) {/Helvetica cf} 2 16 0 1.000 2600 -424 label
+(P-105) {/Helvetica-Bold cf} 2 16 0 1.000 3728 -1840 label
+0 1.000 3584 -1760 3584 -1784 4000 -1784 4000 -1760 4 polygon
+0 1.000 3792 -1600 3792 -1696 3952 -1696 3952 -1600 4 polygon
+0 1.000 3808 -1696 3808 -1760 3936 -1760 3936 -1696 4 polygon
+1 1.000 3704 -1568 3720 -1568 3720 -1600 3736 -1600 3736 -1696 3680 -1696 3680 
+-1656 3648 -1656 3648 -1640 3680 -1640 3680 -1600 3704 -1600 3704 -1568 13 
+polygon
+0 1.000 3736 -1640 3736 -1656 3792 -1656 3792 -1640 4 polygon
+0 1.000 3688 -1696 3688 -1760 3728 -1760 3728 -1696 4 polygon
+1 2.000 3712 -1568 3712 -576 2 polygon
+1 2.000 2464 32 3712 32 3712 -584 3 polygon
+1.000 90 -3488 176 pid::valve
+1 2.000 -3488 224 -3488 288 2 polygon
+1.000 180 -3488 224 generic::arrowhead
+1 2.000 -3488 128 -3488 -112 2 polygon
+1 2.000 -3488 -144 -3488 -592 2 polygon
+1 2.000 -3488 -624 -3488 -784 2 polygon
+1 2.000 -3488 -816 -3488 -1232 2 polygon
+1 2.000 -3488 -1264 -3488 -1920 3488 -1920 3488 -1648 3648 -1648 5 polygon
+1.000 270 3472 -1280 pid::valve_relief
+1 2.000 3712 -1264 3536 -1264 2 polygon
+1 2.000 3488 -1312 3488 -1648 2 polygon
+1.000 180 3488 -1648 generic::arrowhead
+1.000 270 3536 -1264 generic::arrowhead
+1.000 360 3712 -1264 generic::arrowhead
+(Set @ 10 PSI) {/Helvetica cf} 2 16 0 1.000 3360 -1216 label
+(P-105) {/Helvetica-Bold cf} 2 16 0 1.000 2800 1904 label
+(NITRIC ACID METERING PUMP) {/Helvetica-Bold cf} 2 16 0 1.000 2592 1856 label
+(F) {ns} (o) {Ss} (2.4 GPM @ 70 ) {/Helvetica cf} 6 16 0 1.000 2704 1808 label
+(Rated head: 55 PSI) {/Helvetica cf} 2 16 0 1.000 2688 1760 label
+1.000 0 3872 -1344 pid::field
+3 1.000 3872 -1408 3872 -1600 2 polygon
+3 1.000 2688 -384 3696 -384 2 polygon
+3 1.000 3728 -384 3872 -384 3872 -1280 3 polygon
+(VFD) {/Helvetica cf} 2 16 0 1.000 3832 -1360 label
+-1.000 /sv 180 2416 32 pid::valve
+-1.000 /sv 270 2880 -48 pid::valve
+1 2.000 2880 0 2880 32 2 polygon
+1 1.000 2864 -96 2864 -112 2896 -112 2896 -96 4 polygon
+1.000 270 2464 32 generic::arrowhead
+1 2.000 3712 -1104 3536 -1104 2 polygon
+1.000 90 3488 -1472 generic::arrowhead
+-1.000 270 3536 -1104 generic::arrowhead
+1 2.000 3440 -1104 3328 -1104 3328 -1472 3472 -1472 4 polygon
+1.000 360 3488 -1648 generic::arrowhead
+1.000 90 3488 -1920 generic::arrowhead
+1.000 180 -3488 -1920 generic::arrowhead
+1.000 90 3648 -1648 generic::arrowhead
+1 2.000 3616 864 2976 864 2 polygon
+1 2.000 -3168 -1248 -3584 -1248 2 polygon
+1 2.000 -3168 -800 -3584 -800 2 polygon
+1 2.000 -3168 -608 -3584 -608 2 polygon
+1 2.000 -3168 -128 -3584 -128 2 polygon
+1 2.000 -3168 288 -3584 288 2 polygon
+1 2.000 -3168 1408 -3584 1408 2 polygon
+497 1.000 -2880 192 -2880 128 -2784 192 -2784 128 -2880 192 5 polygon
+497 1.000 -1872 -1344 -1872 -1408 -1776 -1344 -1776 -1408 -1872 -1344 5 polygon
+497 1.000 512 1024 512 960 608 1024 608 960 512 1024 5 polygon
+497 1.000 992 256 1056 256 992 160 1056 160 992 256 5 polygon
+497 1.000 3440 -1072 3440 -1136 3536 -1072 3536 -1136 3440 -1072 5 polygon
+1.000 90 -1552 -528 pid::valve
+endgate
+} def
+
+
+%%EndSetup
+
+%%Page: i03525x02 1
+%%PageOrientation: Portrait
+/pgsave save def bop
+% 32.00 64.00 gridspace
+0.1500 inchscale
+2.6000 setlinewidth 4807 4703 translate
+
+1.000 90 -1600 576 ::diagram8
+pgsave restore showpage
+
+%%Trailer
+XCIRCsave restore
+%%EOF

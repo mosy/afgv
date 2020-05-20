@@ -1,0 +1,150 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Francis G. Shinskey, in his book {\it Process Control Systems -- Application, Design, and Tuning} (3rd edition), gives a table of generalizations and PID tuning recommendations for different types of processes.  What follows is a modified version:
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Property} & Flow and & Gas & Liquid & Composition & Temperature and \cr
+%
+ & liquid pressure & pressure & level &  & vapor pressure \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Linearity & square/linear & Linear & Linear & Linear / Log & Nonlinear \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Noise & Always & None & Always & Often & None \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Period & 1-10 sec & 0-2 min & 1-10 sec & Minutes to hours & Minutes to hours \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Int/Self-reg & Self-reg & Int & Int & Self-reg & Self-reg \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Controller} & Flow and  & Gas & Liquid & Composition & Temperature and \cr
+%
+{\bf action} & liquid pressure & pressure & level &  & vapor pressure \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Proportional & Moderate-weak & Strong & Strong & Weak & Strong \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Integral & Strong & None & Seldom & Essential & Yes \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Derivative & Never & None & None & If possible & Essential \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+Choose one of these process types and explain {\it why} the tuning recommendations are as stated in the second table.  Note: ``Essential'' does not imply ``Strong,'' but rather that at least {\it some} of this action must be present for good control.  ``Strong,'' however, {\it does} imply necessity!
+
+\vfil
+
+\underbar{file i01822}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+This is a graded question -- no answers or hints given!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+\noindent
+{\bf Flow and Liquid Pressure}
+
+These types of processes are always self-regulating (mass balance is assured), with very fast response, and lots of noise.  The presence of noise tells us right away that we cannot use any derivative action or strong proportional action.  The self-regulating nature tells us we will definitely need integral action, and the fast-responding nature tells us our integral can be pretty aggressive without suffering from wind-up.  Therefore, we should rely primarily on strong integral action for control, with added proportional action as necessary.
+
+\vskip 20pt
+
+\noindent
+{\bf Gas pressure}
+
+The elasticity of a compressed gas acts as a shock absorber to dampen noise, which is why gas pressure control is virtually noiseless.  Unles multiple process vessel chambers exist, the only lag will be single-order, which cannot create any more than 90 degrees of phase shift.  Furthermore, gas pressure control tends to be integrating in nature (mass-balance, where one mass flow is manipulated and the other is relatively constant).  All these factors scream ``proportional'' as the mode the controller needs to have the most: strong proportional action is excellent for integrating processes, so long as multiple orders of lag and noise do not exist.  The fact that the lag time of gas pressure processes tends to be long is of no concern, because the lag is strictly single-order and therefore cannot cause enough phase shift to make proportional action oscillate.
+
+\vskip 20pt
+
+\noindent
+{\bf Liquid level}
+
+Liquid level has a lot in common with gas pressure, in that it is also an integrating process type (mass balance, where one mass flow is manipulated and the other is relatively constant).  The big difference here is that liquid level processes are almost always noisy, whereas gas pressure processes are virtually noiseless.  This means we will not be able to use as much proportional action as we normally could, since proportional action amplifies process variable noise.  If significant noise is present in our liquid level process, we may have to use integral action in lieu of aggressive proportional action, even though this will guarantee overshoot on setpoint changes (being an integrating process).  If we are somehow able to get rid of the noise (e.g. install a {\it stilling well} to ``quiet'' the choppy liquid surface), then strong proportional action will work just fine.  One caveat to be mindful of is the effect of rapid control valve action on surrounding processes: if we do end up using strong proportional action to control liquid level, the sudden and swift actions of the valve may wreak havoc on other processes, as we generate wild surges in flow rate.
+
+\vskip 20pt
+
+\noindent
+{\bf Composition} (e.g. mixture control, chemical reaction control)
+
+This is the most challenging process type listed in the table.  It's self-regulating, so we know we will need to use integral control action to eliminate offset between PV and SP.  However, it has a long lag time, and this lag tends to be multiple-order.  The existence of significant lag time means integral will have a tendency to wind up if made too aggressive.  Too much proportional action will cause oscillations for the same reason: lots of multiple-order lag causing phase shift, which is why proportional action must be kept weak.  Derivative control action would normally be very helpful in conditions like this (lot of lag, inability to use strong P or I action), but the common presence of noise in composition processes makes this problematic as well.  If your composition process is virtually noise-free, then derivative action may be used, allowing more aggressive proportional and integral action to be used as a consequence.  If the noise is significant, however, you're out of luck, which means you'll have to make do with weak actions all around, and therefore must tolerate slow controller response and prolonged offset from setpoint.
+
+\vskip 20pt
+
+\noindent
+{\bf Temperature and Vapor Pressure}
+
+These types of processes are almost always self-regulating (energy balance is assured).  Unique exceptions do exist, such as temperature control of exothermic chemical reactions, which may be runaway in nature!  Self-regulation tells us we will definitely need to use integral action to eliminate offset between PV and SP.  Like gas pressure processes, temperature and vapor pressure control is virtually noiseless, which allows us to use lots of proportional and/or derivative action if necessary.  The caveat here is lag time: lots of multiple-order lag will require derivative action to tame, and will preclude proportional action due to the phase shift the multiple orders of lag may create.  If the lag time is single-order, though, we can use lots of proportional action without fear of oscillation.
+
+
+
+%INDEX% Control, PID tuning: typical settings for different process types
+
+%(END_NOTES)
+
+

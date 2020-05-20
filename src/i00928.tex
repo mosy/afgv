@@ -1,0 +1,63 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Read selected portions of the ``Rosemount 5300 Series high performance guided wave radar'' manual (part 00809-0100-4530, Revision AA, June 2007), and answer the following questions:
+
+\vskip 10pt
+
+Pages 3-8 and 3-9 list guidelines for installing guided-wave radar instruments in liquid and in solid services.  Identify some of these guidelines and explain the rationale for them.
+
+\vskip 10pt
+
+Pages 7-3 through 7-10 discuss the use of Rosemount's ``Radar Master'' configuration software to analyze the transmitter's ``Echo Curve.''  After reading this section, explain how ``threshold'' values are used to identify the meaning of echo pulses.  Also, explain how the ``Amplitude Threshold Curve'' may be used to ignore false echos resulting from disturbing objects in the process vessel (e.g. ladders, baffle plates, etc.).
+
+\vskip 10pt
+
+Guided-wave radar transmitters are capable of measuring liquid-liquid interfaces in addition to simple liquid levels.  Thus, a GWR transmitter may be considered a {\it multivariable} device.  This presents a challenge: how to communicate multiple measurement variables over a single 4-20 mA signal wire pair.  A solution presented on pages 2-6, 5-44, and 5-45 of this manual shows the use of a device called a {\it HART Tri-Loop} to extract three 4-20 mA signals from the transmitter, each signal representing a different process variable.  Explain how this is possible, based on what you know of HART.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identify an echo curve shown in the manual where the detection threshold is set incorrectly, and identify whether the threshold value needs to be increased or decreased.
+\item{} Explain how the Amplitude Threshold Curve (ATC) may be used to set thresholds in way that is more sophisticated, in order to avoid falsely interpreting interfering objects as liquid levels.
+\item{} Explain how ``Probe End Projection'' may be used to determine product level even in cases where there is insufficient echo generated at the top of the product to measure reliably.
+\item{} Will the apparent probe end position rise or fall as the level of material in a vessel increases?
+\item{} In order to use a Tri-Loop device with a HART transmitter, the transmitter must be configured for {\it burst mode}.  What do you suppose ``burst mode'' means for a HART transmitter?
+\item{} Identify some of the process and instrument variables which may be communicated using a Tri-Loop device, other than process level of course.
+\end{itemize}
+
+\underbar{file i00928}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Avoid locating probes near agitators, inlet pipes, heating coils, and other disturbances.  Don't let the probe sway or contact any solid object inside the vessel.  In some applications the probe may need to be {\it anchored} to the vessel bottom to avoid excessive motion.  The rationale for avoiding proximity with disturbances is to eliminate false ``echo'' signatures that may be misinterpreted by the radar transmitter as a fluid interface.
+
+\vskip 10pt
+
+Threshold values are set using the Radar Master software, to interpret different echo signals as different interfaces in the process.  The first echo exceeding threshold P1, for instance, is deemed the ``product surface'' (gas-liquid interface).  The next echo after that, large enough to exceed threshold P2, is deemed the ``interface'' (liquid-liquid) level.  Threshold {\it curves} may be used to skirt false echoes caused by fixed-position disturbances in the vessel.  In all cases, the threshold value should be set to approximately 50\% of the real-world received signal amplitude.
+
+\vskip 10pt
+
+HART is a digital protocol, and as such may serially transmit multiple points of data.  This is what allows multi-variable transmission for HART instruments along a wire pair.
+
+%INDEX% Measurement, level: radar
+%INDEX% Reading assignment: Rosemount model 5300 guided-wave radar transmitter manual
+
+%(END_NOTES)
+

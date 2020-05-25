@@ -19,13 +19,16 @@ function die () {
 ../scripts/gandwrap$2.bash $1
 
 # . . . then convert "output.tex" to DVI format . . .
-if ! latex output.tex ; then die TeX ; fi
+
+#if ! latex output.tex ; then die TeX ; fi
+
+if ! pdflatex output.tex ; then die TeX ; fi
 
 # . . . then give the file a proper name . . .
-mv -vf output.dvi $1$2.dvi
+#mv -vf output.dvi $1$2.dvi
 
 # . . . then convert the file to PostScript format . . .
-if ! dvips -Ppdf -o ../output/$1$2.ps $1$2.dvi ; then die dvips ; fi
+#if ! dvips -Ppdf -o ../output/$1$2.ps $1$2.dvi ; then die dvips ; fi
 
 # . . . then convert the file to Adobe PDF format 
 # (if this is not an "instructor" worksheet)!
@@ -34,8 +37,9 @@ if ! dvips -Ppdf -o ../output/$1$2.ps $1$2.dvi ; then die dvips ; fi
 #         then die ps2pdf ; 
 #       fi ; 
 #fi
-ps2pdf ../output/$1$2.ps ../output/$1$2.pdf
+#ps2pdf ../output/$1$2.ps ../output/$1$2.pdf
 
+cp output.pdf ../output/$1$2.pdf
 # After all that, remove temporary files, including all PostScript files 
 # (unless this is producing an "instructor" version).
 rm -vf all.*

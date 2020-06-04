@@ -1,11 +1,10 @@
 %!PS-Adobe-3.0 EPSF-3.0
-%%Title: mf001x01.eps
+%%Title: if001x02.eps
 %%Creator: XCircuit v3.9 rev73
-%%CreationDate: Thu Jun  4 11:22:01 2020
+%%CreationDate: Wed Jun  3 12:41:07 2020
 %%Pages: 1
-%%BoundingBox: 68 68 378 326
-%%DocumentNeededResources: font Helvetica Helvetica-Bold Times-Roman 
-%%+ font HelveticaISO Symbol 
+%%BoundingBox: 68 68 449 297
+%%DocumentNeededResources: font Helvetica Times-Roman Times-RomanISO Symbol 
 %%EndComments
 %%BeginProlog
 %
@@ -181,50 +180,27 @@
 
 %%EndResource
 %%EndProlog
-/Helvetica findfont dup length dict begin
+/Times-Roman findfont dup length dict begin
 {1 index /FID ne {def} {pop pop} ifelse} forall
 /Encoding ISOLatin1Encoding def currentdict end
-/HelveticaISO exch definefont pop
+/Times-RomanISO exch definefont pop
 
 % XCircuit output starts here.
 
 %%BeginSetup
 
-/::dp_cell {
+/digital::battery {
+% trivial
 begingate
-0.600 0.600 0.600 scb
-241 1.000 -48 -8 -16 -8 -16 -24 -48 -24 spline
-241 1.000 -48 -120 -16 -120 -16 -104 -48 -104 spline
-0.800 0.800 0.800 scb
-240 1.000 0 -24 0 8 16 8 16 -24 4 polygon
-0.000 0.000 1.000 scb
-241 1.000 8 64 56 0.000 360.000 xcarc
-0.600 0.600 0.600 scb
-240 1.000 -48 -24 -48 -104 -16 -104 -16 -24 4 polygon
-sce
-241 1.000 -32 -64 8 0.000 360.000 xcarc
-0.600 0.600 0.600 scb
-241 1.000 32 -8 64 -8 64 -24 32 -24 spline
-241 1.000 32 -120 64 -120 64 -104 32 -104 spline
-240 1.000 32 -24 32 -104 64 -104 64 -24 4 polygon
-sce
-241 1.000 48 -64 8 0.000 360.000 xcarc
-0.800 0.800 0.800 scb
-240 1.000 -16 -24 -16 -104 32 -104 32 -24 4 polygon
-sce
-1 1.000 -48 -104 -48 -24 2 polygon
-1 1.000 -16 -24 -16 -104 2 polygon
-1 1.000 -48 -8 -16 -8 -16 -24 -48 -24 spline
-1 1.000 -48 -120 -16 -120 -16 -104 -48 -104 spline
-1 1.000 32 -120 64 -120 64 -104 32 -104 spline
-1 1.000 32 -8 64 -8 64 -24 32 -24 spline
-1 1.000 32 -24 32 -104 2 polygon
-1 1.000 64 -24 64 -104 2 polygon
-0 1.000 -16 -24 -16 -104 32 -104 32 -24 4 polygon
-(H) {/Helvetica cf} 2 16 0.000 0.500 -40 -40 label
-(L) {/Helvetica cf} 2 16 0.000 0.500 40 -40 label
-0 1.000 0 8 0 -24 16 -24 16 8 4 polygon
-1 1.000 8 64 56 0.000 360.000 xcarc
+1 1.000 -32 32 32 32 2 polygon
+1 1.000 0 64 0 32 2 polygon
+1 1.000 -16 12 16 12 2 polygon
+1 1.000 -16 -28 16 -28 2 polygon
+1 1.000 -32 -8 32 -8 2 polygon
+1 1.000 0 -64 0 -28 2 polygon
+1.000 0.000 0.000 scb
+(b.p) {/Times-Roman cf} 2 9 0.000 1.000 0 64 pinlabel
+(b.m) {/Times-Roman cf} 2 13 0.000 1.000 0 -64 pinlabel
 endgate
 } def
 
@@ -248,35 +224,6 @@ begingate
 endgate
 } def
 
-/generic::dot {
-% trivial
-begingate
-248 1.000 0 0 6 0.000 360.000 xcarc
-1.000 0.000 0.000 scb
-(x) {/Times-Roman cf} 2 29 -0.000 1.000 0 0 pinlabel
-endgate
-} def
-
-/analog::source {
-% hidden
-begingate
-1 1.000 0 0 32 0.000 360.000 xcarc
-1 1.000 0 32 0 64 2 polygon
-1 1.000 0 -32 0 -64 2 polygon
-endgate
-} def
-
-/analog::vsource {
-begingate
-1.000 0.000 0 0 analog::source
-(+) {/Symbol cf} 2 5 0.000 1.000 0 14 label
-(-) {/Symbol cf} 2 5 0.000 1.000 0 -22 label
-1.000 0.000 0.000 scb
-(v.p) {/Times-Roman cf} 2 9 0.000 1.000 0 64 pinlabel
-(v.m) {/Times-Roman cf} 2 13 0.000 1.000 0 -64 pinlabel
-endgate
-} def
-
 /analog::resistor {
 begingate
 1 1.000 0 64 0 36 2 polygon
@@ -292,72 +239,94 @@ infolabel
 endgate
 } def
 
-/analog::gnd {
-% trivial
+/analog::source {
+% hidden
 begingate
-1 1.000 0 0 0 -32 2 polygon
-1 1.000 -32 -32 32 -32 2 polygon
-1 1.000 -18 -46 18 -46 2 polygon
-1 1.000 -4 -60 4 -60 2 polygon
-0.933 0.604 0.000 scb
-(GND) {/Times-Roman cf} 2 1 0.000 1.000 0 0 pinglobal
+1 1.000 0 0 32 0.000 360.000 xcarc
+1 1.000 0 32 0 64 2 polygon
+1 1.000 0 -32 0 -64 2 polygon
+endgate
+} def
+
+/analog::isource {
+begingate
+1.000 0.000 0 0 analog::source
+1 0.750 0 20 0 -8 2 polygon
+0.800 /sv 180.000 0 -20 generic::arrowhead
+1.000 0.000 0.000 scb
+(i.p) {/Times-Roman cf} 2 9 0.000 1.000 0 64 pinlabel
+(i.m) {/Times-Roman cf} 2 13 0.000 1.000 0 -64 pinlabel
 endgate
 } def
 
 
 %%EndSetup
 
-%%Page: 5450x001.eps 1
+%%Page: if002x02.eps 1
 %%PageOrientation: Portrait
 /pgsave save def bop
 % 32.00 8.00 gridspace
 0.7500 inchscale
-2.6000 setlinewidth 736 780 translate
+2.6000 setlinewidth 960 656 translate
 
-1.000 0.647 0.000 scb
-240 1.000 -288 128 -288 -128 96 -128 96 128 4 polygon
+(PLS) {/Helvetica cf} 2 16 0.000 1.000 -624 320 label
+1.000 0.000 -464 192 digital::battery
+1.000 45.000 -432 224 generic::arrow
+1 1.000 -448 208 -512 144 2 polygon
+1 1.000 -464 256 -464 288 448 288 3 polygon
+1.000 0.000 448 192 analog::resistor
+1 1.000 448 288 448 256 2 polygon
+1 1.000 0 96 32 0.000 360.000 xcarc
+1 1.000 0 144 0 48 16 96 -16 96 spline
+1 1.000 -32 96 -464 96 -464 128 3 polygon
+1 1.000 32 96 448 96 448 128 3 polygon
+(\370y) {/Times-RomanISO cf} (st) {ss} (U) {/Times-Roman cf} 6 16 0.000 1.000 
+-48 144 label
+(Motor starter) {/Helvetica cf} 2 16 0.000 1.000 392 360 label
+(inngang) {/Helvetica cf} 2 16 0.000 1.000 448 320 label
+0.600 0.600 0.600 scb
+4 1.000 -704 304 -704 80 -384 80 -384 304 4 polygon
 sce
-1 2.000 -288 320 -288 -128 96 -128 96 320 4 polygon
-(\263) {/HelveticaISO cf} (850kg/m) {CR} (Egenvekt =) {CR} (Prosess veske) 
-{/Helvetica cf} 8 1045 0.000 1.000 -88 32 label
--1.000 /sv 180.000 208 -192 ::dp_cell
-1 2.000 176 -128 96 -128 2 polygon
-1 2.000 -192 384 0 384 96 320 -288 320 spline
-("dry" leg) {/Helvetica cf} 2 16 0.000 1.000 448 176 label
-1.000 225.000 456 136 generic::arrow
-1 2.000 256 -128 416 -128 416 304 96 304 4 polygon
-1.000 0.000 192 -272 generic::dot
-1.000 0.000 240 -272 generic::dot
-1 1.000 192 -240 192 -256 2 polygon
-1 1.000 184 -248 200 -248 2 polygon
-1 1.000 232 -248 248 -248 2 polygon
-1 1.000 -304 128 -368 128 2 polygon
-1 1.000 -304 -128 -368 -128 2 polygon
-1.000 0.000 -336 128 generic::arrowhead
--1.000 /sv 180.000 -336 -128 generic::arrowhead
-1 1.000 -336 -112 -336 -32 2 polygon
-1 1.000 -336 32 -336 112 2 polygon
-1.000 0.000 -288 -400 analog::vsource
-1.000 90.000 -144 -272 analog::resistor
-1 1.000 -208 -272 -288 -272 -288 -336 3 polygon
-1 1.000 -80 -272 192 -272 2 polygon
-1.000 180.000 352 -368 analog::resistor
-1.000 0.000 -288 -464 analog::gnd
-1.000 0.000 352 -464 analog::gnd
-1 1.000 240 -272 352 -272 352 -304 3 polygon
-1 1.000 352 -432 352 -464 2 polygon
-(W) {/Symbol cf} (120 ) {/Times-Roman cf} 4 16 0.000 1.000 -208 -240 label
-(22 VDC) {/Times-Roman cf} 2 16 0.000 1.000 -480 -416 label
-(W) {/Symbol cf} (250 ) {/Times-Roman cf} 4 16 0.000 1.000 384 -384 label
-1.000 0.000 -288 -272 generic::dot
-1.000 0.000 48 -272 generic::dot
-1.000 0.000 352 -272 generic::dot
-(A) {/Helvetica-Bold cf} 2 16 0.000 1.000 -320 -256 label
-(B) {/Helvetica-Bold cf} 2 16 0.000 1.000 32 -256 label
-(C) {/Helvetica-Bold cf} 2 16 0.000 1.000 360 -264 label
-(2.5m) {/Times-Roman cf} 2 16 0.000 1.000 -384 -16 label
-(2.96 Bar) {/Times-Roman cf} 2 16 0.000 1.000 -176 256 label
-(Damptrykk) {/Helvetica cf} 2 16 0.000 1.000 -200 216 label
+(W) {/Symbol cf} (1 M) {/Times-Roman cf} 4 16 0.000 1.000 488 176 label
+0.600 0.600 0.600 scb
+4 1.000 368 304 368 80 624 80 624 304 4 polygon
+sce
+(PLS) {/Helvetica cf} 2 16 0.000 1.000 -624 -128 label
+1.000 45.000 -432 -224 generic::arrow
+1 1.000 -448 -240 -512 -304 2 polygon
+1 1.000 -464 -192 -464 -160 448 -160 3 polygon
+1.000 0.000 448 -256 analog::resistor
+1 1.000 448 -160 448 -192 2 polygon
+1 1.000 0 -352 32 0.000 360.000 xcarc
+1 1.000 0 -304 0 -400 16 -352 -16 -352 spline
+1 1.000 -32 -352 -464 -352 -464 -320 3 polygon
+1 1.000 32 -352 448 -352 448 -320 3 polygon
+{/Times-RomanISO cf} (\370y) {/Times-RomanISO cf} (st) {ss} (U) 
+{/Times-Roman cf} 7 16 0.000 1.000 -48 -304 label
+(Motor starter) {/Helvetica cf} 2 16 0.000 1.000 392 -88 label
+(inngang) {/Helvetica cf} 2 16 0.000 1.000 448 -128 label
+0.600 0.600 0.600 scb
+4 1.000 -704 -144 -704 -368 -384 -368 -384 -144 4 polygon
+4 1.000 368 -144 368 -368 624 -368 624 -144 4 polygon
+sce
+(4-20 mA) {/Times-Roman cf} 2 16 0.000 1.000 -672 -264 label
+-1.000 /sv 180.000 -464 -256 analog::isource
+(W) {/Symbol cf} (250 ) {/Times-Roman cf} 4 16 0.000 1.000 488 -272 label
+0.600 0.600 0.600 scb
+1 1.000 -288 336 -288 48 -320 48 -320 336 spline
+1 1.000 -352 336 -352 48 -320 48 -320 336 spline
+1 1.000 336 336 336 48 304 48 304 336 spline
+1 1.000 272 336 272 48 304 48 304 336 spline
+1 1.000 304 336 -320 336 2 polygon
+1 1.000 -320 48 304 48 2 polygon
+1 1.000 -288 -112 -288 -400 -320 -400 -320 -112 spline
+1 1.000 -352 -112 -352 -400 -320 -400 -320 -112 spline
+1 1.000 336 -112 336 -400 304 -400 304 -112 spline
+1 1.000 272 -112 272 -400 304 -400 304 -112 spline
+1 1.000 304 -112 -320 -112 2 polygon
+1 1.000 -320 -400 304 -400 2 polygon
+sce
+(1-5 VDC) {/Times-Roman cf} 2 16 0.000 1.000 -668 184 label
 pgsave restore showpage
 
 %%Trailer

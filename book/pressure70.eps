@@ -1,0 +1,643 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: pressure70.eps
+%%Creator: XCircuit v3.6 rev164
+%%CreationDate: Wed Sep 15 08:01:14 2010
+%%Pages: 1
+%%BoundingBox: 68 68 464 301
+%%DocumentNeededResources: font Helvetica Helvetica-Bold Helvetica-Oblique 
+%%+ font Times-Roman 
+%%EndComments
+%%BeginProlog
+%
+%  PostScript prolog for output from xcircuit
+%  Version: 3.3
+%
+%  Electrical circuit (and otherwise general) drawing program
+%
+%  Written by Tim Edwards 8/5/93--7/13/05  (tim.edwards@multigig.com)
+%  The Johns Hopkins University (1993-2004)
+%  MultiGiG, Inc. (2004-present)
+%
+%%BeginResource: procset XCIRCproc 3.3 0
+%
+% supporting definitions --- these are the primary xcircuit types.
+
+/XCIRCsave save def
+/topmat matrix currentmatrix def
+
+/fontslant { /slant exch def [1 0 slant 1 0 0] 
+    exch findfont exch makefont dup length dict /ndict exch def
+    { 1 index /FID ne { ndict 3 1 roll put } { pop pop } ifelse } forall
+    ndict definefont pop} def
+/ul { dup type /stringtype eq showflag 1 eq and { gsave 
+   currentpoint topmat setmatrix 0 0 moveto 2 index stringwidth pop (_)
+   false charpath flattenpath pathbbox grestore exch pop 1 index
+   sub setlinewidth exch pop currentpoint 3 -1 roll add moveto 0
+   rlineto stroke moveto } if } def
+/ol { dup type /stringtype eq showflag 1 eq and { gsave gsave
+   currentpoint topmat setmatrix 2 index stringwidth pop 3 index
+   true charpath flattenpath pathbbox grestore exch pop
+   exch pop topmat setmatrix (_) true charpath pathbbox grestore
+   exch pop 1 index sub setlinewidth exch pop currentpoint
+   exch 4 1 roll exch sub add moveto pop 0 rlineto stroke
+   moveto } if } def
+/stW { gsave currentpoint newpath moveto true charpath flattenpath
+	pathbbox pop exch pop sub grestore } def
+/Ts {mark Tabs aload pop counttomark 1 add array astore /Tabs exch def Tabs
+	0 currentpoint pop put} def
+/Tbn {mark Tabs aload pop counttomark dup 2 add 1 roll cleartomark 1 sub} def
+/Tb { 0 1 Tbn {Tabs exch get dup currentpoint pop lt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/Tf { Tbn -1 0 {Tabs exch get dup currentpoint pop gt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/qS { (aa) stW (a a) stW sub 4 div 0 Kn } def
+/hS { qS qS } def
+/pspc 0 def
+/cf0 { scalefont setfont } bind def
+/Kn { dup kY add /kY exch def rmoveto } bind def
+/ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.33 mul neg Kn} def
+/Ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.67 mul Kn } def
+/ns { 0 kY neg Kn /kY 0 def /fscale 1.0 def xfont0 1.0 cf0 } def
+/CR { ns 0 /Bline Bline fscale0 neg add def Bline moveto } def
+/cf { dup type /realtype ne {1.0} if exch findfont exch kY 0 eq
+	{ 40 mul dup /fscale0 exch def cf0 /xfont0 currentfont def}
+	{fscale0 mul fscale mul cf0} ifelse } def
+/ctmk { counttomark dup 2 add -1 roll pop } bind def
+/label { gsave translate 0 0 moveto dup scale neg /rotval exch def
+	/just exch def just 384 and 0 gt {/mshow {pop} def} {/mshow {show}
+	def} ifelse just 16 and 0 gt {gsave rotval rotate 0 1 dtransform
+	gsave pagemat setmatrix idtransform exch grestore 1 0 dtransform
+	gsave pagemat setmatrix idtransform exch grestore dup abs 1e-9 lt
+	{pop mul 0 gt} {3 1 roll pop pop 0 lt} ifelse grestore {-1 /rotval
+	rotval neg def /just just dup 3 and 1 ne {3 xor} if def} {1} ifelse
+	exch -1e-9 lt {-1 /rotval rotval neg def /just just dup 12 and
+	4 ne {12 xor} if def} {1} ifelse scale } if /showflag 0 def
+	/fspc pspc def /Bline 0 def /Tabs 0 array def /fscale 1.0 def
+	/kY 0 def gsave dup 1 add copy 0 exch 1 0 dtransform exch atan rotate
+	{exch dup type /stringtype eq {true charpath flattenpath} {dup type
+	/arraytype eq {exec} {12 string cvs true charpath flattenpath} ifelse}
+	ifelse} repeat pop pathbbox grestore 3 -1 roll pop 3 1 roll just
+	1 and 0 gt {just 2 and 0 gt {exch pop neg fspc sub} {exch sub 0.5
+	mul neg} ifelse} {pop neg fspc add} ifelse exch Bline exch just 4
+	and 0 gt {just 8 and 0 gt {exch pop neg fspc sub} {add 0.5 mul neg}
+	ifelse} {pop neg fspc add} ifelse rotval rotate Kn currentpoint
+	translate /showflag 1 def /Bline 0 def /Tabs 0 array def /fscale
+	1.0 def /kY 0 def {dup type /stringtype eq {mshow} {dup type
+	/arraytype eq {exec} {12 string cvs mshow} ifelse} ifelse} repeat
+	grestore } def
+/pinlabel { 4 index 32 and 0 ne hlevel 0 eq or { /pspc 10 def label
+	/pspc 0 def } { pop pop pop pop pop {pop} repeat } ifelse } def
+/pinglobal { pinlabel } def
+/infolabel { pinlabel } def
+/graphic { gsave 4 index cvx exec /DataSource get resetfile translate
+	0 0 moveto neg rotate dup scale cvx exec image grestore } def
+
+/scb { setrgbcolor } bind def  /sce { defColor aload pop scb } bind def
+/cRedef {/defColor currentcolor 3 array astore def} def
+/begingate {dup type /dicttype ne {1 dict} if begin	% default params
+	dup type /dicttype ne {1 dict} if begin		% instanced params
+	/hlevel hlevel 1 add def /defColor currentcolor sce 3 array
+	astore def gsave sce translate 0 0 moveto neg rotate dup abs scale
+	} bind def
+/endgate { /hlevel hlevel 1 sub def grestore defColor aload pop cRedef
+	scb end end} bind def
+
+/hlevel 0 def
+/tmpa [1 0 0 1 0 0] def
+/gar {8 8 true tmpa {<c0 c0 00 00 0c 0c 00 00>} imagemask} bind
+{8 8 true tmpa {<30 70 60 02 03 07 06 20>} imagemask} bind
+{8 8 true tmpa {<0c 1e 1e 0c c0 e1 e1 c0>} imagemask} bind
+{8 8 true tmpa {<0f 0f 0f 0f f0 f0 f0 f0>} imagemask} bind
+{8 8 true tmpa {<3f f3 e1 e1 f3 3f 1e 1e>} imagemask} bind
+{8 8 true tmpa {<df cf 8f 9f fd fc f8 f9>} imagemask} bind
+{8 8 true tmpa {<ff 3f 3f ff ff f3 f3 ff>} imagemask} bind 7 array astore def
+/ppaint { gsave clip tmpa dup setmatrix pathbbox neg exch neg 4 2 roll
+  neg 4 -1 roll 2 copy gt {exch} if 8 div ceiling 8 mul 4 2 roll neg 2 copy
+  gt {exch} if 8 div ceiling 8 mul 3 -1 roll -8 5 -1 roll
+  { 3 index exch 5 exch put dup -8 3 index { 3 index
+  exch 4 exch put 3 index exec } for } for pop pop pop pop grestore } bind def
+/setstyles {
+  currentlinewidth mul setlinewidth /style exch def
+  style 1 and 0 gt not {closepath} if
+  style 1024 and 0 gt {2 setlinecap} if
+  style 2 and 0 gt {currentlinewidth 4 mul dup 2 array astore 0 setdash} if
+  style 4 and 0 gt {0.5 currentlinewidth 4 mul 2 array astore 0 setdash} if
+  gsave style 16 and 0 gt { style 224 and -5 bitshift style 256 and 0 gt {
+  7 exch sub 8 div dup 1 exch sub currentrgbcolor 3 array astore
+  {3 copy mul add 4 1 roll pop} forall pop pop setrgbcolor eofill}
+  {dup 7 lt {gar exch get ppaint} {pop eofill} ifelse} ifelse}
+  {style 256 and 0 gt {1 setgray eofill} if} ifelse grestore style 8 and 0 gt 
+  style 512 eq or {newpath} {stroke} ifelse grestore} def     
+
+/polygon { gsave /num exch def moveto num 1 sub {lineto} repeat setstyles } def
+/xcarc   { gsave newpath arc setstyles } def
+/elb { matrix currentmatrix 7 -1 roll 7 -1 roll translate 5 1 roll 4 -1 roll
+	3 index div 1 scale } def
+/ele { 0 4 1 roll 0 4 1 roll } bind def
+/ellipse { gsave elb newpath ele arc setmatrix setstyles } def
+/pellip  { elb ele arc setmatrix } def
+/nellip  { elb ele arcn setmatrix } def
+/spline  { gsave moveto curveto setstyles } def
+/polyc   { {lineto} repeat } bind def
+/beginpath { gsave moveto } bind def
+/endpath { setstyles } bind def
+/bop	 { 1 setlinecap 0 setlinejoin 6 setmiterlimit 0 0 0 scb cRedef } def
+/psinsertion {/PSobj save def /showpage {} def /setpagedevice {pop} def bop
+	rotate translate dup scale} def
+/end_insert {PSobj restore} def
+/setpagemat {/pagemat matrix currentmatrix def} def
+/inchscale  {setpagemat 0.375 mul dup scale} def
+/cmscale    {setpagemat 0.35433071 mul dup scale} def
+
+%%EndResource
+%%EndProlog
+
+% XCircuit output starts here.
+
+%%BeginSetup
+
+/generic::arrowhead {
+% nonetwork
+begingate
+8 -28 beginpath
+3 -18 3 -15 0 0 curveto
+-3 -15 -3 -18 -8 -28 curveto
+-2 -26 2 -26 8 -28 curveto
+249 
+1.000 endpath
+endgate
+} def
+
+/::arrowhead90 {
+begingate
+1.000 270 -16 0 generic::arrowhead
+endgate
+} def
+
+/generic::dot {
+% trivial
+begingate
+248 1.000 0 0 6 0.000 360.000 xcarc
+1.000 0.000 0.000 scb
+(x) {/Times-Roman cf} 2 29 0 1.000 0 0 pinlabel
+endgate
+} def
+
+/generic::arrow {
+% nonetwork
+begingate
+1 0.800 0 -40 0 20 2 polygon
+1.000 0 0 40 generic::arrowhead
+endgate
+} def
+
+
+%%EndSetup
+
+%%Page: 5300x013.eps 1
+%%PageOrientation: Portrait
+/pgsave save def bop
+% 32.00 8.00 gridspace
+0.7500 inchscale
+2.6000 setlinewidth 1392 640 translate
+
+1 1.000 -176 -48 -272 48 -272 176 -48 -48 spline
+1 1.000 -176 400 -272 304 -272 176 -48 400 spline
+1 1.000 80 400 176 304 176 176 -48 400 spline
+1 1.000 -176 -64 -288 32 -288 176 -48 -64 spline
+1 1.000 -176 416 -288 320 -288 176 -48 416 spline
+1 1.000 80 416 192 320 192 176 -48 416 spline
+1 1.000 176 160 192 160 192 176 176 176 spline
+0.604 0.604 0.604 scb
+241 1.000 -48 176 16 0.000 360.000 xcarc
+sce
+1 3.000 -48 176 -288 -48 2 polygon
+1.000 315 -288 -48 ::arrowhead90
+(Pointer) {/Helvetica cf} 2 16 0 1.000 -416 -16 label
+0.604 0.604 0.604 scb
+241 1.000 -48 152 -32 184 8 192 -48 120 spline
+sce
+241 1.000 -48 120 8 112 2 polygon
+0.604 0.604 0.604 scb
+241 1.000 8 192 32 136 2 polygon
+241 1.000 176 200 208 184 200 168 168 184 spline
+241 1.000 128 32 96 48 104 64 136 48 spline
+241 1.000 168 184 104 64 136 48 200 168 168 184 5 polygon
+sce
+1 1.000 104 64 168 184 2 polygon
+1 1.000 136 48 200 168 2 polygon
+1 1.000 176 200 208 184 200 168 168 184 spline
+1 1.000 128 32 96 48 104 64 136 48 spline
+1.000 0 184 176 generic::dot
+0.604 0.604 0.604 scb
+241 1.000 8 112 32 136 136 64 120 40 8 112 5 polygon
+241 1.000 -48 120 8 112 32 136 8 192 -48 120 5 polygon
+sce
+1 1.000 -48 152 -24 192 8 192 -48 120 spline
+1 1.000 -48 120 8 112 120 40 3 polygon
+1 1.000 8 192 32 136 136 64 3 polygon
+0.604 0.604 0.604 scb
+241 1.000 152 56 128 32 120 40 136 64 spline
+sce
+1 1.000 152 56 128 32 120 40 136 64 spline
+1.000 0 120 56 generic::dot
+1.000 0 16 128 generic::dot
+1 1.000 -48 176 16 0.000 360.000 xcarc
+1.000 0 -48 176 generic::dot
+1.000 0.000 0.000 scb
+(Pinion gear) {/Helvetica cf} 2 16 0 0.500 -128 200 label
+sce
+(Sector gear) {/Helvetica cf} 2 16 0 0.500 24 176 label
+(Link) {/Helvetica cf} 2 16 300 0.500 144 96 label
+(Bourdon) {/Helvetica cf} 2 16 0 0.500 172 296 label
+(tube) {/Helvetica cf} 2 16 0 0.500 188 276 label
+(Bourdon tube) {/Helvetica-Oblique cf} 2 16 0 1.000 -576 200 label
+(pressure gauge) {/Helvetica-Oblique cf} 2 16 0 1.000 -600 160 label
+0.361 0.675 0.933 scb
+1.000 0 -1120 280 generic::dot
+1.000 0 -1104 264 generic::dot
+1.000 0 -1104 216 generic::dot
+1.000 0 -1120 184 generic::dot
+1.000 0 -1120 168 generic::dot
+1.000 0 -1088 136 generic::dot
+1.000 0 -1088 168 generic::dot
+1.000 0 -1056 200 generic::dot
+1.000 0 -1056 248 generic::dot
+1.000 0 -1088 232 generic::dot
+1.000 0 -1056 280 generic::dot
+1.000 0 -1040 232 generic::dot
+1.000 0 -1088 200 generic::dot
+1.000 0 -1072 168 generic::dot
+1.000 0 -1056 136 generic::dot
+1.000 0 -1024 168 generic::dot
+1.000 180 -896 136 generic::dot
+1.000 180 -912 152 generic::dot
+1.000 180 -912 200 generic::dot
+1.000 180 -896 232 generic::dot
+1.000 180 -896 248 generic::dot
+1.000 180 -928 280 generic::dot
+1.000 180 -928 248 generic::dot
+1.000 180 -960 216 generic::dot
+1.000 180 -960 168 generic::dot
+1.000 180 -928 184 generic::dot
+1.000 180 -960 136 generic::dot
+1.000 180 -976 184 generic::dot
+1.000 180 -928 216 generic::dot
+1.000 180 -944 248 generic::dot
+1.000 180 -960 280 generic::dot
+1.000 180 -992 248 generic::dot
+1.000 0 -1008 200 generic::dot
+1.000 0 -1024 280 generic::dot
+1.000 0 -992 136 generic::dot
+1.000 0 -1120 120 generic::dot
+1.000 0 -1024 120 generic::dot
+1.000 0 -944 120 generic::dot
+1.000 180 -1120 232 generic::dot
+1.000 180 -992 168 generic::dot
+1.000 180 -1008 248 generic::dot
+1.000 180 -976 232 generic::dot
+1.000 180 -896 168 generic::dot
+1.000 180 -896 200 generic::dot
+1.000 0 -864 280 generic::dot
+1.000 0 -848 264 generic::dot
+1.000 0 -848 216 generic::dot
+1.000 0 -864 184 generic::dot
+1.000 0 -864 168 generic::dot
+1.000 0 -832 136 generic::dot
+1.000 0 -832 168 generic::dot
+1.000 0 -800 200 generic::dot
+1.000 0 -800 248 generic::dot
+1.000 0 -832 232 generic::dot
+1.000 0 -800 280 generic::dot
+1.000 0 -784 232 generic::dot
+1.000 0 -832 200 generic::dot
+1.000 0 -816 168 generic::dot
+1.000 0 -800 136 generic::dot
+1.000 0 -768 168 generic::dot
+1.000 180 -1080 -56 generic::dot
+1.000 180 -1096 -40 generic::dot
+1.000 180 -1056 -40 generic::dot
+1.000 180 -1080 40 generic::dot
+1.000 180 -1080 72 generic::dot
+1.000 180 -1112 88 generic::dot
+1.000 180 -1112 56 generic::dot
+1.000 180 -704 216 generic::dot
+1.000 180 -704 168 generic::dot
+1.000 180 -1112 -8 generic::dot
+1.000 180 -704 136 generic::dot
+1.000 180 -720 184 generic::dot
+1.000 180 -1112 24 generic::dot
+1.000 180 -1120 -40 generic::dot
+1.000 180 -704 280 generic::dot
+1.000 180 -736 248 generic::dot
+1.000 0 -752 200 generic::dot
+1.000 0 -768 280 generic::dot
+1.000 0 -736 136 generic::dot
+1.000 0 -864 120 generic::dot
+1.000 0 -768 120 generic::dot
+1.000 0 -1112 -72 generic::dot
+1.000 180 -864 232 generic::dot
+1.000 180 -736 168 generic::dot
+1.000 180 -752 248 generic::dot
+1.000 180 -720 232 generic::dot
+1.000 180 -1080 -24 generic::dot
+1.000 180 -1088 104 generic::dot
+1.000 0 -1064 88 generic::dot
+1.000 0 -1048 72 generic::dot
+1.000 0 -1048 24 generic::dot
+1.000 0 -1064 -8 generic::dot
+1.000 0 -1056 104 generic::dot
+1.000 0 -1032 -56 generic::dot
+1.000 0 -1032 -24 generic::dot
+1.000 0 -1000 8 generic::dot
+1.000 0 -1000 56 generic::dot
+1.000 0 -1032 40 generic::dot
+1.000 0 -1000 88 generic::dot
+1.000 0 -984 40 generic::dot
+1.000 0 -1032 8 generic::dot
+1.000 0 -1016 -24 generic::dot
+1.000 0 -1000 -56 generic::dot
+1.000 0 -968 -24 generic::dot
+1.000 180 -840 -56 generic::dot
+1.000 180 -856 -40 generic::dot
+1.000 180 -856 8 generic::dot
+1.000 180 -840 40 generic::dot
+1.000 180 -840 56 generic::dot
+1.000 180 -872 88 generic::dot
+1.000 180 -872 56 generic::dot
+1.000 180 -904 24 generic::dot
+1.000 180 -904 -24 generic::dot
+1.000 180 -872 -8 generic::dot
+1.000 180 -904 -56 generic::dot
+1.000 180 -920 -8 generic::dot
+1.000 180 -872 24 generic::dot
+1.000 180 -888 56 generic::dot
+1.000 180 -904 88 generic::dot
+1.000 180 -936 56 generic::dot
+1.000 0 -952 8 generic::dot
+1.000 0 -968 88 generic::dot
+1.000 0 -936 -56 generic::dot
+1.000 0 -1064 -72 generic::dot
+1.000 0 -968 -72 generic::dot
+1.000 0 -888 -72 generic::dot
+1.000 180 -1064 40 generic::dot
+1.000 180 -936 -24 generic::dot
+1.000 180 -952 56 generic::dot
+1.000 180 -920 40 generic::dot
+1.000 180 -840 -24 generic::dot
+1.000 180 -840 8 generic::dot
+1.000 0 -808 88 generic::dot
+1.000 0 -792 72 generic::dot
+1.000 0 -792 24 generic::dot
+1.000 0 -808 -8 generic::dot
+1.000 0 -808 -24 generic::dot
+1.000 0 -776 -56 generic::dot
+1.000 0 -776 -24 generic::dot
+1.000 0 -744 8 generic::dot
+1.000 0 -744 56 generic::dot
+1.000 0 -776 40 generic::dot
+1.000 0 -744 88 generic::dot
+1.000 0 -728 40 generic::dot
+1.000 0 -776 8 generic::dot
+1.000 0 -760 -24 generic::dot
+1.000 0 -744 -56 generic::dot
+1.000 0 -712 -24 generic::dot
+1.000 180 -1008 -240 generic::dot
+1.000 180 -1024 -224 generic::dot
+1.000 180 -1024 -176 generic::dot
+1.000 180 -1008 -144 generic::dot
+1.000 180 -1008 -128 generic::dot
+1.000 180 -1040 -96 generic::dot
+1.000 180 -1032 -120 generic::dot
+1.000 180 -1072 -160 generic::dot
+1.000 180 -1072 -208 generic::dot
+1.000 180 -1040 -192 generic::dot
+1.000 180 -1072 -240 generic::dot
+1.000 180 -1088 -192 generic::dot
+1.000 180 -1040 -160 generic::dot
+1.000 180 -1056 -128 generic::dot
+1.000 180 -1072 -96 generic::dot
+1.000 180 -1104 -128 generic::dot
+1.000 0 -1120 -176 generic::dot
+1.000 0 -712 88 generic::dot
+1.000 0 -1104 -240 generic::dot
+1.000 0 -808 -72 generic::dot
+1.000 0 -712 -72 generic::dot
+1.000 0 -1056 -256 generic::dot
+1.000 180 -808 40 generic::dot
+1.000 180 -1104 -208 generic::dot
+1.000 180 -1112 -104 generic::dot
+1.000 180 -1088 -144 generic::dot
+1.000 180 -1008 -208 generic::dot
+1.000 180 -1016 -80 generic::dot
+1.000 0 -992 -96 generic::dot
+1.000 0 -976 -112 generic::dot
+1.000 0 -976 -160 generic::dot
+1.000 0 -992 -192 generic::dot
+1.000 0 -864 -88 generic::dot
+1.000 0 -960 -240 generic::dot
+1.000 0 -960 -208 generic::dot
+1.000 0 -928 -176 generic::dot
+1.000 0 -928 -128 generic::dot
+1.000 0 -960 -144 generic::dot
+1.000 0 -928 -96 generic::dot
+1.000 0 -912 -144 generic::dot
+1.000 0 -960 -176 generic::dot
+1.000 0 -944 -208 generic::dot
+1.000 0 -928 -240 generic::dot
+1.000 0 -896 -208 generic::dot
+1.000 180 -976 -48 generic::dot
+1.000 180 -784 -224 generic::dot
+1.000 180 -784 -176 generic::dot
+1.000 180 -768 -144 generic::dot
+1.000 180 -768 -128 generic::dot
+1.000 180 -800 -96 generic::dot
+1.000 180 -776 -96 generic::dot
+1.000 180 -832 -160 generic::dot
+1.000 180 -832 -208 generic::dot
+1.000 180 -800 -192 generic::dot
+1.000 180 -832 -240 generic::dot
+1.000 180 -848 -192 generic::dot
+1.000 180 -800 -160 generic::dot
+1.000 180 -816 -128 generic::dot
+1.000 180 -832 -96 generic::dot
+1.000 180 -864 -128 generic::dot
+1.000 0 -880 -176 generic::dot
+1.000 0 -896 -96 generic::dot
+1.000 0 -864 -240 generic::dot
+1.000 0 -992 -256 generic::dot
+1.000 0 -896 -256 generic::dot
+1.000 0 -816 -256 generic::dot
+1.000 180 -952 -120 generic::dot
+1.000 180 -864 -208 generic::dot
+1.000 180 -880 -128 generic::dot
+1.000 180 -848 -144 generic::dot
+1.000 180 -768 -208 generic::dot
+1.000 180 -768 -176 generic::dot
+1.000 0 -736 -96 generic::dot
+1.000 0 -720 -112 generic::dot
+1.000 0 -720 -160 generic::dot
+1.000 0 -736 -192 generic::dot
+1.000 0 -736 -208 generic::dot
+1.000 0 -736 -256 generic::dot
+1.000 180 -736 -144 generic::dot
+1.000 0 -840 88 generic::dot
+1.000 0.000 0.000 scb
+1.000 0 -16 -216 generic::dot
+1.000 0 -16 -192 generic::dot
+1.000 0 -16 -160 generic::dot
+1.000 0 -32 -128 generic::dot
+1.000 0 -16 -112 generic::dot
+1.000 0 -16 -80 generic::dot
+1.000 0 -32 -64 generic::dot
+1.000 0 0 -48 generic::dot
+1.000 0 0 -96 generic::dot
+1.000 0 0 -128 generic::dot
+1.000 0 -32 -48 generic::dot
+1.000 0 -112 -48 generic::dot
+1.000 0 -168 -24 generic::dot
+1.000 0 -208 8 generic::dot
+1.000 0 -248 56 generic::dot
+1.000 0 -272 112 generic::dot
+1.000 0 -280 168 generic::dot
+1.000 0 -272 232 generic::dot
+1.000 0 -256 280 generic::dot
+1.000 0 -232 320 generic::dot
+1.000 0 -200 352 generic::dot
+1.000 0 -152 384 generic::dot
+1.000 0 -104 400 generic::dot
+1.000 0 -56 408 generic::dot
+1.000 0 8 400 generic::dot
+1.000 0 56 384 generic::dot
+1.000 0 96 360 generic::dot
+1.000 0 136 320 generic::dot
+1.000 0 160 280 generic::dot
+1.000 0 176 240 generic::dot
+1.000 0 184 200 generic::dot
+1.000 0 -64 -56 generic::dot
+1.000 0 -136 -40 generic::dot
+1.000 0 -24 408 generic::dot
+1.000 0 -264 88 generic::dot
+1.000 0 -232 32 generic::dot
+1.000 0 -192 -8 generic::dot
+1.000 0 -280 200 generic::dot
+(Fill fluid) {/Helvetica-Bold cf} 2 16 0 1.000 80 -64 label
+1.000 255 32 -64 generic::arrow
+sce
+1.000 315 -624 -312 generic::arrow
+0.000 0.000 1.000 scb
+(\(process fluid\)) {/Helvetica-Bold cf} 2 16 0 1.000 -1040 88 label
+sce
+(with remote seal) {/Helvetica-Oblique cf} 2 16 0 1.000 -616 120 label
+1 1.000 -688 -160 -656 -160 -656 -208 -624 -208 4 polygon
+1 1.000 -688 -272 -656 -272 -656 -224 -624 -224 4 polygon
+1 1.000 -656 -176 -688 -176 -672 -192 -672 -160 spline
+1 1.000 -656 -208 -688 -208 -672 -224 -672 -192 spline
+1 1.000 -656 -240 -688 -240 -672 -256 -672 -224 spline
+1 1.000 -664 -264 -672 -272 -672 -272 -672 -256 spline
+0.361 0.675 0.933 scb
+1.000 0 -1112 -256 generic::dot
+1.000 0 -1096 -272 generic::dot
+1.000 0 -1096 -320 generic::dot
+1.000 0 -1112 -352 generic::dot
+1.000 0 -1112 -368 generic::dot
+1.000 0 -1080 -368 generic::dot
+1.000 0 -1048 -336 generic::dot
+1.000 0 -1048 -288 generic::dot
+1.000 0 -1080 -304 generic::dot
+1.000 0 -1072 -280 generic::dot
+1.000 0 -1032 -304 generic::dot
+1.000 0 -1080 -336 generic::dot
+1.000 0 -1064 -368 generic::dot
+1.000 0 -1016 -368 generic::dot
+1.000 180 -904 -336 generic::dot
+1.000 180 -888 -304 generic::dot
+1.000 180 -888 -288 generic::dot
+1.000 180 -920 -256 generic::dot
+1.000 180 -920 -288 generic::dot
+1.000 180 -952 -320 generic::dot
+1.000 180 -952 -368 generic::dot
+1.000 180 -920 -352 generic::dot
+1.000 180 -968 -352 generic::dot
+1.000 180 -920 -320 generic::dot
+1.000 180 -936 -288 generic::dot
+1.000 180 -952 -256 generic::dot
+1.000 180 -984 -288 generic::dot
+1.000 0 -1000 -336 generic::dot
+1.000 0 -1016 -256 generic::dot
+1.000 180 -1112 -304 generic::dot
+1.000 180 -984 -368 generic::dot
+1.000 180 -1000 -288 generic::dot
+1.000 180 -968 -304 generic::dot
+1.000 180 -888 -368 generic::dot
+1.000 180 -888 -336 generic::dot
+1.000 0 -856 -256 generic::dot
+1.000 0 -840 -272 generic::dot
+1.000 0 -840 -320 generic::dot
+1.000 0 -856 -352 generic::dot
+1.000 0 -856 -368 generic::dot
+1.000 0 -824 -368 generic::dot
+1.000 0 -792 -336 generic::dot
+1.000 0 -792 -288 generic::dot
+1.000 0 -824 -304 generic::dot
+1.000 0 -792 -256 generic::dot
+1.000 0 -776 -304 generic::dot
+1.000 0 -824 -336 generic::dot
+1.000 0 -808 -368 generic::dot
+1.000 0 -760 -368 generic::dot
+1.000 180 -696 -320 generic::dot
+1.000 180 -696 -368 generic::dot
+1.000 180 -712 -352 generic::dot
+1.000 180 -696 -256 generic::dot
+1.000 180 -728 -288 generic::dot
+1.000 0 -744 -336 generic::dot
+1.000 0 -760 -256 generic::dot
+1.000 180 -856 -304 generic::dot
+1.000 180 -728 -368 generic::dot
+1.000 180 -744 -288 generic::dot
+1.000 180 -712 -304 generic::dot
+1.000 180 -688 -176 generic::dot
+1.000 180 -712 -192 generic::dot
+1.000 180 -704 -216 generic::dot
+1.000 180 -688 -240 generic::dot
+1.000 180 -728 -232 generic::dot
+1.000 180 -680 -200 generic::dot
+sce
+1 2.000 -688 304 -688 -160 -656 -160 -656 -208 -624 -208 5 polygon
+1 2.000 -624 -224 -656 -224 -656 -272 -688 -272 -688 -384 5 polygon
+1 2.000 -24 -176 -24 -144 -48 -144 -48 -64 4 polygon
+1 2.000 -48 -48 -48 -32 16 -32 16 -144 -8 -144 -8 -176 6 polygon
+1 2.000 -624 -208 -24 -208 -24 -176 3 polygon
+1 2.000 -8 -176 -8 -224 -624 -224 3 polygon
+1.000 0.000 0.000 scb
+1.000 0 -64 -216 generic::dot
+1.000 0 -112 -216 generic::dot
+1.000 0 -160 -216 generic::dot
+1.000 0 -208 -216 generic::dot
+1.000 0 -256 -216 generic::dot
+1.000 0 -304 -216 generic::dot
+1.000 0 -352 -216 generic::dot
+1.000 0 -400 -216 generic::dot
+1.000 0 -448 -216 generic::dot
+1.000 0 -496 -216 generic::dot
+1.000 0 -544 -216 generic::dot
+1.000 0 -592 -216 generic::dot
+1.000 0 -640 -216 generic::dot
+1.000 0 -664 -216 generic::dot
+1.000 0 -664 -184 generic::dot
+1.000 0 -664 -248 generic::dot
+sce
+(Capillary tube) {/Helvetica cf} 2 16 0 1.000 -456 -192 label
+1 2.000 -1136 304 -1136 -384 2 polygon
+1.000 0.000 0.000 scb
+1.000 0 -40 -96 generic::dot
+sce
+(Remote isolating diaphragm) {/Helvetica cf} 2 16 0 1.000 -624 -376 label
+(Pipe) {/Helvetica cf} 2 16 0 1.000 -672 32 label
+pgsave restore showpage
+
+%%Trailer
+XCIRCsave restore
+%%EOF

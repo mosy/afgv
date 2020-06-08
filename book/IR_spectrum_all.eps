@@ -1,0 +1,1036 @@
+%!PS-Adobe-3.0
+%%Title: IR_spectrum_all.eps
+%%Creator: XCircuit v3.4 rev27
+%%CreationDate: Wed Oct  7 04:59:40 2009
+%%Pages: 1
+%%BoundingBox: 0 0 612 792
+%%DocumentNeededResources: font Helvetica 
+%%EndComments
+%%BeginProlog
+%
+%  PostScript prolog for output from xcircuit
+%  Version: 3.3
+%
+%  Electrical circuit (and otherwise general) drawing program
+%
+%  Written by Tim Edwards 8/5/93--7/13/05  (tim.edwards@multigig.com)
+%  The Johns Hopkins University (1993-2004)
+%  MultiGiG, Inc. (2004-present)
+%
+%%BeginResource: procset XCIRCproc 3.3 0
+%
+% supporting definitions --- these are the primary xcircuit types.
+
+/XCIRCsave save def
+/topmat matrix currentmatrix def
+
+/fontslant { /slant exch def [1 0 slant 1 0 0] 
+    exch findfont exch makefont dup length dict /ndict exch def
+    { 1 index /FID ne { ndict 3 1 roll put } { pop pop } ifelse } forall
+    ndict definefont pop} def
+/ul { dup type /stringtype eq showflag 1 eq and { gsave 
+   currentpoint topmat setmatrix 0 0 moveto 2 index stringwidth pop (_)
+   false charpath flattenpath pathbbox grestore exch pop 1 index
+   sub setlinewidth exch pop currentpoint 3 -1 roll add moveto 0
+   rlineto stroke moveto } if } def
+/ol { dup type /stringtype eq showflag 1 eq and { gsave gsave
+   currentpoint topmat setmatrix 2 index stringwidth pop 3 index
+   true charpath flattenpath pathbbox grestore exch pop
+   exch pop topmat setmatrix (_) true charpath pathbbox grestore
+   exch pop 1 index sub setlinewidth exch pop currentpoint
+   exch 4 1 roll exch sub add moveto pop 0 rlineto stroke
+   moveto } if } def
+/stW { gsave currentpoint newpath moveto true charpath flattenpath
+	pathbbox pop exch pop sub grestore } def
+/Ts {mark Tabs aload pop counttomark 1 add array astore /Tabs exch def Tabs
+	0 currentpoint pop put} def
+/Tbn {mark Tabs aload pop counttomark dup 2 add 1 roll cleartomark 1 sub} def
+/Tb { 0 1 Tbn {Tabs exch get dup currentpoint pop lt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/Tf { Tbn -1 0 {Tabs exch get dup currentpoint pop gt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/qS { (aa) stW (a a) stW sub 4 div 0 Kn } def
+/hS { qS qS } def
+/pspc 0 def
+/cf0 { scalefont setfont } bind def
+/Kn { dup kY add /kY exch def rmoveto } bind def
+/ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.33 mul neg Kn} def
+/Ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.67 mul Kn } def
+/ns { 0 kY neg Kn /kY 0 def /fscale 1.0 def xfont0 1.0 cf0 } def
+/CR { ns 0 /Bline Bline fscale0 neg add def Bline moveto } def
+/cf { dup type /realtype ne {1.0} if exch findfont exch kY 0 eq
+	{ 40 mul dup /fscale0 exch def cf0 /xfont0 currentfont def}
+	{fscale0 mul fscale mul cf0} ifelse } def
+/ctmk { counttomark dup 2 add -1 roll pop } bind def
+/label { gsave translate 0 0 moveto dup scale neg /rotval exch def
+	/just exch def just 384 and 0 gt {/mshow {pop} def} {/mshow {show}
+	def} ifelse just 16 and 0 gt {gsave rotval rotate 0 1 dtransform
+	gsave pagemat setmatrix idtransform exch grestore 1 0 dtransform
+	gsave pagemat setmatrix idtransform exch grestore dup abs 1e-9 lt
+	{pop mul 0 gt} {3 1 roll pop pop 0 lt} ifelse grestore {-1 /rotval
+	rotval neg def /just just dup 3 and 1 ne {3 xor} if def} {1} ifelse
+	exch -1e-9 lt {-1 /rotval rotval neg def /just just dup 12 and
+	4 ne {12 xor} if def} {1} ifelse scale } if /showflag 0 def
+	/fspc pspc def /Bline 0 def /Tabs 0 array def /fscale 1.0 def
+	/kY 0 def gsave dup 1 add copy 0 exch 1 0 dtransform exch atan rotate
+	{exch dup type /stringtype eq {true charpath flattenpath} {dup type
+	/arraytype eq {exec} {12 string cvs true charpath flattenpath} ifelse}
+	ifelse} repeat pop pathbbox grestore 3 -1 roll pop 3 1 roll just
+	1 and 0 gt {just 2 and 0 gt {exch pop neg fspc sub} {exch sub 0.5
+	mul neg} ifelse} {pop neg fspc add} ifelse exch Bline exch just 4
+	and 0 gt {just 8 and 0 gt {exch pop neg fspc sub} {add 0.5 mul neg}
+	ifelse} {pop neg fspc add} ifelse rotval rotate Kn currentpoint
+	translate /showflag 1 def /Bline 0 def /Tabs 0 array def /fscale
+	1.0 def /kY 0 def {dup type /stringtype eq {mshow} {dup type
+	/arraytype eq {exec} {12 string cvs mshow} ifelse} ifelse} repeat
+	grestore } def
+/pinlabel { 4 index 32 and 0 ne hlevel 0 eq or { /pspc 10 def label
+	/pspc 0 def } { pop pop pop pop pop {pop} repeat } ifelse } def
+/pinglobal { pinlabel } def
+/infolabel { pinlabel } def
+/graphic { gsave 4 index cvx exec /DataSource get resetfile translate
+	0 0 moveto neg rotate dup scale cvx exec image grestore } def
+
+/scb { setrgbcolor } bind def  /sce { defColor aload pop scb } bind def
+/cRedef {/defColor currentcolor 3 array astore def} def
+/begingate {dup type /dicttype ne {1 dict} if begin	% default params
+	dup type /dicttype ne {1 dict} if begin		% instanced params
+	/hlevel hlevel 1 add def /defColor currentcolor sce 3 array
+	astore def gsave sce translate 0 0 moveto neg rotate dup abs scale
+	} bind def
+/endgate { /hlevel hlevel 1 sub def grestore defColor aload pop cRedef
+	scb end end} bind def
+
+/hlevel 0 def
+/tmpa [1 0 0 1 0 0] def
+/gar {8 8 true tmpa {<c0 c0 00 00 0c 0c 00 00>} imagemask} bind
+{8 8 true tmpa {<30 70 60 02 03 07 06 20>} imagemask} bind
+{8 8 true tmpa {<0c 1e 1e 0c c0 e1 e1 c0>} imagemask} bind
+{8 8 true tmpa {<0f 0f 0f 0f f0 f0 f0 f0>} imagemask} bind
+{8 8 true tmpa {<3f f3 e1 e1 f3 3f 1e 1e>} imagemask} bind
+{8 8 true tmpa {<df cf 8f 9f fd fc f8 f9>} imagemask} bind
+{8 8 true tmpa {<ff 3f 3f ff ff f3 f3 ff>} imagemask} bind 7 array astore def
+/ppaint { gsave clip tmpa dup setmatrix pathbbox neg exch neg 4 2 roll
+  neg 4 -1 roll 2 copy gt {exch} if 8 div ceiling 8 mul 4 2 roll neg 2 copy
+  gt {exch} if 8 div ceiling 8 mul 3 -1 roll -8 5 -1 roll
+  { 3 index exch 5 exch put dup -8 3 index { 3 index
+  exch 4 exch put 3 index exec } for } for pop pop pop pop grestore } bind def
+/setstyles {
+  currentlinewidth mul setlinewidth /style exch def
+  style 1 and 0 gt not {closepath} if
+  style 1024 and 0 gt {2 setlinecap} if
+  style 2 and 0 gt {currentlinewidth 4 mul dup 2 array astore 0 setdash} if
+  style 4 and 0 gt {0.5 currentlinewidth 4 mul 2 array astore 0 setdash} if
+  gsave style 16 and 0 gt { style 224 and -5 bitshift style 256 and 0 gt {
+  7 exch sub 8 div dup 1 exch sub currentrgbcolor 3 array astore
+  {3 copy mul add 4 1 roll pop} forall pop pop setrgbcolor eofill}
+  {dup 7 lt {gar exch get ppaint} {pop eofill} ifelse} ifelse}
+  {style 256 and 0 gt {1 setgray eofill} if} ifelse grestore style 8 and 0 gt 
+  style 512 eq or {newpath} {stroke} ifelse grestore} def     
+
+/polygon { gsave /num exch def moveto num 1 sub {lineto} repeat setstyles } def
+/xcarc   { gsave newpath arc setstyles } def
+/elb { matrix currentmatrix 7 -1 roll 7 -1 roll translate 5 1 roll 4 -1 roll
+	3 index div 1 scale } def
+/ele { 0 4 1 roll 0 4 1 roll } bind def
+/ellipse { gsave elb newpath ele arc setmatrix setstyles } def
+/pellip  { elb ele arc setmatrix } def
+/nellip  { elb ele arcn setmatrix } def
+/spline  { gsave moveto curveto setstyles } def
+/polyc   { {lineto} repeat } bind def
+/beginpath { gsave moveto } bind def
+/endpath { setstyles } bind def
+/bop	 { 1 setlinecap 0 setlinejoin 6 setmiterlimit 0 0 0 scb cRedef } def
+/psinsertion {/PSobj save def /showpage {} def /setpagedevice {pop} def bop
+	rotate translate dup scale} def
+/end_insert {PSobj restore} def
+/setpagemat {/pagemat matrix currentmatrix def} def
+/inchscale  {setpagemat 0.375 mul dup scale} def
+/cmscale    {setpagemat 0.35433071 mul dup scale} def
+
+%%EndResource
+%%EndProlog
+
+% XCircuit output starts here.
+
+%%BeginSetup
+
+
+%%EndSetup
+
+%%Page: 1 1
+%%PageOrientation: Landscape
+%%PageBoundingBox: 0 0 612 792
+/pgsave save def bop
+90 rotate 19 -631 translate
+0.5476 inchscale
+2.6000 setlinewidth 1262 707 translate
+
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 -712 220 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 -912 256 label
+1 1.00 -880 624 -912 624 2 polygon
+1 1.00 -880 304 -912 304 2 polygon
+1 1.00 -880 464 -912 464 2 polygon
+1 1.00 -880 336 -896 336 2 polygon
+1 1.00 -880 368 -896 368 2 polygon
+1 1.00 -880 400 -896 400 2 polygon
+1 1.00 -880 432 -896 432 2 polygon
+1 1.00 -880 496 -896 496 2 polygon
+1 1.00 -880 528 -896 528 2 polygon
+1 1.00 -880 560 -896 560 2 polygon
+1 1.00 -880 592 -896 592 2 polygon
+1 1.00 -880 624 -880 304 2 polygon
+1 1.00 -520 284 -520 304 2 polygon
+1 1.00 -700 284 -700 304 2 polygon
+1 1.00 -880 304 -700 304 2 polygon
+1 1.00 -700 304 -520 304 2 polygon
+1 1.00 -520 304 -340 304 2 polygon
+1 1.00 -340 284 -340 304 2 polygon
+1 1.00 -340 304 -294 304 2 polygon
+1 1.00 -294 304 -248 304 2 polygon
+1 1.00 -790 304 -790 288 2 polygon
+1 1.00 -610 304 -610 288 2 polygon
+1 1.00 -432 304 -432 288 2 polygon
+1 1.00 -836 294 -836 304 2 polygon
+1 1.00 -746 294 -746 304 2 polygon
+1 1.00 -656 294 -656 304 2 polygon
+1 1.00 -566 294 -566 304 2 polygon
+1 1.00 -476 292 -476 302 2 polygon
+1 1.00 -386 294 -386 304 2 polygon
+1 1.00 -294 294 -294 304 2 polygon
+1 1.00 -248 304 -248 288 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 -728 256 label
+(2000) {/Helvetica cf} 2 16 0 0.60 -550 256 label
+(1000) {/Helvetica cf} 2 16 0 0.60 -368 256 label
+1 1.00 -880 284 -880 304 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 -783 623 -783 515 -776 496 -768 508 -768 624 5 polygon
+497 1.00 -762 624 -761 484 -760 622 3 polygon
+497 1.00 -482 623 -481 499 -479 484 -473 447 -465 467 -463 457 -455 512 -455 
+467 -449 507 -445 470 -439 459 -434 475 -431 499 -429 623 14 polygon
+497 1.00 -374 623 -370 470 -367 440 -361 392 -356 370 -346 361 -341 357 -338 
+451 -337 409 -331 392 -325 397 -315 411 -305 416 -300 474 -297 624 15 polygon
+1 1.00 -872 624 -256 624 2 polygon
+1 1.00 -763 623 -760 623 2 polygon
+1.000 0.000 0.000 scb
+(Ammonia) {/Helvetica cf} 2 16 0 1.00 -704 480 label
+(\)) {ns} (3) {ss} (\(NH) {/Helvetica cf} 6 16 0 1.00 -672 432 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 56 220 label
+(4000) {/Helvetica cf} 2 16 0 0.60 -144 256 label
+1 1.00 -112 624 -144 624 2 polygon
+1 1.00 -112 304 -144 304 2 polygon
+1 1.00 -112 464 -144 464 2 polygon
+1 1.00 -112 336 -128 336 2 polygon
+1 1.00 -112 368 -128 368 2 polygon
+1 1.00 -112 400 -128 400 2 polygon
+1 1.00 -112 432 -128 432 2 polygon
+1 1.00 -112 496 -128 496 2 polygon
+1 1.00 -112 528 -128 528 2 polygon
+1 1.00 -112 560 -128 560 2 polygon
+1 1.00 -112 592 -128 592 2 polygon
+1 1.00 -112 624 -112 304 2 polygon
+1 1.00 248 284 248 304 2 polygon
+1 1.00 68 284 68 304 2 polygon
+1 1.00 -112 304 68 304 2 polygon
+1 1.00 68 304 248 304 2 polygon
+1 1.00 248 304 428 304 2 polygon
+1 1.00 428 284 428 304 2 polygon
+1 1.00 428 304 474 304 2 polygon
+1 1.00 474 304 520 304 2 polygon
+1 1.00 -22 304 -22 288 2 polygon
+1 1.00 158 304 158 288 2 polygon
+1 1.00 336 304 336 288 2 polygon
+1 1.00 -68 294 -68 304 2 polygon
+1 1.00 22 294 22 304 2 polygon
+1 1.00 112 294 112 304 2 polygon
+1 1.00 202 294 202 304 2 polygon
+1 1.00 292 292 292 302 2 polygon
+1 1.00 382 294 382 304 2 polygon
+1 1.00 474 294 474 304 2 polygon
+1 1.00 520 304 520 288 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 40 256 label
+(2000) {/Helvetica cf} 2 16 0 0.60 218 256 label
+(1000) {/Helvetica cf} 2 16 0 0.60 400 256 label
+1 1.00 -112 284 -112 304 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 -24 624 -23 570 -20 624 -17 573 -14 624 5 polygon
+497 1.00 140 623 143 584 145 624 148 587 150 623 5 polygon
+497 1.00 198 623 203 412 206 484 209 415 213 484 217 624 6 polygon
+497 1.00 369 624 373 494 376 567 378 497 383 623 5 polygon
+1 1.00 -104 624 512 624 2 polygon
+1.000 0.000 0.000 scb
+(Nitrous Oxide) {/Helvetica cf} 2 16 0 1.00 -80 480 label
+(O\)) {ns} (2) {ss} (\(N) {/Helvetica cf} 6 16 0 1.00 -16 432 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 56 -260 label
+(4000) {/Helvetica cf} 2 16 0 0.60 -144 -224 label
+1 1.00 -112 144 -144 144 2 polygon
+1 1.00 -112 -176 -144 -176 2 polygon
+1 1.00 -112 -16 -144 -16 2 polygon
+1 1.00 -112 -144 -128 -144 2 polygon
+1 1.00 -112 -112 -128 -112 2 polygon
+1 1.00 -112 -80 -128 -80 2 polygon
+1 1.00 -112 -48 -128 -48 2 polygon
+1 1.00 -112 16 -128 16 2 polygon
+1 1.00 -112 48 -128 48 2 polygon
+1 1.00 -112 80 -128 80 2 polygon
+1 1.00 -112 112 -128 112 2 polygon
+1 1.00 -112 144 -112 -176 2 polygon
+1 1.00 248 -196 248 -176 2 polygon
+1 1.00 68 -196 68 -176 2 polygon
+1 1.00 -112 -176 68 -176 2 polygon
+1 1.00 68 -176 248 -176 2 polygon
+1 1.00 248 -176 428 -176 2 polygon
+1 1.00 428 -196 428 -176 2 polygon
+1 1.00 428 -176 474 -176 2 polygon
+1 1.00 474 -176 520 -176 2 polygon
+1 1.00 -22 -176 -22 -192 2 polygon
+1 1.00 158 -176 158 -192 2 polygon
+1 1.00 336 -176 336 -192 2 polygon
+1 1.00 -68 -186 -68 -176 2 polygon
+1 1.00 22 -186 22 -176 2 polygon
+1 1.00 112 -186 112 -176 2 polygon
+1 1.00 202 -186 202 -176 2 polygon
+1 1.00 292 -188 292 -178 2 polygon
+1 1.00 382 -186 382 -176 2 polygon
+1 1.00 474 -186 474 -176 2 polygon
+1 1.00 520 -176 520 -192 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 40 -224 label
+(2000) {/Helvetica cf} 2 16 0 0.60 218 -224 label
+(1000) {/Helvetica cf} 2 16 0 0.60 400 -224 label
+1 1.00 -112 -196 -112 -176 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 259 143 265 29 267 145 3 polygon
+497 1.00 271 144 273 51 276 143 3 polygon
+1 1.00 -107 144 259 144 2 polygon
+1 1.00 162 224 184 224 2 polygon
+1 1.00 263 144 496 144 2 polygon
+1.000 0.000 0.000 scb
+(Nitric Oxide) {/Helvetica cf} 2 16 0 1.00 -64 16 label
+(\(NO\)) {/Helvetica cf} 2 16 0 1.00 0 -32 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 -712 -260 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 -912 -224 label
+1 1.00 -880 144 -912 144 2 polygon
+1 1.00 -880 -176 -912 -176 2 polygon
+1 1.00 -880 -16 -912 -16 2 polygon
+1 1.00 -880 -144 -896 -144 2 polygon
+1 1.00 -880 -112 -896 -112 2 polygon
+1 1.00 -880 -80 -896 -80 2 polygon
+1 1.00 -880 -48 -896 -48 2 polygon
+1 1.00 -880 16 -896 16 2 polygon
+1 1.00 -880 48 -896 48 2 polygon
+1 1.00 -880 80 -896 80 2 polygon
+1 1.00 -880 112 -896 112 2 polygon
+1 1.00 -880 144 -880 -176 2 polygon
+1 1.00 -520 -196 -520 -176 2 polygon
+1 1.00 -700 -196 -700 -176 2 polygon
+1 1.00 -880 -176 -700 -176 2 polygon
+1 1.00 -700 -176 -520 -176 2 polygon
+1 1.00 -520 -176 -340 -176 2 polygon
+1 1.00 -340 -196 -340 -176 2 polygon
+1 1.00 -340 -176 -294 -176 2 polygon
+1 1.00 -294 -176 -248 -176 2 polygon
+1 1.00 -790 -176 -790 -192 2 polygon
+1 1.00 -610 -176 -610 -192 2 polygon
+1 1.00 -432 -176 -432 -192 2 polygon
+1 1.00 -836 -186 -836 -176 2 polygon
+1 1.00 -746 -186 -746 -176 2 polygon
+1 1.00 -656 -186 -656 -176 2 polygon
+1 1.00 -566 -186 -566 -176 2 polygon
+1 1.00 -476 -188 -476 -178 2 polygon
+1 1.00 -386 -186 -386 -176 2 polygon
+1 1.00 -294 -186 -294 -176 2 polygon
+1 1.00 -248 -176 -248 -192 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 -728 -224 label
+(2000) {/Helvetica cf} 2 16 0 0.60 -550 -224 label
+(1000) {/Helvetica cf} 2 16 0 0.60 -368 -224 label
+1 1.00 -880 -196 -880 -176 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 -408 144 -406 45 -402 -11 -398 44 -396 3 -395 87 -392 19 -391 53 -389 
+26 -386 83 -384 144 11 polygon
+497 1.00 -728 144 -721 -12 -717 -48 -712 -64 -708 -8 -704 -48 -703 47 -697 -25 
+-695 8 -693 -15 -682 144 11 polygon
+1 1.00 -875 144 -728 144 2 polygon
+1 1.00 -728 144 -272 144 2 polygon
+sce
+1 1.00 -272 144 -257 144 2 polygon
+1.000 0.000 0.000 scb
+(Methane) {/Helvetica cf} 2 16 0 1.00 -624 48 label
+(\)) {ns} (4) {ss} (\(CH) {/Helvetica cf} 6 16 0 1.00 -600 0 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 824 -260 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 624 -224 label
+1 1.00 656 144 624 144 2 polygon
+1 1.00 656 -176 624 -176 2 polygon
+1 1.00 656 -16 624 -16 2 polygon
+1 1.00 656 -144 640 -144 2 polygon
+1 1.00 656 -112 640 -112 2 polygon
+1 1.00 656 -80 640 -80 2 polygon
+1 1.00 656 -48 640 -48 2 polygon
+1 1.00 656 16 640 16 2 polygon
+1 1.00 656 48 640 48 2 polygon
+1 1.00 656 80 640 80 2 polygon
+1 1.00 656 112 640 112 2 polygon
+1 1.00 656 144 656 -176 2 polygon
+1 1.00 1016 -196 1016 -176 2 polygon
+1 1.00 836 -196 836 -176 2 polygon
+1 1.00 656 -176 836 -176 2 polygon
+1 1.00 836 -176 1016 -176 2 polygon
+1 1.00 1016 -176 1196 -176 2 polygon
+1 1.00 1196 -196 1196 -176 2 polygon
+1 1.00 1196 -176 1242 -176 2 polygon
+1 1.00 1242 -176 1288 -176 2 polygon
+1 1.00 746 -176 746 -192 2 polygon
+1 1.00 926 -176 926 -192 2 polygon
+1 1.00 1104 -176 1104 -192 2 polygon
+1 1.00 700 -186 700 -176 2 polygon
+1 1.00 790 -186 790 -176 2 polygon
+1 1.00 880 -186 880 -176 2 polygon
+1 1.00 970 -186 970 -176 2 polygon
+1 1.00 1060 -188 1060 -178 2 polygon
+1 1.00 1150 -186 1150 -176 2 polygon
+1 1.00 1242 -186 1242 -176 2 polygon
+1 1.00 1288 -176 1288 -192 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 808 -224 label
+(2000) {/Helvetica cf} 2 16 0 0.60 986 -224 label
+(1000) {/Helvetica cf} 2 16 0 0.60 1168 -224 label
+1 1.00 656 -196 656 -176 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 972 144 984 -116 988 144 992 -104 1004 144 5 polygon
+1 1.00 972 144 660 144 2 polygon
+1 1.00 1280 144 1004 144 2 polygon
+1.000 0.000 0.000 scb
+(Carbon Monoxide) {/Helvetica cf} 2 16 0 0.80 684 16 label
+(\(CO\)) {/Helvetica cf} 2 16 0 1.00 756 -32 label
+0.000 0.000 1.000 scb
+1 1.00 972 144 1016 144 2 polygon
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 824 220 label
+(4000) {/Helvetica cf} 2 16 0 0.60 624 256 label
+1 1.00 656 624 624 624 2 polygon
+1 1.00 656 304 624 304 2 polygon
+1 1.00 656 464 624 464 2 polygon
+1 1.00 656 336 640 336 2 polygon
+1 1.00 656 368 640 368 2 polygon
+1 1.00 656 400 640 400 2 polygon
+1 1.00 656 432 640 432 2 polygon
+1 1.00 656 496 640 496 2 polygon
+1 1.00 656 528 640 528 2 polygon
+1 1.00 656 560 640 560 2 polygon
+1 1.00 656 592 640 592 2 polygon
+1 1.00 656 624 656 304 2 polygon
+1 1.00 1016 284 1016 304 2 polygon
+1 1.00 836 284 836 304 2 polygon
+1 1.00 656 304 836 304 2 polygon
+1 1.00 836 304 1016 304 2 polygon
+1 1.00 1016 304 1196 304 2 polygon
+1 1.00 1196 284 1196 304 2 polygon
+1 1.00 1196 304 1242 304 2 polygon
+1 1.00 1242 304 1288 304 2 polygon
+1 1.00 746 304 746 288 2 polygon
+1 1.00 926 304 926 288 2 polygon
+1 1.00 1104 304 1104 288 2 polygon
+1 1.00 700 294 700 304 2 polygon
+1 1.00 790 294 790 304 2 polygon
+1 1.00 880 294 880 304 2 polygon
+1 1.00 970 294 970 304 2 polygon
+1 1.00 1060 292 1060 302 2 polygon
+1 1.00 1150 294 1150 304 2 polygon
+1 1.00 1242 294 1242 304 2 polygon
+1 1.00 1288 304 1288 288 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 808 256 label
+(2000) {/Helvetica cf} 2 16 0 0.60 986 256 label
+(1000) {/Helvetica cf} 2 16 0 0.60 1168 256 label
+1 1.00 656 284 656 304 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 701 624 704 543 705 624 709 546 713 624 5 polygon
+497 1.00 720 624 722 562 725 624 728 566 731 623 5 polygon
+497 1.00 945 624 949 356 951 462 955 358 962 626 966 569 969 624 7 polygon
+497 1.00 1248 624 1254 494 1255 555 1257 506 1262 624 5 polygon
+1 1.00 660 624 700 624 2 polygon
+1 1.00 713 624 720 624 2 polygon
+1 1.00 731 624 944 624 2 polygon
+1 1.00 944 624 945 623 2 polygon
+1 1.00 969 622 969 624 1248 624 3 polygon
+1 1.00 1262 624 1283 624 2 polygon
+1.000 0.000 0.000 scb
+(Carbon Dioxide) {/Helvetica cf} 2 16 0 0.80 704 496 label
+(\)) {ns} (2) {ss} (\(CO) {/Helvetica cf} 6 16 0 1.00 752 448 label
+0.000 0.000 1.000 scb
+1 1.00 944 624 969 624 2 polygon
+1 1.00 699 624 734 624 2 polygon
+1 1.00 1247 624 1265 624 2 polygon
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 824 684 label
+(4000) {/Helvetica cf} 2 16 0 0.60 624 720 label
+1 1.00 656 1088 624 1088 2 polygon
+1 1.00 656 768 624 768 2 polygon
+1 1.00 656 928 624 928 2 polygon
+1 1.00 656 800 640 800 2 polygon
+1 1.00 656 832 640 832 2 polygon
+1 1.00 656 864 640 864 2 polygon
+1 1.00 656 896 640 896 2 polygon
+1 1.00 656 960 640 960 2 polygon
+1 1.00 656 992 640 992 2 polygon
+1 1.00 656 1024 640 1024 2 polygon
+1 1.00 656 1056 640 1056 2 polygon
+1 1.00 656 1088 656 768 2 polygon
+1 1.00 1016 748 1016 768 2 polygon
+1 1.00 836 748 836 768 2 polygon
+1 1.00 656 768 836 768 2 polygon
+1 1.00 836 768 1016 768 2 polygon
+1 1.00 1016 768 1196 768 2 polygon
+1 1.00 1196 748 1196 768 2 polygon
+1 1.00 1196 768 1242 768 2 polygon
+1 1.00 1242 768 1288 768 2 polygon
+1 1.00 746 768 746 752 2 polygon
+1 1.00 926 768 926 752 2 polygon
+1 1.00 1104 768 1104 752 2 polygon
+1 1.00 700 758 700 768 2 polygon
+1 1.00 790 758 790 768 2 polygon
+1 1.00 880 758 880 768 2 polygon
+1 1.00 970 758 970 768 2 polygon
+1 1.00 1060 756 1060 766 2 polygon
+1 1.00 1150 758 1150 768 2 polygon
+1 1.00 1242 758 1242 768 2 polygon
+1 1.00 1288 768 1288 752 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 808 720 label
+(2000) {/Helvetica cf} 2 16 0 0.60 986 720 label
+(1000) {/Helvetica cf} 2 16 0 0.60 1168 720 label
+1 1.00 656 748 656 768 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 1183 1087 1183 910 1185 838 1188 1087 1192 882 1193 1088 6 polygon
+1 1.00 664 1088 1200 1088 2 polygon
+1 1.00 1199 1088 1282 1088 2 polygon
+1.000 0.000 0.000 scb
+(Methanol) {/Helvetica cf} 2 16 0 1.00 832 976 label
+(O\)) {ns} (4) {ss} (\(CH) {/Helvetica cf} 6 16 0 1.00 840 928 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 56 684 label
+(4000) {/Helvetica cf} 2 16 0 0.60 -144 720 label
+1 1.00 -112 1088 -144 1088 2 polygon
+1 1.00 -112 768 -144 768 2 polygon
+1 1.00 -112 928 -144 928 2 polygon
+1 1.00 -112 800 -128 800 2 polygon
+1 1.00 -112 832 -128 832 2 polygon
+1 1.00 -112 864 -128 864 2 polygon
+1 1.00 -112 896 -128 896 2 polygon
+1 1.00 -112 960 -128 960 2 polygon
+1 1.00 -112 992 -128 992 2 polygon
+1 1.00 -112 1024 -128 1024 2 polygon
+1 1.00 -112 1056 -128 1056 2 polygon
+1 1.00 -112 1088 -112 768 2 polygon
+1 1.00 248 748 248 768 2 polygon
+1 1.00 68 748 68 768 2 polygon
+1 1.00 -112 768 68 768 2 polygon
+1 1.00 68 768 248 768 2 polygon
+1 1.00 248 768 428 768 2 polygon
+1 1.00 428 748 428 768 2 polygon
+1 1.00 428 768 474 768 2 polygon
+1 1.00 474 768 520 768 2 polygon
+1 1.00 -22 768 -22 752 2 polygon
+1 1.00 158 768 158 752 2 polygon
+1 1.00 336 768 336 752 2 polygon
+1 1.00 -68 758 -68 768 2 polygon
+1 1.00 22 758 22 768 2 polygon
+1 1.00 112 758 112 768 2 polygon
+1 1.00 202 758 202 768 2 polygon
+1 1.00 292 756 292 766 2 polygon
+1 1.00 382 758 382 768 2 polygon
+1 1.00 474 758 474 768 2 polygon
+1 1.00 520 768 520 752 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 40 720 label
+(2000) {/Helvetica cf} 2 16 0 0.60 218 720 label
+(1000) {/Helvetica cf} 2 16 0 0.60 400 720 label
+1 1.00 -112 748 -112 768 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 2 1087 7 963 12 940 17 975 20 943 25 1016 28 1087 7 polygon
+497 1.00 355 1087 363 966 367 1087 370 972 377 1088 5 polygon
+497 1.00 461 1086 465 956 473 892 475 1088 481 908 486 1004 489 1088 7 polygon
+497 1.00 512 1088 -104 1088 2 polygon
+1 1.00 461 1087 488 1087 2 polygon
+1.000 0.000 0.000 scb
+(Acetylene) {/Helvetica cf} 2 16 0 1.00 96 960 label
+(\)) {ns} (2) {ss} (H) {ns} (2) {ss} (\(C) {/Helvetica cf} 10 16 0 1.00 128 912 
+label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 -712 684 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 -912 720 label
+1 1.00 -880 1088 -912 1088 2 polygon
+1 1.00 -880 768 -912 768 2 polygon
+1 1.00 -880 928 -912 928 2 polygon
+1 1.00 -880 800 -896 800 2 polygon
+1 1.00 -880 832 -896 832 2 polygon
+1 1.00 -880 864 -896 864 2 polygon
+1 1.00 -880 896 -896 896 2 polygon
+1 1.00 -880 960 -896 960 2 polygon
+1 1.00 -880 992 -896 992 2 polygon
+1 1.00 -880 1024 -896 1024 2 polygon
+1 1.00 -880 1056 -896 1056 2 polygon
+1 1.00 -880 1088 -880 768 2 polygon
+1 1.00 -520 748 -520 768 2 polygon
+1 1.00 -700 748 -700 768 2 polygon
+1 1.00 -880 768 -700 768 2 polygon
+1 1.00 -700 768 -520 768 2 polygon
+1 1.00 -520 768 -340 768 2 polygon
+1 1.00 -340 748 -340 768 2 polygon
+1 1.00 -340 768 -294 768 2 polygon
+1 1.00 -294 768 -248 768 2 polygon
+1 1.00 -790 768 -790 752 2 polygon
+1 1.00 -610 768 -610 752 2 polygon
+1 1.00 -432 768 -432 752 2 polygon
+1 1.00 -836 758 -836 768 2 polygon
+1 1.00 -746 758 -746 768 2 polygon
+1 1.00 -656 758 -656 768 2 polygon
+1 1.00 -566 758 -566 768 2 polygon
+1 1.00 -476 756 -476 766 2 polygon
+1 1.00 -386 758 -386 768 2 polygon
+1 1.00 -294 758 -294 768 2 polygon
+1 1.00 -248 768 -248 752 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 -728 720 label
+(2000) {/Helvetica cf} 2 16 0 0.60 -550 720 label
+(1000) {/Helvetica cf} 2 16 0 0.60 -368 720 label
+1 1.00 -880 748 -880 768 2 polygon
+1 1.00 -272 1088 -257 1088 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 -702 1087 -699 927 -696 1088 3 polygon
+1 1.00 -875 1088 -689 1088 2 polygon
+1 1.00 -689 1088 -272 1088 2 polygon
+1.000 0.000 0.000 scb
+(Ethane) {/Helvetica cf} 2 16 0 1.00 -608 992 label
+(\)) {ns} (6) {ss} (H) {ns} (2) {ss} (\(C) {/Helvetica cf} 10 16 0 1.00 -608 
+944 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 -712 1148 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 -912 1184 label
+1 1.00 -880 1552 -912 1552 2 polygon
+1 1.00 -880 1232 -912 1232 2 polygon
+1 1.00 -880 1392 -912 1392 2 polygon
+1 1.00 -880 1264 -896 1264 2 polygon
+1 1.00 -880 1296 -896 1296 2 polygon
+1 1.00 -880 1328 -896 1328 2 polygon
+1 1.00 -880 1360 -896 1360 2 polygon
+1 1.00 -880 1424 -896 1424 2 polygon
+1 1.00 -880 1456 -896 1456 2 polygon
+1 1.00 -880 1488 -896 1488 2 polygon
+1 1.00 -880 1520 -896 1520 2 polygon
+1 1.00 -880 1552 -880 1232 2 polygon
+1 1.00 -520 1212 -520 1232 2 polygon
+1 1.00 -700 1212 -700 1232 2 polygon
+1 1.00 -880 1232 -700 1232 2 polygon
+1 1.00 -700 1232 -520 1232 2 polygon
+1 1.00 -520 1232 -340 1232 2 polygon
+1 1.00 -340 1212 -340 1232 2 polygon
+1 1.00 -340 1232 -294 1232 2 polygon
+1 1.00 -294 1232 -248 1232 2 polygon
+1 1.00 -790 1232 -790 1216 2 polygon
+1 1.00 -610 1232 -610 1216 2 polygon
+1 1.00 -432 1232 -432 1216 2 polygon
+1 1.00 -836 1222 -836 1232 2 polygon
+1 1.00 -746 1222 -746 1232 2 polygon
+1 1.00 -656 1222 -656 1232 2 polygon
+1 1.00 -566 1222 -566 1232 2 polygon
+1 1.00 -476 1220 -476 1230 2 polygon
+1 1.00 -386 1222 -386 1232 2 polygon
+1 1.00 -294 1222 -294 1232 2 polygon
+1 1.00 -248 1232 -248 1216 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 -728 1184 label
+(2000) {/Helvetica cf} 2 16 0 0.60 -550 1184 label
+(1000) {/Helvetica cf} 2 16 0 0.60 -368 1184 label
+1 1.00 -880 1212 -880 1232 2 polygon
+0.000 0.000 1.000 scb
+1 1.00 -872 1552 -256 1552 2 polygon
+497 1.00 -459 1552 -455 1375 -452 1454 -450 1379 -445 1552 5 polygon
+1.000 0.000 0.000 scb
+(Nitrogen Dioxide) {/Helvetica cf} 2 16 0 1.00 -800 1440 label
+(\)) {ns} (2) {ss} (\(NO) {/Helvetica cf} 6 16 0 1.00 -720 1392 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 56 1148 label
+(4000) {/Helvetica cf} 2 16 0 0.60 -144 1184 label
+1 1.00 -112 1552 -144 1552 2 polygon
+1 1.00 -112 1232 -144 1232 2 polygon
+1 1.00 -112 1392 -144 1392 2 polygon
+1 1.00 -112 1264 -128 1264 2 polygon
+1 1.00 -112 1296 -128 1296 2 polygon
+1 1.00 -112 1328 -128 1328 2 polygon
+1 1.00 -112 1360 -128 1360 2 polygon
+1 1.00 -112 1424 -128 1424 2 polygon
+1 1.00 -112 1456 -128 1456 2 polygon
+1 1.00 -112 1488 -128 1488 2 polygon
+1 1.00 -112 1520 -128 1520 2 polygon
+1 1.00 -112 1552 -112 1232 2 polygon
+1 1.00 248 1212 248 1232 2 polygon
+1 1.00 68 1212 68 1232 2 polygon
+1 1.00 -112 1232 68 1232 2 polygon
+1 1.00 68 1232 248 1232 2 polygon
+1 1.00 248 1232 428 1232 2 polygon
+1 1.00 428 1212 428 1232 2 polygon
+1 1.00 428 1232 474 1232 2 polygon
+1 1.00 474 1232 520 1232 2 polygon
+1 1.00 -22 1232 -22 1216 2 polygon
+1 1.00 158 1232 158 1216 2 polygon
+1 1.00 336 1232 336 1216 2 polygon
+1 1.00 -68 1222 -68 1232 2 polygon
+1 1.00 22 1222 22 1232 2 polygon
+1 1.00 112 1222 112 1232 2 polygon
+1 1.00 202 1222 202 1232 2 polygon
+1 1.00 292 1220 292 1230 2 polygon
+1 1.00 382 1222 382 1232 2 polygon
+1 1.00 474 1222 474 1232 2 polygon
+1 1.00 520 1232 520 1216 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 40 1184 label
+(2000) {/Helvetica cf} 2 16 0 0.60 218 1184 label
+(1000) {/Helvetica cf} 2 16 0 0.60 400 1184 label
+1 1.00 -112 1212 -112 1232 2 polygon
+0.000 0.000 1.000 scb
+497 1.00 357 1551 360 1334 362 1449 364 1333 368 1552 5 polygon
+497 1.00 512 1552 -104 1552 2 polygon
+1.000 0.000 0.000 scb
+(Sulfur Dioxide) {/Helvetica cf} 2 16 0 1.00 -16 1440 label
+(\)) {ns} (2) {ss} (\(SO) {/Helvetica cf} 6 16 0 1.00 48 1392 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 824 1148 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 624 1184 label
+1 1.00 656 1552 624 1552 2 polygon
+1 1.00 656 1232 624 1232 2 polygon
+1 1.00 656 1392 624 1392 2 polygon
+1 1.00 656 1264 640 1264 2 polygon
+1 1.00 656 1296 640 1296 2 polygon
+1 1.00 656 1328 640 1328 2 polygon
+1 1.00 656 1360 640 1360 2 polygon
+1 1.00 656 1424 640 1424 2 polygon
+1 1.00 656 1456 640 1456 2 polygon
+1 1.00 656 1488 640 1488 2 polygon
+1 1.00 656 1520 640 1520 2 polygon
+1 1.00 656 1552 656 1232 2 polygon
+1 1.00 1016 1212 1016 1232 2 polygon
+1 1.00 836 1212 836 1232 2 polygon
+1 1.00 656 1232 836 1232 2 polygon
+1 1.00 836 1232 1016 1232 2 polygon
+1 1.00 1016 1232 1196 1232 2 polygon
+1 1.00 1196 1212 1196 1232 2 polygon
+1 1.00 1196 1232 1242 1232 2 polygon
+1 1.00 1242 1232 1288 1232 2 polygon
+1 1.00 746 1232 746 1216 2 polygon
+1 1.00 926 1232 926 1216 2 polygon
+1 1.00 1104 1232 1104 1216 2 polygon
+1 1.00 700 1222 700 1232 2 polygon
+1 1.00 790 1222 790 1232 2 polygon
+1 1.00 880 1222 880 1232 2 polygon
+1 1.00 970 1222 970 1232 2 polygon
+1 1.00 1060 1220 1060 1230 2 polygon
+1 1.00 1150 1222 1150 1232 2 polygon
+1 1.00 1242 1222 1242 1232 2 polygon
+1 1.00 1288 1232 1288 1216 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 808 1184 label
+(2000) {/Helvetica cf} 2 16 0 0.60 986 1184 label
+(1000) {/Helvetica cf} 2 16 0 0.60 1168 1184 label
+1 1.00 656 1212 656 1232 2 polygon
+0.000 0.000 1.000 scb
+1 1.00 664 1552 1280 1552 2 polygon
+497 1.00 664 1549 670 1486 676 1401 685 1335 693 1552 698 1410 701 1355 709 
+1415 713 1350 724 1403 730 1465 734 1550 12 polygon
+497 1.00 1025 1552 1042 1412 1049 1500 1056 1371 1060 1396 1065 1341 1072 1317 
+1075 1403 1080 1347 1084 1552 10 polygon
+497 1.00 1089 1552 1091 1326 1099 1385 1101 1346 1107 1434 1108 1385 1113 1355 
+1116 1390 1121 1472 1124 1435 1129 1501 1130 1551 12 polygon
+1 1.00 664 1550 732 1550 2 polygon
+1 1.00 664 1551 734 1551 2 polygon
+1 1.00 664 1549 712 1549 2 polygon
+1.000 0.000 0.000 scb
+(O\)) {ns} (2) {ss} (\(H) {/Helvetica cf} 6 16 0 1.00 824 1392 label
+(Water) {/Helvetica cf} 2 16 0 1.00 816 1440 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 1592 1148 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 1392 1184 label
+1 1.00 1424 1552 1392 1552 2 polygon
+1 1.00 1424 1232 1392 1232 2 polygon
+1 1.00 1424 1392 1392 1392 2 polygon
+1 1.00 1424 1264 1408 1264 2 polygon
+1 1.00 1424 1296 1408 1296 2 polygon
+1 1.00 1424 1328 1408 1328 2 polygon
+1 1.00 1424 1360 1408 1360 2 polygon
+1 1.00 1424 1424 1408 1424 2 polygon
+1 1.00 1424 1456 1408 1456 2 polygon
+1 1.00 1424 1488 1408 1488 2 polygon
+1 1.00 1424 1520 1408 1520 2 polygon
+1 1.00 1424 1552 1424 1232 2 polygon
+1 1.00 1784 1212 1784 1232 2 polygon
+1 1.00 1604 1212 1604 1232 2 polygon
+1 1.00 1424 1232 1604 1232 2 polygon
+1 1.00 1604 1232 1784 1232 2 polygon
+1 1.00 1784 1232 1964 1232 2 polygon
+1 1.00 1964 1212 1964 1232 2 polygon
+1 1.00 1964 1232 2010 1232 2 polygon
+1 1.00 2010 1232 2056 1232 2 polygon
+1 1.00 1514 1232 1514 1216 2 polygon
+1 1.00 1694 1232 1694 1216 2 polygon
+1 1.00 1872 1232 1872 1216 2 polygon
+1 1.00 1468 1222 1468 1232 2 polygon
+1 1.00 1558 1222 1558 1232 2 polygon
+1 1.00 1648 1222 1648 1232 2 polygon
+1 1.00 1738 1222 1738 1232 2 polygon
+1 1.00 1828 1220 1828 1230 2 polygon
+1 1.00 1918 1222 1918 1232 2 polygon
+1 1.00 2010 1222 2010 1232 2 polygon
+1 1.00 2056 1232 2056 1216 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 1576 1184 label
+(2000) {/Helvetica cf} 2 16 0 0.60 1754 1184 label
+(1000) {/Helvetica cf} 2 16 0 0.60 1936 1184 label
+1 1.00 1424 1212 1424 1232 2 polygon
+0.000 0.000 1.000 scb
+1 1.00 1432 1552 2048 1552 2 polygon
+497 1.00 1905 1552 1908 1326 1912 1301 1915 1360 1919 1303 1924 1392 1924 1552 
+7 polygon
+1.000 0.000 0.000 scb
+(Hydrogen Peroxide) {/Helvetica cf} 2 16 0 1.00 1504 1424 label
+(\)) {ns} (2) {ss} (O) {ns} (2) {ss} (\(H) {/Helvetica cf} 10 16 0 1.00 1600 
+1376 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 1592 684 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 1392 720 label
+1 1.00 1424 1088 1392 1088 2 polygon
+1 1.00 1424 768 1392 768 2 polygon
+1 1.00 1424 928 1392 928 2 polygon
+1 1.00 1424 800 1408 800 2 polygon
+1 1.00 1424 832 1408 832 2 polygon
+1 1.00 1424 864 1408 864 2 polygon
+1 1.00 1424 896 1408 896 2 polygon
+1 1.00 1424 960 1408 960 2 polygon
+1 1.00 1424 992 1408 992 2 polygon
+1 1.00 1424 1024 1408 1024 2 polygon
+1 1.00 1424 1056 1408 1056 2 polygon
+1 1.00 1424 1088 1424 768 2 polygon
+1 1.00 1784 748 1784 768 2 polygon
+1 1.00 1604 748 1604 768 2 polygon
+1 1.00 1424 768 1604 768 2 polygon
+1 1.00 1604 768 1784 768 2 polygon
+1 1.00 1784 768 1964 768 2 polygon
+1 1.00 1964 748 1964 768 2 polygon
+1 1.00 1964 768 2010 768 2 polygon
+1 1.00 2010 768 2056 768 2 polygon
+1 1.00 1514 768 1514 752 2 polygon
+1 1.00 1694 768 1694 752 2 polygon
+1 1.00 1872 768 1872 752 2 polygon
+1 1.00 1468 758 1468 768 2 polygon
+1 1.00 1558 758 1558 768 2 polygon
+1 1.00 1648 758 1648 768 2 polygon
+1 1.00 1738 758 1738 768 2 polygon
+1 1.00 1828 756 1828 766 2 polygon
+1 1.00 1918 758 1918 768 2 polygon
+1 1.00 2010 758 2010 768 2 polygon
+1 1.00 2056 768 2056 752 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 1576 720 label
+(2000) {/Helvetica cf} 2 16 0 0.60 1754 720 label
+(1000) {/Helvetica cf} 2 16 0 0.60 1936 720 label
+1 1.00 1424 748 1424 768 2 polygon
+0.000 0.000 1.000 scb
+1 1.00 1432 1088 2048 1088 2 polygon
+497 1.00 1533 1088 1536 919 1540 836 1544 820 1545 864 1545 1089 1548 849 1552 
+823 1558 868 1562 976 1562 1088 11 polygon
+497 1.00 1876 1087 1875 976 1883 908 1884 951 1888 1089 1887 953 1893 912 1897 
+973 1899 1088 9 polygon
+497 1.00 2001 1088 2002 969 2006 893 2010 842 2016 875 2016 1089 2020 863 2025 
+925 2028 999 2027 1087 10 polygon
+1.000 0.000 0.000 scb
+(Hydrocyanic Acid) {/Helvetica cf} 2 16 0 1.00 1616 864 label
+(\(HCN\)) {/Helvetica cf} 2 16 0 1.00 1696 816 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 1592 220 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 1392 256 label
+1 1.00 1424 624 1392 624 2 polygon
+1 1.00 1424 304 1392 304 2 polygon
+1 1.00 1424 464 1392 464 2 polygon
+1 1.00 1424 336 1408 336 2 polygon
+1 1.00 1424 368 1408 368 2 polygon
+1 1.00 1424 400 1408 400 2 polygon
+1 1.00 1424 432 1408 432 2 polygon
+1 1.00 1424 496 1408 496 2 polygon
+1 1.00 1424 528 1408 528 2 polygon
+1 1.00 1424 560 1408 560 2 polygon
+1 1.00 1424 592 1408 592 2 polygon
+1 1.00 1424 624 1424 304 2 polygon
+1 1.00 1784 284 1784 304 2 polygon
+1 1.00 1604 284 1604 304 2 polygon
+1 1.00 1424 304 1604 304 2 polygon
+1 1.00 1604 304 1784 304 2 polygon
+1 1.00 1784 304 1964 304 2 polygon
+1 1.00 1964 284 1964 304 2 polygon
+1 1.00 1964 304 2010 304 2 polygon
+1 1.00 2010 304 2056 304 2 polygon
+1 1.00 1514 304 1514 288 2 polygon
+1 1.00 1694 304 1694 288 2 polygon
+1 1.00 1872 304 1872 288 2 polygon
+1 1.00 1468 294 1468 304 2 polygon
+1 1.00 1558 294 1558 304 2 polygon
+1 1.00 1648 294 1648 304 2 polygon
+1 1.00 1738 294 1738 304 2 polygon
+1 1.00 1828 292 1828 302 2 polygon
+1 1.00 1918 294 1918 304 2 polygon
+1 1.00 2010 294 2010 304 2 polygon
+1 1.00 2056 304 2056 288 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 1576 256 label
+(2000) {/Helvetica cf} 2 16 0 0.60 1754 256 label
+(1000) {/Helvetica cf} 2 16 0 0.60 1936 256 label
+1 1.00 1424 284 1424 304 2 polygon
+0.000 0.000 1.000 scb
+1 1.00 1432 624 2048 624 2 polygon
+497 1.00 1592 624 1597 467 1604 395 1611 355 1620 405 1622 624 6 polygon
+497 1.00 1626 624 1628 412 1632 376 1635 368 1640 375 1648 420 1652 457 1661 
+556 1665 623 9 polygon
+1.000 0.000 0.000 scb
+(Hydrochloric Acid) {/Helvetica cf} 2 16 0 1.00 1712 480 label
+(\(HCl\)) {/Helvetica cf} 2 16 0 1.00 1808 432 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 1592 -260 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 1392 -224 label
+1 1.00 1424 144 1392 144 2 polygon
+1 1.00 1424 -176 1392 -176 2 polygon
+1 1.00 1424 -16 1392 -16 2 polygon
+1 1.00 1424 -144 1408 -144 2 polygon
+1 1.00 1424 -112 1408 -112 2 polygon
+1 1.00 1424 -80 1408 -80 2 polygon
+1 1.00 1424 -48 1408 -48 2 polygon
+1 1.00 1424 16 1408 16 2 polygon
+1 1.00 1424 48 1408 48 2 polygon
+1 1.00 1424 80 1408 80 2 polygon
+1 1.00 1424 112 1408 112 2 polygon
+1 1.00 1424 144 1424 -176 2 polygon
+1 1.00 1784 -196 1784 -176 2 polygon
+1 1.00 1604 -196 1604 -176 2 polygon
+1 1.00 1424 -176 1604 -176 2 polygon
+1 1.00 1604 -176 1784 -176 2 polygon
+1 1.00 1784 -176 1964 -176 2 polygon
+1 1.00 1964 -196 1964 -176 2 polygon
+1 1.00 1964 -176 2010 -176 2 polygon
+1 1.00 2010 -176 2056 -176 2 polygon
+1 1.00 1514 -176 1514 -192 2 polygon
+1 1.00 1694 -176 1694 -192 2 polygon
+1 1.00 1872 -176 1872 -192 2 polygon
+1 1.00 1468 -186 1468 -176 2 polygon
+1 1.00 1558 -186 1558 -176 2 polygon
+1 1.00 1648 -186 1648 -176 2 polygon
+1 1.00 1738 -186 1738 -176 2 polygon
+1 1.00 1828 -188 1828 -178 2 polygon
+1 1.00 1918 -186 1918 -176 2 polygon
+1 1.00 2010 -186 2010 -176 2 polygon
+1 1.00 2056 -176 2056 -192 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 1576 -224 label
+(2000) {/Helvetica cf} 2 16 0 0.60 1754 -224 label
+(1000) {/Helvetica cf} 2 16 0 0.60 1936 -224 label
+1 1.00 1424 -196 1424 -176 2 polygon
+0.000 0.000 1.000 scb
+1 1.00 1432 144 2048 144 2 polygon
+497 1.00 1437 144 1438 -80 1445 -96 1453 -89 1460 -67 1469 -34 1478 11 1487 68 
+1498 143 9 polygon
+1.000 0.000 0.000 scb
+(Hydrofluoric Acid) {/Helvetica cf} 2 16 0 1.00 1616 16 label
+(\(HF\)) {/Helvetica cf} 2 16 0 1.00 1712 -32 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 -712 1612 
+label
+(4000) {/Helvetica cf} 2 16 0 0.60 -912 1648 label
+1 1.00 -880 2016 -912 2016 2 polygon
+1 1.00 -880 1696 -912 1696 2 polygon
+1 1.00 -880 1856 -912 1856 2 polygon
+1 1.00 -880 1728 -896 1728 2 polygon
+1 1.00 -880 1760 -896 1760 2 polygon
+1 1.00 -880 1792 -896 1792 2 polygon
+1 1.00 -880 1824 -896 1824 2 polygon
+1 1.00 -880 1888 -896 1888 2 polygon
+1 1.00 -880 1920 -896 1920 2 polygon
+1 1.00 -880 1952 -896 1952 2 polygon
+1 1.00 -880 1984 -896 1984 2 polygon
+1 1.00 -880 2016 -880 1696 2 polygon
+1 1.00 -520 1676 -520 1696 2 polygon
+1 1.00 -700 1676 -700 1696 2 polygon
+1 1.00 -880 1696 -700 1696 2 polygon
+1 1.00 -700 1696 -520 1696 2 polygon
+1 1.00 -520 1696 -340 1696 2 polygon
+1 1.00 -340 1676 -340 1696 2 polygon
+1 1.00 -340 1696 -294 1696 2 polygon
+1 1.00 -294 1696 -248 1696 2 polygon
+1 1.00 -790 1696 -790 1680 2 polygon
+1 1.00 -610 1696 -610 1680 2 polygon
+1 1.00 -432 1696 -432 1680 2 polygon
+1 1.00 -836 1686 -836 1696 2 polygon
+1 1.00 -746 1686 -746 1696 2 polygon
+1 1.00 -656 1686 -656 1696 2 polygon
+1 1.00 -566 1686 -566 1696 2 polygon
+1 1.00 -476 1684 -476 1694 2 polygon
+1 1.00 -386 1686 -386 1696 2 polygon
+1 1.00 -294 1686 -294 1696 2 polygon
+1 1.00 -248 1696 -248 1680 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 -728 1648 label
+(2000) {/Helvetica cf} 2 16 0 0.60 -550 1648 label
+(1000) {/Helvetica cf} 2 16 0 0.60 -368 1648 label
+1 1.00 -880 1676 -880 1696 2 polygon
+0.000 0.000 1.000 scb
+1 1.00 -872 2016 -256 2016 2 polygon
+497 1.00 -353 2016 -351 1822 -347 1956 -345 1827 -343 1889 -341 2015 6 polygon
+1.000 0.000 0.000 scb
+(Ozone) {/Helvetica cf} 2 16 0 1.00 -736 1904 label
+(\)) {ns} (3) {ss} (\(O) {/Helvetica cf} 6 16 0 1.00 -712 1856 label
+sce
+(\)) {ns} (-1) {Ss} (Wavenumber \(cm) {/Helvetica cf} 6 16 0 0.70 56 1612 label
+(4000) {/Helvetica cf} 2 16 0 0.60 -144 1648 label
+1 1.00 -112 2016 -144 2016 2 polygon
+1 1.00 -112 1696 -144 1696 2 polygon
+1 1.00 -112 1856 -144 1856 2 polygon
+1 1.00 -112 1728 -128 1728 2 polygon
+1 1.00 -112 1760 -128 1760 2 polygon
+1 1.00 -112 1792 -128 1792 2 polygon
+1 1.00 -112 1824 -128 1824 2 polygon
+1 1.00 -112 1888 -128 1888 2 polygon
+1 1.00 -112 1920 -128 1920 2 polygon
+1 1.00 -112 1952 -128 1952 2 polygon
+1 1.00 -112 1984 -128 1984 2 polygon
+1 1.00 -112 2016 -112 1696 2 polygon
+1 1.00 248 1676 248 1696 2 polygon
+1 1.00 68 1676 68 1696 2 polygon
+1 1.00 -112 1696 68 1696 2 polygon
+1 1.00 68 1696 248 1696 2 polygon
+1 1.00 248 1696 428 1696 2 polygon
+1 1.00 428 1676 428 1696 2 polygon
+1 1.00 428 1696 474 1696 2 polygon
+1 1.00 474 1696 520 1696 2 polygon
+1 1.00 -22 1696 -22 1680 2 polygon
+1 1.00 158 1696 158 1680 2 polygon
+1 1.00 336 1696 336 1680 2 polygon
+1 1.00 -68 1686 -68 1696 2 polygon
+1 1.00 22 1686 22 1696 2 polygon
+1 1.00 112 1686 112 1696 2 polygon
+1 1.00 202 1686 202 1696 2 polygon
+1 1.00 292 1684 292 1694 2 polygon
+1 1.00 382 1686 382 1696 2 polygon
+1 1.00 474 1686 474 1696 2 polygon
+1 1.00 520 1696 520 1680 2 polygon
+(3000) {/Helvetica cf} 2 16 0 0.60 40 1648 label
+(2000) {/Helvetica cf} 2 16 0 0.60 218 1648 label
+(1000) {/Helvetica cf} 2 16 0 0.60 400 1648 label
+1 1.00 -112 1676 -112 1696 2 polygon
+0.000 0.000 1.000 scb
+1 1.00 -104 2016 512 2016 2 polygon
+497 1.00 435 2015 435 1964 437 2016 3 polygon
+1.000 0.000 0.000 scb
+(Sulfur Hexafluoride) {/Helvetica cf} 2 16 0 1.00 -16 1888 label
+(\)) {ns} (6) {ss} (\(SF) {/Helvetica cf} 6 16 0 1.00 96 1840 label
+pgsave restore showpage
+
+%%Trailer
+XCIRCsave restore
+%%EOF

@@ -1,0 +1,100 @@
+// ePiX mathematical plot routine
+// Pole-Zero plot written by Tony R. Kuphaldt (August 6, 2013) 
+// for inclusion into the "Lessons In Industrial Instrumentation" textbook
+// RLC tank circuit with R = 7 ohms and C = 0.2 Farads and L = 5 Henrys
+// (under-damped)
+//
+// Compile this C++ file using the following ePiX script: 
+//     elaps <filename (without the ".xp" extension)>
+// After execution, elaps generates two files:
+//   - one is a LaTeX file with the extension ".eepic"
+//   - the other is an Encapsulated PostScript file with the extension ".eps"
+
+#include "epix.h"
+using namespace ePiX;
+
+// Setting various constants
+const int M(20); // Number of intervals 
+double MAX(2); // Limits of domain
+double Bd(MAX*1.75); // Domain boundaries
+double Pole_Bd(MAX*1.75); // Pole boundary
+double R1 = 7; // Resistor value
+double C1 = 0.2; // Capacitor value
+double L1 = 5; // Inductor value
+
+// Here is the transfer function to be plotted, the magnitude of which is
+// calculated as sqrt(r^2 + i^2)
+P F(double sigma, double omega)
+{
+  // Note: the 0.1 added to the denominator prevents infinity at the pole, 
+  // without skewing the plot signficantly enough to notice
+  return P(sigma, omega, sqrt( pow(sigma*R1*C1 ,2) + pow(omega*R1*C1 ,2)) / 
+          (0.001 + 
+            sqrt(
+                 pow( pow(sigma,2)*L1*C1 - pow(omega,2)*L1*C1 + sigma*R1*C1 + 1 ,2) +
+                 pow( 2*sigma*omega*L1*C1 + omega*R1*C1 ,2)
+                ) 
+          ) 
+      );
+}
+
+// Defines the points for the domain of the transfer function
+P pt1(-MAX,-MAX), pt2(0, MAX); // domain limits for the surface plot
+P pt3(-MAX,-MAX), pt4(MAX, MAX);  // domain limits for the grid
+//domain R(pt1, pt2, mesh(M/2,M), mesh(M/2,M));
+domain R(pt1, pt2, mesh(M,M), mesh(M,M));
+
+int main()
+{
+  picture(P(-Bd,-Bd), P(Bd,Bd), "3x3in");
+
+  begin();
+
+  // Sets the camera's vantage point
+  camera.at(P(6,-6,6));
+
+  // Plots a 2-D grid at z=0
+  clip_box(P(-Bd,-Bd,-Bd), P(Bd,Bd,0));
+  plain(Blue());
+  grid(pt3, pt4, M, M); 
+
+  // axes and labels
+  // SYNTAX: arrow(Coordinates of tail, Coordinates of tip);
+  // SYNTAX: label(Coordinates, Offset, "LaTeX text", alignment);
+  //          Note that LaTeX escape characters must be "\\" rather than "\"
+  
+  // Setting up clip box and pen color for axes and labels
+  clip_box(P(-Bd,-Bd,-Bd), P(Bd,Bd,Pole_Bd)); 
+  plain(Blue());
+
+  arrow(P(0,0,0), P(MAX*1.25,0,0));
+  label(P(MAX*1.25,0), P(2,-2), "$+\\sigma$", r); 
+
+  arrow(P(0,0,0), P(-Bd,0,0));
+  label(P(-Bd,0), P(-2,2), "$-\\sigma$", l); 
+
+  arrow(P(0,0,0), P(0,Bd,0));
+  label(P(0,Bd), P(2,2), "$+j \\omega$", r);
+
+  arrow(P(0,0,0), P(0,-MAX*1.25,0));
+  label(P(0,-MAX*1.25), P(-2,-2), "$-j \\omega$", l);
+
+  arrow(P(0, 0, 0), P(0,0,Pole_Bd));
+  label(P(0,0,Pole_Bd), P(35,5), "$R = 7$", r);
+  label(P(0,0,Pole_Bd), P(12,-10), "\\textit{Under-damped}", r);
+
+  // Plots a 3-D surface for the transfer function
+  clip_box(P(-Bd,-Bd,0),P(Bd,Bd,Pole_Bd));
+  plain(Gray());  // Pen color
+  fill(Yellow());     // Fill color
+  surface(F,R);      // plots the 3-D surface
+
+  
+  // Plots a 2-D line along a slice of the surface (sigma = 0) to show the
+  // frequency response for a sinusoid of constant magnitude (i.e. the Bode plot)
+  bbold(Red());  // Pen color and thickness
+  plot(F, R.resize2(0,MAX).slice1(0));  
+
+  pst_format();
+  end();
+}

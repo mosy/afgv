@@ -238,23 +238,25 @@ Heldigvis leverer leverandørene manualer som illurtrerer hvordan digitale inn o
 \filbreak
 \subsection{Analog I/O}
 
-In the early days of programmable logic controllers, processor speed and memory were too limited to support anything but discrete (on/off) control functions.  Consequently, the only I/O capability found on early PLCs were discrete in nature\footnote{Some modern PLCs such as the Koyo ``CLICK'' are also discrete-only.  Analog I/O and processing is significantly more complex to engineer and more expensive to manufacture than discrete control, and so low-end PLCs are more likely to lack analog capability.}.  Modern PLC technology, though, is powerful enough to support the measurement, processing, and output of analog (continuously variable) signals.  \index{I/O, analog (PLC)}
+Når PLS-ene kom på markedet på markedet, var prosessorhastigheten og minnet så begrenset at det ikke var mulig å støtte annet en digitale styringsfunksjoner. Derfor ble de også bare laget med digitale IO-er. Moderne PLS-er har nok prosessorkrat og minne til å støtte måling, prossesering og styring av analoge signaler. \index{analog, IO, PLS}
 
-All PLCs are digital devices at heart.  Thus, in order to interface with an analog sensor or control device, some ``translation'' is necessary between the analog and digital worlds.  Inside every analog input module is an \textit{ADC}, or \textit{Analog-to-Digital Converter}, circuit designed to convert an analog electrical signal into a multi-bit binary word.  Conversely, every analog output module contains a \textit{DAC}, or \textit{Digital-to-Analog Converter}, circuit to convert the PLC's digital command words into analog electrical quantities.  \index{Analog-to-digital converter}  \index{ADC}  \index{Digital-to-analog converter}  \index{DAC}
+En PLS jobber digitalt internt. For å ta imot og sende ut analoge singaler er det nødvendig med en omformer mellom digitale og analoge signaler. I alle analoge inngangmoduler er det en \textit{ADC}, eller \textit{Analog til Digital Converter} som skal konvertere det eletriske signalet på inngangen til et binert tall. Det motsatte trengs på en analog utgangsmodul, der brukes  en , \textit{DAC}, eller \textit{Digital til Analog Converter} som konverterter binære tall til analoge elektriske signaler.  \index{Analog-to-digital converter}  \index{ADC}  \index{Digital-to-analog converter}  \index{DAC}
 
-Analog I/O is commonly available for modular PLCs for many different analog signal types, including:
+Analog IO finnes for mange ulike typer analoge signaler, noen som brukes masse er:
+
 
 \begin{itemize}
-\item Voltage (0 to 10 volt, 0 to 5 volt)
-\item Current (0 to 20 mA, 4 to 20 mA)
-\item Thermocouple (millivoltage)
+\item Spenning (0 to 10 volt, 0 to 5 volt)
+\item Strøµ (0 to 20 mA, 4 to 20 mA)
+\item Thermoelement (millivoltage)
 \item RTD (millivoltage)
-\item Strain gauge (millivoltage)
+\item Strekklapp.  (millivoltage)
 \end{itemize}
 
 \filbreak
 
-The following photographs show two analog I/O cards for an Allen-Bradley SLC 500 modular PLC system, an analog input card and an analog output card.  Labels on the terminal cover doors indicate screw terminal assignments:
+Bildene viser to analoge IO-kort til en Allen-Bradley SLC 500. Det er et analogt inngangskort(AI) og et analogt utgangskfort(AO).  Merkelappen i dekselet indikerer hvordan modulene skal kobles. 
+
 
 $$\includegraphics[height=6in]{plc_019.eps} \hskip 30pt \includegraphics[height=6in]{plc_020.eps}$$
 
@@ -286,13 +288,15 @@ For more information on networking standards used in PLC systems, refer to the `
 
 
 \filbreak
-\section{Logic programming}
+\section{}
 
-Although it seems each model of PLC has its own idiosyncratic standard for programming, there does exist an international standard for controller programming that most PLC manufacturers at least attempt to conform to.  This is the IEC 61131-3 standard, which will be the standard presented in this chapter.  \index{IEC standard 61131-3 (PLC programming languages)}
+Det kan se ut som alle PLS-er har sin egen standard for programmering, men det finnes en international standard for PLS progarmmering som de fleste PLS produsenter i det minste forsøker å følge. Dette er IEC 61131-3, som vi vil bruke her.\index{IEC standard 61131-3 (PLC programming languages)}
 
-One should take solace in the fact that despite differences in the details of PLC programming from one manufacturer to another and from one model to another, the basic principles are largely the same.  There exist much greater disparities between different general-purpose programming languages (e.g. C/C++, BASIC, FORTRAN, Pascal, Java, Ada, etc.) than between the programming languages supported by different PLCs, and this fact does not prevent computer programmers from being ``multilingual.''  I have personally written and/or analyzed programs for over a half-dozen different manufacturers of PLCs (Allen-Bradley, Siemens, Square D, Koyo, Fanuc, Moore Products APACS and QUADLOG, and Modicon), with multiple PLC models within most of those brands, and I can tell you the differences in programming conventions are largely insignificant.  After learning how to program one model of PLC, it is quite easy to adapt to programming other makes and models of PLC.  If you are learning to program a particular PLC that does not exactly conform to the IEC 61131-3 standard, you will still be able to apply every single principle discussed in this chapter -- the fundamental concepts are truly that universal.
+En kan trøste seg med at selv som detaljene fra et PLS programmeringsverktøy til et annet, er prinseppene i det store å hele det samme. Det er mye større forskjelle i generelle programmeringsspråk( som C/C++, BASIC, FORTRAN, Pascal, Java, bl.a. )en mellom prgrammeringsverktøy fra ulike PLS leverandører, på tross av dette behersker programmere flere språk. Tony har programmert mange ulike PLS-er (Allen-Bradley, Siemens, SquareD, Koyo, Fanuc, Moore Products APACA AND QUADLOG og Modicon) med ulike typer av PLS innfor mange av merkene, og han kan fortelle at forskjellene i det store og hele er ubetydlige. Etter å ha lært en type PLS er det enkelt å gå over til en annen PLS. Selv om du programmerer en PLS som ikke følger IEC 61131-3 kan du følge prinsippene i dette kapittelet. De grunnleggende prinsippene er universelle. 
 
-The IEC 61131-3 standard specifies five distinct forms of programming language for industrial controllers:
+
+IEC-61131-3 standarden spesifiserer fem forskjellige programmeringsspråk for industrielle styringer:
+
 
 \begin{itemize}
 \item Ladder Diagram (LD)
@@ -302,9 +306,7 @@ The IEC 61131-3 standard specifies five distinct forms of programming language f
 \item Sequential Function Chart (SFC)
 \end{itemize}
 
-Not all programmable logic controllers support all five language types, but nearly all of them support Ladder Diagram (LD), which will be the primary focus of this book.
-
-Programming languages for many industrial devices are limited by design.  One reason for this is \textit{simplicity}: any programming language simple enough in structure for someone with no formal computer programming knowledge to understand is going to be limited in its capabilities.  Another reason for programming limitations is \textit{safety}: the more flexible and unbounded a programming language is, the more potential there will be to unintentionally create complicated ``run-time'' errors when programming.  The ISA safety standard number 84 classifies industrial programming languages as either \textit{Fixed Programming Languages} (FPL), \textit{Limited Variability Languages} (LVL), or \textit{Full Variability Languages} (FVL).  Ladder Diagram and Function Block Diagram programming are both considered to be ``limited variability'' languages, whereas Instruction List (and traditional computer programming languages such as C/C++, FORTRAN, BASIC, etc.) are considered ``full variability'' languages with all the attendant potential for complex errors.  \index{ISA 84}  \index{Fixed Programming Language (FPL)}  \index{Limited Variability Language (LVL)}  \index{Full Variability Language (FVL)}
+Ikke alle programmeringsspråk støttes av alle PLS-er, men omtrent alle støtter Ladder Diagram (LD), som vil være fokus i denne boken. 
 
 % ADD: note the extreme importance of properly documenting control programs, and also maintaining backup copies in case of data loss
 
@@ -315,6 +317,9 @@ Programming languages for many industrial devices are limited by design.  One re
 
 \filbreak
 \subsection{Relating I/O status to virtual elements}
+\subsection{Sammenhengen mellom IO-status og virtuelle brytere}
+
+Et konsept som krever litt tilvenning når en lærer å programmere PLS er sammenhengen mellom IO-ene og statusen på variabler og andre elementer i programmet. Dette gjelder spesielt for Ladder diagram (LD), der programmet ligner et elektriske skjema. Det er viktig å gjøre den mentale koblingen mellom virklige byrere og sensorer i anlegget og de tenket byrerene og relespolene en finner i PLS-programmet. 
 
 Perhaps the most important yet elusive concept to grasp when learning to program PLCs is the relationship between the electrical status of the PLC's I/O points and the status of variables and other ``elements'' in its programming.  This is especially true for Ladder Diagram (LD) programming, where the program itself resembles an electrical diagram.  Making the mental connection between the ``real'' world of the switches, contactors, and other electrical devices connected to the PLC and the ``imaginary'' world of the PLC's program consisting of virtual contacts and relay ``coils'' is most fundamental.
 

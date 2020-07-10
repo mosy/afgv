@@ -96,143 +96,141 @@ $$\includegraphics[width=16cm]{plc_004.eps}$$
 
 \filbreak
 
-While the Siemens S7 and Rockwell ControlLogix PLC platforms represent large-scale, modular PLC systems, there exist much smaller PLCs available for a fraction of the cost.  Perhaps the least expensive PLC on the market at this time of writing is the Koyo ``CLICK'' PLC series, the processor module (with eight discrete input and six discrete output channels built in) shown in my hand (sold for 69 US dollars in the year 2010, and with free programming software!):  \index{Koyo CLICK PLC}  
+Siemens S7 og Rockwell ControlLogix er eksempler på modulære PLS systemer som kan tilpasses store installasjoner. Det finnes andre PLS-er som er mye billigere. Et eksempel er Koyo Click serien med PLS-er. En prosessormodul med 6 DI(Digiale Innganger) og 6 DO(Digitale Utganger) vises på bildet.(Denne kostet 69 USD i 2010, med gratis programmeringsverktøy.).\index{Koyo CLICK PLC}  
 
-$$\includegraphics[width=4in]{plc_005.eps}$$
+$$\includegraphics[width=10cm]{plc_005.eps}$$
 
-This is a semi-modular PLC design, with a minimum of input/output (I/O) channels built into the processor module, but having the capacity to accept multiple I/O modules plugged in to the side, much like the Siemens S7-300 PLC.
-
-\filbreak
-
-Other semi-modular PLCs expand using I/O cards that plug in to the base unit not unlike traditional rack-based PLC systems.  The Koyo DirectLogic DL06 is a good example of this type of semi-modular PLC, the following photograph showing a model DL06 accepting a thermocouple input card in one of its four available card slots:  \index{Koyo DL06 PLC}
-
-$$\includegraphics[width=4in]{plc_007.eps}$$
-
-This photograph shows the PLC base unit with 20 discrete input channels and 16 discrete output channels, accepting an analog input card (this particular card is designed to input signals from thermocouples to measure up to four channels of temperature).
-
-\filbreak
-
-Some low-end PLCs are strictly monolithic, with no ability to accept additional I/O modules.  This General Electric Series One PLC (used to monitor a small-scale hydroelectric power generating station) is an example of a purely monolithic design, having no ``expansion'' slots to accept I/O cards:  \index{GE Series One PLC}
-
-$$\includegraphics[width=4in]{plc_006.eps}$$
-
-A disadvantage of monolithic PLC construction is that damaged I/O cannot be independently replaced.  If an I/O channel on one of these PLCs becomes damaged, the entire PLC must be replaced to fix the problem.  In a modular system, the damaged I/O card may simply be unplugged from the rack and replaced with a new I/O card.  Another disadvantage of monolithic PLCs is the inherently fixed nature of the I/O: the end-user cannot customize the I/O configuration to match the application.  For these reasons, monolithic PLCs are usually found on small-scale processes with few I/O channels and limited potential for expansion.
-
-
-
-
-
+Dette er et semi-modulært PLS system, en prosessormodul med et minumum av IO-er, som det er mulig å utvide med flere moduler som plugges i siden, omtrent på samme måte som Siemens S7-300 serien. 
 
 
 \filbreak
-\section{Input/Output (I/O) capabilities}
 
-Every programmable logic controller must have some means of receiving and interpreting signals from real-world sensors such as switches, and encoders, and also be able to effect control over real-world control elements such as solenoids, valves, and motors.  This is generally known as \textit{input/output}, or \textit{I/O}, capability.  Monolithic (``brick'') PLCs have a fixed amount of I/O capability built into the unit, while modular (``rack'') PLCs use individual circuit board ``cards'' to provide customized I/O capability.  \index{I/O}  
+Andre semi-modulære PLS-er bruker IO-kort for å utvide grunnmodulen. Koyo DirectLogic DL06 er et eksempel på denne type PLS. Bildet viser DL06 som det settes et kort for termoelementer i en av de 4 ledige plassene.\index{Koyo DL06 PLC}
+
+$$\includegraphics[width=10cm]{plc_007.eps}$$
+
+Dette bildet viser en PLS grunnmodul med 20 DI og 16 DO kanaler. Kotet som settes i er for analoge signaler fra thermoelementer. Det kan kobles 4 thermoelementer til kortet.
+
+\filbreak
+
+Noen billige kompakt PLS-er har ikke mulighet for utvidelse med IO-moduler.  Denne General Electric Series One PLS (bruk til å overvåke et mini vannkraftverk) er et eksempel på dette. 
+
+$$\includegraphics[width=10cm]{plc_006.eps}$$
+
+Ulempen med et kompakt PLS er at en defekt IO ikke kan byttes ut sepparat. Hele PLS-en må byttes. I et modulært system kan hver IO-modul byttes ved feil. En annen ulempe er at brukeren er låst til IO-konfigurasjonen som PLS har. Det er ingen mulighet for tilpassning til bruken. På grunn av dette brukes som oftest kompakt PLS-er på  mindre automatiserte anlegg der en ikke forventer behov for utvidelse.  
+
+
+\filbreak
+\section{Inngangs- og utgangs tilkoblinger IO-er  }
+
+Alle PLS-er må kunne motta og forstå signaler fra den virklige verden, f.eks. byrtere og enkodere. Den må også kunne kontrollere enheter som solenoider, ventiler og motorer. Dette kalls for PLS-ens IO-kapasitet. En kompakt PLS har en bestemt IO-kapasitet, mens en modulær PLS har mulighet for å konfigurere IO-kapasiteten.\index{I/O}  
 
 $$\includegraphics{plc_075.eps}$$
 
-The advantages of using replaceable I/O cards instead of a monolithic PLC design are numerous.  First, and most obvious, is the fact that individual I/O cards may be easily replaced in the event of failure without having to replace the entire PLC.  Specific I/O cards may be chosen for custom applications, biasing toward discrete cards for applications using many on/off inputs and outputs, or biasing toward analog cards for applications using many 4-20 mA and similar signals.  Some PLCs even offer the feature of \textit{hot-swappable} cards, meaning each card may be removed and a new one inserted without de-energizing power to the PLC processor and rack.  Please note that one should not assume any system has hot-swappable cards, because if you attempt to change out a card ``live'' in a system without this feature, you run the risk of damaging the card and/or the rest of the unit it is plugged in to!  \index{Hot-swappable PLC I/O}  \index{I/O, hot-swappable}
+Det er mange fordeler med å bruke IO-moduler istedenfor en kompakt PLS. Den visktigste er at devekte IO-kort kan byttes uten å måtte bytte hele PLS-en. Det er også mulig å velge IO-kort alt etter behovet i styringssystemet. Typisk trenger styringsoppgaver som flytter på "ting" mange digitale inn- og utganger, mens en i prosessanlegg trenger flere analoge inn og -utganger. Noen  PLS-systemer har også muligheten for \textit{hot-swappable} moduler, det vil si at de kan byttes uten å ta strømmen fra PLS-systemet. Vær obs på at dette bare kan gjøres på systemer som er laget for det, ellers kan du ødlegge PLS-systemet.\index{Hot-swappable PLC I/O}  \index{IO, hot-swappable}
 
 \filbreak
 
-Some PLCs have the ability to connect to processor-less remote racks filled with additional I/O cards or modules, thus providing a way to increase the number of I/O channels beyond the capacity of the base unit.  The connection from host PLC to remote I/O racks usually takes the form of a special digital network, which may span a great physical distance:  \index{Remote PLC I/O}  \index{I/O, remote}
+Noen PLS-er har mulighet for tilkobling av eksterne moduler uten prosessorer, dette gjør det mulig å utvide IO-kapasiteten . Disse kobles sammen til et digitalt nettverk med en kommunikasjonskabel. Dette gjør at en kan ha stor fysisk avstand mellom PLS og IO-er på et anlegg. Slike eksterne IO-enheter kalles normalt for en RIO (Remote IO) \index{RIO} \index{remote IO}. 
 
 $$\includegraphics{plc_008.eps}$$
 
-An alternative scheme for system expansion is to network multiple PLCs together, where each PLC has its own dedicated rack and processor.  Through the use of communication instructions, one PLC may be programmed to read data from and/or write data to another PLC, effectively using the other PLC as an extension of its own I/O.  Although this method is more expensive than remote I/O (where the remote racks lack their own dedicated processors), it provides the capability of stand-alone control in the event the network connection between PLC processors becomes severed.
+Et alternativ til et styresystem med remote IO er å koble sammen flere PLS-er. En kan da programmere PLS-ene til å dele på IO-er, for på den måten å utvide IO-kapasiteten. Dette er en dyr metode, men detn gir mulighet for videre drift selv om det skulle være feil på nettverket. 
+
 
 \vskip 10pt
 
-Input/output capability for programmable logic controllers comes in three basic varieties: \textit{discrete}, \textit{analog}, and \textit{network}; each type discussed in a following subsection.
-
-
-
-
-
+IO-tilkoblinger for en PLS kommer i to ulike kategorier \textit{digitale} og \textit{ analoge} disse beskrives i de neste kaptittelene. 
 
 
 \filbreak
-\subsection{Discrete I/O}
+\subsection{Digitale IO-er}
 
-A ``discrete'' data point is one with only two states \textit{on} and \textit{off}.  Process switches, pushbutton switches, limit switches, and proximity switches are all examples of discrete sensing devices.  In order for a PLC to be aware of a discrete sensor's state, it must receive a signal from the sensor through a \textit{discrete input} channel.  Inside each discrete input module is (typically) a set of light-emitting diodes (LEDs) which will be energized when the corresponding sensing device turns on.  Light from each LED shines on a photo-sensitive device such as a phototransistor inside the module, which in turn activates a \textit{bit} (a single element of digital data) inside the PLC's memory.  This opto-coupled arrangement makes each input channel of a PLC rather rugged, capable of isolating the sensitive computer circuitry of the PLC from transient voltage ``spikes'' and other electrical phenomena capable of causing damage:  \index{Bit}  \index{I/O, discrete (PLC)}
+Et digitalt singal for en PLS, er et signal som kan ha to tilstander \textit{av} og \textit{på}. Disse bruker datatypen BOOL i internt i PLS-en. Trykkbrytere, temperaturbrytere, trykknappbrytere, endebrytere og nærhetssensorer er eksempler på digitale signalkilder for en PLS. For at PLS-en skal lese signaler fra denne type sensorer må den ha en digitale innganger. Digitale innganger på en PLS vil ha en lysdiode som indikerer om en inngang er aktivert eller ikke. Det vil også være en annen LED som er en del av en optokobler. Optokobleren lager et galvansik skille mellom sensorkretsen og mikroprosessorkretsen inne i PLS-en. Et slikt system gjør at en PLS er mindre følsom fra spenningstransienter. Optokobleren aktiver et bit inn minnet til PLS-en. Dette minnet brukes av PLS programmet til å avgjøre om en sensor er aktivert eller ikke. \index{DIO, Digital IO} \index{Bit} 
+
 
 $$\includegraphics{plc_073.eps}$$
 
-The internal schematic diagram for a discrete input module (``card'') shown above reveals the componentry typical for a single input channel on that card.  Each input channel has its own optocoupler, writing to its own unique memory register bit inside the PLC's memory.  Discrete input cards for PLCs typically have 4, 8, 16, or 32 channels.
+Det interne koblingskjemaet for en inngangmodul viser de viktigste komponentene for en inngang. Hver inngang har samme kretsen som skriver til hvert sitt bit i PLS-ens minne. Digitale inngangmoduler har vanligvis 4, 8, 16 eller 32 innganger.  
+
 
 \filbreak
 
-Indicator lamps, solenoid valves, and motor starters (assemblies consisting of contactors and overload protection devices) are all examples of discrete control devices.  In a manner similar to discrete inputs, a PLC connects to any number of different discrete final control devices through a \textit{discrete output channel}\footnote{I/O ``channels'' are often referred to as ``points'' in industry lingo.  Thus, a ``32-point input card'' refers to an input circuit with 32 separate channels through which to receive signals from on/off switches and sensors.}.  Discrete output modules typically use the same form of opto-isolation to allow the PLC's computer circuitry to send electrical power to loads: the internal PLC circuitry driving an LED which then activates some form of photosensitive switching device.  Alternatively, small electromechanical relays may be used in lieu of opto-isolating semiconductor switching elements such as transistors (DC) or TRIACs (AC):
+Signallamper, magnetventiler og motorstartere er alle eksempler på digitale styringselementer. Omtrent på samme måte som digitale innganger kobler PLS-en seg til digitale styringselementt ved hjelp av digitale utgangsmoduler. Digitale utgangsmoduler bruker ofte samme type galvansik skille som inngangmoduler, ved hjelp av en optokobler. Alternativt brukes også elektromekaniske releer. 
+
 
 $$\includegraphics{plc_074.eps}$$
 
-As with the schematic diagram for a discrete input module shown previously, the schematic diagram shown here for a discrete output module reveals the componentry typical for a single channel on that card.  Each output channel has its own optocoupler, driven by its own unique memory register bit inside the PLC's memory.  Discrete output cards for PLCs also typically have 4, 8, 16, or 32 channels.
+Som ved den digitaleinngangsmodule vises et koblingsskjema en av flere utganger. Hver utgang har sitt tilhørende bit i minnet som vil aktivere utgangen. Digitale ugangsmoduler har typisk 4, 8, 16, eller 32 utganger. 
+
 
 \vskip 10pt
 
 \filbreak
 
-An important concept to master when working with DC discrete I/O is the distinction between \textit{current-sourcing} and \textit{current-sinking} devices.  The terms ``sourcing'' and ``sinking'' refer to the direction of current (as denoted by conventional flow notation) into or out of a device's control wire\footnote{By ``control wire,'' I mean the single conductor connecting the I/O card channel to the field device, as opposed to conductors directly common with either the positive or negative lead of the voltage source.  If you focus your attention on this one wire, noting the direction of conventional-flow current through it, the task of determining whether a device is sourcing or sinking current becomes much simpler.}.  A device sending (conventional flow) current out of its control terminal to some other device(s) is said to be \textit{sourcing} current, while a device accepting (conventional flow) current into its control terminal is said to be \textit{sinking} current.  \index{Sourcing current}  \index{Sinking current}  \index{Current sourcing}  \index{Current sinking}
+Et viktig konsept å beherske når en jobber med digitale inn- og utganger er forskjellen mellom \textit{current-sourcing} og \textit{current-sinking}. Begrepene "sourcing" og "sinking" refererer til retningen til strømmen inn eller ut av terminalen for styresignal. En enhet som sender strøm ut av styreterminalen sies å \textit{sourcing}, mens utstrm som tar imont strøm sies å være \textit{sinking}.\index{Sourcing current}  \index{Sinking current}  \index{Current sourcing}  \index{Current sinking}
 
 \filbreak
 
-To illustrate, the following illustration shows a PLC output channel is \textit{sourcing} current to an indicator lamp, which is \textit{sinking} current to ground:
+Tegningen nedenfor illustrerer PLS utgang som er current \textit{sourcing} for en lampe som er current\textit{sinking}.
+
 
 $$\includegraphics{plc_009.eps}$$
 
-These terms really only make sense when electric current is viewed from the perspective of conventional flow, where the positive terminal of the DC power supply is envisioned to be the ``source'' of the current, with current finding its way ``down'' to ground (the negative terminal of the DC power supply).  In every circuit formed by the output channel of a PLC driving a discrete control device, or by a discrete sensing device driving an input channel on a PLC, one element in the circuit must be sourcing current while the other is sinking current.
-
-An engineering colleague of mine has a charming way to describe sourcing and sinking: \textit{blowing} and \textit{sucking}.  A device that sources current to another ``blows'' current toward the other device.  A device that sinks current ``sucks'' current from the other device.  Many students seem to find these terms helpful in first mastering the distinction between sourcing and sinking despite (or perhaps because of!) their informal nature.
-
 \filbreak
 
-If the discrete device connecting to the PLC is not polarity-sensitive, either type of PLC I/O module will suffice.  For example, the following diagrams show a mechanical limit switch connecting to a sinking PLC input and to a sourcing PLC input:
+Om det tilkoblede utstyret polaritetsuavhengig, er det like gylding om en har \textit{sourcing} eller \textit{sinking} DI-modul. Bildet viser et eksempel med en endebryter. 
+
 
 $$\includegraphics{plc_010.eps}$$
 
 $$\includegraphics{plc_011.eps}$$
 
-Note the differences in polarity and labeling between the sinking card's common terminal and the sourcing card's common terminal.  On the ``sinking'' card, the input channel terminal is positive while the common (``Com'') terminal is negative.  On the ``sourcing'' card, the input channel terminal is negative while the common (``VDC'') terminal is positive. 
+Legg merke til polariteten på fellesterminalen på begge moduelene. Modulen som er \textit{sinking} har fellesterminalen koblet til minus, mens modulen som  er \textit{sourcing} er koblet til +. 
+
 
 \filbreak
 
-Some discrete sensing devices \textit{are} polarity-sensitive, such as electronic proximity sensors containing transistor outputs.  A ``sourcing'' proximity switch can only interface with a ``sinking'' PLC input channel, and vice-versa:  \index{Sourcing current}  \index{Sinking current}  \index{Current sourcing}  \index{Current sinking}
+Noen digitale sensorer \textit{har} en bestempt polaritet, f.eks. nærhetssensorer med transistorutgang. En \textit{sourcing} nærhetssensor kan bare kobles til en \textit{sinking} PLS inngang, og visa versa.\index{Sourcing current}  \index{Sinking current}  \index{Current sourcing}  \index{Current sinking}
 
 $$\includegraphics{plc_012.eps}$$
 
-In all cases, the ``sourcing'' device sends current \textit{out of} its signal terminal while the ``sinking'' device takes current \textit{into} its signal terminal.
+I alle tilfellene sender enheten som er \textit{sourcing} ut strøm fra signalterminalen til \textit{sinking} enheten som mottar signal på sin signalterminal. 
+
 
 \filbreak
 
-Two photographs of a DC (sinking) discrete input module for an Allen-Bradley model SLC 500 PLC are shown here: one with the plastic cover closed over the connection terminals, and the other with the plastic cover opened up for viewing the terminals.  A legend on the inside of the cover shows the purpose of each screw terminal: eight input channels (numbered 0 through 7) and two redundant ``DC Com'' terminals for the negative pole of the DC power supply to connect:
+Her vises to bilder av en DI module(1746-IB8) til Allen-Bradley modell SLC 500 PLS. På det dene bilder er dekselset lukket. På det andre er dekselet åpen og vi ser terminalene sammen med en forklaring på funksjonen til hver terminal. Her ser vi at modulen har 8 digitale innganger, nummerert fra IN0 til IN7, og to tilkoblinger for COM. Vi ser også at dette er en DC-SINK modul. 
 
-$$\includegraphics[height=3in]{plc_013.eps} \hskip 30pt \includegraphics[height=3in]{plc_014.eps}$$
 
-A standard feature found on practically every PLC discrete I/O module is a set of LED indicators visually indicating the status of each bit (discrete channel).  On the SLC 500 module, the LEDs appear as a cluster of eight numbered squares near the top of the module.
+$$\includegraphics[height=4in]{plc_013.eps} \hskip 30pt \includegraphics[height=4in]{plc_014.eps}$$
 
-A photograph of discrete output terminals on another brand of PLC (a Koyo model DL06) shows somewhat different labeling:
+En standard funksjon som nesten alle digitale innganger har er et indikatorlys som viser når inngangen er aktiv. På 1746-IB8 modulen til Allen-Bradley SLC 500 PLS systemen ser vi disse samlet på toppen av modulen i to rekker. 
+
+Et bilde av DI terminalene til en annen PLS (Koyo model DL06) viser en annen merking. 
+
 
 $$\includegraphics[width=16cm]{plc_015.eps}$$
 
-Here, each output channel terminal is designated with a letter/number code beginning with the letter ``Y''.  Several ``common'' terminals labeled with ``C'' codes service clusters of output channels.  In this particular case, each ``common'' terminal is common only to four output channels.  With sixteen total output channels on this PLC, this means there are four different ``common'' terminals.  While this may seem somewhat strange (why not just have one ``common'' terminal for all sixteen output channels?), it more readily permits different DC power supplies to service different sets of output channels.
+Her er hver utgang gitt en bokstavnummer kombinasjon som starter med Y ellerfult av nummere på utgangen. Det er også C terminaler, dette er fellesterminaler for samlinger på fireutganger på denne PLS-en. Selv som det kan virke litt tungvint å ha flere fellesterminaler, så gjør dette PLS-en mer fleksibler for flere driftsspenninger og det muliggjør bruk av interne styrespenninger fra utstyr. 
+
 
 \vskip 10pt
 
-Electrical polarity is not an issue with AC discrete I/O, since the polarity of AC reverses periodically anyway.  However, there is still the matter of whether the ``common'' terminal on a discrete PLC module will connect to the \textit{neutral} (grounded) or \textit{hot} (ungrounded) AC power conductor.
+Elektriske polaritet er ikke noe en trenger å tenke på ved bruk av digitale innganger for AC, siden polariteten snus hver periode uansett. En må likevell tenke på om fellesterminalen skal kobles til nøytral eller en av faselederene. Denne informasjonen vil en finne i leverandør manualen for den aktuelle modulen. 
 
-The next photograph shows a discrete AC output module for an Allen-Bradley SLC 500 PLC, using TRIACs as power switching devices rather than transistors as is customary with DC discrete output modules:
+
+Neste bilde viser en digital utgangsmodul for AC fra Allen-Bradly. Her brukes triacer på utgangen istedenfor transistorer som er vanlig for DC type utganger. 
+
 
 $$\includegraphics[height=4in]{plc_021.eps}$$
 
-This particular eight-channel module provides two sets of TRIACs for switching power to AC loads, each set of four TRIACs receiving AC power from a ``hot'' terminal (VAC 1 or VAC 2), the other side of the load device being connected to the ``neutral'' (grounded) conductor of the AC power source.
+Denne 8 kanals modulen har to sett med TRIACer som  får spenning fra hver sine fellesterminaler VAC1 og VAC2, den andre siden av lasten kobles til motsatt faseleder eller nøytral. 
+
 
 \vskip 10pt
 
-Fortunately, the hardware reference manual supplied by the manufacturer of every PLC shows diagrams illustrating how to connect discrete input and output channels to field devices.  One should always consult these diagrams before connecting devices to the I/O points of a PLC!
-
-
-
-
+Heldigvis leverer leverandørene manualer som illurtrerer hvordan digitale inn og utganger skal kobles til feltutstyret. Det er viktig at du alltid setter deg inn i disse manualene. 
 
 
 
@@ -258,7 +256,7 @@ Analog I/O is commonly available for modular PLCs for many different analog sign
 
 The following photographs show two analog I/O cards for an Allen-Bradley SLC 500 modular PLC system, an analog input card and an analog output card.  Labels on the terminal cover doors indicate screw terminal assignments:
 
-$$\includegraphics[height=4in]{plc_019.eps} \hskip 30pt \includegraphics[height=4in]{plc_020.eps}$$
+$$\includegraphics[height=6in]{plc_019.eps} \hskip 30pt \includegraphics[height=6in]{plc_020.eps}$$
 
 
 

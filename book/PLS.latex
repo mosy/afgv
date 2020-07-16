@@ -212,7 +212,7 @@ Et bilde av DI terminalene til en annen PLS (Koyo model DL06) viser en annen mer
 
 $$\includegraphics[width=16cm]{plc_015.eps}$$
 
-Her er hver utgang gitt en bokstavnummer kombinasjon som starter med Y ellerfult av nummere på utgangen. Det er også C terminaler, dette er fellesterminaler for samlinger på fireutganger på denne PLS-en. Selv som det kan virke litt tungvint å ha flere fellesterminaler, så gjør dette PLS-en mer fleksibler for flere driftsspenninger og det muliggjør bruk av interne styrespenninger fra utstyr. 
+Her er hver utgang gitt et bokstavnummer kombinasjon som starter med Y ellerfult av nummere på utgangen. Det er også C terminaler, dette er fellesterminaler for samlinger på fireutganger på denne PLS-en. Selv som det kan virke litt tungvint å ha flere fellesterminaler, så gjør dette PLS-en mer fleksibler for flere driftsspenninger og det muliggjør bruk av interne styrespenninger fra utstyr. 
 
 
 \vskip 10pt
@@ -316,58 +316,62 @@ Ikke alle programmeringsspråk støttes av alle PLS-er, men omtrent alle støtte
 
 
 \filbreak
-\subsection{Relating I/O status to virtual elements}
 \subsection{Sammenhengen mellom IO-status og virtuelle brytere}
 
-Et konsept som krever litt tilvenning når en lærer å programmere PLS er sammenhengen mellom IO-ene og statusen på variabler og andre elementer i programmet. Dette gjelder spesielt for Ladder diagram (LD), der programmet ligner et elektriske skjema. Det er viktig å gjøre den mentale koblingen mellom virklige byrere og sensorer i anlegget og de tenket byrerene og relespolene en finner i PLS-programmet. 
+Et konsept som krever litt tilvenning når en lærer å programmere PLS er sammenhengen mellom IO-ene og statusen på variabler og andre elementer i programmet. Dette gjelder spesielt for Ladder diagram (LD), der programmet ligner et elektriske skjema. Det er viktig å gjøre den mentale koblingen mellom virklige byrere og sensorer i anlegget og de tenkte byrerene og relespolene en finner i PLS-programmet. 
 
-Perhaps the most important yet elusive concept to grasp when learning to program PLCs is the relationship between the electrical status of the PLC's I/O points and the status of variables and other ``elements'' in its programming.  This is especially true for Ladder Diagram (LD) programming, where the program itself resembles an electrical diagram.  Making the mental connection between the ``real'' world of the switches, contactors, and other electrical devices connected to the PLC and the ``imaginary'' world of the PLC's program consisting of virtual contacts and relay ``coils'' is most fundamental.
+En grunnleggende regel en må tenke på når en leser et ladder program er at \textbf{hver kontakt i programmet aktiveres ved at den leser "1" i det tilhørende minnebit,  og at den deaktiveres når den leser "0" i det tilhørdne minnebit.}. For en NO kontakt vil det si at den er lukket nå tilhørdne minnebit er "1" For en NO kontakt vil det si at den er lukket når tilhørende minnebit er "0". Om et bit har tilstanden "0"  vil det si at tilhørdne kontakt er i sin normale posisjon, mens en bitstatus på "1" vil få kontakten til å aktivere og gå i sin aktive tilstand. \index{PLS Normal status på brytere}  
 
-The first fundamental rule one should keep in mind when examining a Ladder Diagram PLC program is that \textbf{each virtual contact shown in the program \textit{actuates} whenever it reads a ``1'' state in its respective bit and will be \textit{at rest} whenever it reads a ``0'' state in its respective bit} (in the PLC's memory).  If the contact is a normally-open (NO) type, it will open when its bit is 0 and close when its bit is 1.  If the contact is a normally-closed (NC) type, it will close when its bit is 0 and open when its bit is 1.  A 0 bit state causes the contact to be in its ``normal'' (resting) condition, while a 1 bit state \textit{actuates} the contact, forcing it into its non-normal (actuated) state.   \index{Normal state of a PLC program contact}
+En annen viktig regel når en leser PLS programmer er at programmeringsgrensesnittet tilbyr \textit{farge merkeing} for å markere virtuel status av hvert program element. \textbf{En farget kontakt(\colorbox{yellow!50}{-$|$ $|$-}) er \textit{lukket}, mens en ikke farget (-$|$ $|$-) er \textit{åpen}}. Om  bryteren har en skråstrek (-$|/|$-) eller ikke (-$|\:|$-) marker hvilken normale status brytern har, så marker farge om den er lukket eller ikke.
 
-Another rule to remember when examining a Ladder Diagram PLC program is that the programming software offers \textit{color highlighting}\footnote{It should be noted that in some situations the programming software will fail to color the contacts properly, especially if their status changes too quickly for the software communication link to keep up, and/or if the bit(s) change state multiple times within one scan of the program.  However, for simple programs and situations, this rule holds true and is a great help to beginning programmers as they learn the relationship between real-world conditions and conditions within the PLC's ``virtual'' world.} to display the virtual status of each program element: \textbf{a colored contact is \textit{closed}, while an un-colored contact is \textit{open}}.  While the presence or absence of a ``slash'' symbol marks the \textit{normal} status of a contact, its live color highlighting shown by PLC programming software reveals the ``conductive'' status of the elements \textit{in real time}.
+Tabellen nedenfor viser hvordan to typer kontakter et PLS ladder program forholder seg til ulike bitstatuser. Det brukes rød for å vise når en virtuell kontakt leder. 
 
-The following table shows how the two types of contacts in a PLC's Ladder Diagram program respond to bit states, using red coloring to signify each contact's virtual conductivity:
 
 $$\includegraphics{plc_065.eps}$$
 
-Just as a pressure switch's contacts are actuated by a high pressure condition, and a level switch's contacts are actuated by a high level condition, and a temperature switch's contacts are actuated by a high temperature condition, so a PLC's virtual contact is actuated by a high \textit{bit} condition (1).  In the context of any switch, an \textit{actuated} condition is the opposite of its \textit{normal} (resting) condition.
+Akkurat som en trykkbryter aktiveres av høyt trykk, og en nivåbryter aktiveres av høyt nivå, og en temperaturbyter aktiveres av høy temperatur, så vil en PLS sine virtuelle brytere aktiveres av et høyt \textit{bit} status. Med en bryte sin \textit{aktiverte} tilstand mener vi det motsatte av den \textit{normale} tilstand.
+
 
 \filbreak
 
-The following simplified\footnote{The electrical wiring shown in this diagram is incomplete, with the ``Common'' terminal shown unconnected for simplicity's sake.} illustration shows a small PLC with two of its discrete input channels electrically energized, causing those two bits to have ``1'' statuses.  The color-highlighted contacts in the programming editor software's display shows a collection of contacts addressed to those input bits in various states (colored = closed ; un-colored = open).  As you can see, every contact addressed to a ``set'' bit (1) is in its actuated state, while every contact addressed to a ``cleared'' bit (0) is in its normal state:
+Illustrasjonen nedenfor viser en kompakt PLS med to av de digitale inngangene aktivert, noe som gjør at de tilhørende bit i inngangsregisteret er høye (TRUE eller "1"). De kontaktene som er farget i PLS programmeringsverktøyet viser virtuelle kontakter som vil sende \textit{signalet} videre ved de statuser som vises i  inngangsregisteret.
 
 $$\includegraphics{plc_064.eps}$$
 
-Remember that a \textit{colored} contact is a \textit{closed} contact.  The contacts appearing as colored are either normally-closed contacts with ``0'' bit states, or normally-open contacts with ``1'' bit states.  It is the combination of bit state and contact type (NO vs. NC) that determines whether the virtual contact will be open (un-colored) or closed (colored) at any given time.  Correspondingly, it is a combination of colored highlighting and virtual contact type that indicates the real-world energization status of a particular PLC input at any given time.
+\textbf{Husk} at en farget kontakt er en \textit{lukket} kontakt. De kontaktene som er farget er enten NC kontakter med "0" bit status, eller NO kontakter med "1" bit status. Det er kombinasjonen av bit status og type kontakt (NO/NC) som avgjør om den virtuelle kontakten vil  være åpen (ikke farget) eller lukket (farget). 
 
 \filbreak
 
-In my teaching experience, the main problem students have comprehending PLC Ladder Diagram programs is that they over-simplify and try to directly associate real-world switches connected to the PLC with their respective contact instructions inside the PLC program.  Students mistakenly think the real-world switch connecting to the PLC and the respective virtual switch contact inside the PLC program are one and the same, when this is not the case at all.  Rather, the real-world switch sends power to the PLC input, \textit{which in turn \underbar{controls} the state of the virtual contact(s) programmed into the PLC.}  Specifically, I see students routinely fall into the following mis-conceptions:
+Min erfaring som lærer er at hovedproblemet elever har med å forstå PLS ladderprogrammer, er at de prøver å simplifisere ved å relatere vituelle kontakter i pls programmet med kontakter ute i anlegget. Det som skjer er at kontakter i anlegget sender spenning til inngange \textit{som igjen \underbar{styrer}} status til den virtuelle kontakten i PLS programmet. Typiske feil som elever gjøre er:
 
 \begin{itemize}
-\item Students mistakenly think the contact instruction type (NO vs. NC) needs to match that of its associated real-world switch
-\item Students mistakenly think color highlighting of a contact instruction is equivalent to the electrical status of its associated real-world PLC input
-\item Students mistakenly think a closed real-world switch must result in a closed contact instruction in the live PLC program
+	\item Elever tror kontakten i PLS programmet må være av samme type (NO/NC) som tilhørende bryter i anlegget
+	\item Elever tror at fargemerkingen av en kontakt er det samme som status på tilhørende inngang. 
+	\item Elever tror en lukket kontakt i anlegget må resultere i en lukket kontakt i PLS programmet.
 \end{itemize}
 
-To clarify, here are the fundamental rules one should keep in mind when interpreting contact instructions in Ladder Diagram PLC programs:
+Oppsummering av grunnleggende regler når en leser et PLS ladder program:
 
 \begin{itemize}
-\item \textbf{Each input bit in the PLC's memory will be a ``1'' when its input channel is powered, and will be a ``0'' when its input channel is unpowered}
-\item \textbf{Each virtual contact shown in the program \textit{actuates} whenever it reads a ``1'' state in its respective bit, and will be \textit{at rest} whenever it reads a ``0'' state in its respective bit}
-\item \textbf{A colored contact is \textit{closed} (passes virtual power in the PLC program), while an un-colored contact is \textit{open} (blocks virtual power in the PLC program)}
+
+	\item \textbf{Hvert inngangsbit i PLS-en sitt minne vil være "1" når dens tilhørende inngang aktiveres}
+	\item \textbf{Hver virtuelle kontakt som vises i programmet\textit{aktiveres} når den leser "1" i tilhørende bit i inngangsregisteret, og vil være i normaltilstand når den leser "0" i tilhørende minnebit}
+	\item \textbf{En farget kontakt er \textit{lukket} (sender videre signal i PLS programmet), mens en ikke farget kontakt er \textit{åpen} (blokkerer signal i PLS programmet)}
 \end{itemize}
 
-In trying to understand PLC Ladder Diagram programs, the importance of these rules cannot be overemphasized.  The truth of the matter is a causal chain -- rather than a direct equivalence -- between the real-world switch and the contact instruction status.  The real-world switch controls whether or not electrical power reaches the PLC input channel, which in turn controls whether the input register bit will be a ``1'' or a ``0'', which in turn controls whether the contact instruction will actuated or at rest.  Virtual contacts inside the PLC program are thus \textit{controlled} by their corresponding real-world switches, rather than simply being \textit{identical} to their real-world counterparts as novices tend to assume.  Following these rules, we see that normally-open (NO) contact instructions will mimic what their real-world switches are doing, while normally-closed (NC) contact instructions will act opposite of their real-world counterparts.
+Dette er meget viktige regler å ha klart for seg  når en skal forstå PLS ladder programmer. 
+
 
 % ADD: show relay analogy, where each PLC input is a special coil electrically energized by a real-world switch.  Show relay circuit first, then follow with modified diagram showing how the PLC implements the same logic.
 
 \vskip 10pt
 
-The color highlighting of \textit{coil} instructions in a Ladder Diagram PLC program follows similar rules.  A coil will be ``on'' (colored) when all contact instructions prior to it are closed (colored).  A colored coil writes a ``1'' to its respective bit in memory, while an un-colored coil instruction writes a ``0'' to its respective bit in memory.  If these bits are associated with real-world discrete output channels on the PLC, their states will control the real-world energization of devices electrically connected to those channels.
+Fargemerking av en \textit{coil} [---( )] i ladder PLS programmer følger lignende regler. En coil vil være "på" (farget) når alle brytere og funksjoner før den er farget. En coil som er farget vil skrive "1" til tilhørende bit i minnet, mens en coil som ikke er farget sender  en "0" til det tilhørende minnebit. Om disse minnebitene har en kobling mot fysike digitale utganger vil disse bli aktivert
+
 
 \filbreak
+
+For å se nærmere på disse grunnleggende konseptene, se nærmere på en PLS styring for å aktivere et varsellys for høyt trykk i en væsketank. PLSen sin oppgave er å aktivere varsellyset når trykket i tanken overstiger 18 BAR, og holde det aktivt selv om det faller under 18 BAR igjen. På denne måten vil operatørene varsles med både nåværende feil og feil som har vært.
 
 To further illuminate these fundamental concepts, we will examine the operation of a simple PLC system designed to energize a warning lamp in the event that a process vessel experiences a high fluid pressure.  The PLC's task is to energize a warning lamp if the process vessel pressure ever exceeds 270 PSI, and keep that warning lamp energized even if the pressure falls below the trip point of 270 PSI.  This way, operators will be alerted to both \textit{past} and \textit{present} process vessel overpressure events.
 

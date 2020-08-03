@@ -387,7 +387,7 @@ Når ingen trykker på resetkanppen vil den være i sin normale posisjon, som fo
 
 \filbreak
 
-
+Om trykket i prosesstanken overstiger 18 BAR aktiveres trykkbrteren og NO-kontaktsettet lukkes. 
 
 If the process vessel experiences a high pressure ($>$ 270 PSI), the pressure switch will actuate, closing its normally-open contact.  This will energize input \texttt{X4} on the PLC, which will ``close'' the virtual contact \texttt{X4} in the ladder program.  This sends virtual power to the virtual ``coil'' \texttt{Y5}, which in turn latches itself on through virtual contact \texttt{Y5}\footnote{It is worth noting the legitimacy of referencing virtual contacts to output bits (e.g. contact \texttt{Y5}), and not just to input bits.  A ``virtual contact'' inside a PLC program is nothing more than an instruction to the PLC's processor to \textit{read} the status of a bit in memory.  It matters not whether that bit is associated with a physical input channel, a physical output channel, or some abstract bit in the PLC's memory.  It would, however, be wrong to associate a virtual coil with an input bit, as coil instructions \textit{write} bit values to memory, and input bits are supposed to be controlled solely by the energization states of their physical input channels.} and also energizes the real discrete output \texttt{Y5} to energize the warning lamp:
 

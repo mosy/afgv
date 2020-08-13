@@ -17,3 +17,4 @@ cat tools.tex >> all.tex
 #cat conversion_constants.tex >> all.tex
 echo  '\end{document}' >> all.tex
 pdflatex all.tex
+mv all.pdf ../output/infoskriv.pdf

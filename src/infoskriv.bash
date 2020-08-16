@@ -7,6 +7,11 @@
 rm -vf all.tex
 touch all.tex
 cat preamble.tex >> all.tex
+#\title {Inforskriv for 3AUA Gand VGS} 
+#\author {Fred-Olav Mosdal}
+#\date {17.08.2020}
+#\maketitle
+cat infoskrivtittel.tex >> all.tex
 cat hvordan.tex >> all.tex
 cat forventninger.tex >> all.tex
 #cat INST200syllabus.tex >> all.tex

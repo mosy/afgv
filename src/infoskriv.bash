@@ -7,14 +7,14 @@
 rm -vf all.tex
 touch all.tex
 cat preamble.tex >> all.tex
-cat howto.tex >> all.tex
-cat expectations.tex >> all.tex
+cat hvordan.tex >> all.tex
+cat forventninger.tex >> all.tex
 #cat INST200syllabus.tex >> all.tex
 #cat sequence.tex >> all.tex
 cat tools.tex >> all.tex
 #cat instructional.tex >> all.tex
-#cat distance.tex >> all.tex
 #cat conversion_constants.tex >> all.tex
 echo  '\end{document}' >> all.tex
 pdflatex all.tex
-mv all.pdf ../output/infoskriv.pdf
+cp all.pdf ../output/infoskriv.pdf
+

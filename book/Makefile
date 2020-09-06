@@ -1,6 +1,6 @@
 # Makefile for managing ``Lessons In Industrial Instrumentation'' textbook
 
-SRC = afgv.latex
+SRC = afgv.tex
 
 VERSION = afgv0.01
 
@@ -16,17 +16,17 @@ afgv.pdf: $(SRC)
 
 # Generates DVI output using LaTeX, without creating PostScript or PDF output files
 afgv.dvi: $(SRC)
-	latex afgv.latex
+	latex afgv.tex
 
 # Generates DVI output using LaTeX, complete with index entries, cross-references, etc.
 afgv.ind: $(SRC)
-	latex afgv.latex
+	latex afgv.tex
 	makeindex afgv.idx
-	latex afgv.latex
+	latex afgv.tex
 
 # Generates gzipped .tar file containing all the source files necessary to build the book
 archive: $(SRC)
-	tar cvf afvg.tar afvg.latex *eps *jpg *bmp *png *lps afvg.pdf Makefile
+	tar cvf afvg.tar afvg.tex *eps *jpg *bmp *png *lps afvg.pdf Makefile
 	gzip liii.tar
 
 # Generates a complete ".tar.gz" archive of a public release version, source files and PDF output.
@@ -34,9 +34,9 @@ archive: $(SRC)
 
 archive_public: $(SRC)
 	make liii.pdf
-	cp -v liii.latex $(VERSION).latex
+	cp -v liii.tex $(VERSION).tex
 	cp -v liii.pdf $(VERSION).pdf
-	tar cvf $(VERSION).tar $(VERSION).latex *eps *jpg *bmp *png *lps $(VERSION).pdf Makefile
+	tar cvf $(VERSION).tar $(VERSION).tex *eps *jpg *bmp *png *lps $(VERSION).pdf Makefile
 	gzip -f $(VERSION).tar
 	cp -v $(VERSION).tar.gz /home/tony/sinst/new/book
 	cp -v $(VERSION).tar.gz liii.tar.gz

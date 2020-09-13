@@ -1,4 +1,4 @@
-
+% !TEX root = /home/fred-olav/afgv/book/
 \chapter{Analog electronic instrumentation}
 
 An ``analog'' electronic signal is a voltage or current proportionate to the value of some physical measurement or control quantity.  An instrument is often classified as being ``analog'' simply by virtue of using an analog signal standard to communicate information, even if the internal construction and design of the instrument may be mostly digital in nature.  This is to distinguish such instruments from those making use of no analog electronic signals at all (e.g. wireless or Fieldbus instruments).
@@ -86,245 +86,177 @@ The relationship between these two signals depends entirely on the response of t
 
 
 \filbreak
-\section{Relating 4 to 20 mA signals to instrument variables}
+\section{Sammenhengen mellom 4-20mA signal og andre signaler}
 
-A 4 to 20 mA current signal represents some signal along a 0 to 100 percent scale.  Usually, this scale is linear as shown by this graph:
+
+Et 4-20mA strømsignal representerer et eller annet signal fra 0 100\%. Denne sammenhengen er vanligvis lineær. 
 
 $$\includegraphics{current42.eps}$$
 
 \label{instrument_range_linear_equation}
 
-Being a linear function, we may use the standard slope-intercept linear equation to relate signal percentage to current values:
+Siden dette er en lineær funksjon, kan vi bruke formelen for en rett linje til å relatere rett signal \% til strømverdier.
+
 
 $$y = mx + b$$
 
 \noindent
-Where,
+Hvor,
 
-$y$ = Output from instrument
+$y$ = Utgangen fra instrumentet
 
-$x$ = Input to instrument
+$x$ = Inngangen fra instrumentet
 
-$m$ = Slope
+$m$ = Stigningstallet for linjen
 
-$b$ = $y$-intercept point (i.e. the \textit{live zero} of the instrument's range)  \index{Live zero}
-
+$b$ = $y$-skjeringspunktet (m.a.o. \textit{aktivt} nullpunkt for instrumentutgangen. \index{aktivt nullpunkt}) Denne vil vi kalle $y_{start}$ fra nå av. 
 \vskip 10pt
 
-Once we determine suitable values for $m$ and $b$, we may then use this linear equation to predict any value for $y$ given $x$, and vice-versa.  This is very useful for predicting the 4-20 mA signal output of a process transmitter, or the expected stem position of a 4-20 mA controlled valve, or any other correspondence between a 4-20 mA signal and some physical variable.
+Med en gang vi har passende verdier for $m$ og $y_{start}$, kan vi bruke formelen for en rett linje for å konvertere mellom inn og utgangen på en transmitter. 
 
-Before we may use this equation for any practical purpose, we must determine the slope ($m$) and intercept ($b$) values appropriate for the instrument we wish to apply the equation to.  Next, we will see some examples of how to do this.
+Før vi kan bruke formelen må vi finne verdiene for stigningstallet og y-skjæringspunktet for den transmitteren vi jobber med.  
 
-\filbreak
-
-For the linear function shown, we may determine the slope value ($m$) by dividing the line's \textit{rise} by its \textit{run}.  Two sets of convenient points we may use in calculating rise over run are 4 and 20 milliamps (for the rise), and 0 and 100 percent (for the run):
+For den lineære funksjonen som vises skal vi finne stigningstallet ($m$) ved å dele linjens $y_{range}$ med linjens $x_{range}$. $y_{range}$ er transmitterens inngangsområde, og $x_{range}$ er transmitteres utgangsområde. 
 
 $$\includegraphics{current43.eps}$$
 
-$$m = {\hbox{Rise} \over \hbox{Run}} = {(20 - 4) \over (100 - 0)} = {16 \over 100}$$
+$$m =\dfrac{ y_{range}} {x_{range}} = \dfrac {20 - 4} {100 - 0} = \dfrac{ 16} {100}$$
 
-$$y = \left({16 \over 100}\right)x + b$$
+Dette gir:
 
-To calculate the y-intercept ($b$), all we need to do is solve for $b$ at some known coordinate pair of $x$ and $y$.  Again, we find convenient points\footnote{We could have just as easily chosen 100 percent for $x$ and 20 milliamps for $y$, for it would have yielded the same result of $b = 4$.} for this task at 0 percent and 4 milliamps:
+$$y = \left({16 \over 100}\right)x + y_{start}$$
 
-$$4 = \left({16 \over 100}\right)0 + b$$
+For å finne skjæringspunktet med y-aksen ($b$), må vi løse denne ligningen for noen kjente verdier av $(x,y)$. Vi kjenner verdiene i starten og enden av måleområde, og kan velge det vi vil. Vi velger starten med $(x,y) = (0,4)$. 
 
-$$4 = 0 + b$$
-
-$$b = 4$$
-
+\begin{align*}
+	4 &= \left({16 \over 100}\right)0 + y_{start}\\
+	4 &= 0 + b\\
+	b &= 4
+\end{align*}
 \vskip 10pt
 
-\filbreak
 
-Now we have a complete formula for converting a percentage value into a milliamp value:
+Nå har vi en komplett formel for å konvertere en prosentverdi om til en milliampere verdi:
+
 
 $$y = \left({16 \over 100}\right)x + 4$$
 
-We may now use this formula to calculate how many milliamps represent any given percentage of signal.  For example, suppose we needed to convert a percentage of 34.7\% into a corresponding 4-20 mA current.  We would do so like this:
+Vi kan nå bruke denne formelen for å regne ut hvor mange milliamper en gitt prosent inngangssignal tilsvarer. Vi kan f.eks. bruke et inngangsignal på 34.7\% til å regne ut tilhørende milliamper verdi:
 
-$$y = \left({16 \over 100}\right)34.7 + 4$$
-
-$$y = 5.552 + 4$$
-
-$$y = 9.552$$
-
-Thus, 34.7\% is equivalent to 9.552 milliamps in a 4-20 mA signal range.
+\begin{align*}
+	y &= \left({16 \over 100}\right)34.7 + 4\\
+	y &= 5.552 + 4\\
+	y &= 9.552
+\end{align*}
+Vi ser altså at 34.7\% er det samme som 9.552 mA i 4-20 mA signalområdet. 
 
 \vskip 10pt
 
-The slope-intercept formula for linear functions may be applied to \textit{any} linear instrument, as illustrated in the following examples.
+Denne formelen kan brukes til alle lineære instrumenter. Men om vi har forsøvet nullpunkt på instrumentaksen $x$ kreves ofte flere mellom regninger.
 
+\vskip 10pt 
+Mange elever foretrekker å bruke en grafisk representasjon av de to måleområdene vi skal konvertere mellom. 
 
+$$\includegraphics{current63.eps}$$
 
+Ut fra denne representasjonen kan vi sette opp følgende formel for konvertering mellom signaler. 
+	\begin{align*}
+		\dfrac{y-y_{start}}{y_{range}}&=\dfrac{x-x_{start}}{x_{range}}\\
+	\end{align*}
 
+Merk her at $y_{range}$ og $x_{range}$ regnes ut fra måleområde slutt til måleområde start. 
 
+For en transmitter som 4mA som nullpunkt blir det (20-4=16), mens for en transmitter med 20mA som nullpunkt blir det (4-20=-16). 
+
+Vi kan også sette opp denne formelen med rene transmitter begreper:
+
+$$\includegraphics{current59.eps}$$
 
 
 
 
 \filbreak
-\subsection{Example calculation: controller output to valve}
+\subsection{Eksempel: Regulatorutgang til reguleringsventil.}
 
 $$\includegraphics{current44.eps}$$
 
 \noindent
-\textit{An electronic loop controller outputs a signal of 8.55 mA to a direct-responding control valve (where 4 mA is shut and 20 mA is wide open).  How far open should the control valve be at this MV signal level?}
+
+\textit{En PID regulator sender et utgangsignal til en direkteverkende reguleringsventil (d.v.s 4mA er lukket og 20mA er helt åpen).Hvor åpen (0-100\%i) vil reguleringsventilen være med dette signalet?}
+
 
 \vskip 10pt
 
-To solve for percentage of stem travel ($x$) at 8.55 milliamps of signal current ($y$), we may use the linear equation developed previously to predict current in milliamps ($y$) from signal value in percent ($x$):
+For å løse utregningen med hensyn på  ventilutslag ($x$), bruker vi formelen som vi har kommet frem til tidligere. 
 
-$$y = \left({16 \over 100}\right)x + 4$$
+	\begin{align*}
+		\dfrac{y-y_{start}}{y_{range}}&=\dfrac{x-x_{start}}{x_{range}}\\
+		\\
+		\dfrac{8.55-4}{16}&=\dfrac{x-0}{100}\\
+		\\
+		\dfrac{100 \cdot 4.55}{16}&=x\\
+		\\
+		x&={28.4}\\
+	\end{align*}
 
-$$8.55 = \left({16 \over 100}\right)x + 4$$
-
-$$4.55 = \left({16 \over 100}\right)x$$
-
-$$\left({100 \over 16}\right)4.55 = x$$
-
-$$x = 28.4$$
-
-Therefore, we should expect the valve to be 28.4\% open at an applied MV signal of 8.55 milliamps.
-
-
-
-
-
+Vi kan derfor forvente at reguleringsventilen er 28.4\% åpen når den får tilført 8.55mA
 
 
 \filbreak
-\subsection{Example calculation: flow transmitter}
+\subsection{Eksempel: Strømningsmåler}
 
 $$\includegraphics{current45.eps}$$
 
+
 \noindent
-\textit{A flow transmitter is ranged 0 to 350 gallons per minute, 4-20 mA output, direct-responding.  Calculate the current signal value at a flow rate of 204 GPM.}
+\textit{En strømningsmåler har et måleområde på 0 til 1400 liter per minutt. Regn ut strømsignalet med en strømningsrate på 816 l/m.}
 
 \vskip 10pt
 
-One way we could solve for the amount of signal current is to convert the flow value of 204 GPM into a ratio of the flowmeter's full-flow value, then apply the same formula we used in the previous example relating percentage to milliamps.  Converting the flow rate into a ``per unit'' ratio is a matter of simple division, since the flow measurement range is zero-based:
+Vi velger strøm som $y$ i formelen og setter inn. 
 
-$${204 \hbox{ GPM} \over 350 \hbox{ GPM}} = 0.583 \hbox{ per unit}$$
 
-Converting a ``per unit'' ratio into percent merely requires multiplication by 100, since ``percent'' literally means ``per 100'':  \index{Per unit}  \index{Percent}
+	\begin{align*}
+		\dfrac{y-y_{start}}{y_{range}}&=\dfrac{x-x_{start}}{x_{range}}\\
+		\\
+		\dfrac{y-4}{16}&=\dfrac{816-0}{1400}\\
+		\\
+		y&=\dfrac{816\cdot16}{1400}+4\\
+		\\
+		y&={13.3mA}\\
+	\end{align*}
 
-$$0.583 \hbox{ per unit} \times 100\% = 58.3\%$$
-
-Next, we plug this percentage value into the formula:
-
-$$y = \left({16 \over 100}\right)58.3 + 4$$
-
-$$y = 9.33 + 4$$
-
-$$y = 13.33$$
-
-Therefore, the transmitter should output a PV signal of 13.3 mA at a flow rate of 204 GPM.
+Vi ser at transmitteren skal sende ut en strøm på 13.3mA med en strømningsrate på 816 l/m. 
 
 \vskip 10pt
 
-\filbreak
-
-An alternative approach is to set up a linear equation specifically for this flowmeter given its measurement range (0 to 350 GPM) and output signal range (4 to 20 mA).  We will begin this process by sketching a simple graph relating flow rate to current:
-
-$$\includegraphics{current46.eps}$$
-
-The slope ($m$) for this equation is rise over run, in this case 16 milliamps of rise for 350 GPM of run:
-
-$$y = \left({{20 - 4} \over {350 - 0}}\right)x + b = \left({16 \over 350}\right)x + b$$
-
-The y-intercept for this equation is 4, since the current output will be 4 milliamps at zero flow:
-
-$$y = \left({16 \over 350}\right)x + 4$$
-
-Now that the linear equation is set up for this particular flowmeter, we may plug in the 204 GPM value for $x$ and solve for current:
-
-$$y = \left({16 \over 350}\right)204 + 4$$
-
-$$y = 9.33 + 4$$
-
-$$y = 13.33$$
-
-Just as before, we arrive at a current of 13.33 milliamps representing a flow rate of 204 GPM.
-
-
-
-
-
-
 
 \filbreak
-\subsection{Example calculation: temperature transmitter}
+\subsection{Eksempel: Temperaturtransmitter}
 
 $$\includegraphics{current47.eps}$$
 
 \noindent
-\textit{An electronic temperature transmitter is ranged 50 to 140 degrees Fahrenheit and has a 4-20 mA output signal.  Calculate the current output by this transmitter if the measured temperature is 79 degrees Fahrenheit.}
+\textit{En elektronisk temperaturtransmitter har et måleområde på 50-140°C, med en strømutgang på 4-20mA utgangssignal. Regn ut strømmen denne transmitteren sender ut når den måler en temperatur på 79°C.}
 
 \vskip 10pt
 
-First, we will set up a linear equation describing this temperature transmitter's function:
-
-$$\includegraphics{current48.eps}$$
-
-Calculating and substituting the slope ($m$) value for this equation, using the full rise-over-run of the linear function:
-
-$$y = \left({{20 - 4} \over {140 - 50}}\right)x + b = \left({16 \over 90}\right)x + b$$
-
-\filbreak
-
-The y-intercept value will be different\footnote{A common misconception for people learning to apply the slope-intercept formula to linear instrument ranges is that they tend to assume $b$ will always be equal to the lower-range value (LRV) of the instrument's output range.  For example, given a transmitter with a 4-20 mA output range, the false assumption is that $b = 4$.  This does happen to be true \textit{only if the instrument possesses a ``dead-zero'' input range}, but it will not be true for instruments with a live-zero input range such in this case here where the temperature input range is 50 to 140 degrees.} for this example than it was for previous examples, since the measurement range is not zero-based.  However, the procedure for finding this value is the same -- plug any corresponding $x$ and $y$ values into the equation and solve for $b$.  In this case, I will use the values of 4 mA for $y$ and 50 $^{o}$F for $x$:
-
-$$4 = \left({16 \over 90}\right)50 + b$$
-
-$$4 = 8.89 + b$$
-
-$$b = -4.89$$
-
-\vskip 10pt
-
-Therefore, our customized linear equation for this temperature transmitter is as follows:
-
-$$y = \left({16 \over 90}\right)x - 4.89$$
-
-At a sensed temperature of 79 $^{o}$F, the transmitter's output current will be 9.16 mA:
-
-$$y = \left({16 \over 90}\right)79 - 4.89$$
-
-$$y = 14.04 - 4.89$$
-
-$$y = 9.16$$
-
-\vskip 10pt
-
-\filbreak
-
-We may apply the same alternative method of solution to this problem as we did for the flowmeter example: first converting the process variable into a simple ``per unit'' ratio or percentage of measurement range, then using that percentage to calculate current in milliamps.  The ``tricky'' aspect of this example is the fact the temperature measurement range does not begin at zero.
-
-Converting 79 $^{o}$F into a percentage of a 50-to-140 $^{o}$F range requires that we first subtract the live-zero value, then divide by the span:
-
-$$\hbox{Per unit ratio} = {{79 - 50} \over {140 - 50}} = 0.3222$$
-
-$$\hbox{Percentage} = 0.3222 \hbox{ per unit} \times 100\% = 32.22\%$$
-
-Next, plugging this percentage value into our standard linear equation for 4-20 mA signals:
-
-$$y = \left({16 \over 100}\right)32.22 + 4$$
-
-$$y = 5.16 + 4$$
-
-$$y = 9.16$$
-
-Again, we arrive at the exact same figure for transmitter output current: 9.16 milliamps at a measured temperature of 79 $^{o}$F.
-
-\vskip 10pt
-
-The choice to calculate transmitter current by first setting up a ``customized'' linear equation for the transmitter in question or by converting the measured value into a percentage and using a ``standard'' linear equation for current is arbitrary.  Either method will produce accurate results, although it could be argued that the ``customized equation'' approach may save time if many different current values must be calculated.
-
-Certainly, if you are programming a computer to convert a received milliamp signal value into a measurement range (such as degrees Fahrenheit), it makes more sense to have the computer evaluate a single equation rather than perform multiple steps of calculations as we do when using percentage values as an intermediate step between the input and output value calculations.  Evaluating one equation rather than two saves processing time.
+Først kan vi sette opp en en oversikt med aksene parallelle. Dette kan vi gjøre for alle lineære konverteringer og det gir et mer kompakt over oversiktlig bilde av sammenhengen.  
 
 
+$$\includegraphics[width=0.8\textwidth]{current48.eps}$$
 
+Nå kan vi sette opp konverteringsformelen. 
+
+	\begin{align*}
+		\dfrac{y-y_{start}}{y_{range}}&=\dfrac{x-x_{start}}{x_{range}}\\
+		\\
+		\dfrac{y-4}{16}&=\dfrac{79-50}{90}\\
+		\\
+		y&=\dfrac{29\cdot16}{90}+4\\
+		\\
+		y&={9.2mA}\\
+	\end{align*}
 
 
 
@@ -332,50 +264,29 @@ Certainly, if you are programming a computer to convert a received milliamp sign
 \filbreak
 \subsection{Example calculation: pH transmitter}
 
-$$\includegraphics{current49.eps}$$
+$$\includegraphics[width=0.4\textwidth]{current49.eps}$$
 
 \noindent
-\textit{A pH transmitter has a calibrated range of 4 pH to 10 pH, with a 4-20 mA output signal.  Calculate the pH sensed by the transmitter if its output signal is 11.3 mA.}
+\textit{En pH transmitter er kalibrert for et måleområde på 4pH til 10pH, med et 4-20mA utgangssignal. Regn ut hvilken pH som måles når transmitteren sender en strøm på 11.3 mA. }
 
 \vskip 10pt
+Først setter vi opp en parallell oversikt over de to måleområdene. 
 
-First, we will set up a linear equation describing this temperature transmitter's function:
+$$\includegraphics[width=0.4\textwidth]{current50.eps}$$
 
-$$\includegraphics{current50.eps}$$
+Så er det bare å sette inn i konverteringsformelen. 
 
-Note how we are free to set up 4-20 mA as the independent variable ($x$ axis) and the pH as the dependent variable ($y$ axis).  We could arrange current on the $y$ axis and the process measurement on the $x$ axis as before, but this would force us to manipulate the linear equation to solve for $x$.
+	\begin{align*}
+		\dfrac{y-y_{start}}{y_{range}}&=\dfrac{x-x_{start}}{x_{range}}\\
+		\\
+		\dfrac{y-4}{6}&=\dfrac{11.3-4}{16}\\
+		\\
+		y&=\dfrac{7.3\cdot6}{16}+4\\
+		\\
+		y&={6.74mA}\\
+	\end{align*}
 
-\filbreak
-
-Calculating and substituting the slope ($m$) value for this equation, using the full rise-over-run of the linear function:
-
-$$y = \left({{10 - 4} \over {20 - 4}}\right)x + b = \left({6 \over 16}\right)x + b$$
-
-\filbreak
-
-Solving for the y-intercept value using the coordinate values of 4 pH and 4 mA, we see again that this is an application where $b$ $\neq$ 4 mA.  This is due to the fact that the instrument's input range (i.e. the domain of the $y = mx + b$ function) does \textit{not} begin at zero:
-
-$$4 = \left({6 \over 16}\right)4 + b$$
-
-$$4 = 1.5 + b$$
-
-$$b = 2.5$$
-
-Therefore, our customized linear equation for this pH transmitter is as follows:
-
-$$y = \left({6 \over 16}\right)x + 2.5$$
-
-Calculating the corresponding pH value for an output current signal of 11.3 mA now becomes a very simple matter:
-
-$$y = \left({6 \over 16}\right)11.3 + 2.5$$
-
-$$y = 4.24 + 2.5$$
-
-$$y = 6.74$$
-
-Therefore, the transmitter's 11.3 mA output signal reflects a measured pH value of 6.74 pH.
-
-
+Transmitteren måler en pH på 6.7 når utgangen sender en strøm på 11.3 mA
 
 
 
@@ -384,234 +295,87 @@ Therefore, the transmitter's 11.3 mA output signal reflects a measured pH value 
 
 
 \filbreak
-\subsection{Example calculation: reverse-acting I/P transducer signal}
+\subsection{Eksempel: I/P omformer med reverserende utgangsignal}
 
 $$\includegraphics{current51.eps}$$
 
-\noindent
-\textit{A current-to-pressure transducer is used to convert a 4-20 mA electronic signal into a 3-15 PSI pneumatic signal.  This particular transducer is configured for \textbf{reverse action} instead of direct, meaning that its pressure output at 4 mA should be 15 PSI and its pressure output at 20 mA should be 3 PSI.  Calculate the necessary current signal value to produce an output pressure of 12.7 PSI.}
+%\noindent
+\textit{En strøm til trykkomformer brukes for å konvertere 4-20mA strømsignal til et 3-15PSI pneumatisk signal. Akkurat denne transmitteren er konfigurert for å ha en reverserende utgang istedenfor direkte. Dette betyr at trykket på utgangen er 15PSI med en strøm på 4mA, og 3 PSI med 20mA. Regn ut hvilken strøm som sendes til omformeren når utgangen har et trykk på 12.7 PSI.}
 
 \vskip 10pt
 
-Reverse-acting instruments are still linear, and therefore still follow the slope-intercept line formula $y = mx + b$, albeit with a negative slope:
+Reverserende instrumenter er fremdeles lineære, og vi kan verfor bruke samme oppsett som før. Legg merke til range på x-aksen som går fra 15 til 3 som gir en range på -12 ($3-15=-12$).
 
 $$\includegraphics{current52.eps}$$
 
-\filbreak
-
-Calculating and substituting the slope ($m$) value for this equation, using the full rise-over-run of the linear function.  Note how the ``rise'' is actually a ``fall'' from 20 milliamps down to 4 milliamps, yielding a negative value for $m$:
-
-$$y = \left({{4 - 20} \over {15 - 3}}\right)x + b = \left({-16 \over 12}\right)x + b = \left(-{16 \over 12}\right)x + b$$
-
-\filbreak
-
-Solving for the y-intercept value using the coordinate values of 3 PSI and 20 mA:
-
-$$20 = \left(-{16 \over 12}\right)3 + b$$
-
-$$20 = -4 + b$$
-
-$$b = 24$$
-
-Therefore, our customized linear equation for this I/P transducer is as follows:
-
-$$y = \left(-{16 \over 12}\right)x + 24$$
-
-Calculating the corresponding current signal for an output pressure of 12.7 PSI:
-
-$$y = \left(-{16 \over 12}\right)12.7 + 24$$
-
-$$y = -16.93 + 24$$
-
-$$y = 7.07$$
-
-Therefore, a current signal of 7.07 mA is necessary to drive the output of this reverse-acting I/P transducer to a pressure of 12.7 PSI.
+	\begin{align*}
+		\dfrac{y-y_{start}}{y_{range}}&=\dfrac{x-x_{start}}{x_{range}}\\
+		\\
+		\dfrac{y-4}{16}&=\dfrac{12.7-15}{-12}\\
+		\\
+		y&=\dfrac{-2.3\cdot16}{-12}+4\\
+		\\
+		y&={7.1mA}\\
+	\end{align*}
 
 
 
-
-
+Strømmen som sendes til transmitteren er 7.1mA. 
 
 
 
 \filbreak
-\subsection{Example calculation: PLC analog input scaling}
+\subsection{Eksempel: PLS analog inngang}
+
 
 $$\includegraphics{current53.eps}$$
 
 \noindent
-\textit{An Allen-Bradley SLC500 programmable logic controller (PLC) uses a 16-bit analog-to-digital converter in its model 1746-NI4 analog input card to convert 4-20 mA signals into digital number values ranging from 3277 (at 4 mA) to 16384 (at 20 mA).  However, these raw numbers from the PLC's analog card must be mathematically scaled inside the PLC to represent real-world units of measurement, in this case 0 to 700 GPM of flow.  Formulate a scaling equation to program into the PLC so that 4 mA of current registers as 0 GPM, and 20 mA of current registers as 700 GPM.}  \index{PLC}  \index{Programmable Logic Controller}  \index{Allen-Bradley SLC 500 PLC}
+\textit{En Allen-Bradley SLC500 PLS bruker en 16-bit analog-til-digital omformer i AI kortet 1746-NI4. I dette kortet konverteres 4-20 mA til digitale nummer(integere) fra 3277 (ved 4 mA) til 16384 (ved 20 mA). I en PLS-en skal denne verdien vises på det display (HMI). En verdi fra 3277-16384 vil ikke være særlig nyttig for en operatør. Derfor må disse verdiene skalleres ved å regne de om til 0-700 l/m. Utrenginger med integere er ikke serlig praktisk og vi må derfor først konvertere de til floating point datatyper. Finn en formel for utregningen og vis hvordan denne kan implementeres i PLS programmet.}
 
 \vskip 10pt
 
-\filbreak
 
 We are already given the raw number values from the analog card's analog-to-digital converter (ADC) circuit for 4 mA and 20 mA: 3277 and 16384, respectively.  These values define the domain of our linear graph:
 
-$$\includegraphics{current54.eps}$$
+$$\includegraphics{current64.eps}$$
 
-Calculating and substituting the slope ($m$) value for this equation, using the full rise-over-run of the linear function:
+Vi kan nå sette opp konverteringsformelen:
 
-$$y = \left({{700 - 0} \over {16384 - 3277}}\right)x + b = \left({700 \over 13107}\right)x + b$$
 
-Solving for the y-intercept value using the coordinate values of 0 GPM and 3277 ADC counts:
+	\begin{align*}
+		\dfrac{y-y_{start}}{y_{range}}&=\dfrac{x-x_{start}}{x_{range}}\\
+		\\
+		\dfrac{y-0}{700}&=\dfrac{x-3277}{16384-3277}\\
+		\\
+		f(x)=y&=\dfrac{(x-3277)\cdot700}{13107}\\
+	\end{align*}
 
-$$0 = \left({700 \over 13107}\right)3277 + b$$
+Når vi skal lage PLS programmet følger vi regnerekkefølgen:
 
-$$0 = 175 + b$$
+\begin{enumerate}
+	\item Paranteser
+	\item Potenser og røtter
+	\item Multiplikasjon og divisjon
+	\item Addisjon og subtraksjon
 
-$$b = -175$$
+\end{enumerate}
 
-Therefore, our PLC scaling equation for this particular flowmeter is as follows:
+Vi tar altså utgangpunkt  i den variable (x) og utfører følgende:
 
-$$y = \left({700 \over 13107}\right)x - 175$$
+\begin{enumerate}
+	\item Utregning i parantesen $x-3277$
+	\item Multiplisering og dividering. Rekkefølgen er likegyldig eller den kan slåes sammen i en blokk. 
+	\item Vi legger så resultatet inn i variabelen y som  kan brukes i HMI-en. 
+\end{enumerate}
 
-\filbreak
 
-This type of scaling calculation is so common in PLC applications that Allen-Bradley has provided a special \texttt{SCL} (``scale'') instruction just for this purpose.  Instead of ``slope'' ($m$) and ``intercept'' ($b$), the instruction prompts the human programmer to enter ``rate'' and ``offset'' values, respectively.  Furthermore, the rate in Allen-Bradley's \texttt{SCL} instruction is expressed as the numerator of a fraction where the denominator is fixed at 10000, allowing fractional (less than one) slope values to be specified using integer numbers.  Aside from these details, the concept is exactly the same.
+I pragrammet legger vi først inn en konverteringsblokk for så å legge blokker inn ut fra regnefekkefølgen.
 
-Expressing our slope of $700 \over 13107$ as a fraction with 10000 as the denominator is a simple matter of solving for the numerator using cross-multiplication and division:
+$$\includegraphics[width=0.8\textwidth]{current65.png}$$
 
-$${700 \over 13107} = { r \over 10000}$$
-
-$$r = 534$$
-
-Thus, the \texttt{SCL} instruction would be configured as follows\footnote{The ``Source'' and ``Dest'' parameters shown in this instruction box refer to special addresses in the PLC's memory where the input (ADC count) and output (scaled flowrate) values will be found.  You need not concern yourself with the meanings of \texttt{I:4.2} and \texttt{N7:15}, because these addresses are unimportant to the task of deriving a scaling formula.}
-
-$$\includegraphics{current55.eps}$$
-
-
-
-
-
-
-
-\filbreak
-\subsection{Graphical interpretation of signal ranges}
-
-\label{instrument_range_numberlines}
-
-An illustration some students find helpful in understanding analog signal ranges is to consider the signal range as a \textit{length} expressed on a number line.  For example, the common 4-20 mA analog current signal range would appear as such:
-
-$$\includegraphics{current22.eps}$$
-
-If one were to ask the percentage corresponding to a 14.4 mA signal on a 4-20 mA range, it would be as simple as determining the length of a line segment stretching from the 4 mA mark to the 14.4 mA mark:
-
-$$\includegraphics{current23.eps}$$
-
-As a percentage, this thick line is 10.4 mA long (the distance between 14.4 mA and 4 mA) over a total (possible) length of 16 mA (the total span between 20 mA and 4 mA).  Thus:
-
-$$\hbox{Percentage} = \left({14.4 \hbox{ mA} - 4 \hbox{ mA}} \over {20 \hbox{ mA} - 4 \hbox{ mA}}\right) 100\%$$
-
-$$\hbox{Percentage} = \left(10.4 \hbox{ mA} \over 16 \hbox{ mA}\right) 100\%$$
-
-$$\hbox{Percentage} = 65 \%$$
-
-\filbreak
-
-This same ``number line'' approach may be used to visualize any conversion from one analog scale to another.  Consider the case of an electronic pressure transmitter calibrated to a pressure range of $-5$ to +25 PSI, having an (obsolete) current signal output range of 10 to 50 mA.  The appropriate current signal value for an applied pressure of +12 PSI would be represented on the number line as such:
-
-$$\includegraphics{current24.eps}$$
-
-Finding the ``length'' of this line segment in units of milliamps is as simple as setting up a proportion between the length of the line in units of PSI over the total (span) in PSI, to the length of the line in units of mA over the total (span) in mA:
-
-$${17 \hbox{ PSI} \over 30 \hbox{ PSI}} = {\hbox{? mA} \over 40 \hbox{ mA}}$$
-
-Solving for the unknown (?) current by cross-multiplication and division yields a value of 22.67 mA.  Of course, this value of 22.67 mA only tells us the length of the line segment on the number line; it does not directly tell us the current signal value.  To find that, we must add the ``live zero'' offset of 10 mA, for a final result of 32.67 mA.  \index{Live zero}
-
-$$\includegraphics{current25.eps}$$
-
-Thus, an applied pressure of +12 PSI to this transmitter should result in a 32.67 mA output signal.
-
-
-
-
-
-
-
-\filbreak
-\subsection{Thinking in terms of per unit quantities}
-
-\label{instrument_range_per_unit}
-
-Although it is possible to generate a ``custom'' linear equation in the form of $y = mx + b$ for any linear-responding instrument relating input directly to output, a more general approach may be used to relate input to output values by translating all values into (and out of) \textit{per unit} quantities.  A ``per unit'' quantity is simply a ratio between a given quantity and its maximum value.  A half-full glass of water could thus be described as having a fullness of \textit{0.5 per unit}.  The concept of percent (``per one hundred'') is very similar, the only difference between per unit and percent being the base value of comparison:  half-full glass of water has a fullness of 0.5 per unit (i.e. $1 \over 2$ of the glass's full capacity), which is the same thing as 50 percent (i.e. 50 on a scale of 100, with 100 representing complete fullness).  \index{Per unit}
-
-Let's now apply this concept to a realistic 4-20 mA signal application.  Suppose you were given a liquid level transmitter with an input measurement range of 15 to 85 inches and an output range of 4 to 20 milliamps, respectively, and you desired to know how many milliamps this transmitter should output at a measured liquid level of 32 inches.  Both the measured level and the milliamp signal may be expressed in terms of \textit{per unit} ratios, as shown by the following graphs:
-
-$$\includegraphics{current56.eps}$$
-
-So long as we choose to express process variable and analog signal values as a per unit ratios ranging from 0 to 1, we see how $m$ (the slope of the line) is simply equal to the span of the process variable or analog signal range, and $b$ is simply equal to the lower-range value (LRV) of the process variable or analog signal range.  The advantage of thinking in terms of ``per unit'' is the ability to quickly and easily write linear equations for any given range.  In fact, this is so easy that we don't even have to use a calculator to compute $m$ in most cases, and we \textit{never} have to calculate $b$ because the LRV is explicitly given to us.  The instrument's input equation is $y = 70x + 15$ because the span of the 15-to-85 inch range is 70, and the LRV is 15.  The instrument's output equation is $y = 16x + 4$ because the span of the 4-to-20 milliamp range is 16, and the LRV is 4.
-
-\filbreak
-
-If we manipulate each of the $y = mx + b$ equations to solve for $x$ (per unit of span), we may express the relationship between the input and output of any linear instrument as a pair of fractions with the per unit value serving as the proportional link between input and output:
-
-$$\includegraphics{current59.eps}$$
-
-\vskip 10pt
-
-The question remains, how do we apply these equations to our example problem: calculating the milliamp value corresponding to a liquid level of 32 inches for this instrument?  The answer to this question is that we must perform a \textit{two-step} calculation: first, convert 32 inches into a per unit ratio, then convert that per unit ratio into a milliamp value.
-
-\vskip 10pt
-
-First, the conversion of inches into a per unit ratio, knowing that 32 is the value of $y$ and we need to solve for $x$:
-
-$$32 = 70x + 15$$
-
-$$32 - 15 = 70x$$
-
-$${{32 - 15} \over 70} = x$$
-
-$$x = 0.2429 \hbox{ per unit} \hskip 10pt \hbox{(i.e. 24.29\%)}$$
-
-\vskip 10pt
-
-Next, converting this per unit ratio into a corresponding milliamp value, knowing that $y$ will now be the current signal value using $m$ and $b$ constants appropriate for the 4-20 milliamp range:
-
-$$y = 16x + 4$$
-
-$$y = 16(0.2429) + 4$$
-
-$$y = 3.886 + 4$$
-
-$$y = 7.886 \hbox{ mA}$$
-
-\vskip 10pt
-
-\filbreak
-
-Instead of deriving a single custom $y = mx + b$ equation directly relating input (inches) to output (milliamps) for every instrument we encounter, we may use two simple and generic linear equations to do the calculation in two steps with ``per unit'' being the intermediate result.  Expressed in general form, our linear equation is:
-
-$$y = mx + b$$
-
-$$\hbox{Value} = (\hbox{Span})(\hbox{Per unit}) + \hbox{LRV}$$
-
-$$\hbox{Value} = (\hbox{URV} - \hbox{LRV})(\hbox{Per unit}) + \hbox{LRV}$$
-
-Thus, to find the per unit ratio we simply take the value given to us, subtract the LRV of its range, and divide by the span of its range.  To find the corresponding value we take this per unit ratio, multiply by the span of the other range, and then add the LRV of the other range.
-
-\vskip 20pt
-
-\filbreak
-
-\textbf{Example:} Given a pressure transmitter with a measurement range of 150 to 400 PSI and a signal range of 4 to 20 milliamps, calculate the applied pressure corresponding to a signal of 10.6 milliamps.
-
-\textbf{Solution:} Take 10.6 milliamps and subtract the LRV (4 milliamps), then divide by the span (16 milliamps) to arrive at 41.25\% (0.4125 per unit).  Take this number and multiply by the span of the pressure range (400 PSI $-$ 150 PSI, or 250 PSI) and lastly add the LRV of the pressure range (150 PSI) to arrive at a final answer of 253.125 PSI.
-
-\vskip 20pt
-
-\textbf{Example:} Given a temperature transmitter with a measurement range of $-88$ degrees to +145 degrees and a signal range of 4 to 20 milliamps, calculate the proper signal output at an applied temperature of +41 degrees.
-
-\textbf{Solution:} Take 41 degrees and subtract the LRV ($-88$ degrees) which is the same as \textit{adding} 88 to 41, then divide by the span (145 degrees $-$ ($-88$) degrees, or 233 degrees) to arrive at 55.36\% (0.5536 per unit).  Take this number and multiply by the span of the current signal range (16 milliamps) and lastly add the LRV of the current signal range (4 milliamps) to arrive at a final answer of 12.86 milliamps.
-
-\vskip 20pt
-
-\textbf{Example:} Given a pH transmitter with a measurement range of 3 pH to 11 pH and a signal range of 4 to 20 milliamps, calculate the proper signal output at 9.32 pH.
-
-\textbf{Solution:} Take 9.32 pH and subtract the LRV (3 pH), then divide by the span (11 pH $-$ 3 pH, or 8 pH) to arrive at 79\% (0.79 per unit).  Take this number and multiply by the span of the current signal range (16 milliamps) and lastly add the LRV of the current signal range (4 milliamps) to arrive at a final answer of 16.64 milliamps.
-
-
-
+En annen mulighet er å bruke en ferdig converteringsblokk, f.eks. LIN\_TRAFO fra util biblioteket til Codesys. 
+$$\includegraphics[width=0.8\textwidth]{current66.png}$$
 
 
 
@@ -620,6 +384,7 @@ Thus, to find the per unit ratio we simply take the value given to us, subtract 
 
 \filbreak
 \section{Controller output current loops}
+
 
 The simplest form of 4-20 mA current loop is the type used to represent the output of a process controller, sending a command signal to a final control element.  Here, the controller supplies both the electrical power and signal information to the final control element, which acts as an electrical load.  To illustrate, consider the example of a controller sending a 4-20 mA signal to an I/P (current-to-pressure) signal converter, which then pneumatically drives a control valve:
 

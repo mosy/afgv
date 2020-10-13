@@ -1118,6 +1118,35 @@ The three-position SQO (Sequencer Output) instruction reads data from \texttt{B3
 Lastly, Allen-Bradley PLCs offer a third sequencing instruction called \textit{Sequencer Load} (SQL), which performs the opposite function as the Sequencer Output (SQO).  An SQL instruction takes data from a designated source and writes it into an indexed register according to a position count value, rather than reading data from an indexed register and sending it to a designated destination as does the SQO instruction.  SQL instructions are useful for reading data from a live process and storing it in different registers within the PLC's memory at different times, such as when a PLC is used for \textit{datalogging} (recording process data).  \index{SQL instruction, Allen-Bradley PLC programming}  \index{Sequencer Load instruction, Allen-Bradley PLC programming}
 
 
+\subsection{PID regulator i PLS programmer}
+
+
+PID regulatoren i Codesys aktiveres ved å laste inn biblioteket Util
+som ligger under Application\_Common\_Util. 
+
+Dette er en enkel PID regulator som fungerer etter formelen. 
+
+\[
+\ensuremath{Y=KP\cdot(e+\frac{1}{TN}\int edt+TV\frac{\delta e}{\delta t})+Y_{OFFSET}}
+\]
+
+%\includegraphics[width=1\textwidth]{PID12}
+
+Her er et lite eksempel på en temperaturregulering med regulatoren.
+Prøv på din egen PC om du får dette til å virke. 
+
+%\includegraphics[width=1\textwidth]{PID13}
+
+For å gjøre regulatoren lett å ta i bruk har vi på Gand lagt inn en
+strukt som enkelt senere kan refereres til. En må da ha Gand funksjonsbiblioteket. 
+
+Variablene rundt regulatoren vil da se ut som i Figur.
+
+
+
+
+Prøv å tilpass programmet du nettopp har laget til bruke denne strukten,
+og de tilhørende symbolene i HMI-en. 
 
 
 

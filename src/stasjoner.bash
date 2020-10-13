@@ -10,5 +10,5 @@ pdflatex stasjon04.tex
 pdflatex stasjon05.tex
 pdflatex stasjon07.tex
 
-cp *.pdf ../output/
+cp stasjon*.pdf ../output/
 

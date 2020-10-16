@@ -1352,6 +1352,16 @@ Thankfully, identifying the cause of ``porpoising'' is rather easy to do.  Only 
 Solely examining the process variable waveform will not reveal whether it is proportional action, derivative action, or both responsible for the ``porpoising'' behavior.  A trial reduction in the derivative\footnote{You could try reducing the controller's gain as a first step, but if the controller implements the Ideal or Series algorithm, reduction in gain will \textit{also} reduce derivative action, which may mask an over-tuned derivative problem.} tuning parameter is one way to identify the culprit, as is phase-shift analysis between the PV and output waveforms during the ``porpoising'' period.  
 
 
+\filbreak
+\subsection{Tims PID tommelfingerregel}
+
+\begin{enumerate}
+	\item Bare jobb med en justering av et parameter om gangen. Når du justerer flere mister du kontrollen. 
+	\item Proporsjonalleddet bestemmer hvor fort en prosess går mot settpunktet. Stor proporsjonalforsterkning vil få prosesse til å nå settpunktet raskt, men du vil få et oversving og mest sannsynlig oscillasjoner. Om du setter P-forsterkningen for lavt unngår du oscillasjoner men det vil ta lang tid å nå settpunktet. Start med I-leddet og D-leddet avslått og øk forsterkningen forsiktig  fra 0.25 (0.25, 0.5, 1, 2, 4, 8, 16) til du får oscillasjoner. Reduser så forsterkningen litt. En regulator med bare P-ledd vil ha et statisk avvik fra settpunktet. 
+	\item I-leddet virker ved å fjerne feil. Det kan hjelpe til med å redusere oscillasjoner og statiske avvik, men feil justering vil føre til oversving og oscillasjoner. Reduser I-tiden i forsiktig til oscillasjoner og statisk avvik er elliminert. 
+	\item D-leddet er ikke nødvendig i de fleste tilfeller om det er akseptabelt med oversving. Om du trenger D-leddet øk forsiktid d-tiden til du er fornød med responsen på variasjoner i prosessen  (SP forandringer).
+\end{enumerate}
+
 
 
 

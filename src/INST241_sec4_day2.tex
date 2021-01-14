@@ -1,0 +1,297 @@
+% This file contains all the necessary TeX statements for specifying
+% overall document format.  This is the file you would edit to set
+% any global typesetting parameters.
+
+\input epsf.tex
+
+% This line effectively turns off "Underfull \vbox" error messages.
+\vbadness=10000
+
+\tolerance = 1000
+\pretolerance = 10000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 21} -- LIII (magnetic flowmeters) \vskip 10pt
+
+Any electrical conductor moving perpendicularly to a magnetic field will experience an induced voltage perpendicular to both the field and the direction of motion.  Conductive liquids moving through a magnetic field do the same thing.  The amount of voltage induced is directly proportional to flow velocity, making this a {\it linear} type of flowmeter:
+
+$$E = Blv = {B d Q \over A} = {4 B Q \over \pi d}$$
+
+$$Q = k {\pi d E \over 4B}$$
+
+\noindent
+Where,
+
+$E$ = Motional EMF (volts)
+
+$B$ = Magnetic flux density (Tesla)
+
+$l$ = Length of conductor passing through the magnetic field (meters)
+
+$v$ = Velocity of conductor (meters per second)
+
+$d$ = Diameter of pipe (meters)
+
+$A$ = Cross-sectional flowing area of pipe (square meters)
+
+$Q$ = Flow rate (cubic meters per second)
+
+$k$ = Constant of proportionality
+
+\vskip 10pt
+
+In order for a magnetic flowmeter to properly function, the fluid must be conductive, completely filling the pipe, and the flowtube must be electrically grounded to prevent stray electric currents from interfering with the flow measurement.  Ideally, the flow should be vertical (upward) to ensure full pipe fillage.  If horizontal, the electrodes should be oriented horizontally as well so that random gas bubbles passing through do not break contact with the liquid.
+
+\vskip 10pt
+
+Liquid conductivity does not have a large effect on flow measurement accuracy, so long as the conductivity is arbirtraily high (i.e. the resistivity is very low).  Only certain liquid types such as deionized water, petroluem fuels, and other completely non-conductive liquids are unsuitable for this technology.
+
+\vskip 10pt
+
+Magflow meters are fairly tolerant of flow disturbances, typically only requiring 5 diameters of upstream straight-pipe length and 3 downstream.
+
+\vskip 10pt
+
+Electrical grounding straps are necessary to bypass stray electric currents around the flowtube (and to ground).  If the piping is non-conductive (e.g. plastic), grounding rings must be used to make contact between the grounding straps and the liquid both before and after the flowtube.
+
+\vskip 10pt
+
+Flowtube coils are often energized with AC rather than DC to avoid problems due to ionic polarization.  60 Hz AC excitation can be problematic because the induced EMF will also be 60 Hz, and therefore indistinguishable from 60 Hz noise.  Pulsed ``DC'' flowmeters use square-wave pulses to excite the field coils, so that the induced voltage will be easily distinguishable from any 60 Hz noise.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 22} -- Rosemount 8700 magflow meter manual \vskip 10pt
+
+5D upstream and 2D downstream, minimum (page 2-3).
+
+\vskip 10pt
+
+One cable to energize the flowtube's coils, and another cable to bring the electrodes' signal back to the transmitter for processing (pages 2-13 through 2-17).
+
+\vskip 10pt
+
+Process liquid flow should always be {\it up} (in the absence of sufficient liquid backpressure), to ensure a completely full tube (pages 2-3 through 2-5).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 23} -- explain magflow strengths/weaknesses \vskip 10pt
+
+{\bf Strengths:}
+
+\medskip
+\item{$\bullet$} Short upstream/downstream straight-pipe requirements: 5 up and 3 down -- {\it induced EMF is a good representation of average flow rate; directions of flow not perpendicular to magnetic field and to electrodes don't contribute much to the EMF}
+\item{$\bullet$} Output is linearly related to volumetric flow rate -- no square root characterization required -- {\it electromagnetic induction is a linear function of velocity}
+\item{$\bullet$} Good rangeability -- {\it linearity makes this possible; limited by ambient electrical noise, though}
+\item{$\bullet$} Bidirectional measurement possible -- {\it polarity (phase) simply reverses}
+\medskip
+
+\vskip 10pt
+
+{\bf Weaknesses:}
+
+\medskip
+\item{$\bullet$} Does not work with nonconducting fluids -- {\it induction requires a conductor}
+\item{$\bullet$} Excellent electrical grounding of the flowmeter is {\it essential} -- {\it to minimize effects of electrical noise on measurement}
+\item{$\bullet$} Coating of electrodes may affect performance -- {\it adds electrical resistance to measurement circuit}
+\item{$\bullet$} Needs to be installed in pipe with electrodes horizontal, never vertical -- {\it so air bubble will have a harder time breaking the measurement circuit}
+\medskip
+
+\vskip 10pt
+
+A partially-filled pipe will cause the velocity to be greater for any given volumetric flow rate (less effective cross-sectional area).  This multiplies the flowmeter's indication, causing it to exhibit a positive span error.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 24} -- activated sludge magflow EMF calculation \vskip 10pt
+
+$$E = Blv = {B d Q \over A} = {4 B Q \over \pi d}$$
+
+\noindent
+Where,
+
+$E$ = Motional EMF (volts)
+
+$B$ = Magnetic flux density (Tesla)
+
+$l$ = Length of conductor passing through the magnetic field (meters)
+
+$v$ = Velocity of conductor (meters per second)
+
+$d$ = Diameter of pipe (meters)
+
+$A$ = Cross-sectional flowing area of pipe (square meters)
+
+$Q$ = Flow rate (cubic meters per second)
+
+$k$ = Constant of proportionality
+
+\vskip 10pt
+
+0.67 cubic meters per minute is equal to 0.112 cubic meters per second.  A circular diameter of 4 inches equates to a cross-sectional area of 0.00810732 square meters.
+
+\vskip 10pt
+
+$$E = {(0.2) (0.1016) (0.112) \over 0.008107} = 27.99 \hbox{ mV}$$
+
+\vskip 10pt
+
+$$\left({0.67 \hbox{ m}^3 \over \hbox{min}}\right) \left(100 \hbox{ cm} \over 1 \hbox{ m} \right)^3 \left(1 \hbox{ in} \over 2.54 \hbox{ cm}\right)^3 \left(1 \hbox{ gallon} \over 231 \hbox{ in}^3 \right) = 176.995 \hbox{ GPM}$$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 25} -- LIII (ultrasonic flowmeters) \vskip 10pt
+
+Ultrasonic flowmeters work by passing high-frequency sound wave pulses through the moving fluid.  Doppler flowmeters infer fluid velocity in aereated or dirty liquid flows by comparing the incident and received frequencies when the sound waves strike a bubble or suspended solid in the liquid.  The frequency of the reflected pulse will shift proportional to velocity:
+
+$$\Delta f = {{2vf \cos \theta} \over {c}}$$
+
+$$Q = {{Ac \Delta f} \over {2 f \cos \theta}}$$
+
+Note that the speed of sound through the liquid ($c$) affects the measurement of flow rate.  The speed of sound through any material is a function of its bulk modulus (how compressible it is) and its mass density.  Chemical composition affects bulk modulus, while pressure and temperature can affect density:
+
+$$c = \sqrt{B \over \rho}$$
+
+\vskip 10pt
+
+Transit-time ultrasonic flowmeters require clean flows (either liquid or gas), and infer flow velocity by comparing the propagation time of a sound pulse sent upstream versus one sent downstream:
+
+$$Q = k {t_{up} - t_{down} \over (t_{up})(t_{down})} = {2 k v \over L}$$
+
+Note how the speed of sound through the fluid ($c$) is absent from this formula, telling us that that this flowmeter is immune to changes in the fluid's speed of sound.  The speed of sound can be measured from the transit time values, however, and this has diagnostic value for the flowmeter (to check the condition of its ultrasonic transducers):
+
+$$c = {L \over 2} \left({t_{up} + t_{down} \over (t_{up})(t_{down})}\right)$$
+
+Multipath ultrasonic flowmeters achieve high accuracy by shooting sound wave pulses across the pipe along different paths (``chords''), capturing different portions of the velocity profile.  The velocity measured by each chord may be expressed as a ratio to the average flow velocity, called a {\it velocity ratio}.  Comparisons of velocity ratios near the pipe's middle versus near the pipe's walls gives a quantitative indication of flow profile shape called the {\it profile factor}.  This ratio of inner velocity to outer velocity will change with installation, with flowtube fouling, and also with sensor malfunctions, making it a useful diagnostic indicator.
+
+Another useful diagnostic indicator is the speed of sound registered by each chord, which should be identical for all conditions.  Any significant differences here indicate problems with one or more chord transducers.
+
+\vskip 10pt
+
+High-accuracy gas flow meausurement using multipath transit-time ultrasonic flowmeters is possible, and codified under American Gas Association report \#9 (AGA9).
+
+\vskip 10pt
+
+Some applications allow for ultrasonic transducers to be clamped on the outside of a pipe, for temporary, non-intrusive flow measurement.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 26} -- Daniel 3400 ultrasonic gas flowmeter manual \vskip 10pt
+
+10D upstream and 5D downstream for the SeniorSonic meters.  20D upstream and 5D downstream for the JuniorSonic meters (page 3-22).  If bidirectional flow is desired, both sides must meet the respective upstream requirement (10D for Senior, 20D for Junior).
+
+\vskip 10pt
+
+The bores must match by $\pm$ 1\%, in order to meet the AGA9 standard.
+
+\vskip 10pt
+
+The temperature probe must be at least 3D downstream.
+
+\vskip 10pt
+
+This is a transit-time flowmeter (pages 5-2 and 5-3).
+
+\vskip 10pt
+
+The Senior flowmeter uses four-chord sensing (page 2-5) while the Junior model uses either single-chord (page 2-6) or two-chord (page 2-7) sensing.  Also, the chord paths in the Senior model run from transducer to transducer, while the Junior model bounces the sound wave from transducer to pipe wall to transducer.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 27} -- transit-time formula evaluation \vskip 10pt
+
+If the fluid is not moving, $t_{up} = t_{down}$.  This makes the numerator of the fraction equal to zero, resulting in a $Q$ of zero.
+
+\vskip 10pt
+
+Mathematical proof that $c$ is irrelevant to the measurement of flow rate by transit times:
+
+$$Q = k {t_{up} - t_{down} \over (t_{up})(t_{down})}$$
+
+$$Q = k {{L \over c-v} - {L \over c+v} \over \left({L \over c+v}\right)  \left({L \over c-v}\right)}$$
+
+$$Q = k {{L (c + v) \over c^2 - v^2} - {L (c - v) \over c^2 - v^2} \over {L^2 \over c^2 - v^2}}$$
+
+$$Q = k {{L (c + v) - L (c - v) \over c^2 - v^2} \over {L^2 \over c^2 - v^2}}$$
+
+$$Q = k \left({L (c + v) - L (c - v) \over c^2 - v^2}\right) \left({c^2 - v^2 \over L^2}\right) $$
+
+$$Q = k {L (c + v) - L (c - v) \over L^2}$$
+
+$$Q = k {Lc + Lv - Lc + Lv \over L^2}$$
+
+$$Q = k {Lv + Lv \over L^2}$$
+
+$$Q = k {2Lv \over L^2}$$
+
+$$Q = k {2v \over L}$$
+
+$$Q = {2kv \over L}$$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 28} -- explain ultrasonic flowmeter strengths/weaknesses \vskip 10pt
+
+{\bf Strengths:}
+
+\medskip
+\item{$\bullet$} May be attached to the {\it outside} of a pipe -- {\it merely need to conduct sound waves through the fluid to measure its velocity}
+\item{$\bullet$} Relatively inexpensive on large pipes -- {\it transducer size does not scale with pipe size, making small transducers useful on huge pipes}
+\item{$\bullet$} Work on liquids, gases, and some vapors -- {\it any fluid transmitting sound is fair game}
+\item{$\bullet$} Output is linearly related to volumetric flow rate -- no square root characterization required -- {\it Doppler frequency shift is linear with velocity; so is transit time difference}
+\item{$\bullet$} Good rangeability -- {\it linear response means good turndown}
+\item{$\bullet$} Bidirectional measurement possible -- {\it Doppler shift merely changes sign with direction; ditto for transit-time differences}
+\medskip
+
+\vskip 10pt
+
+{\bf Weaknesses:}
+
+\medskip
+\item{$\bullet$} Calibration varies with speed of sound in fluid for some types (which?) -- {\it Doppler dependent on $c$; transit-time is not}
+\item{$\bullet$} Efficiently coupling sensors to pipe can be challenging -- {\it need good acoustic coupling to ensure audio signal integrity}
+\item{$\bullet$} May require long straight-pipe lengths to condition flow -- {\it since chord picks up on velocity of fluid in one path only, swirl and eddies can hamper accuracy}
+\item{$\bullet$} May suffer false readings from sound waves ``ringing around the pipe'' instead of going through the fluid -- {\it sound waves may conduct through the pipe walls rather than through the fluid, especially with clamp-on flowmeter types}
+\medskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Summary questions and review of general principles} \vskip 10pt
+
+\noindent
+Identify any general principles you've learned today (i.e. principles spanning multiple applications).
+\item{$\bullet$} Electromagnetic induction: voltage induced in a moving conductor (liquid) as it passed through a magnetic field
+\item{$\bullet$} Doppler effect: frequency shift in sound wave caused by motion of object
+\medskip
+
+\medskip
+\item{$(Q21)$} Summarize main points of the reading (magnetic flowmeters)
+\item{$(Q22)$} Identify the purpose for each cable connecting the transmitter head to the flowtube
+\item{$(Q23)$} Explain strengths/weaknesses
+\item{$(Q23)$} Identify nature of error caused by partially filled pipe
+\item{$(Q24)$} Show magflow EMF and volumetric flow calculations
+\item{$(Q25)$} Summarize main points of the reading (ultrasonic flowmeters)
+\item{$(Q26)$} How many paths (chords) are used in the Senior versus the Junior models?
+\item{$(Q28)$} Explain strengths/weaknesses
+\medskip
+
+\medskip
+\item{$(Q24)$} Explain why a magnetic flowmeter is ideally suited for this application, where the sludge has the approximate consistency (and appearance!) of peanut butter.
+\item{$(Q24)$} Identify any other flowmeter types you've learned about so far which may work well in this application as an alternative to the magnetic flowmeter.
+\item{$(Q24)$} Identify any other flowmeter types you've learned about so far which would {\it not} work well in this application as an alternative to the magnetic flowmeter, and explain why.
+\item{$(Q26)$} Why should the Senior flowmeter be installed with chords oriented horizontally?
+\item{$(Q26)$} Why should the Junior flowmeter be installed with chords 45 degrees off vertical?
+\item{$(Q27)$} Mathematically prove that $c$ is irrelevant
+\medskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Problem Solving question $(Q55)$} \vskip 10pt
+
+Identify and evaluate different flowmeter technologies for a flare-gas flow measurement application.
+
+%$$\epsfxsize=2in \epsfbox{i00000x01.eps}$$
+
+
+\bye
+
+
+

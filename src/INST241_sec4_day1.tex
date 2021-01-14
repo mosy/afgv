@@ -1,0 +1,296 @@
+% This file contains all the necessary TeX statements for specifying
+% overall document format.  This is the file you would edit to set
+% any global typesetting parameters.
+
+\input epsf.tex
+
+% This line effectively turns off "Underfull \vbox" error messages.
+\vbadness=10000
+
+\tolerance = 1000
+\pretolerance = 10000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 01} -- LIII (turbine flowmeters) \vskip 10pt
+
+Turbine flowmeters use a ``windmill'' turbine in the flow stream to detect fluid flow.  So long as the turbine spins frictionlessly, its blade tip speed will be directly proportional to fluid velocity, making this flowmeter {\it linear} in its response, and giving good turndown (typically 10:1 or better).
+
+\vskip 10pt
+
+Turbine speed is often sensed by a ``pickup'' coil generating a voltage pulse every time a turbine blade passes by the pickup coil.  Mechanical shafts and gears may also be used to transmit the turbine's data to a readable location.  In some designs, a pair of fiber optic cables conducts light to and from the turbine blades, the resulting signal being an optical pulse train.
+
+\vskip 10pt
+
+The mathematical relationship between pulse frequency and volumetric flow rate is a simple proportionality:
+
+$$f = kQ$$
+
+The total amount of fluid volume passed through a turbine flowmeter over any time interval is proportional to the total number of pulses output by the flowmeter.
+
+\vskip 10pt
+
+The American Gas Association Report \#7 (AGA7) standardizes high-accuracy gas flow measurement using turbine flowmeters, and includes compensation for both gas pressure and gas temperature, since these variables both affect gas density and therefore affect the ``standardized'' flow rate of gas for any given velocity.
+
+\vskip 10pt
+
+Problems faced by turbine flowmeters include ``coasting'' when flow suddenly stops, errors due to friction either at the turbine bearings or due to the fluid's own viscosity slowing down the turbine wheel.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 02} -- turbine flowmeter calculations \vskip 10pt
+
+$$\left({2594620 \hbox{ pulses} \over 1} \right) \left( {1 \hbox{ SCF} \over 37.2 \hbox{ pulses}} \right) = 69747.8 \hbox{ SCF}$$
+
+\vskip 10pt
+
+$$\left( {94 \hbox{ pulses} \over \hbox{sec}} \right) \left( {1 \hbox{ SCF} \over 37.2 \hbox{ pulses}} \right) = 2.5269 \hbox{ SCFS} = 151.61 \hbox{ SCFM}$$
+
+\vskip 10pt
+
+$$\left( {525000 \hbox{ pulses} \over 1} \right) \left( {1 \hbox{ SCF} \over 37.2 \hbox{ pulses}} \right) \left( {1 \hbox{ min} \over 170 \hbox{ SCF}} \right) = 83.02 \hbox{ minutes}$$
+
+83.02 minutes is equivalent to 1 hour, 23 minutes, 1.02 seconds.
+
+\vskip 10pt
+
+An incorrect K factor entered into the electronic transmitter would result in a {\it span} error, since $k$ is a {\it multiplying} factor in the frequency/flow equation ($f = kQ$), and multiplicative errors are span errors.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 03} -- LIII (vortex flowmeters) \vskip 10pt
+
+When fluid moves with a high Reynolds number past a blunt object, alternating vortices form in the wake downstream of that object.  The wavelength of these vortices remains a constant in proportion to the width of the object (the object's width being approximately 17\% of the vortex wavelength), which means the frequency of the vortex shedding is directly proportional to fluid velocity.  A differential pressure sensor mounted downstream of the object picks up this frequency and linearly interprets it as flow rate.
+
+\vskip 10pt
+
+Like turbine flowmeters, the relationship between frequency and volumetric flow is a linear proportionality:
+
+$$f = kQ$$
+
+Also like turbine flowmeters, the total number of pulses accumulated over a time span is proportional to the total volume of fluid passed through the vortex flowmeter.
+
+\vskip 10pt
+
+An important disadvantage of vortex flowmeters is {\it low-flow cutoff}, where the flowmeter's output goes all the way to zero if the flow rate drops below a critical threshold.  This is due to a cessation of vortex shedding, when the Reynolds number of the fluid gets too low: fluid viscosity overwhelms momentum, preventing vortices from forming.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 04} -- flowmeter pulse output fault analysis \vskip 10pt
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Fault} & {\bf Possible} & {\bf Impossible} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed open &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed open & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_1$ failed shorted &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$R_2$ failed shorted & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+1 amp fuse blown &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+100 milliamp fuse blown & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+24 VCDC source dead &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+5 VCDC source dead & $\surd$ &  \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+If $R_2$ were failed shorted, it would blow the 100 mA fuse at the next pulse, thereby creating a 0 volt drop across the optocoupler's C-E terminals.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 05} -- vortex flowmeter calculations \vskip 10pt
+
+$$\left({8510 \hbox{ gallons} \over \hbox{hour}} \right) \left( {10.344 \hbox{ pulses} \over \hbox{ gallon}} \right) = 88027.44 \hbox{ pulses per hour} = 24.452 \hbox{ Hz}$$
+
+\vskip 10pt
+
+$$\left({800000 \hbox{ pulses} \over 1} \right) \left({ 1 \hbox{ gallon} \over 10.344 \hbox{ pulses}} \right) = 77339.5 \hbox{ gallons}$$
+
+\vskip 10pt
+
+$$\left({35 \hbox{ pulses} \over \hbox{ sec}} \right) \left({ 1 \hbox{ gallon} \over 10.344 \hbox{ pulses}} \right) = 3.3836 \hbox{ gallons per second} = 203.02 \hbox{ GPM} = 27.139 \hbox{ ft}^3\hbox{/min}$$
+
+\vskip 10pt
+
+An incorrect K factor entered into the electronic transmitter would result in a {\it span} error, since $k$ is a {\it multiplying} factor in the frequency/flow equation ($f = kQ$), and multiplicative errors are span errors.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 06} -- vortex low-flow calculation \vskip 10pt
+
+$$\hbox{Re} = {{3160 G_f Q} \over {D \mu}}$$
+
+\noindent
+Where,
+
+Re = Reynolds number (unitless)
+
+$G_f$ = Specific gravity of liquid (unitless)
+
+$Q$ = Flow rate (gallons per minute)
+
+$D$ = Diameter of pipe (inches)
+
+$\mu$ = Absolute viscosity of fluid (centipoise)
+
+3160 = Conversion factor for British units
+
+\vskip 10pt
+
+The specific gravity of this acetone is equal to $49.4 \over 62.4$ = 0.791667, therefore:
+
+$$Q = {D \mu \hbox{Re} \over 3160 G_f} = {(1.610)(0.32)(10000) \over (3160)(0.791667)} = 2.059 \hbox{ GPM}$$
+
+\vskip 10pt
+
+We must have a flow rate of at least 2.059 gallons per minute in order for this vortex flowmeter to operate, and not enter into low-flow cutoff.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 07} -- LIII (positive displacement flowmeters) \vskip 10pt
+
+Positive displacement flowmeters use an ``engine'' sort of mechanism to shuttle definite volumes of fluid through for each mechanism rotation or cycle.  Some are rotary in nature, while others use pistons, bags, or other elements to measure quantities of fluid passed.  If the mechanism is prevented from moving, fluid cannot move through the flowmeter, in contrast to certain other types of flowmeters such as turbines where cessation of element motion will not impede fluid flow.
+
+\vskip 10pt
+
+These flowmeters are very linear in their response, and totally immune to piping disturbances such as swirls and eddies.  They are, however, susceptible to wear over time due to the requirement of close-fitting moving parts, and for the same reason may be damaged by particulate matter in the flowstream.
+
+\vskip 10pt
+
+If an odometer-style counter is attached to the meter mechanism, it will register the total volume of fluid passed through the meter.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 08} -- positive displacement flowmeter calculations \vskip 10pt
+
+$$\left( {310 \hbox{ ft}^3 \over \hbox{min}} \right)  \left( {1728 \hbox{ in}^3 \over 1 \hbox{ ft}^3} \right)  \left({1 \hbox{ gal} \over 231 \hbox{ in}^3}\right)   \left( {1 \hbox{ pulse} \over 20 \hbox{ gal}} \right) = 115.948 \hbox{ pulses per minute} = 1.932 \hbox{ Hz}$$
+
+\vskip 10pt
+
+$$\left({48522 \hbox{ pulses}\over 1}\right) \left({20 \hbox{ gal} \over 1 \hbox{ pulse}}\right) = 970440 \hbox{ gallons}$$
+
+\vskip 10pt
+
+Viscosity is of no concern with a positive-displacement flowmeter, because this type of flowmeter simply shuttles definite volumes of fluid with each pulse with no regard for turbulence or friction.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 09} -- Rosemount 8800 vortex manual \vskip 10pt
+
+Vertical orientation is preferred because this guarantees a full meter body (no gas pockets or condensed liquids off to one side of the tube) and allows equal distribution of solids.  Liquids should flow upward, while gases and vapors may flow in either direction.  Downward liquid flow is possible with the correct piping design (maintaining adequate backpressure to ensure a filled pipe).
+
+\vskip 10pt
+
+The electronics ``head'' should be located below the pipe centerline to discourage hot air convecting heat from the pipe to the electronics.  Of course the proximity to {\it other} hot pipes should be taken into consideration as well!
+
+\vskip 10pt
+
+10D upstream and 5D downstream, minimum.
+
+\vskip 10pt
+
+{\it Cross-torquing} flange bolts helps to ensure an even ``crush'' of the gasket, and helps to avoid warping the flanges due to uneven bolt pressures.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Summary questions and review of general principles} \vskip 10pt
+
+\noindent
+Identify any general principles you've learned today (i.e. principles spanning multiple applications).
+\item{$\bullet$} Alternating vortices form downstream of blunt objects placed within a flowing stream of fluid, provided the Reynolds number is high enough
+\item{$\bullet$} The frequency of the signal output by a turbine, vortex, or PD flowmeter is always directly proportional to flow
+\medskip
+
+\medskip
+\item{$(Q01)$} Summarize main points of the reading (turbine flowmeters)
+\item{$(Q01)$} Explain why a turbine flowmeter is linear
+\item{$(Q01)$} If a turbine flowmeter is forced to measure a fluid that is too viscous, will it register too low or too high?
+\item{$(Q01)$} If a turbine flowmeter begins to experience bearing friction, will it register too low or too high?
+\item{$(Q02)$} Show all mathematical work in turbine flowmeter calculations
+\item{$(Q02)$} The label ``Standard Cubic Feet'' means one cubic foot of volume with the gas at room temperature and atmospheric (sea-level) pressure.  Explain why we might use the unit of ``Standard Cubic Feet'' to express the flow of a gas through a pipe rather than simple ``Cubic Feet''.
+\item{$(Q03)$} Summarize main points of the reading (vortex flowmeters)
+\item{$(Q05)$} Show all mathematical work in vortex flowmeter calculations
+\item{$(Q06)$} Show all mathematical work in vortex Reynolds number calculation
+\item{$(Q06)$} Explain what the {\it Reynolds number} of a flowing fluid means in your own words.  Specifically, what effects are manifest from different Reynolds number values?
+\item{$(Q07)$} Summarize main points of the reading (positive displacement flowmeters)
+\item{$(Q07)$} Explain why PD flowmeters are immune to piping disturbances, whereas other flowmeter types (e.g. orifice plate, turbine, etc.) require well-conditioned flow to measure accurately
+\item{$(Q08)$} Show all mathematical work in PD flowmeter calculations
+\item{$(Q08)$} Why do you suppose a positive displacement flowmeter is a good choice for this process fluid application?
+\medskip
+
+\medskip
+\item{$(Q01)$} Suppose the velocity of a gas through a turbine flowmeter remains constant, but the pressure of that gas gradually increases.  Assuming all other factors remain the same, what effect will this change have on the actual rate of gas flow?  Will the turbine meter register this actual rate of gas flow?  Why or why not?
+\item{$(Q01)$} Suppose the velocity of a gas through a turbine flowmeter remains constant, but the pressure of that gas gradually decreases.  Assuming all other factors remain the same, what effect will this change have on the actual rate of gas flow?  Will the turbine meter register this actual rate of gas flow?  Why or why not?
+\item{$(Q01)$} Suppose the velocity of a gas through a turbine flowmeter remains constant, but the temperature of that gas gradually increases.  Assuming all other factors remain the same, what effect will this change have on the actual rate of gas flow?  Will the turbine meter register this actual rate of gas flow?  Why or why not?
+\item{$(Q01)$} Suppose the velocity of a gas through a turbine flowmeter remains constant, but the temperature of that gas gradually decreases.  Assuming all other factors remain the same, what effect will this change have on the actual rate of gas flow?  Will the turbine meter register this actual rate of gas flow?  Why or why not?
+\item{$(Q04)$} Explain why possible/impossible
+\item{$(Q07)$} Describe how a mechanical device such as a PD flowmeter could be equipped with an electronic output signal representing flow rate.  Be as detailed as you can in describing how the mechanism would have to be modified or augmented.
+\item{$(Q08)$} What would happen if we tried to use an orifice plate to measure the flow rate of Vaseline?
+\item{$(Q08)$} What would happen if we tried to use a turbine flowmeter to measure the flow rate of Vaseline?
+\item{$(Q08)$} What would happen if we tried to use a vortex flowmeter to measure the flow rate of Vaseline?
+\item{$(Q09)$} Suppose you were asked to build a circuit to interpret the pulse output from this model of vortex flowmeter, blinking an LED on and off with the pulse frequency.  Sketch this circuit, being sure to note which screw terminals on the flowmeter to connect your circuit to.
+\medskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Problem Solving question $(Q84)$} \vskip 10pt
+
+Imagine pigment FT suffering from a negative zero shift calibration error.
+
+\vskip 10pt
+
+Operators complain that the paint produced in this measurement system is too darkly colored, and they call you to troubleshoot.
+
+\medskip
+\item{$\bullet$} Brainstorm possible causes (e.g. pigment FT reading too low, base FT reading too high)
+\item{$\bullet$} Identify specific mechanical causes (e.g. pigment FT turbine binding with friction)
+\item{$\bullet$} How to validate flowmeter calibrations? (e.g. flow-prover test using buckets and a stopwatch)
+\medskip
+
+%$$\epsfxsize=2in \epsfbox{i00000x01.eps}$$
+
+
+\bye
+
+
+

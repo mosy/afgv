@@ -1,0 +1,334 @@
+% This file contains all the necessary TeX statements for specifying
+% overall document format.  This is the file you would edit to set
+% any global typesetting parameters.
+
+\input epsf.tex
+
+% This line effectively turns off "Underfull \vbox" error messages.
+\vbadness=10000
+
+\tolerance = 1000
+\pretolerance = 10000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 61} -- LIII (high-accuracy flow measurement) \vskip 10pt
+
+Pressure-based flow elements deviate from ``ideal'' behavior due to a number of factors including compressibility of the fluid, pipe roughness, energy losses due to friction and viscosity, etc.  In order to more accurately predict the flow/pressure relationship for an element such as an orifice plate, we have several other factors included in high-accuracy flow equations.  These include {\it discharge coefficient} ($C$ -- the ratio between true flow rate and theoretical flow rate), {\it gas expansion factor} ($Y$ -- ratio of the gas discharge coefficient to the liquid discharge coefficient for an element), and {\it compressibility factor} ($Z$).
+
+\vskip 10pt
+
+Live parameters such as gas pressure and gas temperature have particular influence on the accuracy of gas flow measurement because they affect the density ($\rho$) of the gas, which of course is an important variable in any DP-based flow formula.  The AGA3 gas flow equation compensates for these variables (as well as $C$, $Y$, and $Z$), and AGA3-compliant gas flow measurement systems must include RTD temperature sensors and absolute pressure sensors in addition to the differential pressure sensor in order to accurately calculate gas flow.  A ``gas flow computer'' takes in these three variables to compute flow rate.  Special {\it multi-variable} transmitters sensing all three of these variables and equipped with the AGA3 gas flow equation may serve the same purpose, computing flow rate and reporting that calculated variable instead of just reporting DP.
+
+\vskip 10pt
+
+For custody transfer (``fiscal'') flow measurement applications, {\it honed meter runs} are used instead of regular pipe.  These precision-machined tubes have mirror-smooth interior surfaces and precisely known dimensions.
+
+\vskip 10pt
+
+In order to improve the inherently poor turndown ratio of orifice-based flowmeters, several honed meter runs may be paralleled through shut-off valves: as flow increases, more valves are opened up to bring additional meter runs on-line, keeping the velocity through all of them within a narrow range where the accuracy is greatest.
+
+\vskip 10pt
+
+Liquid flow measurement applications may also benefit from compensation, but only temperature and not pressure because pressure changes have such a slight effect on liquid density (whereas temperature changes have a much more dramatic effect on liquid density).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 62} -- Rosemount 3095MV manual \vskip 10pt
+
+Figure 2-3 on page 206 shows mounting positions for different services: above the pipe for gas, level with the pipe for gas or liquid, below the pipe for steam.
+
+\vskip 10pt
+
+The Rosemount model 3095 MV uses an RTD to sense process fluid temperature which is ideal given the superior linearity of RTDs (compared to thermocouples and thermistors) and the modest temperature range one would expect from a gas or liquid flowing through an orifice plate.
+
+\vskip 10pt
+
+Mass flow calculation formula (shown on Appendix page A-5:
+
+$$Q_m = N C_d E Y d^2 \sqrt{\rho \Delta P}$$
+
+\noindent
+Where,
+
+$Q_m$ = Mass flow rate (sometimes written as $W$)
+
+$N$ = Unit conversion factor
+
+$C_d$ = Discharge coefficient
+
+$E$ = Velocity of approach factor
+
+$d$ = Orifice bore diameter
+
+$\rho$ = Flowing density of gas
+
+$\Delta P$ = Differential pressure drop
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 63} -- Rosemount orifice plate elements manual \vskip 10pt
+
+A {\it meter section} is a {\it flange union} with pre-welded straight tubes both upstream and downstream.  The pre-welded tubes help ensure better accuracy than what might be achieved with field-welded pipe, since both the tubes and the welds are more likely to be smooth coming from the factory than assembled in the field.
+
+\vskip 10pt
+
+The standard meter sections listed in Appendix C exhibit a typical upstream straight-pipe length of ten (10) diameters and a downstream straight-pipe length of five (5) diameters.
+
+\vskip 10pt
+
+Regulators and throttling control valves seem to present the greatest level of disturbance, as measured by the necessary upstream straight-pipe run requirements (nearly 45 diameters with a beta ratio of 0.75).
+
+\vskip 10pt
+
+For the double-elbow installation, $D$ upstream (minimum) = 25 diameters and $D$ downstream (minimum) = 4 diameters.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 64} -- volumetric flow/DP calculations \vskip 10pt
+
+\medskip
+\item{$\bullet$} Differential pressure at 130 GPM = 16.17 "W.C.
+\item{$\bullet$} Differential pressure at 210 GPM and $\gamma$ = 42.0 lb/ft$^{3}$ = {\bf 42.70 "W.C.}  
+\item{$\bullet$} Flow rate at 40 "W.C. = {\bf 204.5 GPM} 
+\item{$\bullet$} Flow rate at 24.1 "W.C. and $\gamma$ = 41.0 lb/ft$^{3}$ = 159.7 GPM 
+\medskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 65} -- mass flow/DP calculations \vskip 10pt
+
+\medskip
+\item{$\bullet$} Differential pressure at 230 lbm/min mass flow = {\bf 23.28 "W.C.}
+\item{$\bullet$} Differential pressure at 409 lbm/min mass flow and $\rho$ = 1.25 lbm/ft$^{3}$ = 76.55 "W.C.
+\item{$\bullet$} Mass flow rate at 95 "W.C. = 464.7 lbm/min 
+\item{$\bullet$} Mass flow rate at 51 "W.C. and $\rho$ = 1.35 lbm/ft$^{3}$ = {\bf 346.9 lbm/min} 
+\medskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 66} -- DP transmitter calibration error (w/ square root) \vskip 10pt
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Input pressure & Output current \cr
+(" W.C.) & (mA) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+0 & 4 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+45 & 12.76 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+75 & 15.31 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+90 & 16.39 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+110 & 17.70 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+150 & 20 \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+The calibration error is a {\it zero} shift, and it resides in the DAC.  Thus, the transmitter needs its output to be trimmed.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 67} -- square-root indicator calibration \vskip 10pt
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Input current & Displayed flow \cr
+(mA) & (GPM) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+4 & {\bf 0} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+6 & 247.5 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+9.3 & {\bf 402.9} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+13 & {\bf 525} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+14.8 & 575.1 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+20 & 700 \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 68} -- troubleshooting ammonium nitrate flow problem \vskip 10pt
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Fault} & {\bf Possible} & {\bf Impossible} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Bypass valve around FV-23 left open & ? &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Plugged impulse line on FT-24 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+FT-23 calibration error (high) &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+FT-23 calibration error (low) & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+FT-24 calibration error (high) & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+FT-24 calibration error (low) &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Nitric acid supply line plugged &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Ammonia vapor line plugged &  & $\surd$ \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+The bypass valve being left open is only possible if the bypass valve's flow exceeds the desired acid flow even with FV-23 shut.  Otherwise, the ratio control system will still be able to maintain the correct ratio.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 69} -- identifying location of calibration error in a flow loop \vskip 10pt
+
+The problem is in the transmitter: it has a +1 "W.C. zero-shift (i.e. it ``thinks'' the applied pressure is 1 "W.C. greater than it actually is).
+
+\vskip 10pt
+
+Having measurements of transmitter current is extremely helpful because it gives us data we may use to independently assess the calibration of the transmitter versus the calibration of the indicator.  Without this ``measurement in the middle,'' the transmitter and indicator act as a single instrument with one input and one output, making it difficult to discern which half of the loop has the problem.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Question 70} -- identifying location of calibration error in a flow loop \vskip 10pt
+
+The problem is in the transmitter: it is configured for a linear characteristic rather than square-root.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Summary questions and review of general principles} \vskip 10pt
+
+\noindent
+Identify any general principles you've learned today (i.e. principles spanning multiple applications).
+\item{$\bullet$} Flow formulae accounting for all the real-world variables surrounding an orifice plate can be really complex!
+\item{$\bullet$} The absolute pressure and absolute temperature of a gas affect its density, and therefore must be compensated for when performing high-accuracy gas flow measurement using DP-based flow elements (e.g. orifice plates)
+\item{$\bullet$} The absolute temperature of a liquid affects its density, and therefore must be compensated for when performing high-accuracy liquid flow measurement using DP-based flow elements (e.g. orifice plates)
+\item{$\bullet$} Turndown of flowmeters may be improved by paralleling multiple flowmeters and ``staging'' them in sequence with shut-off valves, bringing additional meters on line as flow rate increases.
+\item{$\bullet$} 
+\medskip
+
+\medskip
+\item{$(Q61)$} Summarize main points of the reading (high-accuracy flow measurement)
+\item{$(Q61)$} Explain why we must sense DP, absolute pressure, and absolute temperature to perform accurate gas flow measurements when using an orifice plate as the flow element.
+\item{$(Q61)$} Describe a ``honed meter run'' and explain its significance in flow measurement.
+\item{$(Q61)$} What does a {\it pulse} output represent in a multi-variable flow transmitter such as the Yokogawa EJX910?
+\item{$(Q62)$} Give reasons for the installation guidelines listed on page 2-7
+\item{$(Q63)$} Explain how to interpret graphs in Appendix A showing minimum straight-run piping requirements.
+\item{$(Q64-67)$} Show mathematical work
+\medskip
+
+\medskip
+\item{$(Q61)$} Suppose the line pressure of gas flowing through an AGA3 meter run increases, while all the other live variables (DP, temperature) remain constant.  What does the AGA3 equation predict for flow: does flow increase, decrease, or remain the same as before?
+\item{$(Q61)$} Suppose the line pressure of gas flowing through an AGA3 meter run decreases, while all the other live variables (DP, temperature) remain constant.  What does the AGA3 equation predict for flow: does flow increase, decrease, or remain the same as before?
+\item{$(Q61)$} Suppose the line temperature of gas flowing through an AGA3 meter run increases, while all the other live variables (DP, temperature) remain constant.  What does the AGA3 equation predict for flow: does flow increase, decrease, or remain the same as before?
+\item{$(Q61)$} Suppose the line temperature of gas flowing through an AGA3 meter run decreases, while all the other live variables (DP, temperature) remain constant.  What does the AGA3 equation predict for flow: does flow increase, decrease, or remain the same as before?
+\item{$(Q61)$} Examining the photograph of the integral-orifice Rosemount 3095MV transmitter mounted on the copper line, identify the direction of gas flow.
+\item{$(Q62)$} According to this document, 100:1 rangeability in differential pressure measurement is required to achieve 10:1 rangeability in flow measurement.  Similarly, 64:1 rangeability in pressure measurement is required to achieve 8:1 rangeability in flow measurement.  Explain the mathematical principle relating these ratios together.
+\item{$(Q64)$} What realistic factors could cause the weight density of a liquid such as naphtha to change from 41.5 lb/ft$^{3}$ to 41.0 or 42.0 lb/ft$^{3}$?
+\item{$(Q66)$} Explain how we can determine the location (sensor vs. DAC) of the error in this transmitter.
+\item{$(Q68)$} Explain why possible/impossible
+\item{$(Q69-70)$} Explain how to determine location of calibration error
+\medskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\filbreak \vskip 5pt \hrule \vskip 5pt \noindent {\bf Problem Solving question $(Q)$} \vskip 10pt
+
+%$$\epsfxsize=2in \epsfbox{i00000x01.eps}$$
+
+
+\bye
+
+
+

@@ -1,11 +1,15 @@
 % !TEX root = /home/fred-olav/afgv/book/
-\chapter{Analog electronic instrumentation}
+\chapter{Analog Instrmentering}
 
-An ``analog'' electronic signal is a voltage or current proportionate to the value of some physical measurement or control quantity.  An instrument is often classified as being ``analog'' simply by virtue of using an analog signal standard to communicate information, even if the internal construction and design of the instrument may be mostly digital in nature.  This is to distinguish such instruments from those making use of no analog electronic signals at all (e.g. wireless or Fieldbus instruments).
+Et analogt singal er en spenning eller en strøm som er proporsjonal med en fysisk måling. Betegnelsen analog henspeiler på egenskapen til hva som måles og ikke hvordan signalet behandles internt i måleutstyret (her behandles det ofte digitalt). 
 
-\section{4 to 20 mA analog current signals}
+%An ``analog'' electronic signal is a voltage or current proportionate to the value of some physical measurement or control quantity.  An instrument is often classified as being ``analog'' simply by virtue of using an analog signal standard to communicate information, even if the internal construction and design of the instrument may be mostly digital in nature.  This is to distinguish such instruments from those making use of no analog electronic signals at all (e.g. wireless or Fieldbus instruments).
 
-The most popular form of signal transmission used in modern industrial instrumentation systems (as of this writing) is the 4 to 20 milliamp DC standard.  This is an \textit{analog} signal standard, meaning that the electric current is used to proportionately represent measurements or command signals.  Typically, a 4 milliamp current value represents 0\% of scale, a 20 milliamp current value represents 100\% of scale, and any current value in between 4 and 20 milliamps represents a commensurate percentage in between 0\% and 100\%.  The following table shows the corresponding current and percentage values for each 25\% increment between 0\% and 100\%.  Every instrument technician tasked with maintaining 4-20 mA instruments commits these values to memory, because they are referenced so often: \index{4 to 20 mA}
+\section{4 til 20 mA analoge strøm signaler }
+
+Den mest vanlige måten å overføre analoge signaler i automatiserteanlegg er med en 4-20 mA strømsløyfe. Dette er en \textit{analog}signalstandart. Det betyr at verdien på  strømmen angir et signal fra 0-100\%(4-20 mA). Om en f.eks. skal angi hastigheten til en bil med 4-20mA signal, må en definere at måleområde for hastighet. Det kan f.eks. være 0-200km/t. Da vil 0 km/t være lik 0\% som skal gi et strømsignal på 4mA. (Hvorfor 4mA lurer du kansjke på dette får du svar på senere). 200km/t representerer 100\% som vil gi en strøm på 20 mA. Nedenfor er en tabell med oversikt over hvor mange milliamper ulike prosent av målesignalet tilsvarer. 
+
+%The most popular form of signal transmission used in modern industrial instrumentation systems (as of this writing) is the 4 to 20 milliamp DC standard.  This is an \textit{analog} signal standard, meaning that the electric current is used to proportionately represent measurements or command signals.  Typically, a 4 milliamp current value represents 0\% of scale, a 20 milliamp current value represents 100\% of scale, and any current value in between 4 and 20 milliamps represents a commensurate percentage in between 0\% and 100\%.  The following table shows the corresponding current and percentage values for each 25\% increment between 0\% and 100\%.  Every instrument technician tasked with maintaining 4-20 mA instruments commits these values to memory, because they are referenced so often: \index{4 to 20 mA}
 
 % No blank lines allowed between lines of an \halign structure!
 % I use comments (%) instead, so that TeX doesn't choke.
@@ -50,7 +54,9 @@ $$\vbox{\offinterlineskip
 
 \filbreak
 
-For example, if we were to calibrate a 4-20 mA temperature transmitter for a measurement range of 50 to 250 degrees C, we could relate the current and measured temperature values on a graph like this:
+Om vi for eksempel setter opp en temperaturtransmitter til å måle et temperaturområde på 50-250°C, vil temperaturen i forhold til strøm gi følgende graf. 
+
+%For example, if we were to calibrate a 4-20 mA temperature transmitter for a measurement range of 50 to 250 degrees C, we could relate the current and measured temperature values on a graph like this:
 
 $$\includegraphics{current01.eps}$$
 
@@ -58,13 +64,17 @@ This is not unlike 3-15 pounds per square inch (PSI) pneumatic signal standard, 
 
 \filbreak
 
-An important concept to grasp with all analog instrumentation is that instruments sending and receiving analog signals must be compatibly ranged in order to properly represent the desired variable.  To illustrate, let us consider a temperature measurement system consisting of a thermocouple\footnote{This is a temperature sensing element consisting of two different metal wires joined together, which generate a small voltage proportional to temperature.  The correspondence between junction temperature and DC millivoltage is very well established by scientific testing, and so we may use this principle to sense process temperature.}, a temperature transmitter, a 250 ohm resistor (to convert the 4-20 mA analog signal into a 1-5 volt analog signal), and a special voltmeter functioning as a temperature indicator:
+Et viktig konsept i analog instrumentering enheter som sender og mottar må være tilpasset i måleområde til hveradre. Dette for at den målte verdien skal representeres korrekt hos mottaker. For å illustrere dette skal vi se på et målesystem for måling av temperatur med termoelement. \footnote{This is a temperature sensing element consisting of two different metal wires joined together, which generate a small voltage proportional to temperature.  The correspondence between junction temperature and DC millivoltage is very well established by scientific testing, and so we may use this principle to sense process temperature.}, a temperature transmitter, a 250 ohm resistor (to convert the 4-20 mA analog signal into a 1-5 volt analog signal), and a special voltmeter functioning as a temperature indicator:
 
 $$\includegraphics{current60.eps}$$
 
-Note how the output range of each sending device matches the input range of its corresponding receiving device.  If we view this system as a path for information to flow from the thermocouple's tip to the transmitter to the resistor and finally to the voltmeter/indicator, we see that the analog output range of each device must correspond to the analog input range of the \textit{next} device, or else the real-world meaning of the analog signal will be lost.  
+Legg merke til hvordan utgangsområdet for hver enhet passer med inngangsenheten som skal motta signalet. I målesystemet må kommunikasjonen mellom hver mottaker og sender være avklart på forhånd, om den ikke er det vil ikke avlesningen av signalet ha noen sammenheng med det målte signalet. 
 
-This correspondence does not happen automatically, but must be established by the instrument technician building the system.  In this case, it would be the technician's responsibility to properly adjust the range of the temperature transmitter, and also to ensure the indicator's display scale was properly labeled.  Both the thermocouple and the resistor are non-adjustable devices, their input/output characteristics being fixed by physical laws.
+%Note how the output range of each sending device matches the input range of its corresponding receiving device.  If we view this system as a path for information to flow from the thermocouple's tip to the transmitter to the resistor and finally to the voltmeter/indicator, we see that the analog output range of each device must correspond to the analog input range of the \textit{next} device, or else the real-world meaning of the analog signal will be lost.  
+
+Denne sammenhengen kommer ikke av seg selv, men må settes opp av en automatikker. Automåtikkeren må kalibrere (justere) temperaturtransmitteren til det måle området som er valgt. Han må også sørge for av displayet er tilpasset temperaturområdet som måles. I dette systmet er både termoelementet og motstanden ikke mulig å justere da deres egenskaper er bestemt av fysiske egenskaper. 
+
+%This correspondence does not happen automatically, but must be established by the instrument technician building the system.  In this case, it would be the technician's responsibility to properly adjust the range of the temperature transmitter, and also to ensure the indicator's display scale was properly labeled.  Both the thermocouple and the resistor are non-adjustable devices, their input/output characteristics being fixed by physical laws.
   
 \vskip 10pt
 

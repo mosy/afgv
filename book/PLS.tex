@@ -1222,9 +1222,218 @@ Sekvensen kan være slik:
 		\item Etter en viss tid, stopp den.
  \end{itemize} 
 
+For å beskrive en sekvens med symboler finnes det en internasjonal
+standard med betegnelsen ISO 61131-3. Denne beskriver både overgangene
+mellom aktivitetene og hva som skal skje i de ulike aktivitetstrinn
+og kalles Sekvensielt Funksjons Kart (SFC)
+
+SFC ''språket'' egner seg godt for overordnet styring.
 \vskip 10pt
 
 
+\subsection{Sekvensielt funksjonskart}
+
+For å beskrive en sekvensiel styring brukes et sekvensielt funksjonskart.
+Dette kan beskrive de sekvensielle sidene av et kontroll program. 
+
+SFC viser:
+\begin{itemize}
+\item hoved tilstandene til en maskin eller en prosess
+\item alle mulige tilstandsforandringer
+\item betingelsene som disse forandringene vil skje med.
+\end{itemize}
+
+\subsubsection{SFC elementer}
+
+SFC elementer brukes til å strukturere et sekvensprogram. Dette gjøres
+ved å beskrive styringssekvensen ved hjelp av:
+\begin{itemize}
+	\item Hva som skal kjøre
+	\item Når det skal kjøre
+	\item Hvordan det skal kjøres
+\end{itemize}
+\includegraphics[width=0.5\textwidth]{SFC13.png}
+
+Vi kan dele en sekvensstyring i to deler:
+\begin{enumerate}
+\item Sekvensdelen som bestemmer i hvilken rekkefølge sekvensen skal gå.
+\item Kontrolldelen som bestemmer hva som skal gjøres i hver del.
+\end{enumerate}
+
+\subsubsection{SFC Steg typer. }
+
+Det finnes to typer steg i SFC
+\begin{itemize}
+\item Init
+\item Normalt
+\end{itemize}
+%Dette bildet må genereres på nytt
+%\includegraphics[width=0.5\textwidth]{\string"SFC presentasjon/15\string".eps}
+
+Init steget er det steget som programmet vil stå i når det starter opp, eller der det vil gå til om en resetter sekvensen. 
+
+Init steget har følgende egenskaper:
+\begin{itemize}
+	\item Hver SFC POU må ha et init steg
+	\item det kan bare være et init steg pr. POU
+	\item Init steget definerer steget som POU-en starter opp i ved cold-start. 
+	\item Init steget er aktivt inntil overgangsbetingelsen blir sann. 
+\end{itemize}
+
+Et steg har to tilhørende variabler som vi kan bruke til å monitorere og synkronisere sekvensen. 
+\begin{itemize}
+	\item STEP.x er en variabel som er TRUE når steget er aktivt. 
+	\item STEP.t er en variabel av type TIME, en kan se på denne som en stoppeklokke som starter nå trinnet aktiveres og tar tiden på hvor lenge treinnet har vært aktivt. 
+\end{itemize}
+
+
+
+For at disse variablene skal være tilgjengeligge må vi bruke IEC steg. Det hender at dette ikke stemmer, vi kan da tvinge et steg til å være IEC ved å legge steget inn som følgende variabel i POU-en . 
+\begin{verbatim}
+VAR
+
+        Stegnavn: SFCSTEPTYPE;
+
+END_VAR
+\end{verbatim}
+
+\textbf{Eksempel}:
+Dette programmet vil stå i \verb|INIT| til \verb|INIT.t| er blitt større en 5s, da vil overgangsbetingelsen være \verb|TRUE| og programmet gå videre til \verb|STEP|.
+\vskip 2.5pt 
+\includegraphics[width=0.5\textwidth]{SFC14.png}
+
+\subsubsection{SFC transition}
+
+Det som avgjør når en  går fra et steg til et annet er overgangbetingelser (transitions). For å gå til neste steg må overgangsbetingelsen være \verb|TRUE|.  
+
+Betingelser for transition:
+\begin{itemize}
+\item det må være en transition mellom hvert steg
+\item Når transition er TRUE deaktiveres det aktive trinnet og neste trinn aktiveres. 
+\item En transition gjøres i den vertikale linken mellom to steg. 
+\item En transition må resultere i en enkel BOOL verdi. 
+\item Om en transition er tenkt å alltid være sann kan den skrives som TRUE. 
+\end{itemize}
+I Codesys har vi to typer tranitions:
+\begin{itemize}
+\item direkte (da skrives en logisk ligning i selve transitionen. 
+\item en detaljert som kjører en ekstern funksjon kalt transition.
+\end{itemize}
+\textbf{Eksempel}
+
+I dette programmer står nå i steget \verb|Yellow1| og venter på overgangsbetingelsen \verb|YellowDone|. Men dette er ikke en vanlig overgangsbetingelse. Det kan en se på firkantet over overgangs betingelse. Denne har et grønt hjørne. Dette hjørnet markerer at det er et eksternt program som kjøres. Når variablen \verb|YellowDone| blir \verb|TRUE| i dette programmet er også overgangsbetingelsen aktiv og vi går videre til neste steg \verb|Red1|.
+\vskip 5pt 
+\includegraphics[width=0.7\textwidth]{SFCTransitioneksempel.png}
+
+\vskip 5pt 
+En ser at transitions programmet \verb|YellowDone| består av en linje:
+\vskip 2.5pt 
+\verb|YellowDone := Yellow1.t > t#3s|
+\vskip 2.5pt 
+Det vil si at overgangsbetingelsen vil være \verb|TRUE| når timeren \verb|Yellow1.t| er større en 3s. 
+\subsubsection{SFC Actions}
+% TODU list
+% denne må utvidet med entry og exit acitons
+Actions brukes til å bestemme hva som skal skje i hvert trinn. En action kan være en variabel som settes \verb|TRUE| eller det kan være et eget program som kjøres. 
+\includegraphics[width=0.6\textwidth]{SFC15.png}
+
+Egenskaper ved actions
+\begin{itemize}
+\item Hver action tilhører et step. 
+\item det kan være flere actions pr. steg
+\item hvis det ikke er noe action ved et steg behandles det som et vente
+steg, som bare venter på neste transition
+\item Action qualifyers forandre hvordan et actions oppfører seg. 
+\item en acton kan skrives i alle IEC 61131-3 programmerinspråk. 
+\item en action kjøres minst to ganger, den kan altså ikke brukes til å telle opp hver gang et steg er aktivt. 
+\end{itemize}
+%\includegraphics[width=0.7\textwidth]{SFC_ClampAndDrill}
+
+\begin{center}
+\begin{tabular}{ | m{1.5cm} | m{3cm}| m{10cm} | } 
+\hline
+\multicolumn{3}{|c|}{Action Qualifiers according to IEC 61131-3} \\
+\hline
+Qualifier	& Betydning & Forklaring \\ 
+	\hline
+	N	&Non-stored	&Actionen er aktiv så lenge steget er aktivt. \\
+	\hline
+	R0	&overriding Reset	&Actinen blir deaktivert\\
+	\hline
+	S0	&Set (Stored)	& Actionen blir aktiv og forblir aktiv til den resettes med R0. Den vilforble aktiv selv om sekvensen går over til et nytt trinn\\
+	\hline
+	L	&time Limited	&Actionen blir aktiv med en gang og er aktiv til sekvensen går til neste trinn, eller til gitt tid er gått\\
+	\hline
+	D	&time Delayed	&Actionen blir aktiv \\
+	\hline
+	P	&Pulse	&Utfører actionen to ganger en gang når steget aktiveres og en gang når det deaktiveres.\\
+	\hline
+	SD	&Stored and time Delayed	&Actionen aktiveres etter gitt tid er gått, og vil være aktiv til den resettes.\\
+	\hline
+	DS	&Delayed and Stored	&Actionen aktiveres etter gitt tid er gått, men bare om trinnet fortsatt er aktivt. Den vil være aktiv til den resettes.\\
+	\hline
+	SL	&Stored and time Limited	&Actionen aktiveres så snart trinnet er aktivt, og vil være aktivt til gitt tid er gått eller den resettes. \\
+	\hline
+\end{tabular}
+\end{center}
+\vskip\eject
+\textbf{Eksempel}
+\vskip 2.5pt 
+Her er det eksempel på SFC sine store styrker. En prosess har blitt stående fast i steget Speed2. \\
+
+\vskip 2.5pt 
+Hva er galt? 
+\vskip 2.5pt 
+
+\includegraphics[width=0.7\textwidth]{SFC_stoppet_maskin}
+\vskip 2.5pt 
+Hastighen holdes ikke konstant. 
+\vskip 2.5pt 
+SFC gir over oversikt over hvor programmet er og hva det venter på. Dette letter feilsøking på maskiner som bruker SFC. 
+\vskip\eject
+\paragraph{Oppgave til elever}\\
+
+\begin{itemize}
+	\item Hva gjør programmet?
+	\item Hvilket steg står det i for øyeblikket?
+	\item Hva skjer i hvert steg?
+	\item Hva får det til å gå fra ett steg til et annet?
+	\item Er flere steg aktive sammtidig?
+\end{itemize}
+
+\includegraphics[width=0.7\textwidth]{SFC_EnkeltTrefikkLys}
+\vskip 2.5pt 
+\vskip\eject
+\textbf{Eksempel}
+\vskip 2.5pt 
+Kombinering av språk ved hjelp av actionblokker
+
+\includegraphics[width=1\textwidth]{SFC_KombinasjonavSpråk}
+\vskip 2.5pt 
+Dette er et eksempel på hvordan actions kan være programmer og at en står fritt til å velge hvilket program en ønsker å programere det i. 
+\subsubsection{Alternative og parallelle sekvenser. }
+
+I SFC kan vi ha en linær sekvens der alle stegene kommer etterhverandre
+og til slutt og oppe til starten igjen. 
+
+Vi kan også ha alternative og parallelle sekvenser. I alternative
+vil et seg etterfølges av to eller flere transitions, det bare en
+vei kan velges. Mens i parallelle vil en transittion etterfølges av
+to eller flere steg. 
+
+%\includegraphics[width=0.5\textwidth]{\string"SFC presentasjon/47\string".eps}\includegraphics[width=0.5\textwidth]{\string"SFC presentasjon/50\string".eps}
+
+Eksempel på sekvensstyring:
+
+\begin{center}
+%\includegraphics[scale=0.9]{Veiarbeid}
+\par\end{center}
+
+Funksjonstabell for lysanlegget
+
+\begin{center}
+%\includegraphics[width=17cm]{Sekvenser}
+\par\end{center}
 
 
 

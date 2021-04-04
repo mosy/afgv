@@ -24,6 +24,7 @@ function die () {
 
 if ! pdflatex output.tex ; then die TeX ; fi
 
+#if ! pdflatex output.tex ; then die TeX ; fi
 # . . . then give the file a proper name . . .
 #mv -vf output.dvi $1$2.dvi
 
@@ -43,7 +44,7 @@ cp output.pdf ../output/$1$2.pdf
 # After all that, remove temporary files, including all PostScript files 
 # (unless this is producing an "instructor" version).
 rm -vf all.*
-rm -vf output.*
+#rm -vf output.*
 #if [ "$2" != "_instructor" ] ; then rm -vf ../output/$1.ps ; fi
 
 rm -vf ../output/$1.ps

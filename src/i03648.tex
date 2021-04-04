@@ -3,21 +3,22 @@
 % Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-An Allen-Bradley SLC500 PLC is used as the controller for an oven.  The process variable input from the temperature transmitter comes into channel 0 of a four-channel analog input card.  The transmitter is ranged 100 to 600 degrees Celsius, and we need to scale this measurement so that it appears as a fixed-point number value inside the PLC ranging 1000 to 6000 (i.e. 100.0 to 600.0 with an implied decimal point).
+%An Allen-Bradley SLC500 PLC is used as the controller for an oven.  The process variable input from the temperature transmitter comes into channel 0 of a four-channel analog input card.  The transmitter is ranged 100 to 600 degrees Celsius, and we need to scale this measurement so that it appears as a fixed-point number value inside the PLC ranging 1000 to 6000 (i.e. 100.0 to 600.0 with an implied decimal point).
+
+En Allen-Bradley SLC500 PLS blir bukt som regulator for en ovn. Prosessvariabelen TT01 er tilkoblet channel 0 på en firekanals inngangmodul. Transmitteren har et måleområde på 100-600°C. Vi må skallere denne verdien slik at den kan brukes til å gengi temperaturen på på HMI. HMI symbolet som skal brukes skal tilføres en verdi på 1000-6000. Komma tilføres automatisk av symbolet.  
+
 
 $$\includegraphics[width=15.5cm]{i03648x01.eps}$$
 
-The analog input card is configured to convert a 4 milliamp signal into an integer value of 4000, and a 20 milliamp signal into an integer value of 20000.
+Prosessbildet forteller at inngangmoduletn gir en int verdi på 4000 ved 4mA og 20000 ved 20mA. 
 
 \vskip 10pt
 
-First, develop a mathematical formula to take this 4000-20000 ``count'' range and translate it into the 1000-6000 range desired for our fixed-point representation of furnace temperature.
+a) Lag en matematisk formel for konverteringen av Temperaturen. 
+
+b) tegn et ladder program som viser hvordan denne formelen kan implementeres. 
 
 \vskip 50pt
-
-Second, translate this formula into the ``Rate'' and ``Offset'' parameters needed by the Allen-Bradley PLC's {\tt SCL} instruction to perform this ranging:
-
-$$\includegraphics[width=15.5cm]{i03648x02.eps}$$
 
 \vfil 
 

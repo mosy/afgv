@@ -1,0 +1,857 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.7
+%  Library name is: liec_dig
+%  Author: ,,, <tony@Renegade.custerlook.net>
+%
+
+% Depend liec_dig::no_pushbutton generic::dot
+% Depend liec_dig::nc_pushbutton generic::dot
+% Depend liec_dig::nc_contact liec_dig::no_contact
+% Depend liec_dig::no_electronic liec_dig::no_contact
+% Depend liec_dig::nc_electronic liec_dig::nc_contact
+
+% XCircuitLib library objects
+
+/generic::dot {
+% trivial
+begingate
+248 1.000 0 0 6 0.000 360.000 xcarc
+1.000 0.000 0.000 scb
+(x) {/Times-Roman cf} 2 29 0 1.000 0 0 pinlabel
+endgate
+} def
+
+/liec_dig::ladder_start {
+begingate
+(1) {ss} (L) {/Times-Roman cf} 4 16 0 1.000 -512 64 label
+1 1.000 -496 -80 -496 48 2 polygon
+(2) {ss} (L) {/Times-Roman cf} 4 16 0 1.000 480 64 label
+1 1.000 496 48 496 -80 2 polygon
+endgate
+} def
+
+/liec_dig::ladder_start2 {
+begingate
+(1) {ss} (L) {/Times-Roman cf} 4 16 0 1.000 -272 64 label
+1  1.000 -256 48 -256 -80 2 polygon
+1  1.000 256 48 256 -80 2 polygon
+(2) {ss} (L) {/Times-Roman cf} 4 16 0 1.000 240 64 label
+endgate
+} def
+
+/liec_dig::connector_pair {
+begingate
+1  1.000 -32 0 -8 0 2 polygon
+1  1.000 -16 8 -8 0 -16 -8 3 polygon
+1  1.000 -8 8 0 0 -8 -8 3 polygon
+1  1.000 0 0 32 0 2 polygon
+endgate
+} def
+
+/liec_dig::bluebracket {
+begingate
+0.000 0.000 1.000 scb
+1 1.000 16 48 0 48 0 -48 16 -48 4 polygon
+1 1.000 0 0 -16 0 2 polygon
+endgate
+} def
+
+/liec_dig::redarrow {
+begingate
+1.000 0.000 0.000 scb
+1 1.000 0 -32 0 32 2 polygon
+1 1.000 -8 24 0 32 8 24 3 polygon
+endgate
+} def
+
+/liec_dig::blueplus {
+begingate
+0.000 0.000 1.000 scb
+1 1.000 0 8 0 -8 2 polygon
+1 1.000 -8 0 8 0 2 polygon
+endgate
+} def
+
+/liec_dig::blueminus {
+begingate
+0.000 0.000 1.000 scb
+1 1.000 -8 0 8 0 2 polygon
+endgate
+} def
+
+
+/liec_dig::no_pushbutton {
+begingate
+1 1.000 -32 0 32 0 2 polygon
+1 1.000 0 32 0 0 2 polygon
+1 1.000 -64 -16 -16 -16 2 polygon
+1.000 0 -16 -16 generic::dot
+1 1.000 16 -16 64 -16 2 polygon
+1.000 0 16 -16 generic::dot
+endgate
+} def
+
+/liec_dig::nc_pushbutton {
+begingate
+1  1.000 16 -16 64 -16 2 polygon
+1.000 0 16 -16 generic::dot
+1  1.000 -32 -24 32 -24 2 polygon
+1  1.000 0 -24 0 24 2 polygon
+1  1.000 -64 -16 -16 -16 2 polygon
+1.000 0 -16 -16 generic::dot
+endgate
+} def
+
+/liec_dig::toggle {
+begingate
+1  1.000 -16 -16 16 16 2 polygon
+1  1.000 -64 -16 -16 -16 2 polygon
+1.000 0 -16 -16 generic::dot
+1.000 0 16 -16 generic::dot
+1  1.000 16 -16 64 -16 2 polygon
+endgate
+} def
+
+/liec_dig::toggle_nc {
+begingate
+1  1.000 -16 0 24 8 2 polygon
+1.000 0 -16 0 generic::dot
+1  1.000 -64 0 -16 0 2 polygon
+1.000 0 16 0 generic::dot
+1  1.000 16 0 64 0 2 polygon
+endgate
+} def
+
+/liec_dig::dpst_toggle {
+begingate
+1.000 0 0 32 liec_dig::toggle
+1  1.000 0 32 0 16 2 polygon
+1  1.000 0 0 0 -16 2 polygon
+1.000 0 0 -16 liec_dig::toggle
+endgate
+} def
+
+/liec_dig::spdt_toggle {
+begingate
+1.000 0 16 16 generic::dot
+1  1.000 16 16 16 32 64 32 3 polygon
+1.000 0 16 -16 generic::dot
+1  1.000 16 -16 16 -32 64 -32 3 polygon
+1  1.000 -16 0 32 -16 2 polygon
+1  1.000 -64 0 -16 0 2 polygon
+1.000 0 -16 0 generic::dot
+endgate
+} def
+
+/liec_dig::dpdt_toggle {
+begingate
+1.000 0 0 48 liec_dig::spdt_toggle
+1  1.000 0 32 0 40 2 polygon
+1  1.000 0 0 0 16 2 polygon
+1.000 0 0 -32 liec_dig::spdt_toggle
+1  1.000 0 -32 0 -16 2 polygon
+endgate
+} def
+
+/liec_dig::4pdt_toggle {
+begingate
+1.000 0 0 80 liec_dig::dpdt_toggle
+1  1.000 0 32 0 16 2 polygon
+1.000 0 0 -80 liec_dig::dpdt_toggle
+1  1.000 0 0 0 -16 2 polygon
+1  1.000 0 -32 0 -40 2 polygon
+endgate
+} def
+
+/liec_dig::joystick_right {
+begingate
+1  1.000 -64 -32 -16 -32 2 polygon
+1.000 0 -16 -32 generic::dot
+1  1.000 -32 -16 32 -16 2 polygon
+1  1.000 0 -16 0 0 2 polygon
+1  1.000 0 16 16 0.00 360.00 xcarc
+1.000 0 16 16 generic::dot
+1  1.000 16 -32 64 -32 2 polygon
+1.000 0 16 -32 generic::dot
+endgate
+} def
+
+/liec_dig::joystick_up {
+begingate
+1  1.000 0 -16 0 0 2 polygon
+1  1.000 0 16 16 0.00 360.00 xcarc
+1.000 0 0 32 generic::dot
+1  1.000 -32 -16 32 -16 2 polygon
+1  1.000 -64 -32 -16 -32 2 polygon
+1.000 0 -16 -32 generic::dot
+1  1.000 16 -32 64 -32 2 polygon
+1.000 0 16 -32 generic::dot
+endgate
+} def
+
+/liec_dig::joystick_left {
+begingate
+1  1.000 0 16 16 0.00 360.00 xcarc
+1.000 0 -16 16 generic::dot
+1  1.000 0 -16 0 0 2 polygon
+1  1.000 -32 -16 32 -16 2 polygon
+1  1.000 -64 -32 -16 -32 2 polygon
+1.000 0 -16 -32 generic::dot
+1  1.000 16 -32 64 -32 2 polygon
+1.000 0 16 -32 generic::dot
+endgate
+} def
+
+/liec_dig::joystick_down {
+begingate
+1  1.000 0 -16 0 0 2 polygon
+1  1.000 0 16 16 0.00 360.00 xcarc
+1.000 0 0 0 generic::dot
+1  1.000 -32 -16 32 -16 2 polygon
+1  1.000 -64 -32 -16 -32 2 polygon
+1.000 0 -16 -32 generic::dot
+1  1.000 16 -32 64 -32 2 polygon
+1.000 0 16 -32 generic::dot
+endgate
+} def
+
+/liec_dig::relay_coil {
+begingate
+1 1.000 0 0 32 0.000 360.000 xcarc
+1 1.000 -64 0 -32 0 2 polygon
+1 1.000 32 0 64 0 2 polygon
+endgate
+} def
+
+/liec_dig::no_contact {
+begingate
+1 1.000 -64 0 -16 0 2 polygon
+1 1.000 -16 32 -16 -32 2 polygon
+1 1.000 16 0 64 0 2 polygon
+1 1.000 16 32 16 -32 2 polygon
+endgate
+} def
+
+/liec_dig::nc_contact {
+begingate
+1.000 0 0 0 liec_dig::no_contact
+1 1.000 32 32 -32 -32 2 polygon
+endgate
+} def
+
+/liec_dig::no_electronic {
+begingate
+1.000 0 0 0 liec_dig::no_contact
+0.603 0.603 0.603 scb
+1  1.000 0 64 -64 0 0 -64 64 0 0 64 5 polygon
+sce
+endgate
+} def
+
+/liec_dig::nc_electronic {
+begingate
+0.603 0.603 0.603 scb
+1  1.000 0 64 -64 0 0 -64 64 0 0 64 5 polygon
+sce
+1.000 0 0 0 liec_dig::nc_contact
+endgate
+} def
+
+/liec_dig::coil_electronic {
+begingate
+1.000 0 0 0 liec_dig::relay_coil
+0.603 0.603 0.603 scb
+1  1.000 -64 0 0 -64 64 0 0 64 -64 0 5 polygon
+sce
+endgate
+} def
+
+/liec_dig::ncto {
+begingate
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 -16 16 32 28 2 polygon
+1  1.000 0 -8 0 20 2 polygon
+1.000 0 16 16 generic::dot
+1  1.000 16 16 64 16 2 polygon
+1  1.000 -8 -16 0 -8 8 -16 3 polygon
+endgate
+} def
+
+/liec_dig::nctc {
+begingate
+1  1.000 -64 0 -16 0 2 polygon
+1.000 0 -16 0 generic::dot
+1  1.000 -16 0 32 12 2 polygon
+1  1.000 0 -24 0 4 2 polygon
+1  1.000 -8 -16 0 -24 8 -16 3 polygon
+1.000 0 16 0 generic::dot
+1  1.000 16 0 64 0 2 polygon
+endgate
+} def
+
+/liec_dig::notc {
+begingate
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 -16 16 32 -8 2 polygon
+1  1.000 0 8 0 -16 2 polygon
+1  1.000 -8 -24 0 -16 8 -24 3 polygon
+1.000 0 16 16 generic::dot
+1  1.000 16 16 64 16 2 polygon
+endgate
+} def
+
+/liec_dig::noto {
+begingate
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 -16 16 32 -8 2 polygon
+1  1.000 0 8 0 -16 2 polygon
+1.000 0 16 16 generic::dot
+1  1.000 16 16 64 16 2 polygon
+1  1.000 -8 -8 0 -16 8 -8 3 polygon
+endgate
+} def
+
+/liec_dig::indicator {
+begingate
+1 1.000 0 0 22 0.000 360.000 xcarc
+1 1.000 -20 20 -28 28 2 polygon
+1 1.000 20 20 28 28 2 polygon
+1 1.000 24 0 64 0 2 polygon
+1 1.000 22 0 24 0 2 polygon
+1 1.000 20 -20 28 -28 2 polygon
+1 1.000 -20 -20 -28 -28 2 polygon
+1 1.000 -64 0 -24 0 2 polygon
+1 1.000 -24 0 -22 0 2 polygon
+endgate
+} def
+
+/liec_dig::selector_1 {
+begingate
+1  1.000 -16 32 0 16 0 0 3 polygon
+1.000 0 -16 0 generic::dot
+1  1.000 -64 0 -16 0 2 polygon
+1  1.000 -32 -8 32 -8 2 polygon
+1  1.000 0 0 0 -8 2 polygon
+1.000 0 16 0 generic::dot
+1  1.000 16 -32 64 -32 2 polygon
+1.000 0 16 -32 generic::dot
+1  1.000 16 0 64 0 2 polygon
+1  1.000 -64 -32 -16 -32 2 polygon
+1.000 0 -16 -32 generic::dot
+endgate
+} def
+
+/liec_dig::solenoid_coil {
+begingate
+1  1.000 -32 0 -16 32 16 -32 32 0 4 polygon
+1  1.000 32 0 64 0 2 polygon
+1  1.000 -64 0 -32 0 2 polygon
+endgate
+} def
+
+/liec_dig::no_pressure {
+begingate
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 -16 16 32 -8 2 polygon
+1.000 0 16 16 generic::dot
+1  1.000 16 16 64 16 2 polygon
+1  1.000 0 8 0 -14 2 polygon
+1  1.000 -16 -8 16 -8 16 -32 -16 -32 spline
+1  1.000 -16 -32 16 -32 2 polygon
+endgate
+} def
+
+/liec_dig::nc_pressure {
+begingate
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 -16 16 32 28 2 polygon
+1.000 0 16 16 generic::dot
+1  1.000 16 16 64 16 2 polygon
+1  1.000 0 -14 0 20 2 polygon
+1  1.000 -16 -8 16 -8 16 -32 -16 -32 spline
+1  1.000 -16 -32 16 -32 2 polygon
+endgate
+} def
+
+/liec_dig::no_limit {
+begingate
+1  1.000 -64 16 -32 16 2 polygon
+1.000 0 -32 16 generic::dot
+1  1.000 -32 16 32 -16 2 polygon
+1  1.000 -32 16 20 -20 28 -16 3 polygon
+1.000 0 32 16 generic::dot
+1  1.000 32 16 64 16 2 polygon
+endgate
+} def
+
+/liec_dig::nc_limit {
+begingate
+1  1.000 -32 0 32 8 2 polygon
+1  1.000 -32 0 24 0 28 8 3 polygon
+1  1.000 -64 0 -32 0 2 polygon
+1.000 0 -32 0 generic::dot
+1  1.000 32 0 64 0 2 polygon
+1.000 0 32 0 generic::dot
+endgate
+} def
+
+/liec_dig::no_limit_electronic {
+begingate
+1.000 0 0 -16 liec_dig::no_limit
+0.603 0.603 0.603 scb
+1  1.000 -64 0 0 64 64 0 0 -64 -64 0 5 polygon
+sce
+endgate
+} def
+
+/liec_dig::nc_limit_electronic {
+begingate
+0.603 0.603 0.603 scb
+1  1.000 -64 0 0 64 64 0 0 -64 -64 0 5 polygon
+sce
+1.000 0 0 0 liec_dig::nc_limit
+endgate
+} def
+
+/liec_dig::no_temp {
+begingate
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 -16 16 32 -8 2 polygon
+1  1.000 0 8 0 -8 8 -8 8 -16 -8 -16 -8 -24 8 -24 8 -32 -8 -32 -8 -40 0 -40 
+11 polygon
+1  1.000 16 16 64 16 2 polygon
+1.000 0 16 16 generic::dot
+endgate
+} def
+
+/liec_dig::nc_temp {
+begingate
+1  1.000 -16 16 32 28 2 polygon
+1  1.000 0 20 0 0 8 0 8 -8 -8 -8 -8 -16 8 -16 8 -24 -8 -24 -8 -32 0 -32 
+11 polygon
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 16 16 64 16 2 polygon
+1.000 0 16 16 generic::dot
+endgate
+} def
+
+/liec_dig::no_level {
+begingate
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 -16 16 32 -8 2 polygon
+1  1.000 0 8 0 -8 2 polygon
+1  1.000 0 -24 16 0.00 360.00 xcarc
+1  1.000 16 16 64 16 2 polygon
+1.000 0 16 16 generic::dot
+endgate
+} def
+
+/liec_dig::nc_level {
+begingate
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 -16 16 32 28 2 polygon
+1  1.000 16 16 64 16 2 polygon
+1.000 0 16 16 generic::dot
+1  1.000 0 20 0 -8 2 polygon
+1  1.000 0 -24 16 0.00 360.00 xcarc
+endgate
+} def
+
+/liec_dig::no_flow {
+begingate
+1  1.000 -64 16 -16 16 2 polygon
+1.000 0 -16 16 generic::dot
+1  1.000 -16 16 32 -8 2 polygon
+1  1.000 0 8 0 -24 16 -24 0 -8 4 polygon
+1.000 0 16 16 generic::dot
+1  1.000 16 16 64 16 2 polygon
+endgate
+} def
+
+/liec_dig::nc_flow {
+begingate
+1.000 0 16 8 generic::dot
+1  1.000 16 8 64 8 2 polygon
+1  1.000 -16 8 32 20 2 polygon
+1  1.000 0 12 0 -24 16 -24 0 -8 4 polygon
+1.000 0 -16 8 generic::dot
+1  1.000 -64 8 -16 8 2 polygon
+endgate
+} def
+
+/liec_dig::heater_element {
+begingate
+1  1.000 -64 0 -48 0 -48 32 -32 32 -32 -32 -16 -32 -16 32 0 32 0 -32 16 -32 16 
+32 32 32 32 -32 48 -32 48 0 64 0 16 polygon
+endgate
+} def
+
+/liec_dig::thermal_overload {
+begingate
+1  1.000 -32 -24 0 -24 0 0 -32 0 spline
+1  1.000 0 8 -4 20 -24 16 0 0 spline
+1  1.000 32 24 0 24 0 0 32 0 spline
+1  1.000 0 -8 4 -20 24 -16 0 0 spline
+1  1.000 -32 0 -64 0 2 polygon
+1  1.000 32 0 64 0 2 polygon
+endgate
+} def
+
+/liec_dig::3phase_motor {
+begingate
+(motor) {/Helvetica cf} 2 16 0 1.000 -32 -8 label
+1  1.000 24 0 64 0.00 360.00 xcarc
+1  1.000 -24 48 -40 64 -88 64 3 polygon
+1  1.000 -24 48 -22 46 2 polygon
+1  1.000 -40 0 -88 0 2 polygon
+1  1.000 -24 -48 -40 -64 -88 -64 3 polygon
+1  1.000 -24 -48 -22 -46 2 polygon
+endgate
+} def
+
+/liec_dig::invert2 {
+begingate
+1  1.000 -32 40 -32 -40 2 polygon
+1  1.000 -40 0 8 0.00 360.00 xcarc
+1  1.000 -48 0 -64 0 2 polygon
+1  1.000 -32 40 40 0 -32 -40 3 polygon
+1  1.000 40 0 64 0 2 polygon
+endgate
+} def
+
+/liec_dig::and_gate {
+begingate
+1  1.000 0 -48 -64 -48 -64 48 0 48 4 polygon
+1  1.000 0 0 48 -90.00 90.00 xcarc
+1.000 0.000 0.000 scb
+(Out) {/Helvetica cf} 2 4 0 1.000 48 0 pinlabel
+(In.1) {/Helvetica cf} 2 7 0 1.000 -64 32 pinlabel
+(In.2) {/Helvetica cf} 2 7 0 1.000 -64 -32 pinlabel
+sce
+endgate
+} def
+
+/liec_dig::neg_and {
+begingate
+1.000 0 32 0 liec_dig::and_gate
+1  1.000 -40 -32 8 0.00 360.00 xcarc
+1  1.000 -48 -32 -64 -32 2 polygon
+1  1.000 -40 32 8 0.00 360.00 xcarc
+1  1.000 -48 32 -64 32 2 polygon
+endgate
+} def
+
+/liec_dig::or_gate {
+begingate
+1  1.000 -19 -48 96 30.00 90.00 xcarc
+1  1.000 -19 48 96 270.00 330.00 xcarc
+1  1.000 -112 0 80 -37.00 37.00 xcarc
+1  1.000 -48 48 -19 48 2 polygon
+1  1.000 -48 -48 -19 -48 2 polygon
+1.000 0.000 0.000 scb
+(Out) {/Helvetica cf} 2 4 0 1.000 64 0 pinlabel
+(In.1) {/Helvetica cf} 2 7 0 1.000 -40 32 pinlabel
+(In.2) {/Helvetica cf} 2 7 0 1.000 -40 -32 pinlabel
+sce
+endgate
+} def
+
+/liec_dig::neg_or {
+begingate
+1  1.000 -32 16 8 0.00 360.00 xcarc
+1  1.000 -64 16 -40 16 2 polygon
+1.000 0 16 -16 liec_dig::or_gate
+1  1.000 -32 -48 8 0.00 360.00 xcarc
+1  1.000 -64 -48 -40 -48 2 polygon
+endgate
+} def
+
+/liec_dig::xor_gate {
+begingate
+1  1.000 -19 -48 96 30.00 90.00 xcarc
+1  1.000 -19 48 96 270.00 330.00 xcarc
+1  1.000 -128 0 80 -37.00 37.00 xcarc
+1  1.000 -112 0 80 -37.00 37.00 xcarc
+1  1.000 -48 48 -19 48 2 polygon
+1  1.000 -48 -48 -19 -48 2 polygon
+1.000 0.000 0.000 scb
+(Out) {/Helvetica cf} 2 4 0 1.000 64 0 pinlabel
+(In.1) {/Helvetica cf} 2 7 0 1.000 -56 32 pinlabel
+(In.2) {/Helvetica cf} 2 7 0 1.000 -56 -32 pinlabel
+sce
+endgate
+} def
+
+/liec_dig::neg_xor {
+begingate
+1.000 0 16 -16 liec_dig::xor_gate
+1  1.000 -48 16 8 0.00 360.00 xcarc
+1  1.000 -80 16 -56 16 2 polygon
+1  1.000 -48 -48 8 0.00 360.00 xcarc
+1  1.000 -80 -48 -56 -48 2 polygon
+endgate
+} def
+
+/liec_dig::open-collector {
+begingate
+1  1.000 -8 0 0 16 8 0 0 -16 -8 0 5 polygon
+1  1.000 -8 -16 8 -16 2 polygon
+endgate
+} def
+
+/liec_dig::schmitt {
+begingate
+1  1.000 -16 8 0 -8 -16 -8 0 8 spline
+1  1.000 -8 8 8 -8 -8 -8 8 8 spline
+1  1.000 0 8 8 8 2 polygon
+1  1.000 -8 -8 -16 -8 2 polygon
+endgate
+} def
+
+/liec_dig::sr_latch {
+begingate
+0  1.000 -80 144 -80 -144 80 -144 80 144 4 polygon
+1  1.000 -144 96 -80 96 2 polygon
+(S) {/Helvetica cf} 2 16 0 1.000 -112 112 label
+(Q) {/Helvetica cf} 2 16 0 1.000 96 112 label
+1  1.000 80 96 144 96 2 polygon
+1  1.000 96 -48 128 -48 2 polygon
+(Q) {/Helvetica cf} 2 16 0 1.000 96 -80 label
+1  1.000 88 -96 8 0.00 360.00 xcarc
+1  1.000 96 -96 144 -96 2 polygon
+1  1.000 -144 -96 -80 -96 2 polygon
+(R) {/Helvetica cf} 2 16 0 1.000 -112 -80 label
+endgate
+} def
+
+/liec_dig::sr_flipflop {
+begingate
+1.000 0 0 0 liec_dig::sr_latch
+1  1.000 -80 16 -48 0 -80 -16 3 polygon
+(C) {/Helvetica cf} 2 16 0 1.000 -112 16 label
+1  1.000 -80 0 -144 0 2 polygon
+endgate
+} def
+
+/liec_dig::sr_enabled_latch {
+begingate
+1.000 0 0 0 liec_dig::sr_latch
+(E) {/Helvetica cf} 2 16 0 1.000 -112 16 label
+1  1.000 -80 0 -144 0 2 polygon
+endgate
+} def
+
+/liec_dig::d_latch {
+begingate
+(Q) {/Helvetica cf} 2 16 0 1.000 96 -80 label
+0  1.000 -80 144 -80 -144 80 -144 80 144 4 polygon
+1  1.000 88 -96 8 0.00 360.00 xcarc
+1  1.000 96 -96 144 -96 2 polygon
+1  1.000 96 -48 128 -48 2 polygon
+1  1.000 80 96 144 96 2 polygon
+(Q) {/Helvetica cf} 2 16 0 1.000 96 112 label
+1  1.000 -80 96 -144 96 2 polygon
+(D) {/Helvetica cf} 2 16 0 1.000 -112 104 label
+(E) {/Helvetica cf} 2 16 0 1.000 -112 8 label
+1  1.000 -144 0 -80 0 2 polygon
+endgate
+} def
+
+/liec_dig::d_flipflop {
+begingate
+(D) {/Helvetica cf} 2 16 0 1.000 -112 112 label
+0  1.000 -80 144 -80 -144 80 -144 80 144 4 polygon
+1  1.000 -80 96 -144 96 2 polygon
+(C) {/Helvetica cf} 2 16 0 1.000 -112 16 label
+1  1.000 -80 16 -48 0 -80 -16 3 polygon
+1  1.000 -80 0 -144 0 2 polygon
+1  1.000 96 -96 144 -96 2 polygon
+1  1.000 88 -96 8 0.00 360.00 xcarc
+(Q) {/Helvetica cf} 2 16 0 1.000 96 -80 label
+1  1.000 96 -48 128 -48 2 polygon
+1  1.000 80 96 144 96 2 polygon
+(Q) {/Helvetica cf} 2 16 0 1.000 96 112 label
+endgate
+} def
+
+/liec_dig::d_flipflop2 {
+begingate
+0  1.000 -80 144 -80 -144 80 -144 80 144 4 polygon
+1  1.000 -80 96 -144 96 2 polygon
+(D) {/Helvetica cf} 2 16 0 1.000 -112 112 label
+(C) {/Helvetica cf} 2 16 0 1.000 -112 16 label
+1  1.000 -80 16 -48 0 -80 -16 3 polygon
+1  1.000 -88 0 8 0.00 360.00 xcarc
+1  1.000 -144 0 -96 0 2 polygon
+(Q) {/Helvetica cf} 2 16 0 1.000 96 112 label
+1  1.000 80 96 144 96 2 polygon
+1  1.000 88 -96 8 0.00 360.00 xcarc
+1  1.000 96 -96 144 -96 2 polygon
+(Q) {/Helvetica cf} 2 16 0 1.000 96 -80 label
+1  1.000 96 -48 128 -48 2 polygon
+endgate
+} def
+
+/liec_dig::jk_flipflop {
+begingate
+1  1.000 -80 96 -144 96 2 polygon
+(J) {/Helvetica cf} 2 16 0 1.000 -112 112 label
+0  1.000 -80 144 -80 -144 80 -144 80 144 4 polygon
+(Q) {/Helvetica cf} 2 16 0 1.000 96 112 label
+1  1.000 144 96 80 96 2 polygon
+(Q) {/Helvetica cf} 2 16 0 1.000 96 -80 label
+1  1.000 96 -48 128 -48 2 polygon
+1  1.000 96 -96 144 -96 2 polygon
+1  1.000 88 -96 8 0.00 360.00 xcarc
+1  1.000 -80 0 -144 0 2 polygon
+1  1.000 -80 16 -48 0 -80 -16 3 polygon
+(C) {/Helvetica cf} 2 16 0 1.000 -112 16 label
+(K) {/Helvetica cf} 2 16 0 1.000 -112 -80 label
+1  1.000 -80 -96 -144 -96 2 polygon
+endgate
+} def
+
+/liec_dig::jk_flipflop2 {
+begingate
+0  1.000 -80 144 -80 -144 80 -144 80 144 4 polygon
+1  1.000 -80 96 -144 96 2 polygon
+(J) {/Helvetica cf} 2 16 0 1.000 -112 112 label
+1  1.000 -80 16 -48 0 -80 -16 3 polygon
+1  1.000 -144 0 -96 0 2 polygon
+1  1.000 -88 0 8 0.00 360.00 xcarc
+(C) {/Helvetica cf} 2 16 0 1.000 -112 16 label
+(K) {/Helvetica cf} 2 16 0 1.000 -112 -80 label
+1  1.000 -80 -96 -144 -96 2 polygon
+1  1.000 96 -96 144 -96 2 polygon
+1  1.000 88 -96 8 0.00 360.00 xcarc
+(Q) {/Helvetica cf} 2 16 0 1.000 96 -80 label
+1  1.000 96 -48 128 -48 2 polygon
+(Q) {/Helvetica cf} 2 16 0 1.000 96 112 label
+1  1.000 144 96 80 96 2 polygon
+endgate
+} def
+
+/liec_dig::555_timer {
+begingate
+(555) {/Helvetica-Bold cf} 2 16 0 1.000 -48 120 label
+(Disch) {/Helvetica cf} 2 16 0 1.000 -168 64 label
+(Thresh) {/Helvetica cf} 2 16 0 1.000 -168 -16 label
+(Trig) {/Helvetica cf} 2 16 0 1.000 -168 -96 label
+(Gnd) {/Helvetica cf} 2 16 0 1.000 -56 -192 label
+(cc) {ss} (V) {/Helvetica cf} 4 16 0 1.000 -128 184 label
+(RST) {/Helvetica cf} 2 16 0 1.000 48 176 label
+1  1.000 48 208 128 208 2 polygon
+(Out) {/Helvetica cf} 2 16 0 1.000 80 64 label
+(Ctrl) {/Helvetica cf} 2 16 0 1.000 80 -64 label
+0  1.000 -176 224 -176 -208 160 -208 160 224 4 polygon
+1  1.000 -96 224 -96 256 2 polygon
+1  1.000 80 224 80 256 2 polygon
+1  1.000 -176 80 -208 80 2 polygon
+1  1.000 -176 0 -208 0 2 polygon
+1  1.000 -176 -80 -208 -80 2 polygon
+1  1.000 192 -48 160 -48 2 polygon
+1  1.000 192 80 160 80 2 polygon
+1  1.000 -16 -208 -16 -240 2 polygon
+endgate
+} def
+
+/liec_dig::PLC1 {
+begingate
+0.800 0.800 0.800 scb
+240  1.000 -304 240 -304 -240 304 -240 304 240 4 polygon
+sce
+(PLC) {/Helvetica-Bold cf} 2 16 0 1.000 -32 0 label
+1  1.000 -272 192 16 0.00 360.00 xcarc
+1  1.000 -264 204 -284 184 2 polygon
+1  1.000 -260 200 -280 180 2 polygon
+1  1.000 -272 128 16 0.00 360.00 xcarc
+1  1.000 -264 140 -284 120 2 polygon
+1  1.000 -260 136 -280 116 2 polygon
+1  1.000 -272 64 16 0.00 360.00 xcarc
+1  1.000 -264 76 -284 56 2 polygon
+1  1.000 -260 72 -280 52 2 polygon
+1  1.000 -272 0 16 0.00 360.00 xcarc
+1  1.000 -264 12 -284 -8 2 polygon
+1  1.000 -260 8 -280 -12 2 polygon
+1  1.000 -272 -64 16 0.00 360.00 xcarc
+1  1.000 -264 -52 -284 -72 2 polygon
+1  1.000 -260 -56 -280 -76 2 polygon
+1  1.000 -272 -128 16 0.00 360.00 xcarc
+1  1.000 -264 -116 -284 -136 2 polygon
+1  1.000 -260 -120 -280 -140 2 polygon
+1  1.000 -272 -192 16 0.00 360.00 xcarc
+1  1.000 -264 -180 -284 -200 2 polygon
+1  1.000 -260 -184 -280 -204 2 polygon
+(X1) {/Courier cf} 2 16 0 1.000 -224 176 label
+(X2) {/Courier cf} 2 16 0 1.000 -224 112 label
+(X3) {/Courier cf} 2 16 0 1.000 -224 48 label
+(X4) {/Courier cf} 2 16 0 1.000 -224 -16 label
+(X5) {/Courier cf} 2 16 0 1.000 -224 -80 label
+(X6) {/Courier cf} 2 16 0 1.000 -224 -144 label
+1  1.000 -112 208 16 0.00 360.00 xcarc
+1  1.000 -104 220 -124 200 2 polygon
+1  1.000 -100 216 -120 196 2 polygon
+1  1.000 112 208 16 0.00 360.00 xcarc
+1  1.000 120 220 100 200 2 polygon
+1  1.000 124 216 104 196 2 polygon
+(L1) {/Helvetica cf} 2 16 0 1.000 -128 160 label
+(L2) {/Helvetica cf} 2 16 0 1.000 88 160 label
+1  1.000 272 192 16 0.00 360.00 xcarc
+1  1.000 280 204 260 184 2 polygon
+1  1.000 284 200 264 180 2 polygon
+1  1.000 272 128 16 0.00 360.00 xcarc
+1  1.000 280 140 260 120 2 polygon
+1  1.000 284 136 264 116 2 polygon
+1  1.000 272 64 16 0.00 360.00 xcarc
+1  1.000 280 76 260 56 2 polygon
+1  1.000 284 72 264 52 2 polygon
+1  1.000 272 0 16 0.00 360.00 xcarc
+1  1.000 280 12 260 -8 2 polygon
+1  1.000 284 8 264 -12 2 polygon
+1  1.000 272 -64 16 0.00 360.00 xcarc
+1  1.000 280 -52 260 -72 2 polygon
+1  1.000 284 -56 264 -76 2 polygon
+1  1.000 272 -128 16 0.00 360.00 xcarc
+1  1.000 280 -116 260 -136 2 polygon
+1  1.000 284 -120 264 -140 2 polygon
+1  1.000 272 -192 16 0.00 360.00 xcarc
+1  1.000 280 -180 260 -200 2 polygon
+1  1.000 284 -184 264 -204 2 polygon
+(Y1) {/Courier cf} 2 16 0 1.000 176 176 label
+(Y2) {/Courier cf} 2 16 0 1.000 176 112 label
+(Y3) {/Courier cf} 2 16 0 1.000 176 48 label
+(Y4) {/Courier cf} 2 16 0 1.000 176 -16 label
+(Y5) {/Courier cf} 2 16 0 1.000 176 -80 label
+(Y6) {/Courier cf} 2 16 0 1.000 176 -144 label
+(Programming) {/Helvetica cf} 2 16 0 0.500 -48 -180 label
+(port) {/Helvetica cf} 2 16 0 0.500 -8 -228 label
+240  1.000 -32 -192 -32 -208 48 -208 48 -192 4 polygon
+1  1.000 -240 192 8 0.00 360.00 xcarc
+1  1.000 -240 128 8 0.00 360.00 xcarc
+1  1.000 -240 64 8 0.00 360.00 xcarc
+1  1.000 -240 0 8 0.00 360.00 xcarc
+1  1.000 -240 -64 8 0.00 360.00 xcarc
+1  1.000 -240 -128 8 0.00 360.00 xcarc
+1  1.000 240 192 8 0.00 360.00 xcarc
+1  1.000 240 128 8 0.00 360.00 xcarc
+1  1.000 240 64 8 0.00 360.00 xcarc
+1  1.000 240 0 8 0.00 360.00 xcarc
+1  1.000 240 -64 8 0.00 360.00 xcarc
+1  1.000 240 -128 8 0.00 360.00 xcarc
+0  2.00 -304 240 -304 -240 304 -240 304 240 4 polygon
+(Common) {/Courier cf} 2 16 0 1.000 -248 -208 label
+(Source) {/Courier cf} 2 16 0 1.000 104 -208 label
+endgate
+} def
+
+
+% EndLib

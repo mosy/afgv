@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020.2 (Released July 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Læringsoppdrag Ultralydtransmitter</TITLE>
+<META NAME="description" CONTENT="Læringsoppdrag Ultralydtransmitter">
+<META NAME="keywords" CONTENT="lUltralydtransmitter">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020.2">
+
+<LINK REL="STYLESHEET" HREF="lUltralydtransmitter.css">
+
+<LINK REL="next" HREF="node2.html">
+<LINK REL="previous" HREF="lUltralydtransmitter.html">
+<LINK REL="next" HREF="node2.html">
+</HEAD>
+
+<BODY >
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html5"
+  HREF="node1.html#SECTION00011000000000000000">Oppgave 1 -  Oppkobling av HC-SR04</A>
+<LI><A ID="tex2html6"
+  HREF="node1.html#SECTION00012000000000000000">Oppgave 2 -  Oppkobling av 0.96" oled display</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A ID="SECTION00010000000000000000">
+Læringsoppdrag Ultralydtransmitter</A>
+</H1>
+
+<P>
+I dette læringsoppdraget skal du bygge en ultralyd transmitter. Først skal du koble opp og lære om hvordan de ulike delene av transmitteren virker så skal selv sette isammen delene til en transmitter. Du kan til en vis grad velge nivå, ved å velge hvor mange funksjoner du legger inn i den ferdige transmitteren. 
+
+<P>
+Før du  starter med å sette sammen til en transmitter skal du utføre følgende oppkoblinger mot arduino Nano:
+
+[noitemsep]
+<UL>
+<LI>HC-SR04 ultralyd distanse sensor. 
+</LI>
+<LI>Oled display
+</LI>
+<LI>ADC MCP4725
+</LI>
+<LI>pushbutton rotary encoder
+</LI>
+</UL>
+
+<P>
+Noen av 
+Kompetansemål:
+
+[noitemsep]
+
+<UL>
+<LI>planlegge, utføre, vurdere kvalitet, sluttkontrollere og dokumentere arbeidet
+</LI>
+<LI>planlegge, programmere, montere og idriftsette programmerbare styresystemer
+</LI>
+<LI>endre og tilpasse skjermbilder for grensesnitt mellom menneske og maskin
+</LI>
+<LI>anvende ulike elektroniske kommunikasjonssystemer i automatiserte anlegg
+</LI>
+<LI>vurdere datasikkerhet i automatiserte anlegg
+</LI>
+<LI>montere, konfigurere, kalibrere og idriftsettelse digitale og analoge målesystemer
+</LI>
+<LI>måle fysiske størrelser i automatiserte anlegg
+</LI>
+<LI>feilsøke og rette feil i automatiserte anlegg
+</LI>
+<LI>dokumentere egen opplæring i automatiseringssystemer
+</LI>
+</UL>
+
+<P>
+Anbefalt lesning:
+
+<P>
+
+<OL>
+<LI>afgv.pdf/ 
+</LI>
+</OL>
+
+<P>
+
+<P>
+
+<H2><A ID="SECTION00011000000000000000">
+Oppgave 1 -  Oppkobling av HC-SR04</A>
+</H2>
+I denne oppgaven skal vi bli kjent med ultralydsensoren HC-SR04. Denne sensoren sender ut en ultralyd puls når Trig pinnen akriveres (10µs puls), sammtidig som trig pinnen aktiveres slås echo pinnen på. Denne står på til vi mottar et retur signal (reflektert lyd)
+
+<P>
+<BR><P></P>
+<DIV CLASS="displaymath">
+<!-- MATH
+ \begin{displaymath}
+\includegraphics[width=9cm]{./lUltralydtransmitterx03.eps}
+\end{displaymath}
+ -->
+
+<IMG STYLE="height: 62.70ex; vertical-align: -0.10ex; " SRC="img1.svg"
+ ALT="$\displaystyle \includegraphics[width=9cm]{./lUltralydtransmitterx03.eps}$">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+I vårt program kan vi bruke funksjonen <code>pulseIn()</code>. Denne funksjonen tar tiden på hvor lenge en variabel (echo pinnen) har vært høy. Den virker på pulser fra 10µs til 3 minutter. Tiden den returnerer er i µs. 
+<P>
+Du kan starte med å koble sammen Arduino Nano og HC-SR04 ultralyd sensor slik:
+<BR><P></P>
+<DIV CLASS="displaymath">
+<!-- MATH
+ \begin{displaymath}
+\includegraphics[width=8cm]{./lUltralydtransmitterx04.eps}
+\end{displaymath}
+ -->
+
+<IMG STYLE="height: 54.97ex; vertical-align: -0.10ex; " SRC="img2.svg"
+ ALT="$\displaystyle \includegraphics[width=8cm]{./lUltralydtransmitterx04.eps}$">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+Skriv inn denne koden i Arduino IDE og legg den inn på en Arduino Nano. Det er mulig du må bruke old bootloader. Prøv dette om opplasting ikke virker. 
+<BR><P></P>
+<DIV CLASS="displaymath">
+<!-- MATH
+ \begin{displaymath}
+\includegraphics[width=10cm]{./lUltralydtransmitterx05.png}
+\end{displaymath}
+ -->
+
+<IMG STYLE="height: 34.70ex; vertical-align: -0.10ex; " SRC="img3.svg"
+ ALT="$\displaystyle \includegraphics[width=10cm]{./lUltralydtransmitterx05.png}$">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<BR>
+<IMG STYLE=""
+ SRC="img4.svg"
+ ALT="\begin{lstlisting}[language=Arduino]
+// define the pins used for the HC-SR04.
+co...
+...ate time to distance
+float distance = duration * 0.0343 / 2;
+}
+\end{lstlisting}">
+<BR>
+
+<P>
+Nå skal du ha et program som virker, men du har ingen måte å testet det på. Legg til funksjonalitet i programmet som gjør at du kan lese avstanden ut på seriemonitoren. Prøv også  å plotte den ut som  en kurve. 
+
+<P>
+
+<H2><A ID="SECTION00012000000000000000">
+Oppgave 2 -  Oppkobling av 0.96" oled display</A>
+</H2>
+
+<P>
+
+<P>
+<SPAN ID="txt73">file ./lUltralydtransmitter.tex</SPAN>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="lUltralydtransmitter.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="lUltralydtransmitter.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A
+ HREF="node2.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="lUltralydtransmitter.html">lUltralydtransmitter</A>
+<B> Previous:</B> <A
+ HREF="lUltralydtransmitter.html">lUltralydtransmitter</A></DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

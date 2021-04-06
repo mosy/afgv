@@ -79,13 +79,13 @@ $$\includegraphics[width=10cm]{./lUltralydtransmitterx05.png}$$
 const int trigger = 11;
 const int echo = 10;
 
-void setup
+void setup()
 {
 	// set pin functions
 	pinMode(trigger,OUTPUT);
 	pinMode(echo,INPUT);
 }
-void loop
+void loop()
 {
 	//first we trun off the trigger pin to be sure we have a clean high pulse
 	digitalWrite(trigger, LOW);
@@ -104,13 +104,106 @@ void loop
 Nå skal du ha et program som virker, men du har ingen måte å testet det på. Legg til funksjonalitet i programmet som gjør at du kan lese avstanden ut på seriemonitoren. Prøv også  å plotte den ut som en kurve. 
 
 \subsection*{Oppgave 2 -  Oppkobling av 0.96" oled display}
+I denne oppgaven skal vi legge til et display, dette skal brukes til å vise den målte avstanden. 
 
 
+\vskip 5pt 
+Displayet vi skal bruke et et 0.96" oled monochrom display. Vi kobler det til Arduino Nano ved hjelp av en enkel buss som kalles I²C
 
+\vskip 5pt 
+-----------------Fra wikipedia------------------
 
+\vskip 5pt 
+I²C står for Inter-Integrated Circuit og er en fler-bruker seriell databuss utviklet av Philips semiconductors (i dag NXP Semiconductors) 1982, opprinnelig for bruk internt i TV-er. Nå brukes I²C for å koble lav-hastighets tilleggsenheter til f.eks. mikrokontrollere. Slik utstyr kan blant annet være display eller minne.
+
+\vskip 5pt 
+I²C er et master-slave system og bruker to bidireksjonale open-drain linjer, seriell data (SDA) og seriell klokke (SCL), som trenger pull-up motstander. Typisk arbeidsspenning for et I²C system er +3,3 V eller +5 V, men andre spenninger kan også forekomme. I²C har en 7-bits adresse, men 16 av adressene er reservert, så det er 128–16=112 noder som kan kommunisere på samme bussen.
+
+\vskip 5pt 
+I²C kan operere med flere hastigheter, de mest vanlige er standard mode, 100 kbps, low-speed mode, 10 kbps, men det finnes også fast mode plus, 1 Mbps, og high speed mode, 3,4 Mbps. De sistnevnte har også andre tilleggsfunksjoner, som bla. 10-bits adressering. I tillegg til at det maksimale antall noder er begrenset av adresser, kan ikke den totale kapasitansen på bussen overskride 400 pF.
+
+\vskip 5pt 
+-----------------Fra wikipedia------------------
+\vskip 5pt
+
+I denne oppgaven kan du koble opp slik:
+$$\includegraphics[width=9cm]{./lUltralydtransmitterx0201.eps}$$
+Her ser du at det vil bli litt vanskelig å koble 5V og GND til flere plasser. Da kan du ta flere koblingsledninger og lodde sammen og ta en krympestrømpe over.
 
 \newpage
+Gjør følgende:
+\begin{itemize}[noitemsep]
+	\item Finn frem så mange ledinger du trenger
+	\item klipp av i ene enden
+	\item avisoler i den enden du klipte av
+	\item tvin sammen 
+	\item lodd 
+	\item finn passende lengde på krympestrømpen
+	\item tre på
+	\item krymp med varmluftspistol(lodde bolt)
+\end{itemize}
 
+
+
+$\includegraphics[height=6cm]{./lUltralydtransmitterx0211.jpg}$
+$\includegraphics[height=6cm]{./lUltralydtransmitterx0212.jpg}$
+$\includegraphics[height=6cm]{./lUltralydtransmitterx0213.jpg}$
+$\includegraphics[height=6cm]{./lUltralydtransmitterx0214.jpg}$
+$\includegraphics[height=6cm]{./lUltralydtransmitterx0215.jpg}$
+$\includegraphics[height=6cm]{./lUltralydtransmitterx0216.jpg}$
+$\includegraphics[height=6cm]{./lUltralydtransmitterx0217.jpg}$
+$\includegraphics[height=6cm]{./lUltralydtransmitterx0218.jpg}$
+$\includegraphics[height=6cm]{./lUltralydtransmitterx0219.jpg}$
+
+\vskip 5pt 
+
+For kunne ta i bruk displayet med arduino må vi ta i bruk tre biblioteker. Legg inn følgende kode før setup delen av programmet. 
+
+\vskip 5pt 
+\begin{lstlisting}[language=Arduino]
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+// Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
+#define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
+Adafruit_SSD1306 display = Adafruit_SSD1306(128, 32, &Wire);
+\end{lstlisting}
+\vskip 5pt 
+Wire biblioteket kommer med arduino IDE, men de to andre må vi installere. Trykk CTRL+SHIFT+I for å åpne bibliotek administrasjon i Arduino IDE. De siste linjene er nødvendige for å deklarere hvordan displayet kobles til og hvor stort det er. 
+
+\vskip 5pt 
+Søk først etter GFX og velg Adafruit GFX Library
+$$\includegraphics[width=16cm]{./lUltralydtransmitterx0221.png}$$
+\vskip 5pt 
+Søk deretter etter SSD1306 og velg Adafruit SSD1306
+$$\includegraphics[width=16cm]{./lUltralydtransmitterx0222.png}$$
+\vskip 5pt 
+I \verb|void setup()| kan du legge til følgende kode. 
+
+\begin{lstlisting}[language=Arduino]
+display.begin(SSD1306_SWITCHCAPVCC, 0x3C); 
+display.clearDisplay();
+display.display();
+\end{lstlisting}
+\newpage
+
+\begin{lstlisting}[language=Arduino]
+// first we clear previous display
+display.clearDisplay();
+// The size we want
+display.setTextSize(1);
+// if we du not set som color the display will be black
+display.setTextColor(SSD1306_WHITE);
+// Where shall we put the new text
+display.setCursor(0,0);
+//the next 3 lines is displaying the actual text
+display.print("Avstand = ");
+display.print(distance);
+display.print(" cm");
+// actually display all of the above
+display.display(); 
+\end{lstlisting}
 \underbar{file ./lUltralydtransmitter.tex}
 \end{document}
 

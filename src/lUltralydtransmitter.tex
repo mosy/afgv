@@ -4,7 +4,7 @@
 
 \vskip 5pt
 %beskrivelse av oppgaven
-I dette læringsoppdraget skal du bygge en ultralyd transmitter. Først skal du koble opp og lære om hvordan de ulike delene av transmitteren virker så skal selv sette isammen delene til en transmitter. Du kan til en vis grad velge nivå, ved å velge hvor mange funksjoner du legger inn i den ferdige transmitteren. 
+I dette læringsoppdraget skal du bygge en ultralyd transmitter. Først skal du koble opp og lære om hvordan de ulike delene av transmitteren virker, så skal du selv sette sammen delene til en transmitter. Du kan til en vis grad velge nivå, ved å velge hvor mange valgfrie funksjoner du legger inn i den ferdige transmitteren. 
 
 Før du  starter med å sette sammen til en transmitter skal du utføre følgende oppkoblinger mot arduino Nano:
 \begin{itemize}[noitemsep]
@@ -14,6 +14,18 @@ Før du  starter med å sette sammen til en transmitter skal du utføre følgend
 	\item pushbutton rotary encoder
 \end{itemize}
 
+\vskip 5pt 
+Valgfrie oppdrag:
+
+\vskip 5pt 
+\begin{itemize}[noitemsep]
+	\item spenning til strømkonverterer
+	\item RS-485 kommunikasjon med Modbus RTU
+	\item Funkjon for kalibrering til ny  tank. (Toppnivå og bunnnivå)
+	\item Bytte Arudino nano med ESP32 og sette opp HMI på node-red
+\end{itemize}
+
+<++>
 
 \vskip 2.5pt 
 %kompetansemål som oppgaven dekker
@@ -63,7 +75,7 @@ Anbefalt lesning:
 \newpage
 
 \subsection*{Oppgave 1 -  Oppkobling av HC-SR04}
-I denne oppgaven skal vi bli kjent med ultralydsensoren HC-SR04. Denne sensoren sender ut en ultralyd puls når Trig pinnen akriveres (10µs puls), sammtidig som trig pinnen aktiveres slås echo pinnen på. Denne står på til vi mottar et retur signal (reflektert lyd)
+I denne oppgaven skal vi bli kjent med ultralydsensoren HC-SR04. Denne sensoren sender ut en ultralyd puls når Trig pinnen akriveres (10µs puls), sammtidig som trig pinnen aktiveres slås echo pinnen på, den står på til vi mottar et retur signal (reflektert lyd)
 
 $$\includegraphics[width=9cm]{./lUltralydtransmitterx03.eps}$$
 I vårt program kan vi bruke funksjonen \verb|pulseIn()|. Denne funksjonen tar tiden på hvor lenge en variabel (echo pinnen) har vært høy. Den virker på pulser fra 10µs til 3 minutter. Tiden den returnerer er i µs. 
@@ -108,7 +120,7 @@ I denne oppgaven skal vi legge til et display, dette skal brukes til å vise den
 
 
 \vskip 5pt 
-Displayet vi skal bruke et et 0.96" oled monochrom display. Vi kobler det til Arduino Nano ved hjelp av en enkel buss som kalles I²C
+Displayet vi skal bruke et et 0.96" oled monochrom display. Vi kobler det til Arduino Nano ved hjelp av en buss som kalles I²C
 
 \vskip 5pt 
 -----------------Fra wikipedia------------------
@@ -182,12 +194,13 @@ $$\includegraphics[width=16cm]{./lUltralydtransmitterx0222.png}$$
 I \verb|void setup()| kan du legge til følgende kode. 
 
 \begin{lstlisting}[language=Arduino]
+//sette starte displayet og sette inn I2C adressen
 display.begin(SSD1306_SWITCHCAPVCC, 0x3C); 
 display.clearDisplay();
 display.display();
 \end{lstlisting}
 \newpage
-
+Nå skal du legge inn kode i loop(). Start med koden nedenfor og experimenter selv. 
 \begin{lstlisting}[language=Arduino]
 // first we clear previous display
 display.clearDisplay();
@@ -204,6 +217,20 @@ display.print(" cm");
 // actually display all of the above
 display.display(); 
 \end{lstlisting}
+
+\vskip 5pt 
+Nå skal du ha et display som viser avstanden til til et objekt forran sensoren. Her kommer noen oppgaver du må finne ut av på egen hånd.
+\begin{enumerate}
+	\item Legg koden som skal til for å måle og skrive til displayet inn in en funkson slik at du i loop koden bare trenger å kalle:
+	\begin{lstlisting}[language=Arduino]
+	meassure();
+	\end{lstlisting}
+	\item konverter koden til å kunne måle nivået i en tank. For å teste kan du f.eks. sette sensoren mot gulvet fra  pulten og la dette være null nivå. Så skal nivået øke jo lengre et objekt kommer mot sensoren. Du kan gjerne teste ved å holde en bok imellom. 
+	\item Utvid programmet slik at det bare måler nivået og skriver dette til skjermen hvert 100ms. 
+\end{enumerate}
+
+
+
 \underbar{file ./lUltralydtransmitter.tex}
 \end{document}
 

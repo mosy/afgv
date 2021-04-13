@@ -77,14 +77,14 @@ Anbefalt lesning:
 \subsection*{Oppgave 1 -  Oppkobling av HC-SR04}
 I denne oppgaven skal vi bli kjent med ultralydsensoren HC-SR04. Denne sensoren sender ut en ultralyd puls når Trig pinnen akriveres (10µs puls), sammtidig som trig pinnen aktiveres slås echo pinnen på, den står på til vi mottar et retur signal (reflektert lyd)
 
-$$\includegraphics[width=9cm]{./lUltralydtransmitterx03.eps}$$
+$$\includegraphics[width=9cm]{lUltralydtransmitterx03.eps}$$
 I vårt program kan vi bruke funksjonen \verb|pulseIn()|. Denne funksjonen tar tiden på hvor lenge en variabel (echo pinnen) har vært høy. Den virker på pulser fra 10µs til 3 minutter. Tiden den returnerer er i µs. 
 \vskip 2.5pt 
 
 Du kan starte med å koble sammen Arduino Nano og HC-SR04 ultralyd sensor slik:
-$$\includegraphics[width=8cm]{./lUltralydtransmitterx04.eps}$$
+$$\includegraphics[width=8cm]{lUltralydtransmitterx04.eps}$$
 Skriv inn denne koden i Arduino IDE og legg den inn på en Arduino Nano. Det er mulig du må bruke old bootloader. Prøv dette om opplasting ikke virker. 
-$$\includegraphics[width=10cm]{./lUltralydtransmitterx05.png}$$
+$$\includegraphics[width=10cm]{lUltralydtransmitterx05.png}$$
 \newpage
 \begin{lstlisting}[language=Arduino]
 // define the pins used for the HC-SR04.
@@ -222,15 +222,90 @@ display.display();
 Nå skal du ha et display som viser avstanden til til et objekt forran sensoren. Her kommer noen oppgaver du må finne ut av på egen hånd.
 \begin{enumerate}
 	\item Legg koden som skal til for å måle og skrive til displayet inn in en funkson slik at du i loop koden bare trenger å kalle:
-	\begin{lstlisting}[language=Arduino]
-	meassure();
-	\end{lstlisting}
+		\begin{lstlisting}[language=Arduino]
+		meassure();
+		\end{lstlisting}
 	\item konverter koden til å kunne måle nivået i en tank. For å teste kan du f.eks. sette sensoren mot gulvet fra  pulten og la dette være null nivå. Så skal nivået øke jo lengre et objekt kommer mot sensoren. Du kan gjerne teste ved å holde en bok imellom. 
 	\item Utvid programmet slik at det bare måler nivået og skriver dette til skjermen hvert 100ms. 
 \end{enumerate}
 
+\newpage
+\subsection*{Oppgave 3 - Digital til analog Converterr DAC}
+I denne oppgaven skal vi legge til en DAC eller en digital til analog konverter. Det vil si en komponent som kan gjøre om den digitale verdien vi har på avstanden inne i Arduino Nano om til en spenning. Den DAC-en vi skal bruke er en MCP4725 dette er en 12bits DAC. Det vil si at den kan angi den digitale verdien med et binært tall med 12 siffer. 
+\vskip 5pt 
+Det vil si at den kan angi $2^{12}=4096$ ulike verdier. Da 0 også er en verdi blir den høyeste verdien $2^{12}-1=4095$.  Det vil si at om vi gir MCP4725-en en verdi på 0 vil den gi en spenning på 0V ut. Gir vi 4095 vil den gi en spenning på 5V (eller tilført spenning).
+
+\vskip 5pt 
+
+Når vi skal tilpasse disse verdien til hverandre må vi \href {https://autofaget.no/analog.html} {lære} litt om analoge signaler og hvordan vi skallerer disse. 
+
+\vskip 5pt 
+\vskip 5pt 
+Vi må også forberede MCP4725 kortet med tilkoblingspinner. Finn frem MCP4725 kortet og det 6 pinnene som følger med. 
+
+
+$$\includegraphics[width=8cm]{./lUltralydtrasmitter0301.jpg}$$
+Dytt 4 av pinnene helt inn og to av pinnene litt i den andre retningen. De skal være langen nok til å gå igjennom printkortet slik av vi kan lodde de fast. 
+$$\includegraphics[width=8cm]{./lUltralydtrasmitter0302.jpg}$$
+Så setter du de på plass på kortet slik at de stemmer med bildet. 
+$$\includegraphics[width=8cm]{./lUltralydtrasmitter0303.jpg}$$
+Lodd først fast en av pinnene. Dette gjør det lettere å få pinnene til å stå beint på kortet. Når du har fått de beint. kan du lodde fast da andre pinnene. 
+$$\includegraphics[width=8cm]{./lUltralydtrasmitter0304.jpg}$$
+$$\includegraphics[width=8cm]{./lUltralydtrasmitter0305.jpg}$$
+Her ser du hvordan de skal montere i selve transmitteren når vi kommer så langt. 
+$$\includegraphics[width=8cm]{./lUltralydtrasmitter0306.jpg}$$
+
+\vskip 5pt 
+
+Du kan koble opp DAC-en på denne måten. 
+$$\includegraphics[width=9cm]{./lUltralydtransmitterx0202.eps}$$
+
+\vskip 5pt 
+
+Husk hvordan vi koblet på 5V og GND. Slik må du også gjøre på SDA og SCL linjene. Vi skal ha to enheter på linjen og tranger da totalt tre tilkoblinger. 
+\vskip 5pt 
+Nå må vi legge til kode for MCP4725. Start med å finne Adafruit sitt  bibliotek for MCP4725 og installer dette. (Gjør slik som de forige bibliotekene). 
+
+
+\vskip 5pt 
+Først legger du inn biblioteket.
+
+
+\begin{lstlisting}[language=Arduino]
+include <Adafruit_MCP4725.h> // DAC
+\end{lstlisting}
+
+\vskip 5pt 
+Så må du definere en variabel for en instans av MCP4725. Denne kaller vi dac1. Vi setter sammtidig oppløsningen i linjen under. 
+\begin{lstlisting}[language=Arduino]
+Adafruit_MCP4725 dac1;
+#define DAC_RESOLUTION    (12)
+\end{lstlisting}
+
+\vskip 5pt 
+
+I setup() må du starte DAC-en. 
+
+\begin{lstlisting}[language=Arduino]
+dac1.begin(0x62); //Starter DAC og setter adresse 0x62. 
+\end{lstlisting}
+
+\vskip 5pt 
+For å sette spenning bruker vi følgende kommando:
+
+\begin{lstlisting}[language=Arduino]
+dac1.setVoltage(dacValue, false);
+\end{lstlisting}
+
+\vskip 5pt 
+Husk at dette er en 12 bits DAC som har max verdi $2^{12}-1=4095$. Test med ulike verdier først. Tips Bruk max og min verdi for å finne range for DAC-en.
+\vskip 5pt 
+Nå kan du forsøke å laget et program som tilpasser en bestemt avstands range til 0-5V. F.eks. 20cm = 0V og 50cm  = 5V. 
+
 
 
 \underbar{file ./lUltralydtransmitter.tex}
+\vskip 5pt 
+
 \end{document}
 

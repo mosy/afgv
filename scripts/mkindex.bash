@@ -12,7 +12,7 @@ TEMP1=junk.txt
 
 TEMP2=junk2.txt
 
-OUTPUT=doc/q_index.txt
+OUTPUT=src/q_index.txt
 
 # Use "grep" to search for index terms, commented
 # inside question files in the following format:

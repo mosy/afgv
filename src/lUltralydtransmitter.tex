@@ -306,14 +306,14 @@ Nå kan du forsøke å laget et program som tilpasser en bestemt avstands range 
 \vskip 5pt 
 
 \subsection*{Roterende encoder med trykknapp}
-En roterende encoder med trykknapp brukes ofte til å kunne gjøre innstillinger i programmer en kjører på mikrokontrollere. Det har f.eks. blitt veldig vanlig for å styr menyer på 3d printere. 
+En roterende encoder med trykknapp brukes ofte til å kunne gjøre innstillinger i programmer en kjører på mikrokontrollere. Det har f.eks. blitt veldig vanlig for å styre menyer på 3D printere. 
 
-En roterende encoder virker slik at den generer pulser på en A og en B utgang når den roteres. Disse pulsene er organiser slik at de innholder informasjon om retningen det roteres i og hvorfor det roteres. Ut fra dette kan det lages programm eller bibliotek som kan holde orden på posisjonen til enkoderen. Det en en variabel som telle opp eller ned  alt etter hvilken vei en roterer på enkoderen. 
+En roterende encoder virker slik at den generer pulser på en A og en B utgang når den roteres. Disse pulsene er organisert slik at de innholder informasjon om retningen det roteres i og hvor fort det roteres. Ut fra dette kan det lages program eller bibliotek som kan holde orden på posisjonen til enkoderen. Det en en variabel som telle opp eller ned  alt etter hvilken vei en roterer på enkoderen. 
 \vskip 5pt 
 Trykknappen brukes til å gjøre valg i menyen. 
 \vskip 10pt 
 
-Se på tegningen nedenfor og følg med på hvordan pulsene forandrer seg alt etter hvilken retning en roterer enkoderen i. Pinne A og B er koblet til en pullup inngang på en Arudino Nano. 
+Se på tegningen nedenfor og følg med på hvordan pulsene forandrer seg alt etter hvilken retning en roterer enkoderen i. Pinne A og B er koblet til en pullup inngang på en Arudino Nano. Dette gjør at vi ikke trenger å koble til pullup/down motstand selv. 
 $$\includegraphics[width=9cm]{./rotaryencoder.eps}$$
 
 \vskip 10pt 
@@ -343,6 +343,101 @@ $\includegraphics[width=8cm]{./lUltralydtransmitterx0508.jpg}$
 
 \vskip 5pt 
 Lodd fast ledningene til enkoderen. Dette arbeidet krever nøyaktighet. Ta deg god til for å få det til. Et tips kan være og tvinne alle lederne runt pinnene før du starter å lodde.
+
+\vskip 5pt 
+Nå kan vi koble encoderen slik som dette.
+\vskip 5pt 
+
+$$\includegraphics[width=9cm]{./lUltralydtransmitterx02.eps}$$
+
+Nå skal vi legge inne kode for å kunne manipulere verdier på displayet. Først så trenger vi to biblioteker. Det første finner vi med CTRL+SHIFT+I, søk etter TimerOne og installer dette. Det andre må vi hente som en ZIP fil på github. Gi inn på adressen \url {https://github.com/0xPIT/encoder} og trykke på den grønne code kanppen som vist på bilde og velg last ned ZIP. 
+
+$$\includegraphics[width=8cm]{./lUltralydtransmitterx0509.png}$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Nå kan vi legge de to bibliotekene inn i programmet vårt. 
+
+\begin{lstlisting}[language=Arduino]
+#include <ClickEncoder.h>
+#include <TimerOne.h>
+\end{lstlisting}
+
+Så må vi sette opp noen globale variabler som trengs av av enkoderfunksjonene vi skal bruke
+\begin{lstlisting}[language=Arduino]
+float offset = 0; // Adjustment for Zero level
+boolean up = false; //menu up
+boolean down = false; //menu down
+boolean middle = false; //Select button
+\end{lstlisting}
+
+Så setter vi opp variabel til selve enkoderfunskjonen + innstillinger som trengs av denne
+
+\begin{lstlisting}[language=Arduino]
+ClickEncoder *encoder;
+int16_t last, value;
+#define stepsPerNotch 4
+\end{lstlisting}
+
+I \verb|void setup()| legger vi inn følgende:
+\begin{lstlisting}[language=Arduino]
+encoder = new ClickEncoder(2,3,4);
+encoder->setAccelerationEnabled(true);
+Timer1.initialize(1000);
+Timer1.attachInterrupt(timerIsr); 
+last = encoder->getValue();
+\end{lstlisting}
+Se er det to funksjoner vi skal legge inn. 
+\begin{lstlisting}[language=Arduino]
+void timerIsr()
+{ 
+	encoder->service();
+}
+
+void readRotaryEncoder()
+{
+	value += encoder->getValue();
+	if (value/2 > last) 
+	{
+		last = value/2;
+		up = true;
+		//Adjust this value to faster response from the encoder
+		delay(150);
+	}else		if (value/2 < last) 
+	{
+		last = value/2;
+		down = true;
+		//Adjust this value to faster response from the encoder
+		delay(150);
+	}
+}
+\end{lstlisting} 
+
+Til slutt kan vi legge følgende inni  \verb|void loop()|
+
+\begin{lstlisting}[language=Arduino]
+	readRotaryEncoder();
+
+	if (down) 
+	{
+		offset=offset-0.25;
+		down = false;
+	}
+	else if (up) 
+	{
+		offset=offset+0.25;
+		up = false;
+	}
+\end{lstlisting}
+
+Nå av har vi et  program, med en variabel vi kan bruke til å justere høyden som  sensoren monteres i ved å legge inn en offset. 
+
+
+
+
+
 \underbar{file ./lUltralydtransmitter.tex}
 \vskip 5pt 
 

@@ -1,0 +1,78 @@
+%!TEX encoding = UTF-8 Unicode
+% Author: Laurent Dutriaux
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fourier} % Utilisation des polices texte
+\usepackage{tikz}
+\usetikzlibrary[positioning]
+\usetikzlibrary{patterns}
+\usepackage[french]{babel} % styles français
+\title{Timeplan 3AUA}
+\date{\today}
+\newcommand{\daywidth}{2.2 cm}
+\begin{document}
+
+\maketitle
+
+\begin{tikzpicture}[x=\daywidth, y=-1cm, node distance=0 cm,outer sep = 0pt]
+% Style for Days
+\tikzstyle{day}=[draw, rectangle,  minimum height=1cm, minimum width=\daywidth, fill=gray!20,anchor=south west]
+% Style for hours
+\tikzstyle{hour}=[draw, rectangle, minimum height=0.75 cm, minimum width=2 cm, fill=gray!30,anchor=north east]
+\tikzstyle{friminutt}=[draw, rectangle, minimum height=0.25 cm, minimum width=2 cm, fill=blue!30,anchor=north east]
+\tikzstyle{mat}=[draw, rectangle, minimum height=0.5 cm, minimum width=2 cm, fill=blue!30,anchor=north east]
+
+% Styles for events
+% Duration of sequences
+\tikzstyle{hours}=[rectangle,draw, minimum width=\daywidth, anchor=north west,text centered,text width=5 em]
+\tikzstyle{1hour}=[hours,minimum height=0.75cm]
+\tikzstyle{2hours}=[hours,minimum height=1.5cm]
+\tikzstyle{3hours}=[hours,minimum height=3cm]
+%Style for type of sequence 
+\tikzstyle{Auto1h}=[1hours,fill=red!20]
+\tikzstyle{Auto2h}=[2hours,fill=red!20]
+\tikzstyle{Elenergi1h}=[1hours,fill=blue!20]
+\tikzstyle{Elenergi2h}=[2hours,fill=blue!20]
+\tikzstyle{Mek1h}=[1hours,fill=blue!10]
+\tikzstyle{Mek2h}=[2hours,fill=blue!10]
+\tikzstyle{TP2h}=[2hours, pattern=north east lines, pattern color=magenta]
+\tikzstyle{G3h}=[3hours, pattern=north west lines, pattern color=magenta!60!white]
+\tikzstyle{Planche}=[1hour,fill=white]
+% Positioning labels for days and hours
+\node[day] (man) at (1,8.083333) {Mandag};
+\node[day] (tir) [right = of man] {Tirsdag};
+\node[day] (ons) [right = of tir] {Onsdag};
+\node[day] (tor) [right = of ons] {Torsdag};
+\node[day] (fre) [right = of tor] {Fredag};
+\node[hour] (1) at (1,8.083333) {0805-0850};
+\node[hour] (2) [below = of 1] {0850-0935};
+\node[friminutt] (fr1) [below = of 2] {};
+\node[hour] (3) [below= of fr1] {0950-1035};
+\node[hour] (4) [below = of 3] {1035-1120};
+\node[mat] (mat) [below = of 4] {1120-1150};
+%Position of sequences
+\node[Auto2h] at (1,8.083333) {Auto};
+\node[Auto2h] at (1,9.83333) {Auto\\D426};
+\node[Auto2h] at (2,8) {Auto};
+\node[Auto2h] at (4,8) {Auto};
+\node[Auto2h] at (5,10) {Physique};
+\node[Elenergi2h] at (2,10) {Elenergi\\D426\\Torbjørn};
+\node[Elenergi2h] at (2,14) {Elenergi};
+\node[Elenergi2h] at (3,8) {Elenergi};
+\node[Elenergi2h] at (4,10) {Elenergi};
+\node[Elenergi2h] at (5,8) {Elenergi};
+\node[Mek2h] at (1,14) {Mekanisk\\D426\\Jon};
+\node[Mek2h] at (1,16) {Mekanisk\\D426\\Jon};
+\node[Mek2h] at (2,16) {Mekanisk\\D426\\Jon};
+\node[Mek2h] at (3,10) {Mekanisk\\D426\\Jon};
+\node[Mek2h] at (5,14) {Mekanisk\\D426\\Jon};
+\node[Mek2h] at (5,16) {Mekanisk\\D426\\Jon};
+\node[TP2h] at (3,14) {Phys ou SI};
+\node[TP2h] at (3,16) {SI ou Phys};
+\node[Planche] at (1,13) {Planche};
+\node[Planche] at (1,18) {Colle};
+\node[Planche] at (4,13.5) {Planche};
+\end{tikzpicture}
+
+
+\end{document} 

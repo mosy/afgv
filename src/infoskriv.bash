@@ -9,7 +9,7 @@ touch all.tex
 cat preamble.tex >> all.tex
 #\title {Inforskriv for 3AUA Gand VGS} 
 #\author {Fred-Olav Mosdal}
-#\date {17.08.2020}
+#\date {16.08.2021}
 #\maketitle
 cat infoskrivtittel.tex >> all.tex
 cat hvordan.tex >> all.tex

@@ -1,24 +1,25 @@
 %!PS-Adobe-3.0 EPSF-3.0
 %%Title: i02110x01.eps
-%%Creator: XCircuit v3.7 rev26
-%%CreationDate: Sat Apr  7 17:31:00 2012
+%%Creator: XCircuit v0.0 rev-1643933875
+%%CreationDate: Sun Aug 15 11:07:33 2021
 %%Pages: 1
-%%BoundingBox: 68 68 373 380
-%%DocumentNeededResources: font Helvetica Helvetica-Bold Helvetica-Oblique 
-%%+ font Times-Roman 
+%%BoundingBox: 68 68 373 391
+%%DocumentNeededResources: font Times-Roman Helvetica Helvetica-Bold 
+%%+ font Helvetica-Oblique 
 %%EndComments
 %%BeginProlog
 %
 %  PostScript prolog for output from xcircuit
-%  Version: 3.7
+%  Version: 3.9
 %
 %  Electrical circuit (and otherwise general) drawing program
 %
-%  Written by Tim Edwards 8/5/93--11/1/10  (tim.edwards@multigig.com)
+%  Written by Tim Edwards 8/5/93--4/12/16  (tim@opencircuitdesign.com)
 %  The Johns Hopkins University (1993-2004)
-%  MultiGiG, Inc. (2004-present)
+%  MultiGiG, Inc. (2004-2012)
+%  Open Circuit Design (2012-2016)
 %
-%%BeginResource: procset XCIRCproc 3.7 2
+%%BeginResource: procset XCIRCproc 3.9 1
 %
 % supporting definitions --- these are the primary xcircuit types.
 
@@ -29,18 +30,18 @@
     exch findfont exch makefont dup length dict /ndict exch def
     { 1 index /FID ne { ndict 3 1 roll put } { pop pop } ifelse } forall
     ndict definefont pop} def
-/ul { dup type /stringtype eq showflag 1 eq and { gsave 
+/ul { count 0 gt { dup type /stringtype eq showflag 1 eq and { gsave 
    currentpoint topmat setmatrix 0 0 moveto 2 index stringwidth pop (_)
    false charpath flattenpath pathbbox grestore exch pop 1 index
    sub setlinewidth exch pop currentpoint 3 -1 roll add moveto 0
-   rlineto stroke moveto } if } def
-/ol { dup type /stringtype eq showflag 1 eq and { gsave gsave
+   rlineto stroke moveto } if } if } def
+/ol { count 0 gt { dup type /stringtype eq showflag 1 eq and { gsave gsave
    currentpoint topmat setmatrix 2 index stringwidth pop 3 index
    true charpath flattenpath pathbbox grestore exch pop
    exch pop topmat setmatrix (_) true charpath pathbbox grestore
    exch pop 1 index sub setlinewidth exch pop currentpoint
    exch 4 1 roll exch sub add moveto pop 0 rlineto stroke
-   moveto } if } def
+   moveto } if } if } def
 /stW { gsave currentpoint newpath moveto true charpath flattenpath
 	pathbbox pop exch pop sub grestore } def
 /Ts {mark Tabs aload pop counttomark 1 add array astore /Tabs exch def Tabs
@@ -60,33 +61,45 @@
 /Ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
 	0.67 mul Kn } def
 /ns { 0 kY neg Kn /kY 0 def /fscale 1.0 def xfont0 1.0 cf0 } def
-/CR { ns 0 /Bline Bline fscale0 neg add def Bline moveto } def
+/MR { /twidth exch def } def
+/CRx { } def
+/CR { ns 0 /Bline Bline fscale0 neg add def Bline moveto CRx } def
 /cf { dup type /realtype ne {1.0} if exch findfont exch kY 0 eq
 	{ 40 mul dup /fscale0 exch def cf0 /xfont0 currentfont def}
 	{fscale0 mul fscale mul cf0} ifelse } def
 /ctmk { counttomark dup 2 add -1 roll pop } bind def
-/label { gsave translate 0 0 moveto dup scale neg /rotval exch def
-	/just exch def just 384 and 0 gt {/mshow {pop} def} {/mshow {show}
-	def} ifelse just 16 and 0 gt {gsave rotval rotate 0 1 dtransform
-	gsave pagemat setmatrix idtransform exch grestore 1 0 dtransform
-	gsave pagemat setmatrix idtransform exch grestore dup abs 1e-9 lt
-	{pop mul 0 gt} {3 1 roll pop pop 0 lt} ifelse grestore {-1 /rotval
-	rotval neg def /just just dup 3 and 1 ne {3 xor} if def} {1} ifelse
-	exch -1e-9 lt {-1 /rotval rotval neg def /just just dup 12 and
-	4 ne {12 xor} if def} {1} ifelse scale } if /showflag 0 def
-	/fspc pspc def /Bline 0 def /Tabs 0 array def /fscale 1.0 def
-	/kY 0 def gsave dup 1 add copy 0 exch 1 0 dtransform exch atan rotate
-	{exch dup type /stringtype eq {true charpath flattenpath} {dup type
-	/arraytype eq {exec} {12 string cvs true charpath flattenpath} ifelse}
-	ifelse} repeat pop pathbbox grestore 3 -1 roll pop 3 1 roll just
-	1 and 0 gt {just 2 and 0 gt {exch pop neg fspc sub} {exch sub 0.5
-	mul neg} ifelse} {pop neg fspc add} ifelse exch Bline exch just 4
-	and 0 gt {just 8 and 0 gt {exch pop neg fspc sub} {add 0.5 mul neg}
-	ifelse} {pop neg fspc add} ifelse rotval rotate Kn currentpoint
-	translate /showflag 1 def /Bline 0 def /Tabs 0 array def /fscale
-	1.0 def /kY 0 def {dup type /stringtype eq {mshow} {dup type
-	/arraytype eq {exec} {12 string cvs mshow} ifelse} ifelse} repeat
-	grestore endclip} def
+/label { gsave translate 0 0 moveto dup scale neg
+	/rotval exch def /twidth 100000 def /just exch def just 128 and
+	0 gt {/mshow {pop} def} {/mshow {show} def} ifelse just 16 and 0
+	gt {gsave rotval rotate 0 1 dtransform gsave pagemat setmatrix
+	idtransform exch grestore 1 0 dtransform gsave pagemat setmatrix
+	idtransform exch grestore dup abs 1e-9 lt {pop mul 0 gt} {3 1 roll
+	pop pop 0 lt} ifelse grestore {-1 /rotval rotval neg def /just just
+	dup 3 and 1 ne {3 xor} if def} {1} ifelse exch -1e-9 lt {-1 /rotval
+	rotval neg def /just just dup 12 and 4 ne {12 xor} if def} {1}
+	ifelse scale } if /showflag 0 def /fspc pspc def /Bline 0 def
+	/numlines 0 def /padding 0 array def /Tabs 0 array def
+	/fscale 1.0 def /kY 0 def gsave /CRx { linewid padding
+	aload pop numlines 1 add dup /numlines exch def array astore
+	/padding exch def /linewid 0 def } def dup 1 add copy dup 1 0
+	dtransform exch atan rotate {exch dup type /stringtype eq {gsave dup
+	gsave newpath 0 0 moveto true charpath flattenpath pathbbox pop exch
+	pop exch pop grestore currentpoint pop add dup /linewid exch def twidth
+	ge {grestore CR exch 1 add dup 2 add {CR} exch 1 roll exch} {grestore}
+	ifelse true charpath flattenpath} {dup type /arraytype eq {exec} {12
+	string cvs true charpath flattenpath} ifelse} ifelse} repeat
+	CRx /CRx {padding aload pop just 1280 and 0 gt {blockwid exch sub just
+	1024 and 0 gt {0.5 mul} if} {pop 0} ifelse 0 rmoveto numlines 1 sub
+	dup /numlines exch def array astore /padding exch def} def exch pop
+	pathbbox grestore 4 copy pop exch pop exch sub /blockwid exch def
+	3 -1 roll pop 3 1 roll just 1 and 0 gt {just 2 and
+	0 gt {exch pop neg fspc sub} {exch sub 0.5 mul neg} ifelse} {pop neg
+	fspc add} ifelse exch Bline exch just 4 and 0 gt {just 8 and 0 gt
+	{exch pop neg fspc sub} {add 0.5 mul neg} ifelse} {pop neg fspc add}
+	ifelse rotval rotate Kn currentpoint translate /showflag 1 def /Bline
+	0 def /Tabs 0 array def /fscale 1.0 def /kY 0 def CRx {dup type
+	/stringtype eq {mshow} {dup type /arraytype eq {exec} {12 string cvs
+	mshow} ifelse} ifelse} repeat grestore endclip} def
 /pinlabel { 4 index 32 and 0 ne hlevel 0 eq or { /pspc 10 def label
 	/pspc 0 def } { pop pop pop pop pop {pop} repeat } ifelse } def
 /pinglobal { pinlabel } def
@@ -99,10 +112,10 @@
 /begingate {dup type /dicttype ne {1 dict} if begin	% default params
 	dup type /dicttype ne {1 dict} if begin		% instanced params
 	/hlevel hlevel 1 add def /defColor currentcolor sce 3 array astore
-	def gsave sce translate 0 0 moveto neg rotate dup type /nametype
-	eq not { dup abs currentlinewidth exch div setlinewidth } { pop }
-	ifelse dup abs scale clipped 1 and 1 eq {/clipped clipped 1 add def}
-	if} bind def
+	def gsave sce dup type /nametype eq { pop } if translate 0 0 moveto
+	neg rotate dup type /nametype eq not { dup abs currentlinewidth exch
+	div setlinewidth } { pop } ifelse dup abs scale clipped 1 and 1 eq
+	{/clipped clipped 1 add def} if} bind def
 /endgate { /hlevel hlevel 1 sub def grestore defColor aload pop cRedef
 	scb end end endclip} bind def
 
@@ -125,7 +138,7 @@
   currentlinewidth mul setlinewidth /style exch def style 2048 and 0 gt
   clipped 1 and 0 eq and {clip newpath /clipped clipped 1 add def} {
   style 1 and 0 gt not {closepath} if
-  style 1024 and 0 gt {2 setlinecap} if
+  style 1024 and 0 gt {2 setlinecap 0 setlinejoin} if
   style 2 and 0 gt {currentlinewidth 4 mul dup 2 array astore 0 setdash} if
   style 4 and 0 gt {0.5 currentlinewidth 4 mul 2 array astore 0 setdash} if
   gsave style 16 and 0 gt { style 224 and -5 bitshift style 256 and 0 gt {
@@ -157,7 +170,7 @@
 /polyc   { {lineto} repeat } bind def
 /beginpath { gsave moveto } bind def
 /endpath { setstyles } bind def
-/bop	 { 1 setlinecap 0 setlinejoin 6 setmiterlimit 0 0 0 scb cRedef
+/bop	 { 1 setlinecap 2 setlinejoin 6 setmiterlimit 0 0 0 scb cRedef
 	/clipped 0 def} def
 /psinsertion {/PSobj save def /showpage {} def /setpagedevice {pop} def bop
 	rotate translate dup scale} def
@@ -168,47 +181,16 @@
 
 %%EndResource
 %%EndProlog
-
 % XCircuit output starts here.
 
 %%BeginSetup
 
 /liec_dig::ladder_start {
 begingate
-(1) {ss} (L) {/Times-Roman cf} 4 16 0 1.000 -512 64 label
+(1) {ss} (L) {/Times-Roman cf} 4 16 0.000 1.000 -512 64 label
 1 1.000 -496 -80 -496 48 2 polygon
-(2) {ss} (L) {/Times-Roman cf} 4 16 0 1.000 480 64 label
+(2) {ss} (L) {/Times-Roman cf} 4 16 0.000 1.000 480 64 label
 1 1.000 496 48 496 -80 2 polygon
-endgate
-} def
-
-/generic::dot {
-% trivial
-begingate
-248 1.000 0 0 6 0.000 360.000 xcarc
-1.000 0.000 0.000 scb
-(x) {/Times-Roman cf} 2 29 0 1.000 0 0 pinlabel
-endgate
-} def
-
-/liec_dig::nc_pressure {
-begingate
-1 1.000 -64 16 -16 16 2 polygon
-1.000 0 -16 16 generic::dot
-1 1.000 -16 16 32 28 2 polygon
-1.000 0 16 16 generic::dot
-1 1.000 16 16 64 16 2 polygon
-1 1.000 0 -14 0 20 2 polygon
-1 1.000 -16 -8 16 -8 16 -32 -16 -32 spline
-1 1.000 -16 -32 16 -32 2 polygon
-endgate
-} def
-
-/liec_dig::relay_coil {
-begingate
-1 1.000 0 0 32 0.000 360.000 xcarc
-1 1.000 -64 0 -32 0 2 polygon
-1 1.000 32 0 64 0 2 polygon
 endgate
 } def
 
@@ -223,14 +205,23 @@ endgate
 
 /liec_dig::nc_contact {
 begingate
-1.000 0 0 0 liec_dig::no_contact
+1.000 0.000 0 0 liec_dig::no_contact
 1 1.000 32 32 -32 -32 2 polygon
+endgate
+} def
+
+/generic::dot {
+% trivial
+begingate
+248 1.000 0 0 6 0.000 360.000 xcarc
+1.000 0.000 0.000 scb
+(x) {/Times-Roman cf} 2 29 0.000 1.000 0 0 pinlabel
 endgate
 } def
 
 /junk::air_compressor {
 begingate
-0.604 0.604 0.604 scb
+0.600 0.600 0.600 scb
 241 1.000 -32 -48 48 0.000 360.000 xcarc
 0.800 0.800 0.800 scb
 240 1.000 -48 0 -48 64 -16 64 -16 0 4 polygon
@@ -243,7 +234,7 @@ sce
 1 1.000 -64 56 0 56 2 polygon
 1 1.000 -64 8 0 8 2 polygon
 1 1.000 -32 -48 16 0.000 360.000 xcarc
-1.000 0 -32 -48 generic::dot
+1.000 0.000 -32 -48 generic::dot
 1 3.000 -48 64 -64 80 2 polygon
 1 3.000 -16 64 0 80 2 polygon
 80 1.000 16 96 16 64 80 64 80 96 4 polygon
@@ -255,7 +246,7 @@ endgate
 
 /junk::valve_small {
 begingate
-0.604 0.604 0.604 scb
+0.600 0.600 0.600 scb
 240 1.000 -24 -4 -24 -28 32 -28 32 -4 4 polygon
 240 1.000 -8 -4 -8 4 16 4 16 -4 4 polygon
 sce
@@ -268,43 +259,67 @@ sce
 endgate
 } def
 
+/euro::preassureswotch-NC {
+begingate
+1 1.000 28 -64 28 -32 56 36 3 polygon
+1 1.000 28 64 28 32 60 32 3 polygon
+1 1.000 40 0 16 0 2 polygon
+1 1.000 4 0 -16 0 2 polygon
+0 1.000 -16 24 -16 -24 -64 -24 -64 24 4 polygon
+(P) {/Helvetica cf} 2 1045 0.000 1.000 -40 0 label
+endgate
+} def
+
+/euro::relecoil {
+begingate
+0 1.000 -64 -32 -64 32 68 32 68 -32 4 polygon
+1 1.000 4 -32 4 -64 2 polygon
+1 1.000 4 32 4 64 2 polygon
+endgate
+} def
+
+/euro::switchNC {
+begingate
+1 1.000 -16 -64 -16 -32 12 36 3 polygon
+1 1.000 16 32 -16 32 2 polygon
+1 1.000 -16 64 -16 32 2 polygon
+endgate
+} def
+
 
 %%EndSetup
 
 %%Page: i02110x01 1
 %%PageOrientation: Portrait
 /pgsave save def bop
-% 32.00 8.00 gridspace
+% 32.00 4.00 gridspace
 0.7500 inchscale
 2.6000 setlinewidth 800 1104 translate
 
-1.000 0 -16 80 liec_dig::ladder_start
-1.000 0 -352 -16 liec_dig::nc_pressure
-(Cut-out switch) {/Helvetica cf} 2 16 0 1.000 -480 32 label
+1.000 0.000 -16 80 liec_dig::ladder_start
+(Cut-out switch) {/Helvetica cf} 2 16 0.000 1.000 -160 120 label
 1 1.000 -512 0 -416 0 2 polygon
-1.000 0 288 -32 liec_dig::relay_coil
-1.000 0 416 -32 liec_dig::nc_contact
-(OL) {/Helvetica cf} 2 16 0 1.000 384 16 label
-(M) {/Helvetica cf} 2 16 0 1.000 272 16 label
+1.000 0.000 360 240 liec_dig::nc_contact
+(OL) {/Helvetica cf} 2 16 0.000 1.000 264 24 label
+(M) {/Helvetica cf} 2 16 0.000 1.000 400 52 label
 1 1.000 32 0 80 0 80 -16 3 polygon
-1.000 0 80 -16 generic::dot
-1.000 0 80 -48 generic::dot
+1.000 0.000 80 -16 generic::dot
+1.000 0.000 80 -48 generic::dot
 1 1.000 80 -48 80 -64 32 -64 3 polygon
-1.000 0 112 -32 generic::dot
+1.000 0.000 112 -32 generic::dot
 1 1.000 112 -32 160 -32 2 polygon
 1 1.000 112 -32 64 -32 2 polygon
 1 1.000 480 0 480 -32 2 polygon
-1.000 0 -96 -144 liec_dig::nc_pressure
 1 1.000 -192 0 -192 -128 2 polygon
 1 1.000 0 -128 0 -64 2 polygon
-1.000 0 -192 0 generic::dot
+1.000 0.000 -192 0 generic::dot
 1 1.000 -192 0 -64 0 2 polygon
 1.000 0.000 0.000 scb
-(Hand) {/Helvetica cf} 2 16 0 0.500 64 16 label
-(Off) {/Helvetica cf} 2 16 0 0.500 24 -40 label
-(Auto) {/Helvetica cf} 2 16 0 0.500 64 -88 label
+(Hand) {/Helvetica cf} 2 16 0.000 0.500 64 16 label
+(Off) {/Helvetica cf} 2 16 0.000 0.500 24 -40 label
+(Auto) {/Helvetica cf} 2 16 0.000 0.500 64 -88 label
 sce
-(Control switch) {/Helvetica cf} 2 16 0 1.000 -216 -216 label
+(Control switch) {/Helvetica cf} 2 16 0.000 1.000 -216 -216 label
 1 1.000 -224 0 -192 0 2 polygon
 1 1.000 -192 -128 -160 -128 2 polygon
 1 1.000 -32 -128 0 -128 2 polygon
@@ -312,8 +327,8 @@ sce
 1 1.000 -64 0 32 0 2 polygon
 1 1.000 -288 0 -224 0 2 polygon
 1 1.000 160 -32 224 -32 2 polygon
-1.000 0 272 -704 junk::air_compressor
-0.604 0.604 0.604 scb
+1.000 0.000 272 -704 junk::air_compressor
+0.600 0.600 0.600 scb
 496 1.000 -368 -528 -368 -704 32 -704 32 -528 4 polygon
 497 1.000 96 -528 96 -704 32 -704 32 -528 spline
 497 1.000 -432 -528 -432 -704 -368 -704 -368 -528 spline
@@ -322,72 +337,79 @@ sce
 1 1.000 96 -528 96 -704 32 -704 32 -528 spline
 1 1.000 32 -528 -368 -528 2 polygon
 1 1.000 -368 -704 32 -704 2 polygon
-(Receiver tank) {/Helvetica cf} 2 16 0 1.000 -288 -624 label
-1.000 90 -304 -752 junk::valve_small
-(Condensate drain valve) {/Helvetica cf} 2 16 0 0.500 -416 -824 label
-(Compressor) {/Helvetica cf} 2 16 0 0.750 288 -720 label
+(Receiver tank) {/Helvetica cf} 2 16 0.000 1.000 -288 -624 label
+1.000 90.000 -304 -752 junk::valve_small
+(Condensate drain valve) {/Helvetica cf} 2 16 0.000 0.500 -416 -824 label
+(Compressor) {/Helvetica cf} 2 16 0.000 0.750 288 -720 label
 1 2.000 208 -624 80 -624 2 polygon
-1.000 360 144 -608 junk::valve_small
-(Intake filter) {/Helvetica cf} 2 16 0 1.000 272 -592 label
+1.000 360.000 144 -608 junk::valve_small
+(Intake filter) {/Helvetica cf} 2 16 0.000 1.000 272 -592 label
 1 1.000 -336 -500 -336 -528 2 polygon
 1 1.000 0 -500 0 -528 2 polygon
-(Control circuit schematic) {/Helvetica-Oblique cf} 2 16 0 1.000 -240 208 label
-1.000 360 -464 -592 junk::valve_small
+(Control circuit schematic) {/Helvetica-Oblique cf} 2 16 0.000 1.000 -240 208 
+label
+1.000 360.000 -464 -592 junk::valve_small
 1 2.000 -512 -608 -512 -736 2 polygon
 1 2.000 -520 -728 -512 -736 -504 -728 3 polygon
 0.000 0.000 1.000 scb
-(Compressed air) {/Helvetica-Oblique cf} 2 16 0 0.500 -536 -760 label
+(Compressed air) {/Helvetica-Oblique cf} 2 16 0.000 0.500 -536 -760 label
 sce
-(Pictorial diagram of system) {/Helvetica-Oblique cf} 2 16 0 1.000 -256 -328 
-label
-1.000 0 -512 0 generic::dot
+(Pictorial diagram of system) {/Helvetica-Oblique cf} 2 16 0.000 1.000 -256 
+-328 label
+1.000 0.000 -512 0 generic::dot
 0.000 0.000 1.000 scb
-(A) {/Helvetica-Bold cf} 2 16 0 0.500 -528 -24 label
-(B) {/Helvetica-Bold cf} 2 16 0 0.500 -200 16 label
-(C) {/Helvetica-Bold cf} 2 16 0 0.500 -216 -144 label
+(A) {/Helvetica-Bold cf} 2 16 0.000 0.500 -528 -24 label
+(B) {/Helvetica-Bold cf} 2 16 0.000 0.500 -200 16 label
+(C) {/Helvetica-Bold cf} 2 16 0.000 0.500 -216 -144 label
 sce
-1.000 0 480 -32 generic::dot
-1.000 0 352 -32 generic::dot
-1.000 0 192 -32 generic::dot
-1.000 0 0 -64 generic::dot
-1.000 0 0 0 generic::dot
+1.000 0.000 480 -32 generic::dot
+1.000 0.000 352 -32 generic::dot
+1.000 0.000 192 -32 generic::dot
+1.000 0.000 0 -64 generic::dot
+1.000 0.000 0 0 generic::dot
 0.000 0.000 1.000 scb
-(D) {/Helvetica-Bold cf} 2 16 0 0.500 -8 16 label
-(E) {/Helvetica-Bold cf} 2 16 0 0.500 -24 -56 label
-(F) {/Helvetica-Bold cf} 2 16 0 0.500 184 -16 label
-(G) {/Helvetica-Bold cf} 2 16 0 0.500 344 -16 label
+(D) {/Helvetica-Bold cf} 2 16 0.000 0.500 -8 16 label
+(E) {/Helvetica-Bold cf} 2 16 0.000 0.500 -24 -56 label
+(F) {/Helvetica-Bold cf} 2 16 0.000 0.500 184 -16 label
+(G) {/Helvetica-Bold cf} 2 16 0.000 0.500 344 -16 label
 sce
-1.000 0 -192 -128 generic::dot
+1.000 0.000 -192 -128 generic::dot
 0.000 0.000 1.000 scb
-(H) {/Helvetica-Bold cf} 2 16 0 0.500 472 -56 label
+(H) {/Helvetica-Bold cf} 2 16 0.000 0.500 472 -56 label
 sce
-1.000 270 -352 -480 junk::valve_small
-1.000 270 -16 -480 junk::valve_small
+1.000 270.000 -352 -480 junk::valve_small
+1.000 270.000 -16 -480 junk::valve_small
 0.800 0.800 0.800 scb
 497 1.000 -336 -400 35 0.000 360.000 xcarc
 sce
 1 1.000 -336 -400 35 0.000 360.000 xcarc
-(PS) {/Helvetica cf} 2 16 0 0.750 -352 -408 label
+(PS) {/Helvetica cf} 2 16 0.000 0.750 -352 -408 label
 0.800 0.800 0.800 scb
 497 1.000 0 -400 35 0.000 360.000 xcarc
 sce
 1 1.000 0 -400 35 0.000 360.000 xcarc
-(PS) {/Helvetica cf} 2 16 0 0.750 -16 -408 label
-(Cut-out switch) {/Helvetica cf} 2 16 0 0.500 -288 -408 label
-(Control switch) {/Helvetica cf} 2 16 0 0.500 48 -408 label
-0.604 0.604 0.604 scb
+(PS) {/Helvetica cf} 2 16 0.000 0.750 -16 -408 label
+(Cut-out switch) {/Helvetica cf} 2 16 0.000 0.500 -288 -408 label
+(Control switch) {/Helvetica cf} 2 16 0.000 0.500 48 -408 label
+0.600 0.600 0.600 scb
 0 3.000 -544 -352 -544 -848 512 -848 512 -352 4 polygon
 sce
-(\(trips at 110 PSI rising\)) {/Helvetica-Oblique cf} 2 16 0 0.500 -304 -432 
+(\(trips at 110 PSI rising\)) {/Helvetica-Oblique cf} 2 16 0.000 0.500 -304 
+-432 label
+(\(trips at 90 PSI rising, resets at 80 PSI falling\)) {/Helvetica-Oblique cf} 
+2 16 0.000 0.500 32 -432 label
+(\(trips at 110 PSI rising\)) {/Helvetica-Oblique cf} 2 16 0.000 0.500 -448 -72 
 label
 (\(trips at 90 PSI rising, resets at 80 PSI falling\)) {/Helvetica-Oblique cf} 
-2 16 0 0.500 32 -432 label
-(\(trips at 110 PSI rising\)) {/Helvetica-Oblique cf} 2 16 0 0.500 -448 -72 
-label
-(\(trips at 90 PSI rising, resets at 80 PSI falling\)) {/Helvetica-Oblique cf} 
-2 16 0 0.500 -288 -240 label
-0.604 0.604 0.604 scb
+2 16 0.000 0.500 -288 -240 label
+0.600 0.600 0.600 scb
 0 3.000 -544 192 -544 -256 512 -256 512 192 4 polygon
+sce
+1.000 90.000 -352 28 euro::preassureswotch-NC
+1.000 90.000 -96 -100 euro::preassureswotch-NC
+1.000 90.000 416 -28 euro::relecoil
+1.000 90.000 284 -48 euro::switchNC
+1 1.000 288 -44 288 -28 304 -28 304 -12 288 -12 288 4 6 polygon
 pgsave restore showpage
 
 %%Trailer

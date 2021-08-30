@@ -1594,34 +1594,20 @@ Integrating processes are characterized by the capacity to experience persistent
 
 
 
-
 \oppgave{} 
-% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Her ser du en sprangresponstest på en prosess, utført med regulatoren i manuell modus. Ut fra kurven finn følgende:
+Suppose we have an Allen-Bradley model ``SLC 500'' PLC connected to a three switches and two AC loads (a lamp and a solenoid coil) as shown in this illustration:
+Her ser du en Allen-Bradley model ``SLC 500'' PLS koblet til tre innganger og to utganger. Inngangene består av to sensorer og en trykknapp. Utgangene består av en solenoid og et lys. 
 
-$K$ = \underbar{\hskip 50pt} \hskip 50pt $\tau$ = \underbar{\hskip 50pt} \hskip 50pt $\theta$ = \underbar{\hskip 50pt}
+$$\includegraphics[width=15.5cm]{i04527x01.eps}$$
 
-$$\includegraphics[width=15.5cm]{rf001x01.eps}$$
+The following is the PLC's program as it appears printed on paper.  From this information, determine the status of the lamp and of the solenoid coil provided a process pressure of 9 bar, a process temperature of 186 $^{o}$C, and an unpressed pushbutton switch:
 
+$$\includegraphics[width=15.5cm]{i04527x02.eps}$$
 
-\vskip 10pt
-
-Hva om en hadde gjort et sprang på 25\% istedenfor 15\%.  Hvilken effekt ville dette fått på $\tau$ og $\theta$?
-
-\begin{tikzpicture}
-	\draw[step=0.5cm,gray!20,very thin]  grid (16,1) ;
-\end{tikzpicture}
-\vskip 10pt
-
-Til slutt skal du regne ut $K_p$ og $T_i$ for en PI regulator
-
-\begin{tikzpicture}
-	\draw[step=0.5cm,gray!20,very thin]  grid (16,7) ;
-\end{tikzpicture}
-\underbar{file rf001.tex}
-%\underbar{file i01656}
+\underbar{file i04527}
 \vskip 10pt \filbreak 
 
 
@@ -1630,31 +1616,9 @@ Til slutt skal du regne ut $K_p$ og $T_i$ for en PI regulator
 
 \svar{} 
 
-$$\includegraphics[width=15.5cm]{i01656x02.eps}$$
+Both the lamp and the solenoid coil will be energized:
 
-\begin{itemize}
-\item{}Steady-state gain ($K$) = 1.333
-\vskip 5pt
-\item{}Dead time ($L_R$) = 0.375 minutes
-\vskip 5pt
-\item{}Reaction rate ($R_R$) = 3.556\% / unit-minute
-\end{itemize} 
-
-\vskip 10pt
-
-Note: the unit of ``unit-minute'' for reaction rate refers to reaction rate corrected for percentage of output step.  In other words, this is not the raw reaction rate figure, but rather the reaction rate per percent of output step.
-
-\vskip 10pt
-
-Ideally, there will be minimal effect on the apparent dead time ($L_R$) of the process, since such ``transport delays'' are usually unrelated to the manipulated variable.
- 
-The reaction rate ($R_R$) will also (ideally) remain constant.  Although the slope of the tangent line to the point of inflection on the PV curve will be steeper, this increase in steepness should be proportional to the increase in output step-change, resulting in an $R_R$ figure that is the same as with a lesser output step-change.
-
-Of course, if the process gain changes throughout the PV range, then the reaction rate ($R_R$) will be affected by an increase in output step-change.
-
-\vskip 10pt
-
-$\tau$ = 0.375 minutes (approximately)
+$$\includegraphics[width=15.5cm]{i04527x03.eps}$$
 
 \vskip 10pt \filbreak 
 
@@ -1664,60 +1628,41 @@ $\tau$ = 0.375 minutes (approximately)
 
 \notes{} 
 
-{\it Calculating process gain:}
-
-$K$ = $\Delta$PV / $\Delta$Output
-
-$K$ = 20\% / 15\%
-
-$K$ = 1.3333
- 
-\vskip 10pt
-
-{\it Calculating apparent dead time:}
-
-$L_R$ = (3 horizontal divisions on plot)(7.5 seconds / division)
-
-$L_R$ = 22.5 seconds
-
-$L_R$ = 0.375 minutes
- 
-\vskip 10pt
- 
-{\it Calculating reaction rate:}
-
-$R_R$ = $\Delta$PV / (Lag time)($\Delta$Output)
-
-$R_R$ = 20\% / (0.375 min)(15\%)
-
-$R_R$ = 3.556\% / unit-minute
- 
-\vskip 10pt
- 
-NOTE: Some references suggest to calculate the reaction rate ($R_R$) as shown: the slope of the tangent line in \% per minute, per unit of output change.  Others omit the percent of output change, leading to an $R_R$ figure in units of \% per minute, but they assume an output change of only 1\% (1 unit), or else they incorporate the $\Delta$Output figure in a later equation when $R_R$ is used to calculate ideal PID constants.  
-
-The tangent line slope is meaningless unless referenced to a specified change in output, since different step-changes in the output signal will lead to different rates of PV change per minute.
-
-\vskip 10pt
 
 
-Time constant ($\tau$) may be calculated two different ways:
- 
-\vskip 10pt
 
-$\tau$ = Time required for PV to change 63.2\% from starting to final value (from the time the PV first starts to change -- no need to draw a reaction rate tangent line).
- 
-\vskip 10pt
 
-$\tau$ = Time required for reaction rate tangent line to span full $\Delta$PV.
 
-\vskip 10pt
 
-NOTE: these two methods often produce significantly different results.  When in doubt, the best method to use is the first one, measuring the 63.2\% point on the vertical scale and then counting horizontal units of time.
 
-%INDEX% Control, PID tuning: step change (output) revealing process gain
-%INDEX% Control, PID tuning: step change (output) revealing process dead time
-%INDEX% Control, PID tuning: step change (output) revealing process reaction rate
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtual Troubleshooting} \vrule} \hrule}
+
+This question is a good candidate for a ``Virtual Troubleshooting'' exercise.  Presenting the diagram to students, you first imagine in your own mind a particular fault in the system.  Then, you present one or more symptoms of that fault (something noticeable by an operator or other user of the system).  Students then propose various diagnostic tests to perform on this system to identify the nature and location of the fault, as though they were technicians trying to troubleshoot the problem.  Your job is to tell them what the result(s) would be for each of the proposed diagnostic tests, documenting those results where all the students can see.
+
+During and after the exercise, it is good to ask students follow-up questions such as:
+
+\begin{itemize}
+\item{} What does the result of the last diagnostic test tell you about the fault?
+\item{} Suppose the results of the last diagnostic test were different.  What then would that result tell you about the fault?
+\item{} Is the last diagnostic test the best one we could do?
+\item{} What would be the ideal order of tests, to diagnose the problem in as few steps as possible?
+\end{itemize}
+
+
+\vfil \eject
+
+\noindent
+{\bf Prep Quiz:}
+
+$$\includegraphics[width=15.5cm]{i04527x01.eps}$$
+
+The following is the PLC's program as it appears printed on paper.  From this information, determine the status of the lamp and of the solenoid coil provided a process pressure of 130 PSI, a process temperature of 186 $^{o}$F, and someone continuously pressing the pushbutton switch:
+
+$$\includegraphics[width=15.5cm]{i04527x02.eps}$$
+
+
+%INDEX% PLC, relating I/O status to virtual elements
 
 \vfil \eject 
 

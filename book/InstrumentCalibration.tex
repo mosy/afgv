@@ -14,58 +14,59 @@ Allt instrumenter har minst en \textit{inngang} og en \textit{utgang}. For en tr
 
 Justering av måleområde vil si å sette opp hvilke verdier, på inngangen, som  skal vi min- og max utgangssignal. En trykktransmitter kan f.eks. ha et måleområde fra 0 til 20 bar (0 bar = 4mA : 20 bar = 20mA) men vi bestemmer oss for å justere måleområde til å være 0 til 15 bar (0 bar = 4mA :15 bar = 20mA)
 
-Å kalibrere et instrument betyr å sjekke, og eventuelt justere (om nødvendig), responsen slik at utgangen stemmmer nøyaktig med inngangen i det valgte måleområde. 
-To \textit{calibrate} an instrument means to check and adjust (if necessary) its response so the output accurately corresponds to its input throughout a specified range.  In order to do this, one must expose the instrument to an actual input stimulus of precisely known quantity.  For a pressure gauge, indicator, or transmitter, this would mean subjecting the pressure instrument to known fluid pressures and comparing the instrument response against those known pressure quantities.  One cannot perform a true calibration without comparing an instrument's response to known, physical stimuli.  \index{Calibration}
+Å kalibrere et instrument betyr å sjekke, og eventuelt justere (om nødvendig), responsen slik at utgangen stemmmer nøyaktig med inngangen i det valgte måleområde. For å gjøre dette må en tilføre inngangen på instrumentet en kjent og nøyaktig verdi. For trykktransmitter vil dette si at en må tilføre et kjent og nøyaktig trykk. Dette gjøres ofte med et trykkalibreringsinstrument som har 3-4 ganger bedre nøyaktighet en hva som kreves av målingen. Det er ikke mulig å kalibrere uten å tilføre en kjent fysisk påvirkning til instrumentets inngang. 
 
-To \textit{range} an instrument means to set the lower and upper range values so it responds with the desired sensitivity to changes in input.  For example, a pressure transmitter set to a range of 0 to 200 PSI (0 PSI = 4 mA output ; 200 PSI = 20 mA output) could be re-ranged to respond on a scale of 0 to 150 PSI (0 PSI = 4 mA ; 150 PSI = 20 mA). \index{Ranging}
+På analoge instrumenter vil en justering av måleområde som regel kreve en om kalibrering. Dette er på grunn av  at det er de to skruene Zero og Range(span) som brukes til begge formål. Digitale instrumenter har separate justeringer for hvert av disse formålene. Det er derfor viktig å vite forskjellen. 
 
-In analog instruments, re-ranging could (usually) only be accomplished by re-calibration, since the same adjustments were used to achieve both purposes.  In digital instruments, calibration and ranging are typically separate adjustments (i.e. it is possible to re-range a digital transmitter without having to perform a complete recalibration), so it is important to understand the difference.
 
 
 
 
 \filbreak
-\section{Zero and span adjustments (analog instruments)}
+\section{Zero og span justeringer på analoge instrumenter}
 
-The purpose of \textit{calibration} is to ensure the input and output of an instrument reliably correspond to one another throughout the entire range of operation.  We may express this expectation in the form of a graph, showing how the input and output of an instrument should relate.  For the vast majority of industrial instruments this graph will be linear:
+Hensikten med \textit{kalibrering} er å sørge for at inn- og utgangen på et instrument stemmer overens i hele måleområdet. Hva som menes med dette kan vises i en graf som viser hvordan inngangen  og utgangen skal forholede seg tilhverandre. For de aller fleste instrumenter vil dette forholdet være linært. Det vil si at vi har en rett linje i grafen. 
+
 
 $$\includegraphics{calibrate01.eps}$$
 
-This graph shows how any given percentage of input should correspond to the same percentage of output, all the way from 0\% to 100\%.
+Denne grafen viser hvordan en prosent av inngangen skal stemmed med samme prosent av utgangen, hele veien fra 0\% til 100\% 
 
 \filbreak
 
-Things become more complicated when the input and output axes are represented by units of measurement other than ``percent.''  Take for instance a pressure \textit{transmitter}, a device designed to sense a fluid pressure and output an electronic signal corresponding to that pressure.  Here is a graph for a pressure transmitter with an input range of 0 to 100 pounds per square inch (PSI) and an electronic output signal range of 4 to 20 milliamps (mA) electric current:
+Det blir litt mer komplisert når inn- og utgangs aksene viser enheten som brukes istedenfor prosent. Ta f.eks. en \textit{trykktransmitter}, det er et instrument som skal gjøre om et trykk i gass eller væske til et signal på utgangen av transmitteren, ofte 4-20mA. Her vises en graf for en trykktransmitter med et måleområde på inngangen på 0-100 bar og et elektronisk utgangssignal på 4-20mA. 
+
 
 $$\includegraphics{calibrate02.eps}$$
 
-Although the graph is still linear, zero pressure does not equate to zero current.  This is called a \textit{live zero}, because the 0\% point of measurement (0 PSI fluid pressure) corresponds to a non-zero (``live'') electronic signal.  0 PSI pressure may be the LRV (Lower Range Value) of the transmitter's input, but the LRV of the transmitter's output is 4 mA, not 0 mA.  \index{Live zero} \index{LRV} \index{Lower range value}
+Selv om grafen fremdeles er linær, er ikke lengre null trykk tilsvarende null strøm. Dette kalles et aktivt nullpunkt, fordi null trykk på inngangen tilsvarer en strøm på utgangen som ikke er null. 0 bar er LRV på inngangen mens LVR for utgangen er 4mA og ikke 0mA. 
 
-Any linear, mathematical function may be expressed in ``slope-intercept'' equation form:
+Enhver linær matematisk funkson kan beskrives med formelen:
+
 
 $$y = mx + b$$
 
 \noindent
 Where,
 
-$y$ = Vertical position on graph
+$y$ = Vertikal posisjon på grafen.
 
-$x$ = Horizontal position on graph
+$x$ = Horisontal posisjon på grafen. 
 
-$m$ = Slope of line
+$m$ = Stigningen til grafen
 
-$b$ = Point of intersection between the line and the vertical ($y$) axis
+$b$ = Punktet der grafen skjærer igjennom y aksen. 
 
 \vskip 10pt
 
 
-This instrument's calibration is no different.  If we let $x$ represent the input pressure in units of PSI and $y$ represent the output current in units of milliamps, we may write an equation for this instrument as follows:
+Dette instrumentet sin kalibrering er det samme. Om vi lar $x$ representere instrumentets inngang i bar og $y$ representerer utgangen i milliampere, kan vi skrive følgende formel for dette instrumentet som følger:
+
 
 $$y = 0.16x + 4$$
 
-On the actual instrument (the pressure transmitter), there are two adjustments which let us match the instrument's behavior to the ideal equation.  One adjustment is called the \textit{zero} while the other is called the \textit{span}.  These two adjustments correspond exactly to the $b$ and $m$ terms of the linear function, respectively: the ``zero'' adjustment shifts the instrument's function vertically on the graph ($b$), while the ``span'' adjustment changes the slope of the function on the graph ($m$).  By adjusting both zero and span, we may set the instrument for any range of measurement within the manufacturer's limits. \index{Zero adjustment} \index{Span adjustment}
+På selve instrumetet (trykktransmitteren) er det to justeringer som lar oss tilpasse instrumentet respons til denne ideelle formelen. Den dene justeringen kalles \textit{zero} mens den andre kalles \textit{span} eller av og til \textit{range} alt eller produsent. Disse to justeringene stemmer overens med uttrykkene $b$ og $m$ i formelen for en linær funksjon: zero justeringen flytter instrumentets funksjon  vertikalt langs y-aksen, mens "span" justerer grafens stigning. Ved å justere zero og span kan vi justere instrumentets respons innenfor dets grenser. 
 
-The relation of the slope-intercept line equation to an instrument's zero and span adjustments reveals something about how those adjustments are actually achieved in any instrument.  A ``zero'' adjustment is always achieved by \textit{adding} or \textit{subtracting} some quantity, just like the $y$-intercept term $b$ adds or subtracts to the product $mx$.  A ``span'' adjustment is always achieved by \textit{multiplying} or \textit{dividing} some quantity, just like the slope $m$ forms a product with our input variable $x$.  
 
 \vskip 10pt
 
@@ -91,82 +92,91 @@ Span adjustments typically take one of these forms:
 \item Spring rate (changing the force per unit distance of stretch)
 \end{itemize}
 
-It should be noted that for most analog instruments, zero and span adjustments are \textit{interactive}.  That is, adjusting one has an effect on the other.  Specifically, changes made to the span adjustment almost always alter the instrument's zero point\footnote{However, it is actually quite rare to find an instrument where a change to the zero adjustment affects the instrument's span.}.  An instrument with interactive zero and span adjustments requires much more effort to accurately calibrate, as one must switch back and forth between the lower- and upper-range points repeatedly to adjust for accuracy. \index{Interactive zero and span adjustments}
+Det er viktig å merke seg at for de fleste instrumenter, vil zero og span justeringer påvirker hverandre. Det vil si at om en justerer en av de vil dette påvirke den andre. Dette gjelder spesielt span da denne nesten alltid påvirker zero. En justering av zero vil ikke alltid påvirke spen. Det er derfor viktig å vite at ved justering av analoge instrumenter må en gå frem og tilbake mellom zero og span til ønsket resultat er oppnådd. 
+
  
 
 
 
-
-
 \filbreak
-\section{Calibration errors and testing}
+\section{Kalibreringsfeil og testing}
 
-The efficient identification and correction of instrument calibration errors is an important function for instrument technicians.  For some technicians -- particularly those working in industries where calibration accuracy is mandated by law -- the task of routine calibration consumes most of their working time.  For other technicians calibration may be an occasional task, but nevertheless these technicians must be able to quickly diagnose calibration errors when they cause problems in instrumented systems.  This section describes common instrument calibration errors and the procedures by which those errors may be detected and corrected.
+Å effektivt kunne indentifisere og rette opp kalibreringsfeil er viktig for en automatikker. For noen automatikkere spesielt de som jobber i industrier der caliberingsnøyaktivhet er et krav etter loven. Vil kalibrering være noe som tar det meste av tiden dere. For andre automatikere vil kalibrering være noe som utføres en gang i blant. Det er uansett viktig å rette opp kalibreringsfeil raskt og effektivt. Denne seksjonen beskriver noen vanlige kalibreringsfeil og hvor rutiner for å rette dem opp. 
 
 
 
 
 \filbreak
-\subsection{Typical calibration errors}
+\subsection{Typsike kalibreringsfeil}
 
-Recall that the slope-intercept form of a linear equation describes the response of \textit{any} linear instrument:
+Husk at formelen for en rett linje beskriver overføringsfunksjone for alle linære instrumneter. 
+
 
 $$y = mx + b$$
 
 \noindent
-Where,
+Her er,
 
 $y$ = Output
 
-$m$ = Span adjustment
+$m$ = Span justering
 
 $x$ = Input
 
-$b$ = Zero adjustment
+$b$ = Zero justering
 
 \vskip 10pt
+
+En \textit{zero shift} kalibreringsfeil flytter funksonen vertikalt på grafen, som er det samme som at $b$ verdien i formelen er feil. Dette påvirker alle punkter på grafen likt, noe som gjør at den prosentvise feilen er lik for hele måleområdet. Her et eksempel for en trykktransmitter med et måleområde på inngangen på 0-100 bar og utgangen 4-20mA. 
 
 A \textit{zero shift} calibration error shifts the function vertically on the graph, which is equivalent to altering the value of $b$ in the slope-intercept equation.  This error affects \textit{all} calibration points equally, creating the same percentage of error across the entire range.  Using the same example of a pressure transmitter with 0 to 100 PSI input range and 4 to 20 mA output range: \index{Zero shift}
 
 $$\includegraphics{calibrate06.eps}$$
 
-If a transmitter suffers from a zero calibration error, that error may be corrected by carefully moving the ``zero'' adjustment until the response is ideal, essentially altering the value of $b$ in the linear equation.
+Om en transmitter har zero shift feil, kan denne feilen rettes opp i ved å justere zero til responsen er innenfor kravene. Dette er det samme som å forandre på $b$ verdien i formelen for en rett linje. 
+
 
 \filbreak
 
-A \textit{span shift} calibration error shifts the slope of the function, which is equivalent to altering the value of $m$ in the slope-intercept equation.  This error's effect is unequal at different points throughout the range: \index{Span shift}
+\textit{Span shift} kalibreringsfeil eller forsterkningsfeil på transmitteren er det sammes om å forandre stigningen $m$ i formelen for en rett linje. Effekten av denne feilen vil ikke være lik i noen del av måleområdet. 
+
 
 $$\includegraphics{calibrate07.eps}$$
 
-If a transmitter suffers from a span calibration error, that error may be corrected by carefully moving the ``span'' adjustment until the response is ideal, essentially altering the value of $m$ in the linear equation.
+Om en transmitter har feil span eller span kalibreringsfeil, kan en  rette opp i dette ved å justere span til responsen er innenfor kravet. Husk at span som regel påvirker zero slik at du nok blir nødt til å justere begge. Dette er det samme som å justere $m$ i formelen for en rett linje. 
+
 
 \filbreak
 
-A \textit{linearity} calibration error causes the instrument's response function to no longer be a straight line.  This type of error does not directly relate to a shift in either zero ($b$) or span ($m$) because the slope-intercept equation only describes straight lines:
+Om en transmitter har linearitetsfeil vil ikke overføringsfunksjon lengre være en rett linje. Denne type feil kan ikke rettes med zero og span justeringer.
 
 $$\includegraphics{calibrate08.eps}$$
 
-Some instruments provide means to adjust the linearity of their response, in which case this adjustment needs to be \textit{carefully} altered.  The behavior of a linearity adjustment is unique to each model of instrument, and so you must consult the manufacturer's documentation for details on how and why the linearity adjustment works.  If an instrument does not provide a linearity adjustment, the best you can do for this type of problem is ``split the error'' between high and low extremes, so the maximum absolute error at any point in the range is minimized.  \index{Linearity error}
+Noen instumenter har justeringer for linearitet. Denne justeringen må i tilfellet gjøres i nøye samsvar med manualen til produsenten. Noen instrumenter vil ikke ha en slik justering, det beste du da kan gjøre er å fordele feilen innenfor måleområde slik du kommer innenfor kravet til feilprosent. 
+
 
 \filbreak
 
-A \textit{hysteresis} calibration error occurs when the instrument responds differently to an increasing input compared to a decreasing input.  The only way to detect this type of error is to do an \textit{up-down} calibration test, checking for instrument response at the same calibration points going down as going up:  \index{Hysteresis error}
+Hysteresefeil er kalibreringsfeil der transmitteren reagerer forskjelling alt etter om den mottar stigende eller synkende verdier. Den eneste måten å oppdage slike feil på er å gjøre en opp/ned test av transmitteren. Det vil si at den bruker det samme målepunktene når en går opp i verdi som når en går ned. 
+
 
 $$\includegraphics{calibrate09.eps}$$
 
-Hysteresis errors are almost always caused by mechanical friction on some moving element (and/or a loose coupling between mechanical elements) such as bourdon tubes, bellows, diaphragms, pivots, levers, or gear sets.  Friction always acts in a direction opposite to that of relative motion, which is why the output of an instrument with hysteresis problems always \textit{lags} behind the changing input, causing the instrument to register falsely low on a rising stimulus and falsely high on a falling stimulus.  Flexible metal strips called \textit{flexures} -- which are designed to serve as frictionless pivot points in mechanical instruments -- may also cause hysteresis errors if cracked or bent.  Thus, hysteresis errors cannot be remedied by simply making calibration adjustments to the instrument -- one must usually replace defective components or correct coupling problems within the instrument mechanism.  \index{Flexure}
+Hysteresefeil kommer som regel alltid av mekanisk friksjon på en beveglig del eller slark i koblingen mellom mekaniske deler. Friksjon virker alltid i motsatt retning av bevegelsen, hysteresefeil vil derfor alltid ligge etter inngangssignalet. Hysteresefeil kan ikke rettes opp i ved justeringer på instrumentet, det er som regel en mekaniske komponent som må byttes eller smøres. 
 
 \vskip 10pt
 
-In practice, most calibration errors are some combination of zero, span, linearity, and hysteresis problems.  An important point to remember is that with rare exceptions, zero errors always accompany other types of errors.  In other words, it is extremely rare to find an instrument with a span, linearity, or hysteresis error that does not \textit{also} exhibit a zero error.  For this reason, technicians often perform a single-point calibration test of an instrument as a qualitative indication of its calibration health.  If the instrument performs within specification at that one point, its calibration over the entire range is \textit{probably} good.  Conversely, if the instrument fails to meet specification at that one point, it definitely needs to be recalibrated.
+I praksis vil de fleste kalibreringsfeil være en kombinasjon av zero, span, linearitet og hysteresefeil. Det er viktig å huske at med få unntak, zero feil kominers som regel med andre feil. Det er ekstremt skjelden en finner en transmitter med span, linearitet eller hysteresefeil som ikke også har en zero feil. Dette gjør at om et instrument stemmer i ett punkt, vil det som regel stemme i alle punkter. Om det ikke gjør det, er det på tide med en rekalibrering. 
+
 
 \filbreak
 
-A very common single-point test for instrument technicians to perform on differential pressure (``DP'') instruments is to close both block valves on the three-valve manifold assembly and then open the equalizing valve, to produce a known condition of 0 PSI differential pressure:
+Et vanlig testpunkt for automatikere å utføre på en DP-celle er å lukke begge ventiler på manifolden og åpne utlingningsventilen og å tilføre et kjent differansetrykk på 0 bar. 
+
 
 $$\includegraphics{pressure72.eps}$$
 
-Most DP instrument ranges encompass 0 PSI, making this a very simple single-point check.  If the technician ``blocks and equalizes'' a DP instrument and it properly reads zero, its calibration is \textit{probably} good across the entire range.  If the DP instrument fails to read zero during this test, it definitely needs to be recalibrated.
+De fleste DP-celler har 0 bar i måleområdet, noe som gjør dette til en enkel enpunkts test. Om denne testen er ok er instrumentet sansynligvis ok over hele måleområdet. Om det ikke er ok må instrumentet rekalibreres. 
 
 
 
@@ -180,11 +190,13 @@ Most DP instrument ranges encompass 0 PSI, making this a very simple single-poin
 
 
 \filbreak
-\subsection{As-found and as-left documentation}
+\subsection{As-found og as-left dokumentasjon}
 
-An important principle in calibration practice is to document every instrument's calibration as it was found \textit{and} as it was left after adjustments were made.  The purpose for documenting both conditions is to make data available for calculating instrument \textit{drift} over time.  If only one of these conditions is documented during each calibration event, it will be difficult to determine how well an instrument is holding its calibration over long periods of time.  Excessive drift is often an indicator of impending failure, which is vital for any program of predictive maintenance or quality control.  \index{Drift}  \index{As-found calibration}  \index{As-left calibration}  \index{Predictive maintenance}
+Et viktig printsipp ved kalibrering er å dokumentere interumenters som de ble funnet (as-fount) og som forlatt (as-left) etter justering. Hensikten med å dokumentere begge er å lage data som gjøre det mulig å kalkulere hvor mye instrumentet driver over tid. Dette er ikke mulig med bare en av disse. Om et instrument driver mye over tid kan dette være en indikator på at instrumentet snart blir defekt. Dette kan være nyttig for prevantivt vedlikehold av instrumentparken. 
 
-Typically, the format for documenting both As-Found and As-Left data is a simple table showing the points of calibration, the ideal instrument responses, the actual instrument responses, and the calculated error at each point.  The following table is an example for a pressure transmitter with a range of 0 to 200 PSI over a five-point scale:
+
+Et vanlig format for å dokumentere as-fount og as-left data er en tabell som viser kalibreringspunktene, ideell respons og faktisk respons og kalkulert feil for hvert punkt. Her vises et eksempel for en transmitter med et måleområde på 0-200 PSI med 5 testpunkter. 
+
 
 % No blank lines allowed between lines of an \halign structure!
 % I use comments (%) instead, so Tex doesn't choke.
@@ -232,11 +244,13 @@ $$\vbox{\offinterlineskip
 } % End of \halign 
 }$$ % End of \vbox
 
-The following photograph shows a single-point ``As-Found'' calibration report on a temperature indicating controller, showing the temperature of the calibration standard ($-78.112$ degrees Celsius), the display of the instrument under test (IUT, $-79$ degrees Celsius), and the error between the two ($-0.888$ degrees Celsius):
+Dette bildet viser en enkeltpunkts As-Found kalibrerings  rapport for en temperaturtransmitter. Den viser temperaturen for calibreringsstandarden ($-78.112$ degrees Celsius), temperaturen som instrumentet viste under testen (IUT, $-79$ degrees Celsius) og forskjellen mellom de to ($-0.888$ degrees Celsius)
+
 
 $$\includegraphics[width=3in]{calibrate28.eps}$$
 
-Note that the mathematical sign of the error is important.  An instrument that registers $-79$ degrees when it should register $-78.112$ degrees exhibits a \textit{negative error}, since its response is lower (i.e. more negative) than it should be.  Expressed mathematically: Error = IUT $-$ Standard.  When the error must be expressed in percentage of span, the formula becomes:
+Legg merket til fortegnet til avviket. Her er det negativt siden responsen er mindre en den skulle vært. Når feilen skal gis i prosent av span blir formelen:
+
 
 $$\hbox{Error} = {\hbox{IUT} - \hbox{Standard} \over \hbox{Span}} \times 100\%$$
 
@@ -244,9 +258,9 @@ $$\hbox{Error} = {\hbox{IUT} - \hbox{Standard} \over \hbox{Span}} \times 100\%$$
 
 
 \filbreak
-\subsection{Up-tests and Down-tests}
+\subsection{Test med stigende og synkende verdier}
 
-It is not uncommon for calibration tables to show multiple calibration points going \textit{up} as well as going \textit{down}, for the purpose of documenting hysteresis and deadband errors.  Note the following example, showing a transmitter with a maximum hysteresis of 0.313 \% (the offending data points are shown in bold-faced type):
+Det er ikke uvanlig at en bruker flere kalibreringspunkter, og at en testet med stigende og synkende verdier. 5 punkts kalibrering er en valig standard. I dette eksempelet vises en transmitter med max hysterese på 0.313 \%. Hensikten med opp/ned test er å avdekker hysterese- og dødbåndsfeil. 
 
 % No blank lines allowed between lines of an \halign structure!
 % I use comments (%) instead, so Tex doesn't choke.
@@ -314,11 +328,10 @@ $$\vbox{\offinterlineskip
 } % End of \halign 
 }$$ % End of \vbox
 
-Note again how error is expressed as either a positive or a negative quantity depending on whether the instrument's measured response is above or below what it should be under each condition.  The values of error appearing in this calibration table, expressed in percent of span, are all calculated by the following formula:
-
+Legg igjen merke til at feilen er enten negativ eller positiv alt etter om den målte verdien er over eller under ønsket verdi. Veridene i denne tabellen som er oppgitt i prosent av span er utregnet med denne formelen:
 $$\hbox{Error} = \left( {{I_{measured} - I_{ideal}} \over 16 \hbox{ mA}} \right)  \left( 100 \% \right)$$
 
-In the course of performing such a directional calibration test, it is important not to overshoot any of the test points.  If you do happen to overshoot a test point in setting up one of the input conditions for the instrument, simply ``back up'' the test stimulus and re-approach the test point from the same direction as before.  Unless each test point's value is approached from the proper direction, the data cannot be used to determine hysteresis/deadband error.
+Ved utførelsen av opp/ned test er det viktig å ikke gå over noen av testpunktene. Om du havner over et av punktene må du gå litt tilbake og nærme deg testpuniktet på samme måte som før. Om du ikke klarer dette vil du ikke kunne si noe om hysterese- og dødbåndsfeil
 
 
 

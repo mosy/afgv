@@ -68,37 +68,18 @@
 % End preamble
 
 \begin{document}
-% !TEX root = /home/fred-olav/afgv/src/preamble.tex
-\centerline{\bf Tittel på leksjonen}  \bigskip
+\centerline{PLS - Kombinatoriske oppgaver}  \bigskip
 
 Kompetansemål:
 \begin{itemize}[noitemsep]
 
-	\item utføre arbeid på automatiserte anlegg fagmessig, nøyaktig og i overensstemmelse med krav til helse, miljø og sikkerhet og rutiner for kvalitetssikring og internkontroll
-	\item utføre risikovurdering og vurdere tiltak for ivaretakelse av person- og maskinsikkerhet
-	\item vurdere hvilke regelverk og normer som gjelder for arbeidet som skal utføres og anvende dette
-	\item planlegge, utføre, vurdere kvalitet, sluttkontrollere og dokumentere arbeidet
 	\item planlegge, programmere, montere og idriftsette programmerbare styresystemer
 	\item endre og tilpasse skjermbilder for grensesnitt mellom menneske og maskin
 	\item anvende ulike elektroniske kommunikasjonssystemer i automatiserte anlegg
-	\item vurdere datasikkerhet i automatiserte anlegg
-	\item tegne, lese og forklare instrumenterte prosessflytskjemaer og bruke annen relevant dokumentasjon for automatiserte anlegg
-	\item montere, konfigurere, kalibrere og idriftsettelse digitale og analoge målesystemer
-	\item idriftsette og optimalisere regulatorer basert på prosessbehov
-	\item montere og idriftsette ulike typer pådragsorganer med tilhørende forstillingselementer og hjelpeutstyr
-	\item programmere, idriftsette samt gjøre rede for roboters funksjon og anvendelse i produksjonsanlegg
-	\item måle fysiske størrelser i automatiserte anlegg
-	\item feilsøke og rette feil i automatiserte anlegg
-	\item bruke gjeldende regelverk og normer for elektriske installasjoner på maskiner
-	\item bruke gjeldende regelverk og normer for installasjon av elektroniske kommunikasjonssystemer
-	\item beskrive ulike vedlikeholdssystemer og -rutiner knyttet til automatiserte anlegg, og anvende et av disse
-	\item redegjøre for bedriftens organisasjonsoppbygging og bedriftens verdiskapning i et samfunnsperspektiv
-	\item dokumentere egen opplæring i automatiseringssystemer
 \end{itemize}
 	Læringsmål
 	\begin{itemize}[noitemsep]
-		\item Kunne 
-		\item Kunne 
+		\item Kunne løse kombinatoriske styringer med PLS programmering
 	\end{itemize}
 
 	Forkunnskaper
@@ -108,12 +89,18 @@ Kompetansemål:
 
 	\end{itemize}
 \textbf{Teori}\\\\
-afgv.pdf - Programmerbare Logiske Styringer - Inngangs- og utgangs tilkoblinger (IO-er)\\\\
 Øvingsoppgaver til leksjon - følger neste side\\\\
 Innlevering til leksjon - Det er ingen innlevering til leksjonen. 
 \bigskip 
 \hrule
 \vfil \eject
+
+\bigskip 
+ 
+\hrule
+
+\vfil \eject
+
 \vfil \eject
 
 \oppgave{} 
@@ -160,76 +147,6 @@ The motor control circuit -- although not shown to you here -- uses two contacto
 
 \vfil \eject 
 
-
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-An Allen-Bradley Logix5000 PLC is used to control the starting and stopping of an air compressor based on momentary-contact pushbutton switch inputs as well as high and low pressure switches (PSH and PSL, respectively).  Analyze this program and explain how it is supposed to work:
-
-$$\includegraphics[width=15.5cm]{i02346x01.eps}$$
-
-\filbreak
-
-$$\includegraphics[width=15.5cm]{i02346x02.eps}$$
-
-In particular, answer these following questions:
-
-\begin{itemize}
-\item{} Determine the ``normal'' electrical statuses of all switches (e.g. NO or NC) connected to the inputs of this PLC, based on an examination of the respective contact instructions within the PLC program.
-\item{} Why is is important that a {\it retentive} timer instruction be used for the calculation of total run-time? 
-\item{} What is the significance of the maintenance warning light controlled by this PLC?
-\end{itemize}
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Note how all instructions in this Logix5000 PLC program are addressed by {\it tagname} rather than by hardware addresses (e.g. {\tt I:2/6}, {\tt O:3/1}).  How do you suppose the PLC ``knows'' which real I/O points to associate with which instructions in the program?
-\item{} How will this system behave if the reset switch fails shorted?
-\item{} How will this system behave if the high-pressure switch fails open?
-\item{} How will this system behave if the high-pressure switch fails shorted?
-\item{} How will this system behave if the low-pressure switch fails open?
-\item{} How will this system behave if the low-pressure switch fails shorted?
-\end{itemize}
-
-\underbar{file i02346}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-Input switch electrical ``normal'' statuses:
-
-\begin{itemize}
-\item{} {\bf Start} = NO
-\item{} {\bf Stop} = NC
-\item{} {\bf PSL} = NC
-\item{} {\bf PSH} = NC
-\item{} {\bf Reset} = NO
-\end{itemize}
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-The RTO timer instruction is configured to reach its end-count every hour of compressor run time.  It self-resets, with the counter instruction keeping tabs on how many timer cycles (how many hours) the compressor has run.  It is important that an RTO timer instruction is used, so that it will continue to accumulate time even if the compressor runs for less than an hour.
-
-\vskip 10pt
-
-The maintenance warning light turns on when the accumulated run time equals or exceeds 250 hours.
-
-%INDEX% PLC, ladder logic program analysis and explanation
-
-\vfil \eject 
 
 
 
@@ -339,7 +256,7 @@ First, determine a start-up sequence that makes sense: which conveyor belt shoul
 
 This operation uses a Siemens S7 series PLC to control the three conveyor belts.  Analyze this program and explain how it accomplishes the task of starting up the three conveyors in sequence:
 
-$$\includegraphics[width=15.5cm]{i04428x02.eps}$$
+$$\includegraphics[width=10.5cm]{i04428x02.eps}$$
 
 Lastly, determine where you might add a contact instruction for an {\it emergency shutoff} safety switch, so that all three conveyors stop simultaneously if ever the safety switch is actuated.
 
@@ -380,230 +297,6 @@ An emergency stop input contact could be added in ``series'' with the regular St
 %INDEX% PLC, ladder logic program analysis and explanation
 
 \vfil \eject 
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-This Allen-Bradley PLC program detects whether an integer number stored in register {\tt N7:4} is odd or even, energizing one of two lights to indicate the result:
-
-$$\includegraphics[width=15.5cm]{i02387x01.eps}$$
-
-Explain how this very simple program detects the oddness or evenness of the integer number, and also determine which output bit activates for the odd result and which activates for the even result.
-
-\vskip 10pt
-
-Could this same programming technique be applied in a Siemens S7-200 PLC, say to determine whether the integer number stored in word {\tt VW88} was odd or even?
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Does the Koyo CLICK PLC offer similar bit-wise addressing capability, which could be used in the same way?
-\end{itemize}
-
-\underbar{file i02387}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-Yes, this same technique may be applied in a Siemens S7-200 PLC.  For a ``word'' (16 bit) integer stored in V memory register {\tt VW88}, the contact bit address would be {\tt V88.0}.
- 
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-The ``zeroeth'' bit of a binary number is the bit in the 1's place, the only place-weight with an odd value.  Therefore, any odd binary number will have a 1 in this place, while any even binary number will have a 0 in this place.  The status of the least-significant bit (LSB) for any binary number defines its ``oddness'' or ``evenness''.
-
-\vskip 10pt
-
-{\tt O:0/0} is the output activated when {\tt N7:4} is odd (i.e. its LSB is 1).  {\tt O:0/1} is the output activated when {\tt N7:4} is even (i.e. its LSB is 0).  
-
-%INDEX% PLC, ladder logic program analysis and explanation (Allen-Bradley)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-An important pump in a chemical process is turned by an electric motor, and operators want to have visual indication in the control room that the pump is indeed turning.  There is no way to attach a speed switch to the pump shaft (that would be too easy!).  Instead, someone has installed a proximity switch near the pump shaft, situated to pick up the passing of a keyway in the shaft with each rotation.  Thus, the proximity switch will output a ``pulse'' signal when the pump shaft is spinning:
-
-$$\includegraphics[width=15.5cm]{i03838x01.eps}$$
-
-Operators wanted the indicator light in the control room to blink when the pump is running, for an indication of shaft motion.  The problem is, the shaft turns much too fast (approximately 1750 RPM) to directly drive the indicator with the proximity switch signal, and so an Allen-Bradley PLC was programmed to produce a slower blink using this program:
-
-$$\includegraphics[width=15.5cm]{i03838x02.eps}$$
-
-Explain how this program works to fulfill the function of a {\it frequency divider}, converting the high-speed pulse signal of the proximity switch into a low-speed blink for the operator light.  
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Explain how a {\it frequency divider} circuit built out of J-K flip-flop integrated circuits functions, and then describe how this PLC program is similar in principle.
-\item{} Explain how to speed up the blinking rate of the light for any given motor shaft speed.
-\end{itemize}
-
-\underbar{file i03838}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-Hint: the contact address {\tt C5:0.ACC/13} refers to the 13th bit of the counter's accumulator register, which is a 16-bit binary number.  The 15th bit would be the MSB, while the 0th bit is the LSB.
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-If a pulse signal drives a binary counter, the bits of that counter's accumulator value will oscillate at sub-harmonic frequencies.  The LSB will oscillate at exactly one-half the frequency of the input; the next higher-order bit at exactly one-quarter the input frequency; the next higher-order bit at exactly one-eighth the input frequency; etc.
-
-\vskip 10pt
-
-By monitoring bit 13 of the counter's accumulator value, the frequency is divided by a factor of $2^{14}$, which is $1 \over 16384$.  If the shaft speed is exactly 1750 RPM (switch signal frequency = 29.1667 Hz), then the light's blinking frequency will be 0.00178 Hz, or 0.1068 times per minute.  This is very slow (9.36 minutes per on/off blink cycle!), and should probably be sped up for practical reasons.
-
-
-%INDEX% PLC, ladder logic program analysis and explanation (Allen-Bradley)
-
-\vfil \eject 
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-A {\tt NAND} logic function may be built up from a regular {\tt AND} function plus an inverter function (a {\tt NOT} gate) on the output:
-
-$$\includegraphics[width=15.5cm]{i04092x01.eps}$$
-
-The same strategy of ``building'' a {\tt NAND} gate may be done in PLC ladder-diagram programming, by combining a normally-closed contact instruction with two contacts in series.
-
-\vskip 10pt
-
-Examine these two Allen-Bradley PLC programs, and explain why the left-hand program is ``wasteful'' while the right-hand program makes more efficient use of available bits:
-
-$$\includegraphics[width=15.5cm]{i04092x02.eps}$$
-
-Examine these two Siemens S7 PLC programs, and explain why the left-hand program is ``wasteful'' while the right-hand program makes more efficient use of available bits in the same ways the Allen-Bradley example programs were wasteful/efficient:
-
-$$\includegraphics[width=15.5cm]{i04092x03.eps}$$
-
-\vskip 10pt
-
-\noindent
-{\bf Note: many novice PLC programmers commit this error of ``wasting'' valuable I/O as they write their programs!}
-
-
-\underbar{file i04092}
-\vskip 10pt \filbreak 
-
-
-
-
-\svar{} 
-
-Each ``wasteful'' program uses an output bit as the intermediary bit between the {\tt AND} and {\tt NOT} functions when there is no need.  
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-Output I/O points are valuable because they (and they alone) can be used to drive real-world devices on and off.  No need to ``waste'' them on functions that have no real-world application, when we may use bits that are internal to the PLC's memory!
-
-%INDEX% PLC, ladder logic program analysis and explanation (Allen-Bradley)
-%INDEX% PLC, ladder logic program analysis and explanation (Siemens S7)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-An Allen-Bradley MicroLogix 1100 PLC senses a 4-20 mA analog signal from a temperature transmitter using an analog input module (model IF2OF2).  At the lower end of signal scale (100 degrees Fahrehneit = 4 mA DC signal), the input register value in the PLC (the analog-to-digital converter's ``count'' value) is 6240.  At the high end of signal scale (800 degrees Fahrenheit = 20 mA DC signal), the input register value in the PLC is 31200:
-
-$$\includegraphics[width=15.5cm]{i03839x01.eps}$$
-
-A {\it scale} (SCL) instruction in the PLC's program is used to convert this raw analog-to-digital ``count'' value into units of degrees Fahrenheit in the PLC, storing the result in register {\tt N7:2} as an integer number:
-
-$$\includegraphics[width=15.5cm]{i03839x02.eps}$$
-
-Examine the parameters entered into this SCL instruction, and then calculate the actual integer value written to {\tt N7:2} at a temperature of 100 degrees F (4 mA signal) and the actual integer value written to {\tt N7:2} at 800 degrees F (20 mA signal).  The results will {\it not} be exact due to rounding of the Rate and Offset parameters.
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} The particular scaling chosen here is not the best for a realistic application, using an integer number to represent a temperature between 100 and 800 degrees with a resolution of $\pm$ 1 degree.  Explain how we could represent a temperature range of 100.0 to 800.0 degrees instead.
-\item{} For those who have studied thermocouple types, identify the type of thermocouple used in this system.
-\item{} Identify the circumstance(s) under which the scale instruction ({\tt SCL}) will generate an {\it overflow} condition in an Allen-Bradley PLC.
-\end{itemize}
-
-\underbar{file i03839}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-At 100 deg F, {\tt N7:2} = 100 {\it (rounded up from 99.72)}
-
-\vskip 10pt
-
-At 800 deg F, {\tt N7:2} = 799 {\it (rounded up from 798.6)}
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-The SCL instruction's operation is described in the instruction set manual for the MicroLogix 1100 PLC.  It executes the following mathematical expression:
-
-$$\hbox{Scaled value} = {\hbox{Rate} \times \hbox{Value} \over 10000} + \hbox{Offset}$$
-
-\vskip 10pt
-
-At 100 degrees F, the count value will be 6240.  Therefore, the SCL instruction will carry out the following calculation, which it will round to an integer result of 100:
-
-$$\hbox{Scaled value} = {280 \times 6240 \over 10000} + (-75) = 99.72$$
-
-\vskip 10pt
-
-At 800 degrees F, the count value will be 31200.  Therefore, the SCL instruction will carry out the following calculation, which it will round to an integer result of 799:
-
-$$\hbox{Scaled value} = {280 \times 31200 \over 10000} + (-75) = 798.6$$
-
-
-%INDEX% PLC, ladder logic program analysis and explanation (Allen-Bradley MicroLogix 1100)
-
-\vfil \eject 
-
 
 
 \oppgave{} 
@@ -721,96 +414,35 @@ Both the ``Start'' and ``Stop'' pushbutton switches need to have normally-open (
 % Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-This Allen-Bradley SLC 500 PLC program writes data to a variable-frequency drive using Modbus protocol.  The PLC receives data from an HMI panel in the form of an integer value and a momentary ``ENTER pushbutton'' bit signal (writing to bit {\tt B3:0/5} in the PLC).  It is important to note that MicroLogix programs such as this one require a ``one-shot'' to drive any communication instructions such as {\tt MSG}.  If a {\tt MSG} instruction is continually activated in a ladder-logic program it experiences trouble completing its task, as though each fresh scan of the program interrupts the instruction's action begun on the previous scan:
+An Allen-Bradley Logix5000 PLC is used to control the starting and stopping of an air compressor based on momentary-contact pushbutton switch inputs as well as high and low pressure switches (PSH and PSL, respectively).  Analyze this program and explain how it is supposed to work:
 
+$$\includegraphics[width=15.5cm]{i02346x01.eps}$$
 
-$$\includegraphics[width=15.5cm]{i04531x01.eps}$$
+\filbreak
 
-Explain how this program functions, especially how the ``one-shot'' ({\tt ONS}) instruction prevents the {\tt MSG} instruction from ``talking over itself''.  How many integer registers are used in the SLC 500 PLC's memory for storing data relevant to the MSG instruction?  What type(s) of data are being written to the VFD?
+$$\includegraphics[width=15.5cm]{i02346x02.eps}$$
 
-\vskip 10pt
-
-Presently this program sends a Modbus message to another device once for every positive transition of the {\tt B3:0/5} bit.  Suppose you wished to alter this program so that it transmits a Modbus message regularly every half-second or so.  How could you edit the program to do this?
-
-\vskip 10pt
-
-A lot of details seem to be missing from this instruction as it appears in the RSLogix 500 software display.  Identify some of the pertinent parameters we do {\it not} see in this MSG instruction, and where the human programmer could navigate to in the RSLogix software to view them.
-
-\underbar{file i04531}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-\noindent
-{\bf Partial answer:}
-
-\vskip 10pt
-
-In order to alter the program for regular Modbus message transmissions, you can replace the {\tt B3:0/5} contact instruction with a contact instruction linked to one of the {\tt S:4} status bits (a continually counting binary number in the Allen-Bradley PLC's free-running clock).  Choose whichever status bit toggles at a frequency closest to 2 Hz (once every half-second).
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-When bit {\tt B3:0/5} transitions from low to high (0 to 1), the MSG instruction is activated.  According to the Allen-Bradley SLC 500 instruction set manual, you must trigger the MSG instruction {\it once} per use.
-
-\vskip 10pt
-
-In order to alter the program for regular Modbus message transmissions, you can replace the {\tt B3:0/5} contact instruction with a contact instruction linked to one of the {\tt S:4} status bits (a continually counting binary number in the Allen-Bradley PLC's free-running clock).  Choose whichever status bit toggles at a frequency closest to 2 Hz (once every half-second).
-
-\vskip 10pt
-
-The Setup Screen for the MSG instruction prompts entry of the following parameters (all necessary for operation):
+In particular, answer these following questions:
 
 \begin{itemize}
-\item{} {\bf Parameters for PLC:}
-\item{} Data table address (memory location in PLC for communicated data)
-\item{} Size in Elements (how many words of data will be communicated)
-\item{} Channel (serial, Ethernet, etc.)
-\vskip 10pt
-\item{} {\bf Parameters for Target Device:}
-\item{} Message timeout
-\item{} Data table address (memory location in target device for communicated data)
-\item{} Data table offset
-\item{} Local Node Address (serial network address of the target device)
-\item{} Ethernet (IP) Address (Ethernet network address of the target device)
-\item{} MultiHop (whether or not communication happens directly between two devices)
-\item{} {\it various network ``Bridge'' parameters}
+\item{} Determine the ``normal'' electrical statuses of all switches (e.g. NO or NC) connected to the inputs of this PLC, based on an examination of the respective contact instructions within the PLC program.
+\item{} Why is is important that a {\it retentive} timer instruction be used for the calculation of total run-time? 
+\item{} What is the significance of the maintenance warning light controlled by this PLC?
+\item Finnes det en retentive timer til codesys
 \end{itemize}
-
-%INDEX% PLC, ladder logic program analysis and explanation (Allen-Bradley SLC 500)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-An Allen-Bradley SLC 500 controls the start-up and shut-down of a large air blower (fan) with a pressurized lubrication oil sub-system to keep the blower bearings lubricated as they turn:
-
-$$\includegraphics[width=15.5cm]{i04592x01.eps}$$
-
-Analyze this control program, and then explain what each instruction does (including the practical function of each timer instruction).  Also, identify all conditions that will shut down this system (stopping the blower motor and the oil pump).
 
 \vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
 
 \begin{itemize}
-\item{} Why is the oil pressure switch contact ({\tt I:1/4}) in-line with the {\tt LATCH\_RUN} seal-in contact rather than being in-line with the other shut-down permissive contacts (oil level pump vibration, etc.)?
-\item{} Based on the color highlighting shown (red), what state is the program in?
-\item{} Identify all the ``normal'' electrical switch contact statuses for each shutdown switch (e.g. vibration, temperature, etc.) based on an examination of the contact instructions in this program.
+\item{} Note how all instructions in this Logix5000 PLC program are addressed by {\it tagname} rather than by hardware addresses (e.g. {\tt I:2/6}, {\tt O:3/1}).  How do you suppose the PLC ``knows'' which real I/O points to associate with which instructions in the program?
+\item{} How will this system behave if the reset switch fails shorted?
+\item{} How will this system behave if the high-pressure switch fails open?
+\item{} How will this system behave if the high-pressure switch fails shorted?
+\item{} How will this system behave if the low-pressure switch fails open?
+\item{} How will this system behave if the low-pressure switch fails shorted?
 \end{itemize}
 
-\underbar{file i04592}
+\underbar{file i02346}
 \vskip 10pt \filbreak 
 
 
@@ -819,33 +451,15 @@ Analyze this control program, and then explain what each instruction does (inclu
 
 \svar{} 
 
-The oil pump will start up when the ``Start'' pushbutton is pressed.  It will ``seal in'' and latch when the oil pressure has reached its minimum value, necessitating the operator hold the ``Start'' button pressed for some minimum amount of time during the start-up procedure.
-
-\vskip 10pt
-
-The blower delays turning on for 15 seconds, this time delay set by timer {\tt T4:0}.  A solenoid-operated air valve actuates simultaneously with the blower motor.
-
-\vskip 10pt
-
-If the ``Run/Stop'' switch is set to the ``Stop'' position, the blower and solenoid valve de-energize, but the oil pump continues to run for 15 seconds (post-lube) controlled by timer {\tt T4:1}.
-
-\vskip 10pt
-
-If any of the emergency shutdown permissives are lost (any of the colored contacts in rung 0), both the blower and the oil pump shut off immediately, and the solenoid-operated valve also returns to its de-energized position.
-
-\vskip 10pt
-
-Shutdown conditions:
+Input switch electrical ``normal'' statuses:
 
 \begin{itemize}
-\item{} Emergency stop pushbutton
-\item{} Low oil pressure
-\item{} Low oil level
-\item{} High pump vibration
-\item{} High fan vibration
-\item{} High temperature
+\item{} {\bf Start} = NO
+\item{} {\bf Stop} = NC
+\item{} {\bf PSL} = NC
+\item{} {\bf PSH} = NC
+\item{} {\bf Reset} = NO
 \end{itemize}
-
 
 \vskip 10pt \filbreak 
 
@@ -855,97 +469,13 @@ Shutdown conditions:
 
 \notes{} 
 
-
-%INDEX% PLC, ladder logic program analysis and explanation (Allen-Bradley SLC 500)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-A Koyo CLICK PLC controls the start-up of a gas-fuel furnace, using an {\it event drum} instruction.  The purpose of this sequence is to safely ``purge'' the furnace of any residual fuel gas vapors using fresh air before attempting to ignite it:
-
-\begin{itemize}
-\item{} {\bf Inputs} 
-\item{} {\tt X001} -- ``Purge start'' pushbutton (momentary NO)
-\item{} {\tt X002} -- ``Ignition start'' pushbutton (momentary NO)
-\item{} {\tt X003} -- ``Shutdown'' pushbutton (momentary NO)
-\item{} {\tt X004} -- Flame sensor -- {\it PLC input energizes when flame detected}
-\end{itemize}
-
-\begin{itemize}
-\item{} {\bf Outputs} 
-\item{} {\tt Y001} -- Combustion air valve -- {\it energizing this PLC output opens the air valve to the furnace}
-\item{} {\tt Y002} -- Fuel gas valve -- {\it energizing this PLC output opens the fuel gas valve to the furnace}
-\item{} {\tt Y003} -- ``Purge complete'' lamp
-\item{} {\tt Y004} -- Spark ignition coil
-\end{itemize}
-
-\filbreak
-
-\begin{itemize}
-\item{} {\bf Step description} 
-\item{} Step 1 -- Waiting to purge
-\item{} Step 2 -- Purging combustion chamber
-\item{} Step 3 -- Chamber purged, waiting to start
-\item{} Step 4 -- Furnace running
-\end{itemize}
-
-$$\includegraphics[width=15.5cm]{i00458x01.eps}$$
-
-\filbreak
-
-$$\includegraphics[width=15.5cm]{i00458x02.eps}$$
-
-Analyze this furnace control program, and then explain what each instruction does (including the practical function of each timer instruction).  Also, identify all conditions that will shut down this system (returning the drum to step 1).
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Why is a {\it purge time} so important to the safe operation of a gas fuel furnace?
-\item{} Explain the purpose of the NO contact instruction addressed to the bit {\tt \_Always\_ON} ({\tt SC1}).
-\item{} Suppose you were helping another technician troubleshoot a burner problem in this furnace, and in the process of doing so had to start up and shut down the furnace several times.  The technician you are working with gets impatient and tells you to edit the PLC program so that he won't have to wait so long for the furnace to re-purge itself every start-up cycle.  Which portion of the program controls the purge time?  Would you do what the other technician tells you to do?  Why or why not?
-\item{} Suppose the programmer writing this program forgot to include the normally-open Y002 contact in the rung leading to the drum instruction's {\it reset} input.  How would this omission affect the program's operation?
-\item{} Suppose the programmer writing this program forgot to include the normally-closed Y004 contact in the rung leading to the drum instruction's {\it reset} input.  How would this omission affect the program's operation?
-\end{itemize}
-
-\underbar{file i00458}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-Timer T1 controls the purge cycle (480 seconds = 8 minutes).
+The RTO timer instruction is configured to reach its end-count every hour of compressor run time.  It self-resets, with the counter instruction keeping tabs on how many timer cycles (how many hours) the compressor has run.  It is important that an RTO timer instruction is used, so that it will continue to accumulate time even if the compressor runs for less than an hour.
 
 \vskip 10pt
 
-Timer T2 controls the ``wait'' time, allowing time between purge completion and burner start.  The drum will reset to step 1 if no one has pushed the ``Ignition start'' button within 5 minutes of purge completion.
+The maintenance warning light turns on when the accumulated run time equals or exceeds 250 hours.
 
-\vskip 10pt
-
-Timer T3 controls the ignition time delay (10 seconds), giving that much time for the burner to light.  If there is no proof of flame within this amount of time, the drum will reset to step 1.
-
-\vskip 10pt
-
-Finally, someone pressing the ``Shutdown'' button will reset the drum to setp 1.
-
-%INDEX% PLC, ladder logic program analysis and explanation (Koyo CLICK)
-%INDEX% Process: furnace safety purge controller 
+%INDEX% PLC, ladder logic program analysis and explanation
 
 \vfil \eject 
 
@@ -1024,180 +554,6 @@ During and after the exercise, it is good to ask students follow-up questions su
 
 
 \oppgave{} 
-% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-Analyse this relay ladder-logic (RLL) program written for a Koyo CLICK PLC, designed to send an ASCII-encoded text message to a data terminal (e.g. a personal computer running a terminal emulator program, ready to display any text sent to it by the PLC over a serial data cable) whenever an alarm switch detects a high-temperature condition in a furnace:
-
-$$\includegraphics[width=15.5cm]{i03743x01.eps}$$
-
-Answer the following questions about this PLC program:
-
-\begin{itemize}
-\item{} Based on what you see here, is the high-temperature alarm switch sending the signal to the PLC electrically {\it NO} or is it {\it NC}?  Is it even possible to tell, or do we need more information?
-\vskip 10pt
-\item{} Why is an edge-transition contact instruction used on the {\tt X8} input bit, rather than a normal contact instruction?
-\vskip 10pt
-\item{} Modify the program so that it will work well without having to use an edge transition contact instruction.
-\vskip 10pt
-\item{} Modify the program so that it will only send no more than one message per 10 minutes, even if the high-temperature switch keeps tripping and resetting at a frequency faster than that.
-\end{itemize}
-
-\underbar{file i03743}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-We can tell that the high-temperature switch must have normally-open (NO) contacts, because it is on the {\it positive} edge transition that the PLC transmits the message (i.e. when the temperature switch {\it closes}).  Thus, the switch must transition from open to close as temperature rises, making it an NO contact.
-
-\vskip 10pt
-
-The edge-transition contact instruction is used so that the PLC does not continually repeat the message if a high-temperature condition continues unabated over time.
-
-\vskip 10pt
-
-Modification of program to avoid using edge-transition instruction:
-
-$$\includegraphics[width=15.5cm]{i03743x02.eps}$$
-
-{\it Note: the order in which these ladder-logic rungs appear in this example are essential to the program operating properly.  The ``Send'' rung \underbar{must} precede the interlock ({\tt C3} coil) rung.}
-
-\vskip 10pt
-
-The program shown here does the same thing as a positive edge-detect instruction, and it does so by exploiting the scan order of the PLC.  When {\tt X8} first transitions from low to high (0 to 1) and the PLC scans the program from top to bottom, the first rung is executed because {\tt X8} = 1 and {\tt C3} = 0.  After the second rung scans, however, bit {\tt C3} becomes set, preventing any further executions of the Send instruction in the top rung.
-
-\vskip 10pt
-
-\filbreak
-
-Modification of program to avoid nuisance alarm messages:
-
-$$\includegraphics[width=15.5cm]{i03743x03.eps}$$
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, ladder logic program analysis and explanation (Koyo CLICK)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-This Koyo CLICK PLC program reads data from and writes data to a Modbus device connected to the RS-485 communications port (Port 3):
-
-$$\includegraphics[width=15.5cm]{i03858x01.eps}$$
-
-Explain how this program functions, especially the use of the rising- and falling-edge {\tt SC6} contacts.  How many integer registers being communicated between the CLICK PLC and the Modbus device?  What type(s) of data are being read and written to the Modbus device? 
-
-\vskip 10pt
-
-It is important to note that if the Modbus device being communicated with is another PLC, that other PLC does {\it not} have to run complementary communication instructions in its ladder logic program (e.g. a ``Send'' instruction to match the first PLC's ``Receive'' instruction, and so forth).  The instructions you see in the first PLC's program are self-sufficient -- the other PLC is able to answer Modbus queries and commands without any need for additional ladder logic programming.  Examine the ``Operating Cycle'' or ``Scan Cycle'' in the instruction manual for a typical PLC, and identify when in the cycle you think Modbus communications take place if not in the ladder logic program.
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} What would happen if each Modbus communication instruction continually received ``power'' from the left-hand rail without waiting on the {\tt SC6} contact instructions?
-\item{} Identify some practical uses for the data stored in the {\tt C} bits signifiying ``Sending,'' ``Receiving,'' ``Success,'' and ``Error.''
-\end{itemize}
-
-\underbar{file i03858}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-The rising- and falling-edge contact instructions are necessary to keep the two Modbus instructions from ``colliding'' with each other over time.  All in all, six integer registers are communicated between the PLC and the Modbus device.
- 
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-Six integer registers used in the PLC: {\tt DS1}, and {\tt DS7} through {\tt DS11}.  Five analog registers are being read from the Modbus device ({\tt 30001} through {\tt 30005}), and one ``holding'' register is being written to ({\tt 40005}).
-
-\vskip 10pt
-
-Outside of the program execution period of a typical PLC scan cycle, there is a block of time reserved for data communications.  This is where Modbus messages are serviced.
-
-%INDEX% PLC, ladder logic program analysis and explanation (Koyo CLICK)
-
-\vfil \eject 
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-A {\tt NAND} logic function may be built up from a regular {\tt AND} function plus an inverter function (a {\tt NOT} gate) on the output:
-
-$$\includegraphics[width=15.5cm]{i04092x01.eps}$$
-
-The same strategy of ``building'' a {\tt NAND} gate may be done in PLC ladder-diagram programming, by combining a normally-closed contact instruction with two contacts in series.
-
-\vskip 10pt
-
-Examine these two Allen-Bradley PLC programs, and explain why the left-hand program is ``wasteful'' while the right-hand program makes more efficient use of available bits:
-
-$$\includegraphics[width=15.5cm]{i04092x02.eps}$$
-
-Examine these two Siemens S7 PLC programs, and explain why the left-hand program is ``wasteful'' while the right-hand program makes more efficient use of available bits in the same ways the Allen-Bradley example programs were wasteful/efficient:
-
-$$\includegraphics[width=15.5cm]{i04092x03.eps}$$
-
-\vskip 10pt
-
-\noindent
-{\bf Note: many novice PLC programmers commit this error of ``wasting'' valuable I/O as they write their programs!}
-
-
-\underbar{file i04092}
-\vskip 10pt \filbreak 
-
-
-
-
-\svar{} 
-
-Each ``wasteful'' program uses an output bit as the intermediary bit between the {\tt AND} and {\tt NOT} functions when there is no need.  
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-Output I/O points are valuable because they (and they alone) can be used to drive real-world devices on and off.  No need to ``waste'' them on functions that have no real-world application, when we may use bits that are internal to the PLC's memory!
-
-%INDEX% PLC, ladder logic program analysis and explanation (Allen-Bradley)
-%INDEX% PLC, ladder logic program analysis and explanation (Siemens S7)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
 % Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
@@ -1249,30 +605,26 @@ The counter decrements if ever input {\tt I1.0} transitions from low to high as 
 
 
 \oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-A manufacturing facility uses an electronic scale to weigh batches of material in a packaging process.  The scale weighs each batch about to be packaged, and determines whether the batch is too light, too heavy, or within tolerable limits.  Three discrete output bits serve as the indicators of these statuses: one to energize when the batch is too light, one to energize when it's too heavy, and the third to energize when the batch weight is correct.  The wiring for this system is shown here, with the bridge and differential amplifier circuit calibrated for an 8 volt signal output (to the PLC) at 1500 lbs scale weight, and a 0 volt signal at 0 lbs scale weight:
+The following PLC program preforms the function of an {\it alarm annunciator}, where a discrete input signal from an alarm switch (e.g. high temperature alarm) first causes a warning light to blink and a siren to audibly pulse until a human operator presses an {\it acknowledge} pushbutton.  If the alarm switch signal is still activated, the light will remain on (steady) instead of blink and the siren will go silent.  The light turns off as soon as the alarm signal goes back to its ``safe'' state.  A timing diagram shows how this should work:
 
-$$\includegraphics[width=15.5cm]{i03516x01.eps}$$
+$$\includegraphics[width=15.5cm]{i02342x01.eps}$$
 
-The analog inputs on the S7-200 PLC are scaled for 0 to 10 volts = 0 to 32000 counts.
+$$\includegraphics[width=15.5cm]{i02342x02.eps}$$
 
-\filbreak
-
-Analyze this offline program display for the S7-200 PLC, explaining how the ladder-logic functions and also determining the weight limits for the three output bits:
-
-$$\includegraphics[width=15.5cm]{i03516x02.eps}$$
-
-Finally, determine which bit represents ``too light,'' which bit represents ``too heavy,'' and which bit represents ``correct'' for weight.
+Take this ``generic'' PLC program and enter it into your own PLC, assigning appropriate addresses to all instructions, and demonstrating its operation.
 
 \vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
 
 \begin{itemize}
-\item{} Explain how the PLC will interpret a failed-open strain gauge.
+\item{} Does the PLC program (as written) ``expect'' a {\it closed} alarm switch contact to trigger the alarm, or an {\it open} alarm switch contact?
+\item{} If the real-world alarm switch contact was a pressure switch wired NC (normally-closed), would this circuit function as a {\it low} pressure alarm or as a {\it high} pressure alarm?
+\item{} If the real-world alarm switch contact was a temperature switch wired NO (normally-open), would this circuit function as a {\it low} temperature alarm or as a {\it high} temperature alarm?
 \end{itemize}
 
-\underbar{file i03516}
+\underbar{file i02342}
 \vskip 10pt \filbreak 
 
 
@@ -1280,16 +632,6 @@ Finally, determine which bit represents ``too light,'' which bit represents ``to
 
 
 \svar{} 
-
-{\tt O0.0} = ``Correct weight'' = Between 786.45 lbs and 805.84 lbs
-
-\vskip 10pt
-
-{\tt O0.1} = ``Too heavy'' = Equal to or exceeds 805.84 lbs
-
-\vskip 10pt
-
-{\tt O0.2} = ``Too light'' = Equal to or less than 786.45 lbs
 
 \vskip 10pt \filbreak 
 
@@ -1299,20 +641,791 @@ Finally, determine which bit represents ``too light,'' which bit represents ``to
 
 \notes{} 
 
-At 0 lbs of weight, the ADC count value will be zero as well.  At 1500 lbs of weight, the ADC's count will be $8 \over 10$ of the full-scale value of 32000, or 25600.  Thus, the equivalence between scale weight and count value is a simple proportionality:
-
-$${\hbox{Weight} \over \hbox{Counts}} = {1500 \over 25600}$$
+I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
 
 \vskip 10pt
 
-A count value of 13422 therefore equals 786.44 lbs of weight.
+I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
+
+%INDEX% PLC, programming, kombinatorisk 
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Lyset i en gang opereres av to sett med impulsbrytere, et i hver ende
+av gangen. Disse er kobla til en PLS.
+\begin{enumerate}
+\item Lag en skisse for oppkoblingen
+\item Sett opp en IO liste
+\item Lag et PLS program for denne funksjonen.
+\item Utvid PLS programmet til å virke med en bryter i hver enda av gangen. 
+\end{enumerate}
+\vskip 10pt
+\underbar{file i00800}
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denn oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, Lys i gang
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+
+Lyset i en gang opereres av to sett med impulsbrytere, et i hver ende
+av gangen. Disse er kobla til en PLS.
+\begin{enumerate}
+\item Lag en skisse for oppkoblingen
+\item Sett opp en IO liste
+\item Lag et PLS program for denne funksjonen.
+\item Utvid PLS programmet til å virke med en bryter i hver enda av gangen. 
+\end{enumerate}
+\vskip 10pt
+\underbar{file i08001}
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denn oppgaven
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, lys i gang (impuls)
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Du skal lage et program som detekterer og skubber vekk flasker som
+har veltet på et samlebånd. Følerene X0 og X1 har bryter av typeNC (Normaly Closed). Den pneumatiske sylinderen Y0 aktiveres med TRUE og skubber da ut sylinderen. Dette går så fort at den rekke å skubbe ut og komme tilbake før neste flaske kommer frem. 
+
+\includegraphics[width=1\textwidth]{i08002x01.eps}
+\vskip 10pt
+\underbar{file i08002}
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denn oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk,samlebånd velta flasker
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+
+Du skal lage styring for overvåkning av et
+tankanlegg med kjemikalier. Tankanlegget består av 3 separate tanker.
+Hver av tankene inneholder en nivåføler som gir logisk 1 når kjemikaliemengden
+er under et minimumsnivå kretsen sin oppgave er å tenne (gi logisk
+1) en varsellampe på et kontrollpanel når kjemikaliemengden i to eller
+flere av tankene er under minimumsnivået.
+\begin{enumerate}
+\item Tegn en enkel skisse for å visualisere systemet for deg selv. 
+\item Lag et skjema for oppkoblingen
+\item Sett opp en IO liste
+\item Lag et PLS program for denne funksjonen.
+\end{enumerate}
+
+Tilleggsoppgave. Du skal lage en alarmkrets.Den skal virke slik ved aktivering av alarm:
+\begin{itemize}
+\item En indikator skal blinke med alarm og det skal lages lyd (simuleres
+med lys). 
+\item Nå det trykkes Acknowledge skal Indikatoren lys konstant og lyden
+skal gå av. 
+\item Når alarm betingelsen er borte skal alarmen kunne resettes. 
+\end{itemize}
+\vskip 10pt
+\underbar{file i08003}
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denn oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, kjemikalietanker, alarm
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+
+Til en bil skal du lage en alarmkrets som varsler med lyssignal når
+sikkerhetsbeltene i forsetet ikke er festet og det sitter noen i setene.
+Under hvert sete er det en bryter som lukker når en person setter
+seg i setet. Videre er det i hvert sikkerhetsbelte en bryter som lukker
+når beltet blir festet.
+\begin{enumerate}
+\item Sett opp en IO liste
+\item Lag et PLS program for denne funksjonen
+\item Lag et HMI display som viser funksjonen 
+\end{enumerate}
+\vskip 10pt
+\underbar{file i08004}
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denn oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, Sete alarm
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+
+Lyset i et rom styres av to impulsbyrtere, AV og PÅ, når av bryteren
+betjens skal lyset stå på i 5 sek. før det går av.
+\begin{enumerate}
+\item Sett opp en IO liste
+\item Lag et PLS program for denne funksjonen.
+\end{enumerate}
+\vskip 10pt
+\underbar{file i08005}
+
+
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denne oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, lys automatisk av
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+
+Foriglinger
+
+To hydrauliske sylindre er arrangert slik at det er kollisjonsmulighet
+mellom dem. Derfor må operasjonen av dem være slik at for at den ene
+skal gå i + må den andre være i \textendash stilling og vice versa. 
+
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Adresse & Funksjon Innganger & Adresse & Funksjon Utganger\tabularnewline
+\hline 
+\hline 
+I0 & Start & Q0 & Sylinder A gå i + retning\tabularnewline
+\hline 
+I1 & Stopp/pause (når 0) & Q1 & Sylinder A gå i - retning\tabularnewline
+\hline 
+I2 & Sylinder A i -pos & Q2 & Sylinder B gå i + retning\tabularnewline
+\hline 
+I3 & Sylinder A i +pos & Q3 & Sylinder B gå i - retning\tabularnewline
+\hline 
+I4 & Sylinder B i -pos &  & \tabularnewline
+\hline 
+I5 & Sylinder B i +pos &  & g\tabularnewline
+\hline 
+\end{tabular}
+\\
+\\
+Lag et utgangsprogram for styringen
+\vskip 10pt
+\underbar{file i08006}
+
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denne oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, foriglinger
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+
+Foriglinger
+
+To hydrauliske sylindre er arrangert slik at det er kollisjonsmulighet
+mellom dem. Derfor må operasjonen av dem være slik at for at den ene
+skal gå i + må den andre være i \textendash stilling og vice versa. 
+
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Adresse & Funksjon Innganger & Adresse & Funksjon Utganger\tabularnewline
+\hline 
+\hline 
+I0 & Start & Q0 & Sylinder A gå i + retning\tabularnewline
+\hline 
+I1 & Stopp/pause (når 0) & Q1 & Sylinder A gå i - retning\tabularnewline
+\hline 
+I2 & Sylinder A i -pos & Q2 & Sylinder B gå i + retning\tabularnewline
+\hline 
+I3 & Sylinder A i +pos & Q3 & Sylinder B gå i - retning\tabularnewline
+\hline 
+I4 & Sylinder B i -pos &  & \tabularnewline
+\hline 
+I5 & Sylinder B i +pos &  & g\tabularnewline
+\hline 
+\end{tabular}
+\begin{enumerate}
+\item Lag et utgangsprogram for styringen
+\end{enumerate}
+
+\underbar{i08007}
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denne oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk 
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+
+På en parkeringsplass for biler er det plass til 10 biler. Det er
+separat inn- og utkjøring fra parkeringsplassen. Ved innkjøringen
+er det plassert to lamper, en som skal lyse grønt hvis det er ledige
+plasser, og en som skal lyse rødt når det ikke er ledige plasser.
+Ved innkjøring er det en bryter som gir signal for hver bil som kjører
+inn på plassen. Ved utkjøring er det en bryter som gir signal for
+hver bil som kjører ut.
+\begin{enumerate}
+\item Tegn en skisse for lysregleringen
+\item Sett opp en IO liste
+\item Lag et PLS program for denne funksjonen.
+\end{enumerate}
+
+\vskip 10pt
+\underbar{file i08008}
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denne oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, parkeringsplass
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+
+Sekvensiell oppstart av tre motorer 
+
+Tre motorer skal starts når du trykker på en knapp. Oljemotoren starter
+umiddelbart, hovedmotoren starter etter 10s og hjelpemotoren starter
+etter 15s. Når en trykker stopp skal alle motorene stoppes. 
+
+\vskip 10pt
+\underbar{file i08009}
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denne oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, start av tre motorer i rekkefølge
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Sortering av defekte enheter 
+
+Et transportbånd som frakter ferdige produkter er utstyrt med et system
+som fjerner defekte enheter. Dette systemet skal styres av en PLS.
+Defekte produkter er høyere enn enheter som er i orden
+
+%\includegraphics[width=1\textwidth]{KombStyrOppg04}
+
+Denne oppgaven skal kun ta for seg utsorteringen av defekte produkter.
+Forutsetningen er at transpontbåndet går med konstant hastighet, langsomt
+nok til at den elektromagnetiske armen Y0 rekker å skyve ut defekte
+produkter. En fotoelektrisk sensor X0 registrerer produkter som er
+for høye ved posisjon 1 og skyver de ut av transportbandet ved hjelp
+av en elektromagnetisk arm Y0 ved posisjon 5. Når den defekte enheten
+faller ned i resirkuleringskassen, registreres dette av en fotoelektrisk
+sensor X5 som en puls. En fotoelektrisk sensor X4 registrerer 1 hel
+omdreininger på motorakslingen som en puls. En hel omdreining av motorakslingen
+fører til at produktene mates frem 1 posisjon Anlegget er utstyrt
+med en RESET knapp. Når denne trykkes, settes programmet til startposisjonen.
+Det vil si tomt bånd. 
+\begin{enumerate}
+\item Lag tilordningsliste (symboltabell) for utsorteringen basert på opplysningene
+gitt ovenfor. Velg passende inn- og utgangsadresser. Det skal tydelig
+fremgå om du har brukt hvile-/arbeidskontakter i anlegget.
+\item Lag et PLS program for sorteringen. 
+\end{enumerate}
+
+\vskip 10pt
+\underbar{file i08010}
+
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denne oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, sortering av defekte enheter
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+
+
+\paragraph{Test oppgave Kornsilo lett versjon}
+
+Simulering av kornsiloen ligger i Gand biblioteket. (SimKornsilo)
+
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Tilkoblet utstyr & IO på RIO & Variabel & Beskrivelse av tilkoblet utstyr\tabularnewline
+\hline 
+\hline 
+Start Knapp & Bryter1 & Start & \tabularnewline
+\hline 
+Stopp Knapp & Bryter2 & Stopp & \tabularnewline
+\hline 
+H Sensor & Bryter3 & LevelHigh & \tabularnewline
+\hline 
+L Sensor & Bryter4 & LevelLow & \tabularnewline
+\hline 
+Drifts Lys & Lys1 & Drift & \tabularnewline
+\hline 
+Pumpe Lys & Lys2 & Pumpe & \tabularnewline
+\hline 
+Alarm Lys & Lys3 & AlarmLys & \tabularnewline
+\hline 
+Alarm Lyd & Lys4 & AlarmLyd & \tabularnewline
+\hline 
+\end{tabular}
+
+En kornsilo skal fyllest ved hjelp av en pumpe
+
+\includegraphics[width=0.5\textwidth]{i08012x01.png}
+
+Der er to nivåvakter i hver silo (L og H) disse gir \textquotedblright{}
+TRUE\textquotedblright{} når nivået ligger over giveren.
+
+Virkemåte: Pumpa i en silo skal alltid starte når nivået er under
+minimum og stoppe når nivået går over maksimum for siloen.
+\begin{enumerate}
+\item Lag en Visualisering som ligner den på bildet
+\item Anlegget settes i drift med en Start knapp og stoppes med en Stoppknapp.
+Når anlegget er satt i drift og nivået er under L startes pumpe P.
+Denne går til nivået når H. Slik fortsetter det til driften av anlegget
+stoppes.
+\item Legg til AutoMan styring av pumpe
+\item Legg til en teller for totalt antall sykluser på pumpe (skal vises
+på skjerm). 
+\item Det skal aktiveres en alarm om det tar mer en 10min (10s) å komme
+over L nivå (etter at den har vært under). Alarmen skal ha bekreft
+og resett funksjon.
+\end{enumerate}
+
+\paragraph{Test oppgave kornsile vanskelig versjon}
+
+Tre kornsiloer skal fyllest ved hjelp av hver sin pumpe P1, P2 og
+P3. 
+
+\begin{table}[]
+\begin{centering}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Tilkoblet utstyr & IO på RIO & Variabel & Beskrivelse av tilkoblet utstyr\tabularnewline
+\hline 
+\hline 
+Start Knapp & Bryter1 & Start & \tabularnewline
+\hline 
+Stopp Knapp & Bryter2 & Stopp & \tabularnewline
+\hline 
+H Sensor & Bryter3 & LevelHigh & \tabularnewline
+\hline 
+L Sensor & Bryter4 & LevelLow & \tabularnewline
+\hline 
+Drifts Lys & Lys1 & Drift & \tabularnewline
+\hline 
+Pumpe Lys & Lys2 & Pumpe & \tabularnewline
+\hline 
+Alarm Lys & Lys3 & AlarmLys & \tabularnewline
+\hline 
+Alarm Lyd & Lys4 & AlarmLyd & \tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{IO-liste for oppkobling mot Gand RIO-trainer}
+\end{table}
+
+\includegraphics[width=1\textwidth]{i08012x02.png}
+
+Der er to nivåvakter i hver silo (L1, H1, L2. osv.) og alle disse
+gir\textquotedblright{} 1\textquotedblright{} når nivået ligger over
+giveren. Pumpa i en silo skal alltid starte når nivået er under minimum
+og stoppe når nivået går over maksimum for siloen.
+
+Pumpene skal styras slik at det ikke blir brukt mer enn 2000W (P1=500W,
+P2=1000W og P3=1500W). Ved tom tank, skal silo fyllest slik at den
+ikke lenger er tom (uavhengig av strømforbruk). Alle nettverk programmeres
+i LD/FBD. Det skal være mulighet for manuell styring av pumper. 
+\begin{enumerate}
+\item Anlegget settes i drift med en Start knapp og stoppes med en Stoppknapp.
+Når anlegget er satt i drift og nivået er under L startes pumpe P.
+Denne går til nivået når H. Dette gjeler for alle pumpene. Slik fortsetter
+det til driften av anlegget stoppes. 
+\item Komplementer anlegget med alarm dersom nivået ligger under minimum
+i mer enn 1 minutt i en av siloene. Alarmsignalet skal pulsere (blinke)
+med en frekvens på 1 HZ. 
+\item Det er ønskelig med teller for antall sykluser og driftstimer på hver
+pumpe. Driftstid og antall sykluser skal presenteres ved hver pumpe.
+Når en pumpe kommer over 1000 sykluser eller 1000 driftstimer skal
+det vis et varsel om vedlikehold. Dette skal kunne resettes etter
+utført vedlikehold. 
+\item Sett opp kommunikasjon med Gand-RIO Trainer i henhold til tilordningslisten.
+\end{enumerate}
+\vskip 10pt
+\underbar{file i08012}
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+Det er ikke svar på denne oppgave
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, programming, kombinatorisk, kornsilo
+
+\vfil \eject 
+
+
+
+
+
+\oppgave{} 
+% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+\noindent
+{\bf Programming Challenge and Comparison -- build a simple SCADA system} 
 
 \vskip 10pt
 
-A count value of 13753 therefore equals 805.84 lbs of weight.
+``SCADA'' is an acronym meaning ``Supervisory Control And Data Acquisition'', referring to control systems where remote units relay data to and from a central location, allowing human operators to monitor and control processes spread over a wide area.  The term ``SCADA'' is broadly applied to many different types of control systems in industry.  Traditionally the term has been limited to control systems spread over a wide geographic area (e.g. power distribution systems, pipeline control systems) but it is now common to see ``SCADA'' used to describe {\it any} form of computer-based control system where process data is communicated over a digital network.  
 
-%INDEX% PLC, ladder logic program analysis and explanation (Siemens S7-200)
-%INDEX% Process: weigh scale alarm (generic)
+\vskip 10pt
+
+Work individually or in teams to wire and configure multiple PLC's to form a simple SCADA system, where analog data is read by a ``remote'' PLC and displayed by an HMI panel connected to a ``base'' PLC, and where virtual pushbuttons on the HMI display cause discrete outputs on the remote PLC to turn on and off.
+
+$$\includegraphics[width=15.5cm]{i02799x01.eps}$$
+
+When the potentiometer at the remote PLC is adjusted, the HMI at the base PLC should display a changing value.  When buttons on the HMI screen are toggled, indicator lamps at the remote PLC should turn on and off.  Feel free to include the following additional features for more fun and challenge:
+
+\begin{itemize}
+\item{} Build a ``trend graph'' display on the HMI instead of a simple numerical indicator for the analog input data point
+\vskip 5pt
+\item{} Have discrete inputs at the remote PLC register on the HMI display as graphic indicators
+\vskip 5pt
+\item{} Incorporate features such as input timers, event counts, etc. in the remote PLC
+\vskip 5pt
+\item{} Add multiple remote PLCs (use multi-drop RS-485 serial data communication, or Ethernet communication with a multi-port hub to connect the PLCs together)
+\end{itemize}
+
+\vskip 10pt
+
+Successful completion of this system will require the use of analog scaling instructions as well as network messaging instructions.  All the usual caveats apply -- {\it have fun!}
+
+\vfil 
+
+\underbar{file i02799}
+\eject
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+
+ 
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+
+%INDEX% PLC, I/O: analog resolution and scaling
+%INDEX% PLC, ladder logic programming: analog input scaling
+%INDEX% PLC, ladder logic programming: simple SCADA system
+
+\vfil \eject 
+
+
+
+\oppgave{} 
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+\noindent
+{\bf Programming Challenge -- HMI control of sprinkler valves} 
+
+\vskip 10pt
+
+Suppose an instrument technician wishes to have a PLC-controlled sprinkler system in his yard, with an HMI panel inside his house with ``pushbutton'' graphics on the screen where he may conveniently activate sprinkler water solenoid valves.  To begin this project, the technician connects two solenoid valves to two discrete outputs on his PLC: one valve opens up to send water to his fruit tree sprinkler nozzles while the other valve opens up to fire a jet of water at the nearby fire hydrant where his neighbor's dog likes to mark his territory.
+
+\vskip 10pt
+
+Create a simple HMI project with two ``pushbutton'' icons on the screen.  The first icon will directly activate the PLC output bit for the fruit tree sprinklers, and it needs to have a {\it toggle} action: pressing this icon once turns the bit on, and pressing it a second time turns it off.  The second icon will directly activate the PLC output bit for the anti-dog water cannon, and it needs to have a {\it momentary} action: pressing this icon activates the water jet, and releasing it stops the water jet.
+
+The PLC itself should have no instructions programmed in it (except perhaps for an {\tt END} rung to avoid a processor error).
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
+
+\begin{itemize}
+\item{} What types of HMI data tags (boolean, integer, floating-point, ASCII, etc.) should be used for both these ``pushbutton'' objects?
+\item{} How do you specify the action (toggle, momentary, etc.) of the ``pushbutton'' icons on the HMI screen?
+\item{} What steps must you take to create appropriate tag names in the HMI for the PLC's data points?
+\item{} Explain why the PLC should have no program in it, or conversely, what bad things could happen if a program existed in the PLC with coils addressed to the same output bits the HMI was attempting to write to.
+\end{itemize}
+
+\vfil 
+
+\underbar{file i02350}
+\eject
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+
+
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
+
+\vskip 10pt
+
+I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
+
+
+
+%INDEX% PLC, programming challenge: HMI control of sprinkler valves
 
 \vfil \eject 
 
@@ -1510,151 +1623,6 @@ In this particular example, the {\tt Pump\_run} bit will be in the set state ({\
 
 
 \oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-Examine this ladder logic program for an Allen-Bradley MicroLogix PLC controlling a valve's motion and checking to determine if the valve ever becomes stuck and cannot fully open or fully close:
-
-$$\includegraphics[width=15.5cm]{i02383x01.eps}$$
-
-\vskip 20pt
-
-Based on this program, determine the necessary connections for each limit switch monitoring the valve stem's position:
-
-\begin{itemize}
-\item{} {\tt VALVE\_OPEN} limit switch: {\it normally-open} (NO) or {\it normally-closed} (NC)?
-\vskip 5pt
-\item{} {\tt VALVE\_CLOSED} limit switch: {\it normally-open} (NO) or {\it normally-closed} (NC)?
-\end{itemize}
-
-\vskip 20pt
-
-Furthermore, determine the energization status of the PLC output controlling the valve actuator:
-
-\begin{itemize}
-\item{} {\tt VALVE} discrete output channel: {\it energize} to open the valve or {\it de-energize} to open the valve?
-\end{itemize}
-
-\vfil
-\underbar{file i02383}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-This is a graded question -- no answers or hints given!
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-The limit switch contact instructions in the alarm output rung are both normally-closed.  This means they will be colored -- and therefore have the potential to activate the alarm bit -- when they are in their resting state: when the real-world PLC input channels are de-energized.  This means a de-energized state for both limit switch inputs must correspond to the valve being in mid-position, neither fully open nor fully closed.  Thus, each limit switch must {\it close} when it reaches its travel limit.  A limit switch that closes when actuated, and is open while at rest, is a {\it normally-open} (NO) limit switch.  Thus, both the real-world {\tt VALVE\_OPEN} and {\tt VALVE\_CLOSED} limit switches must be wired with normally-open (NO) electrical contacts.
-
-\vskip 10pt
-
-We can see that the valve control bit is programmed to be the same state as the command input signal {\tt I:0.0}, which also directly activates the ``Opening'' timer instruction.  The ``Closing'' timer instruction is activated whenever {\tt I:0/0} is zero, which will be when the valve control output ({\tt O:0/0}) is zero as well.  Thus, we may conclude that the discrete output {\tt O:0/0} controlling the valve motion will be energized to open the valve, and de-energized to close the valve.
-
-
-%INDEX% PLC, ladder logic programming: determining necessary switch types from program
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-Examine this ladder logic program for an Allen-Bradley MicroLogix PLC controlling a motor, with multiple ``Start,'' ``Stop,'' and safety pull-switch shutdowns:
-
-$$\includegraphics[width=15.5cm]{i03854x01.eps}$$
-
-Based on this program, determine the necessary type of hard-wired switch contact for each input switch:
-
-\begin{itemize}
-\item{} {\tt START\_SWITCH\_LOCAL}: {\it normally-open} (NO) or {\it normally-closed} (NC)?
-\vskip 5pt
-\item{} {\tt START\_SWITCH\_REMOTE}: {\it normally-open} (NO) or {\it normally-closed} (NC)?
-\vskip 5pt
-\item{} {\tt STOP\_SWITCH\_LOCAL}: {\it normally-open} (NO) or {\it normally-closed} (NC)?
-\vskip 5pt
-\item{} {\tt PULL\_SWITCH\_1}: {\it normally-open} (NO) or {\it normally-closed} (NC)?
-\vskip 5pt
-\item{} {\tt PULL\_SWITCH\_2}: {\it normally-open} (NO) or {\it normally-closed} (NC)?
-\end{itemize}
-
-Also, identify at least two different faults independently capable of preventing the motor from starting up despite attempts actuating the local start switch {\it and} actuating the remote start switch:
-
-\vskip 10pt
-
-\begin{itemize}
-\item{} 
-\vskip 20pt
-\item{} 
-\end{itemize}
-
-\vfil
-\underbar{file i03854}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-This is a graded question -- no answers or hints given!
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-This happens to be one of those unusual cases where the type of real-world switch contact exactly matches its virtual switch contact instruction inside the PLC in every case.  Since this program uses retentive coil instructions (``Latch'' and ``Unlatch'') which require virtual power in order to take action, we desire each of these switches to send virtual power to the respective coil when actuated.  When one of the normally-open (NO) switches is actuated, it sends real power to the PLC input channel, setting the input register bit (1), causing the NO contact instruction to close and send virtual power to the coil.  When one of the normally-closed (NC) switches is actuated, it halts real power from getting to the PLC input, clearing the input register bit (0), causing the NC contact instruction to close and send virtual power to the coil.  Therefore:
-
-\begin{itemize}
-\item{} {\tt START\_SWITCH\_LOCAL}: {\bf normally-open} (NO)
-\item{} {\tt START\_SWITCH\_REMOTE}: {\bf normally-open} (NO)
-\item{} {\tt STOP\_SWITCH\_LOCAL}: {\bf normally-closed} (NC)
-\item{} {\tt PULL\_SWITCH\_1}: {\bf normally-closed} (NC)
-\item{} {\tt PULL\_SWITCH\_2}: {\bf normally-open} (NO)
-\end{itemize}
-
-\vskip 10pt
-
-\noindent
-Some possible faults causing motor to not start from either start switch:
-
-\begin{itemize}
-\item{} Open fault in local start switch wiring
-\item{} Open fault in remote start switch wiring
-\item{} Open fault in local stop switch wiring
-\item{} Open fault in pull switch \#1 wiring
-\item{} Shorted fault (sending power to PLC input at all times) in pull switch \#2 wiring
-\item{} Open fault in motor contactor circuit
-\item{} PLC program execution halted (e.g. not in Run mode)
-\end{itemize}
-
-
-%INDEX% PLC, ladder logic programming: determining necessary switch types from program
-
-\vfil \eject 
-
-
-
-\oppgave{} 
 % Copyright 2008, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
@@ -1715,74 +1683,6 @@ During and after the exercise, it is good to ask students follow-up questions su
 
 \vfil \eject 
 
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-The flow rate of liquid spilling over a {\it rectangular weir} may be calculated by the height of that liquid over the weir by the following formula:
-
-$$\includegraphics[width=15.5cm]{i04543x01.eps}$$
-
-A technician tries to program a PLC to evaluate this formula so that the PLC may continuously calculate flow rate from measured liquid height, but the PLC program keeps ``faulting'' due to its inability to handle fractional exponents (the ``1.5'' power in the formula).
-
-\vskip 10pt
-
-Find a way for the PLC to evaluate this equation using nothing but integer-value exponents.
-
-\vfil
-\underbar{file i04543}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-This is a graded question -- no answers or hints given!
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-PLC processors tend to be a lot more limited than general-purpose computers when it comes to doing arithmetic.  Many PLCs can only do math on the level of a simple hand calculator.  Such is the case here: the application demands that we calculate the 1.5 power of a variable, but unfortunately this particular PLC simply isn't capable of doing that kind of calculation.
-
-\vskip 10pt
-
-For a solution, therefore, we need to find some mathematical equivalent of the 1.5 power.  In other words, we need to find some way to do the same arithmetic using some other function(s).  One way to do this is to recall from basic algebra that fractional exponents are equivalent to roots (e.g. $x^{1 \over 2} = x^{0.5} = \sqrt{x}$).  We know that an exponent of 1.5 is equivalent to a fractional value of $3 \over 2$, which gives us a way to calculate the 1.5 power using cube ($x^3$) and square-root ($x^{1 \over 2}$) functions:
-
-$$Q = 3.33 (L - 0.2H) H^{1.5}$$
-
-$$Q = 3.33 (L - 0.2H) H^{3 \over 2}$$
-
-$$Q = 3.33 (L - 0.2H) \sqrt{H^{3}}$$
-
-Another mathematical ``trick'' useful for calculating odd powers is to use logarithms.  Recall from algebra that the logarithm of a number raised to a power is equal to that power multiplied by the logarithm of the number:
-
-$$\log x^y = y \log x$$
-
-Un-doing the logarithm function with an ``antilog'' function yields the original argument:
-
-$$10^{\log x^y} = 10^{y \log x} = x^y$$
-
-Another way to write this is to say ``antilog'' rather than to explicitly show an exponential function:
-
-$$\hbox{antilog}(\log x^y) = \hbox{antilog}(y \log x) = x^y$$
-
-It is common to find PLCs that cannot calculate fractional exponents, but which can calculate logarithms and anti-logarithms.  In this case, the logarithm-based solution would look like:
-
-$$Q = 3.33 (L - 0.2H) [\hbox{antilog}(1.5 \log H)]$$
-
-%INDEX% PLC, ladder logic programming: integer math limitations
-
-\vfil \eject 
 
 
 \oppgave{} 
@@ -1922,109 +1822,6 @@ Address range (decimal) & Purpose \cr
 % Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Read and outline the introduction to the ``Modbus'' section of the ``Digital Data Acquisition and Networks'' chapter in your {\it Lessons In Industrial Instrumentation} textbook.  Note the page numbers where important illustrations, photographs, equations, tables, and other relevant details are found.  Prepare to thoughtfully discuss with your instructor and classmates the concepts and examples explored in this reading.
-
-\underbar{file i02609}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-Modbus is a communication standard specifying how data may be exchanged between control devices.
-
-
-%INDEX% PLC, ladder logic programming: Modbus
-%INDEX% Reading assignment: Lessons In Industrial Instrumentation, Digital data and networks (introduction to Modbus)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge and Comparison -- Modbus communcation with a non-PLC device} 
-
-\vskip 10pt
-
-Write a PLC program that digitally communicates with a non-PLC device (e.g. a VFD).  You will find that Koyo CLICK PLCs with built-in RS-485 communication ports and easy-to-configure Modbus send/receive instructions work exceptionally well for this task, especially when the Modbus register addresses are specified in hexadecimal (rather than decimal).  If the device you choose is a variable-frequency motor drive (VFD), recommended functions to perform via the network include starting the motor, stopping the motor, and changing its speed.  Your system must incorporate an HMI for user interface (e.g. entering the desired motor speed via the HMI panel).
-
-\vskip 10pt
-
-Note: an essential step of this exercise is properly identifying all electrical connections for the network communication between the PLC and the non-PLC device.  Improper network connections will not only fail to work, but they might even damage one or both of the devices!  {\bf For this reason, your instructor will inspect all proposed wiring before you make any connections!}
-
-\vskip 10pt
-
-When your system is complete and tested, capture a screen-shot of the PLC program as it appears on your computer, and prepare to present your program solution to the class in a review session for everyone to see and critique.  The purpose of this review session is to see multiple solutions to one problem, explore different programming techniques, and gain experience interpreting PLC programs others have written.  When presenting your program (either individually or as a team), prepare to discuss the following points:
-
-\begin{itemize}
-\item{} Show how the communication command(s) is set up, including all the relevant parameters such as baud rate, parity bits, stop bits (which must be set identically in the PLC and the other device).
-\item{} Identify which Modbus codes were used to read and/or write information with the other device.
-\item{} If multiple communication instructions were used in the PLC program, show how you programmed the PLC so these instructions would not interfere with each other (because they are each using the same communications port on the PLC).
-\item{} How you designed the program (i.e. what steps you took to go from a concept to a working program)
-\end{itemize}
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} A powerful problem-solving technique is to simplify the problem so that it is easier to solve, then use that solution as a starting point for the final solution of the given (complex) problem.  Show how you would first simplify the given problem here, and what that simple(r) solution would look like.
-\item{} Identify the advantages of using digital communications to allow a PLC to read and/or write data with other devices, as opposed to discrete I/O wire connections.
-\end{itemize}
-
-\vfil 
-
-\underbar{file i04427}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-If you happen to be using the Automation Direct model GS-1 variable frequency motor drive (an inexpensive option), be prepared to use a rather strange convention for network control bits.  Rather than have certain commands such as ``Run'' and ``Stop'' be distinct bits in a longer digital word as is the case with other motor drives, the GS-1 drive reserves entire 16-bit registers for each bit function.  For example, register {\tt 091B} (hex) in the GS-1 drive is the Run/Stop command: setting that entire 16-bit word to 1 (i.e. 0000000000000001) makes the drive run; setting that entire word to 0 (0000000000000000) makes the drive stop.  The direction control register {\tt 091C} is the same way: setting that entire 16-bit word to 1 (i.e. 0000000000000001) makes the drive go reverse while setting the whole word to 0 (0000000000000000) makes it go forward.
-
-Most other industrial motor drives have a single 16-bit word where individual bits of that word do different functions (e.g. bit 0 is Run/Stop, bit 1 is Fwd/Rvs, bit 2 is Jog, bit 3 is . . .), and the PLC must write individual bit values to the respective places within that 16-bit word in order to command the drive.  While this approach is more efficient in terms of memory usage within the drive, it is less convenient when used with Automation Direct's Koyo ``DirectLogic'' and ``CLICK'' series of PLCs because these PLCs do not provide convenient ways to specify bit-wise addresses.  By contrast, Allen-Bradley and Siemens PLCs make it very easy to address individual bits within a multi-bit register.
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-\vfil \eject
-
-\noindent
-{\bf Summary Quiz:}
-
-(The recommended summary quiz is to have \underbar{each student} demonstrate their team's PLC running this particular program)
-
-%INDEX% PLC, ladder logic programming: Modbus
-
-\vfil \eject 
-
-
-\oppgave{} 
-% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
 Suppose a technician needs to program a PLC to take the raw analog-to-digital ``count'' value from an analog input card and scale it to a value ranging 0 to 100 (\%).  The input card's ADC count range is 0 to 65535.  The standard formula for doing this conversion is as follows:
 
 $$\hbox{Scaled output} = {\hbox{Raw input} \over 65535} \times 100$$
@@ -2066,69 +1863,6 @@ The way to fix this problem in the PLC program is to change the order of operati
 Normally, the order of operations is irrelevant when all we're doing is multiplying and dividing numbers (i.e. the {\it commutative property} of multiplication).  However, when the intermediate results are represented only in integer form, the ``rounding'' caused by truncation to the lowest-value integer may be quite severe as it is in this case.
 
 %INDEX% PLC, ladder logic programming: on-delay versus off-delay timers
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge and Comparison -- build a simple SCADA system} 
-
-\vskip 10pt
-
-``SCADA'' is an acronym meaning ``Supervisory Control And Data Acquisition'', referring to control systems where remote units relay data to and from a central location, allowing human operators to monitor and control processes spread over a wide area.  The term ``SCADA'' is broadly applied to many different types of control systems in industry.  Traditionally the term has been limited to control systems spread over a wide geographic area (e.g. power distribution systems, pipeline control systems) but it is now common to see ``SCADA'' used to describe {\it any} form of computer-based control system where process data is communicated over a digital network.  
-
-\vskip 10pt
-
-Work individually or in teams to wire and configure multiple PLC's to form a simple SCADA system, where analog data is read by a ``remote'' PLC and displayed by an HMI panel connected to a ``base'' PLC, and where virtual pushbuttons on the HMI display cause discrete outputs on the remote PLC to turn on and off.
-
-$$\includegraphics[width=15.5cm]{i02799x01.eps}$$
-
-When the potentiometer at the remote PLC is adjusted, the HMI at the base PLC should display a changing value.  When buttons on the HMI screen are toggled, indicator lamps at the remote PLC should turn on and off.  Feel free to include the following additional features for more fun and challenge:
-
-\begin{itemize}
-\item{} Build a ``trend graph'' display on the HMI instead of a simple numerical indicator for the analog input data point
-\vskip 5pt
-\item{} Have discrete inputs at the remote PLC register on the HMI display as graphic indicators
-\vskip 5pt
-\item{} Incorporate features such as input timers, event counts, etc. in the remote PLC
-\vskip 5pt
-\item{} Add multiple remote PLCs (use multi-drop RS-485 serial data communication, or Ethernet communication with a multi-port hub to connect the PLCs together)
-\end{itemize}
-
-\vskip 10pt
-
-Successful completion of this system will require the use of analog scaling instructions as well as network messaging instructions.  All the usual caveats apply -- {\it have fun!}
-
-\vfil 
-
-\underbar{file i02799}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
- 
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, I/O: analog resolution and scaling
-%INDEX% PLC, ladder logic programming: analog input scaling
-%INDEX% PLC, ladder logic programming: simple SCADA system
 
 \vfil \eject 
 
@@ -2194,50 +1928,6 @@ $$\includegraphics[width=15.5cm]{i02257x04.eps}$$
 % Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Suppose we have an Allen-Bradley MicroLogix 1000 PLC connected to a temperature switch and a flow switch:
-
-$$\includegraphics[width=15.5cm]{i02375x01.eps}$$
-
-We wish for the lamp to come on when the temperature is below 200 degrees F {\it and} when the flow rate is below 15 GPM.  Write a RLL program for the PLC (complete with correct address labels for each of the virtual contacts) to fulfill this function:
-
-$$\includegraphics[width=15.5cm]{i02375x02.eps}$$
-
-\vfil
-
-\underbar{file i02375}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-This is a graded question -- no answers or hints given!
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-$$\includegraphics[width=15.5cm]{i02375x03.eps}$$
-
-In order to turn the light on, we need to send virtual power to coil {\tt O:0/0}.  The ``and'' condition implies a series pairing of contact instructions tied to the two inputs {\tt I:0/1} and {\tt I:0/3}.  Thus, these two contact instruction must both be closed (colored).  Since we are told the temperature will be below 200 degrees (keeping the N.O. temp switch contact in its open state) and that the flow will be below 15 GPM (keeping the N.C. flow switch contact in its closed state), we know that {\tt I:0/3} will be equal to 0 and {\tt I:0/1} will be equal to 1.  In order for the two contact instructions to be colored, we need a NO {\tt I:0/1} and a NC {\tt I:0/3} as shown above.
-
-%INDEX% PLC, ladder logic programming: sketching a solution to a problem
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
 \noindent
 {\bf Programming Challenge -- Alarm event latch and history timers} 
 
@@ -2289,564 +1979,6 @@ I strongly recommend students save all their PLC programs for future reference, 
 I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
 
 %INDEX% PLC, programming challenge: alarm latch with event duration and history timers
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge and Comparison -- Batch mixing sequence control} 
-
-\vskip 10pt
-
-Tony loves garlic-infused olive oil, and so he decides to build an automated process for mixing large batches of it:
-
-$$\includegraphics[width=15.5cm]{i03836x01.eps}$$
-
-\vskip 10pt
-
-Write a PLC program to perform the following sequence, each step lasting 5 seconds (to make testing the program easier):
-
-% No blank lines allowed between lines of an \halign structure!
-% I use comments (%) instead, so that TeX doesn't choke.
-
-$$\vbox{\offinterlineskip
-\halign{\strut
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil \vrule \cr
-\noalign{\hrule}
-%
-% First row
-{\bf Step} & {\bf Action} & Oil valve & Mixer motor & Garlic feed & Drain valve \cr
-%
-\noalign{\hrule}
-%
-% Another row
-1 & Drain valve off, oil valve on & on & off & off & off \cr
-%
-\noalign{\hrule}
-%
-% Another row
-2 & Oil valve off, mixer on & off & on & off & off \cr
-%
-\noalign{\hrule}
-%
-% Another row
-3 & Garlic feed on & off & on & on & off \cr
-%
-\noalign{\hrule}
-%
-% Another row
-4 & Garlic feed off & off & on & off & off \cr
-%
-\noalign{\hrule}
-%
-% Another row
-5 & Mixer off, drain valve on & off & off & off & on \cr
-%
-\noalign{\hrule}
-} % End of \halign 
-}$$ % End of \vbox
-
-\begin{itemize}
-\item{} {\bf Inputs} 
-\item{} Start pushbutton (momentary NO) -- {\it press to begin the mixing sequence}
-\item{} Stop pushbutton (momentary NO) -- {\it press to halt (freeze) the mixing sequence}
-\item{} Reset pushbutton (momentary NO) -- {\it press to reset the sequence to the first step}
-\end{itemize}
-
-\begin{itemize}
-\item{} {\bf Outputs} 
-\item{} Oil valve -- {\it energize to open up the oil valve, admitting oil into the mixing tank}
-\item{} Mixer motor -- {\it energize to turn the mixer paddle}
-\item{} Garlic feed -- {\it energize to add ground garlic to the mixing tank via the screw conveyor}
-\item{} Drain valve -- {\it energize to open up the valve and drain the mixing tank}
-\end{itemize}
-
-\filbreak
-
-Write a PLC program performing this function, and demonstrate its operation using switches connected to its inputs to simulate the discrete inputs in a real application.  
-
-\vskip 10pt
-
-When your program is complete and tested, capture a screen-shot of it as it appears on your computer, and prepare to present your program solution to the class in a review session for everyone to see and critique.  The purpose of this review session is to see multiple solutions to one problem, explore different programming techniques, and gain experience interpreting PLC programs others have written.  When presenting your program, prepare to discuss the following points:
-
-\begin{itemize}
-\item{} Identify the ``tag names'' or ``nicknames'' used within your program to label I/O and other bits in memory
-\item{} Follow the sequence of operation in your program, simulating the system in action
-\item{} Identify any special or otherwise non-standard instructions used in your program, and explain why you decided to take that approach
-\item{} Show the comments placed in your program, to help explain how and why it works
-\item{} How you designed the program (i.e. what steps you took to go from a concept to a working program)
-\end{itemize}
-
-\underbar{file i03836}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-$$\includegraphics[width=15.5cm]{i03836x02.eps}$$
-
-% No blank lines allowed between lines of an \halign structure!
-% I use comments (%) instead, so that TeX doesn't choke.
-
-$$\vbox{\offinterlineskip
-\halign{\strut
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil \vrule \cr
-\noalign{\hrule}
-%
-% First row
-Register & Contents \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt B3:1} & 0000000000011000 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt B3:2} & 0000000000010100 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt B3:3} & 0000000000010110 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt B3:4} & 0000000000010100 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt B3:5} & 0000000000000001 \cr
-%
-\noalign{\hrule}
-} % End of \halign 
-}$$ % End of \vbox
-
-This program simply remains at the last step indefinitely, until the Reset pushbutton is pressed.
-
-
-
-
-
-
-\vfil \eject
-
-\noindent
-{\bf Summary Quiz:}
-
-(The recommended summary quiz is to have \underbar{each student} demonstrate their PLCs running this particular program)
-
-%INDEX% PLC, programming challenge: batch mixing sequence control
-%INDEX% Process: garlic/olive oil mixer
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge and Comparison -- Combination lock}
-
-\vskip 10pt
-
-Suppose we wish to have a PLC act as a combination lock, with four electrical toggle switches acting as input devices, such that the user must actuate those four switches in a specific sequence in order for a lamp to turn on.  For example, consider the following switch sequence:
-
-\begin{itemize}
-\item{} Turn all four switches off (re-sets lock to starting condition)
-\item{} Flip switch \#3 on
-\item{} Flip switch \#2 on
-\item{} Flip switch \#4 on
-\end{itemize}
-
-In the end, toggle switches 2, 3, and 4 are all in the ``on'' position, but those switches must be turned on in the sequence shown in order for the lamp to energize.  In other words, it isn't enough simply to have those three switches turned on in any arbitrary order.
-
-Write a PLC program performing this function, and demonstrate its operation using switches connected to its inputs to simulate the discrete inputs in a real application.  
-
-\vskip 10pt
-
-When your program is complete and tested, capture a screen-shot of it as it appears on your computer, and prepare to present your program solution to the class in a review session for everyone to see and critique.  The purpose of this review session is to see multiple solutions to one problem, explore different programming techniques, and gain experience interpreting PLC programs others have written.  When presenting your program, prepare to discuss the following points:
-
-\begin{itemize}
-\item{} Identify the ``tag names'' or ``nicknames'' used within your program to label I/O and other bits in memory
-\item{} Follow the sequence of operation in your program, simulating the system in action
-\item{} Identify any special or otherwise non-standard instructions used in your program, and explain why you decided to take that approach
-\item{} Show the comments placed in your program, to help explain how and why it works
-\item{} How you designed the program (i.e. what steps you took to go from a concept to a working program)
-\end{itemize}
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} How might it be possible to add one more feature to this program: an {\it alarm} that sounds if a person enters an incorrect sequence?
-\end{itemize}
-
-
-\underbar{file i02262}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-A sophisitcated and flexible solution to this programming challenge (when using an Allen-Bradley PLC) is to utilize a sequencer compare (SQC) instruction to compare switch states against a pre-programmed set of combination codes stored in {\tt B3} memory.  This way, the lock's combination may be altered without changing any of the logic in the program.
-
-\vfil \eject
-
-\noindent
-{\bf Summary Quiz:}
-
-(The recommended summary quiz is to have \underbar{each student} demonstrate their PLCs running this particular program)
-
-%INDEX% PLC, programming challenge: combination lock
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge and Comparison -- Conveyor start/stop control with safety switch} 
-
-\vskip 10pt
-
-Suppose we wish to control the starting and stopping of a large conveyor belt at a factory using a PLC.  This control system will use a ``Start'' pushbutton, a ``Stop'' pushbutton, and an emergency shut-down pull-cable allowing anyone along the conveyor's length to stop the belt simply by tugging on a steel cable (this is akin to the ``stop'' cable used on public buses for passengers to signal to the driver their intent to get off at the next stop).
-
-\begin{itemize}
-\item{} {\bf Inputs} 
-\item{} Start pushbutton (momentary NO) -- {\it pushing this button closes the switch to energize the PLC input}
-\item{} Stop pushbutton (momentary NC) -- {\it pushing this button opens the switch to de-energize the PLC input}
-\item{} Emergency stop cable (latching NC) -- {\it tugging on the cable opens the switch to de-energize the PLC input}
-\end{itemize}
-
-\begin{itemize}
-\item{} {\bf Outputs} 
-\item{} Motor contactor -- {\it energizing this PLC output starts the conveyor belt motor}
-\end{itemize}
-
-Write a PLC program performing this function, and demonstrate its operation using switches connected to its inputs to simulate the discrete inputs in a real application.  
-
-\vskip 10pt
-
-When your program is complete and tested, capture a screen-shot of it as it appears on your computer, and prepare to present your program solution to the class in a review session for everyone to see and critique.  The purpose of this review session is to see multiple solutions to one problem, explore different programming techniques, and gain experience interpreting PLC programs others have written.  When presenting your program (either individually or as a team), prepare to discuss the following points:
-
-\begin{itemize}
-\item{} Identify the ``tag names'' or ``nicknames'' used within your program to label I/O and other bits in memory
-\item{} Follow the sequence of operation in your program, simulating the system in action
-\item{} Identify any special or otherwise non-standard instructions used in your program, and explain why you decided to take that approach
-\item{} Show the comments placed in your program, to help explain how and why it works
-\item{} How you designed the program (i.e. what steps you took to go from a concept to a working program)
-\end{itemize}
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} How do you keep the motor ``latched'' on when the momentary ``Start'' switch is released?
-\item{} Which is simpler: implementing this function using normal program coils, or implementing this function using retentive coils (``set'' and ``reset'', or ``latch'' and ``unlatch'')?
-\end{itemize}
-
-\vfil 
-
-\underbar{file i02340}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-Two different program solutions:
-
-$$\includegraphics[width=15.5cm]{i02340x01.eps}$$
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-
-%INDEX% PLC, programming challenge: conveyor start/stop with safety switch
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge -- Engine auto-start sequence}
-
-\vskip 10pt
-
-Suppose we wish to have a PLC start up an engine automatically on demand.  We need the PLC to follow this sequence in starting the engine:
-
-% No blank lines allowed between lines of an \halign structure!
-% I use comments (%) instead, so that TeX doesn't choke.
-
-$$\vbox{\offinterlineskip
-\halign{\strut
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil \vrule \cr
-\noalign{\hrule}
-%
-% First row
-Step \# & Throttle (idle/run) & Choke & Ignition & Starter \cr
-%
-\noalign{\hrule}
-%
-% Another row
-1 & 0 & 0 & 0 & 0 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-2 & 0 & 1 & 0 & 0 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-3 & 0 & 1 & 1 & 1 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-4 & 1 & 0 & 1 & 0 \cr
-%
-\noalign{\hrule}
-} % End of \halign 
-}$$ % End of \vbox
-
-The program needs to have two discrete inputs and four discrete outputs:
-
-\begin{itemize}
-\item{} Input\_start: Start-up command signal (0 = shut down ; 1 = begin start-up sequence)
-\item{} Input\_run\_detector: Running sensor (0 = not firing ; 1 = engine running)
-\vskip 5pt
-\item{} Output\_throttle: (0 = idle position; 1 = run position)
-\item{} Output\_choke: (0 = off (run position) ; 1 = choked position)
-\item{} Output\_ignition: (0 = off ; 1 = on)
-\item{} Output\_starter: (0 = off ; 1 = cranking)
-\end{itemize}
-
-Steps 1 through 3 should happen according to a timed schedule, but the transition from step 3 (cranking the engine) to step 4 (engine running) should occur {\it only} if Input\_run\_detector shows the engine has fired.  The sequence should immediately revert to step 1 if the ``Input\_start'' command signal ever turns off.
-
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} How will your sequencer ``know'' when to advance from one step to the next, especially given the change of criteria from steps 1 through 3, to step 4?
-\end{itemize}
-
-
-\vfil
-
-\noindent
-PLC comparison:
-
-\begin{itemize}
-\item{} \underbar{Allen-Bradley Logix 5000}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, and {\tt SQL}.
-\vskip 5pt
-\item{} \underbar{Allen-Bradley SLC 500}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, {\tt SQC}, and {\tt SQL}. 
-\vskip 5pt
-\item{} \underbar{Siemens S7-200}: relevant ladder-logic commands include {\tt SCR}, {\tt SCRE}, and {\tt SCRT}.
-\vskip 5pt
-\item{} \underbar{Koyo (Automation Direct) DirectLogic}: relevant ladder-logic commands include {\tt DRUM} and {\tt EDRUM}.
-\end{itemize}
-
-\underbar{file i03715}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming challenge: Engine auto-start sequence
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge -- Engine auto-start sequence with cranking time limit}
-
-\vskip 10pt
-
-Suppose we wish to have a PLC start up an engine automatically on demand.  We need the PLC to follow this sequence in starting the engine:
-
-% No blank lines allowed between lines of an \halign structure!
-% I use comments (%) instead, so that TeX doesn't choke.
-
-$$\vbox{\offinterlineskip
-\halign{\strut
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil \vrule \cr
-\noalign{\hrule}
-%
-% First row
-Step \# & Throttle (idle/run) & Choke & Ignition & Starter \cr
-%
-\noalign{\hrule}
-%
-% Another row
-1 & 0 & 0 & 0 & 0 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-2 & 0 & 1 & 0 & 0 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-3 & 0 & 1 & 1 & 1 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-4 & 1 & 0 & 1 & 0 \cr
-%
-\noalign{\hrule}
-} % End of \halign 
-}$$ % End of \vbox
-
-The program needs to have two discrete inputs and four discrete outputs:
-
-\begin{itemize}
-\item{} Input\_start: Start-up command signal (0 = shut down ; 1 = begin start-up sequence)
-\item{} Input\_run\_detector: Running sensor (0 = not firing ; 1 = engine running)
-\vskip 5pt
-\item{} Output\_throttle: (0 = idle position; 1 = run position)
-\item{} Output\_choke: (0 = off (run position) ; 1 = choked position)
-\item{} Output\_ignition: (0 = off ; 1 = on)
-\item{} Output\_starter: (0 = off ; 1 = cranking)
-\end{itemize}
-
-Steps 1 through 3 should happen according to a timed schedule, but the transition from step 3 (cranking the engine) to step 4 (engine running) should occur {\it only} if Input\_1 shows the engine has fired.  The sequence should immediately revert to step 1 if the ``Input\_start'' command signal ever turns off.  
-
-Furthermore, the sequence should abort if step 3 has been active for more than 10 seconds without the engine firing.  After aborting the sequence (i.e. re-setting back to step 1 and remaining there), an alarm bit should be set by the PLC program to notify an operator that the engine did not start as it was supposed to.
-
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} How will your sequencer ``know'' when to advance from one step to the next, especially given the change of criteria from steps 1 through 3, to step 4?
-\item{} How will the program determine if the engine has been cranking for more than 10 seconds continuously?
-\item{} How will the sequencing function be re-set back to step 1, and remain there rather than progress through the start-up sequence again if the sequence was aborted due to the engine not firing after 10 seconds of cranking (i.e. the command signal is still ``1'')?
-\end{itemize}
-
-
-
-\vfil
-
-\noindent
-PLC comparison:
-
-\begin{itemize}
-\item{} \underbar{Allen-Bradley Logix 5000}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, and {\tt SQL}.
-\vskip 5pt
-\item{} \underbar{Allen-Bradley SLC 500}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, {\tt SQC}, and {\tt SQL}. 
-\vskip 5pt
-\item{} \underbar{Siemens S7-200}: relevant ladder-logic commands include {\tt SCR}, {\tt SCRE}, and {\tt SCRT}.
-\vskip 5pt
-\item{} \underbar{Koyo (Automation Direct) DirectLogic}: relevant ladder-logic commands include {\tt DRUM} and {\tt EDRUM}.
-\end{itemize}
-
-\underbar{file i03716}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming challenge: Engine auto-start sequence with cranking time limit
 
 \vfil \eject 
 
@@ -3062,127 +2194,6 @@ $$\includegraphics[width=15.5cm]{i04657x02.eps}$$
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
 \noindent
-{\bf Programming Challenge -- Blinking alarm light} 
-
-\vskip 10pt
-
-Suppose we wish to create a high-pressure alarm system for operators to alert them when the pressure inside a process vessel exceeds certain pressure limits.  Two normally-open pressure switches connect to this vessel, and to separate inputs on the PLC.  The first is a PSH (pressure switch high) set for a trip pressure of 150 PSI, and the second is a PSHH (pressure switch high-high) set for a trip pressure of 220 PSI.  If the first pressure switch (150 PSI) activates, we want to make a warning light blink on and off.  If the second pressure switch activates (220 PSI), {\it we want that same warning light to remain on steady}.
-
-\vskip 10pt
-
-Write a PLC program to perform this function, and demonstrate its operation using switches connected to its inputs to simulate the discrete inputs in a real application.
-
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} How do you make the alarm light blink on and off if all the PLC input points are steady (non-pulsing)?
-\item{} Can you think of any alternatives to having the same light energize differently to represent two different process alarm conditions?
-\end{itemize}
-
-
-\vfil 
-
-\underbar{file i02341}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
-
-\vskip 10pt
-
-I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
-
-
-%INDEX% PLC, programming challenge: high pressure alarm (blinking/steady)
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge -- HMI control of sprinkler valves} 
-
-\vskip 10pt
-
-Suppose an instrument technician wishes to have a PLC-controlled sprinkler system in his yard, with an HMI panel inside his house with ``pushbutton'' graphics on the screen where he may conveniently activate sprinkler water solenoid valves.  To begin this project, the technician connects two solenoid valves to two discrete outputs on his PLC: one valve opens up to send water to his fruit tree sprinkler nozzles while the other valve opens up to fire a jet of water at the nearby fire hydrant where his neighbor's dog likes to mark his territory.
-
-\vskip 10pt
-
-Create a simple HMI project with two ``pushbutton'' icons on the screen.  The first icon will directly activate the PLC output bit for the fruit tree sprinklers, and it needs to have a {\it toggle} action: pressing this icon once turns the bit on, and pressing it a second time turns it off.  The second icon will directly activate the PLC output bit for the anti-dog water cannon, and it needs to have a {\it momentary} action: pressing this icon activates the water jet, and releasing it stops the water jet.
-
-The PLC itself should have no instructions programmed in it (except perhaps for an {\tt END} rung to avoid a processor error).
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} What types of HMI data tags (boolean, integer, floating-point, ASCII, etc.) should be used for both these ``pushbutton'' objects?
-\item{} How do you specify the action (toggle, momentary, etc.) of the ``pushbutton'' icons on the HMI screen?
-\item{} What steps must you take to create appropriate tag names in the HMI for the PLC's data points?
-\item{} Explain why the PLC should have no program in it, or conversely, what bad things could happen if a program existed in the PLC with coils addressed to the same output bits the HMI was attempting to write to.
-\end{itemize}
-
-\vfil 
-
-\underbar{file i02350}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
-
-\vskip 10pt
-
-I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
-
-
-
-%INDEX% PLC, programming challenge: HMI control of sprinkler valves
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
 {\bf Programming Challenge and Comparison -- HMI-driven PWM duty cycle control} 
 
 \vskip 10pt
@@ -3319,73 +2330,6 @@ I also recommend presenting these programs as problems for students to work on i
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
 \noindent
-{\bf Programming Challenge -- Hour/Minute/Second timer} 
-
-\vskip 10pt
-
-Many PLCs provide a range of {\it special contacts} to the programmer.  Among these ``special contacts'' is typically one that cycles on and off at a rate of once per second, like a 1 Hz clock pulse.  
-
-Research the special contact for this function in your PLC, then write a PLC program for an Hour/Minute/Second timer using three counter instructions: one to count seconds (0 to 59), one to count minutes (0 to 59), and one to count hours.
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} What is the address of the special contact in your PLC for the 1 Hz clock pulse?
-\item{} How do you make three counters count in the correct sequence, so that one represents seconds, the next minutes, and the next hours?
-\end{itemize}
-
-
-\vfil 
-
-\noindent
-PLC comparison:
-
-\begin{itemize}
-\item{} \underbar{Allen-Bradley SLC 500}: status bit {\tt S:4/0} is a free-running clock pulse with a period of 20 milliseconds, which may be used to clock a counter instruction up to 50 to make a 1-second pulse (because 50 times 20 ms = 1000 ms = 1 second).
-\vskip 5pt
-\item{} \underbar{Siemens S7-200}: Special Memory bit {\tt SM0.5} is a free-running clock pulse with a period of 1 second.
-\vskip 5pt
-\item{} \underbar{Koyo (Automation Direct) DirectLogic}: Special relay {\tt SP4} is a free-running clock pulse with a period of 1 second. 
-\end{itemize}
-
-\underbar{file i03691}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
-
-\vskip 10pt
-
-I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
-
-
-
-%INDEX% PLC, programming challenge: hour/minute/second timer (using counters and a 1-second pulse bit)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
 {\bf Programming Challenge -- High-select function} 
 
 \vskip 10pt
@@ -3442,179 +2386,6 @@ I also recommend presenting these programs as problems for students to work on i
 
 %INDEX% PLC, programming challenge: low-select function
 %INDEX% Process: steam boiler
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge -- Mercury Cougar tail light sequencer}
-
-\vskip 10pt
-
-An instrument technician is restoring a vintage 1969 Mercury Cougar, which has three light bulbs on each side of the rear tail-light assembly for turn signals.  When the turn signal switch is activated, the three lights on that particular side of the car blink in sequence like this:
-
-$$\includegraphics[width=15.5cm]{i03837x01.eps}$$
-
-The problem is, the original factory sequencing circuit board for the tail lights is defective, so the technician decides to install a 12 VDC powered PLC in his Cougar to replicate the original blinking sequence.
-
-\vskip 10pt
-
-Write a PLC program to provide this blinking sequence with two switch inputs:
-
-\begin{itemize}
-\item{} Brake switch: if activated (and turn signal NOT activated) turn on all three lights constantly
-\item{} Turn switch: when activated, blink the three lights in sequence regardless of brake switch status
-\end{itemize}
-
-\vskip 10pt
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Although a sequencing instruction is perhaps the most obvious way to perform this function, is there a way to sequence the tail lights {\it without} using a sequencing instruction?
-\end{itemize}
-
-\vfil
-
-\noindent
-PLC comparison:
-
-\begin{itemize}
-\item{} \underbar{Allen-Bradley Logix 5000}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, and {\tt SQL}.
-\vskip 5pt
-\item{} \underbar{Allen-Bradley SLC 500}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, {\tt SQC}, and {\tt SQL}. 
-\vskip 5pt
-\item{} \underbar{Siemens S7-200}: relevant ladder-logic commands include {\tt SCR}, {\tt SCRE}, and {\tt SCRT}.
-\vskip 5pt
-\item{} \underbar{Koyo (Automation Direct) DirectLogic}: relevant ladder-logic commands include {\tt DRUM} and {\tt EDRUM}.
-\end{itemize}
-
-\underbar{file i03837}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
-
-\vskip 10pt
-
-I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
-
-%INDEX% PLC, programming challenge: Mercury Cougar tail light sequencer
-%INDEX% Process: Mercury Cougar taillight blinker
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge and Comparison -- Mixer motor auto-stop} 
-
-\vskip 10pt
-
-A batch mixing process in a manufacturing facility uses a mixer motor and a large ``paddlewheel'' to mix liquid ingredients to make a final product.  A PLC needs to run this motor for exactly 1500 turns of the paddlewheel and then automatically stop.  The motor needs to be able to start back up if the ``Start'' button is pressed again for the next batch:
-
-$$\includegraphics[width=15.5cm]{i03688x01.eps}$$
-
-\begin{itemize}
-\item{} {\bf Inputs} 
-\item{} Start pushbutton (momentary NO) -- {\it pushing this button closes the switch to energize the PLC input}
-\item{} Stop pushbutton (momentary NC) -- {\it pushing this button opens the switch to de-energize the PLC input}
-\item{} Proximity switch (NO) -- {\it one pulse per paddle revolution}
-\end{itemize}
-
-\begin{itemize}
-\item{} {\bf Outputs} 
-\item{} Motor contactor -- {\it energizing this PLC output starts the mixing motor}
-\end{itemize}
-
-Write a PLC program performing this function, and demonstrate its operation using switches connected to its inputs to simulate the discrete inputs in a real application.  
-
-\vskip 10pt
-
-When your program is complete and tested, capture a screen-shot of it as it appears on your computer, and prepare to present your program solution to the class in a review session for everyone to see and critique.  The purpose of this review session is to see multiple solutions to one problem, explore different programming techniques, and gain experience interpreting PLC programs others have written.  When presenting your program, prepare to discuss the following points:
-
-\begin{itemize}
-\item{} Identify the ``tag names'' or ``nicknames'' used within your program to label I/O and other bits in memory
-\item{} Follow the sequence of operation in your program, simulating the system in action
-\item{} Identify any special or otherwise non-standard instructions used in your program, and explain why you decided to take that approach
-\item{} Show the comments placed in your program, to help explain how and why it works
-\item{} How you designed the program (i.e. what steps you took to go from a concept to a working program)
-\end{itemize}
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} How can you test your program's basic operation without having to flick a switch {\it 1500 times} to simulate the full number of paddle revolutions?
-\item{} Try writing your program so that the number of paddle-turns (1500) is not ``hard-coded'' into the PLC program, but rather resides in some memory location that may be altered without reprogramming the PLC.
-\end{itemize}
-
-\vfil
-
-\underbar{file i03688}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-Sample program:
-
-$$\includegraphics[width=15.5cm]{i03688x02.eps}$$
-
-
-
-
-
-
-
-
-
-
-\vfil \eject
-
-\noindent
-{\bf Summary Quiz:}
-
-(The recommended summary quiz is to have \underbar{each student} demonstrate their PLCs running this particular program)
-
-%INDEX% PLC, programming challenge: mixer motor auto-stop (after so many turns)
-%INDEX% Process: batch liquid mixing system (generic)
 
 \vfil \eject 
 
@@ -3679,142 +2450,6 @@ If we don't mind holding the ``Launch'' pushbutton during the entire 10-second c
 (The recommended summary quiz is to have \underbar{each student} demonstrate their PLCs running this particular program)
 
 %INDEX% PLC, programming challenge: model rocket launch timer with HMI screen
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-This PLC is being used to start and stop an electric motor, and also to shut it down automatically in the event of excessive vibration, overcurrent, or high motor winding temperature:
-
-$$\includegraphics[width=15.5cm]{i02662x01.eps}$$
-
-The status of each shutdown contact is as follows:
-
-\begin{itemize}
-\goodbreak
-\item{} Vibration contact: {\it open} when good, {\it closes} when vibration becomes excessive
-\item{} Overload contact: {\it closed} when good, {\it opens} when overloaded
-\item{} Temperature contact: {\it closed} when good, {\it opens} when hot
-\end{itemize}
-
-Draw a PLC ladder-logic program to start and stop this motor.  Be sure to make the program latching so that the operator does not have to hold the Start button to keep the motor running.
-
-$$\includegraphics[width=15.5cm]{i02662x02.eps}$$
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} A powerful problem-solving technique is to simplify the problem so that it is easier to solve, then use that solution as a starting point for the final solution of the given (complex) problem.  Show how you would first simplify the given problem here, and what that simple(r) solution would look like.
-\item{} Explain how you could fool the PLC into ``thinking'' there was a high-temperature condition when in fact there was not.
-\item{} Explain how you could fool the PLC into ``thinking'' there was a high-vibration condition when in fact there was not.
-\item{} Explain how you could fool the PLC into ``thinking'' there was an overload condition at the motor when in fact there was not.
-\end{itemize}
-
-\underbar{file i02662}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-$$\includegraphics[width=15.5cm]{i02662x03.eps}$$
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtual Troubleshooting} \vrule} \hrule}
-
-This question is a good candidate for a ``Virtual Troubleshooting'' exercise.  Presenting the diagram to students, you first imagine in your own mind a particular fault in the system.  Then, you present one or more symptoms of that fault (something noticeable by an operator or other user of the system).  Students then propose various diagnostic tests to perform on this system to identify the nature and location of the fault, as though they were technicians trying to troubleshoot the problem.  Your job is to tell them what the result(s) would be for each of the proposed diagnostic tests, documenting those results where all the students can see.
-
-During and after the exercise, it is good to ask students follow-up questions such as:
-
-\begin{itemize}
-\item{} What does the result of the last diagnostic test tell you about the fault?
-\item{} Suppose the results of the last diagnostic test were different.  What then would that result tell you about the fault?
-\item{} Is the last diagnostic test the best one we could do?
-\item{} What would be the ideal order of tests, to diagnose the problem in as few steps as possible?
-\end{itemize}
-
-%INDEX% PLC, programming challenge: motor shutdown control system
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge and Comparison -- Motor control with HMI and pushbutton} 
-
-\vskip 10pt
-
-Suppose we need to have a PLC provide start/stop control for an electric motor, from two different locations.  Near the motor we have a pair of momentary-contact pushbutton switches: one to start the motor and another to stop it.  However, at the control room we have an HMI panel where the operators would like to have an additional set of momentary start and stop ``pushbuttons'' so they may start and stop the motor from that location as well.
-
-\vskip 10pt
-
-Write a PLC program integrating these two sets of start/stop controls together, so that the motor may be controlled from either location.  Also provide a ``run'' indicator on the HMI panel so operators there know when the motor is actually running.  Demonstrate the program's operation using switches connected to its inputs to simulate the discrete inputs in a real application.  
-
-\vskip 10pt
-
-When your program is complete and tested, capture a screen-shot of it as it appears on your computer, and prepare to present your program solution to the class in a review session for everyone to see and critique.  The purpose of this review session is to see multiple solutions to one problem, explore different programming techniques, and gain experience interpreting PLC programs others have written.  When presenting your program (either individually or as a team), prepare to discuss the following points:
-
-\begin{itemize}
-\item{} Identify the ``tag names'' or ``nicknames'' used within your program to label I/O and other bits in memory
-\item{} Follow the sequence of operation in your program, simulating the system in action
-\item{} Identify any special or otherwise non-standard instructions used in your program, and explain why you decided to take that approach
-\item{} Show the comments placed in your program, to help explain how and why it works
-\item{} How you designed the program (i.e. what steps you took to go from a concept to a working program)
-\end{itemize}
-
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Why would it be a bad idea for the HMI to write to the same PLC addresses used for discrete inputs (e.g. {\tt X1}, {\tt I:0/0}, {\tt I0.0}, etc.) in an attempt to have dual control over the motor?  What bits in the PLC memory should the HMI write to in order to avoid this problem?
-\item{} How may we ensure consistent action at the motor if conflicting commands are given from the pushbuttons and HMI (e.g. ``Start'' pushbutton pressed while ``Stop'' HMI control activated)?
-\end{itemize}
-
-
-\underbar{file i02485}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-\vfil \eject
-
-\noindent
-{\bf Summary Quiz:}
-
-(The recommended summary quiz is to have \underbar{each student} demonstrate their PLCs running this particular program)
-
-%INDEX% PLC, programming challenge: motor start/stop control with dual HMI/pushbutton controls 
 
 \vfil \eject 
 
@@ -4086,234 +2721,6 @@ I also recommend presenting these programs as problems for students to work on i
 
 
 \oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge and Comparison -- Remote PLC ``stop'' button for motor control system} 
-
-\vskip 10pt
-
-Suppose we have an application where two PLCs are connected via a network cable.  PLC 1 directly connects to the momentary-contact ``Start'' pushbutton, ``Stop'' pushbutton, and contactor coil for a simple motor control system.  PLC 2 has its own ``Stop'' pushbutton connected, which is supposed to cause the motor at the first PLC to stop when pressed.  An HMI connected to PLC 2 reads the status of the motor (whether it is running or stopped):
-
-$$\includegraphics[width=15.5cm]{i02492x01.eps}$$
-
-\vskip 10pt
-
-Work individually or in teams to write a PLC program using network communication instructions to perform the functions of remote stop and remote viewing of motor status.  {\it Note: some PLC models are unable to act as network ``master'' devices, such as the Allen-Bradley MicroLogix 1000 series A and B PLCs.}
-
-\vskip 10pt
-
-When your program is complete and tested, capture a screen-shot of it as it appears on your computer, and prepare to present your program solution to the class in a review session for everyone to see and critique.  The purpose of this review session is to see multiple solutions to one problem, explore different programming techniques, and gain experience interpreting PLC programs others have written.  When presenting your program (either individually or as a team), prepare to discuss the following points:
-
-\begin{itemize}
-\item{} Identify the ``tag names'' or ``nicknames'' used within your program to label I/O and other bits in memory
-\item{} Follow the sequence of operation in your program, simulating the system in action
-\item{} Identify any special or otherwise non-standard instructions used in your program, and explain why you decided to take that approach
-\item{} Show the comments placed in your program, to help explain how and why it works
-\item{} How you designed the program (i.e. what steps you took to go from a concept to a working program)
-\end{itemize}
-
-\vfil 
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Why can't communication instructions be continuously ``energized'' in PLC programs, but rather must be only occasionally activated (i.e. a series contact closing for one scan every so often)?
-\item{} Does it matter which PLC is the master and which is the slave in this application?
-\end{itemize}
-
-\underbar{file i02492}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-For Koyo CLICK PLCs, the ``Receive'' and ``Send'' instructions are fairly self-explanatory.  
-
-\vskip 20pt
-
-For Allen-Bradley MicroLogix PLCs, the ``Message'' (MSG) instruction is the one to use, configured for ``500CPU'' Communication Command type.  Follow these steps to ensure good operation:
-
-\begin{itemize}
-\item{} Configure the two PLCs which will be networked to each other via Ethernet with compatible IP addresses and subnets (e.g. {\tt 192.168.0.5} and {\tt 192.168.0.7}, each with a subnet mask of {\tt 255.255.255.0}).
-\vskip 5pt
-\item{} Either connect the two MicroLogix PLCs with a single Ethernet cable, or plug them into an Ethernet hub, allowing a laptop to still be connected to them for programming and monitoring purposes.
-\vskip 5pt
-\item{} Create a new ``Message'' file (e.g. {\tt MG9}) and a new ``Routing Information'' file (e.g. {\tt RI10}).  These will need to be referenced within the setup screen of the MSG instruction.
-\vskip 5pt
-\item{} Reference this new Message file in the MSG instruction box (e.g. MSG File = {\tt MG9:0}).
-\vskip 5pt
-\item{} Double-click the words ``Setup Screen'' in the MSG instruction box to access the setup screen where you may enter all the other configuration data for this instruction.
-\vskip 5pt
-\item{} Under the ``This Controller'' section, select Channel 1 (if you double-click on the entry field, a pull-down arrow appears, allowing you to select among options).
-\vskip 5pt
-\item{} Under the ``This Controller'' section, set the ``Communication Command'' to either {\tt 500CPU Read} or {\tt 500CPU Write}, depending on whether you wish to have the MSG instruction read (receive) data from another PLC, or write (send) data to another PLC.
-\vskip 5pt
-\item{} Under the ``This Controller'' section, set the ``Data Table Address'' to the memory location within this PLC accessed by the MSG instruction.  If you are writing information to another PLC, this is the register where the transmitted data will come from.  If you are reading information from another PLC, this is the register where the received data will be placed.
-\vskip 5pt
-\item{} Under the ``This Controller'' section, set the ``Size in Elements'' for the number of contiguous registers you wish to write or read.  If you only wish to read or write a single 16-bit register, leave this parameter set for 1.
-\vskip 5pt
-\item{} Under the ``Target Device'' section, set the ``Data Table Address'' to the memory location within the other PLC accessed by the MSG instruction.  If you are writing information to another PLC, this is the register in the other PLC where the transmitted data will be written to.  If you are reading information from another PLC, this is the register in the other PLC where the received data will be read from.
-\vskip 5pt
-\item{} Under the ``Target Device'' section, select {\tt Local}.
-\vskip 5pt
-\item{} Under the ``Target Device'' section, specify the Routing Information file you created earlier (e.g. {\tt RI10:0}).
-\vskip 5pt
-\item{} Select the MultiHop tab on the Setup Screen window, and there specify the IP address of the target device (i.e. the IP address of the other PLC).
-\end{itemize}
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-Regardless of the brand of PLC, students need to avoid connecting the input of their communication instruction straight to the ``rail'' in their programs.  Instead, the communication instruction(s) need to receive ``pulsed'' inputs (ideally lasting one scan per pulse) in order that the instruction does not collide with itself over subsequent scans.
-
-
-
-
-\vfil \eject
-
-\noindent
-{\bf Summary Quiz:}
-
-(The recommended summary quiz is to have \underbar{each student} demonstrate their PLCs running this particular program)
-
-%INDEX% PLC, programming challenge: remote PLC stop button for motor control system
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge -- Reversing motor restart delay} 
-
-\vskip 10pt
-
-A three-phase electric motor drives an air heat exchanger (radiative cooler) in either direction (forward or reverse), depending on which way operations personnel wish to blow the warm air.  During warm weather, the preferred direction is up, to direct hot air away from process equipment.  During cold weather, the preferred direction is down, to provide warmth in the process equipment area to help guard against liquid-filled pipes and tubes freezing:
-
-$$\includegraphics[width=15.5cm]{i02347x01.eps}$$
-
-A reversing start/stop PLC program is easy enough to write, with two momentary-contact ``Start'' pushbuttons (one for Forward, one for Reverse) and one momentary ``Stop'' pushbutton; but what we need here is a reversing program that {\it prevents an immediate re-start of the motor} in the opposite direction following a stop command.  This is because the fan blades have a lot of inertia, and take about 30 seconds to coast to a stop.  This restart lockout timer will prevent someone from trying to reverse the motor's direction before the fan has had a chance to fully stop.
-
-\vskip 10pt
-
-Write a PLC program to provide this forward/reverse/restart lockout functionality.  Assume the use of {\it normally-open} (NO) pushbutton switches for all pushbutton inputs.
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} What type of timer instruction is best suited for this application, an {\it on-delay} or an {\it off-delay} timer?
-\end{itemize}
-
-\vfil 
-
-\underbar{file i02347}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
-
-\vskip 10pt
-
-I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
-
-\vskip 10pt
-
-When designing a PLC program, a simplifying strategy is to begin simple and then add features, rather than to try to include all features from the very beginning!  In this case, one might start by writing a reversing control program complete with lockouts, but with no timers.  Only after getting this simple program working would the programmer think of trying to add timers to the mix.
-
-%INDEX% PLC, programming challenge: reversing motor restart delay
-%INDEX% Process: air-cooled heat exchanger (generic)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge -- Reversing motor restart delay} 
-
-\vskip 10pt
-
-Suppose a large machine is turned by an electric motor with reversing contactors.  Due to the high inertia of the machine's moving parts, the motor requires time to coast to a stop before reversing direction, or else the motor will become overloaded in the effort to switch direction while overcoming inertia spinning the wrong way.  
-
-After some experimentation with the machine, it is determined that 20 seconds provides an adequate delay following a ``Stop'' command prior to starting the motor in the opposite direction.  To provide this delay automatically, you are asked to program a PLC inhibiting a re-start in the opposite direction for 20 seconds following a ``stop'' command.  The ``Forward'' and ``Reverse'' commands are to come from an HMI panel (not hard-wired pushbutton switches), and the HMI panel should also indicate ``inhibit'' status to the operator so he or she knows they must wait before pushing a different directional button.
-
-\vskip 10pt
-
-Write a PLC program to provide this forward/reverse/restart lockout functionality, and an HMI screen with the appropriate ``pushbutton'' icons and ``inhibit'' display.
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} What type of timer instruction is best suited for this application, an {\it on-delay} or an {\it off-delay} timer?
-\end{itemize}
-
-\vfil 
-
-\underbar{file i02386}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
-
-\vskip 10pt
-
-I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
-
-%INDEX% PLC, programming challenge: reversing motor restart delay (with HMI)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
 % Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
@@ -4372,881 +2779,6 @@ I also recommend presenting these programs as problems for students to work on i
 %INDEX% Process: municipal water flow control
 
 \vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge -- Traffic light controller} 
-
-\vskip 10pt
-
-Write your own PLC program to sequence a single traffic light (green, yellow, and red lights).  The green light should remain on for 15 seconds, the yellow light for 3 seconds, and the red light for 20 seconds.
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Although a sequencing instruction is perhaps the most obvious way to perform this function, is there a way to sequence the traffic light {\it without} using a sequencing instruction?
-\end{itemize}
-
-\vfil
-
-\noindent
-PLC comparison:
-
-\begin{itemize}
-\item{} \underbar{Allen-Bradley Logix 5000}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, and {\tt SQL}.
-\vskip 5pt
-\item{} \underbar{Allen-Bradley SLC 500}: relevant ladder-logic commands include {\tt SQI}, {\tt SQO}, {\tt SQC}, and {\tt SQL}. 
-\vskip 5pt
-\item{} \underbar{Siemens S7-200}: relevant ladder-logic commands include {\tt SCR}, {\tt SCRE}, and {\tt SCRT}.
-\vskip 5pt
-\item{} \underbar{Koyo (Automation Direct) DirectLogic}: relevant ladder-logic commands include {\tt DRUM} and {\tt EDRUM}.
-\end{itemize}
-
-\underbar{file i02388}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-$$\includegraphics[width=15.5cm]{i02388x01.eps}$$
-
-% No blank lines allowed between lines of an \halign structure!
-% I use comments (%) instead, so that TeX doesn't choke.
-
-$$\vbox{\offinterlineskip
-\halign{\strut
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil \vrule \cr
-\noalign{\hrule}
-%
-% First row
-Register & Contents \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt B3:1} & 0000000000000001 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt B3:2} & 0000000000000010 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt B3:3} & 0000000000000100 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt N7:1} & 15 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt N7:2} & 3 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-{\tt N7:3} & 20 \cr
-%
-\noalign{\hrule}
-} % End of \halign 
-}$$ % End of \vbox
-
-
-
-I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
-
-\vskip 10pt
-
-I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
-
-
-%INDEX% PLC, programming challenge: traffic light controller (simple)
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-Oppgaven omhandler funksjoner rundt et transportbånd for metall deler.
-Du skal utvide funksjonaliteten til styringen for hver oppgave. Det
-starter enkelt og blir vanskligere og vanskligere. 
-
-%\includegraphics[width=1\textwidth]{Transportbånd}
-
-Det skal være skjermstyring som gør det lettere å test funksjonen. 
-
-1. Lag et program for Start og Stopp av transportbåndet 
-
-2. Legg til funksjonalitet slik at transportbåndet også stopper om
-det en mottar tilbakemelding om at nødstopp er aktivert. 
-
-3. Sett opp en forsinket start på 3s av transportbåndet 
-
-4. Når esken er full (10 deler), skal transportbåndet stoppe og det
-skal gis signal om at eske er full. Ved å trykke Ny Eske skal det
-være mulig å starte båndet på nytt. 
-
-5. Om det ikke er registrert ny del på 15s skal transportbåndet stoppe
-og et varsellys aktiveres. Når en ser at det er nye deler klare, starer
-en bare båndet manuelt igjen. 
-
-6. Legg til funksjonalitet slik at motorlampen blinker 1Hz under forsinket
-start. 
-
-\vskip 10pt
-\underbar{file i08011}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming,gradvis, kombinatorisk, transportbånd
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-The following PLC program preforms the function of an {\it alarm annunciator}, where a discrete input signal from an alarm switch (e.g. high temperature alarm) first causes a warning light to blink and a siren to audibly pulse until a human operator presses an {\it acknowledge} pushbutton.  If the alarm switch signal is still activated, the light will remain on (steady) instead of blink and the siren will go silent.  The light turns off as soon as the alarm signal goes back to its ``safe'' state.  A timing diagram shows how this should work:
-
-$$\includegraphics[width=15.5cm]{i02342x01.eps}$$
-
-$$\includegraphics[width=15.5cm]{i02342x02.eps}$$
-
-Take this ``generic'' PLC program and enter it into your own PLC, assigning appropriate addresses to all instructions, and demonstrating its operation.
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Does the PLC program (as written) ``expect'' a {\it closed} alarm switch contact to trigger the alarm, or an {\it open} alarm switch contact?
-\item{} If the real-world alarm switch contact was a pressure switch wired NC (normally-closed), would this circuit function as a {\it low} pressure alarm or as a {\it high} pressure alarm?
-\item{} If the real-world alarm switch contact was a temperature switch wired NO (normally-open), would this circuit function as a {\it low} temperature alarm or as a {\it high} temperature alarm?
-\end{itemize}
-
-\underbar{file i02342}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-I strongly recommend students save all their PLC programs for future reference, commenting them liberally and saving them with special filenames for easy searching at a later date!
-
-\vskip 10pt
-
-I also recommend presenting these programs as problems for students to work on in class for a short time period, then soliciting screenshot submissions from students (on flash drive, email, or some other electronic file transfer method) when that short time is up.  The purpose of this is to get students involved in PLC programming, and also to have them see other students' solutions to the same problem.  These screenshots may be emailed back to students at the conclusion of the day so they have other students' efforts to reference for further study.
-
-%INDEX% PLC, programming, kombinatorisk 
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-Foriglinger
-
-To hydrauliske sylindre er arrangert slik at det er kollisjonsmulighet
-mellom dem. Derfor må operasjonen av dem være slik at for at den ene
-skal gå i + må den andre være i \textendash stilling og vice versa. 
-
-\begin{tabular}{|c|c|c|c|}
-\hline 
-Adresse & Funksjon Innganger & Adresse & Funksjon Utganger\tabularnewline
-\hline 
-\hline 
-I0 & Start & Q0 & Sylinder A gå i + retning\tabularnewline
-\hline 
-I1 & Stopp/pause (når 0) & Q1 & Sylinder A gå i - retning\tabularnewline
-\hline 
-I2 & Sylinder A i -pos & Q2 & Sylinder B gå i + retning\tabularnewline
-\hline 
-I3 & Sylinder A i +pos & Q3 & Sylinder B gå i - retning\tabularnewline
-\hline 
-I4 & Sylinder B i -pos &  & \tabularnewline
-\hline 
-I5 & Sylinder B i +pos &  & g\tabularnewline
-\hline 
-\end{tabular}
-\begin{enumerate}
-\item Lag et utgangsprogram for styringen
-\end{enumerate}
-
-\underbar{i08007}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk 
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-Foriglinger
-
-To hydrauliske sylindre er arrangert slik at det er kollisjonsmulighet
-mellom dem. Derfor må operasjonen av dem være slik at for at den ene
-skal gå i + må den andre være i \textendash stilling og vice versa. 
-
-\begin{tabular}{|c|c|c|c|}
-\hline 
-Adresse & Funksjon Innganger & Adresse & Funksjon Utganger\tabularnewline
-\hline 
-\hline 
-I0 & Start & Q0 & Sylinder A gå i + retning\tabularnewline
-\hline 
-I1 & Stopp/pause (når 0) & Q1 & Sylinder A gå i - retning\tabularnewline
-\hline 
-I2 & Sylinder A i -pos & Q2 & Sylinder B gå i + retning\tabularnewline
-\hline 
-I3 & Sylinder A i +pos & Q3 & Sylinder B gå i - retning\tabularnewline
-\hline 
-I4 & Sylinder B i -pos &  & \tabularnewline
-\hline 
-I5 & Sylinder B i +pos &  & g\tabularnewline
-\hline 
-\end{tabular}
-\\
-\\
-Lag et utgangsprogram for styringen
-\vskip 10pt
-\underbar{file i08006}
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, foriglinger
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-Du skal lage styring for overvåkning av et
-tankanlegg med kjemikalier. Tankanlegget består av 3 separate tanker.
-Hver av tankene inneholder en nivåføler som gir logisk 1 når kjemikaliemengden
-er under et minimumsnivå kretsen sin oppgave er å tenne (gi logisk
-1) en varsellampe på et kontrollpanel når kjemikaliemengden i to eller
-flere av tankene er under minimumsnivået.
-\begin{enumerate}
-\item Tegn en enkel skisse for å visualisere systemet for deg selv. 
-\item Lag et skjema for oppkoblingen
-\item Sett opp en IO liste
-\item Lag et PLS program for denne funksjonen.
-\end{enumerate}
-
-Tilleggsoppgave. Du skal lage en alarmkrets.Den skal virke slik ved aktivering av alarm:
-\begin{itemize}
-\item En indikator skal blinke med alarm og det skal lages lyd (simuleres
-med lys). 
-\item Nå det trykkes Acknowledge skal Indikatoren lys konstant og lyden
-skal gå av. 
-\item Når alarm betingelsen er borte skal alarmen kunne resettes. 
-\end{itemize}
-\vskip 10pt
-\underbar{file i08003}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denn oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, kjemikalietanker, alarm
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-
-\paragraph{Test oppgave Kornsilo lett versjon}
-
-Simulering av kornsiloen ligger i Gand biblioteket. (SimKornsilo)
-
-\begin{tabular}{|c|c|c|c|}
-\hline 
-Tilkoblet utstyr & IO på RIO & Variabel & Beskrivelse av tilkoblet utstyr\tabularnewline
-\hline 
-\hline 
-Start Knapp & Bryter1 & Start & \tabularnewline
-\hline 
-Stopp Knapp & Bryter2 & Stopp & \tabularnewline
-\hline 
-H Sensor & Bryter3 & LevelHigh & \tabularnewline
-\hline 
-L Sensor & Bryter4 & LevelLow & \tabularnewline
-\hline 
-Drifts Lys & Lys1 & Drift & \tabularnewline
-\hline 
-Pumpe Lys & Lys2 & Pumpe & \tabularnewline
-\hline 
-Alarm Lys & Lys3 & AlarmLys & \tabularnewline
-\hline 
-Alarm Lyd & Lys4 & AlarmLyd & \tabularnewline
-\hline 
-\end{tabular}
-
-En kornsilo skal fyllest ved hjelp av en pumpe
-
-\includegraphics[width=0.5\textwidth]{i08012x01.png}
-
-Der er to nivåvakter i hver silo (L og H) disse gir \textquotedblright{}
-TRUE\textquotedblright{} når nivået ligger over giveren.
-
-Virkemåte: Pumpa i en silo skal alltid starte når nivået er under
-minimum og stoppe når nivået går over maksimum for siloen.
-\begin{enumerate}
-\item Lag en Visualisering som ligner den på bildet
-\item Anlegget settes i drift med en Start knapp og stoppes med en Stoppknapp.
-Når anlegget er satt i drift og nivået er under L startes pumpe P.
-Denne går til nivået når H. Slik fortsetter det til driften av anlegget
-stoppes.
-\item Legg til AutoMan styring av pumpe
-\item Legg til en teller for totalt antall sykluser på pumpe (skal vises
-på skjerm). 
-\item Det skal aktiveres en alarm om det tar mer en 10min (10s) å komme
-over L nivå (etter at den har vært under). Alarmen skal ha bekreft
-og resett funksjon.
-\end{enumerate}
-
-\paragraph{Test oppgave kornsile vanskelig versjon}
-
-Tre kornsiloer skal fyllest ved hjelp av hver sin pumpe P1, P2 og
-P3. 
-
-\begin{table}[]
-\begin{centering}
-\begin{tabular}{|c|c|c|c|}
-\hline 
-Tilkoblet utstyr & IO på RIO & Variabel & Beskrivelse av tilkoblet utstyr\tabularnewline
-\hline 
-\hline 
-Start Knapp & Bryter1 & Start & \tabularnewline
-\hline 
-Stopp Knapp & Bryter2 & Stopp & \tabularnewline
-\hline 
-H Sensor & Bryter3 & LevelHigh & \tabularnewline
-\hline 
-L Sensor & Bryter4 & LevelLow & \tabularnewline
-\hline 
-Drifts Lys & Lys1 & Drift & \tabularnewline
-\hline 
-Pumpe Lys & Lys2 & Pumpe & \tabularnewline
-\hline 
-Alarm Lys & Lys3 & AlarmLys & \tabularnewline
-\hline 
-Alarm Lyd & Lys4 & AlarmLyd & \tabularnewline
-\hline 
-\end{tabular}
-\par\end{centering}
-\caption{IO-liste for oppkobling mot Gand RIO-trainer}
-\end{table}
-
-\includegraphics[width=1\textwidth]{i08012x02.png}
-
-Der er to nivåvakter i hver silo (L1, H1, L2. osv.) og alle disse
-gir\textquotedblright{} 1\textquotedblright{} når nivået ligger over
-giveren. Pumpa i en silo skal alltid starte når nivået er under minimum
-og stoppe når nivået går over maksimum for siloen.
-
-Pumpene skal styras slik at det ikke blir brukt mer enn 2000W (P1=500W,
-P2=1000W og P3=1500W). Ved tom tank, skal silo fyllest slik at den
-ikke lenger er tom (uavhengig av strømforbruk). Alle nettverk programmeres
-i LD/FBD. Det skal være mulighet for manuell styring av pumper. 
-\begin{enumerate}
-\item Anlegget settes i drift med en Start knapp og stoppes med en Stoppknapp.
-Når anlegget er satt i drift og nivået er under L startes pumpe P.
-Denne går til nivået når H. Dette gjeler for alle pumpene. Slik fortsetter
-det til driften av anlegget stoppes. 
-\item Komplementer anlegget med alarm dersom nivået ligger under minimum
-i mer enn 1 minutt i en av siloene. Alarmsignalet skal pulsere (blinke)
-med en frekvens på 1 HZ. 
-\item Det er ønskelig med teller for antall sykluser og driftstimer på hver
-pumpe. Driftstid og antall sykluser skal presenteres ved hver pumpe.
-Når en pumpe kommer over 1000 sykluser eller 1000 driftstimer skal
-det vis et varsel om vedlikehold. Dette skal kunne resettes etter
-utført vedlikehold. 
-\item Sett opp kommunikasjon med Gand-RIO Trainer i henhold til tilordningslisten.
-\end{enumerate}
-\vskip 10pt
-\underbar{file i08012}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, kornsilo
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-Lyset i et rom styres av to impulsbyrtere, AV og PÅ, når av bryteren
-betjens skal lyset stå på i 5 sek. før det går av.
-\begin{enumerate}
-\item Sett opp en IO liste
-\item Lag et PLS program for denne funksjonen.
-\end{enumerate}
-\vskip 10pt
-\underbar{file i08005}
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, lys automatisk av
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-Lyset i en gang opereres av to sett med impulsbrytere, et i hver ende
-av gangen. Disse er kobla til en PLS.
-\begin{enumerate}
-\item Lag en skisse for oppkoblingen
-\item Sett opp en IO liste
-\item Lag et PLS program for denne funksjonen.
-\item Utvid PLS programmet til å virke med en bryter i hver enda av gangen. 
-\end{enumerate}
-\vskip 10pt
-\underbar{file i00800}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denn oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, Lys i gang
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-Lyset i en gang opereres av to sett med impulsbrytere, et i hver ende
-av gangen. Disse er kobla til en PLS.
-\begin{enumerate}
-\item Lag en skisse for oppkoblingen
-\item Sett opp en IO liste
-\item Lag et PLS program for denne funksjonen.
-\item Utvid PLS programmet til å virke med en bryter i hver enda av gangen. 
-\end{enumerate}
-\vskip 10pt
-\underbar{file i08001}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denn oppgaven
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, lys i gang (impuls)
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-På en parkeringsplass for biler er det plass til 10 biler. Det er
-separat inn- og utkjøring fra parkeringsplassen. Ved innkjøringen
-er det plassert to lamper, en som skal lyse grønt hvis det er ledige
-plasser, og en som skal lyse rødt når det ikke er ledige plasser.
-Ved innkjøring er det en bryter som gir signal for hver bil som kjører
-inn på plassen. Ved utkjøring er det en bryter som gir signal for
-hver bil som kjører ut.
-\begin{enumerate}
-\item Tegn en skisse for lysregleringen
-\item Sett opp en IO liste
-\item Lag et PLS program for denne funksjonen.
-\end{enumerate}
-
-\vskip 10pt
-\underbar{file i08008}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, parkeringsplass
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-Du skal lage et program som detekterer og skubber vekk flasker som
-har veltet på et samlebånd. Følerene X0 og X1 har bryter av typeNC (Normaly Closed). Den pneumatiske sylinderen Y0 aktiveres med TRUE og skubber da ut sylinderen. Dette går så fort at den rekke å skubbe ut og komme tilbake før neste flaske kommer frem. 
-
-\includegraphics[width=1\textwidth]{i08002x01.eps}
-\vskip 10pt
-\underbar{file i08002}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denn oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk,samlebånd velta flasker
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-Til en bil skal du lage en alarmkrets som varsler med lyssignal når
-sikkerhetsbeltene i forsetet ikke er festet og det sitter noen i setene.
-Under hvert sete er det en bryter som lukker når en person setter
-seg i setet. Videre er det i hvert sikkerhetsbelte en bryter som lukker
-når beltet blir festet.
-\begin{enumerate}
-\item Sett opp en IO liste
-\item Lag et PLS program for denne funksjonen
-\item Lag et HMI display som viser funksjonen 
-\end{enumerate}
-\vskip 10pt
-\underbar{file i08004}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denn oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, Sete alarm
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-Sortering av defekte enheter 
-
-Et transportbånd som frakter ferdige produkter er utstyrt med et system
-som fjerner defekte enheter. Dette systemet skal styres av en PLS.
-Defekte produkter er høyere enn enheter som er i orden
-
-%\includegraphics[width=1\textwidth]{KombStyrOppg04}
-
-Denne oppgaven skal kun ta for seg utsorteringen av defekte produkter.
-Forutsetningen er at transpontbåndet går med konstant hastighet, langsomt
-nok til at den elektromagnetiske armen Y0 rekker å skyve ut defekte
-produkter. En fotoelektrisk sensor X0 registrerer produkter som er
-for høye ved posisjon 1 og skyver de ut av transportbandet ved hjelp
-av en elektromagnetisk arm Y0 ved posisjon 5. Når den defekte enheten
-faller ned i resirkuleringskassen, registreres dette av en fotoelektrisk
-sensor X5 som en puls. En fotoelektrisk sensor X4 registrerer 1 hel
-omdreininger på motorakslingen som en puls. En hel omdreining av motorakslingen
-fører til at produktene mates frem 1 posisjon Anlegget er utstyrt
-med en RESET knapp. Når denne trykkes, settes programmet til startposisjonen.
-Det vil si tomt bånd. 
-\begin{enumerate}
-\item Lag tilordningsliste (symboltabell) for utsorteringen basert på opplysningene
-gitt ovenfor. Velg passende inn- og utgangsadresser. Det skal tydelig
-fremgå om du har brukt hvile-/arbeidskontakter i anlegget.
-\item Lag et PLS program for sorteringen. 
-\end{enumerate}
-
-\vskip 10pt
-\underbar{file i08010}
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, sortering av defekte enheter
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
-Sekvensiell oppstart av tre motorer 
-
-Tre motorer skal starts når du trykker på en knapp. Oljemotoren starter
-umiddelbart, hovedmotoren starter etter 10s og hjelpemotoren starter
-etter 15s. Når en trykker stopp skal alle motorene stoppes. 
-
-\vskip 10pt
-\underbar{file i08009}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, start av tre motorer i rekkefølge
-
-\vfil \eject 
-
-
 
 
 \end{document}

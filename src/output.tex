@@ -91,6 +91,40 @@ Kompetansemål:
 \textbf{Teori}\\\\
 Øvingsoppgaver til leksjon - følger neste side\\\\
 Innlevering til leksjon - Det er ingen innlevering til leksjonen. 
+
+
+Under disse oppgavene skal du ha fokus på følgende regler fra coding
+guidelines:
+
+4.2 All elements shall be commented
+
+4.1 Comment shall describe the intention of the code
+
+5.3 All variables shall be initialized before being used. 
+
+5.13 Physical outputs shall be written once per PLC cycle
+
+5.8. Floating point comparison shall not be equality or inequality
+
+5.9. Time and physical measures comparison shall not be equality or
+inequality
+
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Tilkoblet utstyr & IO på PLS & Variabel & Beskrivelse av tilkoblet utstyr\tabularnewline
+\hline 
+\hline 
+S1 & DI1 & Start & Start av motor\tabularnewline
+\hline 
+S2 & DI2 & Stopp & Stopp av motor\tabularnewline
+\hline 
+F4 & DI3 & Motorvern & Inngang for motorvern\tabularnewline
+\hline 
+Q1 & DO1 & Motor & Utgang for styring av motor\tabularnewline
+\hline 
+H1 & DO2 & Varsellys & Varsel for motorvern utløst. \tabularnewline
+\hline 
+\end{tabular}
 \bigskip 
 \hrule
 \vfil \eject
@@ -297,117 +331,6 @@ An emergency stop input contact could be added in ``series'' with the regular St
 %INDEX% PLC, ladder logic program analysis and explanation
 
 \vfil \eject 
-
-
-\oppgave{} 
-% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-This Allen-Bradley MicroLogix 1100 PLC ``schedules'' a setpoint value for a heat-treat furnace temperature control system.  The setpoint value is selected by the first sequencer instruction (SQO) from multiple PLC memory registers and placed in memory register N7:10 where it will be read by another portion of the program to be interpreted as the desired temperature of the furnace.  The second sequencer instruction (SQO) allows for different time intervals at each setpoint value in the schedule.  The purpose of this sequencing program is to select different furnace temperature setpoint values at different times, in order to properly heat-treat samples of alloyed metal placed in the furnace:
-
-$$\includegraphics[width=15.5cm]{i04658x01.eps}$$
-
-\filbreak
-
-$$\includegraphics[width=15.5cm]{i04658x02.eps}$$
-
-Identify the proper number values to store in the appropriate {\tt N7} registers to generate the following schedule, assuming 1-degree Fahrenheit resolution for the integer temperature setpoint values (e.g. an integer value of ``562'' means 562 degrees Fahrenheit):
-
-\begin{itemize}
-\item{} 750 degrees for 10 minutes
-\item{} 1050 degrees for 35 minutes
-\item{} 500 degrees for 20 minutes
-\item{} 0 degrees (indefinite cool-down period) 
-\end{itemize}
-
-Also, identify the ``normal'' pushbutton switch contact statuses (NO vs. NC) for the ``Start'' and ``Stop'' pushbuttons controlling this temperature sequencing program, and how this program might be edited to provide a ``reset'' pushbutton control to return back to step 1 of the heating schedule.
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Suggestions for Socratic discussion} \vrule} \hrule}
-
-\begin{itemize}
-\item{} Identify the purpose of the rung with the {\tt B3:2/0} coil at the end.
-\end{itemize}
-
-\underbar{file i04658}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-% No blank lines allowed between lines of an \halign structure!
-% I use comments (%) instead, so that TeX doesn't choke.
-
-$$\vbox{\offinterlineskip
-\halign{\strut
-\vrule \quad\hfil # \ \hfil & 
-\vrule \quad\hfil # \ \hfil \vrule \cr
-\noalign{\hrule}
-%
-% First row
-{\bf Register} & {\bf Value} \cr
-%
-\noalign{\hrule}
-%
-% Another row
-N7:1 & 750 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-N7:2 & 1050 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-N7:3 & 500 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-N7:4 & 0 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-N7:6 & 600 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-N7:7 & 2100 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-N7:8 & 1200 \cr
-%
-\noalign{\hrule}
-%
-% Another row
-N7:9 & 0 \cr
-%
-\noalign{\hrule}
-} % End of \halign 
-}$$ % End of \vbox
-
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-Both the ``Start'' and ``Stop'' pushbutton switches need to have normally-open (NO) contacts.  A ``return to step 1'' input could energize a pair of reset coils (RES) addressed to each of the two sequencer addresses.
-
-%INDEX% PLC, ladder logic program analysis and explanation (Allen-Bradley MicroLogix 1100)
-
-\vfil \eject 
-
 
 
 \oppgave{} 
@@ -656,6 +579,58 @@ I also recommend presenting these programs as problems for students to work on i
 
 
 \oppgave{} 
+% Copyright 2009, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+In relay ladder logic (RLL) programming, it is considered bad practice to have multiple instances of an identical (standard) ``relay'' coil in a program:
+
+$$\includegraphics[width=15.5cm]{i02376x01.eps}$$
+
+Explain why this is considered poor practice in PLC programming.  Next, determine the status of the {\tt Pump\_run} output channel given the following bit states:
+
+\begin{itemize}
+\item{} {\tt Timer\_01} = {\tt 1}
+\item{} {\tt Level\_low} = {\tt 1}
+\item{} {\tt Switch\_hand} = {\tt 0}
+\item{} {\tt OL\_contact} = {\tt 0}
+\item{} {\tt Sump\_wet} = {\tt 0} 
+\end{itemize}
+
+\vfil
+
+\underbar{file i02376}
+\eject
+\vskip 10pt \filbreak 
+
+
+
+
+
+\svar{} 
+
+This is a graded question -- no answers or hints given!
+
+\vskip 10pt \filbreak 
+
+
+
+
+
+\notes{} 
+
+Multiple instances of a coil in RLL programming means the possibility exists for different Boolean values to be written to the same bit in memory.  In other words, one rung of logic might be telling the pump to run, while another might be telling it to not run.  This makes the {\tt Pump\_run} bit liable to change within one scan of the program, with only the last scanned (evaluated) value being the one sent to the PLC discrete output channel.
+
+\vskip 10pt
+
+In this particular example, the {\tt Pump\_run} bit will be in the set state ({\tt 1}) at the conclusion of the program scan because the {\it last} rung in this program is ``energizing'' the {\tt Pump\_run} coil.  The coil in the first run is ``de-energized,'' making the {\tt Pump\_run} bit a {\tt 0} state during the rest of the program, but that is of no consequence to the output state because the output register gets updated only after the entire program has been scanned.
+
+%INDEX% PLC, ladder logic programming: avoiding multiple coils of the same label in a program
+
+\vfil \eject 
+
+
+
+\oppgave{} 
 % Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
@@ -668,7 +643,7 @@ av gangen. Disse er kobla til en PLS.
 \item Utvid PLS programmet til å virke med en bryter i hver enda av gangen. 
 \end{enumerate}
 \vskip 10pt
-\underbar{file i00800}
+\underbar{file i08000}
 \vskip 10pt \filbreak 
 
 
@@ -699,8 +674,7 @@ Det er ikke svar på denn oppgave
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
 
-Lyset i en gang opereres av to sett med impulsbrytere, et i hver ende
-av gangen. Disse er kobla til en PLS.
+Lyset på en idrettsarena kan opereres fra to ulike innganger, A og B, med individuelle impulsbrytere som er kobla til en PLS slik som i oppgaven over. Her skal vi ha en tilleggsfunksjon: Når lyset er skrudd på ved inngang A så skal det ikke kunne slukkes ved inngang B og vice versa. 
 \begin{enumerate}
 \item Lag en skisse for oppkoblingen
 \item Sett opp en IO liste
@@ -726,7 +700,8 @@ Det er ikke svar på denn oppgaven
 \notes{} 
 
 
-%INDEX% PLC, programming, kombinatorisk, lys i gang (impuls)
+%INDEX% PLC, programming, kombinatorisk, lys på idrettsarena
+
 
 \vfil \eject 
 
@@ -969,65 +944,6 @@ Det er ikke svar på denne oppgave
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
 
-Foriglinger
-
-To hydrauliske sylindre er arrangert slik at det er kollisjonsmulighet
-mellom dem. Derfor må operasjonen av dem være slik at for at den ene
-skal gå i + må den andre være i \textendash stilling og vice versa. 
-
-\begin{tabular}{|c|c|c|c|}
-\hline 
-Adresse & Funksjon Innganger & Adresse & Funksjon Utganger\tabularnewline
-\hline 
-\hline 
-I0 & Start & Q0 & Sylinder A gå i + retning\tabularnewline
-\hline 
-I1 & Stopp/pause (når 0) & Q1 & Sylinder A gå i - retning\tabularnewline
-\hline 
-I2 & Sylinder A i -pos & Q2 & Sylinder B gå i + retning\tabularnewline
-\hline 
-I3 & Sylinder A i +pos & Q3 & Sylinder B gå i - retning\tabularnewline
-\hline 
-I4 & Sylinder B i -pos &  & \tabularnewline
-\hline 
-I5 & Sylinder B i +pos &  & g\tabularnewline
-\hline 
-\end{tabular}
-\begin{enumerate}
-\item Lag et utgangsprogram for styringen
-\end{enumerate}
-
-\underbar{i08007}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk 
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-
 På en parkeringsplass for biler er det plass til 10 biler. Det er
 separat inn- og utkjøring fra parkeringsplassen. Ved innkjøringen
 er det plassert to lamper, en som skal lyse grønt hvis det er ledige
@@ -1099,65 +1015,6 @@ Det er ikke svar på denne oppgave
 
 
 %INDEX% PLC, programming, kombinatorisk, start av tre motorer i rekkefølge
-
-\vfil \eject 
-
-
-
-
-
-\oppgave{} 
-% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-Sortering av defekte enheter 
-
-Et transportbånd som frakter ferdige produkter er utstyrt med et system
-som fjerner defekte enheter. Dette systemet skal styres av en PLS.
-Defekte produkter er høyere enn enheter som er i orden
-
-%\includegraphics[width=1\textwidth]{KombStyrOppg04}
-
-Denne oppgaven skal kun ta for seg utsorteringen av defekte produkter.
-Forutsetningen er at transpontbåndet går med konstant hastighet, langsomt
-nok til at den elektromagnetiske armen Y0 rekker å skyve ut defekte
-produkter. En fotoelektrisk sensor X0 registrerer produkter som er
-for høye ved posisjon 1 og skyver de ut av transportbandet ved hjelp
-av en elektromagnetisk arm Y0 ved posisjon 5. Når den defekte enheten
-faller ned i resirkuleringskassen, registreres dette av en fotoelektrisk
-sensor X5 som en puls. En fotoelektrisk sensor X4 registrerer 1 hel
-omdreininger på motorakslingen som en puls. En hel omdreining av motorakslingen
-fører til at produktene mates frem 1 posisjon Anlegget er utstyrt
-med en RESET knapp. Når denne trykkes, settes programmet til startposisjonen.
-Det vil si tomt bånd. 
-\begin{enumerate}
-\item Lag tilordningsliste (symboltabell) for utsorteringen basert på opplysningene
-gitt ovenfor. Velg passende inn- og utgangsadresser. Det skal tydelig
-fremgå om du har brukt hvile-/arbeidskontakter i anlegget.
-\item Lag et PLS program for sorteringen. 
-\end{enumerate}
-
-\vskip 10pt
-\underbar{file i08010}
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-Det er ikke svar på denne oppgave
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, programming, kombinatorisk, sortering av defekte enheter
 
 \vfil \eject 
 
@@ -1502,184 +1359,6 @@ A helpful reference for you, especially if programming an Allen-Bradley SLC 500 
 
 %INDEX% PLC, I/O: analog resolution and scaling
 %INDEX% PLC, ladder logic programming: analog input scaling
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-\noindent
-{\bf Programming Challenge and Comparison -- build a simple SCADA system} 
-
-\vskip 10pt
-
-``SCADA'' is an acronym meaning ``Supervisory Control And Data Acquisition'', referring to control systems where remote units relay data to and from a central location, allowing human operators to monitor and control processes spread over a wide area.  The term ``SCADA'' is broadly applied to many different types of control systems in industry.  Traditionally the term has been limited to control systems spread over a wide geographic area (e.g. power distribution systems, pipeline control systems) but it is now common to see ``SCADA'' used to describe {\it any} form of computer-based control system where process data is communicated over a digital network.  
-
-\vskip 10pt
-
-Work individually or in teams to wire and configure multiple PLC's to form a simple SCADA system, where analog data is read by a ``remote'' PLC and displayed by an HMI panel connected to a ``base'' PLC, and where virtual pushbuttons on the HMI display cause discrete outputs on the remote PLC to turn on and off.
-
-$$\includegraphics[width=15.5cm]{i02799x01.eps}$$
-
-When the potentiometer at the remote PLC is adjusted, the HMI at the base PLC should display a changing value.  When buttons on the HMI screen are toggled, indicator lamps at the remote PLC should turn on and off.  Feel free to include the following additional features for more fun and challenge:
-
-\begin{itemize}
-\item{} Build a ``trend graph'' display on the HMI instead of a simple numerical indicator for the analog input data point
-\vskip 5pt
-\item{} Have discrete inputs at the remote PLC register on the HMI display as graphic indicators
-\vskip 5pt
-\item{} Incorporate features such as input timers, event counts, etc. in the remote PLC
-\vskip 5pt
-\item{} Add multiple remote PLCs (use multi-drop RS-485 serial data communication, or Ethernet communication with a multi-port hub to connect the PLCs together)
-\end{itemize}
-
-\vskip 10pt
-
-Successful completion of this system will require the use of analog scaling instructions as well as network messaging instructions.  All the usual caveats apply -- {\it have fun!}
-
-\vfil 
-
-\underbar{file i02799}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
- 
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-%INDEX% PLC, I/O: analog resolution and scaling
-%INDEX% PLC, ladder logic programming: analog input scaling
-%INDEX% PLC, ladder logic programming: simple SCADA system
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2009, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-In relay ladder logic (RLL) programming, it is considered bad practice to have multiple instances of an identical (standard) ``relay'' coil in a program:
-
-$$\includegraphics[width=15.5cm]{i02376x01.eps}$$
-
-Explain why this is considered poor practice in PLC programming.  Next, determine the status of the {\tt Pump\_run} output channel given the following bit states:
-
-\begin{itemize}
-\item{} {\tt Timer\_01} = {\tt 1}
-\item{} {\tt Level\_low} = {\tt 1}
-\item{} {\tt Switch\_hand} = {\tt 0}
-\item{} {\tt OL\_contact} = {\tt 0}
-\item{} {\tt Sump\_wet} = {\tt 0} 
-\end{itemize}
-
-\vfil
-
-\underbar{file i02376}
-\eject
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-This is a graded question -- no answers or hints given!
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-Multiple instances of a coil in RLL programming means the possibility exists for different Boolean values to be written to the same bit in memory.  In other words, one rung of logic might be telling the pump to run, while another might be telling it to not run.  This makes the {\tt Pump\_run} bit liable to change within one scan of the program, with only the last scanned (evaluated) value being the one sent to the PLC discrete output channel.
-
-\vskip 10pt
-
-In this particular example, the {\tt Pump\_run} bit will be in the set state ({\tt 1}) at the conclusion of the program scan because the {\it last} rung in this program is ``energizing'' the {\tt Pump\_run} coil.  The coil in the first run is ``de-energized,'' making the {\tt Pump\_run} bit a {\tt 0} state during the rest of the program, but that is of no consequence to the output state because the output register gets updated only after the entire program has been scanned.
-
-%INDEX% PLC, ladder logic programming: avoiding multiple coils of the same label in a program
-
-\vfil \eject 
-
-
-
-\oppgave{} 
-% Copyright 2008, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
-% This means you may do almost anything with this work of mine, so long as you give me proper credit
-
-Examine these two different PLC-based motor control programs and wiring diagrams:
-
-$$\includegraphics[width=15.5cm]{i02424x01.eps}$$
-
-\filbreak
-
-$$\includegraphics[width=15.5cm]{i02424x02.eps}$$
-
-Under normal operating conditions, these two motor control systems will perform identically.  However, they will act differently under abnormal conditions.  Identify one such ``abnormal'' condition that will cause these two systems to act differently, and explain what that difference is.
-
-\underbar{file i02424}
-\vskip 10pt \filbreak 
-
-
-
-
-
-\svar{} 
-
-The latter system ``reads back'' the motor's status from the auxiliary contact on the contactor, rather than from a bit internal to the PLC (Y1).  This gives it the ability to ``sense'' what is going on in the real world.
-
-\vskip 10pt
-
-Imagine a case where the motor control power circuit fuse blew, preventing the motor contactor from energizing even when PLC output Y1 activates.  The internally-latched PLC program would blissfully maintain an energized condition on Y1 output after someone presses the Start pushbutton even though the motor is not running (and will suddenly start if anyone replaces the blown fuse!).  The externally-latched PLC program refuses to latch output Y1 on unless it senses the contactor has actually energized, making it a safer system.
-
-\vskip 10pt
-
-A similar system of external latching is used on electric clothes dryers, to latch the motor control circuit on only when an external speed switch senses drum rotation.  This prevents the unwanted condition of continuous motor and heater operation in the event of a broken belt (which would prevent the drum from turning).
-
-\vskip 10pt \filbreak 
-
-
-
-
-
-\notes{} 
-
-
-
-
-\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtual Troubleshooting} \vrule} \hrule}
-
-This question is a good candidate for a ``Virtual Troubleshooting'' exercise.  Presenting the diagram to students, you first imagine in your own mind a particular fault in the system.  Then, you present one or more symptoms of that fault (something noticeable by an operator or other user of the system).  Students then propose various diagnostic tests to perform on this system to identify the nature and location of the fault, as though they were technicians trying to troubleshoot the problem.  Your job is to tell them what the result(s) would be for each of the proposed diagnostic tests, documenting those results where all the students can see.
-
-During and after the exercise, it is good to ask students follow-up questions such as:
-
-\begin{itemize}
-\item{} What does the result of the last diagnostic test tell you about the fault?
-\item{} Suppose the results of the last diagnostic test were different.  What then would that result tell you about the fault?
-\item{} Is the last diagnostic test the best one we could do?
-\item{} What would be the ideal order of tests, to diagnose the problem in as few steps as possible?
-\end{itemize}
-
-%INDEX% PLC, ladder logic programming: external feedback in motor starter control
 
 \vfil \eject 
 

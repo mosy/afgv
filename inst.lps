@@ -1,15 +1,27 @@
 %! PostScript set of library objects for XCircuit
-%  Version: 3.6
+%  Version: 3.10
 %  Library name is: inst
-%  Author: Tony,,, <tony@darkstar.example.net>
+%  Author:  <fred-olav@afgvPC>
 %
 
 % Depend inst::gauge generic::dot
 % Depend inst::meter generic::dot
 % Depend inst::gauge_dp generic::dot
 % Depend inst::air_compressor generic::dot
+% Depend inst::Altek_calibrator generic::dot
+% Depend inst::valve_reg_air inst::reg_ventil
 
 % XCircuitLib library objects
+/inst::main_front_long {
+begingate
+1 1.000 -64 0 64 90.000 270.000 xcarc
+1 1.000 -128 0 128 0 2 polygon
+1 1.000 64 0 64 -90.000 90.000 xcarc
+1 1.000 -64 64 64 64 2 polygon
+1 1.000 -64 -64 64 -64 2 polygon
+endgate
+} def
+
 /inst::dot {
 begingate
 248 1.000 0 0 6 0.000 360.000 xcarc
@@ -47,8 +59,8 @@ sce
 1 1.000 32 -24 32 -104 2 polygon
 1 1.000 64 -24 64 -104 2 polygon
 0 1.000 -16 -24 -16 -104 32 -104 32 -24 4 polygon
-(H) {/Helvetica cf} 2 16 0 0.500 -40 -40 label
-(L) {/Helvetica cf} 2 16 0 0.500 40 -40 label
+(H) {/Helvetica cf} 2 16 0.000 0.500 -40 -40 label
+(L) {/Helvetica cf} 2 16 0.000 0.500 40 -40 label
 0 1.000 0 8 0 -24 16 -24 16 8 4 polygon
 1 1.000 8 64 56 0.000 360.000 xcarc
 endgate
@@ -88,8 +100,8 @@ sce
 241 1.000 -40 8 40 8 24 112 -24 112 -40 8 5 polygon
 sce
 1 1.000 -40 8 -24 112 24 112 40 8 -40 8 5 polygon
-(H) {/Helvetica cf} 2 16 0 0.500 -48 -40 label
-(L) {/Helvetica cf} 2 16 0 0.500 32 -40 label
+(H) {/Helvetica cf} 2 16 0.000 0.500 -48 -40 label
+(L) {/Helvetica cf} 2 16 0.000 0.500 32 -40 label
 endgate
 } def
 
@@ -109,7 +121,7 @@ endgate
 begingate
 248 1.000 0 0 6 0.000 360.000 xcarc
 1.000 0.000 0.000 scb
-(x) {/Times-Roman cf} 2 29 0 1.000 0 0 pinlabel
+(x) {/Times-Roman cf} 2 29 0.000 1.000 0 0 pinlabel
 endgate
 } def
 
@@ -142,7 +154,7 @@ sce
 1 1.000 -25 -20 -19 -13 2 polygon
 1 1.000 -17 -25 -13 -17 2 polygon
 1 1.000 -8 -28 -7 -19 2 polygon
-1.000 0 0 8 generic::dot
+1.000 0.000 0 8 generic::dot
 0.600 0.600 0.600 scb
 241 1.000 -8 -40 -8 -56 8 -56 8 -40 -8 -40 5 polygon
 sce
@@ -158,7 +170,7 @@ begingate
 sce
 0 1.000 -64 32 -64 -48 64 -48 64 32 4 polygon
 1 1.000 -16 16 16 16 48 0 -48 0 spline
-1.000 0 0 -32 generic::dot
+1.000 0.000 0 -32 generic::dot
 endgate
 } def
 
@@ -172,7 +184,7 @@ begingate
 0.824 0.706 0.549 scb
 241 1.000 0 0 96 0.000 360.000 xcarc
 sce
-1.000 0 0 0 generic::dot
+1.000 0.000 0 0 generic::dot
 1 1.000 -92 0 -76 0 2 polygon
 1 1.000 0 92 0 76 2 polygon
 1 1.000 -88 22 -72 18 2 polygon
@@ -199,8 +211,8 @@ sce
 1 1.000 72 64 128 64 128 -64 72 -64 4 polygon
 0 1.000 -144 8 -144 -8 -128 -8 -128 8 4 polygon
 0 1.000 128 8 128 -8 144 -8 144 8 4 polygon
-(H) {/Helvetica cf} 2 16 0 0.500 -120 -8 label
-(L) {/Helvetica cf} 2 16 0 0.500 104 -8 label
+(H) {/Helvetica cf} 2 16 0.000 0.500 -120 -8 label
+(L) {/Helvetica cf} 2 16 0.000 0.500 104 -8 label
 endgate
 } def
 
@@ -246,7 +258,7 @@ sce
 1 1.000 -64 56 0 56 2 polygon
 1 1.000 -64 8 0 8 2 polygon
 1 1.000 -32 -48 16 0.000 360.000 xcarc
-1.000 0 -32 -48 generic::dot
+1.000 0.000 -32 -48 generic::dot
 1 3.000 -48 64 -64 80 2 polygon
 1 3.000 -16 64 0 80 2 polygon
 80 1.000 16 96 16 64 80 64 80 96 4 polygon
@@ -834,12 +846,12 @@ sce
 1 1.000 128 128 16 0.000 360.000 xcarc
 1 1.000 136 140 116 120 2 polygon
 1 1.000 140 136 120 116 2 polygon
-(Com) {/Helvetica cf} 2 16 0 1.000 -136 152 label
-(NC) {/Helvetica cf} 2 16 0 1.000 -8 152 label
-(NO) {/Helvetica cf} 2 16 0 1.000 96 152 label
+(Com) {/Helvetica cf} 2 16 0.000 1.000 -136 152 label
+(NC) {/Helvetica cf} 2 16 0.000 1.000 -8 152 label
+(NO) {/Helvetica cf} 2 16 0.000 1.000 96 152 label
 0.800 0.800 0.800 scb
-497 1.000 -112 64 -128 48 -256 48 -256 -16 272 -16 272 48 144 48 128 64 
-8 polygon
+497 1.000 -112 64 -128 48 -256 48 -256 -16 272 -16 272 48 144 48 128 64 8 
+polygon
 sce
 1 1.000 -112 64 -128 48 -256 48 -256 -16 272 -16 272 48 144 48 128 64 8 polygon
 1 1.000 -112 64 128 64 2 polygon
@@ -876,23 +888,23 @@ sce
 1 3.000 112 -192 112 160 2 polygon
 1 3.000 96 176 -96 176 2 polygon
 1 3.000 -112 160 -112 -192 2 polygon
-1.000 0 48 144 generic::dot
-1.000 0 -48 144 generic::dot
+1.000 0.000 48 144 generic::dot
+1.000 0.000 -48 144 generic::dot
 1 3.000 -48 144 -48 208 2 polygon
 1.000 0.000 0.000 scb
 1 3.000 48 144 48 208 2 polygon
 sce
 0 1.000 -80 128 -80 80 80 80 80 128 4 polygon
-(mA) {/Helvetica cf} 2 16 0 0.300 56 116 label
+(mA) {/Helvetica cf} 2 16 0.000 0.300 56 116 label
 496 1.000 -26 52 -26 48 -22 48 -22 52 4 polygon
 496 1.000 -10 52 -10 48 -6 48 -6 52 4 polygon
 496 1.000 6 52 6 48 10 48 10 52 4 polygon
 496 1.000 22 52 22 48 26 48 26 52 4 polygon
 0 1.000 -36 40 -36 24 36 24 36 40 4 polygon
-(mA) {/Helvetica cf} 2 16 0 0.300 -40 64 label
-(READ VDC) {/Helvetica cf} 2 16 0 0.300 -96 48 label
-(OFF) {/Helvetica cf} 2 16 0 0.300 20 64 label
-(% 4 to 20 mA) {/Helvetica cf} 2 16 0 0.300 32 48 label
+(mA) {/Helvetica cf} 2 16 0.000 0.300 -40 64 label
+(READ VDC) {/Helvetica cf} 2 16 0.000 0.300 -96 48 label
+(OFF) {/Helvetica cf} 2 16 0.000 0.300 20 64 label
+(% 4 to 20 mA) {/Helvetica cf} 2 16 0.000 0.300 32 48 label
 1 1.000 -8 52 -8 68 -16 68 3 polygon
 1 1.000 8 52 8 68 16 68 3 polygon
 0.400 0.400 0.400 scb
@@ -903,25 +915,25 @@ sce
 1 1.000 -68 -64 -68 -96 2 polygon
 1 1.000 -92 -48 -68 -48 -68 -64 -92 -64 spline
 1 1.000 -92 -112 -68 -112 -68 -96 -92 -96 spline
-(LOOP CALIBRATOR) {/Helvetica cf} 2 16 0 0.500 -92 -4 label
+(LOOP CALIBRATOR) {/Helvetica cf} 2 16 0.000 0.500 -92 -4 label
 1 1.000 68 -64 68 -96 2 polygon
 1 1.000 92 -64 92 -96 2 polygon
 1 1.000 68 -48 92 -48 92 -64 68 -64 spline
 1 1.000 68 -112 92 -112 92 -96 68 -96 spline
-(SOURCE) {/Helvetica cf} 2 16 0 0.300 -104 -44 label
-(2-WIRE) {/Helvetica cf} 2 16 0 0.300 -100 -124 label
-(READ) {/Helvetica cf} 2 16 0 0.300 -60 -84 label
-(100%) {/Helvetica cf} 2 16 0 0.300 68 -32 label
-(20 mA) {/Helvetica cf} 2 16 0 0.300 64 -44 label
-(0%) {/Helvetica cf} 2 16 0 0.300 76 -132 label
-(4 mA) {/Helvetica cf} 2 16 0 0.300 68 -120 label
-(ADJUST) {/Helvetica cf} 2 16 0 0.300 8 -84 label
+(SOURCE) {/Helvetica cf} 2 16 0.000 0.300 -104 -44 label
+(2-WIRE) {/Helvetica cf} 2 16 0.000 0.300 -100 -124 label
+(READ) {/Helvetica cf} 2 16 0.000 0.300 -60 -84 label
+(100%) {/Helvetica cf} 2 16 0.000 0.300 68 -32 label
+(20 mA) {/Helvetica cf} 2 16 0.000 0.300 64 -44 label
+(0%) {/Helvetica cf} 2 16 0.000 0.300 76 -132 label
+(4 mA) {/Helvetica cf} 2 16 0.000 0.300 68 -120 label
+(ADJUST) {/Helvetica cf} 2 16 0.000 0.300 8 -84 label
 0 0.500 4 -72 4 -88 60 -88 60 -72 4 polygon
-(TRANSMITTER) {/Helvetica cf} 2 16 0 0.100 -94 -135 label
-(SIMULATOR) {/Helvetica cf} 2 16 0 0.100 -92 -140 label
+(TRANSMITTER) {/Helvetica cf} 2 16 0.000 0.100 -94 -135 label
+(SIMULATOR) {/Helvetica cf} 2 16 0.000 0.100 -92 -140 label
 0 0.500 -98 -129 -98 -143 -60 -143 -60 -129 4 polygon
-(POWER 2-WIRE) {/Helvetica cf} 2 16 0 0.100 -95 -23 label
-(TRANSMITTERS) {/Helvetica cf} 2 16 0 0.100 -95 -28 label
+(POWER 2-WIRE) {/Helvetica cf} 2 16 0.000 0.100 -95 -23 label
+(TRANSMITTERS) {/Helvetica cf} 2 16 0.000 0.100 -95 -28 label
 0 0.500 -98 -17 -98 -31 -61 -31 -61 -17 4 polygon
 endgate
 } def
@@ -1005,15 +1017,36 @@ sce
 0 1.000 -56 -184 -56 -232 -8 -232 -8 -184 4 polygon
 0 1.000 8 -184 8 -232 56 -232 56 -184 4 polygon
 0 1.000 72 -184 72 -232 120 -232 120 -184 4 polygon
-(HART communicator) {/Helvetica cf} 2 16 0 0.500 -88 24 label
-0.604 0.604 0.604 scb
+(HART communicator) {/Helvetica cf} 2 16 0.000 0.500 -88 24 label
+0.600 0.600 0.600 scb
 496 1.000 -64 240 -64 248 -32 248 -32 240 4 polygon
 sce
 0 1.000 -64 240 -64 248 -32 248 -32 240 4 polygon
-0.604 0.604 0.604 scb
+0.600 0.600 0.600 scb
 496 1.000 32 240 32 248 64 248 64 240 4 polygon
 sce
 0 1.000 32 240 32 248 64 248 64 240 4 polygon
+endgate
+} def
+
+/inst::reg_ventil {
+begingate
+1 1.000 -56 56 56 56 2 polygon
+1 1.000 -64 -56 -64 8 64 -56 64 8 -64 -56 5 polygon
+1 1.000 0 -24 0 56 2 polygon
+1 1.000 -20 92 20 92 56 56 -56 56 spline
+1 1.000 -112 -80 112 32 2 polygon
+497 1.000 112 32 83 25 89 14 112 32 4 polygon
+endgate
+} def
+
+/inst::valve_reg_air {
+begingate
+1 1.000 -56 40 56 40 2 polygon
+1 1.000 -64 -72 -64 -8 64 -72 64 -8 -64 -72 5 polygon
+1 1.000 0 -40 0 40 2 polygon
+1 1.000 -24 80 24 80 56 40 -56 40 spline
+1.000 0.000 1002 520 inst::reg_ventil
 endgate
 } def
 

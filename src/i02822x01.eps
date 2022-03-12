@@ -1,23 +1,24 @@
 %!PS-Adobe-3.0 EPSF-3.0
 %%Title: i02822x01.eps
-%%Creator: XCircuit v3.7 rev26
-%%CreationDate: Sat Feb 23 14:33:00 2013
+%%Creator: XCircuit v0.0 rev209227597
+%%CreationDate: Mon Feb 28 10:13:52 2022
 %%Pages: 1
-%%BoundingBox: 68 68 267 202
+%%BoundingBox: 68 68 242 203
 %%DocumentNeededResources: font Helvetica Times-Roman 
 %%EndComments
 %%BeginProlog
 %
 %  PostScript prolog for output from xcircuit
-%  Version: 3.7
+%  Version: 3.9
 %
 %  Electrical circuit (and otherwise general) drawing program
 %
-%  Written by Tim Edwards 8/5/93--11/1/10  (tim.edwards@multigig.com)
+%  Written by Tim Edwards 8/5/93--4/12/16  (tim@opencircuitdesign.com)
 %  The Johns Hopkins University (1993-2004)
-%  MultiGiG, Inc. (2004-present)
+%  MultiGiG, Inc. (2004-2012)
+%  Open Circuit Design (2012-2016)
 %
-%%BeginResource: procset XCIRCproc 3.7 2
+%%BeginResource: procset XCIRCproc 3.9 1
 %
 % supporting definitions --- these are the primary xcircuit types.
 
@@ -28,18 +29,18 @@
     exch findfont exch makefont dup length dict /ndict exch def
     { 1 index /FID ne { ndict 3 1 roll put } { pop pop } ifelse } forall
     ndict definefont pop} def
-/ul { dup type /stringtype eq showflag 1 eq and { gsave 
+/ul { count 0 gt { dup type /stringtype eq showflag 1 eq and { gsave 
    currentpoint topmat setmatrix 0 0 moveto 2 index stringwidth pop (_)
    false charpath flattenpath pathbbox grestore exch pop 1 index
    sub setlinewidth exch pop currentpoint 3 -1 roll add moveto 0
-   rlineto stroke moveto } if } def
-/ol { dup type /stringtype eq showflag 1 eq and { gsave gsave
+   rlineto stroke moveto } if } if } def
+/ol { count 0 gt { dup type /stringtype eq showflag 1 eq and { gsave gsave
    currentpoint topmat setmatrix 2 index stringwidth pop 3 index
    true charpath flattenpath pathbbox grestore exch pop
    exch pop topmat setmatrix (_) true charpath pathbbox grestore
    exch pop 1 index sub setlinewidth exch pop currentpoint
    exch 4 1 roll exch sub add moveto pop 0 rlineto stroke
-   moveto } if } def
+   moveto } if } if } def
 /stW { gsave currentpoint newpath moveto true charpath flattenpath
 	pathbbox pop exch pop sub grestore } def
 /Ts {mark Tabs aload pop counttomark 1 add array astore /Tabs exch def Tabs
@@ -59,33 +60,45 @@
 /Ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
 	0.67 mul Kn } def
 /ns { 0 kY neg Kn /kY 0 def /fscale 1.0 def xfont0 1.0 cf0 } def
-/CR { ns 0 /Bline Bline fscale0 neg add def Bline moveto } def
+/MR { /twidth exch def } def
+/CRx { } def
+/CR { ns 0 /Bline Bline fscale0 neg add def Bline moveto CRx } def
 /cf { dup type /realtype ne {1.0} if exch findfont exch kY 0 eq
 	{ 40 mul dup /fscale0 exch def cf0 /xfont0 currentfont def}
 	{fscale0 mul fscale mul cf0} ifelse } def
 /ctmk { counttomark dup 2 add -1 roll pop } bind def
-/label { gsave translate 0 0 moveto dup scale neg /rotval exch def
-	/just exch def just 384 and 0 gt {/mshow {pop} def} {/mshow {show}
-	def} ifelse just 16 and 0 gt {gsave rotval rotate 0 1 dtransform
-	gsave pagemat setmatrix idtransform exch grestore 1 0 dtransform
-	gsave pagemat setmatrix idtransform exch grestore dup abs 1e-9 lt
-	{pop mul 0 gt} {3 1 roll pop pop 0 lt} ifelse grestore {-1 /rotval
-	rotval neg def /just just dup 3 and 1 ne {3 xor} if def} {1} ifelse
-	exch -1e-9 lt {-1 /rotval rotval neg def /just just dup 12 and
-	4 ne {12 xor} if def} {1} ifelse scale } if /showflag 0 def
-	/fspc pspc def /Bline 0 def /Tabs 0 array def /fscale 1.0 def
-	/kY 0 def gsave dup 1 add copy 0 exch 1 0 dtransform exch atan rotate
-	{exch dup type /stringtype eq {true charpath flattenpath} {dup type
-	/arraytype eq {exec} {12 string cvs true charpath flattenpath} ifelse}
-	ifelse} repeat pop pathbbox grestore 3 -1 roll pop 3 1 roll just
-	1 and 0 gt {just 2 and 0 gt {exch pop neg fspc sub} {exch sub 0.5
-	mul neg} ifelse} {pop neg fspc add} ifelse exch Bline exch just 4
-	and 0 gt {just 8 and 0 gt {exch pop neg fspc sub} {add 0.5 mul neg}
-	ifelse} {pop neg fspc add} ifelse rotval rotate Kn currentpoint
-	translate /showflag 1 def /Bline 0 def /Tabs 0 array def /fscale
-	1.0 def /kY 0 def {dup type /stringtype eq {mshow} {dup type
-	/arraytype eq {exec} {12 string cvs mshow} ifelse} ifelse} repeat
-	grestore endclip} def
+/label { gsave translate 0 0 moveto dup scale neg
+	/rotval exch def /twidth 100000 def /just exch def just 128 and
+	0 gt {/mshow {pop} def} {/mshow {show} def} ifelse just 16 and 0
+	gt {gsave rotval rotate 0 1 dtransform gsave pagemat setmatrix
+	idtransform exch grestore 1 0 dtransform gsave pagemat setmatrix
+	idtransform exch grestore dup abs 1e-9 lt {pop mul 0 gt} {3 1 roll
+	pop pop 0 lt} ifelse grestore {-1 /rotval rotval neg def /just just
+	dup 3 and 1 ne {3 xor} if def} {1} ifelse exch -1e-9 lt {-1 /rotval
+	rotval neg def /just just dup 12 and 4 ne {12 xor} if def} {1}
+	ifelse scale } if /showflag 0 def /fspc pspc def /Bline 0 def
+	/numlines 0 def /padding 0 array def /Tabs 0 array def
+	/fscale 1.0 def /kY 0 def gsave /CRx { linewid padding
+	aload pop numlines 1 add dup /numlines exch def array astore
+	/padding exch def /linewid 0 def } def dup 1 add copy dup 1 0
+	dtransform exch atan rotate {exch dup type /stringtype eq {gsave dup
+	gsave newpath 0 0 moveto true charpath flattenpath pathbbox pop exch
+	pop exch pop grestore currentpoint pop add dup /linewid exch def twidth
+	ge {grestore CR exch 1 add dup 2 add {CR} exch 1 roll exch} {grestore}
+	ifelse true charpath flattenpath} {dup type /arraytype eq {exec} {12
+	string cvs true charpath flattenpath} ifelse} ifelse} repeat
+	CRx /CRx {padding aload pop just 1280 and 0 gt {blockwid exch sub just
+	1024 and 0 gt {0.5 mul} if} {pop 0} ifelse 0 rmoveto numlines 1 sub
+	dup /numlines exch def array astore /padding exch def} def exch pop
+	pathbbox grestore 4 copy pop exch pop exch sub /blockwid exch def
+	3 -1 roll pop 3 1 roll just 1 and 0 gt {just 2 and
+	0 gt {exch pop neg fspc sub} {exch sub 0.5 mul neg} ifelse} {pop neg
+	fspc add} ifelse exch Bline exch just 4 and 0 gt {just 8 and 0 gt
+	{exch pop neg fspc sub} {add 0.5 mul neg} ifelse} {pop neg fspc add}
+	ifelse rotval rotate Kn currentpoint translate /showflag 1 def /Bline
+	0 def /Tabs 0 array def /fscale 1.0 def /kY 0 def CRx {dup type
+	/stringtype eq {mshow} {dup type /arraytype eq {exec} {12 string cvs
+	mshow} ifelse} ifelse} repeat grestore endclip} def
 /pinlabel { 4 index 32 and 0 ne hlevel 0 eq or { /pspc 10 def label
 	/pspc 0 def } { pop pop pop pop pop {pop} repeat } ifelse } def
 /pinglobal { pinlabel } def
@@ -98,10 +111,10 @@
 /begingate {dup type /dicttype ne {1 dict} if begin	% default params
 	dup type /dicttype ne {1 dict} if begin		% instanced params
 	/hlevel hlevel 1 add def /defColor currentcolor sce 3 array astore
-	def gsave sce translate 0 0 moveto neg rotate dup type /nametype
-	eq not { dup abs currentlinewidth exch div setlinewidth } { pop }
-	ifelse dup abs scale clipped 1 and 1 eq {/clipped clipped 1 add def}
-	if} bind def
+	def gsave sce dup type /nametype eq { pop } if translate 0 0 moveto
+	neg rotate dup type /nametype eq not { dup abs currentlinewidth exch
+	div setlinewidth } { pop } ifelse dup abs scale clipped 1 and 1 eq
+	{/clipped clipped 1 add def} if} bind def
 /endgate { /hlevel hlevel 1 sub def grestore defColor aload pop cRedef
 	scb end end endclip} bind def
 
@@ -124,7 +137,7 @@
   currentlinewidth mul setlinewidth /style exch def style 2048 and 0 gt
   clipped 1 and 0 eq and {clip newpath /clipped clipped 1 add def} {
   style 1 and 0 gt not {closepath} if
-  style 1024 and 0 gt {2 setlinecap} if
+  style 1024 and 0 gt {2 setlinecap 0 setlinejoin} if
   style 2 and 0 gt {currentlinewidth 4 mul dup 2 array astore 0 setdash} if
   style 4 and 0 gt {0.5 currentlinewidth 4 mul 2 array astore 0 setdash} if
   gsave style 16 and 0 gt { style 224 and -5 bitshift style 256 and 0 gt {
@@ -156,7 +169,7 @@
 /polyc   { {lineto} repeat } bind def
 /beginpath { gsave moveto } bind def
 /endpath { setstyles } bind def
-/bop	 { 1 setlinecap 0 setlinejoin 6 setmiterlimit 0 0 0 scb cRedef
+/bop	 { 1 setlinecap 2 setlinejoin 6 setmiterlimit 0 0 0 scb cRedef
 	/clipped 0 def} def
 /psinsertion {/PSobj save def /showpage {} def /setpagedevice {pop} def bop
 	rotate translate dup scale} def
@@ -167,7 +180,6 @@
 
 %%EndResource
 %%EndProlog
-
 % XCircuit output starts here.
 
 %%BeginSetup
@@ -177,13 +189,13 @@
 begingate
 248 1.000 0 0 6 0.000 360.000 xcarc
 1.000 0.000 0.000 scb
-(x) {/Times-Roman cf} 2 29 0 1.000 0 0 pinlabel
+(x) {/Times-Roman cf} 2 29 0.000 1.000 0 0 pinlabel
 endgate
 } def
 
 /::gauge {
 begingate
-0.604 0.604 0.604 scb
+0.600 0.600 0.600 scb
 241 1.000 0 8 48 0.000 360.000 xcarc
 sce
 1 1.000 0 44 0 36 2 polygon
@@ -210,8 +222,8 @@ sce
 1 1.000 -25 -20 -19 -13 2 polygon
 1 1.000 -17 -25 -13 -17 2 polygon
 1 1.000 -8 -28 -7 -19 2 polygon
-1.000 0 0 8 generic::dot
-0.604 0.604 0.604 scb
+1.000 0.000 0 8 generic::dot
+0.600 0.600 0.600 scb
 241 1.000 -8 -40 -8 -56 8 -56 8 -40 -8 -40 5 polygon
 sce
 1 1.000 0 8 48 0.000 360.000 xcarc
@@ -237,25 +249,26 @@ endgate
 %%Page: 6600x007.eps 1
 %%PageOrientation: Portrait
 /pgsave save def bop
+% 32.00 4.00 gridspace
 0.7500 inchscale
-2.6000 setlinewidth 560 448 translate
+2.6000 setlinewidth 512 454 translate
 
-1.000 90 280 -96 ::gauge
+1.000 90.000 280 -96 ::gauge
 1 2.000 224 -96 160 -96 2 polygon
 1 2.000 288 -96 320 -64 2 polygon
-(Pressure = ???) {/Helvetica cf} 2 16 0 1.000 96 -192 label
+(Trykk = ???) {/Helvetica cf} 2 16 0.000 1.000 96 -192 label
 1 1.000 -176 -96 -208 -96 2 polygon
 1 1.000 -176 176 -208 176 2 polygon
--1.000 /sv 180 -192 -96 generic::arrowhead
-1.000 0 -192 176 generic::arrowhead
+-1.000 /sv 180.000 -192 -96 generic::arrowhead
+1.000 0.000 -192 176 generic::arrowhead
 0.933 0.604 0.000 scb
 496 1.000 -160 176 -160 -96 160 -96 160 176 4 polygon
 sce
 1 3.000 -160 256 -160 -96 160 -96 160 256 4 polygon
-(13 feet) {/Helvetica cf} 2 16 0 1.000 -304 32 label
+( 4 m) {/Helvetica cf} 2 16 0.000 1.000 -256 32 label
 1 1.000 -192 160 -192 80 2 polygon
 1 1.000 -192 0 -192 -80 2 polygon
-(3) {Ss} (47.9 lb/ft) {/Helvetica cf} 4 16 0 1.000 -96 32 label
+(3) {Ss} (767.3 kg/m) {/Helvetica cf} 4 16 0.000 1.000 -96 32 label
 pgsave restore showpage
 
 %%Trailer

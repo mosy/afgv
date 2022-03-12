@@ -1,0 +1,320 @@
+% Start preamble
+\documentclass[12pt,a4paper]{article}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./}}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{attachfile}
+\usepackage{epstopdf}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+%\usepackage[table]{xcolor,colorbl}
+\setlength{\textwidth}{16cm}
+\setlength{\oddsidemargin}{-0.5cm}
+\setlength{\evensidemargin}{-0.5cm}
+%\setlenght{\headsep}{0cm}
+\setlength\parindent{0pt}
+%\setlength{\extrarowheight}{3pt}
+\usepackage{listings}
+%\usepackage{xcolor}
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+backgroundcolor=\color{backgroundColour},   
+commentstyle=\color{mGreen},
+keywordstyle=\color{magenta},
+numberstyle=\tiny\color{mGray},
+stringstyle=\color{mPurple},
+basicstyle=\footnotesize,
+breakatwhitespace=false,         
+breaklines=true,                 
+captionpos=b,                    
+keepspaces=true,                 
+numbers=left,                    
+numbersep=5pt,                  
+showspaces=false,                
+showstringspaces=false,
+showtabs=false,                  
+tabsize=2,
+language=C
+ }
+\input{arduinoLanguage.tex}
+%%%%%% Counting oppgaves %%%%%%
+ \newcount\questnum \questnum=0
+ \def\oppgave{
+            \advance\questnum by 1
+	    \ifthenelse{\questnum>0\AND \questnum<9}
+	    {
+                \vskip 1cm
+		\textbf{Oppgave}\hskip 5pt\the\questnum \hfill \hfill(6p)
+		\vskip 3pt
+		\hrule
+	\vskip 0.5cm}
+	{
+                \vskip 1cm
+		\textbf{Oppgave}\hskip 5pt \the\questnum \hfill \hfill(12p)
+		\vskip 3pt \hrule \vskip 0.5cm }
+
+		}
+ %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+% End preamble
+
+\begin{document}
+% !TEX root = /home/fred-olav/afgv/src/preamble.tex
+\LARGE
+\centerline{\bf Prøve i reguleringsteknikk Vinter 2021 (Konte)}  \bigskip
+\normalsize
+Mål som eleven prøves i på prøven: 
+\begin{itemize}[noitemsep]
+\item Kjenne til roboters bevegelser og Koordinatsystemer 
+\item Kjenne til, tegne, forklare og forstå bruk av: 
+\begin{itemize}[noitemsep]
+	\item Tilbakekoblet regulering 
+	\item PID regulator 
+	\item Kaskadekoblet regulering 
+	\item Foroverkoblet regulering 
+\end{itemize}
+\item Kunne optimalisere en prosess med tims, Z\&N og Skogestad 
+\item Kunne sette opp en PID reguator i Codesys og lage til hørende HMI 
+\item Kunne fortelle om egenskaper med en prosess: 
+\begin{itemize}[noitemsep]
+	\item Integrerende 
+	\item Selvsatabliserende 
+	\item Tidskonstant 
+	\item Dødtid 
+	\item Forsterkning 
+\end{itemize}
+\item Tegning av P \& ID i Pc|Schematic 
+\item Planlegging, gjennomføring og dokumentering av et arbidsoppdrag
+\item Kunne grunnprinsipper fra tidligere emner. 
+\end{itemize}
+
+
+
+Oppgave 1 gjøres uten håndbok og skal leveres på papir. \\
+Oppgave 2-7 gjøres med håndbok og skal leveres på papir. \\
+Oppgave 8-9 skal gjøres i på PC og føres i et word  dokument og sendes på mail til fred-olav.mosdal@skole.rogfk.no\\
+
+\bigskip 
+\hrule
+\bigskip 
+\textbf{Navn:}\bigskip 
+\hrule
+\vfil \eject
+\centerline{\bf Oppgaver}
+
+  
+\vskip 5pt
+\oppgave{} 
+a) Tegn blokkskjema for et reguleringsystem
+\newpage
+b) Hva menes med følgende i reguleringsteknikken
+\begin{itemize}[noitemsep]
+	\item Avvik
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+\begin{itemize}[noitemsep]
+	\item Måleomfang
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+\begin{itemize}[noitemsep]
+	\item Prosessvariabel
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+\newpage
+\begin{itemize}[noitemsep]
+	\item Prosessverdi
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+
+\vskip 10pt 
+\newpage
+\oppgave{} 
+a) Beskriv hva følgende instillinger på en PID-regulator gjør:
+\begin{itemize}[noitemsep]
+	\item Direkte/Reverserende
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+\begin{itemize}[noitemsep]
+	\item $K_p$
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+\begin{itemize}[noitemsep]
+	\item Man/Aut
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+
+
+\vskip 10pt 
+\newpage
+b) Tegn grafen for utgangen  på denne regulatoren med bare p-ledd og reverserende virkning. Den er stilt inn med følgende verdier:
+\begin{itemize}[noitemsep]
+	\item proporsjonalbånd 25\%
+	\item bias 45\%
+\end{itemize}
+$$\includegraphics[width=15.5cm]{aReg04x01.eps}$$
+Utregninger:\\
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,10) ;
+\end{tikzpicture}
+\newpage
+\oppgave{} 
+\begin{itemize}[noitemsep]
+	\item Hva menes med TCP
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+\begin{itemize}[noitemsep]
+	\item Hva er workbojekt koordinatsystem i forhold til base koordinatsystem
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+\begin{itemize}[noitemsep]
+	\item Hva gjør kommandoen MoveL
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+\newpage
+\begin{itemize}[noitemsep]
+	\item Hva gjør kommandoen MoveJ
+\end{itemize}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,6) ;
+\end{tikzpicture}
+\begin{itemize}[noitemsep]
+	\item Koden nedenfor treffer ikke helt i punkt p10, hvor nærme vil roboten være før den ser etter neste punkt?
+\end{itemize}
+
+\begin{lstlisting}[style=CStyle]
+	PROC main()
+		MoveL p10, v1000, z50 MyTool\Wobj
+		MoveL p20, v1000, z50 MyTool\Wobj
+		MoveJ p10, v1000, z50 MyTool\Wobj
+	END_PROC
+\end{lstlisting}
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,15) ;
+\end{tikzpicture}
+
+
+\oppgave{} 
+
+Her ser du en sprangresponstest på en prosess, utført med regulatoren i manuell modus. 
+\vskip 5pt 
+$$\includegraphics[width=15.5cm]{aReg04x02.eps}$$
+Ut fra kurven finn følgende:
+\vskip 5pt 
+$K$ = \underbar{\hskip 50pt} \hskip 50pt $\tau$ = \underbar{\hskip 50pt} \hskip 50pt $\theta$ = \underbar{\hskip 50pt}
+
+\vskip 5pt 
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,11) ;
+\end{tikzpicture}
+
+
+\vskip 10pt
+
+Hva om en hadde gjort et sprang på 25\% istedenfor 15\%.  Hvilken effekt ville dette fått på $\tau$ og $\theta$?
+
+\vskip 5pt 
+
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,11) ;
+\end{tikzpicture}
+\vskip 10pt
+
+Til slutt skal du regne ut $K_p$ og $T_i$ for en PI regulator
+
+\vskip 5pt 
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,11) ;
+\end{tikzpicture}
+
+\newpage
+
+\oppgave{} 
+Regn ut resistansen til strekklappen i denne målebro kretsen, gitt voltmeterets indikasjon på 5.6mV (A er positiv og B er negativ).
+
+$$\includegraphics[width=15.5cm]{i00854x01.eps}$$
+
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!40,very thin]  grid (16,12) ;
+\end{tikzpicture}
+
+\vskip 1cm
+$R_{strain}$ = \underbar{\hskip 50pt}
+
+\vfil 
+\newpage
+\oppgave{} 
+I denne prosessen blir sevje fra sukkerlønn oppvarmet for å gjøre den mer konsentrert. En sukkerkonsentrasjonsmåler måler konsentrasjonen på det ferdige produket som er lønnesyrup.  
+
+\vskip 0.8cm
+Et flowmeter er installert for å måle forandringer i strømmen av sevje. Prosessoperatører har funnet ut at variasjoner i strømmen av sevje har stor påvirkning på produktkvaliteten. Din oppgave er å implementere et reguleringssystem som holder produktkvaliteten konstand, selv med forandringer i strømmen av sevje. 
+
+\vskip 10pt 
+$$\includegraphics[width=15.5cm]{i00424x01.eps}$$
+
+\newpage
+\oppgave{} 
+
+Tegn og forklar hvordan et foroverkoblet reguleringssytem virker. 
+\newpage
+
+\hskip 5pt 
+\newpage
+\oppgave{} 
+Følgende er en skisse til P \& ID. Tegn en P \& ID etter vår standard og copy to clipborad til Word. 
+
+$$\includegraphics[width=15.5cm]{./aReg01x01.eps}$$
+\newpage
+\oppgave{} 
+Du har fått i oppgave med å implementere instrumenteringen fra P \& ID i forige oppgave i en PLS, lage et reguleringsrogram og en HMI styring for programmet. (Obs du skal ikke koble signalene)
+\vskip 5pt 
+Vis hvordan du ville planlagt, gjennomført og dokumentert jobben
+
+\vskip 5pt 
+
+Oppgave 8  og 9 leveres i en PDF fil som sendes på mail til:
+\vskip 5pt 
+fred-olav.mosdal@skole.rogfk.no
+Emnefeltet skal bestå av følgende:
+Reguleringsteknikk
+
+\end{document}

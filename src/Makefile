@@ -2,7 +2,7 @@
 
 SEQS:=$(wildcard *.seq)
 PDFFILES=$(patsubst %.seq,../output/%.pdf,$(SEQS))
-IPDFFILES=$(patsubst %.seq,../output/%_instructor.pdf,$(SEQS))
+#IPDFFILES=$(patsubst %.seq,../output/%_instructor.pdf,$(SEQS))
 
 ../output/%.pdf: %.seq
 	../scripts/gandmake.bash $* 

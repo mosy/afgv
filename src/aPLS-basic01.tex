@@ -1,0 +1,138 @@
+
+% Start preamble
+\documentclass[12pt,a4paper]{article}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./}}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{attachfile}
+\usepackage{epstopdf}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+%\usepackage[table]{xcolor,colorbl}
+\setlength{\textwidth}{16cm}
+\setlength{\oddsidemargin}{-0.5cm}
+\setlength{\evensidemargin}{-0.5cm}
+%\setlenght{\headsep}{0cm}
+\setlength\parindent{0pt}
+%\setlength{\extrarowheight}{3pt}
+\usepackage{listings}
+%\usepackage{xcolor}
+
+\input{arduinoLanguage.tex}
+%%%%%% Counting oppgaves %%%%%%
+ \newcount\questnum \questnum=0
+ \def\oppgave{
+            \advance\questnum by 1
+	    \ifthenelse{\questnum>0\AND \questnum<9}
+	    {
+                \vskip 1cm
+		\textbf{Oppgave}\hskip 5pt\the\questnum \hfill \hfill(6p)
+		\vskip 3pt
+		\hrule
+	\vskip 0.5cm}
+	{
+                \vskip 1cm
+		\textbf{Oppgave}\hskip 5pt \the\questnum \hfill \hfill(12p)
+		\vskip 3pt \hrule \vskip 0.5cm }
+
+		}
+
+% End preamble
+
+\begin{document}
+\title{Prøve i grunnleggende PLS-programmering}
+\author{Faglærer: Fred-Olav Mosdal 90507684\\
+Oppgave 1-8 gjøres på ark. Hjelpemidler: kalkulator. \\
+Oppgave 9 gjøres på PC. Hjelpemidler: Alle ikke kommuniserende\\
+Elektronisk del av prøve sendes på email til: \\
+fred-olav.mosdal@skole.rogfk.no\\
+}
+\maketitle
+\paragraph{Del I}
+\vskip 2.5pt 
+Oppgaven omhandler funksjoner rundt et transportbånd for metall deler.
+Du skal utvide funksjonaliteten til styringen for hver oppgave. Det
+starter enkelt og blir vanskligere og vanskligere. 
+Det skal være skjermstyring som gør det lettere å teste funksjonen. 
+\vskip 1cm
+\begin{center}
+\includegraphics[width=0.5\textwidth]{../output/transportbånd.png}
+\end{center}
+
+\oppgave{}
+
+Lag et program for Start og Stopp av transportbåndet 
+\oppgave{}
+
+Legg til funksjonalitet slik at transportbåndet også stopper om
+det mottar tilbakemelding om at nødstopp er aktivert. 
+\oppgave{}
+
+Sett opp en forsinket start på 3s av transportbåndet 
+\oppgave{}
+
+
+Når esken er full (10 deler), skal transportbåndet stoppe og det skal gis signal om at eske er full. Ved å trykke Ny Eske skal det være mulig å starte båndet på nytt. 
+\oppgave{}
+
+
+Om det ikke er registrert ny del på 15s skal transportbåndet stoppe og et varsellys aktiveres. Når en ser at det er nye deler klare, starer en bare båndet manuelt igjen. 
+\oppgave{}
+
+Legg til funksjonalitet slik at en lampe blinker 1Hz under forsinket start. 
+
+\paragraph{Del II}
+
+En kornsilo skal fyllest ved hjelp av en pumpe
+\begin{center}
+\includegraphics[width=0.5\textwidth]{i08012x01.png}
+\end{center}
+Der er to nivåvakter i hver silo (L og H) disse gir \textquotedblright{}
+TRUE\textquotedblright{} når nivået ligger over giveren.
+
+\vskip 10pt 
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Tilkoblet utstyr & IO på RIO & Variabel & Beskrivelse av tilkoblet utstyr\tabularnewline
+\hline 
+\hline 
+Start drift & Bryter1 & Start & \tabularnewline
+\hline 
+Stopp drift & Bryter2 & Stopp & \tabularnewline
+\hline 
+H Sensor & Bryter3 & LevelHigh & \tabularnewline
+\hline 
+L Sensor & Bryter4 & LevelLow & \tabularnewline
+\hline 
+Drifts Lys & Lys1 & Drift & \tabularnewline
+\hline 
+Pumpe Lys & Lys2 & Pumpe & \tabularnewline
+\hline 
+Alarm Lys & Lys3 & AlarmLys & \tabularnewline
+\hline 
+Alarm Lyd & Lys4 & AlarmLyd & \tabularnewline
+\hline 
+\end{tabular}
+
+\oppgave{}
+Lag et proram som kan starte og stoppe drift av anlegget. Når anlegget er i drift skal pumpen startes når nivået kommer under L og pumpen skal gå til nivået kommer over H
+\oppgave{}
+Legg til Manuell styring av pumpen
+\oppgave{}
+Det skal aktiveres en alarm om det tar mer en 10min (10s) å komme over L nivå (etter at den har vært under). Alarmen skal ha bekreft og resett funksjon.
+
+\end{document}

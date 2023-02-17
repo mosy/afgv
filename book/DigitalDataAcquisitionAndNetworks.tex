@@ -2404,6 +2404,19 @@ It should be noted that the same caveat applicable to multidrop HART systems (i.
 \filbreak
 \section{Modbus}
 
+Modbus er en seriell kommunikasjonsprotokoll som brukes i industriell automatisering for å koble sammen enheter som er spredt ut over et stort område. Protokollen ble utviklet av Modicon (nå en del av Schneider Electric) på 1970-tallet, og har blitt en av de mest populære standardene for kommunikasjon mellom enheter i automatiseringssystemer.
+
+Modbus-protokollen bruker en master/slave-modell der en sentral enhet (master) kan sende kommandoer og hente data fra flere mindre enheter (slaver) som er koblet til et nettverk. Hver enhet har en unik adresse som identifiserer den på nettverket.
+
+Modbus-kommunikasjon overføres normalt via en RS-485-seriell kommunikasjonsforbindelse, selv om det også finnes versjoner som støtter TCP/IP for å koble til nettverk.
+
+Når master-enheten vil sende en kommando eller hente data fra en slave-enhet, sender den en forespørselspakke som inneholder adressen til enheten som skal svare, samt dataene som skal overføres. Forespørselen inkluderer også en sjekksum for å sikre integriteten til dataene.
+
+Når slave-enheten mottar forespørselen, utfører den handlingen som er bedt om (for eksempel å hente data fra en sensor eller å kontrollere en aktuator), og sender tilbake en svarpakke til master-enheten som inneholder dataene som er bedt om. Svarpakken inkluderer også en sjekksum for å sikre at dataene er intakte.
+
+Modbus-protokollen er en relativt enkel og pålitelig måte å kommunisere mellom enheter i et automatiseringssystem på. Protokollen støttes av mange forskjellige enheter fra ulike produsenter, noe som gjør den svært fleksibel og allsidig.
+
+
 Developed by the Modicon company (the original manufacturer of the \textit{Programmable Logic Controller}, or \textit{PLC}) in 1979 for use in its industrial control products, \textit{Modbus} is a protocol designed specifically for exchanging process data between industrial control devices.  The Modbus standard does not specify any details of physical networking, and thus may be deployed on many different types of physical networks.  In other words, Modbus primarily falls within layer 7 of the OSI Reference Model (the so-called ``Application Layer'') and therefore is compatible\footnote{These Modbus data frames may be communicated directly in serial form, or ``wrapped'' in TCP segments and IP packets and Ethernet frames, or otherwise contained in any form of packet-based protocol as needed to transport the data from one device to another.  Thus, Modbus does not ``care'' how the data is communicated, just what the data means for the end-device.} with any lower-level communication protocols including EIA/TIA-232, EIA/TIA-485, Ethernet (the latter via TCP/IP), and a special token-passing network also developed by Modicon called \textit{Modbus Plus}.  The Modbus standard primarily defines the \textit{meaning} of various Modbus commands, the addressing scheme used to place data within devices, and the formatting of the data.    \index{Modbus}  \index{Modbus Plus}  \index{EIA/TIA-232 serial communication}  \index{RS-232 serial communication}  \index{EIA/TIA-485 serial communication}  \index{RS-485 serial communication}  \index{Ethernet}
 
 Modbus consists of a set of standardized digital codes intended to read data from and write data to industrial devices.  A Modbus-compliant industrial device has been programmed to understand these codes and respond to them appropriately when received.  The simplest Modbus codes read and write single bits of data in the device's memory, for example the status of a PLC input channel, PLC output channel, or status bit within a PLC program.  Other Modbus codes operate on 16-bit words of data, useful for reading and writing counter and timer accumulated values, operands for mathematical instructions, converted analog signals, etc.

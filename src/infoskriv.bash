@@ -17,6 +17,7 @@ cat forventninger.tex >> all.tex
 #cat INST200syllabus.tex >> all.tex
 #cat sequence.tex >> all.tex
 cat tools.tex >> all.tex
+cat timeplan.tex >> all.tex
 #cat instructional.tex >> all.tex
 #cat conversion_constants.tex >> all.tex
 echo  '\end{document}' >> all.tex

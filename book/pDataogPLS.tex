@@ -589,7 +589,9 @@ For at 0 og 1 ere skal gi mening mellom senser og mottaker. Må de benytte en av
 \end{frame}
 
 \begin{frame}
-	\frametitle{Frametitle}
+	\frametitle{Subnett maske og CIDR}% Dette kap stammer fra kollega Ingve Bjørnå
+	Hvordan IP-nettverk deles opp
+
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
@@ -604,6 +606,300 @@ For at 0 og 1 ere skal gi mening mellom senser og mottaker. Må de benytte en av
 		\end{column}
 	\end{columns}
 \end{frame}
+\begin{frame}
+	\frametitle{IP-adressen (IPv4)}
+			\begin{itemize}
+				\item Alt som vil koble seg til et nettverk trenger en IP-adresse
+				\item Består av 32 bit delt opp i 4 med punktum mellom.
+				\item $2^{32}$ forskjellige unike IP-adresser (4 294 967 296)
+				\item Skrives vanligvis i 10-tall systemet f.eks. slik: 192.168.1.100
+				\item I binærtall vil den samme adressen se slik ut:
+				\item 1100 0000 . 1010 1000 . 0000 0001 . 0110 0100 (Ikke like enkelt)
+			\end{itemize}
+
+			
+\end{frame}
 
 
+
+\begin{frame}
+	\frametitle{Binær og 10 tall systemet}
+
+			\begin{itemize}
+				\item En bit er enten 0 eller 1
+				\item 8 bit er en byte og en byte er 8 bit
+				\item IP-adressen består av 4 byte som er 4 x 8 bit (32 bit)
+				\item Det minste en byte kan være er 0000 0000 = 0
+				\item Det største en byte kan være er 1111 1111 = 255
+				\item En byte kan ha 256 forskjellige verdier, 0 - 255
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{En byte er alltid 8 bit}
+			\begin{itemize}
+				\item Dette gjelder selv om vi ikke bruker alle 8 bit-ene
+				\item Tallet 12 i titallsystemet er 1100 i binærtall. 
+				\item Hvis 12 er en del av en byte så skrives den slik: 0000 1100
+				\item Hvis vi ikke tar med nullene foran blir det feil.
+				\item 192.168.1.100
+				\item 1100 0000 . 1010 1000 . 0000 0001 . 0110 0100
+				\item 1100 0000 . 1010 1000 . 1 . 110 0100 = 192.168.288 (Feil)
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Subnett maske (Nettverksmaske)}
+
+			\begin{itemize}
+				\item Deler opp en IP-adresse i Nettverks-ID og Verts-ID (Host-ID)
+				\item Nettverks-ID er første del av IP-adressen
+				\item Verts-ID er resten av IP-adressen
+				\item Kan deles opp på forskjellige plasser ut fra behov
+				\item Mange Pcer på samme nett krever at Nettverks-ID får mindre plass og Vets-ID får større plass
+				\item Typisk ser en nettverksmaske slik ut: 255.255.255.0
+
+
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Nettverksmaske: 255.255.255.0}
+
+			\begin{itemize}
+
+				\item 1Hvis vi skriver dette i binærtall blir det slik:
+				\item 11111 1111 . 1111 1111 . 1111 1111 . 0000 0000
+				\item 1Den delen hvor nettverksmasken viser enere er Nettverks-ID
+				\item 1Delen hvor nettverksmasken viser nullere er Verts-ID (Host ID)
+				\item 1Dette betyr at vi kan ha nesten 256 unike Vets-IDer med samme Nettverks-ID. (Nesten fordi noen er satt av til noe annet)
+				\item 1Hvis vi trenger flere kan vi f.eks. si at nettverksmasken er slik:
+				\item 1255.255.0.0
+				\item 1Ca. hvor mange unike Verts-Ider kan vi ha da?
+
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Nettverksmaske: 255.255.0.0}
+
+			\begin{itemize}
+				\item 1111 1111 . 1111 1111 . 0000 0000 . 0000 0000
+				\item Nå har vi 256 * 256 forskjellige adresser å bruke til verts-ID
+				\item Det er 65 536 forskjellige unike adresser
+				\item Kanskje noe overkill om man bare trenger litt mer enn 256…
+				\item Det er faktisk mulig å sette skillet inni en av bytene slik:
+				\item 1111 1111 . 1111 1111 . 1111 | 0000 . 0000 0000	
+					
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Hva blir nettverksmasken?\\1111 1111 . 1111 1111 . 1111 | 0000 . 0000 0000 }
+
+			\begin{itemize}
+				\item De to første bytene er bare enere, så de blir 255
+				\item Den siste er bare nullere så den blir 0
+				\item Da står vi igjen med : 255. 255. ? . 0\\
+\begin{center}
+\begin{tabular}{ c c c c c c c c}
+128 & 64 	& 32 	& 16 	& 8  	& 4	& 2	&  1\\
+1 & 1 	& 1 	& 1 	& 0  	& 0	& 0	&  0\\
+\end{tabular}
+\end{center}
+				\item 128 + 64 + 32 + 16 = 240
+				\item Nettverksmasken blir 255.255.240.0
+				
+
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Hva blir nettverksmasken?\\ 1111 1111 . 1111 1111 . 1111 1111 . 1 | 000 0000 }
+
+
+\begin{center}
+\begin{tabular}{ c c c c c c c c}
+128 & 64 	& 32 	& 16 	& 8  	& 4	& 2	&  1\\
+ &  	&  	&  	&   	& 	& 	&  \\
+\end{tabular}
+\end{center}
+\end{frame}
+\begin{frame}
+	\frametitle{192.168.1.100}
+
+			\begin{itemize}
+				\item Hjemme er du på en PC som har denne adressen
+				\item Du vet også at nettverksmasken er 255.255.255.0
+				\item Hva er nettverks ID?
+				\item 192.168.1.0
+				\item Hva er Verts-ID?
+				\item 100
+				\item Hvilke IPer inngår i nettverksmasken?
+				\item 192.168.1.1 - 192.168.1.254    (192.168.1.0 - 192.168.1.255)
+				\item Den første og den siste kan man ikke bruke!!! De er avholdt til å være Nettverks-ID og kringkasting (Broadcast) Mer om dette en annen gang.
+
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{CIDR-notasjon}
+
+			\begin{itemize}
+				\item En annen (enklere?) måte å skrive nettverksmaske på.
+				\item Fra forrige side hadde vi følgende info:
+				\item Ip-adresse: 192.168.1.100
+				\item Nettverksmaske: 255.255.255.0
+				\item I CIDR-notasjon skrives det slik:
+				\item 192.168.1.100/24
+				\item Nå vet jeg alt jeg trenger å vite, men hvordan?
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{192.168.1.100/24}
+
+			\begin{itemize}
+				\item IP adressen er: 192.168.1.100
+				\item /24 betyr at de første 24 bitene i IP-adressen er nettverksmasken
+				\item 1111 1111 . 1111 1111 . 1111 1111 . 0000 0000
+				\item     8bit  +     8bit  +     8bit  +     0bit = 24bit 
+				\item Da vet vi at nettverks-ID = 192.168.1.0
+				\item Vi vet også at kringkastings IP er 192.168.1.255 siden vi har 8 bit til verts-ID-adresser
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{192.168.1.100/25}
+
+			\begin{itemize}
+				\item Hva er nettverksmasken nå?
+\begin{center}
+\begin{tabular}{ c c c c c c c c}
+128 & 64 	& 32 	& 16 	& 8  	& 4	& 2	&  1\\
+ &  	&  	&  	&   	& 	& 	&  \\
+\end{tabular}
+\end{center}
+				\item 255.255.255.128
+				\item Hvor mange Vertsadresser kan vi ha?
+				\item $2^7$ = 128 Vertsadresser (Altså halvparten av 256)
+				\item 192.168.1.1 - 192.168.1.127
+				\item Hva er nettverks-ID?
+				\item NettverksID er den første/laveste IPen i subnettet
+				\item Siden VetsID 100 er mindre enn 128 så er NettverksID 192.168.1.0
+				\item KringkastingsIPen er 192.168.1.127, som er den høyeste adressen i subnettet.
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{192.168.1.200/25}
+
+			\begin{itemize}
+				\item Hva er nettverksmasken nå?
+\begin{center}
+\begin{tabular}{ c c c c c c c c}
+128 & 64 	& 32 	& 16 	& 8  	& 4	& 2	&  1\\
+ &  	&  	&  	&   	& 	& 	&  \\
+\end{tabular}
+\end{center}
+				\item 255.255.255.128 (Akkurat det samme som sist)
+				\item Hvor mange Vertsadresser kan vi ha?
+				\item $2^7$ = 128 Vertsadresser (Fortsatt samme som sist) men nå er vi i et annet subnet enn sist, for vi er over halvparten av 256.
+				\item Hva er nettverks-ID?
+				\item Nå er Verts-ID over 128. Det betyr at Nettverks-ID er  192.168.1.128 og kringkasting er 192.168.1.255
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{En annen måte å se ting på}
+
+			\begin{itemize}
+				\item Hvis vi ser på 192.168.1.10 /24 så er den siste byten avsatt til verts-IDer
+				\item Hvis vi ser på 192.168.1.10 /25 så er bare 7 bit satt av til verts-IDer og en av bitene hører til Nettverks-ID
+				\item Et bit kan ha 2 tilstander: 0 og 1. den er 0 når den siste byten er under 128 og 1 når den er 128 og oppover.
+				\item 0111 1111 = 127
+				\item 1000 0000 = 128 
+				\item Hvis IPen slutter på noe over 128 betyr det at du er i den øverste halvdelen, og nettverks-ID er 192.168.1.128
+				\item Hvis IPen slutter på noe lavere enn 127 så betyr det at nettverks-ID er 192.168.1.0
+				\item Ipen slutta på 10, så derfor er nettverks-ID 192.168.1.0
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Fortsettelse}
+
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+
+			\begin{itemize}
+				\item vis vi ser på 192.168.1.10 /26, hvordan skal vi tenke da?
+				\item Nå har vi 2 bit som hører til nettverks-ID og 6 som hører til Verts-ID.
+				\item 2 bit kan ha 4 tilstander: 00, 01, 10 og 11
+				\item Det betyr at IP-adressen er i en av 4 forskjellige subnet
+				\item Vi deler inn subnettene slik:
+				\item Da ser vi at 192.168.1.10 tilhører det første subnettet
+				\item Derfor er nettverks-ID 192.168.1.0
+				\item Broadcast er 192.168.1.63 
+			\end{itemize}
+			
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+\begin{tabular}{ c c }
+	Område & Tilstander\\
+	0-63 & 00 \\
+	64-127 & 01 \\
+	127-191 & 10 \\
+	192-255 & 11 
+\end{tabular}
+		\end{column}
+	\end{columns}
+\end{frame}
+\begin{frame}
+	\frametitle{Hvor fant jeg disse tallene?}
+
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+
+			\begin{itemize}
+				\item 63 = \textcolor{red}{00}\textcolor{black}{11 1111}
+				\item 64 = \textcolor{red}{01}\textcolor{black}{00 0000}
+				\item 127 = \textcolor{red}{01}\textcolor{black}{11 1111}
+				\item 128 = \textcolor{red}{10}\textcolor{black}{00 0000}
+				\item 191 = \textcolor{red}{10}\textcolor{black}{11 1111}
+				\item 192 = \textcolor{red}{11}\textcolor{black}{00 0000}
+			\end{itemize}
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+\begin{tabular}{ c c }
+	Område & Tilstander\\
+	0-63 & 00 \\
+	64-127 & 01 \\
+	127-191 & 10 \\
+	192-255 & 11 
+\end{tabular}
+		\end{column}
+	\end{columns}
+\end{frame}
+\begin{frame}
+	\frametitle{Oppgave:}
+
+			\begin{itemize}
+				\item 192.168.20.100 /26
+				\item Hva er nettverksmasken?
+				\item Hvor mange Verts-ID-er kan vi ha på dette subnettet?
+				\item Hva er nettverks ID?
+				\item Hva er krinkastingsadressen?
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{}
+
+			\begin{itemize}
+				\item
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{}
+
+			\begin{itemize}
+				\item
+			\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{}
+
+			\begin{itemize}
+				\item
+			\end{itemize}
+\end{frame}
 \end{document}

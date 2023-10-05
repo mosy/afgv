@@ -1,0 +1,267 @@
+% Start preamble
+\documentclass[12pt,a4paper]{article}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./}}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{attachfile}
+\usepackage{epstopdf}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+%\usepackage[table]{xcolor,colorbl}
+\setlength{\textwidth}{16cm}
+\setlength{\oddsidemargin}{-0.5cm}
+\setlength{\evensidemargin}{-0.5cm}
+%\setlenght{\headsep}{0cm}
+\setlength\parindent{0pt}
+%\setlength{\extrarowheight}{3pt}
+\usepackage{listings}
+%\usepackage{xcolor}
+
+\input{arduinoLanguage.tex}
+%%%%%% Counting oppgaves %%%%%%
+ \newcount\questnum \questnum=0
+ \def\oppgave{
+            \advance\questnum by 1
+	    \ifthenelse{\questnum>0\AND \questnum<9}
+	    {
+                \vskip 1cm
+		\textbf{Oppgave}\hskip 5pt\the\questnum \hfill \hfill(6p)
+		\vskip 3pt
+		\hrule
+	\vskip 0.5cm}
+	{
+                \vskip 1cm
+		\textbf{Oppgave}\hskip 5pt \the\questnum \hfill \hfill(12p)
+		\vskip 3pt \hrule \vskip 0.5cm }
+
+		}
+
+% End preamble
+
+\begin{document}
+\title{Alternativ Høstprøve 06}
+\author{Faglærer: Fred-Olav Mosdal 90507684\\
+Oppgave 1-8 gjøres på ark. Hjelpemidler: kalkulator. \\
+Oppgave 9 gjøres på PC. Hjelpemidler: Alle ikke kommuniserende\\
+Elektronisk del av prøve sendes på email til: \\
+fred-olav.mosdal@skole.rogfk.no\\
+Emne: Høstprøve}
+\date{5 timers prøve Fredag 6. Oktober}
+\maketitle
+\newpage
+\
+\newpage
+\oppgave{}
+Regn ut spenningen mellom punktene A og B i denne kretsen. (Vis alle utregninger)
+
+$$\includegraphics[width=15.5cm]{i02527x01.eps}$$
+
+\begin{tikzpicture}
+	\draw[step=0.5cm,gray!20,very thin]  grid (16,10) ;
+\end{tikzpicture}
+\newpage
+\oppgave{}
+Endebrytere er elektriske brytere som er laget slik at de aktueres ved bevegelse eller posisjon til et objekt, istedenfor at et menneske skal trykke inn en knapp. Enkle endebrytere bruker direkte fysisk kontakt med en arm, og av og til en rulle på enden for lav friksjon. 
+
+$$\includegraphics[width=15.5cm]{i02242x01.eps}$$
+
+\vskip 30pt
+
+Vis hvordan du ville koblet kretsen ovenfor slik av endebryeren slukker lyset når den aktueres. Lyset skal altså normalt være på. 
+\oppgave{}
+En forbedring i forhold til endebrytere med fysisk kontakt kan i mange tilfeller være induktive nærhetssensorer. Denne type bryter aktiveres ved at et objekt kommer nærme den. Det er ikke nødvendig med fysisk kontakt. Forklar hvordan denne type bryter virker, og hvilke materialer den kan detektere. 
+
+Induktive nærhetssensorer trenger driftsspenning. Det er vanlig med +24V DC. Utgangen er normalt ikke en potensialfri kontakt, men en transistor. 
+
+$$\includegraphics[width=15.5cm]{i02243x01.eps}$$
+
+\vskip 30pt
+
+Vis hvordan du ville koblet kretsen nedenfor slik at LED-en lyser når sensoren aktiveres. Anta at utgangen er sourcing (PNP).
+\newpage
+\oppgave{}
+Forklar funksjonen til dettte styrestrømsskjemaet. Skriv også opp navn på symboler og hva referansebetegnelsene står for. 
+
+$$\includegraphics[width=15.5cm]{i00364x01.eps}$$
+
+\newpage
+\oppgave{}
+Her vises to transmittere som er koblet til en regulator med to innganger. Transmitterene får forsysningspenning fra strømsløyfen(4-20mA). Til utgangen på regulatoren er det koblet en I/P konverter som brukes til å styre en pneumatisk reguleringsventil. Inngangen på regulatoren har et område på 1-5V, ikke 4-20mA. 
+
+$$\includegraphics[width=15.5cm]{i02273x01.eps}$$
+
+Vis hvordan feltutstyret skal kobles til regulatoren, inkluder plassering av motstander for konvertere strømsignal til spenningssignal som regulatorens ADC kan lese. Bruk skjermet kabel og vis hvordan denne skal jordes. 
+
+\newpage
+\oppgave{}
+Hvilke kalibreringsfeil vises på de ulike bildene?
+
+$$\includegraphics[width=15.5cm]{i01036x01.eps}$$
+\newpage
+\oppgave{}
+
+En trykktransmitter er justert med et måleområde på 0 til 100 BAR. Utgangen er av type 4-20mA. 
+Det er utført en 5 punkts As-Found sjekk med stidende og synkende verider. Resultatet ble som følger:
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Tilført trykk & Output signal \cr
+%
+% Another row
+(BAR) & (mA) \cr
+%
+\noalign{\hrule}
+%
+% Another row
+0 & 3.5 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+25 & 7.5 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+50 & 11.5 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+75 & 15.5 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+100 & 19.5 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+75 & 15.5 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+50 & 11.5 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+25 & 7.5 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+0 & 3.5 \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+Skisser instrumentet overføringsfunksjon i grafen nedenfor. Skisser også den ideelle overføringsfunksjonen ut fra LRV og URV. Hvilken type kalibreringsfeil har transmitteren?  ({\it feil nullpunkt}, {\it feil på måleområde (span)}, og/eller {\it linearitetsfeil})
+
+$$\includegraphics[width=10cm]{i00081x03.eps}$$
+
+Tilslutt, hvordan kan du rette opp denne kalibreringsfeilen? Hvilke steg eller prosedyrer ville du fulgt ?
+\oppgave{}
+
+To endebrytere skal tilkobles h.h.v. \texttt{DI2} og \texttt{DI5} på en Wago 750-436 DI inngangsmodul. Tegn de nødvendige koblingene. Det internekoblingsskjemaet for (\texttt{DI1}) vises som en referanse for alle inngangene.
+Tegn de nødvendige koblingene som er nødvendig for tilkobling av endebryterene.  
+
+
+$$\includegraphics[width=15.5cm]{i04807x01.eps}$$
+
+Er dette en \textit{sinking} eller en \textit{sourcing} DI modul?
+\oppgave{}
+
+Oppgaven omhandler funksjoner rundt et transportbånd for metall deler.
+Du skal utvide funksjonaliteten til styringen for hver oppgave. Det
+starter enkelt og blir vanskligere og vanskligere. 
+\vskip 1cm
+\includegraphics[width=1\textwidth]{../output/transportbånd.png}
+
+\vskip 1cm
+Det skal være skjermstyring som gør det lettere å test funksjonen. 
+\vskip 10pt
+1. Lag et program for Start og Stopp av transportbåndet 
+
+2. Legg til funksjonalitet slik at transportbåndet også stopper om
+det en mottar tilbakemelding om at nødstopp er aktivert. 
+
+3. Sett opp en forsinket start på 3s av transportbåndet 
+
+4. Når esken er full (10 deler), skal transportbåndet stoppe og det
+skal gis signal om at eske er full. Ved å trykke Ny Eske skal det
+være mulig å starte båndet på nytt. 
+
+5. Om det ikke er registrert ny del på 15s skal transportbåndet stoppe
+og et varsellys aktiveres. Når en ser at det er nye deler klare, starer
+en bare båndet manuelt igjen. 
+
+6. Legg til funksjonalitet slik at motorlampen blinker 1Hz under forsinket
+start. 
+\end{document}
+
+% a) Hva er forskjellen på en induktiv og en kapasitiv giver?
+% \vskip 2.5pt 
+% \begin{tikzpicture}
+% 	\draw[step=0.5cm,gray!20,very thin]  grid (17,3) ;
+% \end{tikzpicture}
+% \vskip 2.5pt 
+% b) Hva er en NAMUR-giver, og hvordan fungerer den?
+% \vskip 2.5pt 
+% \begin{tikzpicture}
+% 	\draw[step=0.5cm,gray!20,very thin]  grid (17,3) ;
+% \end{tikzpicture}
+% \vskip 2.5pt 
+% c) En komponent er merket med dette symbolet, forklar hva det betyr:
+% \vskip 2.5pt 
+% \begin{tikzpicture}
+% 	\draw[step=0.5cm,gray!20,very thin]  grid (17,3) ;
+% \end{tikzpicture}
+% \vskip 2.5pt 
+% d) Tegn/forklar hva som er forskjellen på en PNP og NPN giver
+% \vskip 2.5pt 
+% \begin{tikzpicture}
+% 	\draw[step=0.5cm,gray!20,very thin]  grid (17,3) ;
+% \end{tikzpicture}
+% \vskip 2.5pt 
+% e) Forklar hvilke tre «hovedtyper» fotoelektriske (fotocelle) givere som finnes, og hvordan disse virker?
+% \vskip 2.5pt 
+% \begin{tikzpicture}
+% 	\draw[step=0.5cm,gray!20,very thin]  grid (17,3) ;
+% \end{tikzpicture}
+% \vskip 2.5pt 
+% f) Nevn noen ting som er viktig å vurdere før du skal velge giver/sensor til et anlegg (minst 5)
+% \vskip 2.5pt 
+% \begin{tikzpicture}
+% 	\draw[step=0.5cm,gray!20,very thin]  grid (17,3) ;
+% \end{tikzpicture}
+% \vskip 2.5pt 
+% 
+% Se figuren under. Tanken på bildet skal utstyres med automatisk fylling. Når nivået synker under posisjonen til -S2, aktiveres magnetventilen -V1, og tanken fylles opp. Når nivået kommer opp til -S3, kobler magnetventilen ut. Dersom nivået i tanken av en eller annen grunn (komponentsvikt e.l.) skulle stige opp til alarmgiveren -S4, aktiveres signallampen -P2 (og magnetventilen skal stenge). Den kapasitive giveren -S4 har en invertert utgang (NC) for på den måten oppnå en selvovervåkning av alarmkretsen (en komponentsvikt eller brudd i kabelen vil utløse alarmen). Anlegget startes med venderen -S1, og signallampen -P1 angir at anlegget er aktivert (spenning på). Datablad til giveren som skal benyttes finner du i vedlegget til prøven.
+% 
+% Lag styrestrømskjema for anlegget. Tilførselsspenningen er enfase 230 VAC, sensorene og magnetventil er 24 VDC. Det kan benyttes hjelpereleer (ikke PLS-styring).

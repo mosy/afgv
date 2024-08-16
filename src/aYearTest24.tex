@@ -1,0 +1,120 @@
+% Start preamble
+\documentclass[12pt,a4paper]{article}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./}}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{attachfile}
+\usepackage{epstopdf}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+%\usepackage[table]{xcolor,colorbl}
+\setlength{\textwidth}{17cm}
+\setlength{\oddsidemargin}{-0.5cm}
+\setlength{\evensidemargin}{-0.5cm}
+%\setlenght{\headsep}{0cm}
+\setlength\parindent{0pt}
+%\setlength{\extrarowheight}{3pt}
+\usepackage{listings}
+%\usepackage{xcolor}
+
+\input{arduinoLanguage.tex}
+%%%%%% Counting oppgaves %%%%%%
+ \newcount\questnum \questnum=0
+ \def\oppgave{
+            \advance\questnum by 1
+	    \ifthenelse{\questnum>0\AND \questnum<9}
+	    {
+                \vskip 1cm
+		\textbf{Oppgave}\hskip 5pt\the\questnum \hfill \hfill
+		\vskip 3pt
+		\hrule
+	\vskip 0.5cm}
+	{
+                \vskip 1cm
+		\textbf{Oppgave}\hskip 5pt \the\questnum \hfill \hfill)
+		\vskip 3pt \hrule \vskip 0.5cm }
+
+		}
+
+\begin{document}
+\title{Årsprøve 2024 3AUA automatiseringssystemer}
+\author{Leveres på mail til Fred-Olav Mosdal med emne:Årsprøve}
+\maketitle
+\href{https://rfka-my.sharepoint.com/:b:/g/personal/fred-olav_mosdal_skole_rogfk_no/EX2NSNlNAUBAiXgV4bY635sBs2AgR988B3WfM6rRxccZ4w?e=fJK93X}{Angleggsbeskrivelse}\\
+\href{https://rfka-my.sharepoint.com/:b:/g/personal/fred-olav_mosdal_skole_rogfk_no/EQ2OEMJGIXFJoMyoB40eFI8BjiayYXByMvUzEM8L6Pys_Q?e=aNoTGF}{Vedlegg 1 Krohne UFM 3030}\\
+\href{https://rfka-my.sharepoint.com/:b:/g/personal/fred-olav_mosdal_skole_rogfk_no/ESrkbpSQtQJJvCxtDD68DP8BnyQyh2LqUFdKkSv97DNSxw?e=dgDBLg}{Vedlegg 2 Vegapuls 66}\\
+\href{https://rfka-my.sharepoint.com/:b:/g/personal/fred-olav_mosdal_skole_rogfk_no/Ee5-_de_63hNrPSWLENtxkUBD28u1ZM9XAiQ2WMyMqOYfw?e=hUWTVH}{Vedlegg 3 NXP 0004}\\
+\href{https://rfka-my.sharepoint.com/:b:/g/personal/fred-olav_mosdal_skole_rogfk_no/ESrkbpSQtQJJvCxtDD68DP8BnyQyh2LqUFdKkSv97DNSxw?e=dgDBLg}{Symboloversikt}\\
+
+
+
+
+\Large Situasjonsbeskrivelse Årsprøve 2024 
+\normalsize 
+\vskip  0.25cm
+Du jobber i et team med automatikere, elektrikere og mekanikere som skal planlegge, gjennomføre og dokumentere årlig kontroll (vedlikeholdsstans i 2 uker, uten produksjon) på utrustning tilkoplet akkumulator NDE10BB001 og bistå ved oppstart av normal drift. Disse oppgavene skal dere løse i samarbeid med de lokale operatørene og bedriftens automasjonsleder.  
+
+
+\vskip  0.25cm
+Hovedfokus for vedlikeholdsstansen er vedlikehold og oppgradering av instrumentering. Akkumulatoren har vært i drift i fem år og nå skal alle analoge og digitale signaler kontrolleres og funksjonstestes. Prosess- og nødavstengnings løsningen skal spesielt testes knyttet til oppstart mot normal drift. 
+
+\vskip  0.25cm
+Arbeidslederen din tar en prat med deg før dere skal sette i gang med arbeidet. Han forteller deg at bedriften stiller krav om faglig godt utført arbeid. For å oppfylle disse kravene må du og resten av teamet blant annet sørge for  
+
+\begin{itemize}
+	\item å utføre både elektrisk og mekanisk arbeid på en sikker måte 
+	\item å utarbeide nødvendig dokumentasjon, som er i samsvar med bedriftens standard, og som kan brukes av annet fagpersonell  
+	\item å bruke fagterminologi for å beskrive anlegget med tilhørende komponenter og vise faglig forståelse  
+	\item å velge egnede verktøy og instrumenter og bruke disse riktig 
+	\item å ha god struktur og følge riktig framgangsmåte under feilsøking og reflektere over resultatene 
+\end{itemize}
+Arbeidslederen forteller at han har hentet ut et utvalg fra dokumentasjonen for anlegget til deg. Siden det er et utvalg, er ikke sidenummereringen komplett. Videre sier han at dokumentasjonen omtaler hele anlegget fra et systemperspektiv, og at det kan hende han har tatt med mer enn du trenger. Du må derfor se gjennom hele omtalen av anlegget for å finne fram til det du mener er relevant. Arbeidslederen har også erfart at originaldokumentasjon kan inneholde feil og mangler. Du må derfor huske å være faglig kritisk, og du må kanskje se flere deler av dokumentasjonen i sammenheng for å komme videre i arbeidet.
+
+
+
+
+
+
+
+
+\newpage
+
+\oppgave
+Frekvensomformerne PGB60AP001-U01 og -U02 gir ut signal som er koblet til PLS, og som indikerer feiltilstand på elektromotorene MPGB60AP001 og MPGB60AP002. Tilstanden til motorene skal nå vises på HMI.
+\vskip 0.25cm
+Beskriv hvordan du vil planlegge, gjennomføre og dokumentere arbeidet. Tegn skisse til forklaringen og ta bilde av skissen med webkamerafunksjonen nedenfor.
+\oppgave
+Nivåtransmitter NDE10CL001 og NDE10CL002 er radarmåling med VEGAPULS 66 som gir signal videre inn til signalomformer NDE10CL801 og NDE10CL802 hvor alarmgrenser for høy og lav settes. Nivåtransmitterne skal kalibreres og alarmgrenser skal kontrolleres og funksjonstestes.
+\vskip 0.25cm
+Beskriv hvordan du vil planlegge, gjennomføre og dokumentere arbeidet. Tegn skisse til forklaring og ta bilde av skissen med webkamerafunksjonen nedenfor.
+\oppgave
+Etter kalibreringen får du tilbakemelding fra prosessoperatør om at de opplever ustabil regulering og tilbakemelding om feil nivå i tanken med nivåtransmitter NDE10CL001.
+\vskip 0.25cm
+Beskriv hvordan du vil planlegge, gjennomføre og dokumentere feilsøkingsarbeidet.Tegn skisse til forklaringen og ta bilde av skissen med webkamerafunksjonen nedenfor.
+\oppgave
+En ønsker å ha total strømning fra strømningsmåleren NDD30CF001 som en variabel i PLS programmet, til dette skal pulsutgangen brukes. Du må koble utgangen til PLS og lage et program for å lagre total strømning i en variabel.
+\vskip 0.25cm
+Beskriv hvordan du vil planlegge, gjennomføre og dokumentere arbeidet. Tegn skisse til forklaring og ta bilde av skissen med webkamerafunksjonen nedenfor.
+\oppgave
+Ved testing av sikkerhetsavstengningsventiler NDE20/30AA151 vil ikke disse åpne. Du får oppdraget med å finne feilen.
+\vskip 0.25cm
+Beskriv hvordan du vil planlegge, gjennomføre og dokumentere feilsøkingsarbeidet. Tegn skisse til forklaringen og ta bilde av skissen med webkamerafunksjonen nedenfor.
+\vskip 0.25cm
+
+
+\newpage
+\end{document}

@@ -1,3 +1,199 @@
+% Start preamble
+\documentclass[12pt,a4paper]{article}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage[table]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./}}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{attachfile}
+\usepackage{epstopdf}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{comment}
+%\usepackage[table]{xcolor,colorbl}
+\setlength{\textwidth}{16cm}
+\setlength{\oddsidemargin}{-0.5cm}
+\setlength{\evensidemargin}{-0.5cm}
+%\setlenght{\headsep}{0cm}
+\setlength\parindent{0pt}
+%\setlength{\extrarowheight}{3pt}
+\usepackage{listings}
+%\usepackage{xcolor}
+
+\input{arduinoLanguage.tex}
+%%%%%% Counting oppgaves %%%%%%
+ \newcount\questnum \questnum=0
+ \def\oppgave{
+            \advance\questnum by 1
+            \ifnum \questnum > 0
+                 \hrule
+                 \vskip 3pt
+                 \leftline{Oppgave \the\questnum}
+                 \vskip 3pt \fi}
+ %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%% Counting answers %%%%%%
+\newcount\answnum \answnum=0
+\def\svar{
+           \advance\answnum by 1
+           \ifnum \answnum > 0
+                \hrule
+                \vskip 3pt
+                \leftline{Svar \the\answnum}
+                \vskip 3pt \fi}
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%% Counting notes %%%%%%
+\newcount\explnum \explnum=0
+\def\notes{
+           \advance\explnum by 1
+           \ifnum \explnum > 0
+                \hrule
+                \vskip 3pt
+                \leftline{Notes \the\explnum}
+                \vskip 3pt \fi}
+%%%%%%%%%%%%%%%%%%%%%%
+
+% End preamble
+
+\begin{document}
+\begin{titlepage}
+   \begin{center}
+       \vspace*{1cm}
+
+       \textbf{Infoskriv 3AUA Gand VGS}
+
+       \vspace{0.5cm}
+        Skoleåret 2024/2025
+            
+       \vspace{1.5cm}
+
+       \textbf{Kontaktlærer: Fred-Olav Mosdal}
+
+       \vfill
+            
+            
+     
+       \includegraphics[width=1\textwidth]{/home/fred-olav/Downloads/GandLogo.jpg}
+    \vfill        
+            
+   \end{center}
+\end{titlepage}
+
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+%(BEGIN_FRONTMATTER)
+\centerline{\bf Hvordan . . .} \bigskip 
+
+\noindent
+{\bf Finne fagplan for VG3 Automatiseringsfaget:} \url{https://www.udir.no/lk20/aut03-04}
+\vskip 10pt
+
+\noindent
+{\bf Finner jeg skoleruten:} \url{https://www.gand.vgs.no/hovedmeny/for-elever/skolehverdag/skoleferier-og-fridager-skoleruta/}
+\vskip 10pt
+
+\noindent
+{\bf Finner jeg informasjon om Skolen:} \url{https://www.gand.vgs.no/hovedmeny/for-elever/}
+\vskip 10pt
+
+\noindent
+{\bf Finner jeg timeplanen:} Timeplanen din finner du i VIS. 
+\vskip 10pt
+
+\noindent
+{\bf Få penger til utstyr som kreves:} Alle elever med ungdomsrett i videregående opplæring får utstyrsstipend. Utstyrsstipendet er ikke avhengig av hvor mye foreldrene tjener.
+Søknaden skrives til lånekassen \url{http://www.lanekassen.no}
+\vskip 10pt
+
+\noindent
+{\bf Få tak i oppgaver og lærebok} På siden autofaget.no legges oppgaver og teori ut. Noe vil også bli levert på papir eller lagt ut på Teams. 
+\vskip 10pt
+
+\noindent
+{\bf Få tak i  software og biblioteker:} Software som vi bruker legger jeg ut i ukesplanen på autofaget.no  
+\vskip 10pt
+
+\noindent
+{\bf Hvordan lære mest mulig:} kom til skolen forberedt hver eneste dag -- dette betyr at du har gjort alle lekser gitt til/etter en leksjon. Fulgt alle tips som gis på oppgaveark og av lærer. Ikke spør andre om hjelp før du har gjort en rimlig innsats selv. Hjelp andre med å gjennomføre oppgave og å forstå, men ikke gjør jobben for DE. 
+\vskip 10pt
+
+\noindent
+{\bf Holde orden på innleveringer og frister.} Følg med på beskjeder gitt av lærer. I arbeidslivet vil du få muntlige beskjeder som det forventes at du følger opp, slik er det her også. Er du vekke fra skolen må du orientere deg med medelever. Se også autofaget.no
+\vskip 10pt
+
+
+\noindent
+{\bf Finne fagstoff og manualer fra produsenter } Det forventes at du kan søke dette opp på internet selv. 
+\vskip 10pt
+
+
+
+\noindent
+{\bf Få seg læreplass:} Ca. i desember starter de første firmaene å legge annonser for nye lærlinger (Søk på så mange du klarer å håndtere ca. 50), når du er i utplassering må du vise deg som en attraktiv arbeidstager, sørg for å være faglig interessert/på, ha minst mulig fravær og følgmed på Teams der legger jeg forespørsler fra firmaer. 
+\vskip 0.5 cm
+1) Vær smart allerede når du søker utplassering\\
+Hvis det er en spesiell bedrift du kunne tenke deg å være lærling hos, tenk på dette allerede når du skal være utplassert fra skolen. Det er ofte at vi tilbyr gode utplasseringselever lærlingplass.
+
+\vskip 0.5 cm
+På utdanning.no kan du selv søke opp aktuelle lærebedrifter innen ditt \href{https://utdanning.no/finnlarebedrift/}{fag}.
+\vskip 0.5 cm
+2) Vær smart under utplassering. \\
+Når man er utplassert, er det ikke alltid man får så mye praktisk arbeid. Men ta det du får. Gjør oppgavene du får skikkelig, vær nysgjerrig, still spørsmål og gjør ditt beste. Møt opp i tide, og vær på tilbudssiden. Vi husker gode, proaktive ungdommer.
+\vskip 0.5 cm
+
+
+3) Lite fravær på skolen\\
+Noe av det første vi ser på og spør deg om på intervju er hvor mye fravær du har. Har du mye, er det mindre sjanse for å få lærlingeplass. Så, det er viktig å møte opp på skolen! Hvis du har mye fravær, er det lurt å forklare hvorfor.
+\vskip 0.5 cm
+
+4) Forbered deg\\
+Les om selskapet du vil være lærling hos på nettsiden deres, slik at du vet litt om dem før du skriver søknad. Det er alltid en fordel å vite litt om bedriften man søker jobb hos. De som mottar søknader, ser fort om det er en generell søknad som har gått ut til mange eller om kandidaten er ekte interessert i bedriften
+\vskip 0.5 cm
+
+5) Søk tidlig – og vis interesse\\
+Lærebedriften bestemmer selv hvem de vil ha som lærling, så det er ingen garanti for å få plassen du helst vil ha. Derfor er det viktig å ta ansvar, vise interesse og kontakte bedriften direkte. Start jakten tidlig – gjerne et år før du planlegger å begynne.
+\vskip 0.5 cm
+
+6) Lever søknaden der du skal, og legg ved det du får beskjed om\\
+Hvis bedriften ber om å få søknaden gjennom et skjema på nettsiden, send den der. Vil bedriften at du skal sende på epost, gjør det. Står det at du skal legge ved karakterutskrift og/eller CV. Send det med en gang, så slipper bedriften svare deg tilbake at de mangler informasjon. Dette viser at du er oppegående og følger med!
+\vskip 0.5 cm
+
+7) Vær nøye med søknaden og CVen\\
+Bruk litt tid på å skrive en god søknad og fiks CVen din. All arbeidserfaring er positivt og kan listes opp i en CV, inkludert frivillige verv du måtte ha. Søknaden bør vise hvorfor du vil jobbe i den spesielle bedriften og hva du har å tilby. Med andre ord, vis at du har satt deg inn i bedriften og skriv hvordan du kan bidra til suksess. Det kan være nøkkelen til å få den lærlingeplassen du vil ha.
+\vskip 0.5 cm
+
+
+Et siste lite tips:
+Hvis du har fått hjelp av AI med å skrive søknad, sørg for at du fjerner AI’ens kommentar, som: Selvfølgelig, jeg kan hjelpe deg med å lage et utkast til søknad for lærlingstilling… Det ser veldig slurvete ut. Les også gjennom teksten, og se om språket er ditt. Vi ser flere og flere AI-genererte søknader med nesten helt lik tekst. Da virker man ikke genuint interessert i jobben.
+
+
+\vskip 10pt
+
+
+\vfil
+
+\underbar{file {\tt hvordan}}
+\eject
+%(END_FRONTMATTER)
+
 
 % Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
@@ -139,3 +335,107 @@ De som hønsker å være utplassert hos:
 \eject
 %(END_FRONTMATTER)
 
+
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+%(BEGIN_FRONTMATTER)
+\centerline{\bf IT hjelp} \bigskip 
+
+\href{https://forms.office.com/Pages/DesignPageV2.aspx?origin=NeoPortalPage&subpage=design&id=H75sAsQBmEalZi_EPr7HMR3QcgyZmWZGpIMQU6JKCTZUM1dDVVM5WEZHU1A4N0dFRTJMSlpCRThVRi4u}{Hva har jeg gjort?}
+\vskip 1cm
+\href{https://rfka-my.sharepoint.com/:v:/g/personal/sverre_wilhelmsen_skole_rogfk_no/EfmqE3Pj3mNFlTp-p-owBP8Biqz8LDh1uGrZO5f0QOXu0g?e=z03gZU}{Filer og mappestruktor}
+\vskip 1cm
+\href{https://vimeo.com/850876389}{Konfiguere og bruke OneDrive}
+\vskip 1cm
+\href{https://vimeo.com/850863231}{Installere M365}
+
+\vskip 1cm
+\href{https://rfka.sharepoint.com/:b:/r/sites/GANDElevinformasjon/Delte%20dokumenter/IT/Infoskriv%20til%20%20VG1%20(2024).pdf?csf=1&web=1&e=NsSipR}{IT informasjon til Gand Elever}
+\vskip 1cm
+\vskip 1cm
+\vskip 1cm
+
+
+\vskip 1cm
+\underbar{file {\tt it}}
+\eject
+%(END_FRONTMATTER)
+
+
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+%(BEGIN_FRONTMATTER)
+
+\centerline{\bf Verktøy og utstyrsliste }
+
+\vskip 10pt
+
+
+\noindent
+{\bf Verktøy}
+\begin{itemize}[itemsep=1mm, parsep=0pt]
+	\item Verktøykasse som passer i skap 
+	\item Kjørner
+	\item Rissenål
+	\item Kniv
+	\item Skyvelære
+	\item Meterstokk
+	\item Flattjern, 3, 4 og 6mm
+	\item Phillips, \#1 and \#2
+	\item presisjonsskrutrekkersett\\
+       \includegraphics[width=0.3\textwidth]{/home/fred-olav/Downloads/presisjonstrekkersett.png}
+	\item Posidrive \#2
+	\item Trekker med bitssett
+	\item Multimeter, CAT 3 600V 
+	\item Avisoleringsverktøy
+	\item Avbiter
+	\item Hvit elektrikkertape og markeringspenn til å skrive på tapen. (til å lage midlertidige markeringer)
+\medskip
+\end{itemize}
+\vskip 10pt
+
+\noindent
+{\bf Sikkerhetsutstyr}
+\begin{itemize}[itemsep=1mm, parsep=0pt]
+	\item Vernebriller
+	\item Hørselsvern
+	\item Vernesko
+	\item Sveisehansker
+	\item Monteringshansker
+	\item Arbeidsklær i bomull
+\medskip
+\end{itemize}
+\vskip 10pt
+
+\noindent
+{\bf Nødvendig utstyr til skoledagen}
+\begin{itemize}[itemsep=1mm, parsep=0pt]
+	
+	\item Still godt forberedt! Ha med PC med windows 11, blyanter, visk, linjal, fargeblyanter, blyantspisser, kalkulator og skrivebøker. Ha med perm til å samle alle ark.
+	\item Det er forventet at du holder orden på din PC, slik at denne fungerer i timene. (Kjør en reinstallasjon av PC-en i starten av skoleåret). 
+	\item Lag et mappesystem fra dag en. (Da slipper du å tenke over hvor du skal lagre filene dine.)
+\medskip
+\end{itemize}
+\vskip 10pt
+
+
+
+\vfil
+
+\underbar{file {\tt tools}}
+\eject
+%(END_FRONTMATTER)
+
+
+
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+%(BEGIN_FRONTMATTER)
+
+\includepdf[pages=-,angle=90]{../output/nogpl/Timeplan.pdf}
+\eject
+%(END_FRONTMATTER)
+
+
+\end{document}

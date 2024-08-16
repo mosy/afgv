@@ -14,6 +14,7 @@ cat preamble.tex >> all.tex
 cat infoskrivtittel.tex >> all.tex
 cat hvordan.tex >> all.tex
 cat forventninger.tex >> all.tex
+cat it.tex >> all.tex
 #cat INST200syllabus.tex >> all.tex
 #cat sequence.tex >> all.tex
 cat tools.tex >> all.tex

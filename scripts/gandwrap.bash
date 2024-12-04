@@ -15,12 +15,12 @@ cat $1.tex >> $OUTPUT
 
 
 # Extract and organize frontmatter from "all.tex" 
-echo "\vfil \eject" >> $OUTPUT
+#echo "\vfil \eject" >> $OUTPUT
 sed -f ../scripts/frontmatter.sed all.tex >> $OUTPUT
 
 
 # Extract and organize questions from "all.tex" 
-echo "\vfil \eject" >> $OUTPUT
+#echo "\vfil \eject" >> $OUTPUT
 echo "\centerline{\bf Oppgaver}" >> $OUTPUT
 echo "\vskip 5pt" >> $OUTPUT
 sed -f ../scripts/oppgave.sed all.tex >> $OUTPUT

@@ -1,0 +1,61 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En P-regulator i automatisk modus har følgende inngangs- og utgangsverdier:
+
+\begin{itemize}
+\item{} PV = 65\%
+\item{} SP = 62\%
+\item{} Output (Pådrag) = 48\%
+\end{itemize}
+
+Plutselig endrer operatøren skal-verdien (setpoint) fra 62\% til 55\%. Regulatorutgangen går umiddelbart fra 48\% til 31\%. Beregn proporsjonalbåndet og forsterkningen for denne regulatoren, og vis utregningen din. Avgjør også om denne regulatoren er {\it direkte} eller {\it revers} virkende.
+
+\vfil
+
+\underbar{file i01493}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er et spørsmål som skal evalueres -- ingen svar eller hint er gitt!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Akkurat som en elektronisk forsterker, er {\it forsterkningen (gain)} til en sløyferegulator matematisk definert som forholdet mellom utgangsendring ($\Delta m$) og inngangsendring ($\Delta e$). Med andre ord:
+
+$$\mbox{Forsterkning} = \frac{\Delta \mbox{ Utgang}}{\Delta \mbox{ Inngang}}$$
+
+$$K_p = \frac{\Delta m}{\Delta e}$$
+
+Derfor må vi nærme oss dette problemet ved å undersøke hvor mye avviket {\it endrer} seg fra sin forrige verdi, og sammenligne dette med hvor mye utgangssignalet {\it endrer} seg fra sin forrige verdi. I dette eksempelet endret skal-verdien seg fra 62\% til 55\%, som er et hopp på -7\%. Som en konsekvens av den endringen i skal-verdien, hoppet utgangen fra 48\% til 31\%, som er et hopp på -17\%. Derfor:
+
+$$K_p = \frac{\Delta m}{\Delta e} = \frac{31\% - 48\%}{55\% - 62\%} = \frac{-17\%}{-7\%} = 2,429$$
+
+Proporsjonalbånd er definert som den resiproke verdien av regulatorforsterkningen, uttrykt i prosent. Derfor:
+
+$$\mbox{PB} = \frac{1}{K_p} = \frac{1}{2,429} = 0,4118 = 41,18\%$$
+
+\vskip 10pt
+
+Det faktum at utgangsverdien sank da skal-verdien sank, forteller oss at denne regulatoren er {\it reversvirkende}. Til å begynne med kan dette virke bakvendt for oss, for gikk ikke utgangen i {\it samme} retning som inngangen? Selv om dette er sant, er det avgjørende å huske at "direkte" og "revers" for en sløyferegulator er definert som effekten {\it prosessvariabelen} (ikke {\it skal-verdien}) har på utgangen. Siden vi vet at PV og SP alltid har motsatt effekt på utgangen, betyr en synkende utgang for en synkende SP at utgangen ville øke for en synkende PV, som gjør den reversvirkende. Ligningen for en slik regulator er vist her:
+
+$$m = K_p (\mbox{SP} - \mbox{PV}) + b$$
+
+%INDEX% Control, proportional: gain versus proportional band
+%INDEX& Control, proportional: proportional band versus gain
+
+%(END_NOTES)

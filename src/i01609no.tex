@@ -1,0 +1,41 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+I dette nivåreguleringssystemet er kontrollventilen (LV) av typen "fail-closed" (stenger ved signalbortfall), og I/P-omformeren er direktekoblet (4mA inn = 3 PSI ut ; 20mA inn = 15 PSI ut). Transmitteren er reversvirkende (høyt nivå = 4 mA ut ; lavt nivå = 20 mA ut):
+
+
+Anta at operatøren stenger håndventilen på innløpsledningen for å stoppe væskestrømmen inn i tanken, for å utføre vedlikehold på pumpen. Nivåregulatoren etterlates i "auto"-modus med et settpunkt på 50\%.
+
+Forklar hvorfor integrasjonsmetning (reset windup) vil oppstå i denne regulatoren hvis den blir stående i denne tilstanden, og hvilken konsekvens det vil ha når operatøren åpner håndventilen igjen etter vedlikeholdet.
+
+\vfil
+
+\underbar{file i01609}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Når væsketilførselen stopper, vil nivået synke. Siden transmitteren er reversvirkende, vil signalet til regulatoren (PV) øke. Et økende PV-signal i en reversvirkende regulator (som dette må være for å kontrollere nivået med en fail-closed ventil) vil føre til at integralvirkningen reduserer utgangen i et forsøk på å stenge ventilen og stoppe nivåfallet. Men siden væsketilførselen allerede er stoppet manuelt, vil ikke dette ha noen effekt. Nivået fortsetter å synke, avviket vedvarer, og integralvirkningen vil fortsette å redusere utgangen ("wind down") til den når nedre metningspunkt (0%).
+
+Når håndventilen åpnes igjen, vil regulatoren være mettet på 0% utgang. Dette betyr at kontrollventilen vil være helt stengt. Selv om nivået nå begynner å stige igjen (fordi pumpen starter), vil det ta tid for regulatoren å "integrere seg opp" (unwind) fra 0% og begynne å åpne ventilen. Dette vil resultere i en betydelig overskyting i nivået før kontrollen gjenopprettes.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Dette er et klassisk eksempel på windup, og viser viktigheten av å forstå hvordan regulatorer oppfører seg i unormale situasjoner. Diskusjonen bør fokusere på konsekvensene av windup og hvordan det kan unngås (f.eks. ved å sette regulatoren i manuell modus før pumpen stoppes, eller ved å bruke en regulator med anti-windup funksjon).
+
+%INDEX% Control, integral: windup
+
+%(END_NOTES)

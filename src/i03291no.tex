@@ -1,0 +1,50 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En av de viktigste prosessene som brukes for å rense kommunalt avløpsvann er {\it lufting} (aeration), hvor konsentrasjonen av oppløst oksygen i avløpsvannet økes ved å boble luft gjennom vannet i et {\it luftebasseng}. En analysator for oppløst oksygen ("DO") måler oksygenkonsentrasjonen i avløpsvannet, og en regulator varierer hastigheten på viftene som pumper luft inn i bassengene ved hjelp av AC-motorer drevet gjennom frekvensomformere (VFD-er):
+
+$$\includegraphics[width=15.5cm]{i03291x01.eps}$$
+
+Kontrollstrategien som brukes her kalles {\it adaptiv forsterkning} (adaptive gain). Selv om den ligner i konfigurasjon på foroverkobling (feedforward) -- hvor en lastvariabel (i dette tilfellet innkommende strømningsrate) brukes til å endre pådraget (MV) som går til sluttelementet i en tilbakekoblingssløyfe -- er reléet som brukes i dette tilfellet en {\it multiplikator} snarere enn den mer vanlige {\it summereren} som sees i konvensjonelle strategier for foroverkobling.
+
+\vskip 10pt
+
+Forklar hvorfor et multipliserende relé egentlig er det mest passende for denne typen applikasjon, og "demonstrer" forklaringen din ved å sette opp et tankeeksperiment av ditt eget design.
+
+\vfil 
+
+\underbar{file i03291}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er et spørsmål som skal evalueres -- ingen svar eller hint er gitt!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+La oss utføre et tankeeksperiment der innkommende strømningsrate {\it dobles}. Vårt spørsmål er: hvordan vil behovet for luft øke? Basert på vår kunnskap om oksidering (massen av oksygen som kreves for oksidering er direkte proporsjonal med massen av stoff som trenger oksidering), kan vi konkludere med at luftbehovet også vil dobles. Derfor må luftstrømmen styres som en {\it andel} av innkommende strøm.
+
+\vskip 10pt
+
+Hvis vi bare skulle bruke et summerings-relé mellom AIC og viftekontrollene, ville en økning i innkommende strømningsrate faktisk legge til mer luft til dysene, men det ville sannsynligvis ikke være riktig mengde. Vi trenger at AIC-regulatorens utgang skal {\it multipliseres} med eventuelle økninger i innkommende flyt for å opprettholde riktig forhold mellom innløp og oksygen.
+
+Et enkelt tankeeksperiment beviser at dette er sant. Anta at innløpshastigheten hopper opp fra 25\% til 50\%. Det økte behovet for luftstrøm inn i bassenget ville selvfølgelig dobles. La oss nå anta at innløpshastigheten hopper opp igjen, denne gangen fra 50\% til 100\%. Enda en gang ville vi trenge å doble luftmengden fra før (dvs. {\it fire ganger} mengden luft sammenlignet med den opprinnelige luftstrømmen ved 25\% innløpshastighet). Hvis vi hadde en summeringsblokk i stedet for en multiplikator, ville den ekstra luftstrømmen som ble kalt på av foroverkoblingen bare være 75\%, ikke den firedoble (400\%) økningen vi faktisk trenger.
+
+%INDEX% Control, strategies: adaptive gain
+%INDEX% Control, strategies: feedforward
+%INDEX% Process: wastewater aeration (dissolved oxygen control)
+
+%(END_NOTES)

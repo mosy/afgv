@@ -1,0 +1,111 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En instrumentstudent programmerer en mikrokontroller til å fungere som en proporsjonalregulator (P-regulator), men gjør en feil i programmeringen:
+
+$$\includegraphics[width=15.5cm]{i01497x01.eps}$$
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=5in \raggedright
+
+\noindent
+\underbar{\bf Pseudocode listing}
+
+{\tt Declare Pin0 as an analog input (scale 0 to 5 volts = 0 to 1023)}
+
+{\tt Declare Pin1 as an analog output (scale 0 to 5 volts = 0 to 1023)}
+
+{\tt Declare SP as a variable, initially set to a value of 614}
+
+{\tt Declare ERROR as a variable}
+
+{\tt Declare GAIN as a variable, initially set to a value of 1.0}
+
+{\tt Declare BIAS as a constant = 614}
+
+{\tt Set ERROR = Pin0 - SP}
+
+\vskip 10pt
+
+{\tt LOOP}
+
+\hskip 10pt {\tt Set Pin1 = (GAIN * ERROR) + BIAS}
+
+{\tt ENDLOOP}
+
+}
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+\vskip 10pt
+
+Når dette programmet kjøres, setter det utgangen til en bestemt spenningsverdi som aldri endres når prosessvariabelen endres (unntatt når mikrokontrolleren startes på nytt). Forklar hva som er galt med dette programmet, og hva som kreves for å fikse det. Avgjør også om dette er programmert til å være en {\it direktevirkende} regulator eller en {\it reversvirkende} regulator.
+
+\underbar{file i01497}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette vil være en {\it direktevirkende} regulator når programmeringsfeilen er rettet.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Beregningen av {\tt ERROR} (avviket) utføres kun én gang, før {\tt LOOP} starter. Dette er grunnen til at utgangen reagerer på prosessvariabelen bare én gang per omstart av mikrokontrolleren. For å fikse dette problemet, må vi flytte linjen med beregningen av {\tt ERROR} inn i {\tt LOOP} der den hører hjemme:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=5in \raggedright
+
+\noindent
+\underbar{\bf Pseudocode listing}
+
+{\tt Declare Pin0 as an analog input (scale 0 to 5 volts = 0 to 1023)}
+
+{\tt Declare Pin1 as an analog output (scale 0 to 5 volts = 0 to 1023)}
+
+{\tt Declare SP as a variable, initially set to a value of 614}
+
+{\tt Declare ERROR as a variable}
+
+{\tt Declare GAIN as a variable, initially set to a value of 1.0}
+
+{\tt Declare BIAS as a constant = 614}
+
+\vskip 10pt
+
+{\tt LOOP}
+
+\hskip 10pt {\tt SET ERROR = Pin0 - SP}
+
+\hskip 10pt {\tt SET Pin1 = (GAIN * ERROR) + BIAS}
+
+{\tt ENDLOOP}
+
+}
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+\vskip 10pt
+\vskip 10pt
+
+
+%INDEX% Control, proportional: digital electronic controller
+
+%(END_NOTES)

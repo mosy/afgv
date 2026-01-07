@@ -1,0 +1,71 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Skriv et pseudokode-program for en mikrokontroller som beregner den omtrentlige endringshastigheten (derivert) til et analogt inngangssignal ($PV$) i enheter av "volt per minutt".
+
+Anta at programmet skannes (kjøres) 15 ganger per sekund.
+
+\underbar{file i01557}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er bare ett eksempel, og ikke det eneste korrekte svaret:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=4.5in \raggedright
+
+\noindent
+\underbar{\bf Pseudocode listing}
+
+{\tt Declare PV as variable}
+
+{\tt Declare Last\_PV as variable}
+
+{\tt Declare Rate as variable}
+
+\vskip 10pt
+
+{\tt LOOP}
+
+\hskip 10pt {\tt SET PV = Analog Input}
+
+\hskip 10pt {\tt SET Rate = (PV - Last\_PV) * 900}
+
+\hskip 10pt {\tt SET Last\_PV = PV}
+
+{\tt ENDLOOP}
+}
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+
+\vskip 10pt
+
+Faktoren "900" kommer fra det faktum at sløyfen kjører med en hastighet på 15 ganger i sekundet (900 ganger i minuttet). Forskjellen mellom nåværende PV og forrige PV vil derfor representere spenningsendringen per $\frac{1}{900}$ del av et minutt. For å skalere dette til "volt per minutt", må vi multiplisere med 900.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Be studentene forklare hvorfor verdien for {\tt Last\_PV} oppdateres helt på slutten av loopen, og ikke begynnelsen. Hva ville skje hvis vi oppdaterte den ved begynnelsen?
+
+Svaret er ganske pedagogisk: hvis vi satte {\tt Last\_PV = PV} ved starten av loopen, ville de to variablene hatt samme verdi når vi beregnet {\tt Rate}. Dette ville resultere i en {\tt Rate}-verdi på 0 hver gang! For at derivasjonsfunksjonen skal fungere, må differansen tas mellom verdien av PV {\it akkurat nå} og verdien av PV {\it for en tid siden} (i forrige skanning).
+
+%INDEX% Control, derivative: digital algorithm
+
+%(END_NOTES)

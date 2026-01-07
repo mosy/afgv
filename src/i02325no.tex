@@ -1,0 +1,58 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2013, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Følgende P-regulering kildekode (pseudokode) inneholder logikk for å begrense utgangssignalet mellom 0\% og 100\%:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=5in \raggedright
+
+\noindent
+\underbar{\bf Pseudocode listing}
+
+{\tt Set ERROR = SP - PV}
+
+{\tt Set OUTPUT = (GAIN * ERROR) + BIAS}
+
+{\tt IF OUTPUT > 100\% THEN OUTPUT = 100\%}
+
+{\tt IF OUTPUT < 0\% THEN OUTPUT = 0\%}
+
+}
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+\vskip 10pt
+
+Forklar hvorfor det er nødvendig å inkludere lignende grense-logikk i den integrerende (I) delen av algoritmen for en PID-regulator, og forklar hva konsekvensene er for regulatorens drift hvis denne logikken utelates.
+
+\underbar{file i02325}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Hvis integraldelen av regulator-algoritmen ikke er begrenset, vil verdien fortsette å integrere oppover (eller nedover) over metningsgrensen på 100\% (eller under 0\%) hvis den utsettes for et vedvarende avvik over lengre tid. Dette kalles {\it integrasjonsmetning} (integral windup), og resulterer i en treg respons fra regulatoren når avviket endrer fortegn.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Be studentene beskrive en situasjon der integrasjonsmetning kan oppstå.
+
+%INDEX% Control, integral: windup
+%INDEX% Control, digital algorithm: saturation limits
+
+%(END_NOTES)

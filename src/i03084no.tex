@@ -1,0 +1,40 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2013, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En utbredt funksjon i moderne PID-regulatorer er {\it Derivative-on-PV} (Derivat på PV), hvor derivatdelen av PID-ligningen virker på endringshastigheten til prosessvariabelen (PV) i stedet for endringshastigheten til avviket (Error).
+
+Forklar hvorfor denne funksjonen er ønskelig, spesielt i applikasjoner der operatøren kan gjøre plutselige endringer i settpunktet (SP).
+
+\underbar{file i03084}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Hvis derivatdelen virker på avviket ($e = SP - PV$), vil en trinnvis endring i settpunktet bli sett av derivatdelen som en uendelig stor endringshastighet (vertikal kant), noe som forårsaker en enorm "spiker" i utgangssignalet. Dette kalles "derivat-rykk" (derivative kick), og unngås ved å la derivatdelen kun se på PV (som ikke endres umiddelbart ved en settpunktsendring).
+
+Den matematiske PID-ligningen for "Derivative-on-PV" ser slik ut:
+
+$$m = K_p \left( e + {1 \over \tau_i} \int e \> dt - \tau_d {d\mbox{PV} \over dt} \right) + b$$
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Det bør bemerkes for studentene at "Derivative-on-PV" er standardinnstillingen for de fleste digitale regulatorer i dag. Sjelden ønsker man "Derivative-on-Error", og da vanligvis bare for servokontroll (motion control), ikke prosesskontroll.
+
+Merk også at derivatleddet i ligningen ovenfor er subtrapert. Dette er nødvendig fordi en økning i PV representerer en negativ endring i $e$ (forutsatt $e = SP - PV$). Siden $d\mbox{PV}/dt$ vil være positiv for en økende PV, må vi subtrahere dette leddet for å få samme effekt som $de/dt$ ville gitt (som ville vært negativ).
+
+%INDEX% Control, derivative: action on PV only
+%INDEX% Control, proportional + integral + derivative: ideal (ISA) equation
+
+%(END_NOTES)

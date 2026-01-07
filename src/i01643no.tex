@@ -1,0 +1,45 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Det finnes hovedsakelig tre forskjellige matematiske algoritmer for PID-regulering: {\it Ideell} (Ideal), {\it Serie} (Series) og {\it Parallell} (Parallel).
+
+Skriv ned ligningene for disse tre (eller finn dem i læreboken), og forklar hovedforskjellen mellom dem når det gjelder hvordan tuning-parametrene (Gain, Ti, Td) påvirker hverandre.
+
+Spesielt, hvilken type ligning gjør at alle tre virkemåtene (P, I, D) påvirkes av endringer i Gain ($K_p$)? Og hvilken ligning har uavhengige innstillinger for hvert ledd?
+
+\underbar{file i01643}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Ideell (ISA) ligning:
+$$m = K_p ( e + \frac{1}{\tau_i} \int e dt + \tau_d \frac{de}{dt} )$$
+Her påvirker $K_p$ (Gain) alle tre leddene. Dette er den mest vanlige formen.
+
+Serie (Interacting) ligning:
+Matematisk lik Ideell, men derivat- og integralleddene interagerer på en slik måte at endring i den ene påvirker den effektive verdien av den andre.
+
+Parallell (Independent) ligning:
+$$m = K_p e + K_i \int e dt + K_d \frac{de}{dt}$$
+Her er $K_p$, $K_i$ og $K_d$ helt uavhengige. Endring i $K_p$ påvirker kun P-leddet.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Diskusjonen om PID-ligninger er viktig fordi forskjellige regulatorprodusenter bruker forskjellige ligninger. Hvis man tar tuning-verdier fra en regulator (f.eks. Allen-Bradley som ofte bruker Ideell) og taster dem inn i en annen (f.eks. en som bruker Parallell), vil resultatet bli helt feil.
+
+%INDEX% Control, proportional + integral + derivative: ideal (ISA) equation
+%INDEX% Control, proportional + integral + derivative: parallel equation
+
+%(END_NOTES)

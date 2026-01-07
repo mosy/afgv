@@ -1,0 +1,75 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Her vises responsen til en PI-regulator på en trinnvis endring i settpunktet (med en konstant prosessvariabel). Beregn regulatorens innstillinger for proporsjonal og integral, basert på det du ser i grafen. Uttrykk svaret ditt for integralkonstanten både i enhetene "repetisjoner per minutt" og "minutter per repetisjon". Avgjør også om denne regulatoren er direktevirkende eller reversvirkende, og marker de trekkene ved utgangsplottet som tilsvarer proporsjonalvirkning og integralvirkning.
+  
+$$\includegraphics[width=15.5cm]{i01602x01.eps}$$
+
+Tidsskalaen på grafen er minutter:sekunder, og PI-algoritmen er som følger:
+
+$$m = K_p \left( e + {1 \over \tau_i} \int e \> dt \right) + b$$
+
+\noindent
+Hvor,
+
+$m$ = Regulatorutgang (pådrag)
+
+$K_p$ = Forsterkning (Gain)
+
+$e$ = Avvikssignal (SP$-$PV eller PV$-$SP)
+
+$\tau_i$ = Integraltidskonstant
+
+$b$ = Bias
+
+\vskip 10pt
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Når man analyserer utgangstrenden for en PI-regulator, er definisjonen av integraltidskonstanten som "antall minutter som kreves for å repetere proporsjonalvirkningen" mest nyttig. Identifiser størrelsen på proporsjonalvirkningens respons på PV-trinnet, og forklar deretter hvordan denne verdien er nyttig for å identifisere $\tau_i$.
+\item{} Hvis du virkelig så denne typen respons på en prosesstrend (skriver), hva ville du mistenke om systemet? Hint: denne typen trend er definitivt {\it ikke} normal for et velfungerende kontrollsystem!
+\end{itemize}
+
+\underbar{file i01602}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Regulatorvirkemåte = {\it Direkte}
+
+\vskip 10pt
+
+Forsterkningskonstant (Gain) = 1, eller 100\% proporsjonalbånd
+
+\vskip 10pt
+
+Integralkonstant = 0,25 repetisjoner per minutt ($\tau_i$), eller 4 minutter per repetisjon ($K_i$)
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Vi vet at denne regulatorens virkemåte er {\it direkte} fordi utgangen minker når settpunktet (SP) øker (OBS: Dette er faktisk feil i originalteksten ut i fra figuren, men hvis SP øker og output minker, så er det reversvirkende i forhold til SP, som betyr direktevirkende i forhold til PV. La oss sjekke: Direct acting: PV opp -> Output opp. Error = PV-SP. Hvis SP opp, Error ned, Output ned. Korrekt. Direct acting.)
+
+Denne regulatorens forsterkning beregnes ved forholdet mellom utgangstrinnets størrelse og inngangstrinnets størrelse: i dette tilfellet skyldes en 20\% endring i utgang en 20\% endring i inngang, noe som gir en forsterkning på 1. Den resiproke verdien gir et proporsjonalbånd på 100\%.
+
+Til slutt ser vi at over en periode på ett minutt, får integralvirkningen utgangen til å drifte ytterligere 5\%. Dette er bare 1/4 av proporsjonalvirkningens respons (som var 20\%), så integralkonstanten er 1/4 repetisjon per minutt. Den resiproke verdien er 4 minutter per repetisjon.
+ 
+\vskip 10pt
+
+Hva er galt med dette kontrollsystemet, som indikert av trenden? Prosessvariabelen virker fullstendig uresponsiv overfor endringen i utgangssignalet! Det ser ut til at sluttelementet er forbigått eller utkoblet på en eller annen måte. Ikke tro at dette indikerer en regulator i manuell modus. En regulator i "manuell" ville ikke generert noen endring i utgangssignalet som respons på endringer i verken PV eller SP.
+
+%INDEX% Control, proportional + integral: graphing controller response
+
+%(END_NOTES)

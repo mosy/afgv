@@ -1,11 +1,25 @@
 
 %(BEGIN_QUESTION)
-% Copyright 2005, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Plott responsen for følgende P-regulator (reversvirkende, gain = 2, bias = 50\%), forutsatt en trinnvis endring i skal-verdien (SP):
+Et uunnværlig verktøy for både prosessoperatører og instrumentteknikere er {\it trendgrafen}, som viser variabler fra kontrollsløyfen som PV, SP og regulatorutgang (Output) overlagret på samme tidsakse. Følgende eksempel viser prosessvariabel, settpunkt og utgang for en P-regulator (kun proporsjonal) som reagerer på endringer i en kontrollsløyfes PV mens settpunktet forblir på en konstant verdi av 40\%:
 
-$$\includegraphics{i00715x01.eps}$$
+$$\includegraphics[width=15.5cm]{i00715x01.eps}$$
+
+Basert på en undersøkelse av denne trendgrafen, bestem {\it bias}-verdien til regulatoren og {\it forsterknings}-verdien (gain) til regulatoren, samt dens virkemåte ({\it direkte} eller {\it revers}).
+
+\vskip 10pt
+
+En nyttig analyseteknikk når man relaterer trendgrafer til regulatorligninger, er å tegne en vertikal linje på grafen for å identifisere et bestemt tidspunkt, og deretter identifisere verdiene for PV, SP og Utgang (Output) ved det tidspunktet. En korrekt ligning for regulatoren vil vellykket forutsi Utgangsverdien ut fra PV- og SP-verdiene ved {\it ethvert} tidspunkt vist på trenden.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Når du har beregnet forsterkningen (gain) for denne sløyferegulatoren, beregn også dens {\it proporsjonalbånd}-verdi.
+\item{} Lag et regnearkprogram for datamaskin for å modellere oppførselen til P-regulatoren i dette scenariet. Du vet du har lykkes når det er i stand til å duplisere enhver Utgangsverdi vist på trendgrafen ved ethvert gitt tidspunkt, tilsvarende PV- og SP-verdiene ved det samme tidspunktet.
+\item{} Hvordan ville denne trenden sett ut hvis regulatoren ble stående i {\it manuell} modus i stedet for {\it automatisk} modus?
+\end{itemize}
 
 \underbar{file i00715}
 %(END_QUESTION)
@@ -16,6 +30,7 @@ $$\includegraphics{i00715x01.eps}$$
 
 %(BEGIN_ANSWER)
 
+Gain = 0,5 og bias = 30\%
 
 %(END_ANSWER)
 
@@ -25,11 +40,7 @@ $$\includegraphics{i00715x01.eps}$$
 
 %(BEGIN_NOTES)
 
-En vanlig feil blant studentene er å glemme bias-verdien. De vil ofte plotte utgangssignalet som starter på 0\% i stedet for 50\%.
-
-De som husker bias-verdien vil kanskje fortsatt gjøre feil med endringsretningen. "Skal den gå opp eller ned?" spør de seg selv. Min metode for å besvare dette spørsmålet er å se for meg at PV øker. Hvis regulatoren er reversvirkende, skal utgangen gå ned. Dette betyr at PV og Output må bevege seg i motsatte retninger. Derfor, hvis PV går {\it opp}, skal Output gå {\it ned}. Men vent! Vi snakker om en endring i {\it skal-verdien} (SP), ikke prosessvariabelen (PV).
-
-Dette bringer oss til et grunnleggende prinsipp for regulering: skal-verdi og prosessvariabel har alltid motsatt effekt på utgangen. Påstanden "reversvirkende" refererer til PV'ens effekt på utgangen. Derfor vil en økning i PV drive utgangen {\it ned}. Dette innebærer at en økning i SP vil drive utgangen {\it opp}.
+Forsterkningen kan beregnes ved å sammenligne endring i utgang ($\Delta m$) med endring i inngang ($\Delta$PV) mellom hvilke som helst to punkter i tid på trenden. Bias bestemmes enklest ved å notere utgangsverdien når avviket er lik null (PV = SP).
 
 %INDEX% Control, proportional: graphing controller response
 

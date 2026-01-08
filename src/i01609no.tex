@@ -1,19 +1,21 @@
 
 %(BEGIN_QUESTION)
-% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-I dette nivåreguleringssystemet er kontrollventilen (LV) av typen "fail-closed" (stenger ved signalbortfall), og I/P-omformeren er direktekoblet (4mA inn = 3 PSI ut ; 20mA inn = 15 PSI ut). Transmitteren er reversvirkende (høyt nivå = 4 mA ut ; lavt nivå = 20 mA ut):
+En PI-regulator (P+I) brukes til å kontrollere strømmen av en væske gjennom et rør. Strømningskontrollventilen er imidlertid underdimensjonert, og vil ikke tillate strømmen å oppnå en verdi som er større enn 70\% av måleområdet. Hva vil regulatoren gjøre hvis den får et settpunkt på 80\%? Vær så spesifikk du kan i svaret ditt.
 
+\vskip 10pt
 
-Anta at operatøren stenger håndventilen på innløpsledningen for å stoppe væskestrømmen inn i tanken, for å utføre vedlikehold på pumpen. Nivåregulatoren etterlates i "auto"-modus med et settpunkt på 50\%.
+Hva vil skje hvis settpunktet returneres til en oppnåelig verdi som 50\% etter at det har stått på 80\% i lang tid?
 
-Forklar hvorfor integrasjonsmetning (reset windup) vil oppstå i denne regulatoren hvis den blir stående i denne tilstanden, og hvilken konsekvens det vil ha når operatøren åpner håndventilen igjen etter vedlikeholdet.
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
 
-\vfil
+\begin{itemize}
+\item{} Hvordan antar du at et problem som dette manifesterer seg på en prosesstrend (logging)? Finnes det noen avslørende ledetråder på en trend som indikerer at et slikt problem eksisterer?
+\end{itemize}
 
 \underbar{file i01609}
-\eject
 %(END_QUESTION)
 
 
@@ -22,9 +24,13 @@ Forklar hvorfor integrasjonsmetning (reset windup) vil oppstå i denne regulator
 
 %(BEGIN_ANSWER)
 
-Når væsketilførselen stopper, vil nivået synke. Siden transmitteren er reversvirkende, vil signalet til regulatoren (PV) øke. Et økende PV-signal i en reversvirkende regulator (som dette må være for å kontrollere nivået med en fail-closed ventil) vil føre til at integralvirkningen reduserer utgangen i et forsøk på å stenge ventilen og stoppe nivåfallet. Men siden væsketilførselen allerede er stoppet manuelt, vil ikke dette ha noen effekt. Nivået fortsetter å synke, avviket vedvarer, og integralvirkningen vil fortsette å redusere utgangen ("wind down") til den når nedre metningspunkt (0%).
+Siden strømmen ikke kan overstige 70\% på grunn av den underdimensjonerte ventilen, vil regulatoren fortsette å "se" et avvik på 10\%, og regulatorutgangen vil til slutt gå i metning på 100\% (helt åpen ventil). Algoritmens integral-ledd vil fortsette å øke (med mindre det begrenses av en spesiell funksjon i regulatoren designet for å stoppe integrasjonsprosessen hvis og når utgangssignalet når visse grenser), selv om det ikke vil gjøre noen nytte fordi ventilen er mettet helt åpen. Dette fenomenet kalles {\it integrasjonsmetning} (integral windup) eller {\it reset windup}.
 
-Når håndventilen åpnes igjen, vil regulatoren være mettet på 0% utgang. Dette betyr at kontrollventilen vil være helt stengt. Selv om nivået nå begynner å stige igjen (fordi pumpen starter), vil det ta tid for regulatoren å "integrere seg opp" (unwind) fra 0% og begynne å åpne ventilen. Dette vil resultere i en betydelig overskyting i nivået før kontrollen gjenopprettes.
+Når settpunktet reduseres til 50\%, kan regulatorutgangen forbli mettet på 100\% (ventil helt åpen) i stedet for umiddelbart å avta for å redusere strømmen gjennom røret slik den skal, på grunn av den akkumulerte verdien ("windup") i integral-leddet.
+
+\vskip 10pt
+
+Det bør bemerkes at de fleste moderne (digitale) sløyferegulatorer har grenser for anti-integrasjonsmetning (anti-reset windup) satt som standard til 100\% og 0\%, slik at integral-akkumulatoren ikke vil "vinde" forbi disse grensene. Jeg har imidlertid støtt på regulatorer uten denne funksjonen, hvor regulatorens interne akkumulator er i stand til å gå langt forbi 100\% selv om kontrollventilen selvfølgelig ikke kan åpne mer enn 100\%.
 
 %(END_ANSWER)
 
@@ -34,7 +40,9 @@ Når håndventilen åpnes igjen, vil regulatoren være mettet på 0% utgang. Det
 
 %(BEGIN_NOTES)
 
-Dette er et klassisk eksempel på windup, og viser viktigheten av å forstå hvordan regulatorer oppfører seg i unormale situasjoner. Diskusjonen bør fokusere på konsekvensene av windup og hvordan det kan unngås (f.eks. ved å sette regulatoren i manuell modus før pumpen stoppes, eller ved å bruke en regulator med anti-windup funksjon).
+Andre forhold kan også forårsake metning (windup). En feilet transmitter, en batch-prosess som stenger ned, eller andre diskontinuiteter i prosessen vil føre til at en regulator med integralvirkning "vinder opp" eller "vinder ned" i et forgjeves forsøk på å minimere avviket.
+
+Når settpunktet reduseres til 50\%, kan regulatorutgangen forbli mettet på 100\% (ventil helt åpen) i stedet for umiddelbart å avta for å redusere strømmen gjennom røret slik den skal, på grunn av den akkumulerte verdien ("windup") i integral-leddet. Med andre ord, den akkumulerte verdien av integral-leddet under "windup" da den forgjeves prøvde å øke strømningsraten til 80\%, er fortsatt tilstede når settpunktet synker til 50\%, og den kan være tilstrekkelig til å holde regulatorutgangen på 100\% i lang tid (inntil integral-leddet "vinder ned" igjen langt nok). Dette resulterer selvfølgelig i en forsinket regulatorrespons på det nye settpunktet.
 
 %INDEX% Control, integral: windup
 

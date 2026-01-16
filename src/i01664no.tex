@@ -1,0 +1,48 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Hvilken type prosess (selvregulerende eller integrerende) er naturlig stabil når regulatoren står i «manuell» modus, og hvilken type prosess er ikke det? Forklar hvorfor.
+
+\vskip 10pt
+
+Hvilken type prosess (selvregulerende eller integrerende) kan teoretisk reguleres med bare P-virkning (kun proporsjonalvirkning)? Forklar hvorfor.
+
+\underbar{file i01664no}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Self-regulating processes are naturally stable when their controllers are left in manual.  Integrating processes are naturally {\it unstable}, and require the supervisory action of a controller in order to achieve equilibrium.
+
+This is not to say that self-regulating processes are without need of a controller.  Controllers in any type of process are necessary to maintain {\it precise} control of the process variable (PV) close to setpoint (SP).  A self-regulating process without a controller may achieve equilibrium on it's own, but that point of equilibrium may or may not be anywhere near setpoint!
+
+The reason integrating processes are naturally unstable is due to the requirement of balanced loads (input and output) to achieve equilibrium.  A self-regulating process tends to naturally balance its loads when something changes, due to the physics of the process alone.  Integrating processes have no inherent mode of self-balance, and thus will eventually ``saturate'' if all loads are not balanced by an external control system.
+ 
+\vskip 10pt
+
+A purely integrating process ideally requires no integral action from the controller at all.  This is because a single controller output value is capable of maintaining the process variable stable at any given value (at least with a constant load).  In other words, PV equilibrium may be achieved at any point along the PV range with just a single output value.  
+
+Proportional-only control provides this functionality: outputting the same (bias) value when SP and PV are equal, regardless of the absolute value of the PV.  If SP does not equal PV, the proportional-only controller output will be something other than the bias value, and the process will ``integrate'' up or down until PV = SP again.  Once the PV has attained the new SP, the controller output will be equal to the bias value again, balancing input and output in the process and holding the PV steady.  In a manner of speaking, the process itself provides all the necessary integral action lacking in the controller to counter offset.  In such a process, integral action would only be needed to adjust for changes in load.
+
+In a self-regulating process, integral action is necessary for the controller to minimize error following either a setpoint or a load change, because each point of PV equilibrium requires a different output value.  A proportional-only algorithm will almost always suffer offset when used in a self-regulating process, because the single bias value (output value when PV = SP) will be sufficient to achieve PV equilibrium for only one SP value (for any given load).  Any SP value other than that one ``magic'' value will result in proportional-only offset, unless integral action is provided to ``reset'' the controller's action to a new equilibrium point.
+
+To summarize, integrating processes are capable of being (ideally) controlled with proportional action only.  Self-regulating processes require integral action in order to avoid proportional-only offset.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% Control, process characteristics: self-regulating versus integrating
+
+%(END_NOTES)

@@ -1,0 +1,61 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Dette er en PFD for et enkelt geotermisk kraftverk, som trekker en blanding av overhetet damp og medforende mineraler fra en ``produksjonsbronn'' boret dypt ned i jorden, og injiserer det kondenserte vannet og mineralene i en andre ``injeksjonsbronn'' for a bli varmet opp igjen av geotermisk varme:
+
+$$\includegraphics[width=15.5cm]{i00070x01.eps}$$
+
+En dag merker en operator noe rart pa trendgrafen for HP-separatoren: saltlakenivaet i den separatoren ser ut til a oscillere pa en firkantbolge-mate rundt det vanlige setpunktet, men stabiliserer seg ved enhver annen setpunktverdi:
+
+$$\includegraphics[width=15.5cm]{i00070x02.eps}$$
+
+Identifiser en realistisk arsak til denne merkelige nivareguleringen, og identifiser deretter neste steg du ville ta for a diagnostisere og rette problemet.
+
+\vfil
+
+\underbar{file i00070}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er et vurdert sporsmal -- ingen svar eller hint gis!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Det kan vare fristende a si at denne reguleringsloopen oppforer seg for aggressivt, basert pa oscillasjonen rundt setpunktet vi ser i starten av trenden.  Legg imidlertid merke til at loopen ikke oscillerer rundt setpunktet mot slutten av trenden, noe som er uvanlig hvis problemet bare er for mye gain (eller annen regulatorhandling).  Nei, problemet her er mer komplekst enn dette.
+
+\vskip 10pt
+
+Det kan ogsa vare fristende a si at reguleringsventilen til HP-separatoren er klissete, gitt den flate responsen til PV av og til.  Dette er imidlertid ikke hvordan en nivaregulering for vaeske vanligvis vil reagere med en klissete ventil.  Nar ventilen setter seg fast i en nivaregulering, vil nivaaet enten rampe ned eller opp (med mindre ventilen tilfeldigvis setter seg fast akkurat i ``balansepunktet'' til prosessen!).
+
+\vskip 10pt
+
+Nokkelen til a bestemme kilden til problemet her er hvordan PV-trenden ``henger'' (viser {\it flate} perioder) og {\it plutselig} hopper til nye verdier, mye raskere enn prosessnivaaet faktisk er i stand til a endre seg, slik de andre stigningene og fallene til PV viser.  Dette indikerer at nivatransmitteren selv vekselvis er {\it ikke-responsiv} pa normale svingninger i saltlakenivaet.  Kontrollsystemet ser et ikke-responderende nivaa som er borte fra setpunktet og handler for a bringe det tilbake mot setpunktet.  Hvis nivaaet passerer setpunktet og transmitteren deretter ``losner'' for a male det nye nivaaet, gjentas wind-up-syklusen.
+
+\vskip 10pt
+
+Et godt ``neste steg'' ville vare a ta transmitteren ut av drift og ``stimulere'' den gjennom hele sitt maleomrade for niva for a se om du kan reprodusere den ``hengingen'' som sees her.
+
+\vskip 10pt
+
+Hvis dette er et fortrengerinstrument, kan ansamlinger av salter rundt fortrengeren (inne i buret) forklare denne oppforselen.  Sa snart nivaaet kommer bort fra det normale setpunktet, responderer transmitteren normalt og alt er bra.
+
+%INDEX% Process troubleshooting: diagnosing problem via trend recording
+%INDEX% Process: geothermal power plant
+
+%(END_NOTES)
+
+

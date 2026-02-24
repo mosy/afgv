@@ -1,0 +1,194 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En avgjørende komponent i alle digitale reguleringssystemer er en {\it analog-til-digital-omformer}, eller {\it ADC}. Denne trengs for å gjøre en analog måling av prosessvariabelen om til et digitalt tall som reguleringsalgoritmen kan behandle. En annen avgjørende komponent er en {\it digital-til-analog-omformer}, eller {\it DAC}, som gjør det motsatte.
+
+I et system som bruker analoge 4-20 mA-strømmer for instrumentsignaler, sitter ADC ved prosessvariabelinngangen til regulatoren, og DAC ved regulatorutgangen:
+
+$$\includegraphics[width=15.5cm]{i01498x01.eps}$$
+
+I digitale ``Fieldbus''-systemer er kommunikasjonen helt digital, og da plasseres ADC i transmitteren og DAC i transduseren:
+
+$$\includegraphics[width=15.5cm]{i01498x02.eps}$$
+
+\filbreak
+
+I begge tilfeller må vi ``skalere'' ADC- og DAC-tellernes binære verdier til tilhørende analoge variabler. Tenk deg en strømningsregulering med transmitterområde 0 til 200 GPM og en pneumatisk reguleringsventil med trykkområde 3 til 15 PSI (instrumentluft). Anta at ADC har 16 bits oppløsning (digitalt område \$0000 til \$FFFF) og DAC har 14 bits oppløsning (digitalt område \$0000 til \$3FFF). Finn de digitale verdiene som tilsvarer et 50\% PV-signal (100 GPM) og 50\% ventilposisjon (9 PSI pneumatisk signal). Skriv de heksadesimale tallverdiene i tabellene under:
+
+\vskip 10pt
+
+\noindent
+{\bf Kalibreringstabell for prosessvariabelsignal (ADC)}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Måling & Digital utgang \cr
+%
+\noalign{\hrule}
+%
+% Another row
+0 GPM & \$0000 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+100 GPM &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+200 GPM & \$FFFF \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+\vskip 10pt
+
+\noindent
+{\bf Kalibreringstabell for utgangssignal (DAC)}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Måling & Digital utgang \cr
+%
+\noalign{\hrule}
+%
+% Another row
+\$0000 & 0 PSI\cr
+%
+\noalign{\hrule}
+%
+% Another row
+ & 9 PSI \cr
+%
+\noalign{\hrule}
+%
+% Another row
+\$3FFF & 15 PSI\cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+\vskip 10pt
+
+Merk at DAC-utgangen {\it ikke} tilsvarer levende nullpunkt. Med andre ord vil digital inngangsverdi \$0000 gi null trykk til ventilen (0 PSI), ikke standard pneumatisk ``null''-signal på 3 PSI.
+
+\underbar{file i01498}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Kalibreringstabell for prosessvariabelsignal (ADC)}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Måling & Digital utgang \cr
+%
+\noalign{\hrule}
+%
+% Another row
+0 GPM & \$0000 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+100 GPM & {\bf \$8000} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+200 GPM & \$FFFF \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+\vskip 10pt
+
+\noindent
+{\bf Kalibreringstabell for utgangssignal (DAC)}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+Måling & Digital utgang \cr
+%
+\noalign{\hrule}
+%
+% Another row
+\$0000 & 0 PSI\cr
+%
+\noalign{\hrule}
+%
+% Another row
+{\bf \$2666} & 9 PSI \cr
+%
+\noalign{\hrule}
+%
+% Another row
+\$3FFF & 15 PSI\cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+100 GPM = 50\% av området 0-200 GPM. Siden inngangen har 16 bits oppløsning (0 til 65535 teller), er halvparten ${65535 \over 2} = 32767.5$. Rundet ned (32767) får vi \$7FFF. Rundet opp (32768) får vi \$8000.
+
+\vskip 10pt
+
+9 PSI = 60\% av området 0-15 PSI. Siden utgangen har 14 bits oppløsning (0 til 16383 teller), er 60\% av dette $16383 \times 0.6 = 9829.8$. Rundet ned (9829) får vi \$2665. Rundet opp (9830) får vi \$2666.
+
+%INDEX% Electronics review: ADC resolution
+%INDEX% Electronics review: DAC resolution
+
+%(END_NOTES)
+

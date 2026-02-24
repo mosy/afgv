@@ -1,14 +1,35 @@
-
 %(BEGIN_QUESTION)
 % Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Et uungåelig kjennetegn ved P-regulering (kun proporsjonal) er noe som kalles {\it stasjonært avvik} (proportional-only offset). Definer hva "stasjonært avvik" er, og forklar hvorfor en P-regulator ikke klarer å eliminere det.
+Her vises et enkelt strømningsreguleringssystem for å distribuere vann fra et irrigasjonsreservoar til et jordstykke med regulert strømningsrate. Flowmåleren er skalert fra 0 til 300 gallon per minutt:
 
-\vfil
+$$\includegraphics[width=15.5cm]{i01584x01.eps}$$
+
+Flowregistrerende regulator (FRC) er en enhet med kun proporsjonalvirkning, med følgende algoritme:
+
+$$m = K_p (\hbox{SP} - \hbox{PV}) + 50\hbox{\%}$$
+
+\noindent
+Der,
+
+$m$ = manipulert variabel (utgang)
+
+$K_p$ = regulatorforsterkning
+
+SP = setpunkt
+
+PV = prosessvariabel (vannflow)
+
+\vskip 10pt
+
+En dag observeres regulatoren i helt normal drift: setpunktet står på 180 GPM, og prosessvariabelen viser nøyaktig det samme: 180 GPM. Regulatorens utgang er 50\% i denne tilstanden. Deretter justerer operatøren setpunktet til en ny strømningsrate: 250 GPM. Som forventet øker regulatorutgangen automatisk, og ventilen åpner mer for å slippe gjennom mer vann i røret. Etter hvert som strømningsraten nærmer seg det nye setpunktet 250 GPM, begynner ventilen å strupe igjen. Dette gjør at strømningsraten nærmer seg setpunktet stadig langsommere, omtrent som når en kondensator lades mot en ny spenningsverdi over tid. Operatøren merker imidlertid noe uventet: strømningsraten kommer aldri helt opp til det nye setpunktet 250 GPM. I stedet stabiliserer den seg rundt 239 GPM og øker ikke videre.
+
+Forvirret over hvorfor regulatoren ikke når det nye setpunktet 250 GPM slik den gjorde med det gamle setpunktet 180 GPM, tilkaller operatøren en instrumenttekniker. ``Hva er galt med denne regulatoren?'' spør operatøren teknikeren. ``Den slutter å øke strømningsraten før den når nytt setpunkt.'' Etter en kort undersøkelse ser teknikeren at dette er en regulator med kun proporsjonalvirkning. Da smiler teknikeren og forklarer hvorfor regulatoren {\it aldri vil} nå det nye setpunktet slik den gjorde ved 180 GPM. For den saks skyld kan den heller ikke nå noe setpunkt under 180 GPM perfekt! Hvis den har nøyaktig treff ved 180 GPM, så er det den {\it eneste} setpunktverdien den vil treffe nøyaktig.
+
+Forklar med egne ord hvorfor dette er sant.
 
 \underbar{file i01584}
-\eject
 %(END_QUESTION)
 
 
@@ -17,7 +38,11 @@ Et uungåelig kjennetegn ved P-regulering (kun proporsjonal) er noe som kalles {
 
 %(BEGIN_ANSWER)
 
-"Stasjonært avvik" er forskjellen mellom settpunkt (SP) og prosessvariabel (PV) som oppstår når prosessbelastningen endrer seg fra verdien som bias-innstillingen var basert på. P-regulatorer "trenger" avvik for å generere et annet utgangssignal enn bias-verdien (vanligvis 50\%), og derfor vil de alltid ha et visst avvik (feil) når prosessforholdene krever et pådrag som er forskjellig fra bias-verdien.
+Jeg svarer på dette spørsmålet med et nytt spørsmål: Tenk deg at regulatoren faktisk {\it oppnådde} den nye setpunktverdien på 250 GPM. Hvis den gjorde det, hva ville ventilposisjonen vært i denne likevektstilstanden der både SP og PV er lik 250 GPM? Sammenlign dette med ventilposisjonen da både SP og PV var lik 180 GPM. Ser du nå hvorfor PV = SP = 250 GPM er umulig?
+
+\vskip 10pt
+
+Utfordringsspørsmål: Hvilken effekt har forsterkningen ($K_p$) på regulatorens manglende evne til å nå setpunktverdier andre enn 180 GPM?
 
 %(END_ANSWER)
 
@@ -27,8 +52,9 @@ Et uungåelig kjennetegn ved P-regulering (kun proporsjonal) er noe som kalles {
 
 %(BEGIN_NOTES)
 
-Mange lærebøker forklarer {\it stasjonært avvik} (offset) ved hjelp av eksempler, f.eks. en væskenivå-regulator der en endring i ventilstilling er nødvendig for å opprettholde nivået under en ny strømningsrate, men hvor regulatoren (som kun er proporsjonal) ikke kan flytte ventilen til en ny posisjon uten at nivået endres for å drive den dit. Dette er en god måte å forklare det på, men vær sikker på at studentene også forstår svaret som er gitt her. Rent matematisk genererer en P-regulator utgangssignalet kun basert på to faktorer: feil (avvik) og bias. Hvis utgangssignalet skal være noe annet enn bias-verdien, {\it må} det være en feil tilstede!
+Jo høyere forsterkning, desto mindre offset. For høy forsterkning vil imidlertid gi oscillasjon.
 
 %INDEX% Control, proportional: proportional-only offset
+%INDEX% Process: irrigation water flow
 
 %(END_NOTES)

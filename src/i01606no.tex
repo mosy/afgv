@@ -3,26 +3,26 @@
 % Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Tegn responsen til en PI-regulator med følgende inngangsforhold, gitt et proporsjonalbånd på 50\% og en integraltidskonstant på 0,5 minutter per repetisjon. Regulatorens virkemåte er {\it revers}, og algoritmen den følger er vist under grafen:
+Tegn bare integralresponsen til en regulator med {\it proporsjonal + integralvirkning}, med proporsjonalbånd 75\% og integralkonstant 2 minutter per repetisjon, for følgende inngangsbetingelser. Anta at regulatoren er {\it direktevirkende}:
 
 $$\includegraphics[width=15.5cm]{i01606x01.eps}$$
 
-Tidsskalaen på grafen er minutter:sekunder, og PI-algoritmen er som følger:
+Tidsskalaen i diagrammet er minutter:sekunder, og PI-algoritmen er som følger:
 
 $$m = K_p \left( e + {1 \over \tau_i} \int e \> dt \right) + b$$
 
 \noindent
-Hvor,
+Der,
 
-$m$ = Regulatorutgang (pådrag)
+$m$ = regulatorutgang (manipulert variabel)
 
-$K_p$ = Forsterkning (Gain)
+$K_p$ = forsterkning
 
-$e$ = Avvikssignal (SP$-$PV)
+$e$ = avvikssignal (PV$-$SP)
 
-$\tau_i$ = Integraltidskonstant
+$\tau_i$ = integraltidskonstant
 
-$b$ = Bias
+$b$ = bias
 
 \vskip 10pt
 
@@ -37,6 +37,113 @@ $b$ = Bias
 
 $$\includegraphics[width=15.5cm]{i01606x02.eps}$$
 
+Først konverterer vi de oppgitte tune-konstantene til direkte visende enheter (forsterkning i stedet for P.B., og rep/min i stedet for min/rep):
+ 
+\vskip 10pt
+
+Proporsjonalbånd = 75\% ; Forsterkning = 1.333
+ 
+\vskip 10pt
+
+2 minutter per repetisjon = 0.5 repetisjoner per minutt
+ 
+\vskip 10pt
+
+\noindent
+Deretter beregner vi akkumulert areal under hver avviksperiode:
+ 
+\vskip 10pt
+
+Integralvirkning = $K_p {1\over \tau_i} \int e \> dt$
+ 
+\vskip 10pt
+
+Integralvirkning = (forsterkning)(repetisjoner/min)(avvik-tid-produkt)
+ 
+\vskip 10pt
+
+Integralvirkning = (1.333)(0.5/min)(10\%-min)
+ 
+\vskip 10pt
+
+Integralvirkning = 6.667\%
+ 
+\vskip 10pt
+
+\noindent
+{\it Utgangen går fra 70\% til 63.33\%}
+ 
+$$\includegraphics[width=15.5cm]{i01606x03.eps}$$
+
+\filbreak
+
+Integralvirkning = $K_p {1\over \tau_i} \int e \> dt$
+ 
+\vskip 10pt
+
+Integralvirkning = (forsterkning)(repetisjoner/min)(avvik-tid-produkt)
+ 
+\vskip 10pt
+
+Integralvirkning = (1.333)(0.5/min)(5\%-min)
+
+\vskip 10pt
+
+Integralvirkning = 3.333\%
+
+\vskip 10pt
+
+\noindent
+{\it Utgangen går fra 63.33\% til 60\%}
+
+$$\includegraphics[width=15.5cm]{i01606x04.eps}$$
+
+\filbreak
+
+Integralvirkning = $K_p {1\over \tau_i} \int e \> dt$
+ 
+\vskip 10pt
+
+Integralvirkning = (forsterkning)(repetisjoner/min)(avvik-tid-produkt)
+ 
+\vskip 10pt
+
+Integralvirkning = (1.333)(0.5/min)(3.125\%-min)
+ 
+\vskip 10pt
+
+Integralvirkning = 2.083\%
+ 
+\vskip 10pt
+
+\noindent
+{\it Utgangen går fra 60\% til 62.083\%}
+
+$$\includegraphics[width=15.5cm]{i01606x05.eps}$$
+
+\filbreak
+
+Integralvirkning = $K_p {1\over \tau_i} \int e \> dt$
+ 
+\vskip 10pt
+
+Integralvirkning = (forsterkning)(repetisjoner/min)(avvik-tid-produkt)
+ 
+\vskip 10pt
+
+Integralvirkning = (1.333)(0.5/min)(6.25\%-min)
+ 
+\vskip 10pt
+
+Integralvirkning = 4.167\%
+
+\vskip 10pt
+
+\noindent
+{\it Utgangen går fra 62.083\% til 66.25\%}
+
+$$\includegraphics[width=15.5cm]{i01606x06.eps}$$
+
 %(END_ANSWER)
 
 
@@ -44,8 +151,6 @@ $$\includegraphics[width=15.5cm]{i01606x02.eps}$$
 
 
 %(BEGIN_NOTES)
-
-Integraltiden på 0,5 minutter per repetisjon tilsvarer en integralkonstant på 2 repetisjoner per minutt. Dette får utgangskurven til å helle moderat bratt i forhold til proporsjonaltrinnet. Den akkumulerer en 40\% endring i utgangen på 1 minutt (2 ganger proporsjonaltrinnet på 20\%).
 
 %INDEX% Control, proportional + integral: graphing controller response
 

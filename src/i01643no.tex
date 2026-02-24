@@ -1,15 +1,21 @@
-
 %(BEGIN_QUESTION)
 % Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Det finnes hovedsakelig tre forskjellige matematiske algoritmer for PID-regulering: {\it Ideell} (Ideal), {\it Serie} (Series) og {\it Parallell} (Parallel).
+Anta at denne prosessen er optimalt innstilt, med et måleområde fra 0$^{o}$ F til 100$^{o}$ F:
 
-Skriv ned ligningene for disse tre (eller finn dem i læreboken), og forklar hovedforskjellen mellom dem når det gjelder hvordan tuning-parametrene (Gain, Ti, Td) påvirker hverandre.
+$$\includegraphics[width=15.5cm]{i01643x01.eps}$$
 
-Spesielt, hvilken type ligning gjør at alle tre virkemåtene (P, I, D) påvirkes av endringer i Gain ($K_p$)? Og hvilken ligning har uavhengige innstillinger for hvert ledd?
+Deretter tas det en dag en beslutning om å områdesette temperaturtransmitteren (TT) på nytt for bedre oppløsning: 50$^{o}$ F til 70$^{o}$ F i stedet for 0$^{o}$ F til 100$^{o}$ F. Som resultat av denne områdeendringen begynner prosessen å oscillere rundt setpunkt i stedet for å holde seg stabil ved setpunkt, slik den gjorde tidligere.
+
+\vskip 10pt
+
+Forklar hvorfor denne områdeendringen gjorde prosesstyringen ustabil, og foreslå en løsning som gjenoppretter den tidligere reguleringskvaliteten.
+
+\vfil
 
 \underbar{file i01643}
+\eject
 %(END_QUESTION)
 
 
@@ -18,16 +24,7 @@ Spesielt, hvilken type ligning gjør at alle tre virkemåtene (P, I, D) påvirke
 
 %(BEGIN_ANSWER)
 
-Ideell (ISA) ligning:
-$$m = K_p ( e + \frac{1}{\tau_i} \int e dt + \tau_d \frac{de}{dt} )$$
-Her påvirker $K_p$ (Gain) alle tre leddene. Dette er den mest vanlige formen.
-
-Serie (Interacting) ligning:
-Matematisk lik Ideell, men derivat- og integralleddene interagerer på en slik måte at endring i den ene påvirker den effektive verdien av den andre.
-
-Parallell (Independent) ligning:
-$$m = K_p e + K_i \int e dt + K_d \frac{de}{dt}$$
-Her er $K_p$, $K_i$ og $K_d$ helt uavhengige. Endring i $K_p$ påvirker kun P-leddet.
+Dette er et vurdert spørsmål -- ingen svar eller hint er gitt!
 
 %(END_ANSWER)
 
@@ -37,9 +34,19 @@ Her er $K_p$, $K_i$ og $K_d$ helt uavhengige. Endring i $K_p$ påvirker kun P-le
 
 %(BEGIN_NOTES)
 
-Diskusjonen om PID-ligninger er viktig fordi forskjellige regulatorprodusenter bruker forskjellige ligninger. Hvis man tar tuning-verdier fra en regulator (f.eks. Allen-Bradley som ofte bruker Ideell) og taster dem inn i en annen (f.eks. en som bruker Parallell), vil resultatet bli helt feil.
+Områdeendringen økte prosessforsterkningen effektivt med faktor fem. Med et transmitterområde som er 5 ganger smalere (nytt spenn er 20$^{o}$ F, fra gammelt spenn på 100$^{o}$ F), vil regulatoren se et prosessvariabelsignal (PV) som er 5 ganger mer følsomt for endringer i prosesstemperaturen enn før. For å hindre at regulatoren overreagerer på PV-endringer, må regulatorens aggressivitet reduseres tilsvarende med en faktor på 5.
+
+\vskip 10pt
+
+Når forsterkningen i en reguleringssløyfe endres som følge av endret transmitterspenn, endret ventil-C$_{v}$, eller et annet forsterkningsendrende forhold i prosessen, må {\it alle} regulatorledd endres omvendt (P, I {\it og} D), ikke bare ``P''-leddet.
+
+En regulator som bruker enten {\it ideal}- eller {\it serie}-ligningen vil være enklere å stille inn på nytt ved endringer i total sløyfeforsterkning enn en regulator basert på {\it parallell}-ligningen, fordi én innstillingskonstant (K$_{c}$) påvirker alle tre reguleringsleddene proporsjonalt. Med {\it parallell}-ligningen må alle tre innstillingskonstanter justeres for å oppnå samme reguleringskvalitet som før.
+
+Det er ingen forskjell i hvor enkelt det er å stille inn på nytt mellom {\it ideal}- og {\it serie}-ligningen i et scenario som dette.
 
 %INDEX% Control, proportional + integral + derivative: ideal (ISA) equation
 %INDEX% Control, proportional + integral + derivative: parallel equation
+%INDEX% Control, proportional + integral + derivative: series equation
+%INDEX% Process: heat exchanger temperature control (generic)
 
 %(END_NOTES)

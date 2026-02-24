@@ -1,0 +1,75 @@
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Se på dette reguleringssystemet, satt opp for å holde temperaturen i en kjemisk reaktortank på en konstant settpunktverdi. Reaktoren varmes av en dampkappe, der varm damp slippes inn gjennom en motorstyrt (M) reguleringsventil (TV), basert på temperaturen i reaktoren målt av temperatursenderen (TT):
+
+$$\includegraphics[width=15.5cm]{i00138x01.eps}$$
+
+Du kommer på jobb og finner en opprørt operatør. Siste batch var utenfor spesifikasjon, og temperaturen i visningsregulatoren (TIC) viser 197 $^{o}$F. Settpunktet er 175 $^{o}$F, og regulatoren står i automatisk modus som den skal.
+
+Første steg er å se på regulatorens utgangsvisning til den motorstyrte dampventilen (TV). Denne visningen («manipulert variabel») viser 0 \%, som betyr «ventil helt lukket».
+
+Deretter sjekker du temperaturen på temperaturindikatoren (TI) ved temperatursenderen (TT) på reaktoren. Der ser du 195 $^{o}$F.
+
+Basert på denne informasjonen, bestem mest sannsynlig feilkilde og forklar hvordan du kom fram til konklusjonen.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hvorfor er det viktig å vite at regulatoren står i automatisk modus? Ville det gjort forskjell om den sto i manuell modus?
+\item{} Forklar hvorfor de to første diagnostiske stegene var å sjekke regulatorutgangen og deretter TI ved reaktoren. Hva forteller disse sjekkene om problemets natur?
+\item{} En kollega foreslår at problemet kan være feil regulatorvirkning (f.eks. direkte i stedet for revers). Er dette en plausibel forklaring på symptomene her? Hvorfor/hvorfor ikke?
+\end{itemize}
+
+\underbar{file i00138}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Problemet ligger mest sannsynlig i ventilen (TV).
+
+\vskip 10pt
+
+Ut fra dataene (temperaturmåler, regulatorvisning og operatørvurdering) vet vi at prosesstemperaturen er for høy. Vi vet også at regulatoren gjør jobben sin ved å sende 0\% utgang for å stenge dampventilen og kjøle prosessen.
+
+Et viktig poeng er at regulatorens utgangsvisning (MV) bare viser signalet regulatoren {\it sender}, ikke nødvendigvis den {\it faktiske} tilstanden til sluttelementet. At regulatoren sender 0\% til ventilen betyr ikke nødvendigvis at ventilen faktisk er lukket. Ventilen kan ha satt seg fast åpen og slippe inn for mye damp til varmekappen.
+
+En annen mulighet er feil i regulatorens utgangssignal. Hvis DAC-en (digital-til-analog-omformer) har feilet slik at utgangsstrømmen blir feilaktig høy, kan det gi samme symptom som en ventil som står fast åpen. Strømtap til motorventilen er også en mulig feil, som gjør at ventilen blir stående i én stilling og ikke følger regulatorutgangen.
+
+En tredje mulighet er en manuell bypassventil rundt reguleringsventilen i damprøret, som har blitt stående åpen. Slike bypassventiler brukes når reguleringsventilen må tas ut av drift. Hvis bypass står åpen, kan reaktoren få for mye damp uten at automatikken kan stenge den.
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtuell feilsøking} \vrule} \hrule}
+
+Dette spørsmålet egner seg godt som en «virtuell feilsøking»-øvelse. Når du presenterer diagrammet for studentene, ser du først for deg en bestemt feil i systemet. Deretter presenterer du ett eller flere symptomer på feilen (noe en operatør eller annen bruker kan observere). Studentene foreslår så diagnostiske tester for å finne feiltype og feilsted, som om de var teknikere i feilsøking. Din jobb er å oppgi hvilke resultater disse testene ville gitt, og dokumentere resultatene synlig for alle studentene.
+
+Under og etter øvelsen er det nyttig å stille oppfølgingsspørsmål som:
+
+\begin{itemize}
+\item{} Hva forteller resultatet av siste diagnostiske test om feilen?
+\item{} Anta at resultatet av siste test var annerledes. Hva ville det da fortalt om feilen?
+\item{} Er siste diagnostiske test den beste vi kunne gjort?
+\item{} Hva ville vært ideell testrekkefølge for å finne feilen i færrest mulig steg?
+\end{itemize}
+
+%INDEX% Basics, control loop troubleshooting: determining cause of control problem
+%INDEX% Process: steam-heated reactor vessel (generic)
+
+%(END_NOTES)

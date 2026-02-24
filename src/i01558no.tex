@@ -1,0 +1,737 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+\noindent
+{\bf Laboratorieøvelse}
+
+\vskip 5pt
+
+Oppgaven din er å bygge, dokumentere og kjøre en prosess som reguleres av en registrerende PID-regulator. Flere alternative prosesstyper finnes og er dokumentert på de neste sidene. Den fungerende prosessen dere bygger vil bli brukt i senere laboratorieøvelser dette kvartalet for å oppnå andre læringsmål, noe som betyr at dere {\it ikke} skal demontere dette prosjektet når disse læringsmålene er fullført, slik dere normalt ville gjort.
+
+Tabellen nedenfor viser hvilke mål du og teamet ditt må fullføre innen den planlagte tiden for denne laboratorieøvelsen. Merk at noen av målene er individuelle, mens andre gjelder hele teamet:
+
+\underbar{Tabell for måloppnåelse:}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Ferdighetsmål} & {\bf Vurdering} & {\bf 1} & {\bf 2} & {\bf 3} & {\bf 4} & {\bf Team} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Velg prosess som skal bygges & mestring & -- & -- & -- & -- & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Teammøte og prototypeskisse & mestring & -- & -- & -- & -- & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Kretsdesign-utfordring & mestring & & & & & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Endelig sløyfediagram og systeminspeksjon & mestring & & & & & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Prosess- og instrumentdiagram (P\&ID) & mestring & & & & & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Trendgraf viser PV og utgang & mestring & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Prosessen viser god reguleringsoppførsel & mestring & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PV-alarm(er) definert og aktivert & mestring & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Labspørsmål: Instrumenttilkoblinger & proporsjonal &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Labspørsmål: Idriftsetting & proporsjonal &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Labspørsmål: Hoderegning & proporsjonal &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Labspørsmål: Diagnostikk & proporsjonal &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+Den eneste ``proporsjonale'' poengsettingen i denne aktiviteten er labspørsmålene, som besvares individuelt av hver student. En liste over mulige labspørsmål vises på slutten av denne oppgaven. Labspørsmålene er ment å styre laboratoriearbeidet like mye som de er ment å måle forståelsen din, og derfor kan instruktøren stille disse spørsmålene til teamet dag for dag i stedet for alle på én gang (på én enkelt dag).
+
+\vskip 10pt
+
+{\bf Det er avgjørende at teamet planlegger på forhånd hva som skal gjennomføres hver dag. Et kort (10 minutter) teammøte i starten av hver labsesjon er en god måte å gjøre dette på, ved å gå gjennom hva som allerede er gjort, hva som gjenstår, og hvilke vurderinger dere bør være klare for. Det er mye arbeid med å bygge, dokumentere og feilsøke fungerende instrumentsystemer!}
+
+Mens du og teamet arbeider med dette systemet, vil dere uunngåelig møte problemer. Dere bør alltid forsøke å løse disse problemene som team før dere ber om hjelp fra instruktør. Hvis dere fortsatt trenger hjelp, skriv teamfargen deres på labtavlen sammen med en kort beskrivelse av hva dere trenger hjelp til. Instruktøren møter hvert team i den rekkefølgen de står på tavlen, for å håndtere problemene.
+
+$$\includegraphics[width=15.5cm]{i01558x01.eps}$$
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Laboratorieøvelse -- velge en prosess å bygge}
+
+\vskip 5pt
+
+Det finnes flere prosesstyper å velge mellom når dere skal velge hva teamet skal bygge. De eneste ikke-forhandlingsbare begrensningene er at prosessen må være sikker, lovlig og mulig å fullføre innen tiden som er satt av til denne laboratorieøvelsen. Her følger noen eksempler:
+
+$$\includegraphics[width=15.5cm]{i01558x02.eps}$$
+
+$$\includegraphics[width=15.5cm]{i01558x03.eps}$$
+
+\filbreak
+
+$$\includegraphics[width=15.5cm]{i01558x04.eps}$$
+
+$$\includegraphics[width=15.5cm]{i01558x05.eps}$$
+
+\filbreak
+
+$$\includegraphics[width=15.5cm]{i01558x06.eps}$$
+
+$$\includegraphics[width=15.5cm]{i01558x07.eps}$$
+
+\noindent
+Andre prosessideer inkluderer:
+
+\begin{itemize}
+\item{} Temperaturregulering av loddebolt (blåse luft over spissen med vifte med variabel hastighet).
+\vskip 10pt
+\item{} Trekksregulering (regulering av svært lavt lufttrykk inne i en boks).
+\vskip 10pt
+\item{} Høyderegulering av pneumatisk stempel (bruk lengder av PVC-rør for å bygge en enkel stempel/sylinder som kan løfte små vekter med moderate lufttrykk). En god måte å regulere lufttrykket til stempelet på er å føre utgangen fra I/P-transduseren til et {\it volume booster}-relé og la reléutgangen drive stempelet direkte. Stempelhøyde kan måles med et fleksibelt vannrør festet til stempelstangen, ført til en stasjonær trykktransmitter.
+\vskip 10pt
+\item{} Luftvarmeveksler fyrt med Sterno.
+\vskip 10pt
+\item{} Miniatyr-dampkjele. {\it Merk: dette er et avansert prosjekt!}
+\vskip 10pt
+\item{} Brennerregulering av luft/drivstoff-forhold. {\it Merk: dette er et avansert prosjekt!}
+\vskip 10pt
+\item{} Posisjonsregulering av servomekanisme. {\it Merk: dette er et avansert prosjekt!}
+\vskip 10pt
+\item{} Balansering av omvendt pendel. {\it Merk: dette er et \underbar{svært} avansert prosjekt!}
+\end{itemize}
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Laboratorieøvelse -- teammøte, prototypeskisse og valg av instrumenter}
+
+\vskip 5pt
+
+Et viktig første steg for å fullføre denne laboratorieøvelsen er å {\bf møte instruktøren} som team for å diskutere sikkerhet, teamytelse og spesifikke roller for teammedlemmene. Hvis dere ønsker å legge vekt på eksponering for bestemt utstyr (f.eks. bruke en bestemt type reguleringssystem, bestemte elektroverktøy), teknikker (f.eks. fabrikasjon) eller oppgaver for å forbedre ferdighetssettet deres, er dette tidspunktet for å be teamet om det, slik at læringsutbyttet av prosjektet maksimeres.
+
+\vskip 10pt
+
+Et helt avgjørende steg for å fullføre denne laboratorieøvelsen er å samarbeide som team om å {\bf skissere et prototypediagram} som viser hva dere har tenkt å bygge. Dette tar vanligvis form av et enkelt elektrisk skjema og/eller sløyfediagram som viser alle elektriske forbindelser mellom komponenter, samt eventuell tubing eller rørføring for væsker. Prototypeskissen trenger ikke være uttømmende i detalj, men den må vise nok detalj til at instruktøren kan avgjøre om alle komponenter blir korrekt tilkoblet for sikker funksjon.
+
+For eksempel: Hvis dere planlegger å koble feltenheter til en PLC (Programmable Logic Controller), må prototypeskissen vise hvordan enhetene kobles til typiske inn-/utgangsterminaler på PLC-en, hvor elektrisk forsyning kommer inn, osv. Prototypeskisser trenger ikke vise alle mellomliggende forbindelser mellom komponenter, som terminalblokker i koblingsbokser mellom feltenheten og regulatoren.
+
+Dere bør bruke gode problemløsningsteknikker når dere lager prototypeskissen, som å konsultere utstyrsmanualer for informasjon om komponentfunksjoner og markere strømretninger, spenningspolariteter og identifisere elektriske kilder/laster. Bruk denne oppgaven som en mulighet til å styrke analytiske ferdigheter! Husk at dere i dette programmet blir utfordret til å gjøre alt dette på egen hånd (under ``capstone''-vurderinger), så ikke gjør feilen å stole på at teamkamerater løser dette for deg -- behandle det i stedet som et problem {\it du} må løse, og sammenlign resultatene med teamkameratenes.
+
+Teamets prototypeskisse er så viktig at instruktøren vil kreve at planen foreligger før bygging av teamets fungerende system starter. {\it Team som bygger systemet uten verifisert plan, vil bli beordret til å stoppe bygging og ikke starte igjen før en prototypeplan er utarbeidet og godkjent!} Tilsvarende bør dere ikke avvike fra prototypedesignet uten godkjenning fra instruktør, for å sikre at utstyr ikke skades av feil tilkoblinger. Hvert teammedlem skal ha enkel tilgang til denne planen (helst egen kopi) gjennom hele byggeprosessen. Prototypeskissing er en ferdighet og en vane dere bør utvikle på skolen og ta med videre i karrieren.
+
+\vskip 10pt
+
+Når dere velger feltinstrumenter til denne laboratorieøvelsen, velg en {\it transmitter} som passer til å måle prosessvariabelen, og sannsynligvis en {\it I/P-konverter} som brukes for å konvertere regulatorens 4-20 mA utgangssignal til et lufttrykk som en reguleringsventil kan operere med. Elektroniske prosessregulatorer finnes flere steder i laben, klare til bruk for prosessregulering. Instruktøren vil hjelpe dere å velge passende instrumenter til prosessen dere har valgt.
+
+Dere kan også trenge en {\it data acquisition unit}, eller {\it DAQ}, som trendregistrator. Brukt sammen med en PC og korrekt tilkoblet sløyfekretsen, vil en DAQ gi grafiske visninger av sløyfevariabler over tid. Studenter opplever ofte tilkobling av DAQ til sløyferegulatoren som den vanskeligste delen av sløyfeopplegget. Dere må konsultere produsentdokumentasjonen for DAQ-enheten samt feltinstrumenter og regulator for å finne ut hvordan alt skal kobles sammen. Selv om prosessregulatoren allerede har trendfunksjon, kan det være nyttig å koble til DAQ fordi evnen til raskt å koble opp og bruke DAQ-maskinvare/programvare for å overvåke elektriske parametere i et system er en verdifull diagnostisk ferdighet i dette yrket.
+
+Dere vil oppleve at teamkamerater som allerede har tatt måleserien (INST24X) er svært nyttige for å vise hvordan måleinstrumentene dere trenger kan sjekkes, konfigureres, kalibreres og installeres.
+
+\vskip 10pt
+
+{\bf Planlegging av et fungerende system bør ikke ta mer enn en time dersom teamet arbeider effektivt, og vil spare dere for mange timer frustrasjon (og mulig ødeleggelse av komponenter!).}
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Laboratorieøvelse -- kretsdesignutfordring}
+
+\vskip 5pt
+
+Instruktøren velger ett 4-20 mA feltinstrument og ett reguleringssystem fra listene nedenfor, og dere må skissere et korrekt kretsdiagram som viser hvordan de to instrumentene kobles sammen. Dersom sammenkoblingen mellom regulator og feltinstrument krever ekstra elektriske komponenter for å fungere (f.eks. DC- eller AC-kilde, presis 250 $\Omega$ motstand, diode, relé, osv.), må disse også inkluderes i diagrammet. Manualer for alt instrumentutstyr i listen finnes i den elektroniske Instrumentation Reference. Når skissen er ferdig, må dere vise relevante manualsider til instruktøren for verifikasjon av korrekte tilkoblinger.
+
+Øvelsen tester evnen til å finne relevant informasjon i tekniske manualer og designe en korrekt 4-20 mA analog signalkrets for et gitt instrumentpar. Den elektroniske Instrumentation Reference er tilgjengelig for å besvare dette.
+
+\vskip 10pt
+
+Siden alle 4-20 mA ``sløyfer'' i utgangspunktet er seriekoblede DC-kretser, anbefales det sterkt at dere angriper designet som enhver annen DC-krets: identifiser nøye alle {\it kilder} og {\it laster} i kretsen, spor retning for all strøm, og marker polaritet for alle spenninger. De fleste feil i denne typen kretsdesignutfordring kan rettes ved nøye vurdering av disse kretsanalysedetaljene.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vskip 10pt
+\filbreak
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=5in \raggedright
+
+\noindent \centerline{\bf 4-20 mA transmitteralternativer}
+\begin{itemize}
+\item{} Trykk
+
+	\begin{itemize}
+	\item{} Yokogawa DPharp EJX110A eller EJX910
+	\item{} Honeywell ST3000
+	\end{itemize}
+\vskip 2pt
+\item{} Nivå
+\vskip 2pt
+
+\item{} Temperatur
+		\begin{itemize}
+		\item{} Foxboro RTT15 eller RTT30
+		\item{} Moore Industries SPT med sourcing (4-leder) 4-20 mA utgang
+		\item{} Moore Industries SPT med sinking (2-leder) 4-20 mA utgang
+		\item{} Moore Industries TRX eller TDY
+		%\item{} Honeywell STT173
+		\end{itemize}
+\vskip 2pt
+\item{} Strømning
+
+\vskip 2pt
+\item{} Analytisk
+	\begin{itemize}
+	\item{} Daniel 700 gasskromatograf (4 analoge utgangskanaler)
+	\item{} Foxboro 876PH (pH/ORP/ISE)
+	\end{itemize}
+\end{itemize}
+
+} \hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vskip 10pt
+\filbreak
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=5in \raggedright
+
+\noindent \centerline{\bf Regulatoralternativer}
+\begin{itemize}
+\item{} Monolittisk
+
+\begin{itemize}
+	\item{} Siemens 353
+	\item{} Foxboro 716C
+	\item{} Foxboro 718TC
+	\item{} Foxboro 762CNA
+	\item{} Moore Industries 535
+	\item{} Honeywell UDC2300
+	\item{} Honeywell UDC3500
+\end{itemize}
+\vskip 2pt
+\item{} Modulær -- {\it du velger passende I/O-modul}
+\begin{itemize}
+
+	\item{} Emerson ROC800 SCADA/RTU
+\end{itemize}
+\vskip 2pt
+\item{} Distribuert kontrollsystem (DCS) -- {\it du velger passende I/O-modul}
+\begin{itemize}
+
+	\item{} Emerson DeltaV med S-series I/O
+	\item{} Honeywell Experion med 2MLF-serie I/O
+\end{itemize}
+\vskip 2pt
+\item{} Programmerbar logisk styring (PLC) -- {\it du velger passende I/O-modul}
+\begin{itemize}
+
+	\item{} Rockwell ControlLogix (katalognummer 1756)
+	\item{} Rockwell CompactLogix (katalognummer 1769)
+\end{itemize}
+
+\end{itemize}
+
+} \hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vskip 10pt
+\filbreak
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=5in \raggedright
+
+\noindent \centerline{\bf 4-20 mA sluttregulerende elementer}
+\begin{itemize}
+\item{} Pneumatiske reguleringsventilposisjonerere
+\begin{itemize}
+
+\item{} Fisher DVC6000 posisjonerer
+\end{itemize}
+\vskip 2pt
+\item{} Elektrisk aktuert ventiler (MOV)
+\begin{itemize}
+
+\item{} Rotork AQ med Folomatic-regulator
+\end{itemize}
+\vskip 2pt
+\item{} AC-motordrifter (VFD)
+\begin{itemize}
+
+\item{} Automation Direct GS1
+\end{itemize}
+\end{itemize}
+
+} \hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\vfil
+
+Studiehenvisning: kapitlet ``Analog Electronic Instrumentation'' i {\it Lessons In Industrial Instrumentation}, spesielt seksjonen om HART.
+
+\vskip 10pt
+
+Merk: en svært effektiv problemløsningsstrategi for å finne ut hvordan ulike komponenter kobles sammen til en fungerende 4-20 mA strømsløyfe, er først å identifisere om hver komponent opptrer som {\it kilde} eller {\it last} i sløyfekretsen. Deretter merk spenningspolariteter (+ , $-$) og strømretninger tilsvarende. Å vite hvilken vei strømmen må gå gjennom hver komponent og hvilken polaritet hver spenning må ha, er nøkkelen til korrekte sammenkoblinger.
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Laboratorieøvelse -- bygge systemet}
+
+\vskip 5pt
+
+Instrumenteringslaboratoriet er satt opp for å lette bygging av fungerende instrumentsløyfer, med over et dusin koblingsbokser, ferdigtrukne signalkabler og ``rack'' med 2-tommers vertikale rør for montering av instrumenter. Disse rackene gir også struktur for bygging av fysiske prosesser, med mer enn nok bæreevne til å holde prosesstanker og utstyr. De eneste ledningene dere bør trenge å legge for å bygge et fungerende system er de som kobler feltinstrumentet til nærmeste koblingsboks, samt korte ``jumper''-kabler som kobler sammen ulike forhåndsinstallerte kabler i mellomliggende koblingsbokser.
+
+Etter at prototypeskissen er godkjent av instruktør, kan dere begynne å bygge systemet. Instrumenter festes til 2-tommers rør med spesialbraketter og U-bolter. Disse finnes i instrumentlageret.
+
+Velg en konkret sløyferegulator for systemet. Instruktøren kan velge regulatoren for teamet, for å sikre at dere lærer mer enn én type regulator i løpet av kvartalet.
+
+Til slutt må prosessreguleringssystemet ha et sløyfenummer, slik at alle instrumenter kan merkes korrekt. Sløyfenummeret må være unikt, slik at et annet team ikke merker instrumenter og kabler likt deres. En måte å gjøre sløyfenummeret unikt på er å bruke tilsvarende motstandsfargekodeverdi for teamfargen i sløyfenummeret. For eksempel: hvis dere er ``rødt'' team, kan sløyfenummeret være ``2''.
+
+\vskip 10pt
+
+{\bf Vanlige feil:}
+
+\begin{itemize}
+\item{} Å unnlate å konsultere produsentdokumentasjon for feltinstrumenter (f.eks. hvordan de kobles og kalibreres).
+\item{} Å montere feltinstrument(er) i uheldige posisjoner, slik at det blir vanskelig å nå tilkoblingsterminaler eller fjerne deksler.
+\item{} Feil montering av rør-/tubingfittings (f.eks. prøve å gjenge tubingfittings inn i rørfittings og omvendt).
+\item{} Å ikke dra i hver eneste leder ved terminering for å sikre mekanisk god forbindelse.
+\item{} At studenter arbeider isolert på hver sin del av systemet og ikke deler med teamet hva de gjorde og hvordan. Det er viktig at hele teamet lærer alle deler av systemet!
+\end{itemize}
+
+\vskip 10pt
+
+{\bf Å bygge en fungerende prosess med komplett instrumentering for regulering tar vanligvis én eller to sesjoner (3 timer hver) hvis alle komponenter er tilgjengelige og teamet arbeider effektivt!}
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Laboratorieøvelse -- dokumentere systemet}
+
+\vskip 5pt
+
+Hver student må lage sitt eget {\it sløyfediagram} og sitt eget {\it P\&ID} for teamets system, etter korrekte ISA-konvensjoner. P\&ID dokumenterer strøm av væsker/materialer i prosessen samt overordnet reguleringsstrategi. Sløyfediagrammet dokumenterer alle lednings- og tubeforbindelser mellom instrumenter. Selv om de to diagrammene forsterker hverandre og i teorien kan kombineres, er industristandard å bruke to separate diagrammer.
+
+Eksempel på sløyfediagrammer vises i neste oppgave i dette arket. Sløyfediagrammene må være {\it fullstendige} og {\it detaljerte}, og vise hver ledningsforbindelse, hver kabel, hver terminalblokk, måleområdepunkter osv. Prinsippet her er å gjøre sløyfediagrammet så komplett og entydig at hvem som helst kan følge det for å se hva som er koblet til hva, også personer uten erfaring med industriell instrumentering. I industrien bygges sløyfer ofte av kontraktpersonell med begrenset forståelse av hvordan systemet skal fungere. Sløyfediagrammene de følger må derfor være så komplette at alt kan kobles riktig uten at de nødvendigvis forstår funksjonen.
+
+Hvert instrument og hver signalkabel i sløyfen må merkes korrekt med ISA-standard tagnummer. En enkel måte er å legge en kort bit maskeringstape rundt hver kabel (og på hvert instrument) og skrive på tapen med permanent tusj. Selv om det ikke finnes en egen industristandard for merking av signalkabler, er en god anbefaling å merke hver tolederkabel med tagnummeret til feltinstrumentet den går til. Dermed bør alle tolederkabler i en trykktransmitterkrets merkes ``PT-$x$'' (der ``$x$'' er sløyfenummer), hver strømningsreguleringsventil merkes ``FV-$x$'', osv. Husk at hele sløyfen defineres av prosessvariabelen den måler: hvis PV er {\it temperatur}, blir transmitteren en {\it T}T, reguleringsventilen en {\it T}V, regulatoren en {\it T}C, osv.
+
+Når hele teamet er ferdig med individuelle sløyfediagrammer, tilkall instruktør for inspeksjon av sløyfen. Her vil instruktøren la studenter gå gjennom hele sløyfen etter tur, mens de andre studentene sjekker diagrammene sine for feil og utelatelser underveis. Samtidig inspiserer instruktøren kvaliteten på installasjonen, og identifiserer problemer som frynsete ledere, dårlig krympede terminaler, dårlig kabelføring, manglende merking, manglende deksler på ledningskanaler osv. Teamet må korrigere alle identifiserte feil for å få godkjenning.
+
+Etter bestått inspeksjon må hvert teammedlem legge sløyfediagrammet i diagramboksen i midten av laben bak hovedkontrollpanelet. Når det er tid for å feilsøke et annet teams system, er dette stedet dere finner sløyfediagrammet for det systemet.
+
+P\&ID-ene leveres også til instruktør for inspeksjon, men selve prosessen trenger ikke inspiseres på nytt.
+
+\vskip 10pt
+
+{\bf Vanlige feil:}
+
+\begin{itemize}
+\item{} Å glemme å merke alle signalledere (se eksempler på sløyfediagram).
+\item{} Å glemme å merke alle feltinstrumenter med egne tag-navn (f.eks. PT-83).
+\item{} Å glemme å notere alle lederfarger.
+\item{} Å glemme navn på sløyfediagrammet.
+\item{} Å bruke ikke-standard instrumenttagger i stedet for ISA 5.1-standard.
+\item{} Å basere diagrammet på en teamkamerats diagram, i stedet for å inspisere systemet nøye selv.
+\item{} Å ikke plassere sløyfearkinstrumenter i korrekt orientering (feltinstrumenter til venstre, kontrollromsinstrumenter til høyre).
+\end{itemize}
+
+\vskip 10pt
+
+{\bf Å lage og inspisere korrekte sløyfediagrammer bør ikke ta mer enn én full labsesjon (3 timer) hvis teamet arbeider effektivt! Å lage og inspisere korrekte P\&ID-er vil ta mer tid, men ikke en hel labsesjon (3 timer).}
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Laboratorieøvelse -- kjøre systemet}
+
+\vskip 5pt
+
+Alle nettverkstilkoblede sløyferegulatorer i laben (DCS, DDC, PLC, enkelt-sløyfe nettverk) har grafikkfunksjon slik at dere kan plotte prosessvariabel (PV) og utgangsverdier over tid. Disse grafiske dataene er essensielle for tuning av PID-sløyfer. Hvis dere bruker en regulator uten grafikkfunksjon, må teamet koble til trendregistrator og/eller DAQ-enhet (pluss PC) til nødvendige signalkabler slik at disse verdiene registreres over tid.
+
+PID-tuning er et tema som fortjener eget kurs, og dere forventes derfor ikke å oppnå perfekt regulering av prosessen. Dere vil likevel oppdage at en av de beste måtene å lære PID-tuning på er å ``leke'' med prosessen mens den responderer på ulike tuningparametere som legges inn i sløyferegulatoren. Forventningen til ``god reguleringsoppførsel'' i denne laboratorieøvelsen er at sløyfen viser respons som ikke er mindre stabil etter store settpunktendringer enn klassisk ``quarter-wave damping'' beskrevet av Ziegler og Nichols i 1942-artikkelen.
+
+\vskip 10pt
+
+De fleste studentbygde prosesser er ganske trygge å kjøre. Men dersom prosessen deres har spesielle farer (f.eks. overløp av vann som gir sklifare, overopphetet ovn som får materialer til å ryke eller brenne), må dere være bevisste disse farene og begrense alles eksponering for dem. Alle teammedlemmer må kjenne til de iboende farene i prosessen og hvordan de reduseres. Et driftsgrep for å unngå problemer er å konfigurere regulatoren med {\it settpunktgrenser} som hindrer at settpunkt settes til ``farlige'' verdier i automatisk modus. Hvilke grenseverdier som er riktige varierer med prosess og teamets erfaring.
+
+Etter hvert som dere får mer tid med prosessen, vil dere sannsynligvis få ideer til forbedringer. Jobb gjerne videre med teamet for å optimalisere prosessen slik dere finner hensiktsmessig. Målet er at prosessen skal være så robust og ``problemfri'' som mulig for andre team som skal bruke den senere.
+
+\vskip 10pt
+
+Når prosessen er bygget og tunet, bør dere identifisere og konfigurere alarmverdier for regulatorens PV-visning. De fleste regulatorer har innebygde PV-alarmer som signaliserer for høy eller for lav PV hvis alarmpunktene utløses. Dere må sette minst en høyalarm på PV slik at når andre team kommer etter dere for å tune prosessen, har de en ``rettesnor'' for hvilke PV-verdier de ikke bør overskride! Har teamet tid, koble gjerne til en faktisk alarmindikator (lampe og/eller summer) til reguleringssystemet som slår inn (og låser) ved alarm.
+
+En tendens hos studenter som nylig har begynt med PID-tuning er å jobbe uforsiktig fordi de vet at ``leketøysprosessene'' de trener på ikke skader noe om PV går utenfor grenser. Selv om dette kan være sant for deres prosess, er det en dårlig vane å utvikle eller forsterke. Derfor gjør inkludering av alarmpunkt(er) på prosess-PV -- spesielt hvis koblet til et signal som er irriterende og/eller pinlig å utløse som en høy summer -- prosessen til et bedre undervisningsverktøy for andre som skal lære PID-tuning!
+
+
+\vfil \eject
+
+\centerline{\bf Feilsøking av PID-regulerte prosesser}
+
+\vskip 10pt
+
+Det er ganske sannsynlig at problemer oppstår under testing og drift av reguleringssløyfen. Følgende råd gis for å hjelpe diagnostikken, slik at dere raskt kan identifisere hvilken del av sløyfen som kan være feil.
+
+\vskip 10pt
+
+Husk at hver tilbakekoblet reguleringssløyfe består av fire grunnleggende elementer: et element som {\it registrerer} prosessvariabelen (f.eks. primærsensor, transmitter), et element som {\it bestemmer} hvordan prosessvariabelen skal reguleres (f.eks. PID-regulator), et element som {\it påvirker} prosessvariabelen (f.eks. reguleringsventil, motordrift eller annet sluttregulerende element), og til slutt selve prosessen som {\it reagerer} på sluttregulerende element:
+
+$$ \includegraphics[width=15.5cm]{i01558x09.eps}$$
+
+\noindent
+Du kan sjekke hvert element i tilbakekoblingssløyfen ved å sammenligne inngang med utgang for å se om elementet gjør det det skal:
+
+\begin{itemize}
+\item{$(1)$} \underbar{\bf Beslutning:} Undersøk regulatorens front nøye, se på verdiene PV, SP og Output. Tar regulatoren hensiktsmessig virkning for å få PV lik SP? Med andre ord: er Output-signalet på en verdi du forventer dersom regulatoren fungerer riktig for å regulere prosessvariabelen til settpunkt? Hvis ja, er regulatorvirkning og tuning sannsynligvis ikke feilkilden. Hvis nei, ligger problemet definitivt i regulatoren.
+\item{$(2)$} \underbar{\bf Måling:} Sammenlign regulatorens viste PV med faktisk prosessvariabelverdi indikert av lokale manometre, føling eller andre deteksjonsmåter. Hvis det er god samsvar mellom PV-visning og faktisk prosessvariabel, er det sannsynligvis ikke feil i måledelen av sløyfen (f.eks. transmitter, impulslinjer, PV-signalledninger, analog inngang i regulator, osv.). Hvis vist PV avviker fra faktisk verdi, er noe definitivt galt her.
+\item{$(3)$} \underbar{\bf Påvirkning:} Sammenlign regulatorens viste Output-verdi med faktisk status på sluttregulerende element. Hvis det er god samsvar mellom Output-visning og FCE-status, er det sannsynligvis ikke feil i utgangsdelen av sløyfen (f.eks. FCE, utgangssignalledninger, analog utgang i regulator, osv.). Hvis Output-verdi avviker fra FCE-tilstand, er noe definitivt galt her.
+\item{$(4)$} \underbar{\bf Reaksjon:} Sammenlign prosessvariabelverdien med tilstanden til sluttregulerende element. Gjør prosessen det du forventer? Hvis ja, ligger feilen sannsynligvis ikke i prosessen (f.eks. manuelle ventiler, sikkerhetsventiler, pumper, kompressorer, motorer og annet prosessutstyr). Hvis prosessen ikke reagerer som forventet gitt FCE-tilstand, er noe definitivt galt i selve prosessen.
+\end{itemize}
+
+
+
+
+\vfil \eject
+
+\centerline{\bf En enkel lukket-sløyfe PID-tuningprosedyre}
+
+\vskip 10pt
+
+Å tune en PID-regulator er i stor grad et håndverk, og kan virke ganske overveldende for nybegynnere. Det som følger er en primitiv (forenklet i noen situasjoner!) prosedyre som kan brukes på mange prosesser.
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 1}
+
+\underbar{Forstå prosessen du prøver å regulere.} Hvis du ikke har grunnleggende forståelse av prosessens natur, er det meningsløst -- og potensielt farlig -- å endre regulatorinnstillinger. Her er en enkel sjekkliste før du rører regulatoren:
+
+\begin{itemize}
+\item{} Hva er prosessvariabelen og hvordan måles den?
+\item{} Hva er sluttregulerende element, og hvordan påvirker det prosessvariabelen?
+\item{} Hvilke sikkerhetsfarer finnes i prosessen knyttet til regulering (f.eks. eksplosjonsfare, størkning, produksjon av farlige biprodukter, osv.)?
+\item{} Hvor mye kan jeg ``bumpe'' prosessen mens jeg tuner regulatoren og observerer responsen?
+\item{} Hvordan settes regulatoren i ``manuell'' modus, dersom jeg må ta over?
+\item{} Ved en farlig tilstand forårsaket av regulatoren, hvordan stenges prosessen ned?
+\end{itemize}
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 2}
+
+\underbar{Forstå hva regulatorinnstillingene gjør.} Er regulatoren konfigurert for gain eller proporsjonalbånd? Minutter per repetisjon eller repetisjoner per minutt? Bruker den reset windup-grenser? Reagerer rate på feil eller bare PV? Du bør forstå hva PID-verdiene gjør med regulatorvirkningen før du avgjør hvilken vei (og hvor mye) de skal justeres! I tiden med analoge elektroniske og pneumatiske regulatorer anbefalte jeg teknikere å tegne små piler ved hver justeringsknapp som viste retning for mer aggressiv virkning -- slik slapp de å blande gain vs PB, rep/min vs min/rep, osv.: alt de trengte å tenke på var ``mer'' eller ``mindre'' av hver virkemåte.
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 3}
+
+\underbar{``Bump'' den manipulerte variabelen (sluttregulerende element) manuelt for å lære hvordan prosessen responderer.} I manuell modus er {\it du} regulatoren! Det du må gjøre er å justere prosessen for å lære responsen: er dette en integrerende prosess, en selvregulerende prosess eller en runaway-prosess? Er det betydelig dødtid eller hysterese? Er responsen lineær og konsistent? Mange reguleringsproblemer skyldes andre forhold enn regulatoren, og denne ``manuelltest''-fasen er en nøkkelmetode for å vurdere slike forhold.
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 4}
+
+\underbar{Sett PID-konstanter til ``minimale'' verdier og bytt til automatisk modus.} Dette betyr gain mindre enn 1, ingen integralvirkning (0 rep/min eller maksimal min/rep), ingen deriverende virkning, og ingen filtrering (demping).
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 5}
+
+\underbar{``Bump'' settpunktet og observer regulatorresponsen.} Dette tester regulatorens evne til å håndtere prosessen på egen hånd. Du ønsker en respons som er rimelig rask uten for mye over- eller undersving, og uten unødig sykling. Prosessens natur og kravene til kvalitet avgjør hva som er ``for mye'' responstid, over-/undersving og sykling.
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 6}
+
+\underbar{Øk eller reduser aggressiviteten i reguleringsvirkningen i henhold til resultatene fra trinn 5.}
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 7}
+
+\underbar{Gjenta trinn 5 og 6 for P, I og D, én av gangen, i den rekkefølgen.} Med andre ord: tun regulatoren først som en P-regulator, legg deretter til integral (PI), og deretter derivat (PID), etter behov.
+
+\filbreak
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 8}
+
+\underbar{``Bump'' en last i prosessen og observer regulatorresponsen.} Dette tester regulatorens evne til å håndtere variasjoner i prosesslast over tid. Regulatorens respons på lastendringer vil ofte avvike fra responsen på settpunktendringer. Du ønsker fortsatt respons som er rimelig rask uten for mye over-/undersving og uten unødig sykling. Du må likevel ofte finne et kompromiss i tuning mellom god settpunktrespons og god lastrespons. Hvordan kompromisset velges avhenger av om regulatoren hovedsakelig må reagere på settpunktendringer (f.eks. slaveregulator i en kaskadesløyfe) eller på lastendringer.
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 9}
+
+\underbar{Øk eller reduser aggressiviteten i reguleringsvirkningen i henhold til resultatene fra trinn 8.}
+
+\vskip 10pt
+
+\noindent
+{\bf Trinn 10}
+
+\underbar{Gjenta trinn 8 og 9 for P, I og D, én av gangen, i den rekkefølgen.} Med andre ord: tun regulatoren først som en P-regulator, legg deretter til integral (PI), og deretter derivat (PID), etter behov.
+
+\vskip 10pt
+
+
+\centerline{\bf Forbehold}
+
+\vskip 10pt
+
+Prosedyren beskrevet her er {\it svært} grov, og bør bare brukes som studentens første møte med PID-tuning på en sikker ``demonstrasjons''prosess. Den forutsetter at prosessen i hovedsak responderer på proporsjonal (P-only) virkning, noe som ikke alltid stemmer. Den gir heller ingen spesifikke råd for tuning basert på resultatene i trinn 3, som er kjennetegnet på en erfaren PID-tuner. Med studier, praksis og tid vil du lære hvilke prosesstyper som responderer best på P-, I- og D-virkning, og da kan du velge klokere hvilke parametere som bør justeres og hvilke lukket-sløyfeoppførsler du skal se etter.
+
+\vskip 10pt
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labspørsmål}
+
+\vskip 5pt
+
+\begin{itemize}
+\item{} {\bf Instrumenttilkoblinger}
+\item{} Bestem korrekte ledningsforbindelser mellom instrumenter for å lage en fungerende 4-20 mA sløyfekrets, basert på instrumentdiagrammer med merkede terminaler
+\item{} Bestem korrekt alle elektriske kilder og laster, samt alle spenningspolariteter og strømretninger i en 4-20 mA sløyfekrets, basert på instrumentdiagrammer med merkede terminaler
+\end{itemize}
+
+\filbreak
+
+\begin{itemize}
+\item{} {\bf Idriftsetting og dokumentasjon}
+\item{} Identifiser og forklar forskjellen mellom {\it direkte} og {\it revers} regulatormodus i sløyferegulatoren
+\item{} Identifiser noen av hoved{\it lastene} i prosessen, og forklar hvordan de kan varieres mens prosessen kjører
+\item{} Beskriv hvordan en loop-kalibrator kobles til for å måle strømutgang fra en sløyfeforsynt (2-leder) transmitter
+\item{} Beskriv hvordan en loop-kalibrator kobles til for å måle strømutgang fra en regulator
+\item{} Beskriv hvordan en loop-kalibrator kobles til for å simulere strøm fra en sløyfeforsynt (2-leder) transmitter
+\item{} Beskriv hvordan en loop-kalibrator kobles til for å simulere strøm fra en selvforsynt (4-leder) transmitter
+\item{} Beskriv hvordan en loop-kalibrator kobles til for å stroke en reguleringsventil
+\end{itemize}
+
+\filbreak
+
+\begin{itemize}
+\item{} {\bf Hoderegning} (ingen kalkulator tillatt!)
+\item{} Konverter en proporsjonalbåndverdi til en gain-verdi, eller omvendt
+\item{} Konverter en integralverdi i repetisjoner/(minutt eller sekund) til (minutter eller sekunder)/repetisjon, eller omvendt
+\item{} Beregn pneumatisk trykk i et 3-15 PSI område som tilsvarer $x$ prosent.
+\item{} Beregn elektrisk strøm i et 4-20 mA område som tilsvarer $x$ prosent.
+\item{} Beregn elektrisk spenning i et 1-5 volt område som tilsvarer $x$ prosent.
+\item{} Beregn prosentverdien for et pneumatisk trykksignal $x$ PSI i et 3-15 PSI område.
+\item{} Beregn prosentverdien for et elektrisk strømsignal $x$ mA i et 4-20 mA område.
+\item{} Beregn prosentverdien for et elektrisk spenningssignal $x$ volt i et 1-5 volt område.
+\end{itemize}
+
+\filbreak
+
+\begin{itemize}
+\item{} {\bf Diagnostikk}
+\item{} Forklar hvordan man skiller en ``åpen'' kabelfeil fra en ``kortsluttet'' kabelfeil med kun voltmeter (uten strøm- eller motstandsmåling, men med forutsetning om at kretsen kan brytes for testen)
+\item{} Forklar hvordan ``manuell'' modus på en prosessregulator brukes som diagnostisk test for å sjekke problemer i et reguleringssystem
+\item{} Avgjør om en gitt diagnostisk test vil gi nyttig informasjon, gitt et sett symptomer i et feilet system
+\item{} Identifiser minst to plausible feil gitt resultat av en diagnostisk test og et sett symptomer i et feilet system
+\item{} Foreslå en diagnostisk test for feilsøking av et feilet system og forklar deretter betydningen av to ulike testresultater
+\end{itemize}
+
+
+
+\underbar{file i01558}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+\noindent
+{\bf Sløyfediagrammer / inspeksjoner:}
+
+Jeg anbefaler sterkt å kontrollere studentenes sløyfediagrammer samtidig som dere inspiserer selve sløyfen (sjekk av sikre ledningsforbindelser, korrekt tubing, god kanal-/conduit-installasjon, osv.). La alle teammedlemmer ta deg med på en ``runde'' i den ferdige sløyfen, der hvert medlem forklarer en valgt del av sløyfen ved bruk av eget sløyfediagram som veiledning. Mens en student forklarer sin del, kan du kontrollere de andre studentenes sløyfediagrammer for nøyaktighet. Dette sparer ikke bare tid ved å slå sammen oppgavene sløyfeinspeksjon og diagramverifikasjon, men sikrer også at studentene faktisk kan knytte sløyfediagrammet til sløyfen de har bygget og forklare denne forståelsen.
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labspørsmål}
+
+\vskip 20pt
+\begin{itemize}
+\item{$(1)$} Skisser ledningstilkoblinger slik at trykk på DP-transmitteren vises på amperemeteret:
+
+$$\includegraphics[width=15.5cm]{i01558x10.eps}$$
+
+\vskip 20pt
+
+\item{$(2)$} Skisser hvordan en loop-kalibrator kobles til for å {\it simulere} strøm fra TT-14 i denne kretsen:
+
+$$\includegraphics[width=15.5cm]{i01558x11.eps}$$
+
+\vskip 20pt
+
+\item{$(3)$} Beregn prosentverdien av et elektrisk signal på 2.3 volt i et 1-5 volt område.
+
+\vskip 20pt
+
+\item{$(4)$} Anta at regulatoren viser 103\% PV i denne prosessen, og operatørene får ikke endret dette selv når de setter regulatoren i manuell modus med $-5$\% utgang. Identifiser én mulig feil, samt én umulig feil, gitt disse symptomene. Vær spesifikk: både plassering (hvilken komponent) og feiltype (f.eks. åpen, kortsluttet, tilstoppet) for hver feil.
+
+$$\includegraphics[width=15.5cm]{i01558x08.eps}$$
+\end{itemize}
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labspørsmål}
+
+\vskip 20pt
+\begin{itemize}
+\item{$(1)$} Skisser ledningstilkoblinger slik at trykk på DP-transmitteren vises på amperemeteret:
+
+$$\includegraphics[width=15.5cm]{i01558x12.eps}$$
+
+\vskip 20pt
+
+\item{$(2)$} Skisser hvordan en loop-kalibrator kobles til for å {\it måle} strøm fra TT-14 i denne kretsen:
+
+$$\includegraphics[width=15.5cm]{i01558x11.eps}$$
+
+\vskip 20pt
+
+\item{$(3)$} Beregn prosentverdien av et elektrisk signal på 14.5 mA i et 4-20 mA område.
+
+\vskip 20pt
+
+\item{$(4)$} Anta at PV og SP (slik regulatoren viser dem) ikke samsvarer: med 50\% settpunkt blir prosessvariabelen stående på 62\% med regulatoren i automatisk modus. Identifiser én mulig feil, samt én umulig feil, gitt disse symptomene. Vær spesifikk: både plassering (hvilken komponent) og feiltype (f.eks. åpen, kortsluttet, tilstoppet) for hver feil.
+
+$$\includegraphics[width=15.5cm]{i01558x08.eps}$$
+
+\end{itemize}
+
+%INDEX% Lab exercise, building a complete process control loop
+
+%(END_NOTES)
+

@@ -1,0 +1,60 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Undersøk dette temperaturreguleringssystemets P\&ID, der en kjemisk prosessreaktor kan varmes opp eller kjøles ned av et temperaturreguleringssystem:
+
+$$\includegraphics[width=15.5cm]{i01394x01.eps}$$
+
+Temperaturregulatoren (TC) sammenligner prosesstemperaturen med et settpunkt og styrer damp- og kjølevannsventilene deretter. Når regulatorutgangen er 100\% (20 mA utgangssignal til I/P-transduseren), skal dampventilen være helt åpen og kjølevannsventilen helt lukket. Når regulatorutgangen er 0\% (4 mA utgangssignal til I/P-transduseren), skal dampventilen være helt lukket og kjølevannsventilen helt åpen. For å unngå energisløsing skal damp- og kjølevannsventilene aldri stå åpne samtidig. Én av de to ventilene skal alltid være lukket.
+
+Forutsatt et standard utgangsområde på 3-15 PSI fra I/P-transduseren (TY), og standard pneumatiske membran-og-fjær-aktuatorer på ventilene, bestem hvilke ventilvirkninger som skal brukes for hver ventil:
+
+\begin{itemize}
+\item{} Luft-til-åpne eller luft-til-stenge?
+\item{} Kalibrert lufttrykksområde?
+\end{itemize} 
+
+Bestem også om temperaturregulatoren må være direktevirkende eller reversvirkende, gitt at temperaturtransmitteren (TT) gir et stigende signal ved stigende prosesstemperatur.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identifiser alternative metoder for split-range-styring av disse to ventilene, utover å bruke én enkelt I/P-konverter.
+\item{} Identifiser konsekvensen av tap av instrumentluft til reguleringsventilene -- hva vil skje med reaktortemperaturen?
+\end{itemize}
+
+\underbar{file i01394}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette krever en {\it eksklusiv} split-range-sekvensering:
+
+$$\includegraphics[width=15.5cm]{i01394x02.eps}$$
+
+Når et regulatorutgangssignal på 100\% (20 mA, eller 15 PSI) skal åpne dampventilen og stenge kjølevannsventilen, må dampventilen være luft-til-åpne og kjølevannsventilen være luft-til-stenge.
+
+For å unngå at begge ventilene står åpne samtidig, kan vi ``splitte'' områdene slik at én ventil arbeider på øvre halvdel av regulatorens utgangssignalområde (12-20 mA, 9-15 PSI), og den andre ventilen på nedre halvdel av regulatorens utgangsområde (4-12 mA, 3-9 PSI).
+
+Siden vi ønsker at temperaturregulatoren skal gi et avtagende utgangssignal (mot 0\% for full kjøling) når prosessverdien øker (økende prosesstemperatur), må den være reversvirkende.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% Final Control Elements, valve: split ranging
+%INDEX% Process: reactor heating/cooling control (generic)
+
+%(END_NOTES)
+

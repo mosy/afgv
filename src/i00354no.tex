@@ -1,0 +1,85 @@
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Anta at en FOUNDATION Fieldbus-nivåtransmitter skal brukes til å måle volumet av vann lagret i en prosesstank over datumlinjen. Transmitteren er koblet til tanken via et impulserør til ``High''-porten på DP-sensoren, og måler nivå direkte i enheten \textit{tommer vannsøyle}. Operatøren forventer derimot å kunne lese væskevolum i \textit{gallon}. Tanken er sylinderformet og har en diameter på 40 tommer:
+
+$$\includegraphics[width=15.5cm]{i00354x01.eps}$$
+
+Fullfør konfigurasjonstabellen i figuren over, og angi riktige parameterverdier for {\tt XD\_Scale}, {\tt OUT\_Scale} og {\tt L\_Type} slik at transmitteren fungerer korrekt i denne applikasjonen.
+
+\vskip 10pt
+
+Bestem også riktige stillinger (åpen eller stengt) for de tre håndventilene mellom prosesstanken og transmitteren ved normal drift.
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Beskriv formålet med parameterne {\tt XD\_Scale} og {\tt OUT\_Scale} i et Fieldbus-instrument.
+\item{} Forklar hva som skjer hvis parameteren {\tt L\_Type} settes til \textit{Direct}.
+\end{itemize}
+
+\underbar{file i00354}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Den mest krevende delen av oppgaven er sannsynligvis å beregne volum i gallon basert kun på \textit{høyden} på vannet målt av nivåtransmitteren. I bunn og grunn er dette først en geometrioppgave og deretter en enhetskonvertering.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Med en diameter på 40 tommer har tanken et tverrsnittsareal lik:
+
+$$A = \pi r^2$$
+
+$$A = \pi (20 \hbox{ in})^2$$
+
+$$A = 1256.6 \hbox{ in}^2$$
+
+Med en vannsøyle på 55 tommer ved dette tverrsnittsarealet blir væskevolumet ved URV:
+
+$$V = A h$$
+
+$$V = \left(1256.6 \hbox{ in}^2\right) (55 \hbox{ in})$$
+
+$$V = 69115.0 \hbox{ in}^3$$
+
+Konvertert til gallon:
+
+$$\left(69115.0 \hbox{ in}^3 \over 1 \right) \left(1 \hbox{ gal} \over 231 \hbox{ in}^3 \right) = 299.2 \hbox{ gal}$$
+
+\vskip 10pt
+
+Når vi vet at et rått måleområde på 0 til 55 tommer vannsøyle tilsvarer et volumområde på 0 til 299.2 gallon, kan Fieldbus-transmitteren konfigureres slik:
+
+\vskip 10pt
+
+{\tt XD\_Scale} = 0 til 55 tommer
+
+\vskip 10pt
+
+{\tt OUT\_Scale} = 0 til 299.2 gallon
+
+\vskip 10pt
+
+{\tt L\_Type} = Indirect
+
+\vskip 10pt
+
+De to blokkventilene skal være åpne, og avluftningsventilen stengt ved normal drift.
+
+
+%INDEX% Fieldbus, instrument ranging: setting XD_Scale and OUT_Scale parameters for an application
+
+%(END_NOTES)

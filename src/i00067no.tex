@@ -1,0 +1,158 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Et splitter nytt kontrollsystem for en kjemisk reaksjonsprosess bruker en frekvensomformer (VFD) til a styre hastigheten pa matepumpen som tilforer kjemiske vaesker til et reaksjonskar.  Denne VFD-en far et 4-20 mA styresignal fra en av kanalene pa et analogt utgangskort i en programmerbar logisk kontroller (PLC).  PLC-en mottar igjen driftsinstruksjoner fra et beroringsskjermpanel (``HMI'') der operatorene kan overvake og styre prosessen:
+
+$$\includegraphics[width=15.5cm]{i00067x01.eps}$$
+
+Dette systemet er nybygget, og har ennå ikke fungert.  Operatorene prover a starte pumpen ved a trykke pa ``Pump start''-ikonet pa beroringsskjermen, men ingenting skjer.  En tekniker kobler signalkabelen fra PLC-ens analoge utgangsterminaler og kobler deretter kabelenden til en ``loopenkalibrator'' for a sende 12 mA DC til VFD-en for en test.  Da starter motoren og gar pa halv hastighet.
+
+Identifiser sannsynligheten for hver spesifiserte feil for denne kretsen.  Vurder hver feil en om gangen (dvs. ingen samtidige feil), og avgjor om hver feil alene kan forklare {\it alle} malinger og symptomer i denne kretsen.
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Feil} & {\bf Mulig} & {\bf Umulig} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Sikring/vern av &  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Beroringsskjermpanel fungerer ikke &  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Programmeringsfeil i PLC &  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Defekt kraftkabel mellom VFD og motor &  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Defekt kraftkabel mellom vern og VFD &  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Analogt utgangskort fungerer ikke &  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Kortsluttet signalkabel &  & \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+Til slutt, identifiser den {\it neste} diagnostiske testen eller malingen du ville gjort pa dette systemet.  Forklar hvordan resultatet(ene) av denne neste testen eller malingen hjelper deg a identifisere plassering og/eller natur pa feilen.
+
+\vfil
+
+\underbar{file i00067}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er et vurdert sporsmal -- ingen svar eller hint gis!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+En nyttig diagnostisk strategi er a kartlegge flyten av data og kraft mellom komponentene i systemet, for a etablere klare arsak-virkning-forhold mellom dem.  Bla piler viser retningen for {\it data}-flyt i systemet, mens rode piler viser retningen for {\it kraft}-flyt i systemet.  Enhver feil i en komponent vil selvsagt pavirke driften av komponenter ``nedstroms'' for den feilende komponenten:
+
+$$\includegraphics[width=15.5cm]{i00067x02.eps}$$
+
+Vi far vite at motoren gar nar et 12 mA-signal injiseres i den analoge signalkabelen med en loopenkalibrator.  Dette forteller oss at motoren, VFD-en og vernet alle ma fungere riktig.  Hvis motoren ikke gar som kommando fra HMI, ma problemet ligge i PLC-en, HMI-en eller kabelen som forbinder disse to komponentene.
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Feil} & {\bf Mulig} & {\bf Umulig} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Sikring/vern av &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Beroringsskjermpanel fungerer ikke & $\surd$  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Programmeringsfeil i PLC & $\surd$  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Defekt kraftkabel mellom VFD og motor &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Defekt kraftkabel mellom vern og VFD &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Analogt utgangskort fungerer ikke & $\surd$  & \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Kortsluttet signalkabel &  & $\surd$ \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+En mulig diagnostisk test ville vare a bruke en laptop-PC til a koble til PLC-en og sjekke den analoge utgangsregisterverdien.  Ideen her ville vare a avgjore om PLC-programmet i det hele tatt forsoker a generere et signal som forteller VFD-en a kjore.  Hvis utgangsregisteret viser en betydelig verdi (dvs. en verdi stor nok til at VFD-en burde kjore), betyr det at den analoge utgangskanalen sannsynligvis er defekt.  Hvis utgangsregisteret viser null (eller en annen ubetydelig verdi), betyr det at programmet ikke skriver den nodvendige verdien til det registeret, og det er sannsynligvis et programmeringsproblem.
+
+En test som ikke krever laptop-PC er a male strommen som sendes fra kortet til VFD-en.  Hvis denne strommen er under 4 mA, er problemet sannsynligvis en maskinvarefeil i det analoge utgangskortet.  Hvis strommen er 4 mA, er problemet sannsynligvis programrelatert.
+
+%INDEX% Basics, control loop troubleshooting: determining reason why VFD won't run
+%INDEX% Final Control Elements: troubleshooting
+%INDEX% PLC, troubleshooting: motor start/stop control circuit
+
+%(END_NOTES)
+
+

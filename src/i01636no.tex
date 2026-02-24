@@ -1,11 +1,27 @@
-
 %(BEGIN_QUESTION)
 % Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Identifiser hvilke justeringsskruer (nåleventiler) i denne pneumatiske regulatoren som tilsvarer proporsjonalbånd (gain), integral (reset) og derivat (rate):
+Her vises skjemaet for en full ``PID'' analog pneumatisk regulator. Selv om den mangler funksjonene utgangs- og setpunktsporing, har den alle tre reguleringsledd: proporsjonal, integral og derivat.
 
-$$\includegraphics{i01636x01.eps}$$
+$$\includegraphics[width=15.5cm]{i01636x01.eps}$$
+
+Basert på analysen din av denne mekanismen, svar på følgende spørsmål:
+
+\begin{itemize}
+\item{} Er denne regulatoren revers- eller direktevirkende?
+\item{} Hvilken ventil justerer integralkonstanten ($\tau_i$)?
+\item{} Hvilken ventil justerer derivatkonstanten ($\tau_d$)?
+\item{} Hva vil en endring i volumet til kapasitetstanken påvirke?
+\item{} Vil justering av proporsjonalkonstanten påvirke enten integral- eller derivatresponsen?
+\item{} Hva ville skjedd hvis ventil $V_2$ var helt stengt?
+\end{itemize} 
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} En kraftig problemløsningsteknikk er å gjennomføre et {\it tankeeksperiment} der du mentalt simulerer systemets respons på et tenkt sett med betingelser. Beskriv et nyttig ``tankeeksperiment'' for dette systemet, og hvordan resultatene fra det hjelper deg med å svare på disse spørsmålene.
+\end{itemize}
 
 \underbar{file i01636}
 %(END_QUESTION)
@@ -16,9 +32,12 @@ $$\includegraphics{i01636x01.eps}$$
 
 %(BEGIN_ANSWER)
 
-Skruen merket med PB er proporsjonalbåndet. Skruen merket med I er integral (reset), og skruen merket med D er derivat (rate).
+{\bf Delvis svar:}
 
-Merk: Plasseringen av nåleventilene i forhold til belgene og kraftbjelken er avgjørende for funksjonen. Integralventilen forsinker trykkoppbyggingen i reset-belgen (positiv tilbakekobling), mens derivatventilen forsinker trykkoppbyggingen i tilbakekoblingsbelgen (negativ tilbakekobling).
+\begin{itemize}
+\item{}Hvilken ventil justerer derivatkonstanten ($\tau_d$)?  {\bf V$_{2}$}
+\item{}Vil justering av proporsjonalkonstanten påvirke enten integral- eller derivatresponsen?  {\bf Ja!}
+\end{itemize} 
 
 %(END_ANSWER)
 
@@ -28,7 +47,77 @@ Merk: Plasseringen av nåleventilene i forhold til belgene og kraftbjelken er av
 
 %(BEGIN_NOTES)
 
-Pneumatiske PID-regulatorer er fascinerende mekanismer. Selv om de er sjeldne i nye installasjoner, finnes det fortsatt mange i drift. Å forstå dem gir dyp innsikt i PID-teori.
+{\it Er denne regulatoren revers- eller direktevirkende?}
+
+Denne regulatoren er reversvirkende, fordi økning i PV gir reduksjon i utgangen. En økning i prosessvariabelsignalet vil tendere til å rotere armen medurs rundt vippepunktet, og dermed øke gapet mellom klaff og dyse og redusere utgangssignalet.
+ 
+\vskip 10pt
+
+{\it Hvilken ventil justerer integralkonstanten ($\tau_i$)?}
+
+Ventil V$_{1}$, som struper luftstrømmen inn og ut av øvre belg (motsatt tilbakekoblingsbelgen). Husk at tilbakekoblingsbelgen (merket ``P'' for ``proportioning'' i pneumatiske regulatorer fra Foxboro) {\it alltid} vil virke slik at gapet mellom klaff og dyse øker ved økende utgangstrykk, slik at tilbakekoblingen holder klaff/dyse-gapet relativt konstant. Belg som gir integralvirkning (merket ``R'' for ``reset'' i pneumatiske regulatorer fra Foxboro) må alltid virke {\it mot} tilbakekoblingsbelgen. I denne regulatoren er derfor nedre belg tilbakekoblingsbelgen, mens øvre belg er integral- eller ``reset''-belgen.
+ 
+\vskip 10pt
+
+{\it Hvilken ventil justerer derivatkonstanten ($\tau_d$)?}
+
+Ventil V$_{2}$, som struper luftstrømmen inn og ut av nedre belg. Som følge av diskusjonen over om belgidentitet virker nedre belg både som tilbakekobling (``proportioning'') og derivat (rate) når det er en struping mellom belgen og kilden til utgangstrykk.
+ 
+\vskip 10pt
+
+{\it Hva vil en endring i volumet til kapasitetstanken påvirke?}
+
+Endringer i tankvolum vil påvirke forholdet mellom $\Delta$volum og trykk for nedre belg. Dette påvirker hvor lang {\it tid} det tar før trykket endrer seg i belgen for en gitt luftmengde som går inn eller ut. Siden nedre belg utfører proporsjonal- og derivatrespons, og fordi proporsjonalvirkning er tidsuavhengig, må volumet påvirke {\it derivatresponsen} (rate).
+ 
+\vskip 10pt
+
+{\it Vil justering av proporsjonalkonstanten påvirke enten integral- eller derivatresponsen?}
+
+Ja, fordi endring av vippepunktets posisjon (den eneste proporsjonaljusteringen i denne mekanismen) endrer den mekaniske utvekslingen i armesystemet, og dette endrer inn/ut-forholdet mellom kreftene fra {\it alle} belgene. Dermed vil endring av proporsjonalbåndet i denne regulatoren føre til at både integral- og derivatrespons blir mer eller mindre aggressive med samme faktor.
+
+\vskip 10pt
+
+{\it Hva ville skjedd hvis ventil $V_2$ var helt stengt?}
+
+Regulatorens forsterkning ville blitt uendelig, fordi utgangsbelgen ikke kunne balansere noe avvik fra PV/SP-belgene når den er blokkert. Den minste endring i PV og/eller SP ville gjort at utgangen mettet fullstendig.
+
+ 
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtuell feilsøking} \vrule} \hrule}
+
+Dette spørsmålet egner seg godt til en ``Virtuell feilsøking''-øvelse. Når du presenterer diagrammet for studentene, tenker du først ut en bestemt feil i systemet. Deretter presenterer du ett eller flere symptomer på denne feilen (noe en operatør eller annen bruker av systemet kan observere). Studentene foreslår så ulike diagnostiske tester for å identifisere feilens type og plassering, som om de var teknikere som feilsøker problemet. Din oppgave er å fortelle hva resultatet/resultatene av hver foreslått test ville vært, og dokumentere resultatene slik at alle studentene kan se dem.
+
+Under og etter øvelsen er det nyttig å stille oppfølgingsspørsmål som:
+
+\begin{itemize}
+\item{} Hva forteller resultatet av den siste diagnostiske testen om feilen?
+\item{} Anta at resultatet av den siste diagnostiske testen var annerledes. Hva ville det resultatet da fortalt om feilen?
+\item{} Er den siste diagnostiske testen den beste vi kunne gjort?
+\item{} Hva ville vært ideell testrekkefølge for å diagnostisere problemet med færrest mulig steg?
+\end{itemize}
+
+
+\vfil \eject
+
+\noindent
+{\bf Oppsummeringsquiz:}
+
+Bestem effekten av at ventil $V_1$ blir fullstendig tilstoppet av partikler:
+
+$$\includegraphics[width=15.5cm]{i01636x02.eps}$$
+
+\begin{itemize}
+\item{} Utgangssignalet faller til 0 PSI
+\vskip 5pt 
+\item{} Forsterkningen blir uendelig (enorm)
+\vskip 5pt 
+\item{} Reguleringsretningen bytter fra revers til direkte
+\vskip 5pt 
+\item{} Derivatvirkningen blir 0 minutter
+\vskip 5pt 
+\item{} Kapasitetstanken sprenges av overtrykk
+\vskip 5pt 
+\item{} Integralvirkningen blir 0 repetisjoner per minutt
+\end{itemize}
 
 %INDEX% Control, proportional + integral + derivative: pneumatic controller
 

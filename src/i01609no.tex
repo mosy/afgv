@@ -3,16 +3,16 @@
 % Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-En PI-regulator (P+I) brukes til å kontrollere strømmen av en væske gjennom et rør. Strømningskontrollventilen er imidlertid underdimensjonert, og vil ikke tillate strømmen å oppnå en verdi som er større enn 70\% av måleområdet. Hva vil regulatoren gjøre hvis den får et settpunkt på 80\%? Vær så spesifikk du kan i svaret ditt.
+En P+I-regulator brukes til å regulere væskestrøm gjennom et rør. Reguleringsventilen er imidlertid underdimensjonert, og tillater ikke at strømningen blir høyere enn 70\% av måleområdet. Hva vil regulatoren gjøre hvis den får setpunkt 80\%? Vær så spesifikk som mulig i svaret.
 
 \vskip 10pt
 
-Hva vil skje hvis settpunktet returneres til en oppnåelig verdi som 50\% etter at det har stått på 80\% i lang tid?
+Hva vil skje hvis setpunktet settes tilbake til en oppnåelig verdi som 50\% etter at det har stått på 80\% lenge?
 
 \vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
 
 \begin{itemize}
-\item{} Hvordan antar du at et problem som dette manifesterer seg på en prosesstrend (logging)? Finnes det noen avslørende ledetråder på en trend som indikerer at et slikt problem eksisterer?
+\item{} Hvordan tror du et slikt problem vil arte seg i en prosesstrend (registrering)? Finnes det avslørende tegn i en trend som indikerer at et slikt problem finnes?
 \end{itemize}
 
 \underbar{file i01609}
@@ -24,13 +24,13 @@ Hva vil skje hvis settpunktet returneres til en oppnåelig verdi som 50\% etter 
 
 %(BEGIN_ANSWER)
 
-Siden strømmen ikke kan overstige 70\% på grunn av den underdimensjonerte ventilen, vil regulatoren fortsette å "se" et avvik på 10\%, og regulatorutgangen vil til slutt gå i metning på 100\% (helt åpen ventil). Algoritmens integral-ledd vil fortsette å øke (med mindre det begrenses av en spesiell funksjon i regulatoren designet for å stoppe integrasjonsprosessen hvis og når utgangssignalet når visse grenser), selv om det ikke vil gjøre noen nytte fordi ventilen er mettet helt åpen. Dette fenomenet kalles {\it integrasjonsmetning} (integral windup) eller {\it reset windup}.
+Siden strømningen ikke kan overstige 70\% på grunn av underdimensjonert ventil, vil regulatoren fortsette å ``se'' et avvik på 10\%, og regulatorutgangen vil etter hvert mettes på 100\% (ventilen fullt åpen). Integralleddet i algoritmen vil fortsette å øke (med mindre dette begrenses av en spesialfunksjon i regulatoren som stopper integreringen når utgangssignalet når bestemte grenser), selv om det ikke hjelper fordi ventilen allerede er fullt mettet åpen. Dette fenomenet kalles {\it integral windup} eller {\it reset windup}.
 
-Når settpunktet reduseres til 50\%, kan regulatorutgangen forbli mettet på 100\% (ventil helt åpen) i stedet for umiddelbart å avta for å redusere strømmen gjennom røret slik den skal, på grunn av den akkumulerte verdien ("windup") i integral-leddet.
+Når setpunktet reduseres til 50\%, kan regulatorutgangen forbli mettet på 100\% (ventil fullt åpen) i stedet for å synke med en gang for å redusere strømningen i røret slik den skal, på grunn av den akkumulerte verdien (``windup'') i integralleddet.
 
 \vskip 10pt
 
-Det bør bemerkes at de fleste moderne (digitale) sløyferegulatorer har grenser for anti-integrasjonsmetning (anti-reset windup) satt som standard til 100\% og 0\%, slik at integral-akkumulatoren ikke vil "vinde" forbi disse grensene. Jeg har imidlertid støtt på regulatorer uten denne funksjonen, hvor regulatorens interne akkumulator er i stand til å gå langt forbi 100\% selv om kontrollventilen selvfølgelig ikke kan åpne mer enn 100\%.
+Det bør nevnes at de fleste moderne (digitale) sløyferegulatorer har anti-reset-windup-grenser satt som standard ved 100\% og 0\%, slik at integralakkumulatoren ikke går utenfor disse grensene. Jeg har likevel møtt regulatorer uten denne funksjonen, der regulatorens interne akkumulator kan gå langt over 100\%, selv om reguleringsventilen selvsagt ikke kan åpne mer enn 100\%.
 
 %(END_ANSWER)
 
@@ -40,9 +40,9 @@ Det bør bemerkes at de fleste moderne (digitale) sløyferegulatorer har grenser
 
 %(BEGIN_NOTES)
 
-Andre forhold kan også forårsake metning (windup). En feilet transmitter, en batch-prosess som stenger ned, eller andre diskontinuiteter i prosessen vil føre til at en regulator med integralvirkning "vinder opp" eller "vinder ned" i et forgjeves forsøk på å minimere avviket.
+Andre forhold kan også forårsake windup. En feilet transmitter, en batchprosess som stanser, eller andre diskontinuiteter i prosessen vil få en regulator med integralvirkning til å integrere seg opp eller ned i et nytteløst forsøk på å minimere avviket.
 
-Når settpunktet reduseres til 50\%, kan regulatorutgangen forbli mettet på 100\% (ventil helt åpen) i stedet for umiddelbart å avta for å redusere strømmen gjennom røret slik den skal, på grunn av den akkumulerte verdien ("windup") i integral-leddet. Med andre ord, den akkumulerte verdien av integral-leddet under "windup" da den forgjeves prøvde å øke strømningsraten til 80\%, er fortsatt tilstede når settpunktet synker til 50\%, og den kan være tilstrekkelig til å holde regulatorutgangen på 100\% i lang tid (inntil integral-leddet "vinder ned" igjen langt nok). Dette resulterer selvfølgelig i en forsinket regulatorrespons på det nye settpunktet.
+Når setpunktet reduseres til 50\%, kan regulatorutgangen forbli mettet på 100\% (ventil fullt åpen) i stedet for å synke med en gang for å redusere strømningen i røret slik den skal, på grunn av den akkumulerte verdien (``windup'') i integralleddet. Med andre ord: den akkumulerte verdien i integralleddet fra ``windup'' da regulatoren forgjeves forsøkte å øke strømningen til 80\%, er fortsatt til stede når setpunktet senkes til 50\%, og kan være stor nok til å holde regulatorutgangen på 100\% i lang tid (inntil integralleddet er redusert langt nok). Dette gir selvsagt en forsinket regulatorrespons på det nye setpunktet.
 
 %INDEX% Control, integral: windup
 

@@ -1,0 +1,65 @@
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Se på dette reguleringssystemet, satt opp for å holde temperaturen i en kjemisk reaktortank på en konstant settpunktverdi. Reaktoren varmes av en dampkappe, der varm damp slippes inn gjennom en motorstyrt (M) reguleringsventil (TV), basert på temperaturen i reaktoren målt av temperatursenderen (TT):
+
+$$\includegraphics[width=15.5cm]{i00139x01.eps}$$
+
+Mens du rydder nær reaktoren får du en stresset melding over radio fra operatøren. Han sier at regulatoren (TIC) viser 186 $^{o}$F, som er 11 grader over settpunkt på 175 $^{o}$F. Så høy temperatur kan ødelegge produktet i reaktoren. Han ber deg sjekke temperaturindikatoren (TI) på siden av reaktoren.
+
+Du ser på TI og den viser 172 $^{o}$F, altså heller litt for kaldt enn for varmt. Du rapporterer dette til operatøren, som ber deg undersøke hvorfor regulatoren viser feil verdi.
+
+Heldigvis har du multimeter og verktøy med deg. Du går til temperatursenderen for å måle mA-signalet. Når du fjerner lokket på en rund koblingsboks i kabelstrekket, ser du en terminalblokk med en 1N4001-likeretterdiode i serie i kretsen:
+
+$$\includegraphics[width=15.5cm]{i00139x02.eps}$$
+
+Du setter multimeteret til mA og kobler rød/svart måleledning over dioden. Da kortsluttes dioden slik at all strøm går gjennom måleren i stedet, og du kan «bryte inn» i 4-20 mA-kretsen uten å fysisk bryte en ledning. Du noterer deg å takke instrumentlæreren senere for trikset, og ser at multimeteret viser 15.683 mA.
+
+Med kalibrert senderområde 100 til 200 $^{o}$F: bestem hva denne strømverdien forteller om hvor feilen ligger i temperaturreguleringssløyfen, og forklar hvordan du kom fram til det.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hvorfor er det viktig at teknikere raskt kan konvertere mA-signal til tilhørende prosessverdi (PV)?
+\item{} Hvordan gjør dioden det mulig å måle strøm uten å bryte kretsen?
+\item{} Hvis det ikke var diode i sløyfen, hvordan ville du foreslått å måle senderstrømmen?
+\item{} Kan feilen ligge i reguleringsventilen i dette tilfellet? Hvorfor/hvorfor ikke?
+\end{itemize}
+
+\underbar{file i00139}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Problemet ligger mest sannsynlig i regulatoren (TIC).
+
+\vskip 10pt
+
+Temperaturen beregnet fra målt mA-verdi og kjent senderområde er:
+
+$$\left({15.683 \hbox{mA} - 4 \hbox{ mA}} \over 16 \hbox{ mA}\right) \times 100 \hbox{ deg F} + 100 \hbox{ deg F} = 173.02 \hbox{ deg F}$$
+
+Oppsummert: Vi tar målt strøm og trekker fra live-zero (4 mA), deler på signalspennvidden (16 mA), og får en fraksjon av området (0-100 \%). Denne fraksjonen ganges med måleområdets spennvidde (200 - 100 = 100 deg F), og til slutt legges områdets nullpunkt (100 deg F) til. Da får vi temperaturen slik senderen tolker den, her 173.02 deg F.
+
+Denne verdien ligger så nær 172 deg F fra temperaturmåleren at vi trygt kan konkludere med at senderen fungerer. Dermed må noe {\it annet} forklare regulatorens for høye temperaturvisning. Med andre ord: senderen er frisk, men regulatoren tolker 15.683 mA feilaktig som en mye høyere temperatur.
+
+Muligheter: analog-til-digital-omformeren i regulatoren kan være defekt og konvertere 4-20 mA feil til temperatur. Eller motstanden i regulatoren som konverterer 4-20 mA til spenningsfall for A/D-inngangen kan være defekt, eller ha løs terminalforbindelse (ekstra resistans i sløyfen gir for høyt spenningsfall som regulatoren tolker som for høy temperatur). Uansett vet vi at senderen ikke er feilen.
+
+%INDEX% Basics, control loop troubleshooting: determining cause of control problem
+%INDEX% Process: steam-heated reactor vessel (generic)
+
+%(END_NOTES)

@@ -1,11 +1,8 @@
-
 %(BEGIN_QUESTION)
 % Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-På mange PID-regulatorer kan man velge om derivatvirkningen skal reagere på endringer i prosessvariabelen (PV) eller på endringer i avviket (Error).
-
-Hva er fordelen med å la derivatvirkningen kun reagere på PV, og ikke på avviket?
+På noen PID-regulatorer finnes et valg for at derivatvirkningen enten skal virke kun på endringer i prosessvariabelen (PV), eller virke på endringer i avviket (PV $-$ SP), slik integralvirkningen alltid gjør. Hvilken fordel kan det gi at derivatvirkningen kun arbeider på PV-endringer og ikke SP-endringer?
 
 \underbar{file i01644}
 %(END_QUESTION)
@@ -16,9 +13,7 @@ Hva er fordelen med å la derivatvirkningen kun reagere på PV, og ikke på avvi
 
 %(BEGIN_ANSWER)
 
-Hvis derivatdelen reagerer på avviket (Error), vil den reagere kraftig på endringer i settpunktet (SP), siden Error = SP - PV. En trinnvis endring i SP representerer en uendelig rask endringshastighet, som vil gi et voldsomt "rykk" (kick) i utgangen.
-
-Ved å la derivatdelen kun se på PV, unngår man dette rykket ved settpunktsendringer, samtidig som man beholder dempningseffekten på prosessforstyrrelser.
+Når derivatvirkningen arbeider på {\it avvikssignalet}, responderer den likt på endringer i setpunkt (SP) og prosessvariabel (PV). Dette kan føre til at regulatorutgangen metter (100\% eller 0\%) ved trinnendringer i setpunkt, noe som kan være uheldig. Derfor tilbyr noen regulatorer muligheten for at derivatvirkningen bare skal virke på PV-endringer og ikke SP-endringer.
 
 %(END_ANSWER)
 
@@ -28,7 +23,7 @@ Ved å la derivatdelen kun se på PV, unngår man dette rykket ved settpunktsend
 
 %(BEGIN_NOTES)
 
-Dette kalles ofte "Derivative on PV" vs "Derivative on Error". I de fleste prosessapplikasjoner foretrekkes "Derivative on PV" for å gi en jevnere respons ved operatørendringer av settpunkt.
+I noen prosesser (særlig de med store førsteordens tidskonstanter, eller {\it lag}) kan det likevel være en fordel at utgangen metter ved setpunktendring, fordi dette i praksis kompenserer for tidsforsinkelsen og gir langt raskere respons mot nytt setpunkt (opptil fire ganger raskere, ifølge enkelte eksperter). Det bør derfor ikke antas at derivatvirkning på avvikssignalet alltid er uønsket.
 
 %INDEX% Control, derivative: action on PV only
 

@@ -1,0 +1,181 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les og lag en disposisjon av avsnittet ``{\sl Wireless}HART'' i kapittelet ``Wireless Instrumentation'' i læreboken din \textit{Lessons In Industrial Instrumentation}. Noter sidetall for viktige illustrasjoner, fotografier, ligninger, tabeller og andre relevante detaljer. Forbered deg på en gjennomtenkt diskusjon med lærer og medstudenter om begrepene og eksemplene i teksten.
+
+\underbar{file i00537}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+{\sl Wireless}HART er en delmengde av HART-kommunikasjonsstandarden (versjon 7). Instrumenter kommuniserer med en sentral gateway-enhet og med hverandre, og danner et ``mesh''-nettverk. I dette mesh-nettverket fungerer instrumenter som repeatere for andre instrumenter og videresender signaler til og fra gatewayen ved behov for å sikre dataintegritet. Påliteligheten oppgis til minimum 99.73\%.
+
+\vskip 10pt
+
+{\sl Wireless}HART-instrumenter er i dag vanligvis batteridrevet (typisk flere års levetid for litiumbatteri, maksimalt). Repeaterfunksjon bruker normalt mindre effekt enn grunnleggende målefunksjon.
+
+\vskip 10pt
+
+Metallobjekter og ledende overflater utgjør barrierer for radiokommunikasjon. Det samme gjør kjøretøy i bevegelse, stillaser og andre store metallobjekter.
+
+\vskip 10pt
+
+Nettverksadministratoren (ofte en funksjon i gatewayen) er en essensiell del av et {\sl Wireless}HART-nettverk. Den tildeler tidsluker for alle feltinstrumenter, tildeler frekvenshoppingskjema, justerer automatisk sendeeffekt for hvert instrument, administrerer liste over aktive instrumenter i nettet, gir statistikk om nettverksytelse og planlegger automatisk alternative dataveier mellom instrumenter i meshet.
+
+\vskip 30pt
+
+{\sl Wireless}HART fysisk lag: 2.4 til 2.5 GHz, O-QPSK-modulasjon, 250 kbps datarate, DSSS spread-spectrum frekvenshopping mellom 15 kanaler, TDMA bussarbitrasjon med 10 ms tidsluker for enhetskommunikasjon, variabel sendeeffekt (10 mW standard). Nettverksadministratoren fungerer som masterenhet (med feltinstrumenter som slaver) ved at den tildeler tidsluker for hver feltenhet.
+
+\vskip 10pt
+
+{\sl Wireless}HART datalink-lag: hvert nettverk defineres av en \textit{network key}-kode, slik at flere mesh-nettverk fysisk kan overlappe uten interferens. Støyende kanaler svartelistes fortløpende.
+
+\vskip 10pt
+
+{\sl Wireless}HART nettverkslag: mesh-nettverk (alle enheter kan etablere koblinger med hverandre og fungere som repeatere for hverandre), nettverksadministratoren etablerer alle broadcast-tidsluker og planlegger dataruter mellom repeaterenheter, 4 meldingsprioriteter (Command, Process data, Normal og Alarm). Nettverksadministratoren har en rolle som ligner LAS i FOUNDATION Fieldbus, og som for LAS kan man også ha redundant nettverksadministrator i et {\sl Wireless}HART-nettverk.
+
+\vskip 10pt
+
+{\sl Wireless}HART applikasjonslag: all data er 128-bit kryptert, med bakoverkompatibilitet mot HART-kommandostruktur og DDL-spesifikasjoner. Det betyr at all {\sl Wireless}HART-data er kompatibel med eldre HART-meldinger, slik at {\sl Wireless}HART kan integreres sømløst med HART-kompatible kontrollplattformer. Selv eldre (kablede) HART-instrumenter kan gjøres {\sl Wireless}HART-kompatible ved å legge til en radioadapter kalt \textit{THUM}.
+
+\vskip 10pt
+
+Bluetooth bruker et fysisk lag som ligner {\sl Wireless}HART, men støtter ikke mesh-nettverk (maks 7 Bluetooth-enheter per master).
+
+\vskip 10pt
+
+ZigBee (brukt i bygningsautomasjon) støtter mesh-nettverk, men bruker ikke kanal-svartelisting.
+
+\vskip 10pt
+
+Wi-Fi støtter ikke kanal-svartelisting slik {\sl Wireless}HART gjør.
+
+\vskip 30pt
+
+Nettverksgatewayen i et {\sl Wireless}HART-system er grensesnittet mellom mesh-radionettet og kontrollsystemet. All data til og fra gatewayen er digital, ikke analog. Emerson Smart Wireless Gateway-enheter støtter Modbus (RS-485 og TCP) og har eget webgrensesnitt for vedlikehold og konfigurering. Spesifikke instrumentdatapunkter kan ``mappes'' til Modbus-registre i gatewayen for dataoverføring. Multivariabel kommunikasjon støttes for alle {\sl Wireless}HART-feltinstrumenter.
+
+\vskip 10pt
+
+Via Modbus kan praktisk talt enhver PLC eller annet kontrollsystem lese data fra gatewayen og utføre regulering basert på {\sl Wireless}HART-parametere.
+
+\vskip 30pt
+
+{\sl Wireless}HART-enheter har metallterminaler som tilkoblingspunkter for feltkommunikatorer som Emerson 375 eller 475. Kommunikasjon via disse terminalene er standard kablet HART-protokoll.
+
+\vskip 10pt
+
+Network ID-koden (område 0 til 36863) angir hvilket mesh-nettverk instrumentet tilhører. Dette nummeret er knyttet til en bestemt gateway.
+
+\vskip 10pt
+
+Enhetens Join Key (128 bit) fungerer som et passord for sikker tilgang til mesh-nettverket. Join Keys kan være unike per enhet eller deles mellom flere enheter. Join Keys kan også ``roteres'' regelmessig for å styrke nettverkssikkerheten.
+
+\vskip 10pt
+
+En av de statistiske parameterne nettverksadministratoren vedlikeholder er RSSI (Received Signal Strength Indication), i dBm. Den viser hvor sterkt signal hver feltenhet har. En annen parameter er antall ``naboer'' hver {\sl Wireless}HART-feltenhet har, som sier noe om hvor robust mesh-nettet er.
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Forklar begrepene ``mesh-nettverk'' og ``self-healing'' i {\sl Wireless}HART-systemer.
+\item{} Beskriv noen av oppgavene til nettverksadministratoren. \textit{Tildeler TDMA-tidsluker til enheter, autentiserer nye enheter i nettet, justerer enhetenes sendeeffekt dynamisk, bestemmer frekvenshoppingskjema, velger videresendingsruter mellom enheter, beregner diagnostiske parametere som RSSI, osv.}
+\item{} Hvor er nettverksadministratoren plassert i et {\sl Wireless}HART-system?
+\item{} Hvordan drives {\sl Wireless}HART-enheter vanligvis?
+\item{} Hva skjer i et {\sl Wireless}HART-nettverk dersom gatewayen svikter?
+\item{} Oppstår kollisjoner i et {\sl Wireless}HART-nettverk?
+\item{} Forklar hvordan frekvenshoppende spread-spectrum-kommunikasjon forbedrer sikkerheten i et {\sl Wireless}HART-nettverk.
+\item{} Standard RF-effekt for en {\sl Wireless}HART-feltenhet er {\bf 10 dBm}. Konverter dette til milliwatt uten kalkulator!
+\item{} Hvilken fordel har det å variere sendeeffekten for hver enhet i et {\sl Wireless}HART-nettverk?
+\item{} Hvordan kan vi styrke påliteligheten i et {\sl Wireless}HART-nettverk med tanke på at nettverket er helt avhengig av gatewayen?
+\item{} Kan flere {\sl Wireless}HART-nettverk overlappe i samme fysiske område?
+\item{} Hvorfor tror du Alarm-meldinger har lavest prioritet i et {\sl Wireless}HART-nettverk? Er ikke alarmer viktige? Forklar hvordan dette ligner alarmkommunikasjon i et FOUNDATION Fieldbus-nettverk (som skjer i uskedulerte eller asynkrone tider som source/sink VCR).
+\item{} Forklar hvordan man kan gjøre et eldre HART-instrument om til et {\sl Wireless}HART-instrument, og hvordan Application-laget i {\sl Wireless}HART muliggjør denne bakoverkompatibiliteten.
+\item{} Forklar hvordan ``stjerne''-topologien i et Bluetooth-nettverk skiller seg fra ``mesh''-topologien i et {\sl Wireless}HART-nettverk.
+\item{} Forklar hvordan CSMA/CA-protokollen i ZigBee eller Wi-Fi skiller seg fra TDMA-protokollen i et {\sl Wireless}HART-nettverk.
+\item{} Forklar hva \textit{determinisme} er i et digitalt nettverk, hvorfor dette er viktig i industriell måling og regulering, og hvorfor {\sl Wireless}HART-nettverk har høyere determinisme enn ZigBee og Wi-Fi.
+\item{} Forklar hvordan prosessmåledata fra en {\sl Wireless}HART-feltenhet kan hentes fra gateway via RS-485 eller Ethernet. Hvordan poller en annen enhet (f.eks. en PLC) disse dataene fra gatewayen?
+\item{} Forklar hvorfor multivariabel prosessdatakommunikasjon er mye mer praktisk for {\sl Wireless}HART-enheter enn for kablede HART-enheter.
+\item{} Beskriv noen av datasikkerhetsfunksjonene i {\sl Wireless}HART-standarden. \textit{128-bit kryptering av data, roterbare Join Keys, frekvenshoppende spread-spectrum-kanaler.}
+\item{} Oppgi noen praktiske tiltak du kan gjøre for å oppnå høyere RSSI-verdi fra et bestemt {\sl Wireless}HART-feltinstrument.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Forberedelsesquiz:}
+
+Et trekk som er unikt for trådløse \textit{mesh}-nettverk (og ikke deles av andre radiotypenettverk) er:
+
+\begin{itemize}
+\item{} Hver enhet har mange nettverksgatewayer den kan kommunisere med
+\vskip 5pt 
+\item{} Alle antennetyper er nødvendigvis identiske (f.eks. alle ``whip''-antenner)
+\vskip 5pt 
+\item{} Dataene som kommuniseres er helt digitale -- ingen analoge signaler i det hele tatt
+\vskip 5pt 
+\item{} Flere kommunikasjonsveier finnes mellom feltenheter og gateway
+\vskip 5pt 
+\item{} All kommunikasjon er duplex (toveis) mellom gateway og feltenheter 
+\vskip 5pt 
+\item{} All kommunikasjon er simplex (enveis) mellom gateway og feltenheter
+\end{itemize}
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Forberedelsesquiz:}
+
+To parametere som må programmeres inn i en {\sl Wireless}HART-enhet for at den skal kunne bli del av et mesh-nettverk er:
+
+\begin{itemize}
+\item{} Baud Rate og IP-adresse
+\vskip 5pt 
+\item{} Network ID og Join Key
+\vskip 5pt 
+\item{} Join Key og Baud Rate
+\vskip 5pt 
+\item{} Network ID og kanalnummer
+\vskip 5pt 
+\item{} Brukernavn og passord
+\vskip 5pt 
+\item{} IP-adresse og Private Key
+\end{itemize}
+
+
+
+%INDEX% Leseoppgave: Lessons In Industrial Instrumentation, WirelessHART (introduksjon)
+
+%(END_NOTES)
+

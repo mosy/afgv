@@ -1,0 +1,71 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+``Flare''-anlegget ved et oljeraffineri fungerer som en sikker måte å raskt kvitte seg med trykksatte hydrokarbonforbindelser på, ved å brenne dem langt unna alt annet som kan være brennbart. I dette systemet, som i de fleste flare-systemer, finnes en ``knockout drum'' som separerer damp fra væske, slik at bare damp sendes til flare-spissen for forbrenning. Oppsamlet væske dreneres til Oily Water Sewer (OWS)-systemet.
+
+En annen beholder kalt ``water seal drum'' opprettholder en vannsøyle som all flaregass må boble gjennom før den går videre til flare for forbrenning. Formålet med vannlåsbeholderen er å hindre at flammer kan forplante seg bakover gjennom prosessrør hvis det skulle oppstå en brennbar blanding av brensel og oksygen i flare-rørnettet. Vannet i seal drum holdes frostfritt i kaldt vær av et temperaturreguleringssystem på denne beholderen:
+
+Studer denne P\&ID-en nøye for først å identifisere alle automatisk regulerte ventiler, og deretter vurdere om en reguleringsventil med lineær iboende karakteristikk vil oppføre seg lineært når den er installert (dvs. også ha lineær {\it installert} karakteristikk):
+
+$$\includegraphics[width=15.5cm]{i0002rx01.eps}$$
+
+\noindent
+Anta følgende parametere i systemet:
+
+\begin{itemize}
+\item{} Flaregassens temperatur varierer mye (fra under omgivelsestemperatur til hundrevis av grader Fahrenheit) avhengig av hvilke enheter som til enhver tid slipper ut til flare-gassheaderen
+\item{} PG-37 viser alltid atmosfærisk trykk (0 PSIG)
+\item{} PG-36 varierer fra atmosfærisk (0 PSIG) til 35 PSIG, avhengig av hvor mange enheter som slipper ut til denne headerledningen til enhver tid
+\item{} PG-35 viser alltid det samme som PG-36
+\item{} PG-12 varierer mellom 85 PSIG og 25 PSIG avhengig av hvor raskt vann trekkes for å fylle vannlåsbeholderen
+\item{} PG-10 leser nesten konstant 27 PSI hele tiden
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hva er det/de avgjørende kriteriene for å bestemme lineær oppførsel hos reguleringsventiler?
+\item{} For en reguleringsventil i denne prosessen som opplever ``forvrengning'', hva vil du anbefale for å forbedre reguleringssløyfens respons?
+\end{itemize}
+
+\underbar{file i01379}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Trodde du virkelig jeg kom til å avsløre detaljene her og ødelegge moroa?
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Prinsippet her er at enhver ventil som opplever et strømningsavhengig trykkfall må ha en equal-percentage-karakteristikk (eller en passende ikke-lineær karakteristikk) for å oppføre seg lineært når den er installert. Enhver ventil som er heldig nok til å oppleve konstant trykkfall under alle strømningsforhold vil fungere fint med en iboende lineær karakteristikk.
+
+\vskip 10pt
+
+TV-26 (dampvarmeventil) {\bf vil oppføre seg lineært} med en iboende lineær karakteristikk, fordi dampforsyningstrykket er konstant og det samme gjelder LP-kondensatlinjen.
+
+\vskip 10pt
+
+LV-21 (vannlåsnivåventil) {\bf vil ikke oppføre seg lineært} med en iboende lineær karakteristikk, fordi forsyningstrykket faller med strømningsraten. En equal-percentage-ventil anbefales her.
+
+\vskip 10pt
+
+LV-24 (kondensatnivåventil for knockout drum) er {\bf usikker}, fordi vi ikke vet hvor stabilt trykkfallet er når strømningsraten endres. Noen kan prøve å basere en konklusjon på variabelt flarelinje- (og knockout drum-)trykk, men dette er irrelevant for vurdering av ventilkarakteristikk fordi denne trykkvariasjonen ikke er {\it strømningsavhengig}. Trykkvariasjoner i flarelinjen skyldes utslippsforhold i raffinerienhetene og er ikke avhengige av strømningsraten gjennom LV-24.
+
+%INDEX% Documentation, loop diagram: realistic industrial example
+%INDEX% Final Control Elements, valve: characterization
+%INDEX% Process: flare knockout drum and water seal (realistic P\&ID shown)
+
+%(END_NOTES)
+

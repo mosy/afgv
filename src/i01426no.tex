@@ -1,0 +1,107 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les og lag en disposisjon av Case History \#60 (``Do Mines Have Particularly Bad Control Problems?'') fra Michael Browns samling av opplæringsartikler om optimalisering av reguleringssløyfer. Forbered deg på en gjennomtenkt diskusjon med lærer og medstudenter om begreper og eksempler i teksten, og svar på følgende spørsmål:
+
+\begin{itemize}
+\item{} Mr. Brown bruker noen lite flatterende ord om PLS-er brukt som sløyferegulatorer, spesielt sammenlignet med DCS-er. Hva er kritikken hans helt konkret, og mener du den er gyldig basert på det du har sett av PID-reguleringsalgoritmer i PLS-systemer (for eksempel Allen-Bradley Logix5000)?
+\vskip 10pt
+\item{} En av anekdotene i denne Case History handler om en PLS brukt som sløyferegulator for ovnstrykk, der programmereren bestemte at reguleringsventilen skulle stenge hver gang regulatoren ble byttet fra manuell til automatisk modus. Hva skjedde som resultat av dette?
+\vskip 10pt
+\item{} Figur 1 viser lukket-sløyfe-responsen i et system der integralvirkningen var altfor treg. Forklar hvordan vi kan avgjøre dette ved å se kun på trenden for SP og PV, selv uten en trend for regulatorens Output.
+\vskip 10pt
+\item{} Figur 2 viser en sløyfe i ``continuous cycle'' (oscillasjon). Undersøk {\it faseskiftet} mellom PV og Output, og bruk denne informasjonen til å avgjøre om regulatorvirkningen domineres av P, I eller D. Hint: Dette er en {\it direktevirkende} regulator.
+\vskip 10pt
+\item{} Figur 4 viser et lærebokeksempel på en ``stick-slip''-syklus. Forklar hva som forårsaker dette, og hvorfor problemet ikke kan elimineres bare ved å justere regulatorens tuningparametere.
+\vskip 10pt
+\item{} Forklar hvordan vi kan se at ventilen har stiction-problemer ved å studere trendgrafen i figur 5.
+\end{itemize}
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} I artikkelen nevner forfatteren en cyanidkonsentrasjonsanalysator med skannefrekvens én gang per 17. minutt. Forklar hvorfor denne skannefrekvensen kan være problematisk dersom denne typen analysator er transmitter i en tilbakekoblet reguleringssløyfe.
+\item{} Beskriv hva en ``safety bursting plate'' er, og hvilke andre begreper en slik enhet kan være kjent under.
+\item{} Regulatoren som oscillerer i figur 2 er direktevirkende, men Mr. Brown sier ikke dette eksplisitt noe sted i teksten. Hvordan kan vi likevel vite det? Hint: Se på figur 3, som er en {\it åpen-sløyfe}-test av samme prosess. Figur 2 (lukket sløyfe) inneholder også nok informasjon til å avgjøre at dette er en direktevirkende regulator.
+\item{} Hvis du synes spørsmålet om faseskift mellom PV og Output er vanskelig som metode for å identifisere dominerende reguleringsvirkning, les delkapitlet ``Recognizing an Over-Tuned Controller by phase shift'' i avsnittet ``Heuristic PID Tuning Procedures'' i kapitlet ``Process Dynamics and PID Controller Tuning'' i læreboken {\it Lessons In Industrial Instrumentation}, og diskuter dette med medstudentene dine.
+\item{} En måte å stoppe en ``stick-slip''-syklus på er å eliminere integralvirkningen fra regulatoren (dvs. sette $\tau_i$ til et svært stort tall). Forklar hvorfor dette stopper syklusen, men dessverre innfører et annet reguleringsproblem i stedet.
+\item{} Identifiser hvor ``porpoising''-atferd vises i en av trendgrafene i artikkelen. Forklar hvorfor porpoising alltid er uheldig i en reguleringssløyfe, og hva som forårsaker det.
+\end{itemize}
+
+\underbar{file i01426}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+PID-regulering implementert i PLS-er har ofte en ``spesiell'' oppførsel, fordi det er lett å undergrave algoritmen med egen brukerlogikk (for eksempel filteralgoritmen Michael Brown fant ``gjemt'' i en undersekvens i et brukerprogram). I tillegg viser standard PID-instruksjoner ofte ``uprofesjonell'' oppførsel. Et eksempel er PID-instruksjonen i Allen-Bradley MicroLogix-PLS-er, som nekter å gi den nesten essensielle funksjonen output tracking dersom integraltidskonstanten settes til null (output tracking fungerer fint med enhver ikke-nullverdi av $\tau_i$).
+
+\vskip 10pt
+
+I PLS-en der ventilen smalt igjen ved overgang fra manuell til auto, førte trykkspiken faktisk til en liten eksplosjon i prosessen!
+
+\vskip 10pt
+
+Figur 1: Vi kan se at integralvirkningen er altfor treg fordi PV ikke ser ut til å nærme seg den nye SP-verdien (selv etter mer enn 1 minutt). Uansett hva regulatorutgangen gjør, går det ikke fort nok! Oscillasjonen før settpunktsendringen er også det vi kaller {\it porpoising}, og den skyldes alltid enten for kraftig proporsjonalvirkning eller for kraftig derivatvirkning (men aldri integralvirkning).
+
+\vskip 10pt
+
+Figur 2: Faseskiftet på -90 grader mellom output-bølgen (PD) og PV-bølgen tyder på at integralvirkningen er dominerende her, noe som gir mening for en strømningssløyfe.
+
+\vskip 10pt
+
+Figur 4: Stick-slip-syklus i en selvregulerende prosess: {\it firkantbølge} på PV, {\it trekantbølge} på output.
+
+\vskip 10pt
+
+Figur 5: Stiction i denne ventilen vises ved at PV er treg/uresponsiv mens Output ramper opp som følge av integralvirkning.
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Forberedelsesquiz:}
+
+I Michael Browns Case History \#60 (``Do Mines Have Particularly Bad Control Problems?'') forteller han om en situasjon der en dårlig programmert PLS faktisk forårsaket skade i prosessen mens han forsøkte å optimalisere en trykkreguleringssløyfe på en smelteovn styrt av denne PLS-en. Beskriv hva som var galt med PLS-programmet, og hva som helt konkret skjedde med ovnen da Mr. Brown byttet fra Manual til Auto på denne sløyfen.
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Forberedelsesquiz:}
+
+I Michael Browns Case History \#60 (``Do Mines Have Particularly Bad Control Problems?'') lister han noen grunner til at PID-sløyferegulering bør implementeres i et DCS (Distributed Control System) fremfor i en PLS (Programmable Logic Controller). Oppgi én av grunnene Mr. Brown oppgir for å foretrekke DCS fremfor PLS til sløyferegulering.
+
+
+%INDEX% Reading assignment: Michael Brown Case History #60, "Do mines have particularly bad control problems?"
+
+%(END_NOTES)
+

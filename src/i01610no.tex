@@ -1,14 +1,32 @@
-
 %(BEGIN_QUESTION)
-% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-En vanlig funksjon på industrielle PID-regulatorer er {\it ekstern reset} (external reset) eller {\it ekstern tilbakekobling} (external feedback). Forklar hva denne funksjonen brukes til, og hvordan den fungerer for å forhindre integrasjonsmetning (windup).
+Her er en pneumatisk P+I-regulatormekanisme, der resetvirkning (integralvirkning) er implementert på standard måte:
 
-\vfil
+$$\includegraphics[width=15.5cm]{i01610x02.eps}$$
+
+\filbreak
+
+Dette kalles ``intern reset''-virkning. Det finnes imidlertid en alternativ metode for å implementere resetvirkning i en pneumatisk regulator, og den innebærer å legge til en pneumatisk posisjonssender på ventilen for å sende ventilstilling (ventilspindelens posisjon) tilbake til regulatoren. Denne alternative metoden kalles ``ekstern reset'':
+
+$$\includegraphics[width=15.5cm]{i01610x01.eps}$$
+
+Fordelen med en regulator med ekstern reset er at resetvirkningen har mindre tendens til å ``winde opp''. Forklar hvorfor dette er slik.
+
+\vskip 10pt
+
+Hint: Tenk deg at ventilen er utstyrt med en minimumsbevegelses-``stopp'', slik at dens mest lukkede posisjon er 15\%. Slike stoppere brukes noen ganger på strømningsreguleringsventiler der en viss minimumsstrøm må opprettholdes av hensyn til prosessikkerhet (f.eks. strømningsregulering av prosessvæske i en forbrenningsvarmer der null strømning kan gi overopphetede og sprukne rør). Hvordan vil ekstern reset bidra til å forhindre at regulatoren integrerer seg nedover ved visse lave setpunktforhold?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} En kraftig problemløsningsteknikk er å utføre et {\it tankeeksperiment} der du mentalt simulerer hvordan et system responderer på et tenkt sett med betingelser. Beskriv et nyttig ``tankeeksperiment'' for dette systemet, og hvordan resultatene fra dette tankeeksperimentet hjelper deg med å svare på spørsmålet. Hvis du synes dette systemet er for komplekst, bruk en annen problemløsningsteknikk: {\it forenkle} systemet, og analyser deretter den enklere varianten.
+\item{} Hvordan ville denne ordningen med ekstern reset fungert på en reguleringsventil med svært dårlig hysterese (stiksjon)? Ville sløyfen ``sykle'' slik en vanlig regulator med intern reset som driver en klebrig ventil typisk vil gi en stick-slip-syklus, eller ikke?
+\item{} Identifiser hvordan du kan øke forsterkningen i denne regulatoren uten å flytte vippepunktet.
+\end{itemize}
 
 \underbar{file i01610}
-\eject
 %(END_QUESTION)
 
 
@@ -17,7 +35,19 @@ En vanlig funksjon på industrielle PID-regulatorer er {\it ekstern reset} (exte
 
 %(BEGIN_ANSWER)
 
-Ekstern reset mater det faktiske ventilsignalet (posisjonen) tilbake til regulatorens integraldel, i stedet for regulatorens eget beregnede utgangssignal. Hvis ventilen går i metning, eller hvis den overstyres av en annen enhet (som en begrensende velger), vil ikke integraldelen fortsette å integrere avviket, fordi den "ser" at ventilen ikke beveger seg.
+Ekstern anti-reset-windup er en funksjon som finnes i enkelte regulatorer for å forhindre ``windup'' i integralleddet (resetleddet), ved å overvåke ventilstilling eller annen reell indikasjon på metning i utgangen. Den virker ved å stoppe integreringen når det faktiske sluttregulerende elementet er mettet, i stedet for å stoppe integreringen basert på en maksimal- eller minimumsverdi programmert i regulatoren.
+
+\vskip 10pt
+
+Når integralvirkningen baseres på ventilstilling i stedet for størrelsen på regulatorens utgangssignal, hindres windup over et bredere sett av driftsforhold. Hvis ventilen for eksempel blir sittende fast eller får begrenset vandring av en ``stopp'', vil integreringen stoppe ved denne grensen, i stedet for å fortsette blindt til regulatorens faktiske utgangstrykk når metning, slik det ville gjort med intern anti-reset-windup.
+
+Dette forhindrer ikke alle tilfeller av reset-windup, men det hjelper regulatoren med å hente seg inn igjen etter hendelser der windup skyldes metning i ventilposisjon.
+
+\vskip 10pt
+
+Interessant nok brukes akkurat den samme teknikken i FOUNDATION Fieldbus PID-sløyfer, der analogutgangens funksjonsblokk gir et ``back calculation''-signal (BKCAL\_OUT) inn til PID-blokken. Hvis det sluttregulerende elementet av en eller annen grunn ikke kan oppnå en bestemt tilstand, vil PID-blokken vite dette og stoppe integreringen, og dermed forhindre unødvendig windup:
+
+$$\includegraphics[width=15.5cm]{i01610x03.eps}$$
 
 %(END_ANSWER)
 
@@ -27,8 +57,8 @@ Ekstern reset mater det faktiske ventilsignalet (posisjonen) tilbake til regulat
 
 %(BEGIN_NOTES)
 
-Ekstern reset er en meget elegant løsning på windup-problemet, spesielt i kaskaderegulering eller systemer med selektor (override) kontroll. Det sikrer at regulatorens utgang alltid er synkronisert med det faktiske pådraget til prosessen.
 
+%INDEX% Control, integral: external reset
 %INDEX% Control, integral: windup mitigation through external reset
 
 %(END_NOTES)

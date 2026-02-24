@@ -1,11 +1,17 @@
-
 %(BEGIN_QUESTION)
 % Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-En "reversvirkende" regulator er definert som en der utgangen minker når prosessvariabelen (PV) øker.
+Bestem hvordan hver reguleringsvirkning (P, I og D) vil reagere i periodene markert på denne prosesstrenden ved å bruke symbolene $\uparrow$ (driver opp), $\downarrow$ (driver ned), $+$ (stabil positiv), $-$ (stabil negativ) eller 0 (null), sammenlignet med virkningen til hver av dem i begynnelsen av trenden. Gjør dette for P, og også for I og D. Anta {\it direktevirkende} regulator.
 
-Hvordan påvirker denne definisjonen fortegnet til P-, I- og D-virkningene i PID-ligningen? Vil de alle jobbe i samme retning (alle negative for revers virkemåte), eller kan de ha forskjellige fortegn?
+$$\includegraphics[width=15.5cm]{i01640x01.eps}$$
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identifiser gode problemløsningsstrategier du kan bruke på denne oppgaven.
+\item{} Skisser en kvalitativ graf som viser utgangen fra en full PID-regulator gitt disse PV- og SP-grafene.
+\end{itemize}
 
 \underbar{file i01640}
 %(END_QUESTION)
@@ -16,9 +22,7 @@ Hvordan påvirker denne definisjonen fortegnet til P-, I- og D-virkningene i PID
 
 %(BEGIN_ANSWER)
 
-I en standard PID-regulator jobber alle tre leddene (P, I og D) sammen i samme retning. Hvis regulatoren er reversvirkende, vil både P-, I- og D-bidragene virke for å redusere utgangen ved en økning i PV.
-
-(Unntaket er visse spesielle implementeringer der man kan velge virkemåte individuelt per ledd, men dette er uvanlig i standard prosesskontroll).
+$$\includegraphics[width=15.5cm]{i01640x02.eps}$$
 
 %(END_ANSWER)
 
@@ -28,7 +32,70 @@ I en standard PID-regulator jobber alle tre leddene (P, I og D) sammen i samme r
 
 %(BEGIN_NOTES)
 
-Det er viktig å forstå at "virkemåte" (Action) er en global innstilling for hele regulatoren, som snur fortegnet på alle leddene samtidig.
+{\bf Periode 1:}
+
+\begin{itemize}
+\item{}P er null, fordi avviket er uforandret
+\item{}I er null, fordi avviket er null
+\item{}D er null, fordi avviket er uforandret
+\end{itemize}
+\bigskip
+
+
+
+{\bf Periode 2:}
+
+\begin{itemize}
+\item{}P øker, fordi avviket blir mer positivt
+\item{}I øker, fordi avviket er positivt
+\item{}D er positiv, fordi endringshastigheten i avviket er stabil og positiv
+\end{itemize}
+\bigskip
+
+
+
+{\bf Periode 3:}
+
+\begin{itemize}
+\item{}P avtar, fordi avviket blir mer negativt
+\item{}I øker, fordi avviket er positivt
+\item{}D er negativ, fordi endringshastigheten i avviket er stabil og negativ
+\end{itemize}
+\bigskip
+
+
+
+{\bf Periode 4:}
+
+\begin{itemize}
+\item{}P er null, fordi avviket er null og uforandret
+\item{}I er positiv, fordi avviket er null og integralleddet tidligere har akkumulert en positiv verdi
+\item{}D er null, fordi avviket er uforandret
+\end{itemize}
+\bigskip
+
+
+
+{\bf Periode 5:}
+
+\begin{itemize}
+\item{}P avtar, fordi avviket blir mer negativt
+\item{}I avtar, fordi avviket er negativt
+\item{}D er negativ, fordi endringshastigheten i avviket er stabil og negativ
+\end{itemize}
+\bigskip
+
+
+
+{\bf Periode 6:}
+
+\begin{itemize}
+\item{}P er negativ, fordi avviket er stabilt og negativt
+\item{}I avtar, fordi avviket er negativt
+\item{}D er null, fordi avviket er uforandret
+\end{itemize}
+
+
 
 %INDEX% Control, proportional + integral + derivative: relative directions of action
 

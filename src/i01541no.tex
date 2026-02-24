@@ -1,0 +1,141 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les og lag en disposisjon av Case History \#92 (``The Controller Has Gone Out Of Tune!'') fra Michael Browns samling av veiledninger om optimalisering av reguleringssløyfer. Forbered deg på en gjennomtenkt diskusjon med lærer og medstudenter om begrepene og eksemplene i denne lesningen, og svar på følgende spørsmål:
+
+\begin{itemize}
+\item{} Som Mr. Brown påpeker, er tittelen på denne casehistorien ganske latterlig gitt bruk av digitale PID-regulatorer. Likevel lever denne holdningen videre i industrien. Hvorfor tror du det er slik?
+\vskip 10pt
+\item{} Ifølge Mr. Brown, hvilken enkelt type instrumentproblem står for det store flertallet av reguleringsproblemer i sløyfer?
+\vskip 10pt
+\item{} Identifiser dominerende regulatormodus (P, I eller D) i trenden i figur 4, samt regulatorens virkemåte (dvs. direkte eller revers).
+\vskip 10pt
+\item{} En betydelig del av denne casehistorien brukes til å forklare {\it aliasing} og hvordan dette fenomenet kan forårsake ustabilitet i et reguleringssystem. Forklar begrepet ``aliasing'' med egne ord.
+\vskip 10pt
+\item{} Er aliasing et problem når reguleringssystemet har {\it rask} skannehastighet eller {\it langsom} skannehastighet? Forklar svaret ditt.
+\vskip 10pt
+\item{} Forklar hvilke parameter(e) i dette DCS-et som påvirket skannehastigheten, og hvorfor dette var viktig for problemet i nivåreguleringssløyfen hvis ytelse er dokumentert i figur 4 og 5.
+\vskip 10pt
+\item{} Figur 5 viser et eksempel på hvordan en høyfrekvent oscillasjon i PV gir en lav frekvens på regulatorens utgangssignal på grunn av aliasing. Anta at en tekniker foreslo at denne oscillasjonen kunne skyldes maskinvibrasjon nær transmitteren. Ville du være enig i denne muligheten, eller ikke? Hvorfor?
+\end{itemize}
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Undersøk og forklar deretter Mr. Browns anbefalte test for ventilhysterese, vist i figur 1.
+\item{} Regulatorens sykling vist i figur 5 ga ifølge Mr. Brown ikke et nivåreguleringsproblem, men den ga problemer for en annen del av prosessen. Identifiser hvilken del dette var.
+\item{} Mr. Brown sier at han korrigerte aliasingproblemet i figur 5 ved å bruke {\it filtrering}. Hvis du skulle brukt denne ``løsningen'', ville du lagt filtreringen i smarttransmitteren eller i regulatoren?
+\item{} Et stroboskop er et verktøy som brukes til å ``fryse'' bevegelsen i en roterende maskin ved å sende korte lysglimt mot maskinen én gang per omdreining, slik at den ser ut til å stå stille. Hvis stroboskopet ikke er nøyaktig innstilt på riktig frekvens, ser komponenten ut til å rotere, men mye saktere enn den faktisk gjør. Forklar hvordan dette er et eksempel på {\it aliasing}.
+\end{itemize}
+
+\underbar{file i01541}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+En plausibel grunn til at folk først fokuserer på regulatorinnstilling, er at dette er enkelt å endre.
+
+\vskip 10pt
+
+Ifølge Michael Brown er over 80\% av sløyfeproblemene knyttet til reguleringsventilen, etterfulgt av måleproblemer og til slutt prosessendringer.
+
+\vskip 10pt
+
+Trenden i figur 4 viser P-dominert virkning med en direktevirkende regulator. Vi vet dette fordi PV- og utgangsbølgeformene er nesten helt i fase med hverandre.
+
+\vskip 10pt
+
+{\it Aliasing}: når en digital sampler ikke sampler raskt nok. Den fanger bare biter og deler av bølgen, og resultatet blir et signal med lavere frekvens enn det som faktisk er til stede. Figur 5 viser dette tydelig: høyfrekvent støy på PV blir til en lavfrekvent bølge på utgangen.
+
+\vskip 10pt
+
+I det japanske DCS-et brukt i denne prosessen var regulatorens skannehastighet basert på integral-tidskonstanten. Den relativt langsomme integraltiden brukt i denne nivåreguleringsprosessen tvang regulatoren til å sample bare én gang hvert 16. sekund, noe som aliaserte støyen på PV-signalet til en langsommere oscillasjon i reguleringsventilen.
+
+\vskip 10pt
+
+Figur 5s høyfrekvente sykling på PV har en periode på omtrent 21 sekunder, noe som gjør det lite sannsynlig at den stammer fra vibrasjon (med mindre det er {\it aliasert} vibrasjon fra transmitterens skannehastighet!).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Forberedende quiz:}
+
+Ifølge Michael Brown i Case History \#92 (``The Controller Has Gone Out Of Tune!'') rapporten, hvilken instrumenttype står for omtrent 80\% av sløyfeproblemene?
+
+\begin{itemize}
+\item{} Transmittere
+\vskip 10pt
+\item{} I/P-konvertere
+\vskip 10pt
+\item{} Reguleringsventiler
+\vskip 10pt
+\item{} P/I-konvertere
+\vskip 10pt
+\item{} Analoge regulatorer
+\vskip 10pt
+\item{} Digitale regulatorer
+\end{itemize}
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Oppsummeringsquiz:}
+
+{\it Aliasing} er et fenomen der:
+
+\begin{itemize}
+\item{} Operatører bærer verktøy for å kle seg ut som instrumentteknikere
+\vskip 5pt 
+\item{} Støy lagt oppå et signal forårsaker ustabilitet i reguleringssløyfen
+\vskip 5pt 
+\item{} Skanntiden i et digitalt system er for rask for signalet
+\vskip 5pt 
+\item{} Stiction i en reguleringsventil gjør at en sløyfe sykler periodisk
+\vskip 5pt 
+\item{} Et signal mistolkes som om det har mye lavere frekvens enn det faktisk har
+\vskip 5pt 
+\item{} Interlock-logikk i en reguleringsstrategi forårsaker periodisk sykling
+\end{itemize}
+
+
+%INDEX% Reading assignment: Michael Brown Case History #92, "The controller has gone out of tune!"
+
+%(END_NOTES)
+

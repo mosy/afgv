@@ -1,0 +1,57 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En datainnsamlingsenhet skal brukes for vibrasjonsmåling på en stor dampturbin. Turbinakselen går med 1800 RPM, og målet er å måle vibrasjoner opp til 11. harmoniske av akselhastigheten.
+
+\vskip 10pt
+
+Bestem minimum samplingsfrekvens for DAQ-modulen for å unngå {\it aliasing}. Bestem også en praktisk samplingsfrekvens slik at selv høyeste interessante frekvens blir godt digitalisert.
+
+\vfil 
+
+\underbar{file i00889}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er en vurdert oppgave -- ingen svar eller hint oppgis!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+``Aliasing'' oppstår når et digitalt datainnsamlingssystem sampler et varierende signal for langsomt, slik at systemet tolker en falsk lavfrekvent bølgeform som egentlig ikke finnes. Absolutt minimum for å unngå aliasing er sampling med {\it dobbelt} av frekvensen av interesse (Nyquists samplingssetning), men en mer praktisk standard er sampling med {\it ti ganger} høyeste frekvens av interesse.
+
+Derfor må vi først konvertere høyeste harmoniske vibrasjonsfrekvens til Hertz (sykluser per sekund), slik at vi kan multiplisere med ti for å finne nødvendig samplingsrate.
+
+\vskip 30pt
+
+Akselhastigheten er 1800 RPM, og vi er interessert i frekvenser opp til 11. harmoniske (11 ganger akselrotasjonen). 1800 RPM kan leses som 1800 omdreininger per minutt. Konvertering til Hertz gjør vi med enhetsbrøker:
+
+$$\left(1800 \hbox{ rev} \over 1 \hbox{ min} \right) \left(1 \hbox{ min} \over 60 \hbox{ sec} \right) = 30 \hbox{ rev/sec} = 30 \hbox{ Hz}$$
+
+Dette betyr at grunnfrekvensen i vibrasjonssignalet er 30 Hz. Høyeste interessante frekvens er da 330 Hz (11. harmoniske av 30 Hz).
+
+\vskip 30pt
+
+Basert på denne frekvensen må vi sample 2 til 10 ganger raskere for å unngå aliasing:
+
+\vskip 10pt
+
+Absolutt minimum samplingsrate = 660 samples per second ($2 \times$ høyeste $f$ av interesse) ; Praktisk samplingsrate = 3300 samples per second ($10 \times$ høyeste $f$ av interesse)
+
+%INDEX% Electronics review: ADC aliasing
+%INDEX% Electronics review: ADC resolution
+
+%(END_NOTES)

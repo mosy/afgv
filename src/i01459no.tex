@@ -3,12 +3,21 @@
 % Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Forklar forskjellen mellom {\it regulatorforsterkning} (controller gain) og {\it sløyfeforsterkning} (loop gain).
+I elektronikkstudiet ditt lærte du sannsynligvis at enhver forsterker kan bli en {\it oscillator} ved å gi riktig mengde faseforskjøvet tilbakekobling fra utgang til inngang, med et minimum av total kretsforsterkning. Dette prinsippet har til og med et navn: {\it Barkhausen-kriteriet}.
 
-\vfil
+$$\includegraphics[width=15.5cm]{i01459x01.eps}$$
+
+Så lenge produktet av de to forsterkningene er minst én ($A_{amp} \cdot A_{feedback} \geq 1$), vil forsterkningen være tilstrekkelig til å opprettholde oscillasjon i kretsen. En viktig måte å unngå oscillasjon på i en slik krets er å begrense total ``sløyfe''-gain til mindre enn én.
+
+\vskip 10pt
+
+Et prosessreguleringssystem med tilbakekobling skiller seg ikke så mye fra dette, og kan også oscillere dersom total ``loop''-gain er for høy:
+
+$$\includegraphics[width=15.5cm]{i01459x02.eps}$$
+
+Beskriv hva ``gain'' representerer i hver av de fire komponentene i reguleringssystemet over ($A_C$, $A_{fce}$, $A_{process}$ og $A_T$), og angi hvilken av disse gainene som er enklest å endre. Forklar til slutt hvordan denne ene (lett justerbare) gainen bør stilles inn. Med andre ord: hvilke kriterier bør bestemme verdien?
 
 \underbar{file i01459}
-\eject
 %(END_QUESTION)
 
 
@@ -17,7 +26,19 @@ Forklar forskjellen mellom {\it regulatorforsterkning} (controller gain) og {\it
 
 %(BEGIN_ANSWER)
 
-Regulatorforsterkning er forholdet mellom utgangsendring og inngangsendring (avviksendring) internt i regulatoren. Sløyfeforsterkning er det totale produktet av alle forsterkninger i tilbakekoblingssløyfen (regulator, sluttelement, prosess og sensor/transmitter).
+For hver komponent i reguleringssystemet defineres ``gain'' på samme måte som for gain i enhver elektronisk komponent -- forholdet mellom endring i utgang og endring i inngang:
+
+$$\hbox{Gain } = {\Delta \hbox{Out} \over \Delta \hbox{In}}$$
+
+Vi kan være mer presise i definisjonen ved å bruke kalkulusnotasjon og uttrykke forholdet som en {\it derivert}:
+
+$$\hbox{Gain } = {d \hbox{Out} \over d \hbox{In}}$$
+
+Når det gjelder hvordan og hvorfor regulatorgain skal settes til en bestemt verdi, lar jeg deg diskutere dette med medstudentene dine og komme fram til et eget svar. Jeg kan likevel si dette: vi ønsker {\it ikke} at systemet skal gå i oscillasjoner!
+
+\vskip 10pt
+
+Utfordringsspørsmål: Som du kanskje (og bør!) huske, er en nødvendig betingelse for oscillasjon i et tilbakekoblet system at tilbakekoblingen er {\it positiv}. Med andre ord må faseforskyvningen fra forsterkerutgang til forsterkerinngang være 360$^{o}$, ellers vil enhver oscillasjon dø ut raskt på grunn av interferens, uavhengig av gain. Med dette i tankene: hvordan kan et reguleringssystem i det hele tatt oscillere, når vi vet at tilbakekoblingen normalt er {\it negativ}, ikke positiv? Selv om regulatorgain var svært høy, burde ikke den iboende negative tilbakekoblingen naturlig forhindre oscillasjon?
 
 %(END_ANSWER)
 
@@ -27,8 +48,28 @@ Regulatorforsterkning er forholdet mellom utgangsendring og inngangsendring (avv
 
 %(BEGIN_NOTES)
 
-Å forstå at "sløyfeforsterkning" er produktet av alle komponentforsterkningene er svært viktig, da det fører til forståelsen av at vi kan kompensere for en endring i forsterkning et annet sted i sløyfen (sluttelement, prosess, etc.) ved rekalibrere forsterkningen i regulatoren.
+Regulatorgain er åpenbart den enkleste gainen å stille i et reguleringssystem, og den bør settes høyt nok til å gi rask og responsiv regulering, men ikke så høyt at systemet blir ustabilt og oscillerer.
+
+\vskip 10pt
+
+Det er lærerikt å la studentene utlede følgende gain-ligninger for hver av de fire komponentene i prosessløkka (transmitter, regulator, ventil og prosess):
+
+$$\hbox{Transmittergain } = {\Delta \hbox{PV signal} \over \Delta \hbox{Målt variabel}}$$
+
+$$\hbox{Regulatorgain } = {\Delta \hbox{MV signal} \over \Delta \hbox{PV signal}}$$
+
+$$\hbox{Ventilgain } = {\Delta C_v \over \Delta \hbox{MV signal}}$$
+
+$$\hbox{Prosessgain } = {\hbox{Målt variabel} \over \Delta C_v}$$
+
+Legg merke til hvordan inngangen til neste instrument i løkka kommer fra utgangen til det forrige! Denne progresjonen viser tydelig ``kjeden'' av informasjon fra ett element til det neste.
+
+\vskip 10pt
+
+Som svar på utfordringsspørsmålet: negativ tilbakekobling vil definitivt hindre oscillasjon uansett gain. Men i et tilbakekoblet system vil det {\it alltid} finnes tidsforsinkelser, og disse gir faseforskyvning ved oscillasjonsfrekvenser. Ved en viss frekvens vil alle reguleringssystem utvikle ytterligere 180$^{o}$ faseforskyvning mellom regulatorutgang og regulatorinngang, og dermed gjøre opprinnelig negativ tilbakekobling til positiv tilbakekobling. Dette er for øvrig grunnen til at tilbakekoblede systemer søker bestemte frekvenser når de oscillerer! Alle andre frekvenser klarer ikke å skape nødvendig faseforskyvning for regenerativ tilbakekobling, og dør derfor ut.
 
 %INDEX% Control, proportional: loop gain
+%INDEX% Electronics review: Barkhausen criterion
 
 %(END_NOTES)
+

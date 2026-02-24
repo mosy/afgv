@@ -1,0 +1,45 @@
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Anta at du blir bedt om å kalibrere en FOUNDATION Fieldbus pH-transmitter som måler pH i vann som strømmer gjennom et rør. Vannbehandlingsprosessen den inngår i må holdes i gang og kan ikke stanses mens du utfører denne oppgaven.
+
+Selskapets standard vedlikeholdsprosedyre for denne sløyfen sier at du skal sette pH-transmitterens Analog Input-funksjonsblokk i ``Manual''-modus under kalibreringen, slik at pH-verdiene den måler under kalibrering ikke sendes til PID-funksjonsblokken og skaper problemer i den operative prosessen. ``Manual''-modus i Analog Input-funksjonsblokken fryser i praksis signalet til PID-funksjonsblokken på den siste verdien den sendte ut under normal drift.
+
+\vskip 10pt
+
+Du er vant til å sette PID-regulatorer i manuell modus når du utfører slike oppgaver, men du er ikke vant til å gjøre det samme med Analog Input-funksjonsblokken i et Fieldbus-system. Er disse to tiltakene likeverdige, eller er det en fordel ved å gjøre det på den ene måten fremfor den andre?
+
+\vfil
+
+\underbar{file i01620}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er et vurdert spørsmål -- ingen svar eller hint er gitt!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Å sette AI-blokken i Manual-modus vil {\it ikke} ha samme effekt som å sette PID-blokken i Manual-modus. Forskjellen er følgende: Å sette PID-blokken i Manual låser sluttregulerende element (for eksempel ventil) i én posisjon mens du kalibrerer transmitteren. Dette er bra, fordi det bidrar til å stabilisere prosessens pH i tiden systemet ikke måler pH. Å sette AI-blokken i Manual fryser derimot bare signalet inn til en fortsatt aktiv PID-blokk. Hvis den frosne pH-verdien ikke er nøyaktig lik setpunktet, vil den aktive PID-blokken begynne å ``winde opp'' eller ``winde ned'' med integralvirkning (retningen avhenger av om den frosne pH-verdien er over eller under setpunktet) i et nytteløst forsøk på å bringe pH tilbake til setpunkt. Dette kan skape store prosessforstyrrelser mens du kalibrerer pH-proben.
+
+En bedre prosedyre ville vært å sette pH-transmitterens AI-funksjonsblokk i {\it Out Of Service} (OOS)-modus i stedet for Manual-modus, fordi OOS-modus har status ``Bad'' knyttet til seg, og denne statusen vil propagere til alle funksjonsblokker ``nedstrøms'' i reguleringsstrategien. De fleste funksjonsblokker går selv til Manual-modus når de mottar ``Bad''-status fra en oppstrøms blokk, og dette vil derfor sette pH-regulatoren i Manual-modus for å hindre windup.
+
+Teknikeren bør likevel ikke avvike fra den skriftlige prosedyren ennå. Hvis noe går galt under kalibreringen og det viser seg at teknikeren har avveket fra standard prosedyre, kan vedkommende få store problemer selv om hensikt og faglig logikk var riktig.
+
+%INDEX% Calibration, practice: taking transmitter out of service
+%INDEX% Fieldbus, function block: ``manual'' mode
+%INDEX% Process: water pH neutralization (generic)
+
+%(END_NOTES)

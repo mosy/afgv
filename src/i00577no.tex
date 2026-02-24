@@ -1,0 +1,90 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les deler av referansemanualen for Rosemount Smart Wireless THUM Adapter (dokument 00809-0100-4075, revisjon AA) og svar på spørsmålene under:
+
+\vskip 10pt
+
+Forklar hva formålet med THUM-enheten er. Hvordan brukes den vanligvis i et {\sl Wireless}HART-nettverk?
+
+\vskip 10pt
+
+Må THUM programmeres med ``network ID'' og ``join key'' på samme måte som en vanlig {\sl Wireless}HART-feltenhet, eller er den unntatt fordi den bare er en {\it adapter}? Forklar begrunnelsen.
+
+\vskip 10pt
+
+Hvor stort DC-spenningsfall introduserer THUM i 4--20 mA-sløyfen? Viktigere: hvordan kan dette spenningsfallet (potensielt) påvirke sløyfen? Og hvorfor er spenningsfall over THUM nødvendig for drift?
+
+\vskip 10pt
+
+Forklar hensikten med at THUM har både variabel (standard) og fast spenningsfallmodus.
+
+\vskip 10pt
+
+Manualen anbefaler en bestemt oppstartsrekkefølge ved idriftsetting av nye enheter i et {\sl Wireless}HART mesh-nettverk. Forklar hvordan rekkefølgen skal være, og hvorfor dette påvirker nettverksdriften.
+
+\vskip 10pt
+
+THUM kan kobles til både sløyfematede (2-leder) instrumenter og egenmatede (4-leder) instrumenter. Se koblingsskjemaene for begge og identifiser mønsteret i THUM-kablingen: hvilken retning går strømmen alltid gjennom THUM-ledningene?
+
+\vskip 10pt
+
+Har monteringsretningen for THUM betydning, selv om enheten ikke har ekstern antenne slik andre {\sl Wireless}HART-enheter har? Hvis ja, hvordan bør THUM monteres?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} I manualen skilles det mellom 2-leder HART-instrumenter, 4-leder ``passive'' HART-instrumenter og 4-leder ``active'' HART-instrumenter. Forklar denne forskjellen.
+\end{itemize}
+
+\underbar{file i00577}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Rosemount THUM kobles til en kablet HART-enhet for å gi den {\sl Wireless}HART-funksjonalitet (side 1-3).
+
+\vskip 10pt
+
+THUM må definitivt programmeres med egen network ID og join key, fordi en kablet HART-enhet ikke har disse parameterne. {\sl Wireless}HART er i praksis et ``supersett'' av kablet HART, så ekstra parametere for trådløs kommunikasjon må ligge i THUM, ikke i underenheten. (side 2-3)
+
+\vskip 10pt
+
+THUM gir omtrent 2.25 V spenningsfall ved 3.5 mA og omtrent 1.2 V ved 25 mA (side 1-3), samt 2.5 V i feilmodus. Vanligvis er dette uproblematisk, men i dårlig dimensjonerte sløyfer kan det gi for lav spenning til sløyfematede transmittere. Spenningsfallet er nødvendig for at THUM skal kunne hente effekt til radiosending og intern prosessor.
+
+\vskip 10pt
+
+I fast spenningsfallmodus faller THUM alltid 2.25 V (side 5-2). Dette representerer verstefall i 4--20 mA-sløyfen og gjør det mulig å verifisere om sløyfen har nok forsyningsspenning under alle forhold. Se det som en ``stresstest'' for kretsen (side 3-7).
+
+\vskip 10pt
+
+{\it Wireless}HART-feltenheter bør startes opp i rekkefølge etter nærhet til gateway for raskere idriftsetting. Enheter nærmest gateway startes først slik at de kan fungere som repeatere for enheter lenger unna (side 1-3).
+
+\vskip 10pt
+
+THUM henter effekt fra strøm som går fra rød leder til gul leder. Vanligvis kobles strømforsyning til rød (+) og svart ($-$), mens gul (+) og hvit ($-$) alltid kobles til HART-enhetens kraft/kommunikasjonsterminaler (side 3-4 og 3-5). Eksempler uten kablet HART-enhet er vist på side 2-2 (strømkilde) og 2-3 (spenningskilde).
+
+\vskip 10pt
+
+THUM bør monteres vertikalt slik at den integrerte antennen får vertikal orientering (side 1-3).
+
+%INDEX% Nettverk, WirelessHART
+%INDEX% Leseoppgave: Rosemount THUM trådløs adapter
+
+%(END_NOTES)
+

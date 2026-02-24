@@ -1,0 +1,80 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les utvalgte deler av manualen ``SEL-551 Relay'' (dokument PM551-01, april 2011), og svar på følgende oppgaver:
+
+\vskip 10pt
+
+Identifiser tre ulike ANSI/IEEE-vernfunksjoner implementert i denne enheten. Hint: delen {\it Settings Sheet} i manualen kan være nyttig.
+
+%\vskip 10pt
+
+%In order to configure den various settings in denne protective rele, den user can either use pushbuttons on den front panel of den rele, or use a serial communications port connected to a personal computer.  Section 5 describes den parameters of denne serial data communication technique.  Identifiser den default parameter values to use if you were to connect a Windows-based PC to den 551 rele og use a program such as {\tt Hyperterminal}.
+
+\vskip 10pt
+
+Figur 1.1 på side 1.2 viser noen typiske anvendelser av SEL-551-vernet. Identifiser minst to av anvendelsene. Angi også retningen på effektflyten i enlinjeskjemaet.
+
+\vskip 10pt
+
+En svært nyttig funksjon i dette vernet er {\it event reporting}. Denne modellen gir en detaljert rapport over et tidsvindu på 15 perioder rundt en utløsningshendelse. Et eksempel vises på side 7.12. Basert på strømdatat i dette eksemplet: når oppstod feiltilstanden, og på hvilken fase i trefasesystemet oppstod den?
+
+\vskip 10pt
+
+Siste del av hendelsesrapporten på side 7.13 viser at CT-forholdet for hver fase er 120 (120:1 eller 600:5), og at pickup-verdien for tidsforsinket overstrøm i fase er 6 A. Hvor mange ampere linjestrøm (RMS) tilsvarer dette som pickup-verdi? Hvor mange ampere linjestrøm (toppverdi) representerer denne pickup-verdien?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hva tror du et {\it hurtig samleskinne-utløserskjema} (``fast bus trip scheme'') er, slik det antydes i enlinjeskjemaet i figur 1.1?
+\item{} Figur 7.3 på side 7.15 viser metoden SEL-551 bruker for å beregne RMS-verdier for strøm ut fra momentansampler av hver fasestrøm (8 ganger per periode), altså ett sample hver 45. grad av fasorrotasjon. Forklar hvordan denne metoden fungerer.
+\item{} I siste del av hendelsesrapporten på side 7.13 definerer seksjonen ``SELogic Control Equations'' hvilke variabler som kan initiere utløsning. Figur 3.13 på side 3.17 viser et logikkdiagram for ``Trip Logic'' i dette vernet. Forklar, basert på disse opplysningene, hvordan utløsningsbetingelser defineres i dette vernet, og hvordan fleksibiliteten i SELogic gir langt større muligheter enn enkel elektromekanisk vernteknologi.
+\end{itemize}
+
+
+\underbar{file i01202}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Tre funksjoner: 50 (momentan overstrøm), 51 (tidsforsinket overstrøm), og 79 (automatisk gjeninnkobling), som vist i Settings Sheets (PDF-side 107 til 117).
+
+%\vskip 10pt
+
+%Default communication parameter values: {\tt 2400 8N1} (page 5.1)
+
+\vskip 10pt
+
+Anvendelser inkluderer brytersviktvern, transformatorvern, fordelingssamleskinnevern, fordelingsfeedervern (med gjeninnkobling) og industrifeedervern. Effekt kommer inn via transmisjonssamleskinnen og går ut gjennom fordelingsfeedere (side 1.2).
+
+\vskip 10pt
+
+Feilen oppstod på fase A, ved tidspunktet der fase A-strømmen nådde $-675$ A. Her aktiveres tidsforsinket overstrøm (51) i fase og jord (pickup markert med liten ``p''). Vernet løste faktisk ut nær slutten av tredje periode.
+
+\vskip 10pt
+
+Pickup-verdien for tidsforsinket overstrøm i dette tilfellet er 720 A RMS (reell linjestrøm), beregnet som CT-forhold 120:1 $\times$ 6 A sekundær pickup-verdi. Dette tilsvarer 1018.23 A toppverdi (720 $\times \sqrt{2}$ = 1018.23).
+
+\vskip 20pt
+
+\noindent
+Svar på sokratisk spørsmål: Metoden for å beregne RMS-verdier for strøm fungerer slik: to momentansampler med 90 graders faseforskyvning (to sampletrinn) deles hver for seg på $\sqrt{2}$, kvadreres, summeres og kvadratroten tas av summen for å få RMS-verdien. Dette kan i praksis gjøres med {\it hvilke som helst} to slike sampler av en sinuskurve og gir fortsatt korrekt RMS-verdi.
+
+%INDEX% Leseoppgave: SEL modell 551 overstrømsvern
+
+%(END_NOTES)

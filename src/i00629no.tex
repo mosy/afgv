@@ -1,0 +1,83 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Anta at en tekniker åpner døren til en koblingsboks og kobler et DMM (digitalt multimeter) til et par termoelementledninger som er terminert på en klemmerekke inne i boksen. Termoelementskjøten i den andre enden av dette ledningsparet er montert i et varmt prosessrør omtrent 50 fot unna, og måler temperaturen til en prosessvæske. Når teknikeren observerer at omgivelsestemperaturen inne i koblingsboksen er 58 grader Fahrenheit, måler han eller hun et termoelementsignal på 29.34 millivolt. Beregn temperaturen for dette termoelementet av type E.
+
+\vskip 10pt
+
+$T = $ \underbar{\hskip 50pt} grader Fahrenheit
+
+\vskip 10pt
+
+Vis utregningen din når du beregner denne temperaturen.
+
+\vskip 50pt
+
+Anta nå at teknikeren fjerner temperaturtransmitteren som er koblet til dette termoelementet av type E, og tar transmitteren med tilbake til kalibreringslaboratoriet. Anta laboratorietemperatur på 73 grader F og at "cold junction compensation" er aktivert i transmitteren. Bestem hvor mange DC-millivolt teknikeren må legge inn på transmitterterminalene for å simulere en prosesstemperatur (termoelementtemperatur) på 925 grader Fahrenheit.
+
+\vskip 10pt
+
+$V_{in} = $ \underbar{\hskip 50pt} mV
+
+\vskip 30pt
+
+Beregn deretter nødvendig resistans i denne spenningsdelerkretsen for å lage det nødvendige millivoltsignalet (for å simulere en temperatur på 925 grader F):
+
+$$\includegraphics[width=15.5cm]{i00629x01.eps}$$
+
+$R = $ \underbar{\hskip 50pt} ohm
+
+
+
+\vfil
+\underbar{file i00629no}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er en vurderingsoppgave -- ingen svar eller hint er oppgitt!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Det viktige prinsippet her er at spenningen som registreres av et voltmeter eller et annet mottakende instrument i en termoelementkrets alltid er {\it forskjellen} mellom spenningene fra to seriemotkoblede termoelementskjøter: måleskjøten og referanseskjøten. Følgende formel uttrykker dette:
+
+$$V_{meter} = V_{J1} - V_{J2}$$
+
+Dermed er signalet på 29.34 mV som ble registrert av voltmeteret i første avsnitt, faktisk spenningsforskjellen mellom måleskjøten (ved prosesstemperatur) og referanseskjøten der måleledningene kobles til termoelementlederen (ved 58 grader F). Hvis vi omskriver formelen for å løse ut måleskjøtspenningen, får vi:
+
+$$V_{J1} = V_{meter} + V_{J2}$$
+
+Slår vi opp millivoltverdien for et type E-termoelement ved 58 $^{o}$F, får vi $V_{J2} = 0.857$ mV. Legger vi dette til voltmeterets registrerte spenning på 29.34 mV, får vi en måleskjøtspenning på 30.197 mV, som tilsvarer en type E-skjøt ved litt over 780 $^{o}$F.
+
+\vskip 50pt
+
+Hvis vi nå tar denne type E temperaturtransmitteren til en kalibreringsbenk og påtrykker en testspenning som skal simulere 925 grader F, må vi "lure" referanseskjøtkompensasjonen i transmitteren til å "tro" at den jobber med en referanseskjøt ved romtemperatur (73 $^{o}$F). Igjen forteller den grunnleggende termoelementformelen oss at spenningen instrumentet normalt ser når prosesstemperaturen er 925 $^{o}$F og terminaltemperaturen er 73 $^{o}$F, vil være {\it forskjellen} mellom de tilsvarende spenningene. Slår vi opp spenningsverdiene for et type E-termoelement ved 925 $^{o}$F og 73 $^{o}$F, får vi tallene vi setter inn i denne ligningen:
+
+$$V_{meter} = V_{J1} - V_{J2}$$
+
+$$V_{meter} = 36.691 \hbox{ mV} - 1.360 \hbox{ mV}$$
+
+$$V_{meter} = 35.331 \hbox{ mV}$$
+
+Motstandsverdien som trengs for å gi dette spenningsfallet finner vi med formelen for spenningsdeler:
+
+$$35.331 \hbox{ mV} = 1.25 \left( {4700 \over R + 4700} \right)$$
+
+$$R = 161.585 \hbox{ k}\Omega$$
+
+%INDEX% Måling, temperatur: termoelement
+
+%(END_NOTES)

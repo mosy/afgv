@@ -1,0 +1,83 @@
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les og lag disposisjon av Case History \#82 (``Problems In A Canadian Plant'') fra Michael Browns samling av veiledninger i optimalisering av reguleringssløyfer. Forbered deg på en faglig diskusjon med lærer og medstudenter om begreper og eksempler i teksten, og svar på spørsmålene under:
+
+\begin{itemize}
+\item{} Kommenter Browns observasjoner om kompetansenivået hos kanadiske instrumentteknikere generelt, samt om konkrete mangler i reguleringsfaglige læreplaner globalt.
+\vskip 10pt
+\item{} Forklar hva ``anti-reset windup'' (ARW) er i en digital PID-regulator, og hvilket formål funksjonen har.
+\vskip 10pt
+\item{} Reguleringssløyfens oppførsel i figur 1 og 2 er svært merkelig. Det som først så ut som et ventilproblem, viste seg å være et underlig problem i DCS. Forklar hvordan ARW-funksjonen i dette systemet virket, og hvorfor dette ga den merkelige lukket-sløyfe-oppførselen i trenden i figur 1.
+\vskip 10pt
+\item{} Undersøk åpen-sløyfe-testen i figur 4, og identifiser hvilke trekk i trenden som tydelig indikerer ventilproblem.
+\vskip 10pt
+\item{} Undersøk lukket-sløyfe-trenden i figur 5, og avgjør ut fra grafene hvilken reguleringsmodus (P, I eller D) som dominerer i regulatoren. Avgjør også om regulatoren er direktevirkende eller reversvirkende.
+\vskip 10pt
+\item{} Undersøk lukket-sløyfe-trenden i figur 6, og identifiser trekk i utgangssignalet (PD-grafen) som tydelig viser \textit{proporsjonal} virkning, og trekk som tydelig viser \textit{integral} virkning.
+\end{itemize}
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Pumper med variabel hastighet regnes ofte som nær ideelle med tanke på reguleringsegenskaper. Forklar hvorfor en variabelhastighetspumpe kan være å foretrekke fremfor en strupeventil i en reguleringssløyfe.
+\item{} Undersøk trendgrafen i figur 1 og beregn regulatorens \textit{proporsjonalbånd}.
+\end{itemize}
+
+\underbar{file i00351}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Brown omtaler kanadiske instrumentteknikere positivt. Samtidig sier han at ``Most basic control theory taught in control training institutions is almost unusable in real life'', og dette gjaldt også de kanadiske teknikerne.
+
+\vskip 10pt
+
+Anti-reset windup (ARW) er en funksjon i PID-regulatorer der integralvirkningen deaktiveres når bestemte PV- og/eller utgangsverdier overskrides. Hensikten er å hindre at integralvirkningen ``vikler opp'' regulatorutgangen uten nytte.
+
+\vskip 10pt
+
+Figur 1: oversving ved nedtrinn i SP, undersving ved opptrinn i SP. Figur 2 (åpen sløyfe) viser ganske god ventiloppførsel. ARW-nedre grense i reguleringssystemet var satt til 45\% på PV-skalaen, og svært merkelig gjorde regulatoren reset \textit{16 ganger raskere} når PV gikk utenfor denne grensen. ARW var altså ikke bare satt til å slå inn ved en merkelig lav PV-verdi, den gjorde også det motsatte av ønsket ved å øke integralvirkningen i stedet for å redusere eller stoppe den.
+
+\vskip 10pt
+
+Figur 4 viser et stort stiction-problem: regulatorutgangen må til tider flyttes betydelig før flow-signalet reagerer.
+
+\vskip 10pt
+
+Figur 5 viser tydelig en proporsjonaldominert direktevirkende regulator. PV- og utgangskurvene etterligner nesten hverandre, noe som indikerer en regulatorforsterkning på omtrent 1.
+
+\vskip 10pt
+
+I figur 6 ser vi proporsjonalvirkning tydelig i responsen på sprang i setpunkt. Utgangen hopper omtrent en tredel av SP-spranget, tilsvarende en forsterkning på $1 \over 3$. Integralvirkning er tydelig i den skrånende midtlinjen i syklusen mens setpunktet er stabilt rundt 60\%: her ramper utgangen (PD) oppover mens PV svinger asymmetrisk rundt SP.
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hvordan tror du PV- og PD-kurvene i figur 5 ville sett ut dersom sløyfen oscillerte med for sterk \textit{integral} virkning i stedet for for sterk proporsjonalvirkning?
+\item{} Identifiser regulatorens dominerende virkemåte i lukket-sløyfe-trenden i figur 6 (P, I eller D).
+\end{itemize}
+
+
+
+%INDEX% Reading assignment: Michael Brown Case History #82, "Problems in a Canadian plant"
+
+%(END_NOTES)

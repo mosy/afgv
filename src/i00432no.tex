@@ -1,0 +1,47 @@
+%(BEGIN_QUESTION)
+% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Anta at du blir bedt om å bygge et komplett reguleringssystem med en DP-sender, Honeywell UDC2000 PID-regulator, en luft-åpne reguleringsventil (med posisjoner) og en I/P-omformer:
+
+$$\includegraphics[width=15.5cm]{i00432x01.eps}$$
+
+Tegn inn nødvendige rør- og ledningsforbindelser for å få et fungerende system. Legg gjerne til andre komponenter ved behov.
+
+\vfil 
+
+\underbar{file i00432}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er et vurderingsspørsmål, så her gis ingen svar eller hint!
+ 
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Tillegg av en 24 VDC strømforsyning og en 250 $\Omega$ motstand er begge nødvendige for å få en fungerende reguleringssløyfe:
+
+$$\includegraphics[width=15.5cm]{i00432x02.eps}$$
+
+Vi vet at en ekstern strømforsyning er nødvendig (og ikke innebygd i regulatoren), fordi regulatorens PV-inngang er merket «1-5 volt». Dette viser at inngangen i praksis er et spenningsmålende instrument (et voltmeter). Da kan ikke sløyfestrømforsyning samtidig ligge på de samme to terminalene uten å oppheve rollen deres som spenningsinnganger. Innebygd DC-sløyfeforsyning i visnings- eller reguleringsinstrumenter forekommer når PV-inngangen er {\it strøm}, ikke spenning.
+
+\vskip 10pt
+
+En 250 ohm motstand trengs for å konvertere senderens 4-20 mA til et 1-5 VDC-signal regulatoren kan lese. Tilsvarende må regulatorens inngangsterminaler 8 og 7 kobles {\it parallelt} med denne motstanden for å måle spenningen over den (spenning er lik over parallelle komponenter), og motstanden må kobles {\it i serie} med senderen (strøm er lik gjennom seriekoblede komponenter).
+
+Viktige prinsipper her er elektriske {\it kilder} versus elektriske {\it laster}. Regulatorens strømutgang er en kilde. Laster inkluderer I/P-enheten, 250 ohm-motstanden og regulatorinngangen (riktignok en svært lett last, siden den i spenningsmålingsmodus trekker nesten ingen strøm). Behovet for 24 V sløyfeforsyning på inngangssiden er tydelig fordi ingen av de andre komponentene i den kretsen er kilder. Derfor må en kilde finnes for å drive 4-20 mA-strømmen. Dette er også grunnen til at utgangskretsen ikke trenger 24 VDC-kilde: regulatorens strømutgang fungerer allerede som kilde, og I/P-enheten kan derfor kobles direkte til regulatorens utgangsterminaler.
+
+%INDEX% Pictorial circuit review (analog signal wiring to process controller and positioner tubing)
+
+%(END_NOTES)

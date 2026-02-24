@@ -3,43 +3,11 @@
 % Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Følgende P-regulatoralgoritme inneholder en feil. Identifiser feilen og korriger algoritmens kildekode for å fikse den:
+{\it Digitale} proporsjonalregulatorer genererer utgangsverdiene sine ved at en mikroprosessor gjentatte ganger evaluerer den proporsjonale ligningen:
 
-\vskip 10pt
-
-\hbox{ \vrule
-\vbox{ \hrule \vskip 3pt
-\hbox{ \hskip 3pt
-\vbox{ \hsize=5in \raggedright
-
-\noindent
-\underbar{\bf Pseudocode listing}
-
-{\tt Declare Pin0 as an analog input (scale 0 to 5 volts = 0 to 1023)}
-
-{\tt Declare Pin1 as an analog output (scale 0 to 5 volts = 0 to 1023)}
-
-{\tt Declare SP as a variable, initially set to a value of 250}
-
-{\tt Declare ERROR as a variable}
-
-{\tt Declare GAIN as a variable, initially set to a value of 2.5}
-
-\vskip 10pt
-
-{\tt LOOP}
-
-\hskip 10pt {\tt SET ERROR = Pin0 - SP}
-
-\hskip 10pt {\tt SET Pin1 = GAIN * ERROR}
-
-{\tt ENDLOOP}
-
-}
-\hskip 3pt}%
-\vskip 5pt \hrule}%
-\vrule}
-\vskip 10pt
+$$m = K_p e + b$$
+ 
+Hva ville skjedd hvis en {\it negativ} verdi ble lagt inn for gain ($K_p$) i programmet til den digitale regulatoren?
 
 \underbar{file i01467}
 %(END_QUESTION)
@@ -50,45 +18,7 @@ Følgende P-regulatoralgoritme inneholder en feil. Identifiser feilen og korrige
 
 %(BEGIN_ANSWER)
 
-Denne regulatoren mangler en {\it bias}-verdi! Uten den kan ikke regulatoren holde utgangen på 50\% (eller andre verdier enn null) når avviket (error) er null.
-
-\vskip 10pt
-
-\hbox{ \vrule
-\vbox{ \hrule \vskip 3pt
-\hbox{ \hskip 3pt
-\vbox{ \hsize=5in \raggedright
-
-\noindent
-\underbar{\bf Pseudocode listing}
-
-{\tt Declare Pin0 as an analog input (scale 0 to 5 volts = 0 to 1023)}
-
-{\tt Declare Pin1 as an analog output (scale 0 to 5 volts = 0 to 1023)}
-
-{\tt Declare SP as a variable, initially set to a value of 250}
-
-{\tt Declare ERROR as a variable}
-
-{\tt Declare GAIN as a variable, initially set to a value of 2.5}
-
-{\bf {\tt Declare BIAS as a constant = 512}}
-
-\vskip 10pt
-
-{\tt LOOP}
-
-\hskip 10pt {\tt SET ERROR = Pin0 - SP}
-
-\hskip 10pt {\tt SET Pin1 = (GAIN * ERROR) {\bf + BIAS}}
-
-{\tt ENDLOOP}
-
-}
-\hskip 3pt}%
-\vskip 5pt \hrule}%
-\vrule}
-\vskip 10pt
+Effekten av en negativ $K_p$-verdi i algoritmen til en digital regulator vil være at reguleringsvirkningen snus (fra omvendtvirkende til direktevirkende, eller fra direktevirkende til omvendtvirkende), fordi en positiv feil da vil {\it redusere} utgangen, og omvendt. Dette forutsetter selvsagt at regulatoren faktisk er programmert til å godta slike verdier. En fornuftig programmerer kan velge å gjøre det umulig å taste inn negative innstillingskonstanter, for å unngå forvirring dersom noen ved et uhell legger inn en slik verdi og utilsiktet snur reguleringsvirkningen.
 
 %(END_ANSWER)
 
@@ -98,10 +28,8 @@ Denne regulatoren mangler en {\it bias}-verdi! Uten den kan ikke regulatoren hol
 
 %(BEGIN_NOTES)
 
-Noen studenter vil kanskje hevde at bias {\it ikke} er nødvendig. I noen få applikasjoner kan dette faktisk være sant. Generelt sett er imidlertid bias nødvendig. For å bevise dette saken, be elevene vurdere en tilstand der PV er nøyaktig lik SP (null avvik). Hva slags pådrag ønsker vi vanligvis å ha i en slik situasjon? 0\%? Be dem vurdere hastigheten på en bil (cruise controll): innebærer 0\% gasspådrag å opprettholde hastigheten akkurat på settpunktet?
-
-I dette spesifikke programmet er det et annet problem: "Integer rollover" (også kjent som "wrap-around"). Hvis det beregnede resultatet er større enn den høyeste verdien variabelen kan holde, vil den "rulle over" til en liten verdi. Dette kan forårsake store problemer i et kontrollsystem!
 
 %INDEX% Control, proportional: digital electronic controller
 
 %(END_NOTES)
+

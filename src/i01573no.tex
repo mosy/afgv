@@ -1,0 +1,107 @@
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les og lag en disposisjon av Case History \#29 (``Scan Rate Problem In a DCS On a Fast Loop'') fra Michael Browns samling med veiledninger om optimalisering av reguleringssløyfer. Forbered deg på å diskutere begrepene og eksemplene i denne teksten grundig med lærer og medstudenter, og svar på følgende spørsmål:
+
+\begin{itemize}
+\item{} Reguleringsstrategien i dette eksempelet ligner en {\it split-range}-ventilsløyfe. Forklar både likheter og forskjeller, og forklar også {\it hvorfor} dette reguleringssystemet er konstruert slik.
+\vskip 10pt
+\item{} Forklar hvordan den dårlige ytelsen i denne reguleringssløyfen for gasstrykk faktisk førte til økonomisk tap på oljeplattformen.
+\vskip 10pt
+\item{} Undersøk lukket-sløyfe-trenden i figur 2, og avgjør hvilken reguleringsmodus (P, I eller D) som dominerer. Gir denne modusen mening for denne prosesstypen (trykkregulering med store volumer)?
+\vskip 10pt
+\item{} Forklar hva uttrykket ``scan rate'' betyr i et digitalt datasystem, og hvorfor dette er viktig når en datamaskin brukes til å regulere en prosess.
+\vskip 10pt
+\item{} Undersøk figur 2 og 3, og forklar deretter hvordan vi kan se av trendene at scan-raten i DCS-systemet er lav. Forklar også hvorfor en av ratio-blokkutgangene hadde mye lavere scan-rate enn den andre.
+\vskip 10pt
+\item{} Forklar hvorfor Brown ikke klarte å rette problemet fullt ut under besøket på oljeplattformen.
+\vskip 10pt
+\item{} Undersøk lukket-sløyfe-trenden i figur 4, og avgjør hvilken reguleringsmodus (P, I eller D) som dominerer med Browns nye tuning. Hvordan skiller den seg fra ``As-Found''-tuningen i figur 2?
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hvorfor tror du databasert regulering som dette har justerbare scan-rater for ulike funksjonsblokker? Hvilken mulig fordel kan det være å kjøre en funksjon med veldig lav scan-rate?
+\item{} Hvor rask er scan-raten i prosessen deres? Hvis denne parameteren ikke oppgis av produsenten, hvordan kan dere måle scan-raten? 
+\end{itemize}
+
+\underbar{file i01573}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Én regulator styrer to parallelle reguleringsventiler (likner split-range) i to innløpsrør som fører naturgass med høyt trykk inn til plattformen. Hver ventil åpner en viss prosent av regulatorens utgangssignal (ulik de fleste split-range-oppsett). Dette ligner et enkelt forholdsreguleringsopplegg der lasten fordeles mellom de to gasslinjene.
+
+\vskip 10pt
+
+Trykkreguleringen i denne sløyfen var for treg til å hente seg inn etter raske lastendringer, som for eksempel kompressorstopp. Dette stengte plattformen, med høy kostnad hver gang (omtrent 1 million britiske pund!).
+
+\vskip 10pt
+
+Figur 2 viser integraldominert regulering med reversvirkning (merk det store faseskiftet mellom PV og Output). Med stort volum nedstrøms blir prosesskarakteristikken integrerende, noe som betyr at regulatoren bør være proporsjonaldominert, ikke integraldominert.
+
+\vskip 10pt
+
+``Scan rate'' beskriver hvor ofte reguleringssystemet oppdaterer utgangssignalet (altså hvor raskt programinstruksjonene for PID-regulering kjøres syklisk). Scan-rate fungerer i praksis som {\it dødtid} som regulatoren selv tilfører sløyfen.
+
+\vskip 10pt
+
+En av ratio-funksjonsblokkene lå i en annen biblioteksseksjon i DCS-systemet, med en ``external scan rate'' som gjorde responsen tregere. Scan-raten i denne biblioteksseksjonen kunne ikke endres online, noe som betydde at de ikke kunne rette problemet uten å stanse plattformen.
+
+\vskip 10pt
+
+Ny tuning i figur 4 viser proporsjonaldominans (reversvirkning) i stedet for integraldominans (reversvirkning), slik den opprinnelige ``As-Found''-tuningen gjorde. Legg merke til nesten null faseskift mellom PV- og Output-kurvene.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Forberedende quiz:}
+
+Det dårlig fungerende gasstrykkreguleringssystemet på oljeplattformen i Nordsjøen, beskrevet av Michael Brown, førte til store økonomiske tap fordi:
+
+\begin{itemize}
+\item{} Den trege trykkreguleringen fikk generatormotorene til å gå ujevnt
+\vskip 5pt 
+\item{} Gasskundene var misfornøyde med trykksvingningene i gasslinjene sine
+\vskip 5pt 
+\item{} Det slet ut reguleringsventilene, som var dyre å skifte ut
+\vskip 5pt 
+\item{} Det førte til at oljeplattformen eksploderte fullstendig en gang
+\vskip 5pt 
+\item{} Papirtrendskriverne brukte mye blekk på å tegne ujevne grafer
+\vskip 5pt 
+\item{} Det aktiverte høytrykksavstengningen og stoppet produksjonen
+\end{itemize}
+
+
+%INDEX% Reading assignment: Michael Brown Case History #29, "Scan rate problem in a DCS on a fast loop"
+
+%(END_NOTES)

@@ -3,9 +3,28 @@
 % Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Plott responsen for følgende PD-regulator (Proporsjonal + Derivat), anta direkte virkemåte, gain = 2, derivattid = 0,25 minutter, og bias = 30\%:
+Tegn responsen til en proporsjonal+deriverende regulator for følgende inngangsbetingelser, med antatt proporsjonalbånd på 200\% og derivasjonskonstant på 15 sekunder. Regulatoren er {\it reversvirkende}, og algoritmen den følger er vist under grafen:
 
-$$\includegraphics{i01546x01.eps}$$
+$$\includegraphics[width=15.5cm]{i01546x01.eps}$$
+
+Tidsskalaen på diagrammet er minutter:sekunder, og P+D-algoritmen er som følger:
+
+$$m = K_p \left( e + \tau_d {de \over dt} \right) + b$$
+
+\noindent
+Der,
+
+$m$ = Regulatorutgang (manipulert variabel)
+
+$K_p$ = Forsterkning
+
+$e$ = Feilsignal (SP$-$PV)
+
+$\tau_d$ = Deriverende tidskonstant
+
+$b$ = Bias
+
+\vskip 10pt
 
 \underbar{file i01546}
 %(END_QUESTION)
@@ -16,7 +35,14 @@ $$\includegraphics{i01546x01.eps}$$
 
 %(BEGIN_ANSWER)
 
-$$\includegraphics[width=10cm]{i01546x02.eps}$$
+%$$\includegraphics[width=15.5cm]{i01546x02.eps}$$
+$$\includegraphics[width=15.5cm]{i01546x03.eps}$$
+
+Når PV starter sin første stigende rampe fra 35\% til 60\%, skjer dette med en helning på 100\% per minutt (25\% over en tidsperiode på 15 sekunder). Siden deriverende virkning er helning multiplisert med derivasjonskonstanten (15 sekunder, eller 1/4 minutt), multiplisert med forsterkningen (PB på 200\% = forsterkning 0.5), blir bidraget fra derivasjonsleddet her et trinn ned på 12.5\%. Deretter ser vi proporsjonalvirkning (med forsterkning 0.5) som ramper utgangen ned med en helning som er 1/2 av PV-helningen, til et punkt på 55\%.
+
+Så, når PV-rampen snur retning og synker med samme rate som den steg tidligere, slutter den deriverende virkningen å {\it trekke fra} 12.5\% fra utgangen og begynner å {\it legge til} 12.5\% på utgangen, altså en total trinnendring i utgangen på 25\% (fra 55\% til 80\%). Proporsjonalvirkning ramper naturligvis utgangen opp 12.5\% fra tid 0:45 til tid 1:00 (fra 80\% til 92.5\%) mens PV endrer 25\% på 15 sekunder. Når PV flater ut ved 1:00, på samme verdi som den startet på, opphører den deriverende virkningen, og utgangen går tilbake til opprinnelig verdi på 80\%.
+
+Ved tid 1:15 gjør PV et nedadgående trinn på 15\%, noe som får deriverende virkning til å gå ``amok'' og mette utgangen på 100\%. Proporsjonalvirkning trinnhever utgangen med 7.5\%, slik at etter den transiente økningen i PV stabiliserer utgangen seg på 87.5\%. Ved tid 1:45 gjør PV et oppadgående trinn på 15\%, noe som igjen får deriverende virkning til å mette utgangen, denne gangen nedover til 0\%. Etter denne transienten stabiliserer utgangen seg på 75\%: en kombinert effekt av proporsjonalvirkning (som driver utgangen ned til 80\%) og deriverende virkning (som driver utgangen ned 5\%, fordi PVs stigende helning er 40\% per minutt -- 40\%/min ganger 0.25 minutt ganger et $K_p$ på 0.5). Proporsjonalvirkning ramper utgangen ned 10\% (fra 75\% til 65\%) frem til tid 2:15, når rampingen stopper og deriverende virkning opphører, slik at utgangen kan trinne opp 5\% (fra 65\% til 70\%) til sin sluttverdi.
 
 %(END_ANSWER)
 
@@ -26,12 +52,8 @@ $$\includegraphics[width=10cm]{i01546x02.eps}$$
 
 %(BEGIN_NOTES)
 
-En vanlig feil blant studentene er å glemme bias-verdien. De vil ofte plotte utgangssignalet som starter på 0\% eller 50\% i stedet for 30\%.
-
-De som husker bias-verdien vil kanskje fortsatt gjøre feil med endringsretningen. "Skal den gå opp eller ned?" spør de seg selv. Min metode for å besvare dette spørsmålet er å se for meg at PV øker. Hvis regulatoren er direktevirkende, skal utgangen også øke. Dette betyr at PV og Output beveger seg i samme retning. Derfor, hvis PV går {\it opp}, skal Output gå {\it opp}.
-
-Det kan være lurt å be studentene tegne P-responsen og D-responsen hver for seg, og deretter summere dem algebraisk for å få den endelige utgangsresponsen.
 
 %INDEX% Control, proportional + derivative: graphing controller response
 
 %(END_NOTES)
+

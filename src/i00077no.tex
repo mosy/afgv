@@ -1,0 +1,138 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Mange brennbare gasser produseres i kjemisk prosessindustri og oljeraffinerier som ``avfalls''-produkter.  Disse ``avfalls''-gassene kan brukes som brensel for dampkjeler og forbrenningsovner i andre deler av raffineriet.  Problemet er at ``avfalls''-gassproduksjonen ofte er ustabil, og ettersporselen etter brenselgass i kjeler og ovner er ogsa ustabil.  Det er tider da det vil vaere et overskudd av avfallsgass (mer enn kan brukes), og tider da det ikke er nok.
+
+Følgende trykkreguleringssystem arbeider for a holde konstant brenselgasstrykk i akkumulatorkaret til tross for endringer i avfallsgassflyt og brenselgasbehov:
+
+$$\includegraphics[width=15.5cm]{i00077x01.eps}$$
+
+Reguleringsventilene PV-45a og PV-45b er split-ranget, elektrisk koblet i serie for a operere pa samme 4-20 mA-signal fra PIC-45.  Selve regulatoren er direktevirkende, og ventilenes split-range-kalibreringer er som folger:
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Ventil} & {\bf Helt lukket ved} & {\bf Helt apen ved} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PV-45a & 12 mA & 4 mA \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PV-45b & 12 mA & 20 mA \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+En operator legger merke til en lav trykkindikasjon pa PI-44: 23 PSI.  Regulatorens setpunkt er 30 PSI, og operatoren ringer kontrollrommet pa radio for a verifisere at setpunktet fortsatt er 30 PSI.  Bekymret ringer hun deg og ber deg undersoke problemet sammen med henne.  Din forste diagnostiske test er a ringe kontrolloperatøren pa radio og sporre hva trykkindikasjonen viser for PIC-45.  Operatøren i kontrollrommet ringer tilbake og sier at PIC-45 leser 22.8 PSI.
+
+\vskip 10pt
+
+Forklar hvordan du ville fortsette feilsoking pa dette problemet.  Hva er noen sannsynlige arsaker til det lave trykket, og hva ville dine neste diagnostiske steg vare?  Tror du PSV-14 kan vare skyld i problemet?  Hvis ditt neste steg var a ta en elektrisk maling et sted i signalkablingen til dette systemet, hvilken maling ville du ta, og hva kan den fortelle deg om problemets natur?
+
+\underbar{file i00077}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Det er grunn til a tro at det lave trykket er reelt, fordi de to trykkmalingenene stemmer overens.  Dette betyr at problemet -- uansett hva det er -- ikke ligger i transmitteren (PT-45) eller regulatorens inngang, men mest sannsynlig pa den endelige reguleringsenhets-siden av loopen.
+
+PSV-14 er en sikkerhetsventil som gir overtrykksbeskyttelse for akkumulatorkaret, men det er lite sannsynlig at den er kilden til problemet.  Hvis PSV-14 ``lettet'' nar den ikke skulle (ved sa lavt trykk!), ville stoyen den lager vare ganske betydelig og trolig tiltrekke seg oppmerksomheten til feltoperatøren som vet godt hvordan prosessen vanligvis skal hoyres ut.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Problemet kan vaere at PV-45a ikke apner sa mye som den skal, eller at PV-45b slipper gjennom stromning nar den ikke skal.  En rask maling av PIC-45s utgangssignal pa 4-20 mA ville vaere en god diagnostisk maling a ta, kombinert med observasjon av spindelposisjonene for PV-45a og PV-45b.  Enten en (eller flere?) av reguleringsventilene responderer ikke slik den skal, eller regulatoren responderer ikke slik den skal pa det lave trykket.  Regulatorens utgangssignal {\it skal} vaere hoyt (20 mA?) siden den registrerer en lav prosessverdi (22.8 PSI) sammenlignet med setpunktet pa 30 PSI.
+
+
+
+
+
+
+
+\filbreak \vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtuell feilsoking} \vrule} \hrule}
+
+\noindent
+{\bf Predikere effekten av en gitt feil:} presenter hver av folgende feil til studentene, en om gangen, og la dem kommentere alle effekter hver feil vil gi.
+
+\begin{itemize}
+\item{} 
+\item{} 
+\item{} 
+\end{itemize}
+
+
+\vskip 10pt
+
+
+\noindent
+{\bf Identifisere mulige/umulige feil:} presenter symptomer til studentene og la dem deretter avgjore om en serie foreslatte feil kan forklare alle symptomene, og forklare {\it hvorfor} eller {\it hvorfor ikke} for hver foreslatt feil:
+
+\begin{itemize}
+\item{} Symptom: {\it Akkumulatortykket er 47 PSI nar regulatorens setpunkt er 30 PSI}
+\item{} PV-45a ventilluftforsyning feilet
+\item{} PV-45b ventilluftforsyning feilet
+\item{} Apen signalkabel pa regulatorutgang
+\item{} Kortsluttet signalkabel pa regulatorutgang
+\item{} Apen signalkabel pa regulatorens PV-inngang
+\item{} Kortsluttet signalkabel pa regulatorens PV-inngang
+\item{} Blokkeringsventil pa brennergasslinje stengt
+\item{} Blokkeringsventil pa fakkellinje stengt
+\end{itemize}
+
+
+\vskip 10pt
+
+
+\noindent
+{\bf Vurdere nytte av gitte diagnostiske tester:} presenter symptomer til studentene og foresla deretter folgende diagnostiske tester en etter en.  Studentene vurderer verdien av hver test og avgjor om den vil gi nyttig informasjon (dvs. fortelle oss noe vi ikke allerede vet).  Studentene avgjor hva ulike resultater for hver test eventuelt indikerer om feilen, hvis noe:
+
+\begin{itemize}
+\item{} Symptom: {\it }
+\item{}  -- {\bf Ja/Nei}
+\item{}  -- {\bf Ja/Nei}
+\end{itemize}
+
+
+\vskip 10pt
+
+
+\noindent
+{\bf Diagnostisere en feil basert pa gitte symptomer:} forestill deg at ??? feiler ??? i dette systemet (ikke avslor feilen til studentene!).  Presenter operatørens observasjon(er) til studentene, la dem vurdere mulige feil og diagnostiske strategier, og gi dem deretter resultatene av tester de foreslar basert pa folgende symptomer, til de korrekt har identifisert feilens art og plassering:
+
+\begin{itemize}
+\item{} {\it }
+\item{} 
+\item{} 
+\end{itemize}
+
+
+%INDEX% Basics, control loop troubleshooting: determining cause of control problem
+%INDEX% Final Control Elements, valve: split-ranging
+
+%(END_NOTES)
+
+

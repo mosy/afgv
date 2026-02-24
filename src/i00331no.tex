@@ -1,0 +1,137 @@
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Lag et regneark som beregner nødvendig sendereffekt ut fra frekvens, avstand i signalbanen, antenneforsterkning, kabeltap og mottakerfølsomhet (minste signalstyrke som kreves på mottakerinngangen). Et eksempeloppsett vises her, der gult markerer verdier som skal tastes inn, og blått markerer verdier som regnearket beregner:
+
+$$\includegraphics[width=15.5cm]{i00331x01.eps}$$
+
+Bruk deretter regnearket til å beregne minimum sendereffekt for et radiosystem med følgende parametere:
+
+\begin{itemize}
+\item{} Frekvens = 900 MHz
+\item{} Avstand i signalbanen = 720 meter
+\item{} Mottakerfølsomhet = $-109$ dBm
+\item{} Senderkabel = $-0.25$ dB per fot ; 12 fot lang
+\item{} Lynavleder på sender = $-0.2$ dB innsettingstap
+\item{} Senderantenne = 6 dB forsterkning
+\item{} Lynavleder på mottaker = $-0.2$ dB innsettingstap
+\item{} Mottakerkabel = $-0.25$ dB per fot ; 16 fot lang
+\item{} Mottakerantenne = 13 dB forsterkning
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Forklar hvorfor det er viktig å ha et praktisk eksempel klart for å \textit{teste} regnearket.
+\item{} Hvordan kan du utvide regnearket til å beregne \textit{fade margin} for å ta høyde for fadingtap?
+\end{itemize}
+
+\underbar{file i00331}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Minste nødvendige sendereffekt i denne applikasjonen er $-31.92$ dBm, som tilsvarer 0.643 mikrowatt.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+$$\lambda = {2.9979 \times 10^8 \over 900 \times 10^6} = 0.3331 \hbox{ m}$$
+
+$$L_p = -20 \log \left(4 \pi 720 \over 0.3331\right) = -88.679 \hbox{ dB}$$
+
+\noindent
+Der,
+
+$L_p$ = signalbanetap, en negativ dB-verdi
+
+$D$ = avstand mellom sende- og mottakerantenne
+
+$\lambda$ = bølgelengde for utsendt RF-felt, i samme lengdeenhet som $D$
+
+\vskip 10pt
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Forsterkning eller tap} & {\bf dB-verdi} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Tap i senderkabel & $-3$ dB \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Tap i senderavleder & $-0.2$ dB \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Senderantennens forsterkning & +6 dBi \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Signalbanetap & $-88.679$ dB \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Fade margin & 0 dB \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Mottakerantennens forsterkning & +13 dBi \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Tap i mottakeravleder & $-0.2$ dB \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Tap i mottakerkabel & $-4$ dB \cr
+%
+\noalign{\hrule}
+%
+% Another row
+$G_{total} + L_{total}$ & {\bf $-$77.07935 dB} \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+
+\vskip 10pt
+
+$$P_{tx} = P_{rx} - (G_{total} + L_{total})$$
+
+$$P_{tx} = -109 \hbox{ dBm} - ( -77.07935 \hbox{ dB})$$
+
+$$P_{tx} = -31.92 \hbox{ dBm} = 0.00064259 \hbox{ mW} = 0.64259 \> \mu\hbox{W}$$
+
+%INDEX% Computer spreadsheet exercise: RF link budget calculator
+%INDEX% Electronics review, RF link budget calculation
+
+%(END_NOTES)

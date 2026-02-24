@@ -1,0 +1,57 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En gassreguleringsventil skal dimensjoneres for å slippe gjennom 50,000 SCFH under disse fullt åpne betingelsene:
+
+\begin{itemize}
+\item{}Temperatur = 280$^{o}$ R
+\item{}Oppstrømstrykk = 3000 PSIG
+\item{}Nedstrømstrykk = 100 PSIG
+\item{}Spesifikk vekt = 1.1
+\end{itemize} 
+ 
+Beregn nødvendig $C_{v}$-faktor for denne ventilen.
+ 
+\underbar{file i01415}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Hvis du beregnet $C_{v}$ = 0.30248, har du gjort en alvorlig feil!
+ 
+\vskip 10pt
+
+Hint: Dette er et ``lurespørsmål'' for å se om du faktisk tenker gjennom gassdynamikken, eller bare setter tall inn i ligninger. Dersom du faktisk installerte en ventil med $C_{v}$-verdi 0.30248 i denne prosessen, ville den resulterende strømningen bli {\it mye lavere} enn 50,000 SCFH.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Dette er et lurespørsmål fordi de oppgitte betingelsene sikrer ``choked'' strømning gjennom ventilen, og standard $C_{v}$-ligning for subkritisk strømning gjelder derfor ikke. Reell $C_{v}$ for denne ventilen må være {\it mye} større enn det den ``subkritiske'' gasstrømsligningen predikerer.
+
+En generell tommelfingerregel for å forutsi choked strømning er når absolutt trykkforhold $P_1$ / $P_{vc}$ overstiger 2:1 (kilde: {\it Instrument Engineer's Handbook -- Process Control}, tredje utgave, side 605 under avsnittet ``Choked Flow''). Når dette skjer, er det nesten garantert at strømningshastigheten gjennom ventilen når sonisk (kritisk) hastighet, og dermed blir faktisk gasstrøm mye lavere enn hva en antakelse om subkritisk strømning ville gitt.
+
+Denne tommelfingerregelen støttes også av William J. Palm i boken {\it Control Systems Engineering}, side 85, der han sier at luftstrøm gjennom en ventil er subsonisk dersom forholdet mellom nedstrømstrykk og oppstrømstrykk ($P_2 \over P_1$) er større enn 0.528 (det vil si at forholdet mellom oppstrøm og nedstrøm $P_1 \over P_2$ er mindre enn 1.894). Dette innebærer at kritisk gasstrøm vil oppstå et sted rundt et absolutt trykkforhold på 2:1, oppstrøms til nedstrøms.
+
+\vskip 10pt
+
+I denne konkrete oppgaven kjenner vi ikke trykket ved vena contracta, men vi kjenner oppstrøms- og nedstrømstrykkene. Når vi beregner forholdet $P_1$ / $P_2$, får vi 30. Siden vena contracta-trykket ($P_{vc}$) nødvendigvis er lavere enn nedstrømstrykket ($P_{2}$), må forholdet $P_1$ / $P_{vc}$ være større enn $P_1$ / $P_2$, og dermed må faktisk trykkforhold fra innløp til vena contracta være større enn 30:1. Hvis et forhold på 2:1 i praksis garanterer choked strømning, kan vi være helt sikre på choked strømning i dette tilfellet.
+
+\vskip 10pt
+
+Det finnes metoder for å estimere nødvendig ventilstørrelse for en slik applikasjon, men vi har ikke nok informasjon om røranlegget eller gassen til å utføre de nødvendige beregningene. Noen av parameterne som mangler er: $x_T$ (critical pressure drop ratio factor), $Y$ (expansion factor) og $F_K$ (ratio of specific heats factor).
+
+%INDEX% Final Control Elements, valve: sizing
+
+%(END_NOTES)
+

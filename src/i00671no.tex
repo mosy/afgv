@@ -1,0 +1,177 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Studer denne programsiden fra et Siemens APOGEE-system (skrevet i Siemens sitt "PPCL"-språk), og svar deretter på følgende spørsmål:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=6.5in \raggedright
+
+\noindent
+{\tt 02530 C}
+
+\noindent
+{\tt 02540 C IF THE ROOM TEMP IS LESS THAN HEATING SETPOINT THAN TURN ON THE HEATING PUMP}
+
+\noindent
+{\tt 02550 C ELSE SHUT OFF HEATING PUMP}
+
+\noindent
+{\tt 02560 C}
+
+\noindent
+{\tt 02570 IF ("MV.GH.2E:ROOM TEMP" .LT. "MV.GH.2E.HTG.STPT") THEN ON ("MV.GH.2E:DO 2")}
+
+\noindent
+{\tt 02580 IF ("MV.GH.2E:ROOM TEMP" .GT. "MV.GH.2E.HTG.STPT"+1) THEN OFF ("MV.GH.2E:DO 2")}
+
+\noindent
+{\tt 02590 C}
+
+\noindent
+{\tt 02600 C *****ROOM 3E CONTROLS*****}
+
+\noindent
+{\tt 02610 C}
+
+\noindent
+{\tt 02620 C IF SOMEONE PUSHES THE OVERIDE BUTTON, THEN TURN ON THE EXHAUST FAN}
+
+\noindent
+{\tt 02630 C OVERRIDE FOR 2 HOURS}
+
+\noindent
+{\tt 02640 C}
+
+\noindent
+{\tt 02650 IF ("MV.GH.3E:DI OVRD SW" .EQ. ON) THEN SET (0,"MV.GH.3E.OT")}
+
+\noindent
+{\tt 02660 IF ("MV.GH.3E.OT" .GT. 1000) THEN SET (1000, "MV.GH.3E.OT")}
+
+\noindent
+{\tt 02670 IF ("MV.GH.3E.OT" .LT. 120) THEN ON ("MV.GH.3E.OVRD") ELSE OFF ("MV.GH.3E.OVRD")}
+
+}
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+
+
+\vskip 10pt
+
+Hva betyr bokstaven {\tt C} foran mange av kodelinjene i dette programmet?
+
+\vskip 10pt
+
+Identifiser betydningen av følgende operatorer i Siemens PPCL-kode: {\tt .LT.}, {\tt .GT.}, {\tt .EQ.}.
+
+\vskip 10pt
+
+Forklar hvordan "heating pump"-koden (linje 2570 og 2580) slår pumpen av og på.
+
+\vskip 10pt
+
+Forklar hvordan "exhaust fan override"-koden (linje 2650 og 2670) holder viften på i to timer. Spesifikt: hvor i koden ser vi at Siemens-regulatoren bruker en {\it to timers} tidsforsinkelse?
+
+\vskip 10pt
+
+Linje 6000 i dette programmet (ikke vist her) instruerer regulatoren til {\tt GOTO 00190}, der 00190 er en linje nær starten av programmet (også ikke vist her). Dette er faktisk den eneste "GOTO"-instruksjonen i hele programmet. Hvorfor tror du denne "GOTO"-instruksjonen finnes?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Tror du det er lettere eller vanskeligere å programmere spesialtilpassede reguleringsalgoritmer i et tekstbasert språk som PPCL enn i et grafisk språk som funksjonsblokker?
+\item{} Anta at driftspersonell ber deg endre override-timeren fra 2 timer til 3 timer. Forklar hvordan du ville endret koden.
+\item{} Anta at pumpens fysiske funksjon endres fra oppvarming til kjøling (dvs. at pumpen på betyr at kjølevæske går inn i varmeveksleren og dermed senker romtemperaturen). Hvordan ville du endret koden for å passe den nye funksjonen?
+\item{} Identifiser fordelen(e) med å kommentere et program som dette tilstrekkelig.
+\end{itemize}
+
+\underbar{file i00671no}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Hver linje som begynner med bokstaven "C" er en {\it kommentar}, lagt inn kun for mennesker som leser programmet. Kommentarer ignoreres av regulatoren under kjøring.
+
+\vskip 10pt
+
+Operatoren {\tt .LT.} betyr "Less Than", {\tt .GT.} betyr "Greater Than", og {\tt .EQ.} betyr "Equal To".
+
+\vskip 10pt
+
+Den eneste GOTO-instruksjonen gjør at programmet {\it looper}, altså kjører hele programmet om igjen kontinuerlig.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Varmepumpen slår inn hvis romtemperaturen er lavere enn settpunkt, og den slår av hvis romtemperaturen er mer enn 1 grad høyere enn settpunkt.
+
+\vskip 10pt
+
+Override-timeren for avtrekksviften {\tt MV.GH.3E.OT} nullstilles hvis override-knappen trykkes (linje 02650). Når timeren teller opp, holder linje 02670 viften på så lenge timerverdien er mindre enn 120 (minutter). Her etableres to-timers forsinkelsen. Timerverdien begrenses oppad til 1000 minutter i linje 02660.
+
+\filbreak \vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtuell feilsøking} \vrule} \hrule}
+
+\noindent
+{\bf Forutsi effekt av gitt feil:} presenter hver av følgende feil for studentene, én om gangen, og la dem kommentere alle effekter hver feil gir.
+
+\begin{itemize}
+\item{} Temperaturføler i drivhusrom 2E feiler med høyt signal
+\item{} Solid-state-relé mellom DDC og avtrekksviftemotor feiler åpen
+\item{} {\tt .LT} og {\tt .GT}-operatorene byttes mellom linje 2570 og 2580
+\item{} Override-trykknapp feiler kortsluttet ("på")
+\end{itemize}
+
+\vskip 10pt
+
+\noindent
+{\bf Identifisere mulige/umulige feil:} presenter symptomer og la studentene avgjøre om foreslåtte feil kan forklare alle symptomene, med begrunnelse for hver feil.
+
+\begin{itemize}
+\item{} Symptom: {\it }
+\item{}  -- {\bf Ja/Nei}
+\item{}  -- {\bf Ja/Nei}
+\item{}  -- {\bf Ja/Nei}
+\end{itemize}
+
+\vskip 10pt
+
+\noindent
+{\bf Vurdere nytten av diagnostiske tester:} presenter symptomer og foreslå tester én etter én. Studentene vurderer verdien av hver test og hva ulike resultater kan indikere.
+
+\begin{itemize}
+\item{} Symptom: {\it }
+\item{}  -- {\bf Ja/Nei}
+\item{}  -- {\bf Ja/Nei}
+\end{itemize}
+
+\vskip 10pt
+
+\noindent
+{\bf Diagnostisere feil fra symptomer:} tenk deg at ??? feiler ??? i dette systemet (ikke avslør feilen). Presenter operatørobservasjon(er), la studentene vurdere mulige feil og tester, og gi testresultater fortløpende til de har identifisert feiltype og plassering korrekt.
+
+\begin{itemize}
+\item{} Operatørobservasjon: {\it }
+\item{}
+\item{}
+\end{itemize}
+
+%INDEX% DDC, Siemens APOGEE-system
+%INDEX% DDC, Siemens PPCL-kode (APOGEE DDC control)
+
+%(END_NOTES)

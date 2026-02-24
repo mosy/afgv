@@ -1,0 +1,74 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les utvalgte deler av databladet for vernereléet ``SEL-387L Line Current Differential Relay'' (dokument SEL-387L Data Sheet, oktober 2009), og svar på følgende spørsmål:
+
+\vskip 10pt
+
+Modell 387L beskrives som et ``No Settings''-relé. Forklar hva dette betyr, og hvorfor det er mulig i denne applikasjonen når moderne digitale vernereléer vanligvis har {\it mange} viktige parametere som må settes.
+
+\vskip 10pt
+
+Forklar hvorfor differensiell strømvern for en kraftlinje krever {\it to} modell 387L-reléer, og hvordan reléparet kommuniserer med hverandre.
+
+\vskip 10pt
+
+I databladet brukes begrepene ``local'' og ``remote'' strøm-målinger. Forklar hva disse to begrepene betyr.
+
+\vskip 10pt
+
+En nyttig funksjon i dette reléet er et par {\it transfer contacts}. Forklar hva disse gjør, og hvordan de ligner diskret I/O i PLS-systemer.
+
+\vskip 10pt
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Kan et par 387L-reléer brukes til differensialvern på en {\it transformator}? Forklar hvorfor eller hvorfor ikke.
+\item{} Skisser en enkel krets som viser hvordan inngangen {\tt T1} på ett relé kan brukes til å trigge utgangen {\tt R1} på et annet relé for å utføre en nyttig funksjon.
+\end{itemize}
+
+\underbar{file i00823}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Delsvar:}
+
+\vskip 10pt
+
+Siden det er upraktisk å føre sekundærledninger fra strømtransformatorer (CT-er) langs hele kraftlinjens lengde for å gjøre differensialmåling i ett relé, brukes et {\it par} 387L-reléer (ett i hver ende av linjen). Hvert relé måler strøm med egne CT-er og sammenligner målingene via en fiberoptisk kommunikasjonsforbindelse mellom reléene.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Dette reléet krever ingen nødvendige innstillinger fordi det i praksis bare sammenligner linjestrøm ved start og slutt av kraftlinjen. Så lenge CT-ene i hver ende er godt nok matchet, vil det fungere i alle aktuelle applikasjoner.
+
+\vskip 10pt
+
+Siden det er upraktisk å føre CT-sekundærledninger langs hele kraftlinjen for differensialmåling med ett relé, brukes et {\it par} 387L-reléer (ett i hver ende). De måler lokalt med hver sine CT-er og sammenligner målingene via fiberoptisk relé-til-relé-kommunikasjon.
+
+\vskip 10pt
+
+En ``local'' strøm-måling er målingen fra CT-er som er fast koblet til ett 387L-relé. En ``remote'' strøm-måling er målingen som mottas via fiberoptisk kommunikasjon fra CT-er som er koblet til {\it det andre} 387L-reléet.
+
+\vskip 10pt
+
+Hvert 387L-relé har to ``transfer'' kontaktinnganger (T1 og T2) og to transfer kontaktutganger (R1 og R2). Hvis for eksempel inngang T1 på ett relé aktiveres, lukkes kontakt R1 umiddelbart på det andre reléet. Det finnes ingen programmerbar logikk mellom disse I/O-punktene, siden dette er et ``no settings''-relé.
+
+%INDEX% Reading assignment: SEL model 387L line current differential protective relay
+
+%(END_NOTES)

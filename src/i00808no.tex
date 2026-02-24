@@ -1,0 +1,163 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les seksjon 10.0 i brukermanualen for Siemens modell 353 Process Automation Controller (dokument UM353-1, revisjon 11, mars 2003). Denne seksjonen, med tittelen ``Controller and System Test'', beskriver hvordan en modell 353 testes ved å gå gjennom en serie øvelser som utforsker hovedfunksjonene. Den fungerer også som en svært god elevøvelse for å forstå regulatorens muligheter.
+
+For å gjøre øvelsen trenger du tilgang til en Siemens modell 353-regulator. Du kan bruke en av de panelmonterte 353-regulatorene i laben, en av Desktop Process-enhetene, eller en 353 tatt fra lager. Dette er en praktisk, hands-on aktivitet.
+
+\vskip 10pt
+
+\noindent
+{\bf 10.1.1 Tilkoblinger og strømforsyning}
+
+Denne delen beskriver hvordan AC-strøm kobles til regulatoren, samt hvordan utgangen kobles til PV-inngangen for de påfølgende testene. Du kan gjerne hoppe over denne siste delen dersom regulatoren allerede er koblet til en virkelig prosess. Gå gjennom underseksjonene og følg trinn-for-trinn-instruksjonene.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.2 Konfigurasjon}
+
+Denne delen henviser til en annen seksjon i manualen og ber deg laste Factory Configured Option nummer 101 (FCO 101).
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.3 Inn/ut-signaler}
+
+Denne delen viser hvordan du verifiserer Setpoint-, Output- og Process Variable-I/O slik de er konfigurert i FCO 101, og henviser til diagrammet for FCO 101 for å verifisere ``koblingene'' for P, S og V i ODC-funksjonsblokken.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.4 Auto/Manuell}
+
+Denne delen viser hvordan du tester automatisk og manuell modus.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.5 Endring av en FCO}
+
+Denne delen viser hvordan du gjør endringer i funksjonsblokkene i FCO 101. Endringene inkluderer:
+
+\begin{itemize}
+\item{} Legge til en ny funksjonsblokk i FCO 101
+\item{} Bla gjennom parametere i en funksjonsblokk
+\item{} Endre parametrene MINSCALE og MAXSCALE i funksjonsblokken AIN1
+\end{itemize}
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.6 Alarmer}
+
+Denne delen viser hvordan alarmverdier og prioritet endres. Instruksjonene forutsetter kobling mellom utgang og PV-inngang, slik at du kan simulere ønsket PV-signal ved å sette regulatoren i manuell modus og justere utgangen. Hvis regulatoren er koblet til en prosess i drift, anbefales automatisk modus med justering av settpunkt for å få PV til ønsket verdi.
+
+\filbreak
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.7 Tag}
+
+Denne delen viser hvordan ``tag''-navnet til sløyfen endres.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.8 Quick}
+
+Denne delen utforsker ``Quick''-funksjonen for å endre utvalgte parametere i valgfri funksjonsblokk. Her brukes den til å konfigurere et rampende settpunkt.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.9 Tune}
+
+Denne delen utforsker ``Tune''-funksjonen for å endre P-, I- og D-parametere og aktivere autotuning. Hvis regulatoren er koblet til en prosess i drift, kan du gjerne prøve autotuning og vurdere resultatet. I praksis vil en kompetent tekniker ofte få mer robust regulering med nøye manuell tuning, men test gjerne funksjonen.
+
+\vskip 30pt
+
+\noindent
+{\bf 10.1.10 View}
+
+Denne delen utforsker ``View''-funksjonen for overvåking av variable i regulatoren. Dette er et nyttig diagnoseverktøy, særlig ved utvikling og feilsøking av nye funksjonsblokkprogrammer.
+
+\vskip 30pt
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Anta at du vil endre ``koblingsbanen'' mellom to funksjonsblokker i et program. Vis hvordan dette gjøres.
+\item{} Anta at du vil ta fabrikkonfigurert program \#101 og legge til en diskret utgangsblokk, og deretter koble denne til alarmblokken slik at en ekstern alarmlampe kan styres av alarminnstillingene i regulatoren. Vis hvordan dette gjøres.
+\item{} Identifiser noen av de ulike Factory Configured Options (FCO-er) som er tilgjengelige.
+\item{} I seksjon 10.1.5 vises en smart måte å endre øvre områdeverdi i AIN-blokken fra 100 til 500 på. I stedet for å skru pulserhjulet helt opp, brukes forskyvning av desimalpunkt. Forklar hvordan dette virker.
+\item{} Seksjon 3.2.12 beskriver betydningen av fem ulike alarmprioritetsnivåer i ALARM-blokken. Forklar disse med egne ord.
+\item{} I seksjon 10.1.8 beskrives en quick-set-parameter kalt ``POWER UP SETPOINT''. Forklar hva denne parameteren brukes til, gjerne med et praktisk eksempel.
+\end{itemize}
+
+\underbar{file i00808}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+{\bf Leksjon:} Å lære seg menynavigasjon i denne regulatoren er nøkkelen. Andre sentrale læringspunkter i øvelsen er: nullstille regulatoren til fabrikkstandard (FCO 101), bruke ``D''-knappen og ``A/M''-knappen for å bytte visnings- og reguleringsmodus, se hvordan funksjonsblokker kobles sammen i et program, legge til funksjonsblokk, endre PV-område og engineering units, sette alarmpunkter, endre tag-navn, bruke ``Quick'' for å redigere utvalgte parametere, bruke ``Tune'' for PID-innstillinger og bruke ``View'' for overvåking av programvariable.
+
+\vskip 10pt
+
+Side 2-4 (seksjon 2.7 ``Configuration Procedure'') gir trinnvis fremgangsmåte for å nullstille regulatoren til en Factory Configured Option (FCO), for eksempel 101. Teksten i seksjon 10.1.2 henviser bare til seksjon 2.7, der konkrete instruksjoner finnes.
+
+\vskip 10pt
+
+Side 3-22 beskriver de ulike alarmprioritetsnivåene i ALARM-funksjonsblokken:
+
+\begin{itemize}
+\item{} Prioritet 1 = Får stolpediagrammer og tilstandsvisninger til å blinke til de kvitteres
+\item{} Prioritet 2 = Som prioritet 1, men selvkvitterende (dvs. ingen manuell kvittering)
+\item{} Prioritet 3 = Får hendelses-LED-er (L og S) til å blinke til de kvitteres
+\item{} Prioritet 4 = Som prioritet 3, men selvkvitterende (dvs. ingen manuell kvittering)
+\item{} Prioritet 5 = Alarm vises, men selvkvitterende
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Oppsummeringsquiz:}
+
+(Dette fungerer godt som oppsummeringsquiz i seg selv -- studenter viser at de har gjennomført konfigurasjonsøvelsene)
+
+%INDEX% Reading assignment: Siemens model 353 controller manual
+
+%(END_NOTES)

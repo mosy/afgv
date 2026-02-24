@@ -1,0 +1,71 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En prosess bruker to split-range-reguleringsventiler (FV-82a og FV-82b, med ``progressive'' områder) for å regulere strømmen av hydrogengass inn i en kjemisk reaktor. Ventil FV-82a er den første av de to hydrogenventilene som åpner (helt åpen når utgangen fra FC-82 er 50\%), mens ventil FV-82b er den siste som åpner (så vidt begynt å åpne når utgangen fra FC-82 er 50\%). Grafikkbildet i DCS skal gi operatørene en visuell indikasjon av prosessen, forholdsregulatoren og begge ventilposisjonene:
+
+$$\includegraphics[width=15.5cm]{i01521x01.eps}$$
+
+Dette grafikkbildet er imidlertid ikke komplett. Ingeniøren glemte å programmere det til å vise de individuelle posisjonene til ventilene FV-82a og FV-82b. Slik det står nå, kan operatøren se regulatorens utgangssignal (vist her som 34\%), men kan ikke se de individuelle spindelposisjonene for hver av de to split-range-ventilene. Denne oppgaven er nå overlatt til deg!
+
+\vskip 10pt
+
+Skriv en formel for å beregne hver ventils posisjon basert på utgangsverdien fra regulator FC-82. Disse formlene skal legges inn i DCS-et for å vise operatøren hver ventils spindelposisjon. Du kan referere til regulatorens utgangssignal som $x$ i hver formel hvis du ønsker:
+
+\vskip 10pt
+
+Posisjon for ventil FV-82a =
+
+\vskip 10pt
+
+Posisjon for ventil FV-82b =
+
+\vskip 10pt
+
+Du trenger ikke bekymre deg for å begrense disse beregnede verdiene for å hindre meningsløse tall som $<$ 0\% og $>$ 100\%, fordi denne verdiavgrensningen enkelt kan programmeres inn i DCS-programvaren for visning. Skriv bare matematiske formler som predikerer de to ventilposisjonene korrekt innenfor deres normale arbeidsområder.
+
+\underbar{file i01521}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Posisjon for ventil FV-82a = {\tt (FC-82 Output) * 2}
+
+\vskip 10pt
+
+Posisjon for ventil FV-82b =  {\tt ((FC-82 Output) * 2) - 100}
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+$$\includegraphics[width=15.5cm]{i01521x02.eps}$$
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtuell feilsøking} \vrule} \hrule}
+
+Denne oppgaven egner seg godt som en ``Virtuell feilsøking''-øvelse. Når du presenterer diagrammet for studentene, ser du først for deg en bestemt feil i systemet. Deretter presenterer du ett eller flere symptomer på feilen (noe en operatør eller annen bruker av systemet kan observere). Studentene foreslår så ulike diagnostiske tester for å identifisere type og plassering av feilen, som om de var teknikere som feilsøker problemet. Din oppgave er å fortelle hva resultatet ville blitt av hver foreslåtte test, og dokumentere resultatene slik at alle studentene kan se dem.
+
+Under og etter øvelsen er det nyttig å stille oppfølgingsspørsmål som:
+
+\begin{itemize}
+\item{} Hva forteller resultatet av den siste diagnostiske testen om feilen?
+\item{} Anta at resultatene av den siste diagnostiske testen var annerledes. Hva ville det resultatet da fortelle om feilen?
+\item{} Er den siste diagnostiske testen den beste vi kunne utført?
+\item{} Hva ville vært den ideelle rekkefølgen av tester for å diagnostisere problemet med færrest mulige trinn?
+\end{itemize}
+
+
+%INDEX% Final Control Elements, valve: split ranging
+
+%(END_NOTES)
+

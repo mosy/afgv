@@ -1,0 +1,53 @@
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Anta at du skal bygge et kontrollsystem med {\sl Wireless}HART-transmittere for måling av ulike prosessvariabler. Den sentrale komponenten i det trådløse nettverket er selvsagt {\it gateway}-enheten. I ditt tilfelle gir gatewayen Modbus-tilgang til data mottatt fra alle disse transmitterene via et RS-485-nettverk (seriell kommunikasjon).
+
+Utfordringen er følgende: Fem programmerbare logiske styringer (PLS-er) trenger tilgang til målevariablene fra fem ulike {\sl Wireless}HART-transmittere. Hver PLS har en RS-485 seriell port, slik at alle kan kobles i en «daisy chain» på ett RS-485-kablet nettverk, sammen med gateway-enheten. Det som ikke er like enkelt, er å finne ut hvordan alle fem PLS-ene skal kunne lese data fra gatewayen, siden Modbus i utgangspunktet er en {\it master/slave}-protokoll (én «master» sender data til og mottar data fra flere «slave»-enheter). I dette systemet trenger vi fem forskjellige PLS-er som skal hente data fra én gateway, og gatewayen er en «slave»-enhet.
+
+\vskip 30pt
+
+Forklar hvordan det er mulig å konfigurere én enkelt PLS som Modbus-«master», og likevel la de fire andre PLS-ene få data fra den trådløse gateway-en ("slave").
+
+\vskip 100pt
+
+Vurder om det er mulig å konfigurere {\it alle} fem PLS-er som Modbus-«master»-enheter, og samtidig unngå «bus contention» når de forsøker å spørre gatewayen ("slave"). Forklar hvorfor denne løsningen er (eller ikke er!) mulig.
+
+\vfil
+
+\underbar{file i00455}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er en vurderingsoppgave. Ingen svar eller hint oppgis!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+I et master/slave-nettverk som Modbus er det kun én enhet (master) som får initiere kommunikasjon på bussen. Alle andre enheter kan bare svare på forespørsler fra masteren. Dette er grunnprinsippet vi må forholde oss til når vi lager en løsning for denne applikasjonen.
+
+\vskip 10pt
+
+Første løsning: La én PLS være master. Denne leser alle datapunkter fra gatewayen, og sender så videre nødvendige data til hver av de fire andre PLS-ene etter tur. Dette er den mest konvensjonelle måten å håndtere data i et slikt system.
+
+\vskip 10pt
+
+Andre løsning: Ja, du kan ha fem master-PLS-er, men da må de synkroniseres slik at de aldri konkurrerer om bussen samtidig. Dette kan kreve kreativ kobling mellom PLS-ene (for eksempel diskrete signaler som bare lar én PLS være master om gangen), eller kreativ programmering (for eksempel synkronisert klokke i hver PLS og kommunikasjon i tildelte tidsluker, som TDMA).
+
+%INDEX% Networking, protocols: master-slave
+%INDEX% Networking, serial: EIA/TIA-485 (formerly RS-485)
+%INDEX% Networking, WirelessHART
+
+%(END_NOTES)

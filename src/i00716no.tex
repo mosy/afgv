@@ -1,0 +1,61 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les Siemens model 353 applikasjonsnotat om "Ethernet Peer-to-Peer Communication With Model 353 and Procidia i/pac Controllers" (AD353-113, Revision 1, July 2002), og svar på spørsmålene:
+
+\vskip 10pt
+
+Kommunikasjonsprotokollen i model 353 er {\it Modbus TCP/IP}. Forklar hvordan dette skiller seg fra Modbus-varianter du har sett i RS-485-nettverk.
+
+\vskip 10pt
+
+Forklar hvordan AIE- og AOE-funksjonsblokker brukes i to model 353-regulatorer for å utveksle analoge signaldata. Leser én regulator data fra en annen, eller skriver den data, eller begge deler?
+
+\vskip 10pt
+
+Avsnittet "Ethernet Function Block" gir et godt eksempel på hvordan subnet mask brukes for å definere hvilke IP-adresser som kan kommunisere. Les eksemplet og forklar med egne ord hvordan subnet mask virker.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Forklar hvorfor variabelutveksling over Ethernet kan være en fordel for en enkelt-sløyfe regulator som Siemens model 353.
+\item{} Identifiser ulemper ved å utveksle prosessdata via Ethernet mellom regulatorer.
+\item{} Hvis du kan velge mellom Ethernet {\it switch} og Ethernet {\it hub}, hva velger du og hvorfor?
+\item{} Modbus er master/slave, Ethernet er CSMA/CD. Hvordan kan Modbus fungere over Ethernet når arbitrasjonsmetodene er ulike?
+\end{itemize}
+
+\underbar{file i00716no}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Modbus TCP/IP kapsler Modbus-koder og kommandoer inn i TCP-segmenter og IP-pakker, som deretter splittes, rutes og settes sammen igjen ved mottaker, slik som annen IP-trafikk.
+
+\vskip 10pt
+
+En AIE-blokk {\it leser} data fra en annen regulator over Ethernet via Modbus TCP/IP. En AOE-blokk initierer ikke kommunikasjon, men mapper valgte datapunkter til Modbus-adresseregistere slik at data kan leses av en annen regulators AIE-blokk.
+
+I Siemens 353 og i$|$Pac finnes ingen Modbus {\it write}-kommando. De kan være Modbus-master via AIE/DIE/CIE, men kun for å {\it lese} data fra en Modbus-slave.
+
+\vskip 10pt
+
+Subnet mask i eksemplet (255.255.255.0) maskerer bort siste oktett i IP-adressen (192.168.175.2), og subnettet defineres av de tre første oktettene (192.168.175.0).
+
+%INDEX% Leseoppgave: Siemens model 353 applikasjonsnotat (Ethernet peer-to-peer)
+
+%(END_NOTES)

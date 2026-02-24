@@ -1,0 +1,81 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les deler av databladet fra Burr-Brown (Texas Instruments) for INA111 høyhastighets instrumentation amplifier, og svar på følgende spørsmål:
+
+\vskip 10pt
+
+Beregn nødvendig gain-motstand ($R_G$) for forsterkning 30. Oppgi også denne gain-verdien i decibel.
+
+\vskip 10pt
+
+Manipuler den oppgitte gain-formelen for å løse for $R_G$ ved vilkårlig ønsket gain.
+
+\vskip 10pt
+
+Oppgi typisk inngangsresistans for forsterkeren, samt typisk biasstrøm. Beskriv hva som skjer dersom det ikke finnes ``return paths'' for biasstrømmene.
+
+\vskip 10pt
+
+Databladet anbefaler {\it clamping diodes} for å beskytte inngangene mot store overspenninger. Studer figur 5 og forklar hvordan disse diodene beskytter forsterkeren. Merk at det faktisk finnes en feil i dette skjemaet -- finner du den?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identifiser hvilke grunnleggende kretsprinsipper som brukes i hvert analysetrinn. Forklar altså ``hvorfor'' for hvert trinn, ikke bare ``hva''.
+\item{} Databladet sier at én bias-returmotstand kan være nok dersom differensiell kildeimpedans er lav. Forklar hvorfor kildemotstanden betyr noe for biasstrømmene.
+\item{} Med internskjemaet på første side: beregn $V_O$ gitt $V_{in(+)}$ = +3.5 V, $V_{in(-)}$ = +1.5 V og $R_G$ = 50 k$\Omega$, ved bruk av Ohms lov og Kirchhoffs lover på tre-opamp-kretsen.
+\end{itemize}
+
+\underbar{file i00887}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+$R_G$ = 1.724 k$\Omega$ for gain 30 = 29.54 dB
+
+\vskip 10pt
+
+$$R_G = {50000 \over {A_v - 1}}$$
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+(Gain-formel vist i skjemaet på side 1)
+
+$$A_V = 1 + {50000 \over R_G}$$
+
+$$A_V - 1 = {50000 \over R_G}$$
+
+$${1 \over A_V - 1} = {R_G \over 50000}$$
+
+$$R_G = {50000 \over A_V - 1}$$
+
+$$R_G = {50000 \over 30 - 1} = 1.7241 \hbox{ k}\Omega$$
+
+\vskip 10pt
+
+$$\hbox{dB} = 20 \log A_V$$
+
+$$\hbox{dB} = 20 \log 30 = 29.54 \hbox{ dB}$$
+
+Ifølge side 2 er typisk inngangsresistans for INA111 rundt $10^{12}$ ohm, med biasstrømmer rundt 2 pA (pikoampere). Side 8 beskriver behovet for returvei for biasstrømmer til negativ forsyningsskinne. Uten returveier vil inngangene flyte til potensialer utenfor forsterkerens common-mode-område, og utgangen mettes.
+
+\vskip 10pt
+
+Clamping-diodene er orientert slik at inngangssignaler som overskrider forsyningsskinnene ikke slipper inn i full størrelse til forsterkerinngangene. Overspenninger ``klemmes'' dermed til litt utenfor skinnene. Feilen i skjemaet er at nedre forsyningsskinne skal være merket ``V$-$'', men er feilaktig merket ``V+'' som øvre skinne.
+
+%INDEX% Reading assignment: Burr-Brown INA111 instrumentation amplifier datasheet
+
+%(END_NOTES)

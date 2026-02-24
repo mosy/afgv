@@ -1,0 +1,83 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les og lag en disposisjon av Case History \#46 (``Analysis Uncovers Control Problems In A Process Plant'') fra Michael Browns samling av veiledninger om optimalisering av reguleringssløyfer. Forbered deg på en gjennomtenkt diskusjon med lærer og medstudenter om begrepene og eksemplene i denne lesningen, og svar på følgende spørsmål:
+
+\begin{itemize}
+\item{} Forklar hvorfor, ifølge Mr. Brown, de fleste som jobber i høyt automatiserte anlegg ikke innser at så mange av deres PID-regulerte systemer yter dårlig.
+\vskip 10pt
+\item{} At dårlig PID-innstilling er så utbredt i industrien, samtidig som industrien fortsatt drives, viser at hvilken prosesstype er mest vanlig: {\it selvregulerende}, {\it integrerende}, eller {\it runaway}?
+\vskip 10pt
+\item{} Når Mr. Brown jobber med optimalisering av en reguleringssløyfe, bruker han hovedsakelig tre spesifikke tester. Identifiser hvilke tester dette er, og hvorfor de utføres i den rekkefølgen. Kommenter også teknikken hans, og hvordan den skiller seg fra noen konvensjonelle tilnærminger til PID-innstilling.
+\vskip 10pt
+\item{} En av grunnene til at strømningsreguleringssløyfen F0102 aldri ble oppfattet som problematisk, var at regulatoren hadde for mye {\it filtrering} programmert inn. Forklar hvorfor dette var et problem for reguleringen, og hvordan driftspersonellet reagerte da Mr. Brown fjernet filtreringen. Finnes det noe annet sted i dette systemet der filtrering kunne ha vært aktiv, i tillegg til i DCS-regulatoren?
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Undersøk trendgrafen i figur 1 og forklar hvordan vi kan se at regulatoren ble byttet fra automatisk til manuell modus (utover tekstboksen Mr. Brown har lagt til i trenden).
+\item{} Forklar hvordan vi kan se at reguleringsventilen i sløyfe F0102 er kraftig overdimensjonert, både ved å se på åpen-sløyfe-trenden og lukket-sløyfe-trenden.
+\end{itemize}
+
+\underbar{file i01549}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Michael Brown hevder at mangel på opplæring er årsaken til utbredt dårlig PID-regulering. At så mange industrier likevel fungerer, skyldes at flertallet av prosessene er selvregulerende. Hvis regulatoren står i automatisk modus og PV er nær SP, antar mange at alt er i orden. I virkeligheten setter operatører ofte regulatoren i manuell modus for å gjøre endringer, og bytter tilbake til automatisk først etter at de manuelt har stabilisert PV.
+
+\vskip 10pt
+
+Muligheten til å kjøre sløyfer i manuell modus avslører deres {\it selvregulerende} natur.
+
+\vskip 10pt
+
+\noindent
+Michael Browns tre tester:
+
+\begin{itemize}
+\item{} As-found automatisk test (lukket sløyfe)
+\item{} Manuell test (åpen sløyfe) for å undersøke prosessegenskaper og instrumenthelse
+\item{} As-left automatisk test (lukket sløyfe)
+\end{itemize}
+
+\vskip 10pt
+
+Filtrering i strømningssløyfen F0102 maskerte et oscillasjonsproblem, slik at PV så langt mer stabil ut enn den faktisk var. Etter at filtreringen ble fjernet, trodde operatørene at sløyfen nå var ustabil, og satte den i manuell modus for å ``fikse'' problemet!
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Ifølge Michael Brown, hvorfor hadde nesten alle sløyfene P-, I- og D-ledd aktivert? {\it DCS-et hadde en selvinnstillingsfunksjon som la alle tre virkemåtene på hver sløyfe den forsøkte å selvinnstille.}
+\item{} Forklar hvorfor det var oscillasjon i strømmen i sløyfe F0102 selv når regulatoren ble satt i manuell modus. {\it Ventilposisjoneren i seg selv var ustabil.}
+\item{} Beskriv hvordan Michael Brown klarte å finne kilden til ustabiliteten i manuell modus. {\it Han identifiserte oppstrøms sløyfer som kunne forklare problemet, og satte regulatorene deres i manuell modus én etter én for å se om dette fikk oscillasjonene i sløyfe F0102 til å forsvinne. Det viste seg at ingen av de mistenkte sløyfene var årsaken.}
+\item{} Forklar hvorfor oscillasjonene i sløyfe F0102 økte dramatisk da regulatoren ble satt i automatisk modus. {\it Ventilposisjonerens oscillasjonsperiode lå nær sløyfens ultimate frekvens, slik at sløyfen kom i sympatisk resonans med den dårlige posisjoneren.}
+\item{} Forklar hvordan vi kan se fra åpen-sløyfe-trenden at reguleringsventilen i sløyfe F0102 kan ha feil karakteristikk. {\it Prosessforsterkningen er mye større ved lav ventilåpning enn ved høy ventilåpning. Det ser ut som vi har en lineær (eller til og med quick-opening) iboende karakteristikk som blir forvrengt av endringer i differansetrykk over ventilen. En likeprosentlig karakteristikk ville fungert mye bedre her. Det er likevel mulig at noe annet skjer, for eksempel en posisjoner med problemer.}
+\end{itemize}
+
+
+
+%INDEX% Reading assignment: Michael Brown Case History #46, "Analysis uncovers control problems in a process plant"
+
+%(END_NOTES)
+

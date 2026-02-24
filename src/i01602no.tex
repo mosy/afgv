@@ -3,34 +3,34 @@
 % Copyright 2007, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Her vises responsen til en PI-regulator på en trinnvis endring i settpunktet (med en konstant prosessvariabel). Beregn regulatorens innstillinger for proporsjonal og integral, basert på det du ser i grafen. Uttrykk svaret ditt for integralkonstanten både i enhetene "repetisjoner per minutt" og "minutter per repetisjon". Avgjør også om denne regulatoren er direktevirkende eller reversvirkende, og marker de trekkene ved utgangsplottet som tilsvarer proporsjonalvirkning og integralvirkning.
+Her vises responsen til en regulator med proporsjonal + integralvirkning på en trinnendring i setpunktet (med konstant prosessvariabel). Beregn regulatorens proporsjonal- og integralkonstanter ut fra grafen. Oppgi svaret for integralkonstanten både i enheten ``repetisjoner per minutt'' og ``minutter per repetisjon.'' Bestem også om regulatoren er direkte- eller reversvirkende, og marker hvilke deler av utgangskurven som tilsvarer proporsjonalvirkning og integralvirkning.
   
 $$\includegraphics[width=15.5cm]{i01602x01.eps}$$
 
-Tidsskalaen på grafen er minutter:sekunder, og PI-algoritmen er som følger:
+Tidsskalaen i diagrammet er minutter:sekunder, og PI-algoritmen er som følger:
 
 $$m = K_p \left( e + {1 \over \tau_i} \int e \> dt \right) + b$$
 
 \noindent
-Hvor,
+Der,
 
-$m$ = Regulatorutgang (pådrag)
+$m$ = regulatorutgang (manipulert variabel)
 
-$K_p$ = Forsterkning (Gain)
+$K_p$ = forsterkning
 
-$e$ = Avvikssignal (SP$-$PV eller PV$-$SP)
+$e$ = avvikssignal (SP$-$PV eller PV$-$SP)
 
-$\tau_i$ = Integraltidskonstant
+$\tau_i$ = integraltidskonstant
 
-$b$ = Bias
+$b$ = bias
 
 \vskip 10pt
 
 \vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
 
 \begin{itemize}
-\item{} Når man analyserer utgangstrenden for en PI-regulator, er definisjonen av integraltidskonstanten som "antall minutter som kreves for å repetere proporsjonalvirkningen" mest nyttig. Identifiser størrelsen på proporsjonalvirkningens respons på PV-trinnet, og forklar deretter hvordan denne verdien er nyttig for å identifisere $\tau_i$.
-\item{} Hvis du virkelig så denne typen respons på en prosesstrend (skriver), hva ville du mistenke om systemet? Hint: denne typen trend er definitivt {\it ikke} normal for et velfungerende kontrollsystem!
+\item{} Når man analyserer utgangstrenden til en PI-regulator, er definisjonen av reset-tidskonstanten som ``antall minutter som trengs for å repetere proporsjonalvirkningen'' spesielt nyttig. Identifiser størrelsen på proporsjonalvirkningen som respons på PV-trinnendringen, og forklar hvordan denne verdien hjelper deg å finne $\tau_i$.
+\item{} Hvis du faktisk så denne typen respons i en trend fra en prosessregulator (skrivende trend), hva ville du mistenkt om systemet? Hint: denne trenden er definitivt {\it ikke} normal for et riktig fungerende reguleringssystem!
 \end{itemize}
 
 \underbar{file i01602}
@@ -42,15 +42,15 @@ $b$ = Bias
 
 %(BEGIN_ANSWER)
 
-Regulatorvirkemåte = {\it Direkte}
+Regulatorvirkning = {\it direkte}
 
 \vskip 10pt
 
-Forsterkningskonstant (Gain) = 1, eller 100\% proporsjonalbånd
+Forsterkningskonstant = 1, eller 100\% proporsjonalbånd
 
 \vskip 10pt
 
-Integralkonstant = 0,25 repetisjoner per minutt ($\tau_i$), eller 4 minutter per repetisjon ($K_i$)
+Integralkonstant = 0.25 repetisjoner per minutt ($K_i$), eller 4 minutter per repetisjon ($\tau_i$)
 
 %(END_ANSWER)
 
@@ -60,15 +60,15 @@ Integralkonstant = 0,25 repetisjoner per minutt ($\tau_i$), eller 4 minutter per
 
 %(BEGIN_NOTES)
 
-Vi vet at denne regulatorens virkemåte er {\it direkte} fordi utgangen minker når settpunktet (SP) øker (OBS: Dette er faktisk feil i originalteksten ut i fra figuren, men hvis SP øker og output minker, så er det reversvirkende i forhold til SP, som betyr direktevirkende i forhold til PV. La oss sjekke: Direct acting: PV opp -> Output opp. Error = PV-SP. Hvis SP opp, Error ned, Output ned. Korrekt. Direct acting.)
+Vi vet at denne regulatoren er {\it direktevirkende} fordi utgangen synker når setpunktet (SP) øker. Det betyr at utgangen også ville synke dersom prosessvariabelen (PV) sank.
 
-Denne regulatorens forsterkning beregnes ved forholdet mellom utgangstrinnets størrelse og inngangstrinnets størrelse: i dette tilfellet skyldes en 20\% endring i utgang en 20\% endring i inngang, noe som gir en forsterkning på 1. Den resiproke verdien gir et proporsjonalbånd på 100\%.
+Regulatorens forsterkning beregnes som forholdet mellom størrelsen på utgangstrinnet og størrelsen på inngangstrinnet: i dette tilfellet gir et utgangstrinn på 20\% et inngangstrinn på 20\%, altså forsterkning 1. Den reciproke verdien gir proporsjonalbånd på 100\%.
 
-Til slutt ser vi at over en periode på ett minutt, får integralvirkningen utgangen til å drifte ytterligere 5\%. Dette er bare 1/4 av proporsjonalvirkningens respons (som var 20\%), så integralkonstanten er 1/4 repetisjon per minutt. Den resiproke verdien er 4 minutter per repetisjon.
+Til slutt ser vi at integralvirkningen over ett minutt får utgangen til å drive ytterligere 5\%. Dette er bare 1/4 av proporsjonalresponsen, og derfor blir integralkonstanten 1/4 repetisjon per minutt. Den reciproke verdien er 4 minutter per repetisjon.
  
 \vskip 10pt
 
-Hva er galt med dette kontrollsystemet, som indikert av trenden? Prosessvariabelen virker fullstendig uresponsiv overfor endringen i utgangssignalet! Det ser ut til at sluttelementet er forbigått eller utkoblet på en eller annen måte. Ikke tro at dette indikerer en regulator i manuell modus. En regulator i "manuell" ville ikke generert noen endring i utgangssignalet som respons på endringer i verken PV eller SP.
+Hva er galt med dette reguleringssystemet, slik trenden viser? Prosessvariabelen ser helt uresponsiv ut på endringer i utgangssignalet. Det ser ut som om sluttelementet er forbikoblet eller koblet ut på en eller annen måte. Ikke tolke dette som at regulatoren står i manuell modus. En regulator i ``manual'' ville ikke laget endringer i utgangssignalet som respons på endringer i PV eller SP. Med andre ord: en regulator i manuell modus holder et konstant utgangsnivå uansett hva som skjer med PV eller SP.
 
 %INDEX% Control, proportional + integral: graphing controller response
 

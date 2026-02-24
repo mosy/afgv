@@ -1,0 +1,86 @@
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En Koyo CLICK-PLS styrer oppstart av en gassfyrt ovn ved hjelp av en {\it event drum}-instruksjon. Formålet med denne sekvensen er å «purge» ovnen på en sikker måte for rester av brennbar gass ved å bruke frisk luft før tenning forsøkes:
+
+\begin{itemize}
+\item{} {\bf Innganger}
+\item{} {\tt X001} -- trykknapp for «Purge start» (momentan NO)
+\item{} {\tt X002} -- trykknapp for «Ignition start» (momentan NO)
+\item{} {\tt X003} -- trykknapp for «Shutdown» (momentan NO)
+\item{} {\tt X004} -- flammesensor -- {\it PLS-inngangen aktiveres når flamme detekteres}
+\end{itemize}
+
+\begin{itemize}
+\item{} {\bf Utganger}
+\item{} {\tt Y001} -- forbrenningsluftventil -- {\it når denne PLS-utgangen aktiveres, åpnes luftventilen til ovnen}
+\item{} {\tt Y002} -- brenselgassventil -- {\it når denne PLS-utgangen aktiveres, åpnes gassventilen til ovnen}
+\item{} {\tt Y003} -- «Purge complete»-lampe
+\item{} {\tt Y004} -- gnisttenningsspole
+\end{itemize}
+
+\filbreak
+
+\begin{itemize}
+\item{} {\bf Trinnbeskrivelse}
+\item{} Trinn 1 -- venter på purge
+\item{} Trinn 2 -- purging av forbrenningskammer
+\item{} Trinn 3 -- kammer purget, venter på start
+\item{} Trinn 4 -- ovn i drift
+\end{itemize}
+
+$$\includegraphics[width=15.5cm]{i00458x01.eps}$$
+
+\filbreak
+
+$$\includegraphics[width=15.5cm]{i00458x02.eps}$$
+
+Analyser dette ovnsstyringsprogrammet, og forklar deretter hva hver instruksjon gjør (inkludert den praktiske funksjonen til hver timerinstruksjon). Identifiser også alle forhold som stopper systemet (setter trommelen tilbake til trinn 1).
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hvorfor er {\it purgetid} så viktig for sikker drift av en gassfyrt ovn?
+\item{} Forklar hensikten med NO-kontaktinstruksjonen adressert til biten {\tt \_Always\_ON} ({\tt SC1}).
+\item{} Anta at du hjelper en annen tekniker med feilsøking av brennerproblem i denne ovnen, og må starte og stoppe ovnen flere ganger. Teknikeren blir utålmodig og ber deg redigere PLS-programmet slik at dere slipper å vente så lenge på ny purge ved hver oppstart. Hvilken del av programmet styrer purgetiden? Ville du gjort det teknikeren ber om? Hvorfor eller hvorfor ikke?
+\item{} Anta at programmereren glemte å inkludere den normalt åpne Y002-kontakten i rung-en som går til drum-instruksjonens {\it reset}-inngang. Hvordan ville dette påvirke programdriften?
+\item{} Anta at programmereren glemte å inkludere den normalt lukkede Y004-kontakten i rung-en som går til drum-instruksjonens {\it reset}-inngang. Hvordan ville dette påvirke programdriften?
+\end{itemize}
+
+\underbar{file i00458}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Timer T1 styrer purge-syklusen (480 sekunder = 8 minutter).
+
+\vskip 10pt
+
+Timer T2 styrer ventetiden mellom fullført purge og brennerstart. Trommelen resettes til trinn 1 hvis ingen har trykket «Ignition start» innen 5 minutter etter fullført purge.
+
+\vskip 10pt
+
+Timer T3 styrer tenningsforsinkelsen (10 sekunder), altså hvor lang tid brenneren får til å tenne. Hvis det ikke er flammesignal innen denne tiden, resettes trommelen til trinn 1.
+
+\vskip 10pt
+
+Til slutt vil et trykk på «Shutdown»-knappen resette trommelen til trinn 1.
+
+%INDEX% PLC, ladder logic program analysis and explanation (Koyo CLICK)
+%INDEX% Process: furnace safety purge controller
+
+%(END_NOTES)

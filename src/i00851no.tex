@@ -1,0 +1,67 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2014, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Anta at et 51-vernerelé (tidsforsinket overstrøm) brukes for vern av en stor elektrisk motor (3000 hk). Motoren drives med linjespenning 4160 volt og har fullastvirkningsgrad på 88\%. Reléet får linjestrømdata fra tre strømtransformatorer med forhold 400:5 på motorens T1-, T2- og T3-ledere.
+
+\vskip 10pt
+
+Basert på denne informasjonen, bestem {\it pick-up}-strømverdien for reléet i CT-sekundæramper:
+
+\vskip 10pt
+
+$I_{pickup}$ = \underbar{\hskip 50pt}
+
+\vskip 10pt
+
+Forklar også hvilke andre faktor(er) som bestemmer time-dial-innstilling og type tid-strøm-kurve for at dette 51-reléet skal gi tilstrekkelig motorvern.
+
+\underbar{file i00851}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Motorens merkedata 3000 hk refererer til mekanisk utgangseffekt, ikke elektrisk inngangseffekt. Nødvendig elektrisk inngangseffekt ved full last blir:
+
+$$P_{in} = {P_{out} \over \hbox{Efficiency}}$$
+
+$$P_{in} = {3000 \hbox{ HP} \over 0.88} = 3409.1 \hbox{ HP}$$
+
+Denne elektriske effekten tilsvarer 2.5432 MW, gitt omregningsfaktoren 746 watt per hestekraft. Linjestrøm for denne trefasemotoren:
+
+$$P = I_{line} V_{line} \sqrt{3}$$
+
+$$I_{line} = {P \over V_{line} \sqrt{3}}$$
+
+$$I_{line} = {2.5432 \hbox{ MW} \over (4160 \hbox{ V}) \sqrt{3}} = 352.96 \hbox{ A}$$
+
+CT-en leverer en proporsjonalt lavere strøm, eksakt $5 \over 400$ av primærstrømmen:
+
+$$I_{sec} = (I_{pri}) \left({5 \over 400}\right)$$
+
+$$I_{sec} = (352.96 \hbox{ A}) \left({5 \over 400}\right) = 4.412 \hbox{ A}$$
+
+Dermed ser 51-reléet 4.412 A i hver CT-inngang ved fullast. Denne verdien må være pick-up for tidsforsinket overstrømsfunksjon, fordi høyere strøm enn dette er overlast og skal medføre utkobling etter en viss tid.
+
+\vskip 10pt
+
+For å fastsette riktig time-dial-innstilling og tid-strøm-kurve må vi kjenne motorens {\it damage curve}: en tid-strøm-kurve som beskriver hvor mye overlast motoren tåler før skade. Reléets tid-strøm-kurve må velges slik at bryteren løser ut {\it før} motorens tålegrenser overskrides.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% Electronics review: current transformer (CT)
+%INDEX% Protective relay: time-overcurrent (51)
+
+%(END_NOTES)

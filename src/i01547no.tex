@@ -3,9 +3,28 @@
 % Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Plott responsen for følgende PD-regulator (Proporsjonal + Derivat), anta revers virkemåte, gain = 1.5, derivattid = 18 sekunder, og bias = 45\%:
+Tegn {\it bare den deriverende responsen} til en proporsjonal+deriverende regulator for følgende inngangsbetingelser, med antatt proporsjonalbånd på 500\% og derivasjonskonstant på 1.5 minutter. Regulatoren er {\it direktevirkende}, og algoritmen den følger er vist under grafen:
 
-$$\includegraphics{i01547x01.eps}$$
+$$\includegraphics[width=15.5cm]{i01547x01.eps}$$
+
+Tidsskalaen på diagrammet er minutter:sekunder, og P+D-algoritmen er som følger:
+
+$$m = K_p \left( e + \tau_d {de \over dt} \right) + b$$
+
+\noindent
+Der,
+
+$m$ = Regulatorutgang (manipulert variabel)
+
+$K_p$ = Forsterkning
+
+$e$ = Feilsignal (PV$-$SP)
+
+$\tau_d$ = Deriverende tidskonstant
+
+$b$ = Bias
+
+\vskip 10pt
 
 \underbar{file i01547}
 %(END_QUESTION)
@@ -16,7 +35,21 @@ $$\includegraphics{i01547x01.eps}$$
 
 %(BEGIN_ANSWER)
 
-$$\includegraphics[width=10cm]{i01547x02.eps}$$
+$$\includegraphics[width=15.5cm]{i01547x02.eps}$$
+
+Først må vi forstå at et proporsjonalbånd på 500\% tilsvarer en forsterkning på 1/5, eller 0.2.
+
+\vskip 10pt
+
+Det nedadgående trinnet i PV ved tid 0:30 får det deriverende leddet til å mette utgangen til 0\%. Når PV flater ut, går den deriverende responsen til 0, og utgangen blir stående på startverdien (60\%).
+
+Fra 1:00 til 1:30 ramper PV fra 15\% til 35\%, som gir en de/dt-helning på +40\% per minutt. Multiplisert med en $\tau_d$-konstant på 1.5 og en forsterkning ($K_p$) på 0.2, blir bidraget fra det deriverende leddet +12\%. Dermed trinner utgangen fra 60\% til 72\%.
+
+Ved 1:30 øker PV-rampen til en rate på 100\% per minutt (fra 35\% til 60\% over 15 sekunder), noe som gir et deriverende bidrag på +30\%. Dermed trinner utgangen til nytt nivå på 90\% (opprinnelig 60\%-verdi + 30\% = 90\%).
+
+Mellom 1:45 og 2:15 har PV negativ helning. Dette gir en negativ deriverende respons (60\% til 35\% over 30 sekunder = -50\% per minutt, ganger 1.5 ganger 0.2 = -15\%). Dermed går utgangen fra 60\% til 45\%.
+
+Ved 2:15 flater PV ut og den deriverende responsen opphører, slik at utgangen returnerer til sin opprinnelige verdi på 60\%
 
 %(END_ANSWER)
 
@@ -26,12 +59,8 @@ $$\includegraphics[width=10cm]{i01547x02.eps}$$
 
 %(BEGIN_NOTES)
 
-En vanlig feil blant studentene er å glemme bias-verdien. De vil ofte plotte utgangssignalet som starter på 0\% eller 50\% i stedet for 45\%.
-
-De som husker bias-verdien vil kanskje fortsatt gjøre feil med endringsretningen. "Skal den gå opp eller ned?" spør de seg selv. Min metode for å besvare dette spørsmålet er å se for meg at PV øker. Hvis regulatoren er reversvirkende, skal utgangen gå ned. Dette betyr at PV og Output beveger seg i motsatte retninger. Derfor, hvis PV går {\it ned} (som vist i grafen), skal Output gå {\it opp}.
-
-Det kan være lurt å be studentene tegne P-responsen og D-responsen hver for seg, og deretter summere dem algebraisk for å få den endelige utgangsresponsen.
-
+ 
 %INDEX% Control, proportional + derivative: graphing controller response
 
 %(END_NOTES)
+

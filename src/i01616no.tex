@@ -1,0 +1,153 @@
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Identifiser egnede inngangsterminaler, riktige moduser og nødvendige forbindelsesledninger slik at denne National Instruments E-serie dataoppsamlingsenheten (DAQ) uavhengig kan måle spenningene fra de tre seriekoblede solcellene som vises:
+
+$$\includegraphics[width=15.5cm]{i01616x01.eps}$$
+
+Tilgjengelige moduser for inngangskanalene er RSE, NRSE og DIFF:
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Kanal} & {\bf Modus} & {\bf Første terminal} & {\bf Andre terminal} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+0 &  &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+1 &  &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+2 &  &  &  \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+\vfil 
+
+\underbar{file i01616}
+\eject
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Dette er et vurdert spørsmål -- ingen svar eller hint er gitt!
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Både celle 1 og celle 2 er {\it flytende} spenningskilder (ikke jordreferert), og kan derfor ikke leses av DAQ i noen single-ended-modus. Det betyr at kanal 1 og 2 må konfigureres som {\it differensiell}. Celle 3 er en jordreferert spenningskilde, og kan derfor leses enten i single-ended- eller differensiell modus.
+
+\vskip 10pt
+
+Dette er én mulig løsning:
+
+$$\includegraphics[width=15.5cm]{i01616x02.eps}$$
+
+(Tilkoblingen til ``AI Gnd'' er nødvendig for å gi en returvei for biasstrøm.)
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Kanal} & {\bf Modus} & {\bf Første terminal} & {\bf Andre terminal} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+0 & DIFF & AI0 & AI8 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+1 & DIFF & AI1 & AI9 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+2 & DIFF & AI2 & AI10 \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+\vfil \eject
+
+Her er en annen mulig løsning:
+
+$$\includegraphics[width=15.5cm]{i01616x03.eps}$$
+
+(Tilkoblingen til ``AI Gnd'' er nødvendig for å gi en returvei for biasstrøm.)
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Kanal} & {\bf Modus} & {\bf Første terminal} & {\bf Andre terminal} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+0 & DIFF & AI0 & AI8 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+1 & DIFF & AI1 & AI9 \cr
+%
+\noalign{\hrule}
+%
+% Another row
+2 & NRSE & AI2 & AI Sense \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+
+%INDEX% Pictorial circuit review (analog signal wiring to data acquisition unit)
+
+%(END_NOTES)

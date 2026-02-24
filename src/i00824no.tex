@@ -1,0 +1,80 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les utvalgte deler av instruksjonsmanualen for vernereléet ``SEL-387A Current Differential Relay'' (dokument SEL-387A Instruction Manual, januar 2014), og svar på følgende spørsmål:
+
+\vskip 10pt
+
+Nevn vanlige bruksområder for denne relémodellen.
+
+\vskip 10pt
+
+Som mange andre moderne digitale vernereléer kan modell 387A levere mer enn én ANSI/IEEE-vernefunksjon. Oppgi noen funksjoner dette reléet tilbyr utover 87 (differensialvern).
+
+\vskip 10pt
+
+Figur 2.7 på side 2-10 viser en eksempelapplikasjon der 387A beskytter en transformator. Identifiser viklingskonfigurasjonen i krafttransformatoren (f.eks. Delta/Stjerne), samt konfigurasjonen av primær- og sekundærstrømtransformatorene i tilkoblingen mot reléet. Hvordan skiller CT-koblingen seg fra tradisjonelle (elektromekaniske) differensialreléer?
+
+\vskip 10pt
+
+Basert på krafttransformator-konfigurasjonen i figur 2.7: hvor stor faseforskyvning finnes mellom primær- og sekundærfaser?
+
+\vskip 10pt
+
+En sentral problemstilling ved implementering av differensialvern på krafttransformatorer er {\it faseforskyvningskompensasjon} fra primær til sekundær når transformatoren er Stjerne-Delta eller Delta-Stjerne. I elektromekaniske reléer løses dette ved ulik CT-kobling på primær- og sekundærside (dvs. Delta-koblede CT-er på transformatorens stjerneside, og Stjerne-koblede CT-er på transformatorens deltaside). Digitale 87-reléer som modell 387A tilbyr derimot ``connection compensation'', basert på digitale beregninger i stedet for fysisk kobling. Side 3-17 til 3-21 beskriver denne funksjonen i modell 387A. Les denne delen og forklar med egne ord hvordan connection compensation virker for de to eksemplene i figur 3.9 og 3.10.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Viklingskompensasjonsparameteren må settes til en bestemt verdi på stjernesiden av krafttransformatoren hvis CT-ene på samme side også er stjernekoblet. Forklar hvorfor, og hva {\tt WnCTC}-verdien må settes til.
+\item{} Studer fasordiagrammene for {\tt WnCTC}-eksemplene på side 3-19 (figur 3.9) og 3-20 (figur 3.10). Hvilke fasordiagrammer viser faseforskyvningen i krafttransformatoren? Hvordan representeres CT-faseforskyvning? Hva representerer den stiplede linjen? Hvordan passer {\tt WnCTC}-verdiene inn i diagrammene?
+\end{itemize}
+
+\underbar{file i00824}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Delsvar:}
+
+\vskip 10pt
+
+I figur 2.7 (side 2-10) ser vi at 387A-reléet beskytter en spenningsnedtrappende {\it autotransformator} med stjernevinding. Både primær- og sekundær-CT-er er stjernekoblet, som er vanlig for digitale 87-reléer.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Modell 387A kan brukes til vern av transformatorer, roterende maskiner, reaktorer og andre flerterminale kraftsystemkomponenter (side 1-1). Noen applikasjoner er vist på side 1-4.
+
+\vskip 10pt
+
+I tillegg til differensialvern (87) tilbyr dette reléet momentant og tidsforsinket overstrømsvern (50/51) samt retningsbestemt overstrømsvern (67). Figur 1.1 på side 1-2 viser dette tydelig.
+
+\vskip 10pt
+
+I figur 2.7 (side 2-10) ser vi at 387A-reléet beskytter en spenningsnedtrappende {\it autotransformator} med stjernevinding. Både primær- og sekundær-CT-er er stjernekoblet, slik som ofte brukes med digitale 87-reléer. Selv om krafttransformatoren hadde Stjerne-Delta eller Delta-Stjerne, kunne CT-ene på begge sider fortsatt vært stjernekoblet fordi faseforskyvningskompensasjonen gjøres digitalt i reléet. Elektromekaniske 87-reléer uten matematisk kompensasjon krevde komplementær CT-kobling (dvs. Delta-CT på stjernesiden av krafttransformatoren, og omvendt).
+
+\vskip 10pt
+
+Autotransformatoren med Stjerne-Stjerne-konfigurasjon mellom primær og sekundær gir ingen faseforskyvning mellom inn- og utgang.
+
+\vskip 10pt
+
+Kompensasjon for viklingsforbindelse er en funksjon som aktiveres/deaktiveres med innstillingen {\tt ICOM} (side 3-9). Når funksjonen er aktiv, brukes parameterne {\tt W1CTC} og {\tt W2CTC} (CT-kompensasjon for vikling 1 og 2), som tar heltall fra 1 til 12 og angir ekstra faseforskyvning som legges til CT-signalene for den aktuelle viklingen. Verdiene følger ``klokketimer'', der hver time tilsvarer 30 graders faseforskyvning. Dermed betyr ``3'' +90 grader, ``6'' +180 grader og ``10'' +300 grader. Hvis verdien ``12'' settes, fjernes nullsekvensstrømmer fra den CT-gruppen, noe som er nødvendig dersom CT-ene er stjernekoblet på stjernesiden av krafttransformatoren.
+
+%INDEX% Electric power systems: protective relays (differential)
+%INDEX% Reading assignment: SEL model 387A current differential protective relay
+
+%(END_NOTES)

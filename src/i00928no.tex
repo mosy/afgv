@@ -1,0 +1,63 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2015, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les utvalgte deler av manualen ``Rosemount 5300 Series high performance guided wave radar'' (del 00809-0100-4530, Revisjon AA, juni 2007), og svar på følgende spørsmål:
+
+\vskip 10pt
+
+Sidene 3-8 og 3-9 lister retningslinjer for installasjon av guided-wave-radar i væske- og faststoffapplikasjoner. Nevn noen av disse retningslinjene og forklar begrunnelsen.
+
+\vskip 10pt
+
+Sidene 7-3 til 7-10 beskriver bruk av Rosemounts konfigurasjonsprogram ``Radar Master'' for analyse av transmitterens ``Echo Curve''. Forklar hvordan ``threshold''-verdier brukes for å identifisere betydningen av ekkopulser. Forklar også hvordan ``Amplitude Threshold Curve'' kan brukes for å ignorere falske ekko fra forstyrrende objekter i tanken (f.eks. stiger, ledeplater osv.).
+
+\vskip 10pt
+
+Guided-wave-radartransmittere kan måle væske-væske-grensesnitt i tillegg til enkelt nivå. En GWR-transmitter kan derfor regnes som en {\it multivariabel} enhet. Dette gir en utfordring: hvordan formidle flere prosessvariabler over ett enkelt 4-20 mA signalpar. En løsning vist på sidene 2-6, 5-44 og 5-45 er en enhet kalt {\it HART Tri-Loop}, som henter ut tre 4-20 mA signaler fra transmitteren, ett for hver prosessvariabel. Forklar hvordan dette er mulig ut fra det du vet om HART.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identifiser en ekkokurve i manualen der deteksjonsterskelen er feil satt, og angi om terskelen bør økes eller reduseres.
+\item{} Forklar hvordan Amplitude Threshold Curve (ATC) kan brukes til mer sofistikert terskelsetting for å unngå at forstyrrende objekter feilaktig tolkes som væskenivå.
+\item{} Forklar hvordan ``Probe End Projection'' kan brukes for nivåbestemmelse selv når ekko fra produkttoppen er for svakt.
+\item{} Vil tilsynelatende probetupp-posisjon stige eller falle når nivået i beholderen øker?
+\item{} For å bruke Tri-Loop med en HART-transmitter må transmitteren stå i {\it burst mode}. Hva tror du ``burst mode'' betyr for en HART-transmitter?
+\item{} Nevn noen prosess- og instrumentvariabler som kan kommuniseres med Tri-Loop, utover prosessnivå.
+\end{itemize}
+
+\underbar{file i00928}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Unngå å plassere prober nær agitatorer, innløpsrør, varmespiraler og andre forstyrrelser. La ikke proben svinge eller berøre faste objekter i beholderen. I noen applikasjoner må proben {\it forankres} i bunnen for å unngå for mye bevegelse. Hensikten er å redusere falske ``ekko'' som kan feiltolkes som grenseflater.
+
+\vskip 10pt
+
+Terskelverdier settes i Radar Master-programvaren for å tolke ulike ekkosignaler som ulike grenseflater. Første ekko over terskel P1 tolkes for eksempel som ``produktoverflate'' (gass-væske). Neste ekko over terskel P2 tolkes som ``grensesnitt'' (væske-væske). Terskel{\it kurver} kan brukes til å omgå falske ekko fra faste forstyrrelser. Generelt bør terskelen settes til omtrent 50\% av reell mottatt signalamplitude.
+
+\vskip 10pt
+
+HART er en digital protokoll og kan derfor sende flere datapunkter serielt. Det muliggjør multivariabel overføring for HART-instrumenter på ett lederpar.
+
+%INDEX% Measurement, level: radar
+%INDEX% Reading assignment: Rosemount model 5300 guided-wave radar transmitter manual
+
+%(END_NOTES)
+

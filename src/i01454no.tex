@@ -3,7 +3,74 @@
 % Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
 % This means you may do almost anything with this work of mine, so long as you give me proper credit
 
-Skriv et pseudokode-program for en mikrokontroller som implementerer en enkel av/på-termostat for temperaturregulering. Programmet ditt bør inneholde en variabel kalt {\tt SP} (Setpoint/Skal-verdi) som bestemmer ved hvilken målt temperatur varmeovnen skal slås av. Sørg for at du inkluderer den nødvendige betingelsessetningen for å slå varmeovnen {\it på} igjen!
+En {\it mikrokontroller} er en digital datamaskin på én brikke med innebygde I/O-funksjoner som kan motta og sende ulike typer elektriske signaler, og med en prosessor som kan utføre en serie skrevne instruksjoner. Denne brukes til å styre en luftkompressor:
+
+$$\includegraphics[width=15.5cm]{i01454x01.eps}$$
+
+Studer programmet under (skrevet i et uformelt programmeringsspråk kalt ``pseudokode'') og forklar hvordan mikrokontrolleren avgjør når motoren skal slås på og av. Bestem også trykkene der mikrokontrolleren starter og stopper kompressoren:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=5in \raggedright
+
+\noindent
+\underbar{\bf Pseudokodelisting}
+
+\vskip 10pt
+
+{\tt Declare Pin0 as an analog input (scale 0 to 5 volts = 0 to 1023)}
+
+{\tt Declare Pin1 as a discrete output}
+
+{\tt Declare Pin2 as a discrete output}
+
+{\tt Declare A as a constant = 805}
+
+{\tt Declare B as a constant = 750}
+
+{\tt Declare C as a constant = 700}
+
+\vskip 10pt
+
+{\tt LOOP}
+
+\hskip 10pt {\it // (Comment: Motor control points)}
+
+\hskip 10pt {\tt IF Pin0 > A, SET Pin1 LOW}
+
+\hskip 10pt {\tt ELSEIF Pin0 < B, SET Pin1 HIGH}
+
+\hskip 10pt {\tt ENDIF}
+
+\vskip 10pt
+
+\hskip 10pt {\it // (Comment: Alarm LED control points)}
+
+\hskip 10pt {\tt IF Pin0 < C, SET Pin2 HIGH}
+
+\hskip 10pt {\tt ELSE SET Pin2 LOW}
+
+\hskip 10pt {\tt ENDIF}
+
+{\tt ENDLOOP}
+}
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hvilke deler av pseudokodeprogrammet kjøres gjentatte ganger, og hvilke deler kjøres bare én gang?
+\item{} Hvor mange bits oppløsning har mikrokontrolleren for analog inngang på pinne \#0, gitt at 0 til 1023 er hele omformerområdet?
+\item{} Forklar hvordan enheten {\it solid state relay} fungerer for å styre kompressormotoren.
+\item{} Forklar hva som ville skjedd hvis du slettet {\tt LOOP}- og {\tt ENDLOOP}-setningene i mikrokontrollerprogrammet.
+\item{} Modifiser pseudokoden slik at alarm-LED-en slår seg på dersom trykket blir for høyt.
+\item{} Modifiser pseudokoden slik at alarm-LED-en slår seg på dersom trykket blir for høyt {\it eller} for lavt.
+\end{itemize}
 
 \underbar{file i01454}
 %(END_QUESTION)
@@ -14,55 +81,11 @@ Skriv et pseudokode-program for en mikrokontroller som implementerer en enkel av
 
 %(BEGIN_ANSWER)
 
-Dette er bare ett eksempel, og ikke det eneste korrekte svaret:
+{\tt A} = {\tt 805} = 110 PSI (motorens stoppunkt)
 
-\vskip 10pt
+{\tt B} = {\tt 750} = 100 PSI (motorens startpunkt)
 
-\hbox{ \vrule
-\vbox{ \hrule \vskip 3pt
-\hbox{ \hskip 3pt
-\vbox{ \hsize=2.5in \raggedright
-
-\noindent
-\underbar{\bf Pseudocode listing}
-
-{\tt LOOP}
-
-\hskip 10pt {\tt IF Temp > SP THEN Heater = Off}
-
-\hskip 10pt {\tt ELSE Heater = On}
-
-{\tt ENDLOOP}
-}
-\hskip 3pt}%
-\vskip 5pt \hrule}%
-\vrule}
-
-\vskip 10pt
-
-En mer sofistikert versjon av dette programmet ville inkludere {\it hysterese} (også kalt {\it dødbånd}):
-
-\vskip 10pt
-
-\hbox{ \vrule
-\vbox{ \hrule \vskip 3pt
-\hbox{ \hskip 3pt
-\vbox{ \hsize=2.5in \raggedright
-
-\noindent
-\underbar{\bf Pseudocode listing}
-
-{\tt LOOP}
-
-\hskip 10pt {\tt IF Temp > SP\_high THEN Heater = Off}
-
-\hskip 10pt {\tt IF Temp < SP\_low THEN Heater = On}
-
-{\tt ENDLOOP}
-}
-\hskip 3pt}%
-\vskip 5pt \hrule}%
-\vrule}
+{\tt C} = {\tt 700} = 90.8 PSI (alarmpunkt for lavt lufttrykk)
 
 %(END_ANSWER)
 
@@ -72,8 +95,47 @@ En mer sofistikert versjon av dette programmet ville inkludere {\it hysterese} (
 
 %(BEGIN_NOTES)
 
-Be studentene forklare hvorfor et dødbånd (hysterese) ville være en god funksjon å inkludere i en temperaturregulator.
+Trykktransmitteren måler 0 til 150 PSI og gir ut 4 til 20 mA. Denne strømmen, gjennom en motstand på 250 ohm, skaper et signal på 1 til 5 volt som mikrokontrollerens ADC kan lese (som en tallverdi opp til 1023 tellerverdier).
+
+\vskip 10pt
+
+LRV (1 volt) gir en telleverdi på 205 teller ($1 \over 5$ av 1023). Dermed representerer 205 til 1023 området 0 til 150 PSI. Telleverdiene i programmet tilsvarer følgende trykk:
+
+\begin{itemize}
+\item{} $A$ = 805 teller = ${805 \over 1023} \times 5$ = 3.9345 volt = 110.04 PSI
+\vskip 5pt
+\item{} $B$ = 750 teller = ${750 \over 1023} \times 5$ = 3.6657 volt = 99.96 PSI
+\vskip 5pt
+\item{} $C$ = 700 teller = ${700 \over 1023} \times 5$ = 3.4213 volt = 90.80 PSI
+\end{itemize}
+
+Kompressormotoren stopper når trykket overstiger $A$ (110.04 PSI), og starter igjen når trykket faller under $B$ (99.96 PSI). En alarmbit settes dersom trykket er lavere enn $C$ (90.80 PSI).
+
+\vskip 10pt
+
+$2^{10} = 1024$, så dette må være en 10-bits ADC.
+
+
+
+
+
+
+
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Virtuell feilsøking} \vrule} \hrule}
+
+Dette spørsmålet egner seg godt som en ``Virtuell feilsøking''-øvelse. Når du presenterer diagrammet for studentene, forestiller du deg først en bestemt feil i systemet. Deretter presenterer du ett eller flere symptomer på denne feilen (noe en operatør eller annen bruker kan observere). Studentene foreslår så ulike diagnostiske tester for å identifisere feilens natur og plassering, slik teknikere ville gjort i praktisk feilsøking. Din oppgave er å fortelle hva resultatet ville blitt for hver foreslått test, og dokumentere resultatene slik at alle studentene kan se dem.
+
+Under og etter øvelsen er det nyttig å stille oppfølgingsspørsmål som:
+
+\begin{itemize}
+\item{} Hva forteller resultatet av den siste diagnostiske testen deg om feilen?
+\item{} Anta at resultatene av den siste diagnostiske testen var annerledes. Hva ville det resultatet fortalt deg om feilen?
+\item{} Er den siste diagnostiske testen den beste vi kunne gjort?
+\item{} Hva ville vært ideell testrekkefølge for å diagnostisere problemet i færrest mulig trinn?
+\end{itemize}
 
 %INDEX% Control, basics: on/off control (implemented in a microcontroller)
 
 %(END_NOTES)
+

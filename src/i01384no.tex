@@ -1,0 +1,76 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2013, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+En løsning på problemet med installert karakteristikk for reguleringsventiler er å fjerne reguleringsventilen helt, og bruke en pumpe med variabel hastighet til å regulere væskestrøm i stedet for en konstant-hastighetspumpe og en strupeventil. Den mest brukte metoden for å styre hastigheten på en elektrisk pumpe er å bruke en frekvensomformer (VFD) til å justere AC-frekvensen til motoren. VFD-er har ofte analog signalstyring, med analoge inngangsterminaler som kan kobles til analoge utgangsterminaler fra en regulator, slik at regulatoren kan kommandere pumpemotoren til ulike hastigheter på samme måte som den kan kommandere en strupeventil til ulike spindelposisjoner.
+
+\vskip 10pt
+
+Les relevant(e) del(er) av Allen-Bradley ``PowerFlex 4 Adjustable Frequency AC Drive user manual'' (dokument FRN 5.xx) for å finne ut hvordan en slik VFD kobles til 4-20 mA analogutgangen fra en sløyferegulator. Skisser et enkelt diagram som viser hvordan en PowerFlex 4 VFD kobles til utgangen fra en av disse regulatorene (du velger regulator):
+
+\vskip 10pt
+\filbreak
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=5in \raggedright
+
+\noindent \centerline{\bf Regulatoralternativer}
+\begin{itemize}
+\item{} Siemens 352P single-loop
+\item{} Siemens 353 four-loop
+\item{} Siemens 353R multi-loop med IO-8AO 8-kanals analog utgangsmodul
+\vskip 2pt
+\item{} Foxboro 762CNA dual-loop
+\item{} Foxboro 716C single-loop temperatur
+\item{} Foxboro 718TC single-loop temperatur
+\item{} Moore Industries 535 single-loop
+%\item{} Honeywell UDC2000 single-loop
+%\item{} Honeywell UDC2500 single-loop
+%\item{} Honeywell UDC3200 single-loop
+%\item{} Honeywell UDC3500 single-loop
+\vskip 2pt
+\item{} Emerson ROC800 SCADA/RTU med AO analog utgangsmodul
+\vskip 2pt
+\item{} Emerson DeltaV DCS med M-series 2 AO 8-kanals 4-20 mA utgangsmodul
+\end{itemize}
+
+} \hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hvilket/hvilke parameter(e) i PowerFlex 4 VFD må konfigureres for å tillate 4-20 mA styring? Hint: dette kalles vanligvis ``Speed Reference''-parameteren for en VFD.
+\item{} Hvilke andre alternativer finnes for ``Speed Reference'' i denne VFD-en?
+\end{itemize}
+
+\underbar{file i01384}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+4-20 mA-inngangen på PowerFlex 4 VFD finnes på terminal 15 (+) og 14 ($-$). Parameter {\tt P038} må settes til valg {\tt 3} (``4-20 mA input'').
+
+\vskip 10pt
+
+Side 1-14 viser hvordan 4-20 mA-signalet skal kobles til VFD-en, og viser også til riktig parameter. Et mer omfattende koblingsskjema finnes på side 1-13. Alternativer for parameter {\tt P038} finnes på side 3-11.
+
+%INDEX% Final Control Elements, motor: variable frequency drive
+
+%(END_NOTES)
+

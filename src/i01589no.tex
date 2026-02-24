@@ -1,0 +1,90 @@
+%(BEGIN_QUESTION)
+% Copyright 2010, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Beregn utgangsspenningens endringsrate (volt per sekund) for denne regulator-kretsen dersom PV-signalet er 3.0 volt og SP-signalet er 2.5 volt, forutsatt at potmeteret er stilt til maksimal motstand. Beregn også ``tidskonstanten'' $\tau$ for kretsen ved samme potmeterstilling:
+
+$$\includegraphics[width=15.5cm]{i01589x01.eps}$$
+
+Beregn deretter hvor lang tid det tar før utgangen endrer seg med 0.5 volt (samme størrelse som forskjellen mellom PV og SP) når potmeteret står nøyaktig i halv posisjon. Hvordan sammenlignes dette tidsresultatet med den nye verdien av $\tau$ ved denne potmeterstillingen?
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Identifiser en måte å gjøre integrasjonstidskonstanten kortere i denne regulatoren uten å justere 71 k$\Omega$-potmeteret i modul 4.
+\item{} Identifiser en måte å gjøre integrasjonstidskonstanten kortere uten å endre noe som helst i modul 4.
+\item{} Identifiser regulatorens virkemåte (direkte eller revers), og angi deretter hva som måtte endres i kretsen for å reversere denne virkemåten.
+\end{itemize}
+
+\underbar{file i01589}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+$d\hbox{(Output)} \over dt$ = $-149.8$ mV/s ved 0.5 volt avvik og maksimal motstand.
+
+\vskip 10pt
+
+$\tau_i$ = 3.337 sekunder per repetisjon (3.337 sekunder for å ``gjenta'' et avvikssignal på 0.5 volt) når potmeteret er stilt til maksimal motstand.
+
+\vskip 10pt
+
+$\tau_i$ = 1.669 sekunder per repetisjon (1.669 sekunder for å ``gjenta'' et avvikssignal på 0.5 volt) når potmeteret er stilt til 35.5 k$\Omega$.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Denne integratorkretsen utfører i hovedsak følgende matematiske funksjon:
+
+$$U_{out} = - {1 \over RC} \int_0^T (\hbox{PV} - \hbox{SP}) \> dt$$
+
+Setter vi inn de oppgitte verdiene for tilfellet med maksimal motstand, får vi:
+
+$$U_{out} = - {1 \over (71000)(0.000047)} \int_0^T (3 - 2.5) \> dt$$
+
+Hvis vi lar kretsen integrere i 1 sekund, får vi:
+
+$$U_{out} = - {1 \over (71000)(0.000047)} \int_0^1 (3 - 2.5) \> dt$$
+
+$$U_{out} = - {1 \over 3.337} \int_0^1 0.5 \> dt$$
+
+$$U_{out} = - \left({1 \over 3.337}\right) [(1)(0.5) - (0)(0.5)]$$
+
+$$U_{out} = - \left({1 \over 3.337}\right) (0.5)$$
+
+$$U_{out} = - 0.149835 \hbox{ volts}$$
+
+Integrasjonstidskonstanten ($\tau_i$) er produktet av $R$ og $C$, som i tilfellet med maksimal motstand blir 3.337 sekunder.
+
+\vskip 10pt
+
+Hvis potmeteret settes i halv posisjon, blir $R$ = 35.5 k$\Omega$, og integrasjonstidskonstanten blir halvparten av full verdi (1.6685 sekunder). Hvis vi gjør et nytt ``tankeeksperiment'' og lar integratorkretsen virke i nøyaktig ett sekund, får vi:
+
+$$U_{out} = - {1 \over (35500)(0.000047)} \int_0^1 (3 - 2.5) \> dt$$
+
+$$U_{out} = - {1 \over 1.6685} \int_0^1 0.5 \> dt$$
+
+$$U_{out} = - \left({1 \over 1.6685}\right) [(1)(0.5) - (0)(0.5)]$$
+
+$$U_{out} = - \left({1 \over 1.6685}\right) (0.5)$$
+
+$$U_{out} = - 0.29967 \hbox{ volts}$$
+
+Ved konstant avvik mellom PV og SP vil integratorens utgangsspenning være en lineær rampe. Derfor kan vi betrakte utgangsspenningen etter 1 sekund som spenningsendringsraten i volt per sekund (forutsatt i begge tilfeller at integratorutgangen startet ved 0 volt). For å finne tiden det tar for en rampe på $-0.29967$ volt per sekund å nå $-0.5$ volt, trenger vi bare å dividere de to størrelsene slik at volt forkortes bort og sekunder står igjen:
+
+$${-0.5 \hbox{ V} \over -0.29967 \hbox{ V/s}} = 1.6685 \hbox{ s}$$
+
+Dermed ser vi at definisjonen av ``tidskonstant'' ($\tau$) for en integrator er hvor lang tid det tar å ``gjenta'' inngangssignalet.
+
+%INDEX% Control, integral: analog electronic controller
+
+%(END_NOTES)

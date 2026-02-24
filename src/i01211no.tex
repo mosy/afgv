@@ -1,0 +1,102 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2012, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Følgende programkode fra et Siemens APOGEE-system (skrevet i Siemens' ``PPCL''-språk) overstyrer posisjonen til et uteluftspjeld basert på målt konsentrasjon av karbondioksid (CO$_{2}$) i romluften. Se på koden og svar på oppgavene:
+
+\vskip 10pt
+
+\hbox{ \vrule
+\vbox{ \hrule \vskip 3pt
+\hbox{ \hskip 3pt
+\vbox{ \hsize=6.5in \raggedright
+
+\noindent
+{\tt 08230 C HVU-2 OUTSIDE AIR DAMPER POSITION OVERRIDDEN} 
+
+\noindent
+{\tt 08240 C IF SPACE CO2 LEVELS RISE MORE THAN 300 PPM ABOVE SETPOINT}
+
+\noindent
+{\tt 08250 C}
+
+\noindent
+{\tt 08260 SAMPLE(300) IF("MV.HVU2.STATUS" .EQ. ON .AND. "MV.HVU2.CO2" .GT. "MV.OACO2" + 300)}
+
+\noindent
+{\tt \hskip 30pt THEN ON("MV.HVU2.CO2.OVRD") ELSE OFF("MV.HVU2.CO2.OVRD")}
+
+\noindent
+{\tt 08270 SAMPLE(30) IF("MV.HVU2.CO2.OVRD" .EQ. ON .AND. "MV.HVU.2:AIRTEMP" .GE. 52)}
+
+\noindent
+{\tt \hskip 30pt THEN "MV.HVU2.MOA" = "MV.HVU2.MOA" + 0.2}
+
+\noindent
+{\tt 08280 SAMPLE(5) IF("MV.HVU2.CO2.OVRD" .EQ. OFF .OR. "MV.HVU.2:AIRTEMP" .LE. 48)}
+
+\noindent
+{\tt \hskip 30pt THEN "MV.HVU2.MOA" = "MV.HVU2.MOA" - 0.2}
+}
+
+\hskip 3pt}%
+\vskip 5pt \hrule}%
+\vrule}
+
+\vskip 10pt
+
+Identifiser variabelen i koden som refererer til målt CO$_{2}$-konsentrasjon i rommet (dvs. {\it prosessvariabelen}).
+
+\vskip 10pt
+
+Identifiser variabelen i koden som refererer til ønsket CO$_{2}$-konsentrasjon i rommet (dvs. {\it settpunktet}).
+
+\vskip 10pt
+
+Identifiser variabelen i koden som refererer til posisjonen til uteluftspjeldet for rommet (dvs. {\it utgangen}).
+
+\vskip 10pt
+
+Hvilken betingelse må være oppfylt for at uteluftspjeldet skal åpne, i tillegg til at CO$_{2}$-konsentrasjonen er for høy?
+
+\vskip 10pt
+
+Hvilken betingelse vil føre til at uteluftspjeldet lukker, selv om CO$_{2}$-konsentrasjonen er for høy?
+
+\underbar{file i01211}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+2 poeng for hvert svar:
+
+\begin{itemize}
+\item{} Variabel for målt CO$_{2}$-konsentrasjon (prosessvariabel) = {\tt MV.HVU2.CO2}
+\vskip 10pt
+\item{} Variabel for ønsket CO$_{2}$-konsentrasjon (settpunkt) = {\tt MV.OACO2}
+\vskip 10pt
+\item{} Variabel for posisjon til uteluftspjeld (utgang) = {\tt MV.HVU2.MOA}
+\vskip 10pt
+\item{} Betingelse for å åpne uteluftspjeldet i tillegg til høy CO$_{2}$: {\bf Romlufttemperaturen må være minst 52 grader.}
+\vskip 10pt
+\item{} Betingelse som lukker uteluftspjeldet selv ved høy CO$_{2}$: {\bf Hvis romlufttemperaturen er 48 grader eller lavere.}
+\end{itemize}
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+{\bf Denne oppgaven er kun ment for prøver/eksamen, ikke arbeidsark!}
+
+%(END_NOTES)
+

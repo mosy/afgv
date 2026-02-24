@@ -1,0 +1,56 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Dette reguleringssystemet måler og regulerer differansetrykket over en stor motordrevet gasskompressor ved å ``resirkulere'' gass fra kompressorens utløpslinje tilbake til sugelinjen.  Det bruker en air-to-close reguleringsventil slik at ventilen feiler åpen ved tap av lufttrykk eller signal.  Kontrollerens utgangsindikasjon er derimot revers-responderende, slik at 0\% (20 mA) betyr helt lukket ventil mens 100\% (4 mA) betyr helt åpen ventil:
+
+$$\includegraphics[width=15.5cm]{i00294x01.eps}$$
+
+Dessverre har systemet et problem.  Differansetrykk-indikerende kontroller (PDIC) viser prosessvariabel (PV) rundt 50\% av området, mens settpunkt (SP) er stilt til 70\%.  Kontrollerens utgangsindikasjon viser 0\%.
+
+Identifiser hvilke av disse fire områdene i systemet problemet kan ligge i, og beskriv deretter en god test du kan gjøre i/på systemet for å snevre inn feilområdet ytterligere:
+
+\begin{itemize}
+\item{} Problem på målesiden (transmitter, kabling, kontroller analog inngang)?
+\item{} Problem med kontrollerens reguleringshandling (``beslutning'')?
+\item{} Problem på sluttkontrollelementsiden (ventil, I/P, booster, kontroller analog utgang)?
+\item{} Problem med selve kompressoren (eller andre deler av prosessen)?
+\end{itemize}
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Kan en stengt manuell ventil i resirkuleringslinjen forklare det vi ser?  Forklar hvorfor eller hvorfor ikke.
+\end{itemize}
+
+\underbar{file i00294}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Problemet er tydeligvis {\it ikke} kontrollerens handling, fordi den ifølge frontpanelet prøver å gjøre riktig (dvs. lukke reguleringsventilen for å bygge opp differansetrykk).
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+Målesiden kan registrere for lavt trykk feilaktig (dvs. faktisk trykk er høyere enn kontrolleren viser), eller ventilen kan åpne når den ikke skal (og dermed gi for lavt differansetrykk), eller kompressoren yter for dårlig og klarer ikke bygge nødvendig differansetrykk, eller resten av prosessen trekker for hardt på kompressoren.
+
+\vskip 10pt
+
+En god test er å verifisere om differansetrykket faktisk er så lavt som kontrolleren viser.  En annen test er å verifisere om reguleringsventilen faktisk står åpen når den burde være stengt.  Måling av enten PV- eller utgangssignal (mA) med milliammeter er et utmerket sted å starte for å verifisere kontrollerens I/O-signaler og samsvar mellom visning og signal.
+
+%INDEX% Basics, control loop troubleshooting: isolating area of fault by correspondence
+%INDEX% Process: compressor differential pressure control
+%INDEX% Process: compressor surge control
+
+%(END_NOTES)

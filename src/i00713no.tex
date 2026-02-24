@@ -1,0 +1,191 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+I dette SCADA-systemet kommuniserer en "master" PLC (MTU) med flere "slave" PLC-er (RTU-er) via radio med Modbus-protokoll. Hver PLC kommuniserer med sin radiosender/mottaker via en kort RS-232-seriekabel. Illustrasjonen er omtrent i målestokk med hensyn til avstander:
+
+$$\includegraphics[width=15.5cm]{i00713x01.eps}$$
+
+Det er et problem i systemet: RTU nummer 4 kommuniserer ikke med MTU. Ved inspeksjon ser du at "Tx"- og "Rx"-LED blinker på alle RTU-radioene unntatt RTU \#4: der blinker bare "Rx".
+
+Vurder sannsynligheten for hver oppgitt feil. Ta én feil om gangen (ingen sammenfallende feil), og avgjør om hver feil alene kan forklare {\it alle} symptomer og målinger.
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil &
+\vrule \quad\hfil # \ \hfil &
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Feil} & {\bf Mulig} & {\bf Umulig} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Skadet antenne på MTU &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Skadet antenne på RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC stoppet (ikke i drift) RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Radio transceiver avstengt på RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+"TD"-leder med brudd i RS-232-kabel på RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+"RD"-leder med brudd i RS-232-kabel på RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud-rate feil satt på RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud-rate feil satt på MTU &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus-modus (RTU/ASCII) feil satt på RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus-modus (RTU/ASCII) feil satt på MTU &  &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Fresnel-soneinterferens mellom MTU og RTU \#4 &  &  \cr
+%
+\noalign{\hrule}
+} % End of \halign
+}$$ % End of \vbox
+
+Til slutt: identifiser {\it neste} diagnostiske test/måling du ville gjort, og forklar hvordan resultatet hjelper videre i feillokalisering.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} En sterk feilsøkingsteknikk er å {\it bytte identiske komponenter} mellom enheter for å se om feilen flytter seg. Forklar hvordan dette kan brukes her.
+\item{} Et viktig spørsmål er om "Tx"/"Rx"-LED på radioene gjelder trådløst nett eller RS-232-nett. Forklar hvordan dette kan avklares med informasjonen som er gitt.
+\end{itemize}
+
+\underbar{file i00713no}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+\noindent
+{\bf Delvis svar:}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil &
+\vrule \quad\hfil # \ \hfil &
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Feil} & {\bf Mulig} & {\bf Umulig} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Skadet antenne på MTU &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Skadet antenne på RTU \#4 &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC stoppet (ikke i drift) RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Radio transceiver avstengt på RTU \#4 &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+"TD"-leder med brudd i RS-232-kabel på RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+"RD"-leder med brudd i RS-232-kabel på RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud-rate feil satt på RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+PLC baud-rate feil satt på MTU &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus-modus (RTU/ASCII) feil satt på RTU \#4 & $\surd$ &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Modbus-modus (RTU/ASCII) feil satt på MTU &  & $\surd$ \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Fresnel-soneinterferens mellom MTU og RTU \#4 &  & $\surd$ \cr
+%
+\noalign{\hrule}
+} % End of \halign
+}$$ % End of \vbox
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+At RTU \#4 mottar signaler fra MTU viser at begge antenner virker, og at radiomottakeren i RTU \#4 virker. Feilen må derfor forklare manglende respons {\it fra} RTU \#4.
+
+%INDEX% Trådløs SCADA-nettverk: feilsøking
+
+%(END_NOTES)

@@ -1,0 +1,55 @@
+%(BEGIN_QUESTION)
+% Copyright 2006, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Det er viktig at et termoelementbasert temperaturinstrument har {\it høy inngangsimpedans}. Hva betyr dette, og hvorfor er det viktig i en termoelementkrets?
+
+\vskip 10pt
+
+Moderne digitale voltmetre har normalt høy inngangsimpedans -- høy nok for termoelementspenning. Anta likevel at du må måle termoelementutgang {\it uten} digitale instrumenter. Du har mange analoge voltmeterbevegelser tilgjengelig, men alle har for lav inngangsimpedans til oppgaven.
+
+Beskriv hvordan du kan bygge et voltmeter med svært høy inngangsimpedans med lett tilgjengelige komponenter. Ekstrapoeng dersom du kan gjøre det uten elektronisk krets.
+
+\underbar{file i00394}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+Når et instrument sies å ha høy inngangsimpedans, betyr det at det trekker svært lite strøm fra spenningskilden det måler. Dette gjelder idealvoltmetre generelt: de skal måle spenning uten å ``belaste'' kilden med nevneverdig strøm. Ofte betyr dette høy DC-motstand, men ordet ``impedans'' inkluderer også andre strømhindringer (kapasitiv og induktiv reaktans).
+
+For termoelementinstrumenter er lav strømtrekk viktig fordi termoelementledninger ofte har høyere motstand per lengde enn kobberledninger med tilsvarende tverrsnitt. Ved merkbar strøm i kretsen vil det oppstå spenningsfall langs lederne, som gir målefeil:
+
+$$\includegraphics[width=15.5cm]{i00394x04.eps}$$
+
+\vskip 10pt
+
+En løsning er op-amp-buffer som driver analogt målerinstrument. Op-amper har typisk inngangsimpedans i millioner eller milliarder ohm (TL082 har typisk $10^{12} \> \Omega$). Kretsen kan se slik ut:
+
+$$\includegraphics[width=15.5cm]{i00394x01.eps}$$
+
+Op-ampen måler termoelementspenningen og replikerer nivået på utgangen, som driver måleinstrumentet. Strømmen til målerinstrumentet kommer fra op-ampens forsyning (+V/-V), ikke fra termoelementet, så termoelementkretsen blir ikke belastet. En ekstra fordel er at bufferen enkelt kan bygges som presisjonsforsterker slik at større målerinstrumentområde kan brukes:
+
+$$\includegraphics[width=15.5cm]{i00394x02.eps}$$
+
+En ikke-elektronisk løsning er klassisk nullbalanse- eller ``potensiometrisk'' voltmeter, der en justerbar spenningskilde balanserer innkommende signalspenning, og et følsomt nullinstrument viser når spenningene er like. Et vanlig analogt voltmeter leser så den justerbare spenningskilden i balansepunktet:
+
+$$\includegraphics[width=15.5cm]{i00394x03.eps}$$
+
+I balanse får nullinstrumentet strøm fra batteriet, ikke fra termoelementet. Denne nullbalansemetoden er i prinsippet den eneste spenningsmålemetoden som kan oppnå {\it uendelig} inngangsimpedans. Enkelhet og høy teoretisk inngangsimpedans gjør løsningen elegant.
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+
+%INDEX% Measurement, temperature: thermocouple transmitter (high impedance input)
+
+%(END_NOTES)

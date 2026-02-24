@@ -1,0 +1,521 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2009, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+\noindent
+{\bf Laboratorieøvelse}
+
+\vskip 5pt
+
+Lagets oppgave er å bygge en enkel reguleringssløyfe bestående av en ``smart'' trykktransmitter, indikerende regulator, I/P-omformer og reguleringsventil.  Sløyfen trenger ikke å regulere noe reelt, men den må flytte ventilen som respons på endring i målingen når regulatoren står i ``automatisk'' modus.
+
+Hovedregelen i dette prosjektet er å holde alt enkelt!  Det vil komme tid til å studere hver sløyfekomponent i dybden.  Nå lærer dere bare hvordan de ulike enhetene henger sammen for å danne et komplett reguleringssystem.  Dette gir perspektiv og kontekst til senere studier.  Den samme øvelsen med å bygge en enkel sløyfe vil bli gjentatt ved slutten av hvert kvartal (unntatt sommer) av hver student individuelt som en ``capstone''-aktivitet.
+
+%I recommend using a Rosemount model 3051 pressure transmitter with a span somewhere between 10 and 100 PSI, and using the default controller display range of 0 to 100 percent rather than try to scale it to engineering units.  Each instrument in the loop should be labeled with a proper tag name (e.g. ``PT-15'' for a pressure transmitter), with all instruments in each loop sharing the same loop number.  Write on pieces of masking tape to make simple labels for all the instruments and signal lines.
+
+Følgende tabell med mål viser hva du og laget ditt må fullføre innen den planlagte tiden for denne labøvelsen.  Legg merke til at noen mål er individuelle, mens andre gjelder laget som helhet:
+
+\vskip 10pt
+
+\underbar{Måloppnåelsestabell:}
+
+% No blank lines allowed between lines of an \halign structure!
+% I use comments (%) instead, so that TeX doesn't choke.
+
+$$\vbox{\offinterlineskip
+\halign{\strut
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil & 
+\vrule \quad\hfil # \ \hfil \vrule \cr
+\noalign{\hrule}
+%
+% First row
+{\bf Prestasjonsmål} & {\bf Vurdering} & {\bf 1} & {\bf 2} & {\bf 3} & {\bf 4} & {\bf Team} \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Manuell styring av sluttregulerende element (FCE) & mastery & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Transmitter registrerer prosess & mastery & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+FCE responderer på prosessendring (auto-modus) & mastery & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Bruk sløyfekalibrator for å måle transmittersignal & mastery & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Bruk sløyfekalibrator til å kilde signal til FCE & mastery & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Bruk sløyfekalibrator til å simulere transmitter & mastery & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Sløyfediagram og inspeksjon & mastery &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Koble rør til Swagelok-tilkobling & mastery &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Labspørsmål: Instrumentinstallasjon & proportional &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Labspørsmål: Igangkjøring & proportional &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Labspørsmål: Hodesregning & proportional &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Labspørsmål: Diagnostikk & proportional &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Nedrigg og lab-rydding & mastery & -- & -- & -- & -- &  \cr
+%
+\noalign{\hrule}
+%
+% Another row
+Personlig verktøykoffert komplett (vises siste dag) & mastery &  &  &  &  & -- -- -- -- \cr
+%
+\noalign{\hrule}
+} % End of \halign 
+}$$ % End of \vbox
+
+De eneste ``proportional''-poengene i denne aktiviteten er labspørsmålene, som besvares av hver student individuelt.  En liste over mulige labspørsmål vises på slutten av denne arbeidsarkoppgaven.  Labspørsmålene er ment å veilede labarbeidet like mye som å måle forståelse, og instruktøren kan derfor spørre laget ditt om disse spørsmålene dag for dag, i stedet for alt på én gang (på en enkelt dag).
+
+\vskip 10pt
+
+{\bf Det er avgjørende at laget planlegger hva dere skal oppnå hver dag.  Et kort (10 minutters) lagmøte i starten av hver labøkt er en god måte å gjøre dette på, ved å gjennomgå hva som allerede er gjort, hva som gjenstår, og hvilke vurderinger dere bør være klare for.  Det er mye arbeid involvert i å bygge, dokumentere og feilsøke disse fungerende instrumentsystemene!}
+
+Når dere arbeider på dette systemet vil dere uunngåelig møte problemer.  Dere bør alltid forsøke å løse problemene som et lag før dere ber om hjelp fra instruktør.  Hvis dere fortsatt trenger hjelp, skriv lagets farge på labtavlen med en kort beskrivelse av hva dere trenger hjelp med.  Instruktøren vil møte hvert lag i den rekkefølgen de står på tavlen for å adressere problemene.
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labøvelse -- sikkerhet først!}
+
+\vskip 30pt
+
+\noindent
+Før dere begynner å jobbe i labrommet, la oss identifisere hvor noen viktige ting er:
+
+\begin{itemize}
+\item{} Førstehjelpsskrin (ved den nord-vestlige ytterdøren)
+\vskip 10pt
+\item{} Brannslukker (ved hovedinngangsdøren til lab)
+\vskip 10pt
+\item{} Nøddusj (ved hovedinngangsdøren til lab)
+\vskip 10pt
+\item{} Vask med øyeskylledyser (på sørenden av laben)
+\vskip 10pt
+\item{} Nødstrømsavbrytere (ved hovedinngangsdøren til lab)
+\vskip 10pt
+\item{} Håndbok for nødprosedyrer (på sørenden av hovedkontrollpanelet)
+\vskip 10pt
+\item{} Faremerker, for merking av utstyr (ved hovedkontrollpanelet)
+\vskip 10pt
+\item{} Ekstra vernebriller og vernebriller med tetning (ved instruktørenes kontordører)
+\vskip 10pt
+\item{} Stigeladder (nord-øst hjørne av labrommet)
+\end{itemize}
+
+\vskip 30pt
+
+\noindent
+Dere må følge disse sikkerhetsreglene til enhver tid når dere jobber i laben:
+
+\begin{itemize}
+\item{} Ingen åpne sko (f.eks. sandaler) er tillatt i laben!
+\vskip 10pt
+\item{} Øyebeskyttelse skal brukes til enhver tid i labrommet!
+\vskip 10pt
+\item{} Bruk aldri et elektroverktøy du ikke er kjent med.  Be om hjelp fra instruktøren før du bruker det for første gang!  En instruktør må være til stede i rommet hvis du bruker et elektroverktøy.
+\vskip 10pt
+\item{} Ikke arbeid med farlige spenninger (alt over 24 volt) uten at en instruktør er til stede i rommet!
+\vskip 10pt
+\item{} Hørselsvern skal brukes når du jobber med eller i nærheten av støyende verktøy!
+\item{} Kapp-/gjærsag
+\item{} Hånddrill (med hullsag)
+\vskip 10pt
+\item{} Bruk alltid stige, aldri en stol, for å nå noe som er høyt oppe!
+\end{itemize}
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labøvelse -- bygging av systemet (kobling av sluttregulerende element til regulatorens utgang)}
+
+\vskip 5pt
+
+Instrumenteringslaben er lagt opp for å legge til rette for bygging av fungerende instrument-``sløyfer,'' med over et dusin koblingsbokser, ferdig trukne signalkabler og ``racks'' med 2-tommers vertikale rør for montering av instrumenter.  De eneste ledningene dere trenger å installere for å bygge et fungerende system er de som kobler feltinstrumentet til nærmeste koblingsboks, og deretter små ``jumper''-kabler som kobler ulike forhåndsinstallerte kabler sammen i mellomliggende koblingsbokser.
+
+
+Det ferdige sløyfesystemet vil bestå av en måleenhet (en trykk-``transmitter''), en reguleringsenhet (en ``sløyferegulator'') og et sluttregulerende element (en ``reguleringsventil'').  Det er enklest å begynne med å koble reguleringsventilen til sløyferegulatoren før du kobler trykktransmitteren.  Velg en stasjon i laben der en reguleringsventil og I/P-omformer allerede er montert og klare til bruk, og la instruktøren hjelpe laget ditt med å velge en passende sløyferegulator.  Å koble disse to enhetene bør være fokus for den første labøkten.
+
+Reguleringsventilen trenger tilførsel av trykkluft for å fungere.  Trykkluft er tilgjengelig på alle ``utility columns'' i labrommet, og også langs noen av instrumentstativene (via rustfrie stålrør).  Koble nærmeste lufttilførsel til reguleringsventilen med en lengde plastslange med påmonterte slangemuttere og klemringer i endene.  For å se hvordan slangefittings settes sammen, kan du inspisere et av de ferdigbygde systemene i laben for å se hvordan slanger er koblet til instrumenter der.  Diagrammet under viser hvordan sløyferegulatoren skal kobles til reguleringsventilen:
+
+$$\includegraphics[width=15.5cm]{i00012x04.eps}$$
+
+Du har flere alternativer for sløyferegulatorer i labrommet: {\it panelmonterte} regulatorer (plassert på hovedkontrollpanelet), fjernmonterte {\it PLC}-enheter (plassert i noen av koblingsboksene) og labens {\it DCS} med to ``noder'' plassert ved nord- og sørenden av labrommet.  Du må konsultere dokumentasjon for hver av disse regulator-typene for å se hvilke terminaler ventilsignalene skal kobles til.  PLC- og DCS-regulatorene har koblingsskjema i koblingsboksene.  De panelmonterte regulatorene er dokumentert i brukermanualer.
+
+Når reguleringsventilen er koblet til regulatorens utgangsterminaler, kan du sette regulatoren i ``Manual''-modus og bruke den til å kommandere ventilen gjennom hele arbeidsområdet.  Dette er den første ``loop check''-testen av lagets system.
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labøvelse -- bygging av systemet (rør- versus slangefittings)}
+
+\vskip 5pt
+
+En av ``just-in-time''-læringsaktivitetene studentene møter i sin første sløyfebygging er hvordan man håndterer {\it rør}- versus {\it slange}-fittings.  De som kjenner til husholdningsrørleggerarbeid vil allerede være kjent med rørfittings, men instrument-slangefittings er nye for nesten alle nye studenter.
+
+\vskip 10pt
+
+En {\it rør}-fitting er laget for å sammenføye stive metallrør med andre metallrør og/eller instrumenter med trykkporter.  Standard amerikanske rørgjenger er {\it koniske}, noe som betyr at de oppnår en tett forbindelse ved å strammes med betydelig moment.  Et viktig detaljpunkt for rørfittings er hvordan man tetter og smører disse koniske gjengene.  Dette gjøres ved å påføre enten {\it gjengetetningsmasse} (pipe ``dope''), {\it teflontape} eller andre tetningsmidler på gjengene før montering.  Unnlater man tetning på rørgjenger vil det føre til lekkasjer og muligens skadede rørfittings!
+
+\vskip 10pt
+
+I kontrast er en {\it slange}-fitting laget for å sammenføye stive eller fleksible slanger med andre slanger og/eller rørgjenger.  Instrument-slangefittings oppnår tetting ved {\it kompresjon} som presser en liten metallring (kalt {\it klemring} eller {\it ferrule}) rundt slangen med riktig spenning.  Slangefittings-gjenger er {\it rette} (ikke koniske), noe som betyr at de ikke strammes gradvis på samme måte som koniske rørfittings.  Ingen gjengetetning (f.eks. teflontape) trengs for å få slangefittings til å tette, kun riktig kompresjon.  Faktisk vil gjengetetning ofte være i veien for å få en god tetning med instrument-slangefittings.
+
+Standard innstramming for første montering av 1/4" og 3/8" Swagelok-instrumentfittings (``swaging'' av klemringen rundt slangen første gang) er én og en kvart omdreining (1-1/4 omdreininger).  Å sette sammen en slangefitting på nytt krever bare at mutteren strammes ``til'', ikke 1-1/4 omdreininger igjen!
+
+\vskip 10pt
+
+For mer detaljer om dette viktige temaet, se seksjonene ``Pipe and Pipe Fittings'' og ``Tube and Tube Fittings'' i kapitlet ``Instrument Connections'' i læreboken din {\it Lessons In Industrial Instrumentation}.  Andre gode ressurser inkluderer dokumentasjon fra produsenter av rør- og slangefittings.  Både Swagelok og Parker publiserer gratis veiledninger om montering og bruk av begge typer fittings.
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labøvelse -- bygging av systemet (kobling av transmitter til regulatorens inngang)}
+
+\vskip 5pt
+
+Neste steg i å bygge lagets sløyfe er å koble måleenheten (``transmitteren'') til sløyferegulatoren.  Anbefalt type transmitter i denne labøvelsen er en {\it differansetrykk}-transmitter, siden dette er et av de mest vanlige og allsidige måleinstrumentene i industriell instrumentering.
+
+Lagets stasjon i labrommet vil ikke være forhåndsutstyrt med en transmitter slik det var med reguleringsventilen.  Dette betyr at dere må velge en fungerende transmitter fra lagerskapet for å installere i systemet.  Se etter en transmitter som er merket med en etikett som sier at den er i god stand.
+
+Transmittere er laget for å boltes til spesielle braketter, som igjen festes til 2-tommers rør med en U-bolt.  Alle labstasjoner har seksjoner av 2-tommers jernrør installert nettopp for dette formålet.  Finn en passende brakett, bolter og U-bolt for å montere transmitteren til røret nær reguleringsventilen.  Merk at boltene som skrus inn i transmitteren har en fin gjengestigning som er forskjellig fra vanlige bolter.  En samling av disse boltene finnes i samme skap som transmitterne og monteringsbrakettene.
+
+Som med ventilens kontrollkabler er de eneste ledningene dere trenger å installere for å koble transmitteren til regulatoren de som går fra feltinstrumentet til nærmeste koblingsboks, og deretter små ``jumper''-kabler som kobler ulike forhåndsinstallerte kabler sammen i mellomliggende koblingsbokser.  De forhåndsinstallerte flerlederkablene dekker mesteparten av avstanden mellom transmitter og regulator.
+
+Konsulter produsentens dokumentasjon for å se hvordan du kobler transmitteren til regulatoren (og bruk de forhåndstrykkede koblingsskjemaene i koblingsboksene for PLC- og DCS-regulatorene).  Du kan finne brukermanualer for trykktransmittere på nett.
+
+\vskip 10pt
+
+Når transmitteren er koblet til regulatorens inngangsterminaler, kan du påføre et lufttrykk på transmitterens ``høytrykks''-port og se regulatorens ``prosessvariabel''-display for å se indikasjonen stige.  Muligheter for å påføre lufttrykk inkluderer et rør fra en luftregulator eller en håndpumpe.  Dette er den andre ``loop check''-testen av lagets system.
+
+\vskip 10pt
+
+Etter at dere har verifisert transmitterens evne til å registrere prosess-trykk, er dere klare til å verifisere at regulatoren fungerer i ``Automatic''-modus.  For denne testen: sett først regulatoren i Manual og flytt utgangen til omtrent 50\% -- dette skal åpne reguleringsventilen omtrent halvveis.  Deretter bytter dere regulatorens modus til Automatic og påfører trykk til transmitterens port.  Når regulatoren registrerer stigende trykk, vil den endre ventilens posisjon.  Dette er hva den ville gjort i en ekte prosesssløyfe: flytte sluttregulerende element som respons på endringer i prosessvariabelen.  Dette er den tredje ``loop check''-testen av lagets system.
+
+\vskip 10pt
+
+{\bf Vanlige feil:}
+
+\begin{itemize}
+\item{} Unnlate å konsultere produsentens dokumentasjon for feltinstrumenter (f.eks. hvordan de kobles, hvordan de kalibreres).
+\item{} Montere feltinstrumenter i vanskelige posisjoner slik at det er vanskelig å komme til terminalene eller fjerne deksler når de er montert.
+\item{} Feil montering av rør/slangefittings (f.eks. forsøke å skru slangefittings inn i rørfittings og omvendt).
+\item{} Unnlate å dra lett i hver eneste leder der den terminerer for å sikre en mekanisk solid forbindelse.
+\item{} Studenter jobber isolert på deler av systemet uten å dele med lagkamerater hva de gjorde og hvordan.  Det er viktig at hele laget lærer alle aspekter av systemet!
+\end{itemize}
+
+\vskip 10pt
+
+{\bf Hvis et lag jobber effektivt, bør de klare å koble både reguleringsventil og transmitter til en regulator og demonstrere funksjonene til hver komponent i løpet av én 3-timers labøkt.}
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labøvelse -- bruke sløyfekalibrator}
+
+\vskip 5pt
+
+Bortsett fra multimeteret ditt er et av de viktigste verktøyene en instrumenttekniker må mestre {\it sløyfekalibratoren}.  Dette er spesielle milliampere-målere med evne til å {\it generere} 4-20 mA-signaler i tillegg til å måle dem.  Som lag skal dere demonstrere bruk av sløyfekalibrator til å:
+
+\vskip 10pt
+
+\begin{itemize}
+\item{} {\it Måle} 4-20 mA-signalet sendt fra transmitteren til regulatoren
+\vskip 15pt 
+\item{} {\it Kilde} et 4-20 mA-signal til reguleringsventilen (i stedet for regulatoren)
+\vskip 15pt 
+\item{} {\it Simulere} en transmitter ved å sende eget 4-20 mA-signal til regulatoren
+\end{itemize}
+
+\vskip 10pt
+
+Detaljer om bruk av sløyfekalibratorer finnes i underseksjonen ``Using Loop Calibrators'' i seksjonen ``Troubleshooting Current Loops'' i kapitlet ``Analog Electronic Instrumentation'' i læreboken din {\it Lessons In Industrial Instrumentation}.
+
+\vskip 10pt
+
+Sløyfekalibratorer, sammen med noen andre spesialverktøy, finnes i {\it lagets verktøyskap}.  Hvert lag har et fargekoded skap i labrommet som inneholder spesialverktøy dere ikke forventes å eie.  Hvert lag er ansvarlig for at disse verktøyene blir lagt tilbake i skapet på slutten av hver labøkt, at skapet blir låst, at alle verktøy holdes i god stand, og at skapene ikke brukes til personlige ting.  Hvert skap vil bli inspisert ved slutten av kvartalet, og lagmedlemmer holdes ansvarlige for å erstatte manglende verktøy for egen regning.
+
+Det bør bemerkes at hvert skap inneholder en spesifisert liste over innhold, som bør sjekkes jevnlig for å sikre at ingenting mangler.
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labøvelse -- dokumentere systemet}
+
+\vskip 5pt
+
+Hver student må tegne sitt eget {\it sløyfediagram} for lagets system, i henhold til riktige ISA-konvensjoner.  Eksempel-sløyfediagrammer vises i neste spørsmål i dette arbeidsarket, og en sløyfediagram-``mal'' er inkludert på slutten av dette spørsmålet (selv om denne malen kanskje ikke samsvarer nøyaktig med instrumentene dere har valgt for sløyfen).  Disse sløyfediagrammene må være {\it omfattende} og {\it detaljerte}, og vise hver ledningsforbindelse, hver kabel, hver terminalblokk, spennpunkter osv.  Prinsippet å ha i mente her er å gjøre sløyfediagrammet så komplett og entydig at hvem som helst kan følge det og se hva som er koblet til hva, selv noen uten kjennskap til industriell instrumentering.  I industrien bygges sløyfer ofte av kontraktspersonell med begrenset forståelse av hvordan systemet skal fungere.  Sløyfediagrammene de følger må være så komplette at de kan koble alt riktig uten nødvendigvis å forstå hvordan det skal fungere.
+
+Hvert instrument og hver signalkabel i sløyfen må være korrekt merket med et ISA-standard tag-nummer.  En enkel måte er å vikle et kort stykke maskeringstape rundt hver kabel (og sette på hvert instrument) og skrive på tapen med permanent tusj.  Selv om det ikke finnes noen industristandard for merking av signalkabler, er en god anbefaling å merke hver to-lederkabel med tag-nummeret til feltinstrumentet den går til.  Dermed bør hver tolederkabel i en trykktransmitterkrets merkes ``PT-$x$'' (der ``$x$'' er sløyfenummeret), hver flow control-ventil merkes ``FV-$x$'', osv.  Husk at hele sløyfen defineres av prosessvariabelen den måler: hvis PV er {\it temperatur} vil transmitteren være en {\it T}T, reguleringsventilen en {\it T}V, regulatoren en {\it T}C, osv.
+
+Når hele laget er ferdig med å tegne sine individuelle sløyfediagrammer, tilkall instruktøren for inspeksjon av sløyfen.  Her vil instruktøren la studentene bytte på å gå gjennom hele sløyfen, mens de andre studentene kontrollerer diagrammene for feil og mangler underveis.  I løpet av denne tiden vil instruktøren også inspisere kvaliteten på installasjonen, og identifisere problemer som frynsete ledninger, dårlig krympede terminaler, dårlig kabelføring, manglende merking, manglende kabelkanaldeksler, osv.  Laget må korrigere alle identifiserte feil for å få godkjenning.
+
+Etter vellykket inspeksjon må hvert lagmedlem plassere sitt sløyfediagram i diagramholderen som er plassert midt i laben bak hovedkontrollpanelet.  Når det blir aktuelt å feilsøke et annet lags system, er det her dere finner sløyfediagrammet for det systemet!
+
+\vskip 10pt
+
+{\bf Vanlige feil:}
+
+\begin{itemize}
+\item{} Glemme å merke alle signalledninger (se eksempel-sløyfediagrammer).
+\item{} Glemme å merke alle feltinstrumenter med egne tag-navn (f.eks. PT-83, PIC-83, PV-83).
+\item{} Glemme å notere alle ledningsfarger.
+\item{} Glemme å sette navnet ditt på sløyfediagrammet!
+\item{} Basere diagrammet på en lagkamerats diagram, i stedet for å inspisere systemet nøye selv.
+\item{} Ikke plassere instrumenter på sløyfediagrammet i riktig orientering (feltinstrumenter til venstre, kontrollromsinstrumenter til høyre).
+\end{itemize}
+
+\vskip 10pt
+
+{\bf Å lage og inspisere nøyaktige sløyfediagrammer bør ikke ta mer enn én full labøkt (3 timer) hvis laget jobber effektivt!}
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labspørsmål}
+
+\vskip 5pt
+
+Det er hvert lags ansvar å studere disse labspørsmålene og være forberedt på å svare på dem gjennom hele konstruksjons- og testprosessen.  Disse spørsmålene måler ikke bare fremdrift, men {\it guider} også fremdriften mens dere bygger, tester og feilsøker sløyfene.  Lag oppmuntres til å gjennomgå denne listen i starten av hver labøkt for å vurdere hvor langt de har kommet i forståelsen av systemet og hvor langt de fortsatt må gå.
+
+Enkelte labspørsmål, som de under ``Instrumentinstallasjon'', bør kunne besvares av alle lagmedlemmer så snart sløyfen er bygget.  Instruktøren vil møte hvert lag for å stille spørsmål på passende tidspunkter gjennom den fler-dagers labøvelsen.  Dette bidrar til å holde laget i god fremdrift, følge læringsmålene og unngå ``rush'' mot slutten.
+
+\vskip 10pt
+
+\begin{itemize}
+\item{} {\bf Instrumentinstallasjon}
+\item{} Demonstrer korrekt terminering av en leder i en modulær terminalblokk
+\item{} Demonstrer riktig skrutrekker-utselelse og bruk på instrument-skrue-terminaler
+\item{} Demonstrer hvordan du bryter og setter sammen en instrument-slangeforbindelse (dvs. på en slange som allerede er korrekt ``swaged'')
+\item{} Forklar forskjellen mellom {\it rør}- og {\it slange}-fitting, med ekte fittings som eksempler
+\item{} Identifiser hvor faremerker oppbevares (for merking av utstyr)
+\end{itemize}
+
+\filbreak
+
+\begin{itemize}
+\item{} {\bf Igangkjøring og dokumentasjon}
+\item{} Demonstrer hvordan du isolerer potensielt farlig energi i systemet ({\it lock-out, tag-out}) og hvordan du trygt verifiserer at energien er isolert før arbeid på systemet
+\item{} Demonstrer hvordan en solid elektrisk forbindelse lages i hver terminalblokk
+\item{} Identifiser ``høy''- og ``lav''-trykksportene på trykktransmitteren og forklar betydningen av dem
+\item{} Forklar forskjellen mellom {\it direkte} og {\it revers} regulatorhandling
+\item{} Forklar med enkle ord hvordan varierende lufttrykk aktiverer reguleringsventilens mekanisme
+\item{} Identifiser flere steder (med referanse til sløyfediagram) der du kan måle ulike 4-20 mA-signaler i systemet
+\end{itemize}
+
+\filbreak
+
+
+\begin{itemize}
+\item{} {\bf Hodesregning} (ingen kalkulator tillatt!)
+\item{} Beregn pneumatisk trykk i et 3-15 PSI-område som tilsvarer $x$ prosent
+\item{} Beregn elektrisk strøm i et 4-20 mA-område som tilsvarer $x$ prosent
+\item{} Beregn elektrisk spenning i et 1-5 volt-område som tilsvarer $x$ prosent
+\item{} Beregn prosentverdien av et pneumatisk trykksignal $x$ PSI i et 3-15 PSI-område
+\item{} Beregn prosentverdien av et elektrisk strømsignal $x$ mA i et 4-20 mA-område
+\item{} Beregn prosentverdien av et elektrisk spenningssignal $x$ volt i et 1-5 volt-område
+\end{itemize}
+
+\filbreak
+
+
+\begin{itemize}
+\item{} {\bf Diagnostikk}
+\item{} ``Virtuell feilsøking'' -- med referanse til systemdiagram(mer) foreslår studentene diagnostiske tester (f.eks. spør instruktøren hva et meter ville måle når det kobles mellom bestemte punkter; spør instruktøren hvordan systemet responderer hvis testpunkter blir jumpert), mens instruktøren svarer i henhold til hvordan systemet ville oppføre seg dersom det hadde feil.  Studentene prøver å bestemme feilens art og plassering basert på resultatene av sine egne diagnostiske tester.
+\item{} Gitt en bestemt komponent- eller kablingsfeil ({\it instruktøren spesifiserer type og plassering}), hvilke symptomer vil sløyfen vise og hvorfor?
+\item{} Bestem om en gitt diagnostisk test vil gi nyttig informasjon, gitt et sett symptomer fra et feilet system
+\item{} Identifiser minst to plausible feil gitt resultatene av en diagnostisk test og et sett symptomer fra et feilet system
+\end{itemize}
+
+% FUTURE ADDITION: lesson on the proper uses of Teflon pipe tape, and the differences between tube, pipe, and conduit threads.
+
+
+
+
+
+
+
+
+\vfil \eject
+
+\noindent
+{\bf Labøvelse -- nedrigg og opprydding}
+
+\vskip 5pt
+
+Siste steg i denne labøvelsen er å demontere lagets system og legge visse komponenter tilbake på riktige lagringssteder, slik at laben er klar for neste øvelse.  Fjern systemdokumentasjon (f.eks. sløyfediagram) fra felles oppbevaringsområde, enten ved å kaste den eller beholde den for egne notater.  Fjern også instrument-etiketter (f.eks. FT-101) fra instrumenter og kabler.  Gjør generell opprydding i labområdet: kast søppel, legg verktøy tilbake på riktige steder, fei opp trådbiter fra gulv og koblingsbokser, osv.
+
+\vskip 10pt
+
+\indent
+{\bf La følgende komponenter være montert på stativene:}
+
+\begin{itemize}
+\item{} Store reguleringsventiler og posisjonere
+\item{} I/P-omformere
+\item{} Store elektromotorer
+\item{} Store frekvensomformere (VFD)
+\item{} Kabler i rør som forbinder koblingsbokser
+\item{} Rør- og slangefittings (ikke skru ut rørgjenger)
+\item{} Tilførselstrykkregulatorer for instrumentluft
+\end{itemize}
+
+\vskip 10pt
+
+\indent
+{\bf Returner følgende komponenter til riktige lagringssteder:}
+
+\begin{itemize}
+\item{} Følere (f.eks. termoelementer, pH-prober osv.)
+\item{} Prosesstransmittere
+\item{} ``Jumper''-kabler brukt til å koble terminalblokker inne i en koblingsboks
+\item{} Plastslange og slangefittings (koble fra kompresjonsfittings)
+\item{} Strømkabler og skjøteledninger
+\item{} Justerbare (loading station) lufttrykksregulatorer
+\end{itemize}
+
+\vskip 10pt
+
+Til slutt skal dere sette alle kontrollsystemkomponenter tilbake til sine opprinnelige (fabrikkstandard) konfigurasjoner.  Dette inkluderer regulatorens PID-innstillinger, funksjonsblokker, inngangssignalområder, osv.
+
+
+
+
+
+\vfil \eject
+
+\centerline{\bf Gå til svarseksjonen for dette spørsmålet for å se et eksempel på sløyfediagram!}
+
+$$\includegraphics[width=15.5cm]{i00012x01.eps}$$
+
+\underbar{file i00012}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+% Original diagram (not a single object)
+% $$\includegraphics[width=15.5cm]{i00012x02.eps}$$
+
+% Encapsulated as a single object for cleaner rotation
+$$\includegraphics[width=15.5cm]{i00012x03.eps}$$
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+\noindent
+{\bf Sløyfediagrammer / inspeksjoner:}
+
+Jeg anbefaler sterkt å krysse av studentenes sløyfediagrammer mens du inspiserer sløyfen deres (kontrollere for sikker kabling, korrekt rør/slangeføring, god kabelkanalinstallasjon, osv.) sammen med dem.  La alle lagmedlemmer ta deg med på en ``omvisning'' av den ferdige sløyfen, der hvert lagmedlem forklarer en annen del av sløyfen du velger, mens de bruker sitt eget sløyfediagram som guide.  Mens en student forklarer sin del av sløyfen, kan du sjekke de andre studentenes sløyfediagrammer for nøyaktighet.  Dette sparer ikke bare tid ved å samle oppgavene med sløyfeinspeksjon og verifisering av sløyfediagram, men sikrer også at studentene faktisk kan relatere sløyfediagrammene til sløyfen de har bygget og forklare denne forståelsen for deg.
+
+\vskip 10pt
+
+
+
+%INDEX% Control, loop: Lab Exercise (build a simple control loop)
+%INDEX% Lab exercise, working control loop
+
+%(END_NOTES)

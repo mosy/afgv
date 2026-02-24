@@ -1,0 +1,72 @@
+
+%(BEGIN_QUESTION)
+% Copyright 2011, Tony R. Kuphaldt, released under the Creative Commons Attribution License (v 1.0)
+% This means you may do almost anything with this work of mine, so long as you give me proper credit
+
+Les utvalgte deler av Allen-Bradley ``MicroLogix 1000 Programmable Controllers (Bulletin 1761 Controllers)'' brukermanual (dokument 1761-6.3, juli 1998) og svar på følgende spørsmål:
+
+\vskip 10pt
+
+Identifiser de ulike typene \textit{timer}-instruksjoner i MicroLogix 1000-kontrolleren, og forklar hvordan hver fungerer.  Hvordan sammenlignes disse med typene i Siemens S7-200 PLC?
+
+\vskip 10pt
+
+Gi et praktisk eksempel på bruk av en \textit{retentive} timerinstruksjon i en PLC.
+
+\vskip 10pt
+
+Hvor mange ulike oppløsningsvalg tilbyr Allen-Bradley MicroLogix-timerinstruksjonene?
+
+\vskip 10pt
+
+Hvor lenge kan én av disse timerinstruksjonene telle opp?  Basert på denne maksimumsverdien, hvor mange bit tror du brukes i registeret som lagrer timerens nåverdi?
+
+\vskip 10pt
+
+Skisser et enkelt stigeskjemaprogram for en Allen-Bradley MicroLogix 1000 PLC der en bryter koblet til inngang {\tt I:0/2} får en timer til å telle opp og deretter slår på alarmlampeutgang {\tt O:0/1} etter 5 sekunder.
+
+\vskip 20pt \vbox{\hrule \hbox{\strut \vrule{} {\bf Forslag til sokratisk diskusjon} \vrule} \hrule}
+
+\begin{itemize}
+\item{} Hvis du har tilgang til egen PLC for eksperimentering, anbefales det å skrive et enkelt \textit{demonstrasjonsprogram} som lar deg utforske oppførselen til disse PLC-instruksjonene.  Programmet trenger ikke gjøre noe nyttig, men bare demonstrere hva hver instruksjon gjør.  Les først relevant del av PLC-manualen eller instruksjonsreferansen for korrekt syntaks (f.eks. hvilke datatyper som brukes og hvilke adresser som er gyldige), og skriv deretter det enkleste programmet du kan for å demonstrere funksjonen isolert.  Last ned programmet til PLC-en, kjør det, og observer hvordan det fungerer ``live'' ved å se på fargemarkering i programmeringsverktøyet og/eller numeriske verdier som manipuleres av hver instruksjon.  Etter at du har ``leketøy'' med demonstrasjonsprogrammet og observert oppførselen, skriv kommentarer for hver rung som forklarer med egne ord hva hver instruksjon gjør.
+\item{} Noen adresseringseksempler i Allen-Bradley MicroLogix 1000-manualen for timerinstruksjoner bruker skråstrek ({\tt /}), mens andre bruker punktum ({\tt .}) foran siste del av adressen.  Hva betyr disse tegnene i Allen-Bradley-adressering?  Hva er for eksempel forskjellen mellom {\tt T4:0/EN} og {\tt T4:0.ACC}?  Hvorfor må ``EN'' ha skråstrek, mens ``ACC'' har punktum?
+\end{itemize}
+
+\underbar{file i00247}
+%(END_QUESTION)
+
+
+
+
+
+%(BEGIN_ANSWER)
+
+
+%(END_ANSWER)
+
+
+
+
+
+%(BEGIN_NOTES)
+
+De tre Allen-Bradley-timerinstruksjonene er On-Delay Timer (TON), Retentive On-Delay Timer (RTO) og Off-Delay Timer (TOF).  Både TON og RTO teller tid når de er aktivert; forskjellen er hva som skjer når inngangene deaktiveres: TON nullstilles umiddelbart, mens RTO beholder telleverdien.  TOF teller tid når inngangen deaktiveres.
+
+\vskip 10pt
+
+Et praktisk bruksområde for en retentiv (RTO) timer er når vi må akkumulere total tid over flere ``på''-hendelser (for eksempel total driftstid for en maskin).
+
+\vskip 10pt
+
+Kun to oppløsninger er tilgjengelig: 10 ms og 1 sekund.
+
+\vskip 10pt
+
+Disse tellerne har maksimal telleverdi 32,767 (15-bit binært tall).  Dette er den positive halvdelen av et 16-bit signed heltall.
+
+$$\includegraphics[width=15.5cm]{i00247x01.eps}$$
+
+
+%INDEX% Reading assignment: Allen-Bradley MicroLogix 1000 user manual (timer instructions)
+
+%(END_NOTES)
